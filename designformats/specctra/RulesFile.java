@@ -21,9 +21,8 @@
 
 package designformats.specctra;
 
-import datastructures.IndentFileWriter;
-
-import  board.BasicBoard;
+import board.BasicBoard;
+import  datastructures.IndentFileWriter;
 
 /**
  * File for saving the board rules, so that they can be restored after the Board

@@ -21,16 +21,13 @@
 
 package autoroute;
 
-import java.util.List;
-import java.util.Collection;
-
-import board.ShapeSearchTree;
-import board.SearchTreeObject;
-import board.PolylineTrace;
-
-import geometry.planar.TileShape;
-
 import board.Item;
+import board.PolylineTrace;
+import board.SearchTreeObject;
+import board.ShapeSearchTree;
+import geometry.planar.TileShape;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Expansion Room used for pushing and ripping obstacles in the autoroute algorithm.

@@ -21,10 +21,9 @@
 package designformats.specctra;
 
 import geometry.planar.IntVector;
-import geometry.planar.Vector;
 import geometry.planar.PolygonShape;
 import geometry.planar.Simplex;
-
+import geometry.planar.Vector;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;

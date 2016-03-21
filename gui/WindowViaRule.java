@@ -20,9 +20,9 @@
 
 package gui;
 
-import rules.ViaRule;
 import rules.ViaInfo;
 import rules.ViaInfos;
+import rules.ViaRule;
 
 /**
  * Window for editing a single via rule.

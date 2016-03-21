@@ -21,22 +21,19 @@
 
 package autoroute;
 
+import board.AngleRestriction;
+import board.Item;
+import board.ShapeSearchTree;
+import board.TestLevel;
+import datastructures.Signum;
+import geometry.planar.FloatLine;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntBox;
+import geometry.planar.Simplex;
+import geometry.planar.TileShape;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.SortedSet;
-
-import datastructures.Signum;
-
-import geometry.planar.FloatPoint;
-import geometry.planar.FloatLine;
-import geometry.planar.TileShape;
-import geometry.planar.IntBox;
-import geometry.planar.Simplex;
-
-import board.ShapeSearchTree;
-import board.AngleRestriction;
-import board.Item;
-import board.TestLevel;
 
 /**
  *

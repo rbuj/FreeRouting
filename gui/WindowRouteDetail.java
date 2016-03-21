@@ -19,7 +19,6 @@
  */
 package gui;
 
-import board.BasicBoard;
 import board.BoardOutline;
 
 /**

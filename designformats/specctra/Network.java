@@ -19,21 +19,18 @@
  */
 package designformats.specctra;
 
+import board.RoutingBoard;
+import datastructures.IdentifierType;
+import datastructures.IndentFileWriter;
 import geometry.planar.IntPoint;
 import geometry.planar.Point;
 import geometry.planar.Vector;
-
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
-import java.util.Iterator;
-
-import datastructures.IndentFileWriter;
-import datastructures.IdentifierType;
-
 import rules.BoardRules;
 import rules.DefaultItemClearanceClasses.ItemClass;
-import board.RoutingBoard;
 
 /**
  * Class for reading and writing net network from dsn-files.

@@ -20,17 +20,13 @@
 
 package interactive;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.Iterator;
-
-
-import java.awt.Graphics;
-
-import boardgraphics.GraphicsContext;
-
-import board.Item;
 import board.ClearanceViolation;
+import board.Item;
+import boardgraphics.GraphicsContext;
+import java.awt.Graphics;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * To display the clearance violations between items on the screen.

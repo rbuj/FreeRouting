@@ -21,9 +21,8 @@
 
 package autoroute;
 
-import java.util.List;
-
 import geometry.planar.TileShape;
+import java.util.List;
 
 /**
  *

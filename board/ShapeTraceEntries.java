@@ -22,7 +22,6 @@ import geometry.planar.Line;
 import geometry.planar.Point;
 import geometry.planar.Polyline;
 import geometry.planar.TileShape;
-
 import java.util.Collection;
 import java.util.Iterator;
 

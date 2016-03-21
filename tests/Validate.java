@@ -20,18 +20,16 @@
 
 package tests;
 
+import board.BasicBoard;
+import board.Item;
+import board.PolylineTrace;
+import board.SearchTreeObject;
 import geometry.planar.IntOctagon;
 import geometry.planar.IntPoint;
 import geometry.planar.Polyline;
 import geometry.planar.TileShape;
-
 import java.util.Collection;
 import java.util.Iterator;
-
-import board.Item;
-import board.BasicBoard;
-import board.PolylineTrace;
-import board.SearchTreeObject;
 
 
 /**

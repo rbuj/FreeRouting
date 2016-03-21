@@ -20,9 +20,9 @@
 
 package gui;
 
+import rules.BoardRules;
 import rules.ViaInfo;
 import rules.ViaInfos;
-import rules.BoardRules;
 
 /**
  * Edit window for the table of available vias.

@@ -21,23 +21,20 @@
 
 package autoroute;
 
+import board.Item;
+import board.SearchTreeObject;
+import board.ShapeSearchTree;
+import datastructures.ShapeTree;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntOctagon;
+import geometry.planar.IntPoint;
+import geometry.planar.Limits;
+import geometry.planar.TileShape;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import datastructures.ShapeTree;
-
-import geometry.planar.Limits;
-import geometry.planar.IntOctagon;
-import geometry.planar.IntPoint;
-import geometry.planar.TileShape;
-import geometry.planar.FloatPoint;
-
-import board.ShapeSearchTree;
-import board.SearchTreeObject;
-import board.Item;
 
 /**
  *

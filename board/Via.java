@@ -19,14 +19,13 @@
  */
 package board;
 
+import geometry.planar.IntPoint;
+import geometry.planar.Point;
+import geometry.planar.Shape;
+import geometry.planar.TileShape;
+import geometry.planar.Vector;
 import java.util.Collection;
 import java.util.Iterator;
-
-import geometry.planar.Point;
-import geometry.planar.IntPoint;
-import geometry.planar.TileShape;
-import geometry.planar.Shape;
-import geometry.planar.Vector;
 import library.Padstack;
 
 /**

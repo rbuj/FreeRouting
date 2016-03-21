@@ -21,10 +21,10 @@
 
 package gui;
 
+import java.net.URL;
 import javax.help.CSH;
 import javax.help.HelpSet;
 import javax.help.HelpSetException;
-import java.net.URL;
 
 /**
  *

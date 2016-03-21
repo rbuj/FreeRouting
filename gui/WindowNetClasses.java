@@ -19,11 +19,10 @@
  */
 package gui;
 
+import board.ObjectInfoPanel.Printable;
+import rules.BoardRules;
 import rules.NetClass;
 import rules.ViaRule;
-import rules.BoardRules;
-
-import board.ObjectInfoPanel.Printable;
 
 /**
  * Edit window for the table of net rules.

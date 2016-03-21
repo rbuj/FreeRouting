@@ -17,7 +17,6 @@
 package board;
 
 import geometry.planar.TileShape;
-
 import java.util.Set;
 
 /**

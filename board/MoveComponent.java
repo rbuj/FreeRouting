@@ -19,18 +19,15 @@
  */
 package board;
 
+import datastructures.Signum;
 import datastructures.TimeLimit;
-
 import geometry.planar.FloatPoint;
 import geometry.planar.IntPoint;
 import geometry.planar.Point;
 import geometry.planar.Vector;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-
-import datastructures.Signum;
 
 /**
  * Class for moving a group of items on the board

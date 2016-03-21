@@ -20,10 +20,10 @@
 
 package designformats.specctra;
 
+import datastructures.IdentifierType;
+import datastructures.IndentFileWriter;
 import geometry.planar.FloatPoint;
 import geometry.planar.IntBox;
-import datastructures.IndentFileWriter;
-import datastructures.IdentifierType;
 
 /**
  * Describes a rectangle in a Specctra dsn file.

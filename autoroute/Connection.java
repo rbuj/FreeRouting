@@ -21,14 +21,12 @@
 
 package autoroute;
 
+import board.Item;
+import board.Trace;
+import geometry.planar.Point;
 import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
-
-import geometry.planar.Point;
-
-import board.Item;
-import board.Trace;
 
 /**
  * Describes a routing connection ending at the next fork or terminal item.

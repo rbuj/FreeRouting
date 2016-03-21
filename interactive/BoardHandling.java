@@ -20,36 +20,31 @@
  */
 package interactive;
 
+import board.CoordinateTransform;
+import board.FixedState;
+import board.Item;
+import board.ItemSelectionFilter;
+import board.LayerStructure;
+import board.PolylineTrace;
+import board.RoutingBoard;
+import board.TestLevel;
+import board.Unit;
+import boardgraphics.GraphicsContext;
+import designformats.specctra.DsnFile;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntBox;
+import geometry.planar.IntPoint;
+import geometry.planar.PolylineShape;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
-
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Set;
-
-import geometry.planar.FloatPoint;
-import geometry.planar.IntBox;
-import geometry.planar.IntPoint;
-import geometry.planar.PolylineShape;
-
 import rules.BoardRules;
-import board.LayerStructure;
-import board.RoutingBoard;
-import board.Item;
-import board.PolylineTrace;
-import board.FixedState;
-import board.ItemSelectionFilter;
-
-import boardgraphics.GraphicsContext;
-import board.CoordinateTransform;
-import board.Unit;
-import board.TestLevel;
-
-import designformats.specctra.DsnFile;
 
 /**
  *

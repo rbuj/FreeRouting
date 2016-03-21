@@ -22,11 +22,9 @@ package gui;
 
 import interactive.BoardHandling;
 import interactive.ScreenMessages;
-
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
-
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;

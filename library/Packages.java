@@ -20,10 +20,9 @@
 
 package library;
 
+import geometry.planar.Shape;
 import java.util.Iterator;
 import java.util.Vector;
-
-import geometry.planar.Shape;
 
 /**
  * Describes a library of component packages.

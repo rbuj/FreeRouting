@@ -19,10 +19,10 @@
  */
 package autoroute;
 
-import geometry.planar.TileShape;
-import geometry.planar.FloatPoint;
 import geometry.planar.FloatLine;
+import geometry.planar.FloatPoint;
 import geometry.planar.Point;
+import geometry.planar.TileShape;
 
 /**
  * An ExpansionDoor is a common edge between two ExpansionRooms

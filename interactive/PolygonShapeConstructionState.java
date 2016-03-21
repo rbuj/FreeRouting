@@ -23,9 +23,7 @@ package interactive;
 import geometry.planar.FloatPoint;
 import geometry.planar.IntPoint;
 import geometry.planar.PolygonShape;
-
 import java.util.Iterator;
-
 import rules.BoardRules;
 
 /**

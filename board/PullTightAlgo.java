@@ -19,6 +19,10 @@
  */
 package board;
 
+import autoroute.AutorouteControl.ExpansionCostFactor;
+import datastructures.Signum;
+import datastructures.Stoppable;
+import datastructures.TimeLimit;
 import geometry.planar.FloatPoint;
 import geometry.planar.IntOctagon;
 import geometry.planar.IntPoint;
@@ -27,16 +31,9 @@ import geometry.planar.Point;
 import geometry.planar.Polyline;
 import geometry.planar.Side;
 import geometry.planar.TileShape;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
-
-import datastructures.Signum;
-import datastructures.Stoppable;
-import datastructures.TimeLimit;
-
-import autoroute.AutorouteControl.ExpansionCostFactor;
 
 /**
  * Class with functionality for optimising traces and vias.

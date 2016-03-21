@@ -21,8 +21,8 @@
 package designformats.specctra;
 
 import board.BasicBoard;
-import datastructures.IndentFileWriter;
 import datastructures.IdentifierType;
+import datastructures.IndentFileWriter;
 
 /**
  * Default parameter type used while writing a Specctra dsn-file.

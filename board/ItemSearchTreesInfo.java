@@ -21,12 +21,10 @@
 
 package board;
 
-import java.util.Collection;
-import java.util.LinkedList;
-
-import  datastructures.ShapeTree;
-
+import datastructures.ShapeTree;
 import geometry.planar.TileShape;
+import  java.util.Collection;
+import java.util.LinkedList;
 
 /**
  * Stores information about the search trees of the board items,

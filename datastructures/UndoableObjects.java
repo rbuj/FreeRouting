@@ -22,9 +22,9 @@ package datastructures;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.Vector;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
  * Database of objects, for which Undo and Redo operations are made possible.

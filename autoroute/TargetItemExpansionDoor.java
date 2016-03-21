@@ -19,10 +19,10 @@
  */
 package autoroute;
 
-import geometry.planar.Simplex;
-import geometry.planar.TileShape;
 import board.Item;
 import board.ShapeSearchTree;
+import geometry.planar.Simplex;
+import geometry.planar.TileShape;
 
 /**
  * An expansion door leading to a start or destination item of the autoroute algorithm.

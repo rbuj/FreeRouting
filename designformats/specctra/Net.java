@@ -20,13 +20,12 @@
 
 package designformats.specctra;
 
+import datastructures.IdentifierType;
+import datastructures.IndentFileWriter;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.Iterator;
-
-import datastructures.IndentFileWriter;
-import datastructures.IdentifierType;
 
 
 /**

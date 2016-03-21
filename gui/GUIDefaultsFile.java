@@ -20,9 +20,8 @@
 
 package gui;
 
-import datastructures.IndentFileWriter;
-
 import board.ItemSelectionFilter;
+import datastructures.IndentFileWriter;
 
 /**
  * Description of a text file,  where the board independent interactive settings are stored.

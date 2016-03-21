@@ -20,15 +20,13 @@
  */
 package board;
 
-import java.awt.Color;
-
-import geometry.planar.Area;
-import geometry.planar.Vector;
-import geometry.planar.Point;
-import geometry.planar.IntPoint;
-import geometry.planar.FloatPoint;
-
 import boardgraphics.GraphicsContext;
+import geometry.planar.Area;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntPoint;
+import geometry.planar.Point;
+import geometry.planar.Vector;
+import java.awt.Color;
 
 /**
  *

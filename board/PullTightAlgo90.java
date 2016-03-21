@@ -21,10 +21,9 @@
 package board;
 
 import datastructures.Stoppable;
-
 import geometry.planar.FloatPoint;
-import geometry.planar.Point;
 import geometry.planar.Line;
+import geometry.planar.Point;
 import geometry.planar.Polyline;
 import geometry.planar.TileShape;
 

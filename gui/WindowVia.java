@@ -20,10 +20,9 @@
 
 package gui;
 
-import rules.ViaRule;
-import rules.BoardRules;
-
 import board.Layer;
+import rules.BoardRules;
+import rules.ViaRule;
 
 /**
  * Window for interactive editing of via rules.

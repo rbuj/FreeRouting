@@ -15,29 +15,26 @@
  */
 package board;
 
+import boardgraphics.GraphicsContext;
 import datastructures.Signum;
 import datastructures.Stoppable;
-
+import geometry.planar.Direction;
+import geometry.planar.FloatPoint;
 import geometry.planar.IntBox;
 import geometry.planar.IntOctagon;
+import geometry.planar.IntPoint;
 import geometry.planar.Line;
 import geometry.planar.LineSegment;
 import geometry.planar.Point;
-import geometry.planar.IntPoint;
-import geometry.planar.FloatPoint;
 import geometry.planar.Polyline;
 import geometry.planar.Shape;
 import geometry.planar.TileShape;
-import geometry.planar.Direction;
 import geometry.planar.Vector;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-
-import boardgraphics.GraphicsContext;
 
 /**
  *

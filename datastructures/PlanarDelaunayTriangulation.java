@@ -20,17 +20,16 @@
 
 package datastructures;
 
+import geometry.planar.IntPoint;
+import geometry.planar.Limits;
+import geometry.planar.Point;
+import geometry.planar.Side;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
-import geometry.planar.Point;
-import geometry.planar.IntPoint;
-import geometry.planar.Side;
-import geometry.planar.Limits;
 
 /**
  * Creates a Delaunay triangulation in the plane for the input objects.

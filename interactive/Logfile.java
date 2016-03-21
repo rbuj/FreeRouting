@@ -17,7 +17,6 @@
 package interactive;
 
 import geometry.planar.FloatPoint;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

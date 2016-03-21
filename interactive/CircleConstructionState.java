@@ -20,16 +20,14 @@
 
 package interactive;
 
+import board.AngleRestriction;
+import board.FixedState;
+import board.RoutingBoard;
 import geometry.planar.Circle;
 import geometry.planar.ConvexShape;
 import geometry.planar.FloatPoint;
 import geometry.planar.IntPoint;
-
 import rules.BoardRules;
-
-import board.AngleRestriction;
-import board.RoutingBoard;
-import board.FixedState;
 
 /**
  * Interactive creation of a circle obstacle

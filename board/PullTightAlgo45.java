@@ -19,8 +19,8 @@
  */
 package board;
 
+import datastructures.Signum;
 import datastructures.Stoppable;
-
 import geometry.planar.Direction;
 import geometry.planar.FloatPoint;
 import geometry.planar.IntPoint;
@@ -31,7 +31,6 @@ import geometry.planar.Polyline;
 import geometry.planar.Side;
 import geometry.planar.TileShape;
 import geometry.planar.Vector;
-import datastructures.Signum;
 
 /**
  *

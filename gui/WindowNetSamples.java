@@ -21,10 +21,9 @@
 
 package gui;
 
-import java.util.zip.ZipInputStream;
-
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.zip.ZipInputStream;
 
 /**
  * Window with a list for selecting samples in the net.

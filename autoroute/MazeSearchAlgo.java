@@ -19,31 +19,29 @@
  */
 package autoroute;
 
-import geometry.planar.ConvexShape;
-import geometry.planar.FloatLine;
-import geometry.planar.FloatPoint;
-import geometry.planar.IntPoint;
-import geometry.planar.Point;
-import geometry.planar.Polyline;
-import geometry.planar.TileShape;
-import geometry.planar.IntBox;
-import geometry.planar.IntOctagon;
-import geometry.planar.Line;
-
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.TreeSet;
-import java.util.Set;
-
+import board.AngleRestriction;
 import board.Connectable;
 import board.ForcedViaAlgo;
 import board.Item;
-import board.PolylineTrace;
-import board.ShapeSearchTree;
-import board.AngleRestriction;
-import board.SearchTreeObject;
 import board.ItemSelectionFilter;
+import board.PolylineTrace;
+import board.SearchTreeObject;
+import board.ShapeSearchTree;
+import geometry.planar.ConvexShape;
+import geometry.planar.FloatLine;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntBox;
+import geometry.planar.IntOctagon;
+import geometry.planar.IntPoint;
+import geometry.planar.Line;
+import geometry.planar.Point;
+import geometry.planar.Polyline;
+import geometry.planar.TileShape;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Class for autorouting an incomplete connection via a maze search algorithm.

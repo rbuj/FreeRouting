@@ -20,10 +20,10 @@
 
 package interactive;
 
-import geometry.planar.FloatPoint;
-import geometry.planar.Point;
 import board.AngleRestriction;
 import board.BasicBoard;
+import geometry.planar.FloatPoint;
+import geometry.planar.Point;
 
 /**
  * Class for shoving items out of a region to make space to insert something else.

@@ -20,8 +20,8 @@
  */
 package interactive;
 
-import board.RoutingBoard;
 import autoroute.AutorouteControl.ExpansionCostFactor;
+import board.RoutingBoard;
 
 /**
  * Contains the interactive settings for the autorouter.

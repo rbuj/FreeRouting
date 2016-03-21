@@ -21,8 +21,6 @@
 package autoroute;
 
 import geometry.planar.TileShape;
-
-
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;

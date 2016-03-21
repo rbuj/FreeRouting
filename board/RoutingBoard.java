@@ -15,6 +15,14 @@
  */
 package board;
 
+import autoroute.AutorouteControl;
+import autoroute.AutorouteControl.ExpansionCostFactor;
+import autoroute.AutorouteEngine;
+import autoroute.CompleteFreeSpaceExpansionRoom;
+import datastructures.ShapeTree.TreeEntry;
+import datastructures.Stoppable;
+import datastructures.TimeLimit;
+import datastructures.UndoableObjects;
 import geometry.planar.FloatPoint;
 import geometry.planar.IntBox;
 import geometry.planar.IntOctagon;
@@ -25,25 +33,13 @@ import geometry.planar.Polyline;
 import geometry.planar.PolylineShape;
 import geometry.planar.TileShape;
 import geometry.planar.Vector;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import datastructures.UndoableObjects;
-import datastructures.Stoppable;
-import datastructures.TimeLimit;
-import datastructures.ShapeTree.TreeEntry;
-
-import rules.ViaInfo;
 import rules.BoardRules;
-
-import autoroute.AutorouteControl;
-import autoroute.AutorouteEngine;
-import autoroute.AutorouteControl.ExpansionCostFactor;
-import autoroute.CompleteFreeSpaceExpansionRoom;
+import rules.ViaInfo;
 
 /**
  *

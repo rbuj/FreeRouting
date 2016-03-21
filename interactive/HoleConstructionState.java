@@ -20,6 +20,8 @@
 
 package interactive;
 
+import board.ItemSelectionFilter;
+import board.ObstacleArea;
 import geometry.planar.Area;
 import geometry.planar.Circle;
 import geometry.planar.FloatPoint;
@@ -28,11 +30,7 @@ import geometry.planar.PolygonShape;
 import geometry.planar.PolylineArea;
 import geometry.planar.PolylineShape;
 import geometry.planar.Shape;
-
 import java.util.Iterator;
-
-import board.ObstacleArea;
-import board.ItemSelectionFilter;
 
 /**
  * Interactive cutting a hole into an obstacle shape

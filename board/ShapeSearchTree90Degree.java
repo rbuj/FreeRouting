@@ -21,17 +21,15 @@
 
 package board;
 
+import autoroute.CompleteFreeSpaceExpansionRoom;
+import autoroute.IncompleteFreeSpaceExpansionRoom;
+import geometry.planar.IntBox;
+import geometry.planar.OrthogonalBoundingDirections;
+import geometry.planar.Polyline;
+import geometry.planar.Shape;
+import geometry.planar.TileShape;
 import java.util.Collection;
 import java.util.LinkedList;
-
-import geometry.planar.OrthogonalBoundingDirections;
-import geometry.planar.TileShape;
-import geometry.planar.Shape;
-import geometry.planar.IntBox;
-import geometry.planar.Polyline;
-
-import autoroute.IncompleteFreeSpaceExpansionRoom;
-import autoroute.CompleteFreeSpaceExpansionRoom;
 
 /**
  * A special simple ShapeSearchtree, where the shapes are of class IntBox.

@@ -19,21 +19,18 @@
  */
 package interactive;
 
-import geometry.planar.FloatPoint;
-import geometry.planar.IntPoint;
-import geometry.planar.Point;
-
-import java.util.Collection;
-import java.util.Set;
-
-import board.Trace;
-import board.Via;
-import board.PolylineTrace;
 import board.ConductionArea;
 import board.DrillItem;
 import board.Item;
-import board.RoutingBoard;
 import board.ItemSelectionFilter;
+import board.PolylineTrace;
+import board.Trace;
+import board.Via;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntPoint;
+import geometry.planar.Point;
+import java.util.Collection;
+import java.util.Set;
 
 /**
  * Interactive routing state.

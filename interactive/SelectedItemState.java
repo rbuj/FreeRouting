@@ -19,36 +19,30 @@
  */
 package interactive;
 
+import autoroute.AutorouteEngine;
+import board.Component;
+import board.Connectable;
+import board.DrillItem;
+import board.FixedState;
+import board.Item;
+import board.ObstacleArea;
+import board.OptViaAlgo;
+import board.Pin;
+import board.PolylineTrace;
+import board.RoutingBoard;
+import board.TestLevel;
+import board.Via;
+import datastructures.Stoppable;
 import geometry.planar.FloatPoint;
 import geometry.planar.IntPoint;
 import geometry.planar.Point;
 import geometry.planar.Vector;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
-
-import datastructures.Stoppable;
-
 import library.Package;
-
 import rules.Net;
-
-import autoroute.AutorouteEngine;
-
-import board.Component;
-import board.Connectable;
-import board.DrillItem;
-import board.Via;
-import board.Pin;
-import board.Item;
-import board.ObstacleArea;
-import board.PolylineTrace;
-import board.RoutingBoard;
-import board.FixedState;
-import board.OptViaAlgo;
-import board.TestLevel;
 
 /**
  *  Class implementing actions on the currently selected items.

@@ -19,26 +19,21 @@
  */
 package designformats.specctra;
 
+import board.FixedState;
+import board.TestLevel;
+import datastructures.IdentifierType;
+import datastructures.IndentFileWriter;
+import datastructures.UndoableObjects;
+import datastructures.UndoableObjects.Storable;
 import geometry.planar.IntBox;
+import geometry.planar.Point;
 import geometry.planar.PolylineShape;
 import geometry.planar.TileShape;
-import geometry.planar.Point;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-
-import datastructures.UndoableObjects;
-
 import rules.BoardRules;
 import rules.DefaultItemClearanceClasses.ItemClass;
-
-import datastructures.IndentFileWriter;
-import datastructures.IdentifierType;
-import datastructures.UndoableObjects.Storable;
-
-import board.FixedState;
-import board.TestLevel;
 
 /**
  * Class for reading and writing structure scopes from dsn-files.

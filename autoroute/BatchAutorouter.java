@@ -15,25 +15,21 @@
  */
 package autoroute;
 
-import java.util.Iterator;
+import board.Connectable;
+import board.DrillItem;
+import board.Item;
+import board.RoutingBoard;
+import datastructures.TimeLimit;
+import datastructures.UndoableObjects;
+import geometry.planar.FloatLine;
+import geometry.planar.FloatPoint;
+import interactive.BoardHandling;
+import interactive.InteractiveActionThread;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import datastructures.TimeLimit;
-import datastructures.UndoableObjects;
-
-import geometry.planar.FloatPoint;
-import geometry.planar.FloatLine;
-
-import board.Connectable;
-import board.Item;
-import board.DrillItem;
-import board.RoutingBoard;
-
-import interactive.BoardHandling;
-import interactive.InteractiveActionThread;
 
 /**
  * Handles the sequencing of the batch autoroute passes.

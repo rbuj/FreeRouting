@@ -20,7 +20,6 @@ import geometry.planar.FloatPoint;
 import geometry.planar.IntOctagon;
 import geometry.planar.Point;
 import geometry.planar.TileShape;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;

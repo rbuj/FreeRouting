@@ -20,9 +20,8 @@
 
 package autoroute;
 
-import board.ShapeSearchTree;
-
 import board.Item;
+import board.ShapeSearchTree;
 
 
 /**

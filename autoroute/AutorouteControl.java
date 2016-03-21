@@ -19,12 +19,10 @@
  */
 package autoroute;
 
+import board.RoutingBoard;
 import geometry.planar.ConvexShape;
-
 import rules.ViaInfo;
 import rules.ViaRule;
-
-import board.RoutingBoard;
 
 /**
  * Structure for controlling the autoroute algorithm.

@@ -19,13 +19,12 @@
  */
 package designformats.specctra;
 
+import datastructures.IdentifierType;
+import datastructures.IndentFileWriter;
+import geometry.planar.PolylineShape;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-
-import geometry.planar.PolylineShape;
-import datastructures.IndentFileWriter;
-import datastructures.IdentifierType;
 
 /**
  * Describes a shape in a Specctra dsn file.

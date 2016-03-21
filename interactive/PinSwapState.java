@@ -20,11 +20,10 @@
 
 package interactive;
 
-import geometry.planar.FloatPoint;
-
-import board.Pin;
 import board.Item;
 import board.ItemSelectionFilter;
+import board.Pin;
+import geometry.planar.FloatPoint;
 
 /**
  *

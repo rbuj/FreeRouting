@@ -21,18 +21,16 @@
 
 package board;
 
-import java.util.Collection;
-
 import datastructures.TimeLimit;
-
-import geometry.planar.TileShape;
 import geometry.planar.ConvexShape;
-import geometry.planar.IntOctagon;
+import geometry.planar.FloatPoint;
 import geometry.planar.IntBox;
+import geometry.planar.IntOctagon;
 import geometry.planar.IntPoint;
 import geometry.planar.Point;
+import geometry.planar.TileShape;
 import geometry.planar.Vector;
-import geometry.planar.FloatPoint;
+import java.util.Collection;
 
 
 /**

@@ -20,8 +20,8 @@
 
 package rules;
 
-import java.util.List;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Contains the lists of different ViaInfo's, which can be used in interactive and automatic routing.

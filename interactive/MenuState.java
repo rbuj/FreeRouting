@@ -20,13 +20,11 @@
 
 package interactive;
 
-import geometry.planar.FloatPoint;
-
-import java.util.Collection;
-
 import board.Item;
 import board.ItemSelectionFilter;
 import board.TestLevel;
+import geometry.planar.FloatPoint;
+import java.util.Collection;
 
 /**
  * Common base class for the main menus, which can be selected in the tool bar.

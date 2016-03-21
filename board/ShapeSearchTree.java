@@ -19,8 +19,12 @@
  */
 package board;
 
+import autoroute.CompleteFreeSpaceExpansionRoom;
+import autoroute.IncompleteFreeSpaceExpansionRoom;
+import datastructures.Signum;
 import geometry.planar.ConvexShape;
-import geometry.planar.ShapeBoundingDirections;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntBox;
 import geometry.planar.IntOctagon;
 import geometry.planar.Line;
 import geometry.planar.LineSegment;
@@ -28,24 +32,16 @@ import geometry.planar.Polyline;
 import geometry.planar.PolylineShape;
 import geometry.planar.RegularTileShape;
 import geometry.planar.Shape;
+import geometry.planar.ShapeBoundingDirections;
 import geometry.planar.Side;
 import geometry.planar.Simplex;
 import geometry.planar.TileShape;
-import geometry.planar.IntBox;
-import geometry.planar.FloatPoint;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeSet;
-
 import rules.ClearanceMatrix;
-
-import datastructures.Signum;
-
-import autoroute.IncompleteFreeSpaceExpansionRoom;
-import autoroute.CompleteFreeSpaceExpansionRoom;
 
 /**
  *

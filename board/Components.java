@@ -22,14 +22,11 @@
 package board;
 
 
+import datastructures.UndoableObjects;
+import geometry.planar.IntPoint;
+import geometry.planar.Point;
 import java.util.Iterator;
 import java.util.Vector;
-
-import datastructures.UndoableObjects;
-
-import geometry.planar.Point;
-import geometry.planar.IntPoint;
-
 import library.Package;
 
 /**

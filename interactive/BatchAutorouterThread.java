@@ -20,14 +20,12 @@
  */
 package interactive;
 
-import geometry.planar.FloatPoint;
-import geometry.planar.FloatLine;
-
-import board.Unit;
-
 import autoroute.BatchAutorouter;
 import autoroute.BatchFanout;
 import autoroute.BatchOptRoute;
+import board.Unit;
+import geometry.planar.FloatLine;
+import geometry.planar.FloatPoint;
 
 /**
  * Thread for the batch autorouter.

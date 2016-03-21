@@ -21,20 +21,17 @@
 
 package autoroute;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.Iterator;
-
-import geometry.planar.Point;
-import geometry.planar.IntBox;
-import geometry.planar.TileShape;
-import geometry.planar.PolylineArea;
-
-import datastructures.ShapeTree.TreeEntry;
-
+import board.Item;
 import board.RoutingBoard;
 import board.ShapeSearchTree;
-import board.Item;
+import datastructures.ShapeTree.TreeEntry;
+import geometry.planar.IntBox;
+import geometry.planar.Point;
+import geometry.planar.PolylineArea;
+import geometry.planar.TileShape;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  *

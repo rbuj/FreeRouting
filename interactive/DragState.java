@@ -20,13 +20,11 @@
 
 package interactive;
 
-import geometry.planar.FloatPoint;
-
-import java.util.Iterator;
-
-import board.Trace;
 import board.DrillItem;
 import board.Item;
+import board.Trace;
+import geometry.planar.FloatPoint;
+import java.util.Iterator;
 
 /**
  * Class implementing functionality when the mouse is dragged on a routing board

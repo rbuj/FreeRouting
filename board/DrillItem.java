@@ -21,19 +21,17 @@
 package board;
 
 
-import geometry.planar.IntBox;
 import geometry.planar.FloatPoint;
-import geometry.planar.Point;
+import geometry.planar.IntBox;
 import geometry.planar.IntPoint;
+import geometry.planar.Point;
 import geometry.planar.Shape;
 import geometry.planar.TileShape;
 import geometry.planar.Vector;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
-
 import library.Padstack;
 
 /**

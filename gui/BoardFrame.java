@@ -16,17 +16,13 @@
 
 package gui;
 
-import interactive.ScreenMessages;
-
-import java.io.File;
-
+import board.BoardObservers;
+import board.TestLevel;
 import datastructures.FileFilter;
 import datastructures.IdNoGenerator;
-
-import board.TestLevel;
-import board.BoardObservers;
-
 import designformats.specctra.DsnFile;
+import interactive.ScreenMessages;
+import java.io.File;
 
 /**
  *

@@ -20,29 +20,25 @@
 
 package designformats.specctra;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.Iterator;
-
+import board.FixedState;
+import board.Item;
+import board.ItemSelectionFilter;
+import board.PolylineTrace;
+import board.RoutingBoard;
+import board.Trace;
+import board.Via;
+import datastructures.IdentifierType;
+import datastructures.IndentFileWriter;
 import datastructures.UndoableObjects;
-
 import geometry.planar.FloatPoint;
-import geometry.planar.Point;
 import geometry.planar.IntBox;
 import geometry.planar.IntPoint;
 import geometry.planar.Line;
+import geometry.planar.Point;
 import geometry.planar.Polyline;
-
-import board.RoutingBoard;
-import board.Item;
-import board.Via;
-import board.Trace;
-import board.PolylineTrace;
-import board.FixedState;
-import board.ItemSelectionFilter;
-
-import datastructures.IndentFileWriter;
-import datastructures.IdentifierType;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * Class for reading and writing wiring scopes from dsn-files.

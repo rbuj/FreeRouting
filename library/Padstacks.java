@@ -20,10 +20,9 @@
 
 package library;
 
+import geometry.planar.ConvexShape;
 import java.util.Iterator;
 import java.util.Vector;
-
-import geometry.planar.ConvexShape;
 
 /**
  * Describes a library of padstacks for pins or vias.

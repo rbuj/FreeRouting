@@ -20,23 +20,19 @@
 
 package interactive;
 
+import board.BasicBoard;
+import board.Item;
+import boardgraphics.GraphicsContext;
+import datastructures.PlanarDelaunayTriangulation;
+import geometry.planar.FloatPoint;
+import geometry.planar.Point;
 import java.awt.Graphics;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import datastructures.PlanarDelaunayTriangulation;
-
-import geometry.planar.FloatPoint;
-import geometry.planar.Point;
-
 import rules.Net;
-
-import board.Item;
-import board.BasicBoard;
-import boardgraphics.GraphicsContext;
 
 /**
  * Creates the Incompletes (Ratsnest) of one net to display them on the screen.

@@ -20,9 +20,9 @@
 
 package interactive;
 
+import board.AngleRestriction;
 import geometry.planar.FloatPoint;
 import geometry.planar.IntPoint;
-import board.AngleRestriction;
 
 /**
  * Common class for constructing an obstacle with a polygonal shape.

@@ -19,17 +19,15 @@
  */
 package board;
 
+import boardgraphics.GraphicsContext;
+import geometry.planar.Area;
+import geometry.planar.FloatPoint;
 import geometry.planar.IntBox;
 import geometry.planar.IntPoint;
-import geometry.planar.LineSegment;
-import geometry.planar.TileShape;
-import geometry.planar.PolylineShape;
 import geometry.planar.PolylineArea;
-import geometry.planar.Area;
+import geometry.planar.PolylineShape;
+import geometry.planar.TileShape;
 import geometry.planar.Vector;
-import geometry.planar.FloatPoint;
-
-import boardgraphics.GraphicsContext;
 
 /**
  * Class describing a board outline.

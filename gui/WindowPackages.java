@@ -20,8 +20,8 @@
 
 package gui;
 
-import library.Packages;
 import library.Package;
+import library.Packages;
 
 /**
  * Window displaying the library packagess.

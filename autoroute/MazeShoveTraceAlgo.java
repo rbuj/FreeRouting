@@ -21,21 +21,19 @@
 
 package autoroute;
 
-import java.util.Collection;
-
-import geometry.planar.TileShape;
-import geometry.planar.Line;
-import geometry.planar.Polyline;
-import geometry.planar.Point;
-import geometry.planar.FloatPoint;
-import geometry.planar.FloatLine;
-import geometry.planar.Side;
-import geometry.planar.Direction;
-import geometry.planar.LineSegment;
-
 import board.Item;
 import board.RoutingBoard;
 import board.ShoveTraceAlgo;
+import geometry.planar.Direction;
+import geometry.planar.FloatLine;
+import geometry.planar.FloatPoint;
+import geometry.planar.Line;
+import geometry.planar.LineSegment;
+import geometry.planar.Point;
+import geometry.planar.Polyline;
+import geometry.planar.Side;
+import geometry.planar.TileShape;
+import java.util.Collection;
 
 /**
  * Auxiliary functions used in MazeSearchAlgo.

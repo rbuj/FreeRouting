@@ -20,26 +20,23 @@
 
 package interactive;
 
+import board.Component;
+import board.DrillItem;
+import board.Item;
+import board.ObstacleArea;
+import board.RoutingBoard;
+import board.Via;
+import geometry.planar.ConvexShape;
 import geometry.planar.FloatPoint;
 import geometry.planar.Point;
 import geometry.planar.Vector;
-import geometry.planar.ConvexShape;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
-
-import library.Padstack;
 import library.Package;
-
-import board.Item;
-import board.DrillItem;
-import board.ObstacleArea;
-import board.Via;
-import board.Component;
-import board.RoutingBoard;
+import library.Padstack;
 
 /**
  * Interactive copying of items.

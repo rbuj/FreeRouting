@@ -21,7 +21,6 @@ package rules;
 
 import board.Item;
 import board.ObjectInfoPanel.Printable;
-
 import datastructures.UndoableObjects;
 
 /**

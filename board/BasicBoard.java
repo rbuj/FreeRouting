@@ -15,33 +15,29 @@
  */
 package board;
 
+import boardgraphics.Drawable;
+import boardgraphics.GraphicsContext;
+import datastructures.ShapeTree.TreeEntry;
+import datastructures.UndoableObjects;
 import geometry.planar.Area;
 import geometry.planar.ConvexShape;
 import geometry.planar.IntBox;
 import geometry.planar.IntOctagon;
 import geometry.planar.Point;
-import geometry.planar.Vector;
 import geometry.planar.Polyline;
 import geometry.planar.PolylineShape;
 import geometry.planar.TileShape;
-
+import geometry.planar.Vector;
 import java.awt.Graphics;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import datastructures.ShapeTree.TreeEntry;
-
 import library.BoardLibrary;
 import library.Padstack;
 import rules.BoardRules;
-import boardgraphics.GraphicsContext;
-import boardgraphics.Drawable;
-import datastructures.UndoableObjects;
 
 /**
  *

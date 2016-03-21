@@ -20,9 +20,9 @@
 
 package library;
 
-import geometry.planar.Vector;
-import geometry.planar.Shape;
 import geometry.planar.Area;
+import geometry.planar.Shape;
+import geometry.planar.Vector;
 
 /**
  * Component package templates describing the padstacks and

@@ -21,15 +21,13 @@
 
 package board;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.Iterator;
-
-import datastructures.UndoableObjects;
 import datastructures.ShapeTree;
-
+import datastructures.UndoableObjects;
 import geometry.planar.FortyfiveDegreeBoundingDirections;
 import geometry.planar.Polyline;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  *

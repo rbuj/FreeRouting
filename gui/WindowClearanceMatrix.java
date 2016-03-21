@@ -20,9 +20,8 @@
 
 package gui;
 
-import rules.ClearanceMatrix;
-
 import datastructures.UndoableObjects;
+import rules.ClearanceMatrix;
 
 /**
  * Window for interactive editing of the clearance Matrix.

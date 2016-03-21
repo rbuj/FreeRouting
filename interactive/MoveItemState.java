@@ -20,23 +20,20 @@
 
 package interactive;
 
+import board.ClearanceViolation;
+import board.Component;
+import board.Item;
+import board.LayerStructure;
+import board.Via;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntPoint;
+import geometry.planar.Point;
+import geometry.planar.Vector;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeSet;
-
-import geometry.planar.FloatPoint;
-import geometry.planar.IntPoint;
-import geometry.planar.Vector;
-import geometry.planar.Point;
-
 import library.BoardLibrary;
-
-import board.Component;
-import board.Item;
-import board.Via;
-import board.ClearanceViolation;
-import board.LayerStructure;
 
 /**
  *

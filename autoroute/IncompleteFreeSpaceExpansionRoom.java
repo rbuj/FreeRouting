@@ -20,9 +20,8 @@
 
 package autoroute;
 
-import java.util.Collection;
-
 import geometry.planar.TileShape;
+import java.util.Collection;
 
 
 /**

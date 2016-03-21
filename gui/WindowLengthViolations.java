@@ -21,11 +21,10 @@
 
 package gui;
 
-import rules.Net;
-import rules.Nets;
-import rules.NetClass;
-
 import interactive.RatsNest;
+import rules.Net;
+import rules.NetClass;
+import rules.Nets;
 
 /**
  *

@@ -15,30 +15,26 @@
  */
 package board;
 
-import java.util.Collection;
-import java.util.LinkedList;
-
-import geometry.planar.Point;
-import geometry.planar.IntPoint;
+import boardgraphics.Drawable;
+import boardgraphics.GraphicsContext;
+import datastructures.ShapeTree;
+import datastructures.ShapeTree.TreeEntry;
+import datastructures.UndoableObjects;
 import geometry.planar.FloatPoint;
+import geometry.planar.IntBox;
+import geometry.planar.IntPoint;
+import geometry.planar.Point;
 import geometry.planar.TileShape;
 import geometry.planar.Vector;
-import geometry.planar.IntBox;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeSet;
-
 import rules.Nets;
-import boardgraphics.Drawable;
-import boardgraphics.GraphicsContext;
-
-import datastructures.UndoableObjects;
-import datastructures.ShapeTree;
-import datastructures.ShapeTree.TreeEntry;
 
 /**
  * Basic class of the items on a board.

@@ -20,19 +20,19 @@
 
 package board;
 
-import geometry.planar.ConvexShape;
-import geometry.planar.IntPoint;
-import geometry.planar.Point;
-import geometry.planar.FloatPoint;
-import geometry.planar.Shape;
-import geometry.planar.TileShape;
-import geometry.planar.Simplex;
-import geometry.planar.IntBox;
 import geometry.planar.Circle;
-import geometry.planar.Vector;
+import geometry.planar.ConvexShape;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntBox;
+import geometry.planar.IntPoint;
 import geometry.planar.Limits;
-import rules.ViaInfo;
+import geometry.planar.Point;
+import geometry.planar.Shape;
+import geometry.planar.Simplex;
+import geometry.planar.TileShape;
+import geometry.planar.Vector;
 import library.Padstack;
+import rules.ViaInfo;
 
 
 /**

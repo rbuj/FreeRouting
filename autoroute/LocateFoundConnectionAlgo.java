@@ -20,20 +20,18 @@
  */
 package autoroute;
 
-import java.util.Collection;
-import java.util.SortedSet;
-import java.util.LinkedList;
-import java.util.Iterator;
-
-import geometry.planar.IntPoint;
-import geometry.planar.FloatPoint;
-import geometry.planar.TileShape;
-
+import board.AngleRestriction;
 import board.Connectable;
 import board.Item;
-import board.AngleRestriction;
 import board.ShapeSearchTree;
 import board.TestLevel;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntPoint;
+import geometry.planar.TileShape;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.SortedSet;
 
 /**
  *

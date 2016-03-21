@@ -19,24 +19,21 @@
  */
 package autoroute;
 
+import board.ForcedViaAlgo;
+import board.Item;
+import board.ItemSelectionFilter;
+import board.PolylineTrace;
+import board.RoutingBoard;
+import board.TestLevel;
+import board.Trace;
+import geometry.planar.FloatPoint;
 import geometry.planar.IntPoint;
 import geometry.planar.Point;
-import geometry.planar.FloatPoint;
 import geometry.planar.Polyline;
-
 import java.util.Iterator;
 import java.util.Set;
-
 import library.Padstack;
 import rules.ViaInfo;
-
-import board.ForcedViaAlgo;
-import board.PolylineTrace;
-import board.Trace;
-import board.Item;
-import board.RoutingBoard;
-import board.ItemSelectionFilter;
-import board.TestLevel;
 
 /**
  * Inserts the traces and vias of the connection found by the autoroute algorithm.

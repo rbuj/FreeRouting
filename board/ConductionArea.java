@@ -20,14 +20,12 @@
 
 package board;
 
-import java.util.Iterator;
-
 import geometry.planar.Area;
-import geometry.planar.Point;
-import geometry.planar.Vector;
 import geometry.planar.FloatPoint;
+import geometry.planar.Point;
 import geometry.planar.TileShape;
-
+import geometry.planar.Vector;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 

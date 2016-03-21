@@ -21,18 +21,16 @@
 
 package board;
 
+import autoroute.AutorouteControl.ExpansionCostFactor;
+import geometry.planar.FloatLine;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntPoint;
+import geometry.planar.Point;
+import geometry.planar.Polyline;
+import geometry.planar.Side;
+import geometry.planar.Vector;
 import java.util.Collection;
 import java.util.Iterator;
-
-import geometry.planar.Point;
-import geometry.planar.IntPoint;
-import geometry.planar.Vector;
-import geometry.planar.Polyline;
-import geometry.planar.FloatPoint;
-import geometry.planar.FloatLine;
-import geometry.planar.Side;
-
-import autoroute.AutorouteControl.ExpansionCostFactor;
 
 /**
  * Contains functions for optimizing and improving via locations.

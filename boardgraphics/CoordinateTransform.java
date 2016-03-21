@@ -19,15 +19,9 @@ package boardgraphics;
 import geometry.planar.FloatPoint;
 import geometry.planar.IntBox;
 import geometry.planar.Limits;
-
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
-/**
- * Transformation function between the board and the screen coordinate systems.
- *
- * @author Alfons Wirtz
- */
 
 
 public class CoordinateTransform implements java.io.Serializable

@@ -20,8 +20,8 @@
 
 package rules;
 
-import java.util.List;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Contains an array of vias used for routing.

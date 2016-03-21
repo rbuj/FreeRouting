@@ -21,7 +21,6 @@
 package interactive;
 
 import geometry.planar.FloatPoint;
-
 import java.awt.geom.Point2D;
 
 /**

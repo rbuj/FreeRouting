@@ -22,11 +22,9 @@ package board;
 
 
 import datastructures.UndoableObjects;
-
-import geometry.planar.Point;
 import geometry.planar.IntPoint;
+import geometry.planar.Point;
 import geometry.planar.Vector;
-
 import library.Package;
 
 

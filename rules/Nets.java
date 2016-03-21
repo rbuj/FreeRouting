@@ -19,8 +19,8 @@
  */
 package rules;
 
-import java.util.Vector;
 import java.util.Collection;
+import java.util.Vector;
 
 /**
  * Describes the electrical Nets on a board.

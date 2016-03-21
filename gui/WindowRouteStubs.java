@@ -21,15 +21,13 @@
 
 package gui;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.Iterator;
-
+import board.Item;
 import datastructures.Signum;
 import geometry.planar.FloatPoint;
-
-import board.Item;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.SortedSet;
 
 /**
  *

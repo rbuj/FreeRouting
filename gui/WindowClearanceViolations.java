@@ -20,9 +20,8 @@
 
 package gui;
 
-import geometry.planar.FloatPoint;
 import board.ClearanceViolation;
-
+import geometry.planar.FloatPoint;
 import interactive.ClearanceViolations;
 
 /**

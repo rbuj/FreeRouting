@@ -20,18 +20,16 @@
 
 package designformats.specctra;
 
-import java.util.Collection;
-import java.util.Iterator;
-
-import geometry.planar.FloatPoint;
-import geometry.planar.Point;
-
 import board.BasicBoard;
+import board.ConductionArea;
 import board.PolylineTrace;
 import board.Via;
-import board.ConductionArea;
-import datastructures.IndentFileWriter;
 import datastructures.IdentifierType;
+import datastructures.IndentFileWriter;
+import geometry.planar.FloatPoint;
+import geometry.planar.Point;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Methods to handle a Specctra session file.

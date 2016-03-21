@@ -21,17 +21,15 @@
 
 package interactive;
 
+import board.Item;
+import board.PolylineTrace;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntBox;
+import geometry.planar.IntPoint;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeSet;
-
-import geometry.planar.FloatPoint;
-import geometry.planar.IntPoint;
-import geometry.planar.IntBox;
-
-import board.Item;
-import board.PolylineTrace;
 
 /**
  *

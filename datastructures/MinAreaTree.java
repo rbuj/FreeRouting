@@ -20,11 +20,10 @@
 
 package datastructures;
 
+import geometry.planar.RegularTileShape;
+import geometry.planar.ShapeBoundingDirections;
 import java.util.Set;
 import java.util.TreeSet;
-
-import geometry.planar.ShapeBoundingDirections;
-import geometry.planar.RegularTileShape;
 
 /**
  * Binary search tree for shapes in the plane.

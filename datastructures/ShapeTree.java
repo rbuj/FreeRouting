@@ -20,9 +20,9 @@
 
 package datastructures;
 
-import geometry.planar.ShapeBoundingDirections;
 import geometry.planar.RegularTileShape;
 import geometry.planar.Shape;
+import geometry.planar.ShapeBoundingDirections;
 import geometry.planar.TileShape;
 
 /**

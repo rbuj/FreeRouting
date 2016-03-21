@@ -15,22 +15,18 @@
  */
 package autoroute;
 
-import java.util.Iterator;
-import java.util.Collection;
-import java.util.Set;
-
-import datastructures.UndoableObjects;
-
-import geometry.planar.FloatPoint;
-
-import board.Item;
-import board.Via;
-import board.Trace;
-import board.RoutingBoard;
 import board.FixedState;
+import board.Item;
+import board.RoutingBoard;
 import board.TestLevel;
-
+import board.Trace;
+import board.Via;
+import datastructures.UndoableObjects;
+import geometry.planar.FloatPoint;
 import interactive.InteractiveActionThread;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * To optimize the vias and traces after the batch autorouter has completed the board.

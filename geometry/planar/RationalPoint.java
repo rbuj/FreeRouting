@@ -19,9 +19,8 @@
  */
 
 package geometry.planar;
-import java.math.BigInteger;
-
 import datastructures.BigIntAux;
+import java.math.BigInteger;
 
 /**
  *

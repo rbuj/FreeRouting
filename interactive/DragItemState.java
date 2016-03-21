@@ -20,17 +20,16 @@
 
 package interactive;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.Iterator;
-
-import geometry.planar.FloatPoint;
-import geometry.planar.IntPoint;
-import geometry.planar.Vector;
 import board.AngleRestriction;
 import board.Item;
 import board.MoveComponent;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntPoint;
+import geometry.planar.Vector;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Class for interactive dragging items with the mouse on a routing board

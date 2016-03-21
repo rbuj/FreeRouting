@@ -19,28 +19,25 @@
  */
 package autoroute;
 
+import board.Item;
+import board.RoutingBoard;
+import board.SearchTreeObject;
+import board.ShapeSearchTree;
+import board.ShapeSearchTree45Degree;
+import board.ShapeSearchTree90Degree;
+import board.TestLevel;
+import datastructures.Stoppable;
+import datastructures.TimeLimit;
 import geometry.planar.Line;
 import geometry.planar.Simplex;
 import geometry.planar.TileShape;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.TreeSet;
 import java.util.Set;
 import java.util.SortedSet;
-
-import datastructures.Stoppable;
-import datastructures.TimeLimit;
-
-import board.SearchTreeObject;
-import board.Item;
-import board.RoutingBoard;
-import board.ShapeSearchTree;
-import board.ShapeSearchTree90Degree;
-import board.ShapeSearchTree45Degree;
-import board.TestLevel;
+import java.util.TreeSet;
 
 /**
  * Temporary autoroute data stored on the RoutingBoard.

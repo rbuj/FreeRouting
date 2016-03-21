@@ -20,18 +20,15 @@
 
 package autoroute;
 
+import board.Connectable;
+import board.Item;
+import board.SearchTreeObject;
+import board.ShapeSearchTree;
+import datastructures.ShapeTree;
 import geometry.planar.TileShape;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-
-import datastructures.ShapeTree;
-
-import board.SearchTreeObject;
-import board.ShapeSearchTree;
-import board.Connectable;
-import board.Item;
 
 
 /**

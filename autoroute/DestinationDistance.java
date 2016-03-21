@@ -20,9 +20,9 @@
 
 package autoroute;
 
+import autoroute.AutorouteControl.ExpansionCostFactor;
 import geometry.planar.FloatPoint;
 import geometry.planar.IntBox;
-import autoroute.AutorouteControl.ExpansionCostFactor;
 
 
 

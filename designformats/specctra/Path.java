@@ -20,8 +20,8 @@
 
 package designformats.specctra;
 
-import datastructures.IndentFileWriter;
 import datastructures.IdentifierType;
+import datastructures.IndentFileWriter;
 
 /**
  * Class for  writing path scopes from dsn-files.

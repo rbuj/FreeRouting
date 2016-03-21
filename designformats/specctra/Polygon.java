@@ -19,9 +19,9 @@
  */
 
 package designformats.specctra;
-import geometry.planar.IntPoint;
-import datastructures.IndentFileWriter;
 import datastructures.IdentifierType;
+import datastructures.IndentFileWriter;
+import geometry.planar.IntPoint;
 
 /**
  * Describes a polygon in a Specctra dsn file.

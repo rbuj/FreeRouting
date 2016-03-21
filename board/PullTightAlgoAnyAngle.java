@@ -16,15 +16,14 @@
 
 package board;
 
-import datastructures.Stoppable;
-import geometry.planar.Limits;
 import datastructures.Signum;
-
+import datastructures.Stoppable;
 import geometry.planar.Direction;
 import geometry.planar.FloatPoint;
 import geometry.planar.IntPoint;
-import geometry.planar.Point;
+import geometry.planar.Limits;
 import geometry.planar.Line;
+import geometry.planar.Point;
 import geometry.planar.Polyline;
 import geometry.planar.Side;
 import geometry.planar.TileShape;

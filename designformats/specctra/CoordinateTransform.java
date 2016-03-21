@@ -21,10 +21,10 @@
 package designformats.specctra;
 
 import geometry.planar.FloatPoint;
-import geometry.planar.Vector;
-import geometry.planar.Line;
 import geometry.planar.IntBox;
+import geometry.planar.Line;
 import geometry.planar.PolylineShape;
+import geometry.planar.Vector;
 
 /**
  * Computes transformations between a specctra dsn-file coordinates and board coordinates.

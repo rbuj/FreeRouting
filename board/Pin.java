@@ -21,17 +21,16 @@
 package board;
 
 
-import geometry.planar.Point;
-import geometry.planar.IntPoint;
-import geometry.planar.Shape;
 import geometry.planar.ConvexShape;
+import geometry.planar.Direction;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntPoint;
+import geometry.planar.Line;
+import geometry.planar.Point;
+import geometry.planar.Polyline;
+import geometry.planar.Shape;
 import geometry.planar.TileShape;
 import geometry.planar.Vector;
-import geometry.planar.Direction;
-import geometry.planar.Line;
-import geometry.planar.Polyline;
-import geometry.planar.FloatPoint;
-
 import library.Package;
 import library.Padstack;
 

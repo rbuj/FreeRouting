@@ -21,30 +21,27 @@
 
 package autoroute;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.TreeSet;
-import java.util.SortedSet;
-import java.util.Iterator;
-
-import datastructures.Signum;
-import datastructures.ShapeTree;
-
-import geometry.planar.Side;
-import geometry.planar.Direction;
-import geometry.planar.Point;
-import geometry.planar.IntPoint;
-import geometry.planar.FloatPoint;
-import geometry.planar.Line;
-import geometry.planar.TileShape;
-import geometry.planar.Simplex;
-
-import board.ShapeSearchTree;
-import board.SearchTreeObject;
 import board.Connectable;
 import board.Item;
 import board.PolylineTrace;
+import board.SearchTreeObject;
+import board.ShapeSearchTree;
 import board.TestLevel;
+import datastructures.ShapeTree;
+import datastructures.Signum;
+import geometry.planar.Direction;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntPoint;
+import geometry.planar.Line;
+import geometry.planar.Point;
+import geometry.planar.Side;
+import geometry.planar.Simplex;
+import geometry.planar.TileShape;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * To calculate the neigbour rooms of an expansion room.

@@ -25,8 +25,8 @@ import geometry.planar.Line;
 import geometry.planar.LineSegment;
 import geometry.planar.Point;
 import geometry.planar.Polyline;
-import geometry.planar.TileShape;
 import geometry.planar.Side;
+import geometry.planar.TileShape;
 
 /**
  *

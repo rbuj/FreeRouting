@@ -16,9 +16,8 @@
 
 package geometry.planar;
 
-import java.math.BigInteger;
-
 import datastructures.Signum;
+import java.math.BigInteger;
 
 /**
  *

@@ -20,9 +20,9 @@
 
 package designformats.specctra;
 
-import geometry.planar.IntPoint;
-import datastructures.IndentFileWriter;
 import datastructures.IdentifierType;
+import datastructures.IndentFileWriter;
+import geometry.planar.IntPoint;
 
 /**
  * Class for reading and writing circle scopes from dsn-files.

@@ -15,16 +15,12 @@
  */
 package autoroute;
 
+import board.RoutingBoard;
+import datastructures.TimeLimit;
+import geometry.planar.FloatPoint;
+import interactive.InteractiveActionThread;
 import java.util.Collection;
 import java.util.SortedSet;
-
-import datastructures.TimeLimit;
-
-import geometry.planar.FloatPoint;
-
-import board.RoutingBoard;
-
-import interactive.InteractiveActionThread;
 
 /**
  * Handles the sequencing of the fanout inside the batch autorouter.

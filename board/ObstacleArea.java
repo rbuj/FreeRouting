@@ -16,17 +16,15 @@
 
 package board;
 
+import boardgraphics.GraphicsContext;
+import geometry.planar.Area;
+import geometry.planar.FloatPoint;
 import geometry.planar.IntBox;
 import geometry.planar.IntPoint;
-import geometry.planar.Area;
+import geometry.planar.Point;
 import geometry.planar.TileShape;
 import geometry.planar.Vector;
-import geometry.planar.Point;
-import geometry.planar.FloatPoint;
-
 import java.awt.Color;
-
-import boardgraphics.GraphicsContext;
 
 /**
  *

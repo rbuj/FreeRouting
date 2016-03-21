@@ -19,25 +19,22 @@
  */
 package interactive;
 
-import geometry.planar.FloatPoint;
-import geometry.planar.TileShape;
-
-import java.util.Collection;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.Iterator;
-
 import autoroute.AutorouteControl;
+import autoroute.AutorouteEngine;
 import autoroute.CompleteFreeSpaceExpansionRoom;
 import autoroute.IncompleteFreeSpaceExpansionRoom;
 import autoroute.InsertFoundConnectionAlgo;
 import autoroute.LocateFoundConnectionAlgo;
 import autoroute.MazeSearchAlgo;
-import autoroute.AutorouteEngine;
-
 import board.Item;
 import board.RoutingBoard;
+import geometry.planar.FloatPoint;
+import geometry.planar.TileShape;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * State for testing the expanding algorithm of the autorouter.

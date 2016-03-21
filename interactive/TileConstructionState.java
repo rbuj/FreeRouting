@@ -21,19 +21,16 @@
 package interactive;
 
 
-import java.util.Iterator;
-
+import board.AngleRestriction;
+import board.FixedState;
+import board.RoutingBoard;
 import geometry.planar.FloatPoint;
 import geometry.planar.IntPoint;
 import geometry.planar.Line;
 import geometry.planar.Side;
 import geometry.planar.TileShape;
-
+import java.util.Iterator;
 import rules.BoardRules;
-
-import board.AngleRestriction;
-import board.RoutingBoard;
-import board.FixedState;
 
 /**
  * Class for interactive construction of a tile shaped obstacle

@@ -20,11 +20,11 @@
 
 package designformats.specctra;
 
-import geometry.planar.FloatPoint;
-import geometry.planar.IntPoint;
-import geometry.planar.IntOctagon;
-import datastructures.IndentFileWriter;
 import datastructures.IdentifierType;
+import datastructures.IndentFileWriter;
+import geometry.planar.FloatPoint;
+import geometry.planar.IntOctagon;
+import geometry.planar.IntPoint;
 
 
 /**

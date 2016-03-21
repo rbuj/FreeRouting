@@ -21,11 +21,10 @@
 
 package gui;
 
+import board.Item;
 import java.util.Collection;
 import java.util.Set;
 import java.util.SortedSet;
-
-import board.Item;
 
 /**
  *

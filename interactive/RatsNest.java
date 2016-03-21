@@ -20,23 +20,18 @@
 
 package interactive;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.Iterator;
-import java.util.Vector;
-
-import java.awt.Graphics;
-
-import datastructures.UndoableObjects;
-
-import geometry.planar.FloatPoint;
-
-import rules.Net;
-
 import board.BasicBoard;
-import board.Item;
 import board.Connectable;
+import board.Item;
 import boardgraphics.GraphicsContext;
+import datastructures.UndoableObjects;
+import geometry.planar.FloatPoint;
+import java.awt.Graphics;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Vector;
+import rules.Net;
 
 /**
  * Creates all Incompletes (Ratsnest) to display them on the screen

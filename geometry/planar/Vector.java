@@ -20,9 +20,8 @@
 
 package geometry.planar;
 
-import java.math.BigInteger;
-
 import datastructures.Signum;
+import java.math.BigInteger;
 
 /**
  * Abstract class describing functionality of Vectors.

@@ -19,10 +19,9 @@
  */
 package designformats.specctra;
 
-import datastructures.IndentFileWriter;
-
 import board.BasicBoard;
 import board.TestLevel;
+import datastructures.IndentFileWriter;
 
 /**
  * Class for reading and writing dsn-files.

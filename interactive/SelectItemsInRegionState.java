@@ -19,15 +19,13 @@
  */
 package interactive;
 
+import board.Item;
 import geometry.planar.FloatPoint;
 import geometry.planar.IntBox;
 import geometry.planar.IntPoint;
-
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
-
-import board.Item;
 
 /**
  * Interactive state for selecting all items in a rectangle.

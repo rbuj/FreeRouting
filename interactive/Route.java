@@ -15,42 +15,36 @@
  */
 package interactive;
 
+import board.AngleRestriction;
+import board.ConductionArea;
+import board.DrillItem;
+import board.Item;
+import board.ItemSelectionFilter;
+import board.PolylineTrace;
+import board.RoutingBoard;
+import board.TestLevel;
+import board.Trace;
+import board.Unit;
+import boardgraphics.GraphicsContext;
 import datastructures.TimeLimit;
-
 import geometry.planar.Area;
+import geometry.planar.Ellipse;
 import geometry.planar.FloatPoint;
 import geometry.planar.IntBox;
 import geometry.planar.IntOctagon;
 import geometry.planar.IntPoint;
-import geometry.planar.Vector;
 import geometry.planar.Point;
 import geometry.planar.Polyline;
-import geometry.planar.Ellipse;
-
+import geometry.planar.Vector;
 import java.awt.Graphics;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
-
 import library.Padstack;
-
-import rules.ViaRule;
-import rules.ViaInfo;
 import rules.Net;
-
-import board.AngleRestriction;
-import board.Trace;
-import board.ConductionArea;
-import board.DrillItem;
-import board.Item;
-import board.PolylineTrace;
-import board.RoutingBoard;
-import board.ItemSelectionFilter;
-import board.TestLevel;
-import board.Unit;
-
-import boardgraphics.GraphicsContext;
+import rules.ViaInfo;
+import rules.ViaRule;
 
 /**
  *

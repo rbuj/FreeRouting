@@ -20,11 +20,10 @@
 
 package designformats.specctra;
 
+import board.Item;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-
-import board.Item;
 
 /**
  * Class for reading and writing package scopes from dsn-files.
