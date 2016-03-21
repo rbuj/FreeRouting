@@ -1319,17 +1319,17 @@ class Structure extends ScopeKeyword
                 clearance_class_no = BoardRules.clearance_class_none();
             }
         }
-        if (p_keepout_type == KeepoutType.via_keepout)
-        {
-            p_board.insert_via_obstacle(p_area, p_layer, clearance_class_no, p_fixed_state);
-        }
-        else if (p_keepout_type == KeepoutType.place_keepout)
-        {
-            p_board.insert_component_obstacle(p_area, p_layer, clearance_class_no, p_fixed_state);
-        }
-        else
-        {
-            p_board.insert_obstacle(p_area, p_layer, clearance_class_no, p_fixed_state);
+        if (null != p_keepout_type)
+        switch (p_keepout_type) {
+            case via_keepout:
+                p_board.insert_via_obstacle(p_area, p_layer, clearance_class_no, p_fixed_state);
+                break;
+            case place_keepout:
+                p_board.insert_component_obstacle(p_area, p_layer, clearance_class_no, p_fixed_state);
+                break;
+            default:
+                p_board.insert_obstacle(p_area, p_layer, clearance_class_no, p_fixed_state);
+                break;
         }
     }
 

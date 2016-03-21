@@ -101,70 +101,56 @@ public class SelectedItemState extends InteractiveState
     {
         InteractiveState result = this;
 
-        if (p_key_char == 'a')
-        {
-            this.hdlg.autoroute_selected_items();
-        }
-        else if (p_key_char == 'b')
-        {
-            this.extent_to_whole_components();
-        }
-        else if (p_key_char == 'd')
-        {
-            result = this.cutout_items();
-        }
-        else if (p_key_char == 'e')
-        {
-            result = this.extent_to_whole_connections();
-        }
-        else if (p_key_char == 'f')
-        {
-            this.fix_items();
-        }
-        else if (p_key_char == 'i')
-        {
-            result = this.info();
-        }
-        else if (p_key_char == 'm')
-        {
-            result = MoveItemState.get_instance(hdlg.get_current_mouse_position(), item_list,
-                    this.return_state, hdlg, logfile);
-        }
-        else if (p_key_char == 'n')
-        {
-            this.extent_to_whole_nets();
-        }
-        else if (p_key_char == 'p')
-        {
-            this.hdlg.optimize_selected_items();
-        }
-        else if (p_key_char == 'r')
-        {
-            result = ZoomRegionState.get_instance(hdlg.get_current_mouse_position(), this, hdlg, logfile);
-        }
-        else if (p_key_char == 's')
-        {
-            result = this.extent_to_whole_connected_sets();
-        }
-        else if (p_key_char == 'u')
-        {
-            this.unfix_items();
-        }
-        else if (p_key_char == 'v')
-        {
-            this.toggle_clearance_violations();
-        }
-        else if (p_key_char == 'w')
-        {
-            this.hdlg.zoom_selection();
-        }
-        else if (p_key_char == java.awt.event.KeyEvent.VK_DELETE)
-        {
-            result = delete_items();
-        }
-        else
-        {
-            result = super.key_typed(p_key_char);
+        switch (p_key_char) {
+            case 'a':
+                this.hdlg.autoroute_selected_items();
+                break;
+            case 'b':
+                this.extent_to_whole_components();
+                break;
+            case 'd':
+                result = this.cutout_items();
+                break;
+            case 'e':
+                result = this.extent_to_whole_connections();
+                break;
+            case 'f':
+                this.fix_items();
+                break;
+            case 'i':
+                result = this.info();
+                break;
+            case 'm':
+                result = MoveItemState.get_instance(hdlg.get_current_mouse_position(), item_list,
+                        this.return_state, hdlg, logfile);
+                break;
+            case 'n':
+                this.extent_to_whole_nets();
+                break;
+            case 'p':
+                this.hdlg.optimize_selected_items();
+                break;
+            case 'r':
+                result = ZoomRegionState.get_instance(hdlg.get_current_mouse_position(), this, hdlg, logfile);
+                break;
+            case 's':
+                result = this.extent_to_whole_connected_sets();
+                break;
+            case 'u':
+                this.unfix_items();
+                break;
+            case 'v':
+                this.toggle_clearance_violations();
+                break;
+            case 'w':
+                this.hdlg.zoom_selection();
+                break;
+            case java.awt.event.KeyEvent.VK_DELETE:
+                result = delete_items();
+                break;
+            default:
+                result = super.key_typed(p_key_char);
+                break;
         }
         return result;
     }

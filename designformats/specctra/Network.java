@@ -1433,20 +1433,19 @@ public class Network extends ScopeKeyword
         {
             library.Package.Keepout[] keepout_arr;
             java.util.Map<String, ComponentPlacement.ItemClearanceInfo> curr_keepout_infos;
-            if (k == 0)
-            {
-                keepout_arr = curr_package.keepout_arr;
-                curr_keepout_infos = p_location.keepout_infos;
-            }
-            else if (k == 1)
-            {
-                keepout_arr = curr_package.via_keepout_arr;
-                curr_keepout_infos = p_location.via_keepout_infos;
-            }
-            else
-            {
-                keepout_arr = curr_package.place_keepout_arr;
-                curr_keepout_infos = p_location.place_keepout_infos;
+            switch (k) {
+                case 0:
+                    keepout_arr = curr_package.keepout_arr;
+                    curr_keepout_infos = p_location.keepout_infos;
+                    break;
+                case 1:
+                    keepout_arr = curr_package.via_keepout_arr;
+                    curr_keepout_infos = p_location.via_keepout_infos;
+                    break;
+                default:
+                    keepout_arr = curr_package.place_keepout_arr;
+                    curr_keepout_infos = p_location.place_keepout_infos;
+                    break;
             }
             for (int i = 0; i < keepout_arr.length; ++i)
             {
@@ -1474,23 +1473,22 @@ public class Network extends ScopeKeyword
                 }
                 if (layer >= 0)
                 {
-                    if (k == 0)
-                    {
-                        routing_board.insert_obstacle(curr_keepout.area, layer, component_translation,
-                                rotation_in_degree, !p_location.is_front, clearance_class, new_component.no,
-                                curr_keepout.name, fixed_state);
-                    }
-                    else if (k == 1)
-                    {
-                        routing_board.insert_via_obstacle(curr_keepout.area, layer, component_translation,
-                                rotation_in_degree, !p_location.is_front, clearance_class, new_component.no,
-                                curr_keepout.name, fixed_state);
-                    }
-                    else
-                    {
-                        routing_board.insert_component_obstacle(curr_keepout.area, layer, component_translation,
-                                rotation_in_degree, !p_location.is_front, clearance_class, new_component.no,
-                                curr_keepout.name, fixed_state);
+                    switch (k) {
+                        case 0:
+                            routing_board.insert_obstacle(curr_keepout.area, layer, component_translation,
+                                    rotation_in_degree, !p_location.is_front, clearance_class, new_component.no,
+                                    curr_keepout.name, fixed_state);
+                            break;
+                        case 1:
+                            routing_board.insert_via_obstacle(curr_keepout.area, layer, component_translation,
+                                    rotation_in_degree, !p_location.is_front, clearance_class, new_component.no,
+                                    curr_keepout.name, fixed_state);
+                            break;
+                        default:
+                            routing_board.insert_component_obstacle(curr_keepout.area, layer, component_translation,
+                                    rotation_in_degree, !p_location.is_front, clearance_class, new_component.no,
+                                    curr_keepout.name, fixed_state);
+                            break;
                     }
                 }
                 else
@@ -1500,23 +1498,22 @@ public class Network extends ScopeKeyword
                     {
                         if (routing_board.layer_structure.arr[j].is_signal)
                         {
-                            if (k == 0)
-                            {
-                                routing_board.insert_obstacle(curr_keepout.area, j, component_translation,
-                                        rotation_in_degree, !p_location.is_front, clearance_class, new_component.no,
-                                        curr_keepout.name, fixed_state);
-                            }
-                            else if (k == 1)
-                            {
-                                routing_board.insert_via_obstacle(curr_keepout.area, j, component_translation,
-                                        rotation_in_degree, !p_location.is_front, clearance_class, new_component.no,
-                                        curr_keepout.name, fixed_state);
-                            }
-                            else
-                            {
-                                routing_board.insert_component_obstacle(curr_keepout.area, j, component_translation,
-                                        rotation_in_degree, !p_location.is_front, clearance_class, new_component.no,
-                                        curr_keepout.name, fixed_state);
+                            switch (k) {
+                                case 0:
+                                    routing_board.insert_obstacle(curr_keepout.area, j, component_translation,
+                                            rotation_in_degree, !p_location.is_front, clearance_class, new_component.no,
+                                            curr_keepout.name, fixed_state);
+                                    break;
+                                case 1:
+                                    routing_board.insert_via_obstacle(curr_keepout.area, j, component_translation,
+                                            rotation_in_degree, !p_location.is_front, clearance_class, new_component.no,
+                                            curr_keepout.name, fixed_state);
+                                    break;
+                                default:
+                                    routing_board.insert_component_obstacle(curr_keepout.area, j, component_translation,
+                                            rotation_in_degree, !p_location.is_front, clearance_class, new_component.no,
+                                            curr_keepout.name, fixed_state);
+                                    break;
                             }
                         }
                     }

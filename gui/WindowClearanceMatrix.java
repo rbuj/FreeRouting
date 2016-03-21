@@ -454,23 +454,22 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow
             
             int board_value = (int) Math.round(board_handling.coordinate_transform.user_to_board((number_value).doubleValue()));
             int layer_no = layer_combo_box.get_selected_layer().index;
-            if (layer_no == ComboBoxLayer.ALL_LAYER_INDEX)
-            {
-                // change the clearance on all layers
-                clearance_matrix.set_value(curr_row, curr_column, board_value);
-                clearance_matrix.set_value(curr_column, curr_row, board_value);
-            }
-            else if (layer_no == ComboBoxLayer.INNER_LAYER_INDEX)
-            {
-                // change the clearance on all inner layers
-                clearance_matrix.set_inner_value(curr_row, curr_column, board_value);
-                clearance_matrix.set_inner_value(curr_column, curr_row, board_value);
-            }
-            else
-            {
-                // change the clearance on layer with index layer_no
-                clearance_matrix.set_value(curr_row, curr_column, layer_no, board_value);
-                clearance_matrix.set_value(curr_column, curr_row, layer_no, board_value);
+            switch (layer_no) {
+                case ComboBoxLayer.ALL_LAYER_INDEX:
+                    // change the clearance on all layers
+                    clearance_matrix.set_value(curr_row, curr_column, board_value);
+                    clearance_matrix.set_value(curr_column, curr_row, board_value);
+                    break;
+                case ComboBoxLayer.INNER_LAYER_INDEX:
+                    // change the clearance on all inner layers
+                    clearance_matrix.set_inner_value(curr_row, curr_column, board_value);
+                    clearance_matrix.set_inner_value(curr_column, curr_row, board_value);
+                    break;
+                default:
+                    // change the clearance on layer with index layer_no
+                    clearance_matrix.set_value(curr_row, curr_column, layer_no, board_value);
+                    clearance_matrix.set_value(curr_column, curr_row, layer_no, board_value);
+                    break;
             }
             if (items_already_assigned)
             {
@@ -508,41 +507,38 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow
             {
                 for (int j = 0; j < clearance_matrix.get_class_count(); ++j)
                 {
-                    if (p_layer == ComboBoxLayer.ALL_LAYER_INDEX)
-                    {
-                        // all layers
-                        
-                        if (clearance_matrix.is_layer_dependent(i, j))
-                        {
-                            this.data[i][j + 1] = -1;
-                        }
-                        else
-                        {
+                    switch (p_layer) {
+                        case ComboBoxLayer.ALL_LAYER_INDEX:
+                            // all layers
+                            
+                            if (clearance_matrix.is_layer_dependent(i, j))
+                            {
+                                this.data[i][j + 1] = -1;
+                            }
+                            else
+                            {
+                                Float curr_table_value =
+                                        (float) board_handling.coordinate_transform.board_to_user(clearance_matrix.value(i, j, 0));
+                                this.data[i][j + 1] = curr_table_value;
+                            }   break;
+                        case ComboBoxLayer.INNER_LAYER_INDEX:
+                            // all layers
+                            
+                            if (clearance_matrix.is_inner_layer_dependent(i, j))
+                            {
+                                this.data[i][j + 1] = -1;
+                            }
+                            else
+                            {
+                                Float curr_table_value =
+                                        (float) board_handling.coordinate_transform.board_to_user(clearance_matrix.value(i, j, 1));
+                                this.data[i][j + 1] = curr_table_value;
+                            }   break;
+                        default:
                             Float curr_table_value =
-                                    (float) board_handling.coordinate_transform.board_to_user(clearance_matrix.value(i, j, 0));
+                                    (float) board_handling.coordinate_transform.board_to_user(clearance_matrix.value(i, j, p_layer));
                             this.data[i][j + 1] = curr_table_value;
-                        }
-                    }
-                    else if (p_layer == ComboBoxLayer.INNER_LAYER_INDEX)
-                    {
-                        // all layers
-                        
-                        if (clearance_matrix.is_inner_layer_dependent(i, j))
-                        {
-                            this.data[i][j + 1] = -1;
-                        }
-                        else
-                        {
-                            Float curr_table_value =
-                                    (float) board_handling.coordinate_transform.board_to_user(clearance_matrix.value(i, j, 1));
-                            this.data[i][j + 1] = curr_table_value;
-                        }
-                    }
-                    else
-                    {
-                        Float curr_table_value =
-                                (float) board_handling.coordinate_transform.board_to_user(clearance_matrix.value(i, j, p_layer));
-                        this.data[i][j + 1] = curr_table_value;
+                            break;
                     }
                 }
             }

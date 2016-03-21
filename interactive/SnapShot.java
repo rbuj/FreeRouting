@@ -142,17 +142,16 @@ public class SnapShot implements java.io.Serializable
     public InteractiveState get_interactive_state(BoardHandling p_board_handling, Logfile p_logfile)
     {
         InteractiveState result;
-        if (this.interactive_state_no == 1)
-        {
-            result = RouteMenuState.get_instance(p_board_handling, p_logfile);
-        }
-        else if (this.interactive_state_no == 2)
-        {
-            result = DragMenuState.get_instance(p_board_handling, p_logfile);
-        }
-        else
-        {
-            result = SelectMenuState.get_instance(p_board_handling, p_logfile);
+        switch (this.interactive_state_no) {
+            case 1:
+                result = RouteMenuState.get_instance(p_board_handling, p_logfile);
+                break;
+            case 2:
+                result = DragMenuState.get_instance(p_board_handling, p_logfile);
+                break;
+            default:
+                result = SelectMenuState.get_instance(p_board_handling, p_logfile);
+                break;
         }
         return result;
     }

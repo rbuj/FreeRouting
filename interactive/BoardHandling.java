@@ -387,23 +387,20 @@ public class BoardHandling
      */
     public void set_manual_trace_half_width(int p_layer_no, int p_value)
     {
-        if (p_layer_no == gui.ComboBoxLayer.ALL_LAYER_INDEX)
-        {
-            for (int i = 0; i < settings.manual_trace_half_width_arr.length; ++i)
-            {
-                this.settings.set_manual_trace_half_width(i, p_value);
-            }
-        }
-        else if (p_layer_no == gui.ComboBoxLayer.INNER_LAYER_INDEX)
-        {
-            for (int i = 1; i < settings.manual_trace_half_width_arr.length - 1; ++i)
-            {
-                this.settings.set_manual_trace_half_width(i, p_value);
-            }
-        }
-        else
-        {
-            this.settings.set_manual_trace_half_width(p_layer_no, p_value);
+        switch (p_layer_no) {
+            case gui.ComboBoxLayer.ALL_LAYER_INDEX:
+                for (int i = 0; i < settings.manual_trace_half_width_arr.length; ++i)
+                {
+                    this.settings.set_manual_trace_half_width(i, p_value);
+                }   break;
+            case gui.ComboBoxLayer.INNER_LAYER_INDEX:
+                for (int i = 1; i < settings.manual_trace_half_width_arr.length - 1; ++i)
+                {
+                    this.settings.set_manual_trace_half_width(i, p_value);
+                }   break;
+            default:
+                this.settings.set_manual_trace_half_width(p_layer_no, p_value);
+                break;
         }
     }
 

@@ -662,42 +662,35 @@ public class IntOctagon extends RegularTileShape implements java.io.Serializable
     {
         
         int tmp;
-        if (p_border_line_no == 0)
-        {
-            tmp = this.ly - p_y;
-        }
-        else if (p_border_line_no == 2)
-        {
-            tmp = p_x - this.rx;
-        }
-        else if (p_border_line_no == 4)
-        {
-            tmp = p_y - this.uy;
-        }
-        else if (p_border_line_no == 6)
-        {
-            tmp = this.lx - p_x;
-        }
-        else if (p_border_line_no == 1)
-        {
-            tmp = p_x - p_y - this.lrx;
-        }
-        else if (p_border_line_no == 3)
-        {
-            tmp = p_x + p_y - this.urx;
-        }
-        else if (p_border_line_no == 5)
-        {
-            tmp = this.ulx + p_y - p_x;
-        }
-        else if (p_border_line_no == 7)
-        {
-            tmp = this.llx - p_x - p_y;
-        }
-        else
-        {
-            System.out.println("IntOctagon.side_of_border_line: p_border_line_no out of range");
-            tmp = 0;
+        switch (p_border_line_no) {
+            case 0:
+                tmp = this.ly - p_y;
+                break;
+            case 2:
+                tmp = p_x - this.rx;
+                break;
+            case 4:
+                tmp = p_y - this.uy;
+                break;
+            case 6:
+                tmp = this.lx - p_x;
+                break;
+            case 1:
+                tmp = p_x - p_y - this.lrx;
+                break;
+            case 3:
+                tmp = p_x + p_y - this.urx;
+                break;
+            case 5:
+                tmp = this.ulx + p_y - p_x;
+                break;
+            case 7:
+                tmp = this.llx - p_x - p_y;
+                break;
+            default:
+                System.out.println("IntOctagon.side_of_border_line: p_border_line_no out of range");
+                tmp = 0;
+                break;
         }
         Side result;
         if (tmp < 0)
@@ -1291,142 +1284,135 @@ public class IntOctagon extends RegularTileShape implements java.io.Serializable
     Side border_line_side_of( FloatPoint p_point, int p_line_no, double p_tolerance)
     {
         Side result;
-        if (p_line_no == 0)
-        {
-            if (p_point.y > this.ly + p_tolerance)
-            {
-                result  = Side.ON_THE_RIGHT;
-            }
-            else if (p_point.y < this.ly - p_tolerance)
-            {
-                result  = Side.ON_THE_LEFT;
-            }
-            else
-            {
+        switch (p_line_no) {
+            case 0:
+                if (p_point.y > this.ly + p_tolerance)
+                {
+                    result  = Side.ON_THE_RIGHT;
+                }
+                else if (p_point.y < this.ly - p_tolerance)
+                {
+                    result  = Side.ON_THE_LEFT;
+                }
+                else
+                {
+                    result = Side.COLLINEAR;
+                }   break;
+            case 2:
+                if (p_point.x < this.rx - p_tolerance)
+                {
+                    result  = Side.ON_THE_RIGHT;
+                }
+                else if (p_point.x > this.rx + p_tolerance)
+                {
+                    result  = Side.ON_THE_LEFT;
+                }
+                else
+                {
+                    result = Side.COLLINEAR;
+                }   break;
+            case 4:
+                if (p_point.y < this.uy - p_tolerance)
+                {
+                    result  = Side.ON_THE_RIGHT;
+                }
+                else if (p_point.y > this.uy  + p_tolerance )
+                {
+                    result  = Side.ON_THE_LEFT;
+                }
+                else
+                {
+                    result = Side.COLLINEAR;
+                }   break;
+            case 6:
+                if (p_point.x > this.lx + p_tolerance )
+                {
+                    result  = Side.ON_THE_RIGHT;
+                }
+                else if (p_point.x < this.lx - p_tolerance )
+                {
+                    result  = Side.ON_THE_LEFT;
+                }
+                else
+                {
+                    result = Side.COLLINEAR;
+                }   break;
+            case 1:
+                {
+                    double tmp = p_point.y - p_point.x + lrx;
+                    if (tmp > p_tolerance)
+                        // the p_point is above the the lower right border line of this octagon
+                    {
+                        result  = Side.ON_THE_RIGHT;
+                    }
+                    else if (tmp < -p_tolerance)
+                        // the p_point is below the the lower right border line of this octagon
+                    {
+                        result  = Side.ON_THE_LEFT;
+                    }
+                    else
+                    {
+                        result = Side.COLLINEAR;
+                    }       break;
+                }
+            case 3:
+                {
+                    double tmp = p_point.x + p_point.y - urx;
+                    if (tmp < -p_tolerance)
+                    {
+                        // the p_point is below the the upper right border line of this octagon
+                        result  = Side.ON_THE_RIGHT;
+                    }
+                    else if (tmp > p_tolerance)
+                    {
+                        // the p_point is above the the upper right border line of this octagon
+                        result  = Side.ON_THE_LEFT;
+                    }
+                    else
+                    {
+                        result = Side.COLLINEAR;
+                    }       break;
+                }
+            case 5:
+                {
+                    double tmp = p_point.y - p_point.x + ulx;
+                    if (tmp < -p_tolerance)
+                        // the p_point is below the the upper left border line of this octagon
+                    {
+                        result  = Side.ON_THE_RIGHT;
+                    }
+                    else if (tmp > p_tolerance)
+                        // the p_point is above the the upper left border line of this octagon
+                    {
+                        result  = Side.ON_THE_LEFT;
+                    }
+                    else
+                    {
+                        result = Side.COLLINEAR;
+                    }       break;
+                }
+            case 7:
+                {
+                    double tmp = p_point.x + p_point.y - llx;
+                    if (tmp > p_tolerance)
+                    {
+                        // the p_point is above the the lower left border line of this octagon
+                        result  = Side.ON_THE_RIGHT;
+                    }
+                    else if (tmp < -p_tolerance)
+                    {
+                        // the p_point is below the the lower left border line of this octagon
+                        result  = Side.ON_THE_LEFT;
+                    }
+                    else
+                    {
+                        result = Side.COLLINEAR;
+                    }       break;
+                }
+            default:
+                System.out.println("IntOctagon.border_line_side_of: p_line_no out of range");
                 result = Side.COLLINEAR;
-            }
-        }
-        else if (p_line_no == 2)
-        {
-            if (p_point.x < this.rx - p_tolerance)
-            {
-                result  = Side.ON_THE_RIGHT;
-            }
-            else if (p_point.x > this.rx + p_tolerance)
-            {
-                result  = Side.ON_THE_LEFT;
-            }
-            else
-            {
-                result = Side.COLLINEAR;
-            }
-        }
-        else if (p_line_no == 4)
-        {
-            if (p_point.y < this.uy - p_tolerance)
-            {
-                result  = Side.ON_THE_RIGHT;
-            }
-            else if (p_point.y > this.uy  + p_tolerance )
-            {
-                result  = Side.ON_THE_LEFT;
-            }
-            else
-            {
-                result = Side.COLLINEAR;
-            }
-        }
-        else if (p_line_no == 6)
-        {
-            if (p_point.x > this.lx + p_tolerance )
-            {
-                result  = Side.ON_THE_RIGHT;
-            }
-            else if (p_point.x < this.lx - p_tolerance )
-            {
-                result  = Side.ON_THE_LEFT;
-            }
-            else
-            {
-                result = Side.COLLINEAR;
-            }
-        }
-        else if (p_line_no == 1)
-        {
-            double tmp = p_point.y - p_point.x + lrx;
-            if (tmp > p_tolerance)
-                // the p_point is above the the lower right border line of this octagon
-            {
-                result  = Side.ON_THE_RIGHT;
-            }
-            else if (tmp < -p_tolerance)
-                // the p_point is below the the lower right border line of this octagon
-            {
-                result  = Side.ON_THE_LEFT;
-            }
-            else
-            {
-                result = Side.COLLINEAR;
-            }
-        }
-        else if (p_line_no == 3)
-        {
-            double tmp = p_point.x + p_point.y - urx;
-            if (tmp < -p_tolerance)
-            {
-                // the p_point is below the the upper right border line of this octagon
-                result  = Side.ON_THE_RIGHT;
-            }
-            else if (tmp > p_tolerance)
-            {
-                // the p_point is above the the upper right border line of this octagon
-                result  = Side.ON_THE_LEFT;
-            }
-            else
-            {
-                result = Side.COLLINEAR;
-            }
-        }
-        else if (p_line_no == 5)
-        {
-            double tmp = p_point.y - p_point.x + ulx;
-            if (tmp < -p_tolerance)
-                // the p_point is below the the upper left border line of this octagon
-            {
-                result  = Side.ON_THE_RIGHT;
-            }
-            else if (tmp > p_tolerance)
-                // the p_point is above the the upper left border line of this octagon
-            {
-                result  = Side.ON_THE_LEFT;
-            }
-            else
-            {
-                result = Side.COLLINEAR;
-            }
-        }
-        else if (p_line_no == 7)
-        {
-            double tmp = p_point.x + p_point.y - llx;
-            if (tmp > p_tolerance)
-            {
-                // the p_point is above the the lower left border line of this octagon
-                result  = Side.ON_THE_RIGHT;
-            }
-            else if (tmp < -p_tolerance)
-            {
-                // the p_point is below the the lower left border line of this octagon
-                result  = Side.ON_THE_LEFT;
-            }
-            else
-            {
-                result = Side.COLLINEAR;
-            }
-        }
-        else
-        {
-            System.out.println("IntOctagon.border_line_side_of: p_line_no out of range");
-            result = Side.COLLINEAR;
+                break;
         }
         return result;
     }

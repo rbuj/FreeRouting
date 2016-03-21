@@ -331,43 +331,36 @@ public class ShapeSearchTree45Degree extends ShapeSearchTree
     private static double signed_line_distance(IntOctagon p_obstacle_shape, int p_obstacle_line_no, IntOctagon p_contained_shape)
     {
         double result;
-        if (p_obstacle_line_no == 0)
-        {
-            result = p_obstacle_shape.ly - p_contained_shape.uy;
-        }
-        else if (p_obstacle_line_no == 2)
-        {
-            result = p_contained_shape.lx - p_obstacle_shape.rx;
-        }
-        else if (p_obstacle_line_no == 4)
-        {
-            result = p_contained_shape.ly - p_obstacle_shape.uy;
-        }
-        else if (p_obstacle_line_no == 6)
-        {
-            result = p_obstacle_shape.lx - p_contained_shape.rx;
-        }
+        switch (p_obstacle_line_no) {
+            case 0:
+                result = p_obstacle_shape.ly - p_contained_shape.uy;
+                break;
+            case 2:
+                result = p_contained_shape.lx - p_obstacle_shape.rx;
+                break;
+            case 4:
+                result = p_contained_shape.ly - p_obstacle_shape.uy;
+                break;
         // factor 0.5 used instead to 1 / sqrt(2) to prefer orthogonal lines slightly to diagonal restraining lines.
-        else if (p_obstacle_line_no == 1)
-        {
-            result = 0.5 * (p_contained_shape.ulx - p_obstacle_shape.lrx);
-        }
-        else if (p_obstacle_line_no == 3)
-        {
-            result = 0.5 * (p_contained_shape.llx - p_obstacle_shape.urx);
-        }
-        else if (p_obstacle_line_no == 5)
-        {
-            result = 0.5 * (p_obstacle_shape.ulx - p_contained_shape.lrx);
-        }
-        else if (p_obstacle_line_no == 7)
-        {
-            result = 0.5 * (p_obstacle_shape.llx - p_contained_shape.urx);
-        }
-        else
-        {
-            System.out.println("ShapeSearchTree45Degree.signed_line_distance: p_obstacle_line_no out of range");
-            result = 0;
+            case 6:
+                result = p_obstacle_shape.lx - p_contained_shape.rx;
+                break;
+            case 1:
+                result = 0.5 * (p_contained_shape.ulx - p_obstacle_shape.lrx);
+                break;
+            case 3:
+                result = 0.5 * (p_contained_shape.llx - p_obstacle_shape.urx);
+                break;
+            case 5:
+                result = 0.5 * (p_obstacle_shape.ulx - p_contained_shape.lrx);
+                break;
+            case 7:
+                result = 0.5 * (p_obstacle_shape.llx - p_contained_shape.urx);
+                break;
+            default:
+                System.out.println("ShapeSearchTree45Degree.signed_line_distance: p_obstacle_line_no out of range");
+                result = 0;
+                break;
         }
         return result;
     }
@@ -386,41 +379,34 @@ public class ShapeSearchTree45Degree extends ShapeSearchTree
         int llx = p_room_shape.llx;
         int urx = p_room_shape.urx;
 
-        if (p_obstacle_line_no == 0)
-        {
-            uy = p_obstacle_shape.ly;
-        }
-        else if (p_obstacle_line_no == 2)
-        {
-            lx = p_obstacle_shape.rx;
-        }
-        else if (p_obstacle_line_no == 4)
-        {
-            ly = p_obstacle_shape.uy;
-        }
-        else if (p_obstacle_line_no == 6)
-        {
-            rx = p_obstacle_shape.lx;
-        }
-        else if (p_obstacle_line_no == 1)
-        {
-            ulx = p_obstacle_shape.lrx;
-        }
-        else if (p_obstacle_line_no == 3)
-        {
-            llx = p_obstacle_shape.urx;
-        }
-        else if (p_obstacle_line_no == 5)
-        {
-            lrx = p_obstacle_shape.ulx;
-        }
-        else if (p_obstacle_line_no == 7)
-        {
-            urx = p_obstacle_shape.llx;
-        }
-        else
-        {
-            System.out.println("ShapeSearchTree45Degree.calc_outside_restrained_shape: p_obstacle_line_no out of range");
+        switch (p_obstacle_line_no) {
+            case 0:
+                uy = p_obstacle_shape.ly;
+                break;
+            case 2:
+                lx = p_obstacle_shape.rx;
+                break;
+            case 4:
+                ly = p_obstacle_shape.uy;
+                break;
+            case 6:
+                rx = p_obstacle_shape.lx;
+                break;
+            case 1:
+                ulx = p_obstacle_shape.lrx;
+                break;
+            case 3:
+                llx = p_obstacle_shape.urx;
+                break;
+            case 5:
+                lrx = p_obstacle_shape.ulx;
+                break;
+            case 7:
+                urx = p_obstacle_shape.llx;
+                break;
+            default:
+                System.out.println("ShapeSearchTree45Degree.calc_outside_restrained_shape: p_obstacle_line_no out of range");
+                break;
         }
 
         IntOctagon result = new IntOctagon(lx, ly, rx, uy, ulx, lrx, llx, urx);
@@ -441,41 +427,34 @@ public class ShapeSearchTree45Degree extends ShapeSearchTree
         int llx = p_room_shape.llx;
         int urx = p_room_shape.urx;
 
-        if (p_obstacle_line_no == 0)
-        {
-            ly = p_obstacle_shape.ly;
-        }
-        else if (p_obstacle_line_no == 2)
-        {
-            rx = p_obstacle_shape.rx;
-        }
-        else if (p_obstacle_line_no == 4)
-        {
-            uy = p_obstacle_shape.uy;
-        }
-        else if (p_obstacle_line_no == 6)
-        {
-            lx = p_obstacle_shape.lx;
-        }
-        else if (p_obstacle_line_no == 1)
-        {
-            lrx = p_obstacle_shape.lrx;
-        }
-        else if (p_obstacle_line_no == 3)
-        {
-            urx = p_obstacle_shape.urx;
-        }
-        else if (p_obstacle_line_no == 5)
-        {
-            ulx = p_obstacle_shape.ulx;
-        }
-        else if (p_obstacle_line_no == 7)
-        {
-            llx = p_obstacle_shape.llx;
-        }
-        else
-        {
-            System.out.println("ShapeSearchTree45Degree.calc_inside_restrained_shape: p_obstacle_line_no out of range");
+        switch (p_obstacle_line_no) {
+            case 0:
+                ly = p_obstacle_shape.ly;
+                break;
+            case 2:
+                rx = p_obstacle_shape.rx;
+                break;
+            case 4:
+                uy = p_obstacle_shape.uy;
+                break;
+            case 6:
+                lx = p_obstacle_shape.lx;
+                break;
+            case 1:
+                lrx = p_obstacle_shape.lrx;
+                break;
+            case 3:
+                urx = p_obstacle_shape.urx;
+                break;
+            case 5:
+                ulx = p_obstacle_shape.ulx;
+                break;
+            case 7:
+                llx = p_obstacle_shape.llx;
+                break;
+            default:
+                System.out.println("ShapeSearchTree45Degree.calc_inside_restrained_shape: p_obstacle_line_no out of range");
+                break;
         }
 
         IntOctagon result = new IntOctagon(lx, ly, rx, uy, ulx, lrx, llx, urx);

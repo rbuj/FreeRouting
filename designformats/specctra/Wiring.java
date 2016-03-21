@@ -293,17 +293,17 @@ class Wiring extends ScopeKeyword
         }
         p_file.new_line();
         p_file.write("(type ");
-        if (p_fixed_state == FixedState.SHOVE_FIXED)
-        {
-            p_file.write("shove_fixed)");
-        }
-        else if (p_fixed_state == FixedState.SYSTEM_FIXED)
-        {
-            p_file.write("fix)");
-        }
-        else
-        {
-            p_file.write("protect)");
+        if (null != p_fixed_state)
+        switch (p_fixed_state) {
+            case SHOVE_FIXED:
+                p_file.write("shove_fixed)");
+                break;
+            case SYSTEM_FIXED:
+                p_file.write("fix)");
+                break;
+            default:
+                p_file.write("protect)");
+                break;
         }
     }
     

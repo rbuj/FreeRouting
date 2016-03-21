@@ -82,17 +82,19 @@ public class BatchFanout
                 this.routing_board.start_marking_changed_area();
                 AutorouteEngine.AutorouteResult curr_result =
                         this.routing_board.fanout(curr_pin.board_pin, this.thread.hdlg.settings, ripup_costs, this.thread, time_limit);
-                if (curr_result == AutorouteEngine.AutorouteResult.ROUTED)
-                {
-                    ++routed_count;
-                }
-                else if (curr_result == AutorouteEngine.AutorouteResult.NOT_ROUTED)
-                {
-                    ++not_routed_count;
-                }
-                else if (curr_result == AutorouteEngine.AutorouteResult.INSERT_ERROR)
-                {
-                    ++insert_error_count;
+                if (null != curr_result)
+                switch (curr_result) {
+                    case ROUTED:
+                        ++routed_count;
+                        break;
+                    case NOT_ROUTED:
+                        ++not_routed_count;
+                        break;
+                    case INSERT_ERROR:
+                        ++insert_error_count;
+                        break;
+                    default:
+                        break;
                 }
                 if (curr_result != AutorouteEngine.AutorouteResult.NOT_ROUTED)
                 {

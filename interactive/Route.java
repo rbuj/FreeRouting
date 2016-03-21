@@ -200,17 +200,16 @@ public class Route
         }
 
         IntOctagon tidy_clip_shape;
-        if (trace_tidy_width == Integer.MAX_VALUE)
-        {
-            tidy_clip_shape = null;
-        }
-        else if (trace_tidy_width == 0)
-        {
-            tidy_clip_shape = IntOctagon.EMPTY;
-        }
-        else
-        {
-            tidy_clip_shape = ok_point.surrounding_octagon().enlarge(trace_tidy_width);
+        switch (trace_tidy_width) {
+            case Integer.MAX_VALUE:
+                tidy_clip_shape = null;
+                break;
+            case 0:
+                tidy_clip_shape = IntOctagon.EMPTY;
+                break;
+            default:
+                tidy_clip_shape = ok_point.surrounding_octagon().enlarge(trace_tidy_width);
+                break;
         }
         int[] opt_net_no_arr;
         if (max_shove_trace_recursion_depth <= 0)

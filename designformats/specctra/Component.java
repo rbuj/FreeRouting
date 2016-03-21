@@ -173,20 +173,19 @@ public class Component extends ScopeKeyword
         String keepout_type;
         for (int j = 0; j < 3; ++j)
         {
-            if (j == 0)
-            {
-                curr_keepout_arr = p_component.get_package().keepout_arr;
-                keepout_type = "(keepout ";
-            }
-            else if (j == 1)
-            {
-                curr_keepout_arr = p_component.get_package().via_keepout_arr;
-                keepout_type = "(via_keepout ";
-            }
-            else
-            {
-                curr_keepout_arr = p_component.get_package().place_keepout_arr;
-                keepout_type = "(place_keepout ";
+            switch (j) {
+                case 0:
+                    curr_keepout_arr = p_component.get_package().keepout_arr;
+                    keepout_type = "(keepout ";
+                    break;
+                case 1:
+                    curr_keepout_arr = p_component.get_package().via_keepout_arr;
+                    keepout_type = "(via_keepout ";
+                    break;
+                default:
+                    curr_keepout_arr = p_component.get_package().place_keepout_arr;
+                    keepout_type = "(place_keepout ";
+                    break;
             }
             for (int i = 0; i < curr_keepout_arr.length; ++i)
             {

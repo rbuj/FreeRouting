@@ -125,21 +125,21 @@ public class InteractiveState
         InteractiveState result = this;
         java.awt.geom.Point2D screen_mouse_pos =
                 hdlg.graphics_context.coordinate_transform.board_to_screen(hdlg.get_current_mouse_position());
-        if (p_key_char == 'a')
-        {
-            hdlg.get_panel().board_frame.zoom_all();
-        }
-        else if (p_key_char == 'c')
-        {
-            hdlg.get_panel().center_display(screen_mouse_pos);
-        }
-        else if (p_key_char == 'f')
-        {
-            result = ZoomRegionState.get_instance(hdlg.get_current_mouse_position(), this, hdlg, logfile);
-        }
-        else if (p_key_char =='h')
-        {
-            hdlg.get_panel().board_frame.select_previous_snapshot();
+        switch (p_key_char) {
+            case 'a':
+                hdlg.get_panel().board_frame.zoom_all();
+                break;
+            case 'c':
+                hdlg.get_panel().center_display(screen_mouse_pos);
+                break;
+            case 'f':
+                result = ZoomRegionState.get_instance(hdlg.get_current_mouse_position(), this, hdlg, logfile);
+                break;
+            case 'h':
+                hdlg.get_panel().board_frame.select_previous_snapshot();
+                break;
+            default:
+                break;
         }
         if (p_key_char == 'j')
         {

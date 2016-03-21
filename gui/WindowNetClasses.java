@@ -501,50 +501,46 @@ public class WindowNetClasses extends BoardSavableSubWindow
             interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;
             rules.BoardRules board_rules = board_handling.get_routing_board().rules;
             NetClass curr_net_class = board_rules.net_classes.get(p_rule_no);
-            if (p_layer.index == ComboBoxLayer.ALL_LAYER_INDEX)
-            {
-                // all layers
-                if (curr_net_class.trace_width_is_layer_dependent())
-                {
-                    trace_width = (float) -1;
-
-                }
-                else
-                {
-                    trace_width = (float) board_handling.coordinate_transform.board_to_user(2 * curr_net_class.get_trace_half_width(0));
-                }
-
-            }
-            else if (p_layer.index == ComboBoxLayer.INNER_LAYER_INDEX)
-            {
-                // all inner layers
-
-                if (curr_net_class.trace_width_is_inner_layer_dependent())
-                {
-                    trace_width = (float) -1;
-                }
-                else
-                {
-                    int first_inner_signal_layer_no = 1;
-                    board.LayerStructure layer_structure = board_handling.get_routing_board().layer_structure;
-                    while (!layer_structure.arr[first_inner_signal_layer_no].is_signal)
+            switch (p_layer.index) {
+                case ComboBoxLayer.ALL_LAYER_INDEX:
+                    // all layers
+                    if (curr_net_class.trace_width_is_layer_dependent())
                     {
-                        ++first_inner_signal_layer_no;
-                    }
-                    if (first_inner_signal_layer_no < layer_structure.arr.length - 1)
-                    {
-
-                        trace_width = (float) board_handling.coordinate_transform.board_to_user(2 * curr_net_class.get_trace_half_width(first_inner_signal_layer_no));
+                        trace_width = (float) -1;
+                        
                     }
                     else
                     {
-                        trace_width = (float) 0;
+                        trace_width = (float) board_handling.coordinate_transform.board_to_user(2 * curr_net_class.get_trace_half_width(0));
+                    }   break;
+                case ComboBoxLayer.INNER_LAYER_INDEX:
+                    // all inner layers
+                    
+                    if (curr_net_class.trace_width_is_inner_layer_dependent())
+                    {
+                        trace_width = (float) -1;
                     }
-                }
-            }
-            else
-            {
-                trace_width = (float) board_handling.coordinate_transform.board_to_user(2 * curr_net_class.get_trace_half_width(p_layer.index));
+                    else
+                    {
+                        int first_inner_signal_layer_no = 1;
+                        board.LayerStructure layer_structure = board_handling.get_routing_board().layer_structure;
+                        while (!layer_structure.arr[first_inner_signal_layer_no].is_signal)
+                        {
+                            ++first_inner_signal_layer_no;
+                        }
+                        if (first_inner_signal_layer_no < layer_structure.arr.length - 1)
+                        {
+                            
+                            trace_width = (float) board_handling.coordinate_transform.board_to_user(2 * curr_net_class.get_trace_half_width(first_inner_signal_layer_no));
+                        }
+                        else
+                        {
+                            trace_width = (float) 0;
+                        }
+                    }   break;
+                default:
+                    trace_width = (float) board_handling.coordinate_transform.board_to_user(2 * curr_net_class.get_trace_half_width(p_layer.index));
+                    break;
             }
             this.data[p_rule_no][ColumnName.TRACE_WIDTH.ordinal()] = trace_width;
             fireTableCellUpdated(p_rule_no, ColumnName.TRACE_WIDTH.ordinal());
@@ -767,20 +763,19 @@ public class WindowNetClasses extends BoardSavableSubWindow
                 int layer_index = layer_combo_box.get_selected_layer().index;
                 NetClass curr_net_class = board_rules.net_classes.get(p_row);
 
-                if (layer_index == ComboBoxLayer.ALL_LAYER_INDEX)
-                {
-                    curr_net_class.set_trace_half_width(curr_half_width);
-                    curr_net_class.set_all_layers_active(is_active);
-                }
-                else if (layer_index == ComboBoxLayer.INNER_LAYER_INDEX)
-                {
-                    curr_net_class.set_trace_half_width_on_inner(curr_half_width);
-                    curr_net_class.set_all_inner_layers_active(is_active);
-                }
-                else
-                {
-                    curr_net_class.set_trace_half_width(layer_index, curr_half_width);
-                    curr_net_class.set_active_routing_layer(layer_index, is_active);
+                switch (layer_index) {
+                    case ComboBoxLayer.ALL_LAYER_INDEX:
+                        curr_net_class.set_trace_half_width(curr_half_width);
+                        curr_net_class.set_all_layers_active(is_active);
+                        break;
+                    case ComboBoxLayer.INNER_LAYER_INDEX:
+                        curr_net_class.set_trace_half_width_on_inner(curr_half_width);
+                        curr_net_class.set_all_inner_layers_active(is_active);
+                        break;
+                    default:
+                        curr_net_class.set_trace_half_width(layer_index, curr_half_width);
+                        curr_net_class.set_active_routing_layer(layer_index, is_active);
+                        break;
                 }
             }
             else if (p_col == ColumnName.ON_LAYER.ordinal())

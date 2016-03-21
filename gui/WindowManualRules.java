@@ -154,53 +154,52 @@ public class WindowManualRules extends BoardSavableSubWindow
     private void set_selected_layer(ComboBoxLayer.Layer p_layer)
     {
         int curr_half_width;
-        if (p_layer.index == ComboBoxLayer.ALL_LAYER_INDEX)
-        {
-            // check if the half width is layer_dependent.
-            boolean trace_widths_layer_dependent = false;
-            int first_half_width = this.board_handling.settings.get_manual_trace_half_width(0);
-            for (int i = 1; i < this.board_handling.get_layer_count(); ++i)
-            {
-                if (this.board_handling.settings.get_manual_trace_half_width(i) != first_half_width)
+        switch (p_layer.index) {
+            case ComboBoxLayer.ALL_LAYER_INDEX:
                 {
-                    trace_widths_layer_dependent = true;
-                    break;
+                    // check if the half width is layer_dependent.
+                    boolean trace_widths_layer_dependent = false;
+                    int first_half_width = this.board_handling.settings.get_manual_trace_half_width(0);
+                    for (int i = 1; i < this.board_handling.get_layer_count(); ++i)
+                    {
+                        if (this.board_handling.settings.get_manual_trace_half_width(i) != first_half_width)
+                        {
+                            trace_widths_layer_dependent = true;
+                            break;
+                        }
+                    }       if (trace_widths_layer_dependent)
+                    {
+                        curr_half_width = -1;
+                    }
+                    else
+                    {
+                        curr_half_width = first_half_width;
+                    }       break;
                 }
-            }
-            if (trace_widths_layer_dependent)
-            {
-                curr_half_width = -1;
-            }
-            else
-            {
-                curr_half_width = first_half_width;
-            }
-        }
-        else if (p_layer.index == ComboBoxLayer.INNER_LAYER_INDEX)
-        {
-            // check if the half width is layer_dependent on the inner layers.
-            boolean trace_widths_layer_dependent = false;
-            int first_half_width = this.board_handling.settings.get_manual_trace_half_width(1);
-            for (int i = 2; i < this.board_handling.get_layer_count() - 1; ++i)
-            {
-                if (this.board_handling.settings.get_manual_trace_half_width(i) != first_half_width)
+            case ComboBoxLayer.INNER_LAYER_INDEX:
                 {
-                    trace_widths_layer_dependent = true;
-                    break;
+                    // check if the half width is layer_dependent on the inner layers.
+                    boolean trace_widths_layer_dependent = false;
+                    int first_half_width = this.board_handling.settings.get_manual_trace_half_width(1);
+                    for (int i = 2; i < this.board_handling.get_layer_count() - 1; ++i)
+                    {
+                        if (this.board_handling.settings.get_manual_trace_half_width(i) != first_half_width)
+                        {
+                            trace_widths_layer_dependent = true;
+                            break;
+                        }
+                    }       if (trace_widths_layer_dependent)
+                    {
+                        curr_half_width = -1;
+                    }
+                    else
+                    {
+                        curr_half_width = first_half_width;
+                    }       break;
                 }
-            }
-            if (trace_widths_layer_dependent)
-            {
-                curr_half_width = -1;
-            }
-            else
-            {
-                curr_half_width = first_half_width;
-            }
-        }
-        else
-        {
-            curr_half_width = this.board_handling.settings.get_manual_trace_half_width(p_layer.index);
+            default:
+                curr_half_width = this.board_handling.settings.get_manual_trace_half_width(p_layer.index);
+                break;
         }
         set_trace_width_field(curr_half_width);
     }
