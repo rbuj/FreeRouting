@@ -49,7 +49,7 @@ public class BatchFanout
         this.thread = p_thread;
         this.routing_board = p_thread.hdlg.get_routing_board();
         Collection<board.Pin> board_smd_pin_list = routing_board.get_smd_pins();
-        this.sorted_components = new java.util.TreeSet<Component>();
+        this.sorted_components = new java.util.TreeSet<>();
         for (int i = 1; i <= routing_board.components.count(); ++i)
         {
             board.Component curr_board_component = routing_board.components.get(i);
@@ -126,7 +126,7 @@ public class BatchFanout
             this.board_component = p_board_component;
 
             // calcoulate the center of gravity of all SMD pins of this component.
-            Collection<board.Pin> curr_pin_list = new java.util.LinkedList<board.Pin>();
+            Collection<board.Pin> curr_pin_list = new java.util.LinkedList<>();
             int cmp_no = p_board_component.no;
             for (board.Pin curr_board_pin : p_board_smd_pin_list)
             {
@@ -149,7 +149,7 @@ public class BatchFanout
             this.gravity_center_of_smd_pins = new FloatPoint(x, y);
 
             // calculate the sorted SMD pins of this component
-            this.smd_pins = new java.util.TreeSet<Pin>();
+            this.smd_pins = new java.util.TreeSet<>();
 
             for (board.Pin curr_board_pin : curr_pin_list)
             {

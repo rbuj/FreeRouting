@@ -312,7 +312,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
     @Override
     public boolean append( String p_button_name, String p_window_title, WindowObjectInfo.Printable p_object)
     {
-        java.util.Collection<WindowObjectInfo.Printable> object_list = new java.util.LinkedList<WindowObjectInfo.Printable>();
+        java.util.Collection<WindowObjectInfo.Printable> object_list = new java.util.LinkedList<>();
         object_list.add(p_object);
         return append_objects(p_button_name, p_window_title, object_list);
     }
@@ -324,7 +324,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
     @Override
     public boolean append_items( String p_button_name, String p_window_title, java.util.Collection<board.Item> p_items)
     {
-        java.util.Collection<WindowObjectInfo.Printable> object_list = new java.util.LinkedList<WindowObjectInfo.Printable>();
+        java.util.Collection<WindowObjectInfo.Printable> object_list = new java.util.LinkedList<>();
         object_list.addAll(p_items);
         return append_objects(p_button_name, p_window_title, object_list);
     }
@@ -393,7 +393,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
      * The new created windows by pushing buttons inside this window.
      * Used when closing this window to close also all subwindows.
      */
-    private Collection<WindowObjectInfo> subwindows = new java.util.LinkedList<WindowObjectInfo>();
+    private Collection<WindowObjectInfo> subwindows = new java.util.LinkedList<>();
     
     private static final int MAX_WINDOW_HEIGHT = 500;
     private static final int SCROLLBAR_ADD = 30;

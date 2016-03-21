@@ -61,10 +61,10 @@ public class MoveComponent
         }
         else
         {
-            item_group_list = new LinkedList<Item>();
+            item_group_list = new LinkedList<>();
             item_group_list.add(p_item);
         }
-        Collection<FloatPoint> item_centers = new LinkedList<FloatPoint>();
+        Collection<FloatPoint> item_centers = new LinkedList<>();
         for (Item curr_item : item_group_list)
         {
             boolean curr_item_movable = !curr_item.is_user_fixed() && ((curr_item instanceof DrillItem) || (curr_item instanceof ObstacleArea) || (curr_item instanceof ComponentOutline));
@@ -124,7 +124,7 @@ public class MoveComponent
             return false;
         }
         TimeLimit time_limit = new TimeLimit(CHECK_TIME_LIMIT);
-        Collection<Item> ignore_items = new LinkedList<Item>();
+        Collection<Item> ignore_items = new LinkedList<>();
         for (int i = 0; i < item_group_arr.length; ++i)
         {
             boolean move_ok;

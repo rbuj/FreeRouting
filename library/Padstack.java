@@ -118,7 +118,7 @@ public class Padstack implements Comparable<Padstack>, board.ObjectInfoPanel.Pri
      */
     public java.util.Collection<Direction> get_trace_exit_directions(int p_layer, double p_factor)
     {
-        java.util.Collection<Direction> result = new java.util.LinkedList<Direction>();
+        java.util.Collection<Direction> result = new java.util.LinkedList<>();
         if (p_layer < 0 || p_layer >= shapes.length)
         {
             return result;

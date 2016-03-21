@@ -59,9 +59,9 @@ class Structure extends ScopeKeyword
         // The correct location is the scope PlaceControl, but Electra writes it here.
         boolean flip_style_rotate_first = false;
 
-        Collection<Shape.ReadAreaScopeResult> keepout_list = new LinkedList<Shape.ReadAreaScopeResult>();
-        Collection<Shape.ReadAreaScopeResult> via_keepout_list = new LinkedList<Shape.ReadAreaScopeResult>();
-        Collection<Shape.ReadAreaScopeResult> place_keepout_list = new LinkedList<Shape.ReadAreaScopeResult>();
+        Collection<Shape.ReadAreaScopeResult> keepout_list = new LinkedList<>();
+        Collection<Shape.ReadAreaScopeResult> via_keepout_list = new LinkedList<>();
+        Collection<Shape.ReadAreaScopeResult> place_keepout_list = new LinkedList<>();
 
         Object next_token = null;
         for (;;)
@@ -570,7 +570,7 @@ class Structure extends ScopeKeyword
                 System.out.println("Structure.read_layer_scope: String expected");
                 return false;
             }
-            Collection<String> net_names = new LinkedList<String>();
+            Collection<String> net_names = new LinkedList<>();
             String layer_string = (String) next_token;
             next_token = p_scanner.next_token();
             while (next_token != Keyword.CLOSED_BRACKET)
@@ -657,8 +657,8 @@ class Structure extends ScopeKeyword
     {
         try
         {
-            Collection<String> normal_vias = new LinkedList<String>();
-            Collection<String> spare_vias = new LinkedList<String>();
+            Collection<String> normal_vias = new LinkedList<>();
+            Collection<String> spare_vias = new LinkedList<>();
             for (;;)
             {
                 Object next_token = p_scanner.next_token();
@@ -865,7 +865,7 @@ class Structure extends ScopeKeyword
         IntBox bounds = (IntBox) bounding_box.transform_to_board(p_par.coordinate_transform);
         bounds = bounds.offset(1000);
 
-        Collection<PolylineShape> board_outline_shapes = new LinkedList<PolylineShape>();
+        Collection<PolylineShape> board_outline_shapes = new LinkedList<>();
         for (Shape curr_shape : p_board_construction_info.outline_shapes)
         {
             if (curr_shape instanceof PolygonPath)
@@ -1005,7 +1005,7 @@ class Structure extends ScopeKeyword
                 curr_shape.is_hole = other_shape.contains_all_corners(curr_shape);
             }
         }
-        Collection<PolylineShape> hole_list = new LinkedList<PolylineShape>();
+        Collection<PolylineShape> hole_list = new LinkedList<>();
         for (int i = 0; i < shape_arr.length; ++i)
         {
             if (shape_arr[i].is_hole)
@@ -1342,13 +1342,13 @@ class Structure extends ScopeKeyword
     private static class BoardConstructionInfo
     {
 
-        Collection<Layer> layer_info = new LinkedList<Layer>();
+        Collection<Layer> layer_info = new LinkedList<>();
         Shape bounding_shape;
-        java.util.List<Shape> outline_shapes = new LinkedList<Shape>();
+        java.util.List<Shape> outline_shapes = new LinkedList<>();
         String outline_clearance_class_name = null;
         int found_layer_count = 0;
-        Collection<Rule> default_rules = new LinkedList<Rule>();
-        Collection<LayerRule> layer_dependent_rules = new LinkedList<LayerRule>();
+        Collection<Rule> default_rules = new LinkedList<>();
+        Collection<LayerRule> layer_dependent_rules = new LinkedList<>();
     }
 
     private static class LayerRule

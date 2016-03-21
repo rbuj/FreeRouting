@@ -48,7 +48,7 @@ public abstract class FreeSpaceExpansionRoom implements ExpansionRoom
     {
         shape = p_shape;
         layer = p_layer;
-        doors = new LinkedList<ExpansionDoor>();
+        doors = new LinkedList<>();
     }
     
     /**
@@ -75,7 +75,7 @@ public abstract class FreeSpaceExpansionRoom implements ExpansionRoom
     @Override
     public void clear_doors()
     {
-        this.doors = new LinkedList<ExpansionDoor>();
+        this.doors = new LinkedList<>();
     }
     
     @Override

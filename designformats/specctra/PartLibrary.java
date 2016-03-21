@@ -182,7 +182,7 @@ public class PartLibrary  extends ScopeKeyword
                 System.out.println("PartLibrary.read_logical_part_mapping: Keyword.COMPONENT_SCOPE expected");
                 return null;
             }
-            java.util.SortedSet <String> result = new java.util.TreeSet<String>();
+            java.util.SortedSet <String> result = new java.util.TreeSet<>();
             for(;;)
             {
                 p_scanner.yybegin(SpecctraFileScanner.NAME);
@@ -215,7 +215,7 @@ public class PartLibrary  extends ScopeKeyword
     
     private LogicalPart read_logical_part(Scanner p_scanner)
     {
-        java.util.Collection<PartPin> part_pins = new java.util.LinkedList<PartPin>();
+        java.util.Collection<PartPin> part_pins = new java.util.LinkedList<>();
         Object next_token = null;
         try
         {

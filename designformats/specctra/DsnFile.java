@@ -129,7 +129,7 @@ public class DsnFile
             layer_contains_wires_arr[i] = false;
             changed_layer_arr[i] = false;
         }
-        java.util.Collection<board.ConductionArea> conduction_area_list = new java.util.LinkedList<board.ConductionArea>();
+        java.util.Collection<board.ConductionArea> conduction_area_list = new java.util.LinkedList<>();
         java.util.Collection<board.Item> item_list = routing_board.get_items();
         for (board.Item curr_item : item_list)
         {
@@ -397,7 +397,7 @@ public class DsnFile
 
     public static java.util.Collection<String> read_string_list_scope(Scanner p_scanner)
     {
-        java.util.Collection<String> result = new java.util.LinkedList<String>();
+        java.util.Collection<String> result = new java.util.LinkedList<>();
         try
         {
             for (;;)

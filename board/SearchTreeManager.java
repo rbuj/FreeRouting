@@ -40,7 +40,7 @@ public class SearchTreeManager
     public SearchTreeManager(BasicBoard p_board)
     {
         board = p_board;
-        compensated_search_trees = new LinkedList<ShapeSearchTree>();
+        compensated_search_trees = new LinkedList<>();
         default_tree =  new ShapeSearchTree(FortyfiveDegreeBoundingDirections.INSTANCE, p_board, 0);
         compensated_search_trees.add(default_tree);
         this.clearance_compensation_used = false;

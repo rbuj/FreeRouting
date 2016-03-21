@@ -48,7 +48,7 @@ public class Library extends ScopeKeyword
     {
         board.RoutingBoard board = p_par.board_handling.get_routing_board();
         board.library.padstacks = new library.Padstacks(p_par.board_handling.get_routing_board().layer_structure);
-        Collection<Package> package_list = new LinkedList<Package>();
+        Collection<Package> package_list = new LinkedList<>();
         Object next_token = null;
         for (;;)
         {
@@ -282,7 +282,7 @@ public class Library extends ScopeKeyword
         String padstack_name = null;
         boolean is_drilllable = true;
         boolean placed_absolute = false;
-        Collection<Shape> shape_list = new LinkedList<Shape>();
+        Collection<Shape> shape_list = new LinkedList<>();
         try
         {
             Object next_token = p_scanner.next_token();

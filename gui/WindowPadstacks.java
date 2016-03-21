@@ -70,13 +70,13 @@ public class WindowPadstacks extends WindowObjectListWithFilter
         {
             return;
         }
-        java.util.Collection<Padstack> padstack_list = new java.util.LinkedList<Padstack>();
+        java.util.Collection<Padstack> padstack_list = new java.util.LinkedList<>();
         for (int i = 0; i < selected_padstacks.length; ++i)
         {
             padstack_list.add((Padstack)selected_padstacks[i]);
         }
         board.RoutingBoard routing_board = board_frame.board_panel.board_handling.get_routing_board();
-        java.util.Set<board.Item> board_instances = new java.util.TreeSet<board.Item>();
+        java.util.Set<board.Item> board_instances = new java.util.TreeSet<>();
         java.util.Iterator<UndoableObjects.UndoableObjectNode> it = routing_board.item_list.start_read_object();
         for(;;)
         {

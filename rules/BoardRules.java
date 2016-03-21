@@ -526,7 +526,7 @@ public class BoardRules implements java.io.Serializable
     
     public final ViaInfos via_infos = new ViaInfos();
     
-    public final java.util.Vector<ViaRule> via_rules = new java.util.Vector<ViaRule>();
+    public final java.util.Vector<ViaRule> via_rules = new java.util.Vector<>();
     
     public final NetClasses net_classes = new NetClasses();
     

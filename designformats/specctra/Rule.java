@@ -36,7 +36,7 @@ public abstract class Rule
      */
     public static Collection<Rule> read_scope( Scanner p_scanner)
     {
-        Collection<Rule> result = new LinkedList<Rule>();
+        Collection<Rule> result = new LinkedList<>();
         Object next_token = null;
         for (;;)
         {
@@ -93,8 +93,8 @@ public abstract class Rule
     {
         try
         {
-            Collection<String> layer_names = new LinkedList<String>();
-            Collection<Rule> rule_list = new LinkedList<Rule>();
+            Collection<String> layer_names = new LinkedList<>();
+            Collection<Rule> rule_list = new LinkedList<>();
             for (;;)
             {
                 p_scanner.yybegin(SpecctraFileScanner.LAYER_NAME);
@@ -294,7 +294,7 @@ public abstract class Rule
                 System.out.println("Rule.read_clearance_rule: number expected");
                 return null;
             }
-            Collection<String> class_pairs = new LinkedList<String> ();
+            Collection<String> class_pairs = new LinkedList<> ();
             next_token = p_scanner.next_token();
             if (next_token != Keyword.CLOSED_BRACKET)
             {

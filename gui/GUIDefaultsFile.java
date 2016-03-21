@@ -878,7 +878,7 @@ public class GUIDefaultsFile
      */
     private java.awt.Color[] read_color_array() throws java.io.IOException
     {
-        java.util.Collection<java.awt.Color> color_list = new java.util.LinkedList<java.awt.Color>();
+        java.util.Collection<java.awt.Color> color_list = new java.util.LinkedList<>();
         for(;;)
         {
             java.awt.Color curr_color = read_color();

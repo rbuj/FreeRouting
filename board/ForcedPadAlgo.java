@@ -99,7 +99,7 @@ public class ForcedPadAlgo
                 return CheckDrillResult.NOT_DRILLABLE;
             }
             Vector delta = new_via_center[0].difference_by(curr_shove_via.get_center());
-            Collection<Item> ignore_items = new java.util.LinkedList<Item>();
+            Collection<Item> ignore_items = new java.util.LinkedList<>();
             if (!MoveDrillItemAlgo.check(curr_shove_via, delta,
                     p_max_recursion_depth, p_max_via_recursion_depth - 1, ignore_items,
                     this.board, p_time_limit))

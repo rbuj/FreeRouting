@@ -94,7 +94,7 @@ public class DrillPageArray
      */
     public Collection<DrillPage> overlapping_pages(TileShape p_shape)
     {
-        Collection<DrillPage> result = new LinkedList<DrillPage>();
+        Collection<DrillPage> result = new LinkedList<>();
         
         IntBox shape_box = p_shape.bounding_box().intersection(this.bounds);
         

@@ -196,7 +196,7 @@ public class WindowNetClasses extends BoardSavableSubWindow
     private final ComboBoxLayer layer_combo_box;
     private final java.util.ResourceBundle resources;
     /** The subwindows created inside this window */
-    private final java.util.Collection<javax.swing.JFrame> subwindows = new java.util.LinkedList<javax.swing.JFrame>();
+    private final java.util.Collection<javax.swing.JFrame> subwindows = new java.util.LinkedList<>();
     private static final int TEXTFIELD_HEIGHT = 16;
     private static final int TEXTFIELD_WIDTH = 100;
     private static final int WINDOW_OFFSET = 30;
@@ -284,7 +284,7 @@ public class WindowNetClasses extends BoardSavableSubWindow
                 selected_class_arr[i] = routing_board.rules.net_classes.get((String) table.getValueAt(selected_rows[i], ColumnName.NAME.ordinal()));
             }
             rules.Nets nets = routing_board.rules.nets;
-            java.util.Set<board.Item> selected_items = new java.util.TreeSet<board.Item>();
+            java.util.Set<board.Item> selected_items = new java.util.TreeSet<>();
             java.util.Collection<board.Item> board_items = routing_board.get_items();
             for (board.Item curr_item : board_items)
             {
@@ -374,7 +374,7 @@ public class WindowNetClasses extends BoardSavableSubWindow
             {
                 selected_class_arr[i] = board_rules.net_classes.get((String) table.getValueAt(selected_rows[i], ColumnName.NAME.ordinal()));
             }
-            java.util.Collection<Printable> contained_nets = new java.util.LinkedList<Printable>();
+            java.util.Collection<Printable> contained_nets = new java.util.LinkedList<>();
             int max_net_no = board_rules.nets.max_net_no();
             for (int i = 1; i <= max_net_no; ++i)
             {

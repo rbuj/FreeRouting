@@ -43,7 +43,7 @@ public class ObstacleExpansionRoom implements CompleteExpansionRoom
         this.item = p_item;
         this.index_in_item = p_index_in_item;
         this.shape = p_item.get_tree_shape(p_shape_tree, p_index_in_item);
-        this.doors = new java.util.LinkedList<ExpansionDoor>();
+        this.doors = new java.util.LinkedList<>();
     }
     
     public int get_index_in_item()
@@ -143,7 +143,7 @@ public class ObstacleExpansionRoom implements CompleteExpansionRoom
     @Override
     public void clear_doors()
     {
-        this.doors = new java.util.LinkedList<ExpansionDoor>();
+        this.doors = new java.util.LinkedList<>();
     }
     
     @Override
@@ -158,7 +158,7 @@ public class ObstacleExpansionRoom implements CompleteExpansionRoom
     @Override
     public Collection<TargetItemExpansionDoor> get_target_doors()
     {
-        return new java.util.LinkedList<TargetItemExpansionDoor>();
+        return new java.util.LinkedList<>();
     }
     
     public Item get_item()

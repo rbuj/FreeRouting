@@ -172,7 +172,7 @@ public class CornerItemConstructionState extends InteractiveState
     /**
      * stored corners of the shape of the item under construction
      */
-    protected java.util.LinkedList<IntPoint> corner_list = new java.util.LinkedList<IntPoint>();
+    protected java.util.LinkedList<IntPoint> corner_list = new java.util.LinkedList<>();
     
     protected FloatPoint snapped_mouse_position;
     protected boolean observers_activated = false;

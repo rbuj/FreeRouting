@@ -240,13 +240,13 @@ public class Component extends ScopeKeyword
         try
         {
             java.util.Map <String, ComponentPlacement.ItemClearanceInfo> pin_infos =
-                    new java.util.TreeMap<String, ComponentPlacement.ItemClearanceInfo>();
+                    new java.util.TreeMap<>();
             java.util.Map <String, ComponentPlacement.ItemClearanceInfo> keepout_infos =
-                    new java.util.TreeMap<String, ComponentPlacement.ItemClearanceInfo>();
+                    new java.util.TreeMap<>();
             java.util.Map <String, ComponentPlacement.ItemClearanceInfo> via_keepout_infos =
-                    new java.util.TreeMap<String, ComponentPlacement.ItemClearanceInfo>();
+                    new java.util.TreeMap<>();
             java.util.Map <String, ComponentPlacement.ItemClearanceInfo> place_keepout_infos =
-                    new java.util.TreeMap<String, ComponentPlacement.ItemClearanceInfo>();
+                    new java.util.TreeMap<>();
             Object next_token = p_scanner.next_token();
             if (!(next_token instanceof String))
             {

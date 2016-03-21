@@ -47,7 +47,7 @@ public class NetIncompletes
     public NetIncompletes(int p_net_no, Collection<Item> p_net_items, BasicBoard p_board, java.util.Locale p_locale)
     {
         this.draw_marker_radius = p_board.rules.get_min_trace_half_width() * 2;
-        this.incompletes = new LinkedList<RatsNest.AirLine>();
+        this.incompletes = new LinkedList<>();
         this.net = p_board.rules.nets.get(p_net_no);
         
         // Create an array of Item-connected_set pairs.
@@ -59,13 +59,13 @@ public class NetIncompletes
         
         // create a Delauny Triangulation for the net_items
         Collection<PlanarDelaunayTriangulation.Storable> triangulation_objects =
-                new LinkedList<PlanarDelaunayTriangulation.Storable>();
+                new LinkedList<>();
         triangulation_objects.addAll(Arrays.asList(net_items));
         PlanarDelaunayTriangulation triangulation = new PlanarDelaunayTriangulation(triangulation_objects);
         
         // sort the result edges of the triangulation by length in ascending order.
         Collection<PlanarDelaunayTriangulation.ResultEdge> triangulation_lines = triangulation.get_edge_lines();
-        SortedSet<Edge> sorted_edges = new TreeSet<Edge>();
+        SortedSet<Edge> sorted_edges = new TreeSet<>();
         
         for (PlanarDelaunayTriangulation.ResultEdge curr_line : triangulation_lines)
         {
@@ -220,7 +220,7 @@ public class NetIncompletes
     private NetItem[] calculate_net_items(Collection<Item> p_item_list)
     {
         NetItem [] result = new NetItem [p_item_list.size()];
-        Collection<Item> handeled_items = new LinkedList<Item>();
+        Collection<Item> handeled_items = new LinkedList<>();
         int curr_index = 0;
         while (!p_item_list.isEmpty())
         {

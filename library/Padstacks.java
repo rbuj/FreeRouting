@@ -35,7 +35,7 @@ public class Padstacks implements java.io.Serializable
     public Padstacks(board.LayerStructure p_layer_structure)
     {
         board_layer_structure = p_layer_structure;
-        padstack_arr = new Vector<Padstack>();
+        padstack_arr = new Vector<>();
     }
     
     /**

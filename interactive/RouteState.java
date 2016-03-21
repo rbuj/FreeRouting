@@ -524,7 +524,7 @@ public class RouteState extends InteractiveState
      */
     static int[] get_route_net_numbers_at_tie_pin(board.Pin p_pin, int p_layer)
     {
-        Set<Integer> net_number_list = new java.util.TreeSet<Integer>();
+        Set<Integer> net_number_list = new java.util.TreeSet<>();
         for (int i = 0; i < p_pin.net_count(); ++i)
         {
             net_number_list.add(p_pin.get_net_no(i));

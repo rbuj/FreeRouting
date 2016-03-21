@@ -345,7 +345,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
     public void overlapping_objects(ConvexShape p_shape, int p_layer, int[] p_ignore_net_nos,
             Set<SearchTreeObject> p_obstacles)
     {
-        Collection<TreeEntry> tree_entries = new LinkedList<TreeEntry>();
+        Collection<TreeEntry> tree_entries = new LinkedList<>();
         overlapping_tree_entries(p_shape, p_layer, p_ignore_net_nos, tree_entries);
         if (p_obstacles != null)
         {
@@ -364,7 +364,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
      */
     public Set<SearchTreeObject> overlapping_objects(ConvexShape p_shape, int p_layer)
     {
-        Set<SearchTreeObject> result = new TreeSet<SearchTreeObject>();
+        Set<SearchTreeObject> result = new TreeSet<>();
         this.overlapping_objects(p_shape, p_layer, new int[0], result);
         return result;
     }
@@ -489,7 +489,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
         Collection<Leaf> tmp_list = overlaps(offset_bounds);
         Iterator<Leaf> it1 = tmp_list.iterator();
         // sort the found items by its clearances tp p_cl_type on layer p_layer
-        Set<EntrySortedByClearance> sorted_items = new TreeSet<EntrySortedByClearance>();
+        Set<EntrySortedByClearance> sorted_items = new TreeSet<>();
 
         while (it1.hasNext())
         {
@@ -551,7 +551,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
     public void overlapping_objects_with_clearance(ConvexShape p_shape, int p_layer, int[] p_ignore_net_nos,
             int p_cl_type, Set<SearchTreeObject> p_obstacles)
     {
-        Collection<TreeEntry> tree_entries = new LinkedList<TreeEntry>();
+        Collection<TreeEntry> tree_entries = new LinkedList<>();
         if (this.is_clearance_compensation_used())
         {
             overlapping_tree_entries(p_shape, p_layer, p_ignore_net_nos, tree_entries);
@@ -583,11 +583,11 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
     public Set<Item> overlapping_items_with_clearance(ConvexShape p_shape, int p_layer, int[] p_ignore_net_nos,
             int p_clearance_class)
     {
-        Set<SearchTreeObject> overlaps = new TreeSet<SearchTreeObject>();
+        Set<SearchTreeObject> overlaps = new TreeSet<>();
 
         this.overlapping_objects_with_clearance(p_shape, p_layer,
                 p_ignore_net_nos, p_clearance_class, overlaps);
-        Set<Item> result = new TreeSet<Item>();
+        Set<Item> result = new TreeSet<>();
         for (SearchTreeObject curr_object : overlaps)
         {
             if (curr_object instanceof Item)
@@ -608,7 +608,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
     public Collection<TreeEntry> overlapping_tree_entries_with_clearance(ConvexShape p_shape, int p_layer,
             int[] p_ignore_net_nos, int p_clearance_class)
     {
-        Collection<TreeEntry> result = new LinkedList<TreeEntry>();
+        Collection<TreeEntry> result = new LinkedList<>();
         if (this.is_clearance_compensation_used())
         {
             this.overlapping_tree_entries(p_shape, p_layer, p_ignore_net_nos, result);
@@ -638,11 +638,11 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
         if (p_room.get_contained_shape() == null)
         {
             System.out.println("ShapeSearchTree.complete_shape: p_shape_to_be_contained != null expected");
-            return new LinkedList<IncompleteFreeSpaceExpansionRoom>();
+            return new LinkedList<>();
         }
         if (this.root == null)
         {
-            return new LinkedList<IncompleteFreeSpaceExpansionRoom>();
+            return new LinkedList<>();
         }
         TileShape start_shape = board.get_bounding_box();
         if (p_room.get_shape() != null)
@@ -650,7 +650,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
             start_shape = start_shape.intersection(p_room.get_shape());
         }
         RegularTileShape bounding_shape = start_shape.bounding_shape(this.bounding_directions);
-        Collection<IncompleteFreeSpaceExpansionRoom> result = new LinkedList<IncompleteFreeSpaceExpansionRoom>();
+        Collection<IncompleteFreeSpaceExpansionRoom> result = new LinkedList<>();
         if (start_shape.dimension() == 2)
         {
             IncompleteFreeSpaceExpansionRoom new_room = new IncompleteFreeSpaceExpansionRoom(start_shape,
@@ -680,7 +680,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
                     {
 
                         TileShape curr_object_shape = curr_object.get_tree_shape(this, shape_index);
-                        Collection<IncompleteFreeSpaceExpansionRoom> new_result = new LinkedList<IncompleteFreeSpaceExpansionRoom>();
+                        Collection<IncompleteFreeSpaceExpansionRoom> new_result = new LinkedList<>();
                         RegularTileShape new_bounding_shape = IntOctagon.EMPTY;
 
                         for (IncompleteFreeSpaceExpansionRoom curr_incomplete_room : result)
@@ -742,7 +742,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
         // opposite of this line.
         Simplex obstacle_simplex = p_obstacle_shape.to_Simplex();  // otherwise border_lines of lenth 0 for octagons may not be handeled correctly
         TileShape shape_to_be_contained = p_incomplete_room.get_contained_shape().to_Simplex(); // There may be a performance problem, if a point shape is represented as an octagon
-        Collection<IncompleteFreeSpaceExpansionRoom> result = new LinkedList<IncompleteFreeSpaceExpansionRoom>();
+        Collection<IncompleteFreeSpaceExpansionRoom> result = new LinkedList<>();
         TileShape room_shape = p_incomplete_room.get_shape();
         int layer = p_incomplete_room.get_layer();
         if (shape_to_be_contained.is_empty())
@@ -992,7 +992,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
         // Called only for designs from host cad systems because otherwise the old sample.dsn gets to many tree shapes.
         }
 
-        Collection<TileShape> tree_shape_list = new LinkedList<TileShape>();
+        Collection<TileShape> tree_shape_list = new LinkedList<>();
         for (int i = 0; i < convex_shapes.length; ++i)
         {
             TileShape curr_convex_shape = convex_shapes[i];
@@ -1028,7 +1028,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
             {
                 return new TileShape[0];
             }
-            Collection<TileShape> tree_shape_list = new LinkedList<TileShape>();
+            Collection<TileShape> tree_shape_list = new LinkedList<>();
             for (int layer_no = 0; layer_no < this.board.layer_structure.arr.length; ++layer_no)
             {
                 for (int i = 0; i < convex_shapes.length; ++i)
@@ -1131,7 +1131,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
         }
         double max_section_width = 0.5 * Math.max(p_board_bounding_box.height(), p_board_bounding_box.width());
         TileShape[] section_arr = curr_room.get_shape().divide_into_sections(max_section_width);
-        Collection<IncompleteFreeSpaceExpansionRoom> result = new LinkedList<IncompleteFreeSpaceExpansionRoom>();
+        Collection<IncompleteFreeSpaceExpansionRoom> result = new LinkedList<>();
         for (TileShape curr_section : section_arr)
         {
             TileShape curr_shape_to_be_contained = curr_section.intersection(curr_room.get_contained_shape());

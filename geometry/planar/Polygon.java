@@ -38,7 +38,7 @@ public class Polygon implements java.io.Serializable
      */
     public Polygon(Point [] p_point_arr)
     {
-        corners = new LinkedList<Point>();
+        corners = new LinkedList<>();
         if (p_point_arr.length == 0)
         {
             return;

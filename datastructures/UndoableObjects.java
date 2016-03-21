@@ -39,8 +39,8 @@ public class UndoableObjects implements java.io.Serializable
     public UndoableObjects()
     {
         stack_level = 0;
-        objects = new ConcurrentSkipListMap<Storable, UndoableObjectNode>();
-        deleted_objects_stack = new Vector<Collection<UndoableObjectNode>>();
+        objects = new ConcurrentSkipListMap<>();
+        deleted_objects_stack = new Vector<>();
     }
 
     /**
@@ -135,7 +135,7 @@ public class UndoableObjects implements java.io.Serializable
     public void generate_snapshot()
     {
         disable_redo();
-        Collection<UndoableObjectNode> curr_deleted_objects_list = new LinkedList<UndoableObjectNode>();
+        Collection<UndoableObjectNode> curr_deleted_objects_list = new LinkedList<>();
         deleted_objects_stack.add(curr_deleted_objects_list);
         ++stack_level;
     }

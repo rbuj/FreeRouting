@@ -52,7 +52,7 @@ public class ShapeTraceEntries
         list_anchor = null;
         trace_piece_count = 0;
         max_stack_level = 0;
-        shove_via_list = new java.util.LinkedList<Via>();
+        shove_via_list = new java.util.LinkedList<>();
     }
     
     /**

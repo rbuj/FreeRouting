@@ -449,7 +449,7 @@ public class Route
      */
     private Set<SwapPinInfo> calculate_swap_pin_infos()
     {
-        Set<SwapPinInfo> result = new java.util.TreeSet<SwapPinInfo>();
+        Set<SwapPinInfo> result = new java.util.TreeSet<>();
         if (this.target_set == null)
         {
             return result;
@@ -647,8 +647,8 @@ public class Route
      */
     private void calculate_target_points_and_areas()
     {
-        target_points = new LinkedList<TargetPoint>();
-        target_traces_and_areas = new LinkedList<Item>();
+        target_points = new LinkedList<>();
+        target_traces_and_areas = new LinkedList<>();
         if (target_set == null)
         {
             return;

@@ -73,7 +73,7 @@ public class MoveDrillItemAlgo
         Collection<Item> ignore_items;
         if (p_ignore_items == null)
         {
-            ignore_items = new java.util.LinkedList<Item>();
+            ignore_items = new java.util.LinkedList<>();
         }
         else
         {
@@ -137,7 +137,7 @@ public class MoveDrillItemAlgo
             attach_allowed = ((Via)p_drill_item).attach_allowed;
         }
         ForcedPadAlgo forced_pad_algo = new ForcedPadAlgo(p_board);
-        Collection<Item> ignore_items = new java.util.LinkedList<Item>();
+        Collection<Item> ignore_items = new java.util.LinkedList<>();
         ignore_items.add(p_drill_item);
         ShapeSearchTree search_tree = p_board.search_tree_manager.get_default_tree();
         for (int curr_layer = p_drill_item.first_layer(); curr_layer <= p_drill_item.last_layer(); ++curr_layer)
@@ -228,7 +228,7 @@ public class MoveDrillItemAlgo
             {
                 if (i == 0 || check_via_center.distance_square(try_via_centers[i].to_float()) <= max_dist_square)
                 {
-                    Collection<Item> ignore_items = new java.util.LinkedList<Item>();
+                    Collection<Item> ignore_items = new java.util.LinkedList<>();
                     if (p_ignore_items != null)
                     {
                         ignore_items.addAll(p_ignore_items);

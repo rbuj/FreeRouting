@@ -118,7 +118,7 @@ public class ShoveTraceAlgo
                 if (i == 0 || curr_shove_via_center.distance_square(try_via_centers[i].to_float()) <= max_dist_square)
                 {
                     Vector delta = try_via_centers[i].difference_by(curr_shove_via.get_center());
-                    Collection<Item> ignore_items = new java.util.LinkedList<Item>();
+                    Collection<Item> ignore_items = new java.util.LinkedList<>();
                     if (MoveDrillItemAlgo.check(curr_shove_via, delta, p_max_recursion_depth,
                             p_max_via_recursion_depth - 1, ignore_items, this.board, p_time_limit))
                     {
@@ -267,7 +267,7 @@ public class ShoveTraceAlgo
                     return 0;
                 }
                 Vector delta = new_via_center[0].difference_by(curr_shove_via.get_center());
-                Collection<Item> ignore_items = new java.util.LinkedList<Item>();
+                Collection<Item> ignore_items = new java.util.LinkedList<>();
                 shove_via_ok = MoveDrillItemAlgo.check(curr_shove_via, delta, p_max_recursion_depth,
                         p_max_via_recursion_depth - 1, ignore_items, p_board, null);
             }
@@ -488,7 +488,7 @@ public class ShoveTraceAlgo
     Collection<Item> get_ignore_items_at_tie_pins(TileShape p_trace_shape, int p_layer, int[] p_net_no_arr)
     {
         Collection<SearchTreeObject> overlaps = this.board.overlapping_objects(p_trace_shape, p_layer);
-        Set<Item> result = new java.util.TreeSet<Item>();
+        Set<Item> result = new java.util.TreeSet<>();
         for (SearchTreeObject curr_object : overlaps)
         {
             if (curr_object instanceof Pin)

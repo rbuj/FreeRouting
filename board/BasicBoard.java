@@ -412,7 +412,7 @@ public class BasicBoard implements java.io.Serializable
      */
     public Collection<Item> get_items()
     {
-        Collection<Item> result = new LinkedList<Item>();
+        Collection<Item> result = new LinkedList<>();
         Iterator<UndoableObjects.UndoableObjectNode> it = item_list.start_read_object();
         for (;;)
         {
@@ -431,7 +431,7 @@ public class BasicBoard implements java.io.Serializable
      */
     public Collection<Item> get_connectable_items(int p_net_no)
     {
-        Collection<Item> result = new LinkedList<Item>();
+        Collection<Item> result = new LinkedList<>();
         Iterator<UndoableObjects.UndoableObjectNode> it = item_list.start_read_object();
         for (;;)
         {
@@ -475,7 +475,7 @@ public class BasicBoard implements java.io.Serializable
      */
     public Collection<Item> get_component_items(int p_component_no)
     {
-        Collection<Item> result = new LinkedList<Item>();
+        Collection<Item> result = new LinkedList<>();
         Iterator<UndoableObjects.UndoableObjectNode> it = item_list.start_read_object();
         for (;;)
         {
@@ -497,7 +497,7 @@ public class BasicBoard implements java.io.Serializable
      */
     public Collection<Pin> get_component_pins(int p_component_no)
     {
-        Collection<Pin> result = new LinkedList<Pin>();
+        Collection<Pin> result = new LinkedList<>();
         Iterator<UndoableObjects.UndoableObjectNode> it = item_list.start_read_object();
         for (;;)
         {
@@ -567,7 +567,7 @@ public class BasicBoard implements java.io.Serializable
      */
     public Collection<ConductionArea> get_conduction_areas()
     {
-        Collection<ConductionArea> result = new LinkedList<ConductionArea>();
+        Collection<ConductionArea> result = new LinkedList<>();
         Iterator<UndoableObjects.UndoableObjectNode> it = item_list.start_read_object();
         for (;;)
         {
@@ -589,7 +589,7 @@ public class BasicBoard implements java.io.Serializable
      */
     public Collection<Pin> get_pins()
     {
-        Collection<Pin> result = new LinkedList<Pin>();
+        Collection<Pin> result = new LinkedList<>();
         Iterator<UndoableObjects.UndoableObjectNode> it = item_list.start_read_object();
         for (;;)
         {
@@ -611,7 +611,7 @@ public class BasicBoard implements java.io.Serializable
      */
     public Collection<Pin> get_smd_pins()
     {
-        Collection<Pin> result = new LinkedList<Pin>();
+        Collection<Pin> result = new LinkedList<>();
         Iterator<UndoableObjects.UndoableObjectNode> it = item_list.start_read_object();
         for (;;)
         {
@@ -637,7 +637,7 @@ public class BasicBoard implements java.io.Serializable
      */
     public Collection<Via> get_vias()
     {
-        Collection<Via> result = new LinkedList<Via>();
+        Collection<Via> result = new LinkedList<>();
         Iterator<UndoableObjects.UndoableObjectNode> it = item_list.start_read_object();
         for (;;)
         {
@@ -659,7 +659,7 @@ public class BasicBoard implements java.io.Serializable
      */
     public Collection<Trace> get_traces()
     {
-        Collection<Trace> result = new LinkedList<Trace>();
+        Collection<Trace> result = new LinkedList<>();
         Iterator<UndoableObjects.UndoableObjectNode> it = item_list.start_read_object();
         for (;;)
         {
@@ -808,12 +808,12 @@ public class BasicBoard implements java.io.Serializable
      */
     public Collection<Collection<Item>> get_connected_sets(int p_net_no)
     {
-        Collection<Collection<Item>> result = new LinkedList<Collection<Item>>();
+        Collection<Collection<Item>> result = new LinkedList<>();
         if (p_net_no <= 0)
         {
             return result;
         }
-        SortedSet<Item> items_to_handle = new TreeSet<Item>();
+        SortedSet<Item> items_to_handle = new TreeSet<>();
         Iterator<UndoableObjects.UndoableObjectNode> it = this.item_list.start_read_object();
         for (;;)
         {
@@ -870,7 +870,7 @@ public class BasicBoard implements java.io.Serializable
      */
     public Set<Item> overlapping_items(Area p_area, int p_layer)
     {
-        Set<Item> result = new TreeSet<Item>();
+        Set<Item> result = new TreeSet<>();
         TileShape[] tile_shapes = p_area.split_to_convex();
         for (int i = 0; i < tile_shapes.length; ++i)
         {
@@ -902,7 +902,7 @@ public class BasicBoard implements java.io.Serializable
             {
                 return false;
             }
-            Set<SearchTreeObject> obstacles = new TreeSet<SearchTreeObject>();
+            Set<SearchTreeObject> obstacles = new TreeSet<>();
             default_tree.overlapping_objects_with_clearance(curr_shape, p_layer,
                     p_net_no_arr, p_cl_class, obstacles);
             for (SearchTreeObject curr_ob : obstacles)
@@ -939,7 +939,7 @@ public class BasicBoard implements java.io.Serializable
             return false;
         }
         ShapeSearchTree default_tree = this.search_tree_manager.get_default_tree();
-        Collection<TreeEntry> tree_entries = new LinkedList<TreeEntry>();
+        Collection<TreeEntry> tree_entries = new LinkedList<>();
         int[] ignore_net_nos = new int[0];
         if (default_tree.is_clearance_compensation_used())
         {
@@ -1085,7 +1085,7 @@ public class BasicBoard implements java.io.Serializable
     {
         TileShape point_shape = TileShape.get_instance(p_location);
         Collection<SearchTreeObject> overlaps = overlapping_objects(point_shape, p_layer);
-        Set<Item> result = new TreeSet<Item>();
+        Set<Item> result = new TreeSet<>();
         for (SearchTreeObject curr_object : overlaps)
         {
             if (curr_object instanceof Item)
@@ -1287,8 +1287,8 @@ public class BasicBoard implements java.io.Serializable
     public boolean undo(Set<Integer> p_changed_nets)
     {
         this.components.undo(this.communication.observers);
-        Collection<UndoableObjects.Storable> cancelled_objects = new LinkedList<UndoableObjects.Storable>();
-        Collection<UndoableObjects.Storable> restored_objects = new LinkedList<UndoableObjects.Storable>();
+        Collection<UndoableObjects.Storable> cancelled_objects = new LinkedList<>();
+        Collection<UndoableObjects.Storable> restored_objects = new LinkedList<>();
         boolean result = item_list.undo(cancelled_objects, restored_objects);
         // update the search trees
         Iterator<UndoableObjects.Storable> it = cancelled_objects.iterator();
@@ -1335,8 +1335,8 @@ public class BasicBoard implements java.io.Serializable
     public boolean redo(Set<Integer> p_changed_nets)
     {
         this.components.redo(this.communication.observers);
-        Collection<UndoableObjects.Storable> cancelled_objects = new LinkedList<UndoableObjects.Storable>();
-        Collection<UndoableObjects.Storable> restored_objects = new LinkedList<UndoableObjects.Storable>();
+        Collection<UndoableObjects.Storable> cancelled_objects = new LinkedList<>();
+        Collection<UndoableObjects.Storable> restored_objects = new LinkedList<>();
         boolean result = item_list.redo(cancelled_objects, restored_objects);
         // update the search trees
         Iterator<UndoableObjects.Storable> it = cancelled_objects.iterator();

@@ -39,7 +39,7 @@ public class ClearanceViolations
     /** Creates a new instance of ClearanceViolations */
     public ClearanceViolations(Collection<Item> p_item_list)
     {
-        this.list = new LinkedList<ClearanceViolation>();
+        this.list = new LinkedList<>();
         Iterator<Item> it = p_item_list.iterator();
         while (it.hasNext())
         {

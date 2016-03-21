@@ -314,7 +314,7 @@ class Wiring extends ScopeKeyword
         board.FixedState fixed = board.FixedState.UNFIXED;
         Path path = null; // Used, if a trace is read.
         Shape border_shape = null; // Used, if a conduction area is read.
-        Collection<Shape> hole_list = new LinkedList<Shape>();
+        Collection<Shape> hole_list = new LinkedList<>();
         Object next_token = null;
         for (;;)
         {
@@ -459,7 +459,7 @@ class Wiring extends ScopeKeyword
                 clearance_class_no =
                         net_class.default_item_clearance_classes.get(rules.DefaultItemClearanceClasses.ItemClass.AREA);
             }
-            Collection<Shape> area = new LinkedList<Shape>();
+            Collection<Shape> area = new LinkedList<>();
             area.add(border_shape);
             area.addAll(hole_list);
             geometry.planar.Area conduction_area =
@@ -556,7 +556,7 @@ class Wiring extends ScopeKeyword
     
     private static Collection<rules.Net> get_subnets(Net.Id p_net_id, rules.BoardRules p_rules)
     {
-        Collection<rules.Net> found_nets = new LinkedList<rules.Net>();
+        Collection<rules.Net> found_nets = new LinkedList<>();
         if (p_net_id != null)
         {
             if (p_net_id.subnet_number > 0)

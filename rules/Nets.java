@@ -33,7 +33,7 @@ public class Nets implements java.io.Serializable
     /** Creates a new empty net list */
     public Nets()
     {
-        net_arr = new Vector<Net>();
+        net_arr = new Vector<>();
     }
 
     /**
@@ -65,7 +65,7 @@ public class Nets implements java.io.Serializable
      */
     public Collection<Net> get(String p_name)
     {
-        Collection<Net> result = new java.util.LinkedList<Net>();
+        Collection<Net> result = new java.util.LinkedList<>();
         for (Net curr_net : net_arr)
         {
             if (curr_net != null && curr_net.name.compareToIgnoreCase(p_name) == 0)

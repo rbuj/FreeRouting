@@ -112,7 +112,7 @@ public class Packages implements java.io.Serializable
     }
     
     /** The array of packages in this object */
-    private Vector<Package> package_arr = new Vector<Package>();
+    private Vector<Package> package_arr = new Vector<>();
     
     final Padstacks padstack_list;
 }

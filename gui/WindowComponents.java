@@ -69,7 +69,7 @@ public class WindowComponents extends WindowObjectListWithFilter
             return;
         }
         board.RoutingBoard routing_board = board_frame.board_panel.board_handling.get_routing_board();
-        java.util.Set<board.Item> selected_items = new java.util.TreeSet<board.Item>();
+        java.util.Set<board.Item> selected_items = new java.util.TreeSet<>();
         java.util.Collection<board.Item> board_items = routing_board.get_items();
         for (board.Item curr_item : board_items)
         {

@@ -141,8 +141,8 @@ public class BatchAutorouter
     {
         try
         {
-            Collection<Item> autoroute_item_list = new java.util.LinkedList<Item>();
-            Set<Item> handeled_items = new TreeSet<Item>();
+            Collection<Item> autoroute_item_list = new java.util.LinkedList<>();
+            Set<Item> handeled_items = new TreeSet<>();
             Iterator<UndoableObjects.UndoableObjectNode> it = routing_board.item_list.start_read_object();
             for (;;)
             {
@@ -206,7 +206,7 @@ public class BatchAutorouter
                         break;
                     }
                     routing_board.start_marking_changed_area();
-                    SortedSet<Item> ripped_item_list = new TreeSet<Item>();
+                    SortedSet<Item> ripped_item_list = new TreeSet<>();
                     if (autoroute_item(curr_item, curr_item.get_net_no(i), ripped_item_list, p_pass_no))
                     {
                         ++routed;

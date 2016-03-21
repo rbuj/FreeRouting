@@ -48,9 +48,9 @@ public class WindowUnconnectedRoute extends WindowObjectListWithFilter
     {
         board.BasicBoard routing_board = this.board_frame.board_panel.board_handling.get_routing_board();
         
-        Set<Item> handled_items = new java.util.TreeSet<Item>();
+        Set<Item> handled_items = new java.util.TreeSet<>();
         
-        SortedSet<UnconnectedRouteInfo> unconnected_route_info_set = new java.util.TreeSet<UnconnectedRouteInfo>();
+        SortedSet<UnconnectedRouteInfo> unconnected_route_info_set = new java.util.TreeSet<>();
         
         Collection<Item> board_items = routing_board.get_items();
         for (Item curr_item : board_items)
@@ -108,7 +108,7 @@ public class WindowUnconnectedRoute extends WindowObjectListWithFilter
         {
             return;
         }
-        Set<board.Item> selected_items = new java.util.TreeSet<board.Item>();
+        Set<board.Item> selected_items = new java.util.TreeSet<>();
         for (int i = 0; i < selected_list_values.length; ++i)
         {
             selected_items.addAll(((UnconnectedRouteInfo)selected_list_values[i]).item_list);

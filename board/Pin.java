@@ -298,7 +298,7 @@ public class Pin extends DrillItem implements java.io.Serializable
      */
     public java.util.Collection<TraceExitRestriction> get_trace_exit_restrictions(int p_layer)
     {
-        java.util.Collection<TraceExitRestriction> result = new java.util.LinkedList<TraceExitRestriction>();
+        java.util.Collection<TraceExitRestriction> result = new java.util.LinkedList<>();
         int  padstack_layer = this.get_padstack_layer(p_layer - this.first_layer());
         double pad_xy_factor = 1.5;
           // setting 1.5 to a higher factor may hinder the shove algorithm of the autorouter between
@@ -452,7 +452,7 @@ public class Pin extends DrillItem implements java.io.Serializable
      */
     public java.util.Set<Pin> get_swappable_pins()
     {
-        java.util.Set<Pin> result = new java.util.TreeSet<Pin>();
+        java.util.Set<Pin> result = new java.util.TreeSet<>();
         Component component = this.board.components.get(this.get_component_no());
         if (component == null)
         {

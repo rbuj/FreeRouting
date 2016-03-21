@@ -89,7 +89,7 @@ public class WindowNets extends WindowObjectListWithFilter
             selected_net_numbers[i] = ((Net) selected_nets[i]).net_number;
         }
         board.RoutingBoard routing_board = board_frame.board_panel.board_handling.get_routing_board();
-        java.util.Set<board.Item> selected_items = new java.util.TreeSet<board.Item>();
+        java.util.Set<board.Item> selected_items = new java.util.TreeSet<>();
         java.util.Collection<board.Item> board_items = routing_board.get_items();
         for (board.Item curr_item : board_items)
         {

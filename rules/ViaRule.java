@@ -170,5 +170,5 @@ public class ViaRule implements java.io.Serializable, board.ObjectInfoPanel.Prin
     }
     
     public final String name;
-    private List<ViaInfo> list = new LinkedList<ViaInfo>();
+    private List<ViaInfo> list = new LinkedList<>();
 }

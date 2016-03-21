@@ -36,7 +36,7 @@ public class ComponentPlacement
     public ComponentPlacement(String p_lib_name)
     {
         lib_name = p_lib_name;
-        locations = new LinkedList<ComponentLocation>();
+        locations = new LinkedList<>();
     }
     
     /** The name of the corresponding library component */

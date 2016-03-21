@@ -61,12 +61,12 @@ public class ShapeSearchTree90Degree extends ShapeSearchTree
         if (!(p_room.get_contained_shape() instanceof IntBox))
         {
             System.out.println("BoxShapeSearchTree.complete_shape: unexpected p_shape_to_be_contained");
-            return new LinkedList<IncompleteFreeSpaceExpansionRoom>();
+            return new LinkedList<>();
         }
         IntBox shape_to_be_contained = (IntBox) p_room.get_contained_shape();
         if (this.root == null)
         {
-            return new LinkedList<IncompleteFreeSpaceExpansionRoom>();
+            return new LinkedList<>();
         }
         IntBox start_shape = board.get_bounding_box();
         if (p_room.get_shape() != null)
@@ -74,13 +74,13 @@ public class ShapeSearchTree90Degree extends ShapeSearchTree
             if (!(p_room.get_shape() instanceof IntBox))
             {
                 System.out.println("BoxShapeSearchTree.complete_shape: p_start_shape of type IntBox expected");
-                return new LinkedList<IncompleteFreeSpaceExpansionRoom>();
+                return new LinkedList<>();
             }
             start_shape = ((IntBox)p_room.get_shape()).intersection(start_shape);
         }
         IntBox bounding_shape = start_shape;
         int room_layer = p_room.get_layer();
-        Collection<IncompleteFreeSpaceExpansionRoom> result = new LinkedList<IncompleteFreeSpaceExpansionRoom>();
+        Collection<IncompleteFreeSpaceExpansionRoom> result = new LinkedList<>();
         result.add(new IncompleteFreeSpaceExpansionRoom(start_shape, room_layer, shape_to_be_contained));
         this.node_stack.reset();
         this.node_stack.push(this.root);
@@ -105,7 +105,7 @@ public class ShapeSearchTree90Degree extends ShapeSearchTree
                     {
                         
                         IntBox curr_object_shape = curr_object.get_tree_shape(this, shape_index).bounding_box();
-                        Collection<IncompleteFreeSpaceExpansionRoom> new_result = new LinkedList<IncompleteFreeSpaceExpansionRoom>();
+                        Collection<IncompleteFreeSpaceExpansionRoom> new_result = new LinkedList<>();
                         IntBox new_bounding_shape = IntBox.EMPTY;
                         for (IncompleteFreeSpaceExpansionRoom curr_room : result)
                         {
@@ -168,7 +168,7 @@ public class ShapeSearchTree90Degree extends ShapeSearchTree
         // Then insersect p_shape with the halfplane defined by the
         // opposite of this line.
         
-        Collection<IncompleteFreeSpaceExpansionRoom> result = new LinkedList<IncompleteFreeSpaceExpansionRoom>();
+        Collection<IncompleteFreeSpaceExpansionRoom> result = new LinkedList<>();
         if (p_incomplete_room.get_contained_shape().is_empty())
         {
             if (this.board.get_test_level().ordinal() >=  TestLevel.ALL_DEBUGGING_OUTPUT.ordinal())

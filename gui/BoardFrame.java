@@ -725,7 +725,7 @@ public class BoardFrame extends javax.swing.JFrame
     static final int SUBWINDOW_COUNT = 24;
     BoardSavableSubWindow[] permanent_subwindows = new BoardSavableSubWindow[SUBWINDOW_COUNT];
     
-    java.util.Collection<BoardTemporarySubWindow> temporary_subwindows = new java.util.LinkedList<BoardTemporarySubWindow>();
+    java.util.Collection<BoardTemporarySubWindow> temporary_subwindows = new java.util.LinkedList<>();
     
     
     DesignFile design_file = null;

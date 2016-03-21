@@ -54,7 +54,7 @@ public class IncompleteFreeSpaceExpansionRoom extends FreeSpaceExpansionRoom
     
     public Collection<TargetItemExpansionDoor> get_target_doors()
     {
-        return new java.util.LinkedList<TargetItemExpansionDoor>();
+        return new java.util.LinkedList<>();
     }
     
     /** A shape which should be contained in the completed shape. */

@@ -66,7 +66,7 @@ public class WindowIncompletes extends WindowObjectListWithFilter
         {
             return;
         }
-        java.util.Set<board.Item> selected_items = new java.util.TreeSet<board.Item>();
+        java.util.Set<board.Item> selected_items = new java.util.TreeSet<>();
         for (int i = 0; i < selected_incompletes.length; ++i)
         {
             RatsNest.AirLine curr_airline = (RatsNest.AirLine) selected_incompletes[i];

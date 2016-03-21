@@ -64,7 +64,7 @@ public class CopyItemState extends InteractiveState
     InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile)
     {
         super(p_parent_state, p_board_handling, p_logfile);
-        item_list = new LinkedList<Item>();
+        item_list = new LinkedList<>();
         
         start_position = p_location.round();
         current_layer =  p_board_handling.settings.layer;
@@ -141,7 +141,7 @@ public class CopyItemState extends InteractiveState
         {
             return;
         }
-        Map<Padstack, Padstack> padstack_pairs = new TreeMap<Padstack, Padstack>(); // Contains old and new padstacks after layer change.
+        Map<Padstack, Padstack> padstack_pairs = new TreeMap<>(); // Contains old and new padstacks after layer change.
         
         RoutingBoard board = hdlg.get_routing_board();
         if (layer_changed)
@@ -162,10 +162,10 @@ public class CopyItemState extends InteractiveState
         // Copy the components of the old items and assign the new items to the copied components.
         
         /** Contailns the old and new id no of a copied component. */
-        Map<Integer, Integer> cmp_no_pairs = new TreeMap<Integer, Integer>();
+        Map<Integer, Integer> cmp_no_pairs = new TreeMap<>();
         
         /** Contains the new created components after copying. */
-        Collection<Component> copied_components = new LinkedList<Component>();
+        Collection<Component> copied_components = new LinkedList<>();
         
         Vector translate_vector = current_position.difference_by(start_position);
         Iterator<Item> it = item_list.iterator();

@@ -752,7 +752,7 @@ public class BoardHandling
         {
             return;
         }
-        java.util.Set<Integer> changed_nets = new java.util.TreeSet<Integer>();
+        java.util.Set<Integer> changed_nets = new java.util.TreeSet<>();
         if (board.undo(changed_nets))
         {
             for (Integer changed_net : changed_nets)
@@ -784,7 +784,7 @@ public class BoardHandling
         {
             return;
         }
-        java.util.Set<Integer> changed_nets = new java.util.TreeSet<Integer>();
+        java.util.Set<Integer> changed_nets = new java.util.TreeSet<>();
         if (board.redo(changed_nets))
         {
             for (Integer changed_net : changed_nets)

@@ -49,7 +49,7 @@ public class BoardLibrary implements java.io.Serializable
     public void set_via_padstacks(Padstack[] p_padstacks)
     {
         
-        this.via_padstacks =  new Vector<Padstack>();
+        this.via_padstacks =  new Vector<>();
         for (int i = 0; i < p_padstacks.length; ++i)
         {
           this.via_padstacks.add(p_padstacks[i]);  

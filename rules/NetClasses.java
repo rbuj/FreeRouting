@@ -160,5 +160,5 @@ public class NetClasses implements java.io.Serializable
         return this.class_arr.remove(p_net_class);
     }
     
-    private final java.util.Vector<NetClass> class_arr = new java.util.Vector<NetClass>();
+    private final java.util.Vector<NetClass> class_arr = new java.util.Vector<>();
 }

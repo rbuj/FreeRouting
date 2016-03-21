@@ -54,14 +54,14 @@ public class ReadScopeParameter
     /** Collection of elements of class PlaneInfo.
      * The plane cannot be inserted directly into the boards, because the layers may not be read completely.
      */
-    final Collection<PlaneInfo> plane_list = new LinkedList<PlaneInfo>();
+    final Collection<PlaneInfo> plane_list = new LinkedList<>();
     
     /**
      * Component placement information.
      * It is filled while reading the placement scope and can be
      * evaluated after reading the library and network scope.
      */
-    final Collection<ComponentPlacement> placement_list = new LinkedList<ComponentPlacement>();
+    final Collection<ComponentPlacement> placement_list = new LinkedList<>();
     
     
     /**
@@ -75,8 +75,8 @@ public class ReadScopeParameter
     
     /** The logical parts are used for pin and gate swaw */
     java.util.Collection<PartLibrary.LogicalPartMapping> logical_part_mappings
-            = new java.util.LinkedList<PartLibrary.LogicalPartMapping>();
-    java.util.Collection<PartLibrary.LogicalPart> logical_parts = new java.util.LinkedList<PartLibrary.LogicalPart>();
+            = new java.util.LinkedList<>();
+    java.util.Collection<PartLibrary.LogicalPart> logical_parts = new java.util.LinkedList<>();
     
     /** The following objects are from the parser scope. */
     String string_quote = "\"";
@@ -87,7 +87,7 @@ public class ReadScopeParameter
     
     boolean board_outline_ok = true;
     
-    final Collection<String[]> constants = new LinkedList<String[]>();
+    final Collection<String[]> constants = new LinkedList<>();
     board.Communication.SpecctraParserInfo.WriteResolution write_resolution = null;
     
     

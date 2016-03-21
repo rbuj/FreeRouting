@@ -123,7 +123,7 @@ public abstract class DragState extends InteractiveState
         if (result != this)
         {
             // an error occured
-            java.util.Set<Integer> changed_nets = new java.util.TreeSet<Integer>();
+            java.util.Set<Integer> changed_nets = new java.util.TreeSet<>();
             hdlg.get_routing_board().undo(changed_nets);
             for (Integer changed_net : changed_nets)
             {

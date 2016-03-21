@@ -352,7 +352,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      */
     public Collection<ClearanceViolation> clearance_violations()
     {
-        Collection<ClearanceViolation> result = new LinkedList<ClearanceViolation>();
+        Collection<ClearanceViolation> result = new LinkedList<>();
         if (this.board == null)
         {
             return result;
@@ -450,7 +450,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      */
     public Set<Item> get_all_contacts()
     {
-        Set<Item> result = new TreeSet<Item>();
+        Set<Item> result = new TreeSet<>();
         if (!(this instanceof Connectable))
         {
             return result;
@@ -482,7 +482,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      */
     public Set<Item> get_all_contacts(int p_layer)
     {
-        Set<Item> result = new TreeSet<Item>();
+        Set<Item> result = new TreeSet<>();
         if (!(this instanceof Connectable))
         {
             return result;
@@ -537,7 +537,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      */
     public Set<Item> get_normal_contacts()
     {
-        return new TreeSet<Item>();
+        return new TreeSet<>();
     }
 
     /**
@@ -585,7 +585,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      */
     public Set<Item> get_connected_set(int p_net_no, boolean p_stop_at_plane)
     {
-        Set<Item> result = new TreeSet<Item>();
+        Set<Item> result = new TreeSet<>();
         if (p_net_no > 0 && !this.contains_net(p_net_no))
         {
             return result;
@@ -676,7 +676,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      */
     public Set<Item> get_unconnected_set(int p_net_no)
     {
-        Set<Item> result = new TreeSet<Item>();
+        Set<Item> result = new TreeSet<>();
         if (p_net_no > 0 && !this.contains_net(p_net_no))
         {
             return result;
@@ -712,7 +712,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
     public Set<Item> get_connection_items(StopConnectionOption p_stop_option)
     {
         Set<Item> contacts = this.get_normal_contacts();
-        Set<Item> result = new TreeSet<Item>();
+        Set<Item> result = new TreeSet<>();
         if (this.is_route())
         {
             result.add(this);
@@ -1327,7 +1327,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
                     java.util.ResourceBundle.getBundle("board.resources.ObjectInfoPanel", p_locale);
             p_window.append(", ");
             Integer violation_count = clearance_violations.size();
-            Collection<ObjectInfoPanel.Printable> violations = new java.util.LinkedList<ObjectInfoPanel.Printable>();
+            Collection<ObjectInfoPanel.Printable> violations = new java.util.LinkedList<>();
             violations.addAll(clearance_violations);
             p_window.append_objects(violation_count.toString(), resources.getString("violation_info"), violations);
             if (violation_count == 1)

@@ -54,7 +54,7 @@ public class MinAreaTree extends ShapeTree
      */
     public Set<Leaf> overlaps(RegularTileShape p_shape)
     {
-        Set<Leaf> found_overlaps = new TreeSet<Leaf>() ;
+        Set<Leaf> found_overlaps = new TreeSet<>() ;
         if (this.root == null)
         {
             return found_overlaps;
@@ -247,6 +247,6 @@ public class MinAreaTree extends ShapeTree
         }
     }
     
-    protected ArrayStack<TreeNode> node_stack = new ArrayStack<TreeNode> (10000);
+    protected ArrayStack<TreeNode> node_stack = new ArrayStack<> (10000);
 }
 

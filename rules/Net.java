@@ -78,7 +78,7 @@ public class Net implements Comparable<Net>, board.ObjectInfoPanel.Printable, ja
      */
     public java.util.Collection<Item> get_terminal_items()
     {
-        java.util.Collection<Item> result = new java.util.LinkedList<Item>();
+        java.util.Collection<Item> result = new java.util.LinkedList<>();
         board.BasicBoard board = this.net_list.get_board();
         java.util.Iterator<UndoableObjects.UndoableObjectNode> it = board.item_list.start_read_object();
         for (;;)
@@ -104,7 +104,7 @@ public class Net implements Comparable<Net>, board.ObjectInfoPanel.Printable, ja
      */
     public java.util.Collection<board.Pin> get_pins()
     {
-        java.util.Collection<board.Pin> result = new java.util.LinkedList<board.Pin>();
+        java.util.Collection<board.Pin> result = new java.util.LinkedList<>();
         board.BasicBoard board = this.net_list.get_board();
         java.util.Iterator<UndoableObjects.UndoableObjectNode> it = board.item_list.start_read_object();
         for (;;)
@@ -130,7 +130,7 @@ public class Net implements Comparable<Net>, board.ObjectInfoPanel.Printable, ja
      */
     public java.util.Collection<board.Item> get_items()
     {
-        java.util.Collection<board.Item> result = new java.util.LinkedList<board.Item>();
+        java.util.Collection<board.Item> result = new java.util.LinkedList<>();
         board.BasicBoard board = this.net_list.get_board();
         java.util.Iterator<UndoableObjects.UndoableObjectNode> it = board.item_list.start_read_object();
         for (;;)
@@ -205,7 +205,7 @@ public class Net implements Comparable<Net>, board.ObjectInfoPanel.Printable, ja
         Integer via_count = this.get_via_count();
         double cumulative_trace_length = this.get_trace_length();
         java.util.Collection<Item> terminal_items = this.get_terminal_items();
-        java.util.Collection<Printable> terminals = new java.util.LinkedList<Printable>();
+        java.util.Collection<Printable> terminals = new java.util.LinkedList<>();
         terminals.addAll(terminal_items);
         Integer terminal_item_count = terminals.size();
 

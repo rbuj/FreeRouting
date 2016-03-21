@@ -134,7 +134,7 @@ public abstract class Shape
                 }
                 layer = p_layer_structure.arr[layer_no];
             }
-            Collection<Object> corner_list = new LinkedList<Object>();
+            Collection<Object> corner_list = new LinkedList<>();
 
             // read the width and the corners of the path
             for (;;)
@@ -204,7 +204,7 @@ public abstract class Shape
     public static final ReadAreaScopeResult read_area_scope(Scanner p_scanner,
                                                             LayerStructure p_layer_structure, boolean p_skip_window_scopes)
     {
-        Collection<Shape> shape_list = new LinkedList<Shape>();
+        Collection<Shape> shape_list = new LinkedList<>();
         String clearance_class_name = null;
         String area_name = null;
         boolean result_ok = true;
@@ -429,7 +429,7 @@ public abstract class Shape
             // overread the aperture width
             next_token = p_scanner.next_token();
 
-            Collection<Object> coor_list = new LinkedList<Object>();
+            Collection<Object> coor_list = new LinkedList<>();
 
             // read the coordinates of the polygon
             for (;;)
@@ -617,7 +617,7 @@ public abstract class Shape
                     layer = p_layer_structure.arr[layer_no];
                 }
             }
-            Collection<Object> corner_list = new LinkedList<Object>();
+            Collection<Object> corner_list = new LinkedList<>();
 
             // read the width and the corners of the path
             for (;;)

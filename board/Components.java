@@ -226,7 +226,7 @@ public class Components implements java.io.Serializable
     
     private final UndoableObjects undo_list = new UndoableObjects();
     
-    private Vector<Component> component_arr = new Vector<Component>();
+    private Vector<Component> component_arr = new Vector<>();
     
     /**
      * If true, components on the back side are rotated before mirroring,

@@ -120,7 +120,7 @@ public class ItemSelectionFilter implements java.io.Serializable
      */
     public Set<Item> filter(java.util.Set<board.Item> p_items)
     {
-        Set<Item> result = new TreeSet<Item>();
+        Set<Item> result = new TreeSet<>();
         for (board.Item curr_item : p_items)
         {
             if (curr_item.is_selected_by_filter(this))

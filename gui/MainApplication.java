@@ -383,7 +383,7 @@ public class MainApplication extends javax.swing.JFrame
      */
     private final WindowNetSamples window_net_sample_designs;
     /** The list of open board frames */
-    private java.util.Collection<BoardFrame> board_frames = new java.util.LinkedList<BoardFrame>();
+    private java.util.Collection<BoardFrame> board_frames = new java.util.LinkedList<>();
     private String design_dir_name = null;
     private final boolean is_test_version;
     private final boolean is_webstart;

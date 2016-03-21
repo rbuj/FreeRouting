@@ -78,7 +78,7 @@ public class NetList
      */
     public Collection<Net> get_nets(String p_component_name, String p_pin_name)
     {
-        Collection<Net> result = new java.util.LinkedList<Net>();
+        Collection<Net> result = new java.util.LinkedList<>();
         Net.Pin search_pin = new Net.Pin(p_component_name, p_pin_name);
         Collection<Net>  net_list = nets.values();
         Iterator<Net> it = net_list.iterator();
@@ -95,6 +95,6 @@ public class NetList
     }
     
     /** The entries of this map are of type Net, the keys are the net_ids. */
-    private final Map<Net.Id, Net> nets = new TreeMap<Net.Id, Net>();
+    private final Map<Net.Id, Net> nets = new TreeMap<>();
     
 }
