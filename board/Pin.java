@@ -417,11 +417,7 @@ public class Pin extends DrillItem implements java.io.Serializable
         {
             return false;
         }
-        if (this.drill_allowed() && p_other instanceof Via && ((Via) p_other).attach_allowed)
-        {
-            return false;
-        }
-        return true;
+        return !(this.drill_allowed() && p_other instanceof Via && ((Via) p_other).attach_allowed);
     }
     
     @Override

@@ -151,11 +151,7 @@ public class RationalPoint extends Point implements java.io.Serializable
             return false;
         }
         tmp = BigInteger.valueOf(p_box.ur.y).multiply(z);
-        if (y.compareTo(tmp) > 0)
-        {
-            return false;
-        }
-        return true;
+        return y.compareTo(tmp) <= 0;
     }
     
     /**

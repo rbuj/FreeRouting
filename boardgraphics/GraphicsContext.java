@@ -348,11 +348,7 @@ public class GraphicsContext implements java.io.Serializable
         {
             return false;
         }
-        if (p_y > p_rect.y + p_rect.height + p_dist)
-        {
-            return false;
-        }
-        return true;
+        return p_y <= p_rect.y + p_rect.height + p_dist;
     }
     
     /**
@@ -772,11 +768,7 @@ public class GraphicsContext implements java.io.Serializable
         {
             return true;
         }
-        if (Math.min(p_1.y, p_2.y) > p_update_box.ur.y + p_update_offset)
-        {
-            return true;
-        }
-        return false;
+        return Math.min(p_1.y, p_2.y) > p_update_box.ur.y + p_update_offset;
     }
     
     /**

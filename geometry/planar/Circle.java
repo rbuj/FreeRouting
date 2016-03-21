@@ -226,11 +226,7 @@ public class Circle implements ConvexShape, java.io.Serializable
         {
             return false;
         }
-        if (p_box.ur.y < center.y + radius)
-        {
-            return false;
-        }
-        return true;
+        return p_box.ur.y >= center.y + radius;
     }
     
     @Override

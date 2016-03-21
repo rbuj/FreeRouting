@@ -649,15 +649,8 @@ public class Sorted45DegreeRoomNeighbours
                         // touch along the side of the room shape
                         insert_incomplete_room = false;
                     }
-                    else if(prev_neighbour.last_touching_side == (next_neighbour.first_touching_side + 1) % 8)
-                    {
-                        // touch at a corner of the room shape
-                        insert_incomplete_room = false;
-                    }
-                    else
-                    {
-                        insert_incomplete_room = true;
-                    }
+                    else insert_incomplete_room = prev_neighbour.last_touching_side != (next_neighbour.first_touching_side + 1) % 8; // touch at a corner of the room shape
+                    
                 }
             }
             else
