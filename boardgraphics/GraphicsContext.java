@@ -366,9 +366,8 @@ public class GraphicsContext implements java.io.Serializable
         }
         Graphics2D g2 = (Graphics2D)p_g;
         Polygon draw_polygon = new Polygon();
-        for(int i= 0; i < p_points.length; i++)
-        {
-            Point2D curr_corner = coordinate_transform.board_to_screen(p_points[i]);
+        for (FloatPoint p_point : p_points) {
+            Point2D curr_corner = coordinate_transform.board_to_screen(p_point);
             draw_polygon.addPoint((int)Math.round(curr_corner.getX()),
                     (int)Math.round(curr_corner.getY()));
         }
@@ -393,9 +392,8 @@ public class GraphicsContext implements java.io.Serializable
         {
             Polygon draw_polygon = new Polygon();
             FloatPoint[] curr_point_list = p_point_lists[j];
-            for(int i= 0; i < curr_point_list.length; i++)
-            {
-                Point2D curr_corner = coordinate_transform.board_to_screen(curr_point_list[i]);
+            for (FloatPoint curr_point_list1 : curr_point_list) {
+                Point2D curr_corner = coordinate_transform.board_to_screen(curr_point_list1);
                 draw_polygon.addPoint((int)Math.round(curr_corner.getX()),
                         (int)Math.round(curr_corner.getY()));
             }
