@@ -69,6 +69,7 @@ public class RationalVector extends Vector implements java.io.Serializable
     /**
      * returns true, if the x and y coordinates of this vector are 0
      */
+    @Override
     public final boolean is_zero()
     {
         return x.signum() == 0 && y.signum() == 0;
@@ -77,6 +78,7 @@ public class RationalVector extends Vector implements java.io.Serializable
     /**
      * returns true, if this RationalVector is equal to p_ob
      */
+    @Override
     public final boolean equals( Object p_ob )
     {
         if ( this == p_ob )
@@ -105,6 +107,7 @@ public class RationalVector extends Vector implements java.io.Serializable
     /**
      * returns the Vector such that this plus this.minus() is zero
      */
+    @Override
     public Vector negate()
     {
         return new RationalVector(x.negate(), y.negate(), z);
@@ -113,6 +116,7 @@ public class RationalVector extends Vector implements java.io.Serializable
     /**
      * adds p_other to this vector
      */
+    @Override
     public final Vector add( Vector p_other)
     {
         return p_other.add(this);
@@ -125,17 +129,20 @@ public class RationalVector extends Vector implements java.io.Serializable
      *         Side.ON_THE_RIGHT, if this Vector is on the right of L
      *     and Side.COLLINEAR, if this Vector is collinear with L.
      */
+    @Override
     public Side side_of(Vector p_other)
     {
         Side tmp = p_other.side_of(this);
         return tmp.negate();
     }
     
+    @Override
     public boolean is_orthogonal()
     {
         return (x.signum() == 0 || y.signum() == 0);
     }
     
+    @Override
     public boolean is_diagonal()
     {
         return x.abs().equals(y.abs());
@@ -148,6 +155,7 @@ public class RationalVector extends Vector implements java.io.Serializable
      *   Signum.NEGATIVE, if the scalar product is < 0,
      *   and Signum.ZERO, if the scalar product is equal 0.
      */
+    @Override
     public Signum projection(Vector p_other)
     {
         return p_other.projection(this);
@@ -156,6 +164,7 @@ public class RationalVector extends Vector implements java.io.Serializable
     /**
      * calculates  the scalar product of this vector and p_other
      */
+    @Override
     public double scalar_product(Vector p_other)
     {
         return p_other.scalar_product(this);
@@ -164,6 +173,7 @@ public class RationalVector extends Vector implements java.io.Serializable
     /**
      * approximates the coordinates of this vector by float coordinates
      */
+    @Override
     public FloatPoint to_float()
     {
         double xd = x.doubleValue();
@@ -172,12 +182,14 @@ public class RationalVector extends Vector implements java.io.Serializable
         return new FloatPoint( xd / zd, yd / zd);
     }
     
+    @Override
     public Vector change_length_approx(double p_lenght)
     {
         System.out.println("RationalVector: change_length_approx not yet implemented");
         return this;
     }
     
+    @Override
     public Vector turn_90_degree(int p_factor)
     {
         int n = p_factor;
@@ -215,16 +227,19 @@ public class RationalVector extends Vector implements java.io.Serializable
         return new RationalVector(new_x, new_y, this.z);
     }
     
+    @Override
     public Vector mirror_at_y_axis()
     {
         return new RationalVector(this.x.negate(), this.y, this.z);
     }
     
+    @Override
     public Vector mirror_at_x_axis()
     {
         return new RationalVector(this.x, this.y.negate(), this.z);
     }
     
+    @Override
     Direction to_normalized_direction()
     {
         BigInteger dx = x;
@@ -240,12 +255,14 @@ public class RationalVector extends Vector implements java.io.Serializable
         return new BigIntDirection(dx, dy);
     }
     
+    @Override
     double scalar_product(IntVector p_other)
     {
         Vector other = new RationalVector(p_other);
         return other.scalar_product(this);
     }
     
+    @Override
     double scalar_product(RationalVector p_other)
     {
         FloatPoint v1 = to_float();
@@ -253,12 +270,14 @@ public class RationalVector extends Vector implements java.io.Serializable
         return v1.x * v2.x + v1.y * v2.y;
     }
     
+    @Override
     Signum projection(IntVector p_other)
     {
         Vector other = new RationalVector(p_other);
         return other.projection(this);
     }
     
+    @Override
     Signum projection(RationalVector p_other)
     {
         BigInteger tmp1 = x.multiply(p_other.x);
@@ -268,12 +287,14 @@ public class RationalVector extends Vector implements java.io.Serializable
         return Signum.of(result);
     }
     
+    @Override
     final Vector add(IntVector p_other)
     {
         RationalVector other = new RationalVector(p_other);
         return add(other);
     }
     
+    @Override
     final Vector add(RationalVector p_other)
     {
         BigInteger v1[] = new BigInteger[3];
@@ -289,6 +310,7 @@ public class RationalVector extends Vector implements java.io.Serializable
         return new RationalVector(result[0], result[1], result[2]);
     }
     
+    @Override
     Point add_to(IntPoint p_point)
     {
         BigInteger new_x = z.multiply(BigInteger.valueOf(p_point.x));
@@ -298,6 +320,7 @@ public class RationalVector extends Vector implements java.io.Serializable
         return new RationalPoint(new_x, new_y, z);
     }
     
+    @Override
     Point add_to(RationalPoint p_point)
     {
         BigInteger v1[] = new BigInteger[3];
@@ -314,12 +337,14 @@ public class RationalVector extends Vector implements java.io.Serializable
         return new RationalPoint(result[0], result[1], result[2]);
     }
     
+    @Override
     Side side_of(IntVector p_other)
     {
         RationalVector other = new RationalVector(p_other);
         return side_of(other);
     }
     
+    @Override
     Side side_of(RationalVector p_other)
     {
         BigInteger tmp_1 = y.multiply(p_other.x);

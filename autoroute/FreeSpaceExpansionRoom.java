@@ -56,6 +56,7 @@ public abstract class FreeSpaceExpansionRoom implements ExpansionRoom
     /**
      * Adds p_door to the list of doors of this room.
      */
+    @Override
     public void add_door(ExpansionDoor p_door)
     {
         this.doors.add(p_door);
@@ -64,6 +65,7 @@ public abstract class FreeSpaceExpansionRoom implements ExpansionRoom
     /**
      * Returns the list of doors of this room to neighbour expansion rooms
      */
+    @Override
     public List<ExpansionDoor> get_doors()
     {
         return this.doors;
@@ -72,11 +74,13 @@ public abstract class FreeSpaceExpansionRoom implements ExpansionRoom
     /**
      * Removes all doors from this room.
      */
+    @Override
     public void clear_doors()
     {
         this.doors = new LinkedList<ExpansionDoor>();
     }
     
+    @Override
     public void reset_doors()
     {
         for (ExpandableObject curr_door : this.doors)
@@ -85,6 +89,7 @@ public abstract class FreeSpaceExpansionRoom implements ExpansionRoom
         }
     }
     
+    @Override
     public boolean remove_door(ExpandableObject p_door)
     {
         return this.doors.remove(p_door);
@@ -93,6 +98,7 @@ public abstract class FreeSpaceExpansionRoom implements ExpansionRoom
     /**
      * Gets the shape of this room
      */
+    @Override
     public TileShape get_shape()
     {
         return this.shape;
@@ -106,6 +112,7 @@ public abstract class FreeSpaceExpansionRoom implements ExpansionRoom
         this.shape = p_shape;
     }
     
+    @Override
     public int get_layer()
     {
         return this.layer;
@@ -114,6 +121,7 @@ public abstract class FreeSpaceExpansionRoom implements ExpansionRoom
     /**
      * Checks, if this room has already a door to p_other
      */
+    @Override
     public boolean door_exists(ExpansionRoom p_other)
     {
         if (doors == null)

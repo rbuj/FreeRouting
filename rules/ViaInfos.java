@@ -100,6 +100,7 @@ public class ViaInfos implements java.io.Serializable, board.ObjectInfoPanel.Pri
         return this.list.remove(p_via_info);
     }
     
+    @Override
     public void print_info(board.ObjectInfoPanel p_window, java.util.Locale p_locale)
     {
         java.util.ResourceBundle resources = 

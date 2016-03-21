@@ -51,6 +51,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
     /**
      * Implements the comparable interface.
      */
+    @Override
     public int compareTo(Object p_other)
     {
         int result;
@@ -92,11 +93,13 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
         return false;
     }
 
+    @Override
     public boolean is_obstacle(int p_net_no)
     {
         return !contains_net(p_net_no);
     }
 
+    @Override
     public boolean is_trace_obstacle(int p_net_no)
     {
         return !contains_net(p_net_no);
@@ -153,6 +156,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
         return get_tree_shape(this.board.search_tree_manager.get_default_tree(), p_index);
     }
 
+    @Override
     public int tree_shape_count(ShapeTree p_tree)
     {
         if (this.board == null)
@@ -163,6 +167,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
         return precalculated_tree_shapes.length;
     }
 
+    @Override
     public TileShape get_tree_shape(ShapeTree p_tree, int p_index)
     {
         if (this.board == null)
@@ -213,6 +218,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      */
     public abstract Item copy(int p_id_no);
 
+    @Override
     public Object clone()
     {
         return copy(this.get_id_no());
@@ -829,6 +835,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
         return new Point[0];
     }
 
+    @Override
     public void draw(Graphics p_g, GraphicsContext p_graphics_context, Color p_color, double p_intensity)
     {
         Color[] color_arr = new Color[board.get_layer_count()];
@@ -875,6 +882,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      * Returns for this item the layer of the shape with index p_index.
      * If p_id_no <= 0, it w2ill be generated internally.
      */
+    @Override
     public abstract int shape_layer(int p_index);
 
     Item(int[] p_net_no_arr, int p_clearance_type, int p_id_no,
@@ -1157,6 +1165,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
     /**
      * Sets the item tree entries for the  tree with identification number p_tree_no.
      */
+    @Override
     public void set_search_tree_entries(ShapeTree.Leaf[] p_tree_entries, ShapeTree p_tree)
     {
         if (this.board == null)

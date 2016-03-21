@@ -59,6 +59,7 @@ public class PolygonShapeConstructionState extends CornerItemConstructionState
      * Inserts the polygon shape item into the board, if possible
      * and returns to the main state
      */
+    @Override
     public InteractiveState complete()
     {
         add_corner_for_snap_angle();
@@ -116,6 +117,7 @@ public class PolygonShapeConstructionState extends CornerItemConstructionState
         return this.return_state;
     }
     
+    @Override
     public void display_default_message()
     {
         hdlg.screen_messages.set_status_message(resources.getString("creating_polygonshape"));

@@ -55,6 +55,7 @@ public class MakeSpaceState extends DragState
                 false, false, false, hdlg.settings.hilight_routing_obstacle);
     }
     
+    @Override
     public InteractiveState move_to(FloatPoint p_to_location)
     {
         if (!something_dragged)
@@ -89,6 +90,7 @@ public class MakeSpaceState extends DragState
         return this;
     }
     
+    @Override
     public InteractiveState button_released()
     {
         int delete_net_no = rules.Nets.hidden_net_no;
@@ -107,6 +109,7 @@ public class MakeSpaceState extends DragState
         return this.return_state;
     }
     
+    @Override
     public void draw(java.awt.Graphics p_graphics)
     {
         if (route != null)

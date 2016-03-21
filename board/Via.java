@@ -48,12 +48,14 @@ public class Via extends DrillItem implements java.io.Serializable
         this.attach_allowed = p_attach_allowed;
     }
 
+    @Override
     public Item copy(int p_id_no)
     {
         return new Via(padstack, get_center(), net_no_arr, clearance_class_no(), p_id_no, get_component_no(),
                 get_fixed_state(), attach_allowed, board);
     }
 
+    @Override
     public Shape get_shape(int p_index)
     {
         if (padstack == null)
@@ -83,6 +85,7 @@ public class Via extends DrillItem implements java.io.Serializable
         return this.precalculated_shapes[p_index];
     }
 
+    @Override
     public Padstack get_padstack()
     {
         return padstack;
@@ -93,11 +96,13 @@ public class Via extends DrillItem implements java.io.Serializable
         padstack = p_padstack;
     }
 
+    @Override
     public boolean is_route()
     {
         return !is_user_fixed() && this.net_count() > 0;
     }
 
+    @Override
     public boolean is_obstacle(Item p_other)
     {
         if (p_other == this || p_other instanceof ComponentObstacleArea)
@@ -126,6 +131,7 @@ public class Via extends DrillItem implements java.io.Serializable
     /**
      * Checks, if the Via has contacts on at most 1 layer.
      */
+    @Override
     public boolean is_tail()
     {
         Collection<Item> contact_list = this.get_normal_contacts();
@@ -148,6 +154,7 @@ public class Via extends DrillItem implements java.io.Serializable
         return true;
     }
 
+    @Override
     public void change_placement_side(IntPoint p_pole)
     {
         if (this.board == null)
@@ -181,6 +188,7 @@ public class Via extends DrillItem implements java.io.Serializable
         return this.autoroute_drill_info;
     }
 
+    @Override
     public void clear_derived_data()
     {
         super.clear_derived_data();
@@ -188,12 +196,14 @@ public class Via extends DrillItem implements java.io.Serializable
         this.autoroute_drill_info = null;
     }
     
+    @Override
     public void clear_autoroute_info()
     {
         super.clear_autoroute_info();
         this.autoroute_drill_info = null;
     }
 
+    @Override
     public boolean is_selected_by_filter(ItemSelectionFilter p_filter)
     {
         if (!this.is_selected_by_fixed_filter(p_filter))
@@ -203,6 +213,7 @@ public class Via extends DrillItem implements java.io.Serializable
         return p_filter.is_selected(ItemSelectionFilter.SelectableChoices.VIAS);
     }
 
+    @Override
     public java.awt.Color[] get_draw_colors(boardgraphics.GraphicsContext p_graphics_context)
     {
         java.awt.Color[] result;
@@ -224,6 +235,7 @@ public class Via extends DrillItem implements java.io.Serializable
         return result;
     }
 
+    @Override
     public double get_draw_intensity(boardgraphics.GraphicsContext p_graphics_context)
     {
         double result;
@@ -245,6 +257,7 @@ public class Via extends DrillItem implements java.io.Serializable
         return result;
     }
 
+    @Override
     public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale)
     {
         java.util.ResourceBundle resources =
@@ -258,6 +271,7 @@ public class Via extends DrillItem implements java.io.Serializable
         p_window.newline();
     }
 
+    @Override
     public boolean write(java.io.ObjectOutputStream p_stream)
     {
         try

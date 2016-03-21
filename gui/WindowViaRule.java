@@ -135,6 +135,7 @@ public class WindowViaRule extends javax.swing.JFrame
     
     private class AppendListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             Object[] possible_values = new Object[via_list.count() - via_rule.via_count()];
@@ -172,6 +173,7 @@ public class WindowViaRule extends javax.swing.JFrame
     
     private class DeleteListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             ViaInfo selected_via = (ViaInfo) rule_list.getSelectedValue();
@@ -190,6 +192,7 @@ public class WindowViaRule extends javax.swing.JFrame
     
     private class MoveUpListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             int selected_index = rule_list.getSelectedIndex();
@@ -204,6 +207,7 @@ public class WindowViaRule extends javax.swing.JFrame
     
     private class MoveDownListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             int selected_index = rule_list.getSelectedIndex();

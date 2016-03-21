@@ -38,6 +38,7 @@ class PupupMenuCornerItemConstruction extends javax.swing.JPopupMenu
         add_corner_item.setText(resources.getString("add_corner"));
         add_corner_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 // Same action as if the left button is clicked with
@@ -53,6 +54,7 @@ class PupupMenuCornerItemConstruction extends javax.swing.JPopupMenu
         close_item.setText(resources.getString("close"));
         close_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_panel.board_handling.return_from_state();
@@ -65,6 +67,7 @@ class PupupMenuCornerItemConstruction extends javax.swing.JPopupMenu
         cancel_item.setText(resources.getString("cancel"));
         cancel_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_panel.board_handling.cancel_state();

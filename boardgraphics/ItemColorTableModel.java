@@ -130,16 +130,19 @@ public class ItemColorTableModel extends ColorTableModel implements java.io.Seri
         }
     }
     
+    @Override
     public int getColumnCount()
     {
         return ColumnNames.values().length;
     }
     
+    @Override
     public int getRowCount()
     {
         return data.length;
     }
     
+    @Override
     public String getColumnName(int p_col)
     {
         java.util.ResourceBundle resources = 
@@ -147,6 +150,7 @@ public class ItemColorTableModel extends ColorTableModel implements java.io.Seri
         return resources.getString(ColumnNames.values()[p_col].toString());
     }
     
+    @Override
     public void setValueAt(Object p_value, int p_row, int p_col)
     {
         super.setValueAt(p_value, p_row, p_col);
@@ -157,6 +161,7 @@ public class ItemColorTableModel extends ColorTableModel implements java.io.Seri
      * Don't need to implement this method unless your table's
      * editable.
      */
+    @Override
     public boolean isCellEditable(int p_row, int p_col)
     {
         //Note that the data/cell address is constant,

@@ -75,6 +75,7 @@ public abstract class RegularTileShape extends TileShape
      * Auxiliary function to implement the same function with parameter
      * type RegularTileShape.
      */
+     @Override
      public abstract boolean is_contained_in (IntBox p_other);
      /**
      * Auxiliary function to implement the same function with parameter

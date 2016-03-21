@@ -42,6 +42,7 @@ public class NetClass implements java.io.Serializable, board.ObjectInfoPanel.Pri
 
     }
 
+    @Override
     public String toString()
     {
         return this.name;
@@ -267,6 +268,7 @@ public class NetClass implements java.io.Serializable, board.ObjectInfoPanel.Pri
         }
     }
 
+    @Override
     public void print_info(board.ObjectInfoPanel p_window, java.util.Locale p_locale)
     {
         java.util.ResourceBundle resources =

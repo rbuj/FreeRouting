@@ -33,6 +33,7 @@ public class FileFilter extends javax.swing.filechooser.FileFilter
     {
         extensions = p_extensions;
     }
+    @Override
     public String getDescription()
     {
         String message = "files with the extensions";
@@ -51,6 +52,7 @@ public class FileFilter extends javax.swing.filechooser.FileFilter
         return message;
     }
     
+    @Override
     public boolean accept(java.io.File p_file)
     {
         if (p_file.isDirectory())

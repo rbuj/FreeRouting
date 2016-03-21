@@ -1193,6 +1193,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
 
         }
 
+        @Override
         public int compareTo(EntrySortedByClearance p_other)
         {
             if (clearance != p_other.clearance)

@@ -87,6 +87,7 @@ public class MinAreaTree extends ShapeTree
     }
     
     
+    @Override
     void insert(Leaf p_leaf)
     {
         ++this.leaf_count;
@@ -167,6 +168,7 @@ public class MinAreaTree extends ShapeTree
     /**
      * removes an entry from this tree
      */
+    @Override
     public void remove_leaf(Leaf p_leaf)
     {
         if (p_leaf == null)

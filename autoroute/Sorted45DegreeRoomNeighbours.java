@@ -1012,6 +1012,7 @@ public class Sorted45DegreeRoomNeighbours
          * Compare function for or sorting the neighbours in counterclock sense
          * around the border of the room shape in ascending order.
          */
+        @Override
         public int compareTo(SortedRoomNeighbour p_other)
         {
             if (this.first_touching_side > p_other.first_touching_side)

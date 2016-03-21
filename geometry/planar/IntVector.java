@@ -45,6 +45,7 @@ public class IntVector extends Vector implements java.io.Serializable
     /**
      * returns true, if this IntVector is equal to p_ob
      */
+    @Override
     public final boolean equals( Object p_ob )
     {
         if ( this == p_ob )
@@ -66,6 +67,7 @@ public class IntVector extends Vector implements java.io.Serializable
     /**
      * returns true, if both coordinates of this vector are 0
      */
+    @Override
     public final boolean is_zero()
     {
         return x == 0 && y == 0;
@@ -74,16 +76,19 @@ public class IntVector extends Vector implements java.io.Serializable
     /**
      * returns the Vector such that this plus this.minus() is zero
      */
+    @Override
     public Vector negate()
     {
         return new IntVector(-x, -y);
     }
     
+    @Override
     public boolean is_orthogonal()
     {
         return ( x == 0 || y == 0 ) ;
     }
     
+    @Override
     public boolean is_diagonal()
     {
         return ( Math.abs(x) == Math.abs(y) ) ;
@@ -98,6 +103,7 @@ public class IntVector extends Vector implements java.io.Serializable
         return (long)x * p_other.y - (long)y * p_other.x;
     }
     
+    @Override
     public Vector turn_90_degree(int p_factor)
     {
         int n = p_factor;
@@ -137,11 +143,13 @@ public class IntVector extends Vector implements java.io.Serializable
     }
     
     
+    @Override
     public Vector mirror_at_y_axis()
     {
         return new IntVector(-this.x, this.y);
     }
     
+    @Override
     public Vector mirror_at_x_axis()
     {
         return new IntVector(this.x, -this.y);
@@ -150,16 +158,19 @@ public class IntVector extends Vector implements java.io.Serializable
     /**
      * adds p_other to this vector
      */
+    @Override
     public final Vector add( Vector p_other)
     {
         return p_other.add(this);
     }
     
+    @Override
     final Vector add( IntVector p_other)
     {
         return new IntVector(x + p_other.x, y + p_other.y);
     }
     
+    @Override
     final Vector add( RationalVector p_other)
     {
         return p_other.add(this);
@@ -168,11 +179,13 @@ public class IntVector extends Vector implements java.io.Serializable
     /**
      * returns the Point, which results from adding this vector to p_point
      */
+    @Override
     final Point add_to(IntPoint p_point)
     {
         return new IntPoint(p_point.x + x, p_point.y + y);
     }
     
+    @Override
     final Point add_to(RationalPoint p_point)
     {
         return p_point.translate_by(this);
@@ -187,18 +200,21 @@ public class IntVector extends Vector implements java.io.Serializable
      *         Side.ON_THE_RIGHT, if this Vector is on the right of L
      *     and Side.COLLINEAR, if this Vector is collinear with L.
      */
+    @Override
     public Side side_of(Vector p_other)
     {
         Side tmp = p_other.side_of(this);
         return tmp.negate();
     }
     
+    @Override
     Side side_of(IntVector p_other)
     {
         double determinant = (double) p_other.x * y - (double) p_other.y * x;
         return Side.of(determinant);
     }
     
+    @Override
     Side side_of(RationalVector p_other)
     {
         Side tmp = p_other.side_of(this);
@@ -211,11 +227,13 @@ public class IntVector extends Vector implements java.io.Serializable
      *   Signum.NEGATIVE, if the scalar product Vector is < 0,
      *   and Signum.ZERO, if the scalar product is equal 0.
      */
+    @Override
     public Signum projection(Vector p_other)
     {
         return p_other.projection(this);
     }
     
+    @Override
     public double scalar_product(Vector p_other)
     {
         return p_other.scalar_product(this);
@@ -226,17 +244,20 @@ public class IntVector extends Vector implements java.io.Serializable
     /**
      * converts this vector to a PointFloat.
      */
+    @Override
     public FloatPoint to_float()
     {
         return new FloatPoint(x, y);
     }
     
+    @Override
     public Vector change_length_approx(double p_length)
     {
         FloatPoint new_point = this.to_float().change_size(p_length);
         return new_point.round().difference_by(Point.ZERO);
     }
     
+    @Override
     Direction to_normalized_direction()
     {
         int dx = x;
@@ -258,23 +279,27 @@ public class IntVector extends Vector implements java.io.Serializable
      *   Signum.NEGATIVE, if the scalar product Vector is < 0,
      *   and Signum.ZERO, if the scalar product is equal 0.
      */
+    @Override
     Signum projection(IntVector p_other)
     {
         double tmp = (double) x * p_other.x + (double) y * p_other.y;
         return Signum.of(tmp);
     }
     
+    @Override
     double scalar_product(IntVector p_other)
     {
         return (double) x * p_other.x + (double) y * p_other.y;
     }
     
+    @Override
     double scalar_product(RationalVector p_other)
     {
         return p_other.scalar_product(this);
     }
     
     
+    @Override
     Signum projection(RationalVector p_other)
     {
         return p_other.projection(this);

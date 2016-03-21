@@ -92,6 +92,7 @@ public class WindowNetClasses extends BoardSavableSubWindow
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    @Override
     public void refresh()
     {
         this.cl_class_combo_box.removeAllItems();
@@ -120,6 +121,7 @@ public class WindowNetClasses extends BoardSavableSubWindow
         }
     }
 
+    @Override
     public void dispose()
     {
         for (javax.swing.JFrame curr_subwindow : this.subwindows)
@@ -203,6 +205,7 @@ public class WindowNetClasses extends BoardSavableSubWindow
     private class AddNetClassListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             board_frame.board_panel.board_handling.get_routing_board().rules.append_net_class(board_frame.get_locale());
@@ -213,6 +216,7 @@ public class WindowNetClasses extends BoardSavableSubWindow
     private class RemoveNetClassListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             if (table_model.getRowCount() <= 1)
@@ -256,6 +260,7 @@ public class WindowNetClasses extends BoardSavableSubWindow
     private class AssignClassesListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             board_frame.assign_net_classes_window.setVisible(true);
@@ -265,6 +270,7 @@ public class WindowNetClasses extends BoardSavableSubWindow
     private class SelectClassesListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             int[] selected_rows = table.getSelectedRows();
@@ -317,6 +323,7 @@ public class WindowNetClasses extends BoardSavableSubWindow
     private class FilterIncompletesListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             int[] selected_rows = table.getSelectedRows();
@@ -353,6 +360,7 @@ public class WindowNetClasses extends BoardSavableSubWindow
     private class ContainedNetsListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             int[] selected_rows = table.getSelectedRows();
@@ -411,11 +419,13 @@ public class WindowNetClasses extends BoardSavableSubWindow
             column_tool_tips[8] = resources.getString("column_tool_tip_8");
         }
         //Implement table header tool tips.
+        @Override
         protected javax.swing.table.JTableHeader createDefaultTableHeader()
         {
             return new javax.swing.table.JTableHeader(columnModel)
             {
 
+                @Override
                 public String getToolTipText(java.awt.event.MouseEvent e)
                 {
                     java.awt.Point p = e.getPoint();
@@ -541,26 +551,31 @@ public class WindowNetClasses extends BoardSavableSubWindow
             fireTableCellUpdated(p_rule_no, ColumnName.TRACE_WIDTH.ordinal());
         }
 
+        @Override
         public String getColumnName(int p_col)
         {
             return column_names[p_col];
         }
 
+        @Override
         public int getRowCount()
         {
             return data.length;
         }
 
+        @Override
         public int getColumnCount()
         {
             return column_names.length;
         }
 
+        @Override
         public Object getValueAt(int p_row, int p_col)
         {
             return data[p_row][p_col];
         }
 
+        @Override
         public void setValueAt(Object p_value, int p_row, int p_col)
         {
             board.RoutingBoard routing_board = board_frame.board_panel.board_handling.get_routing_board();
@@ -781,12 +796,14 @@ public class WindowNetClasses extends BoardSavableSubWindow
             fireTableCellUpdated(p_row, p_col);
         }
 
+        @Override
         public boolean isCellEditable(int p_row, int p_col)
         {
             // the name of the default class is not editable
             return p_row > 0 || p_col > 0;
         }
 
+        @Override
         public Class<?> getColumnClass(int p_col)
         {
             Object curr_entry = getValueAt(0, p_col);

@@ -406,6 +406,7 @@ public class ClearanceMatrix implements java.io.Serializable
             max_value = new int[layer_structure.arr.length];
         }
         
+        @Override
         public void print_info(board.ObjectInfoPanel p_window, java.util.Locale p_locale)
         {
             java.util.ResourceBundle resources = 

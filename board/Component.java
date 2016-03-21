@@ -171,6 +171,7 @@ public class Component implements UndoableObjects.Storable, ObjectInfoPanel.Prin
      * Compares 2 components by name.
      * Useful for example to display components in alphabetic order.
      */
+    @Override
     public int compareTo(Object p_other)
     {
         if (p_other instanceof Component)
@@ -183,6 +184,7 @@ public class Component implements UndoableObjects.Storable, ObjectInfoPanel.Prin
     /**
      * Creates a copy of this component.
      */
+    @Override
     public Component clone()
     {
         Component result = new Component(name, location, rotation_in_degree, on_front,
@@ -191,6 +193,7 @@ public class Component implements UndoableObjects.Storable, ObjectInfoPanel.Prin
         return result;
     }
     
+    @Override
     public String toString()
     {
         return this.name;
@@ -212,6 +215,7 @@ public class Component implements UndoableObjects.Storable, ObjectInfoPanel.Prin
         this.logical_part = p_logical_part;
     }
     
+    @Override
     public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale)
     {
         java.util.ResourceBundle resources = 

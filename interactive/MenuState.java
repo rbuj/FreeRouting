@@ -43,6 +43,7 @@ public class MenuState extends InteractiveState
         this.return_state = this;
     }
     
+    @Override
     public javax.swing.JPopupMenu get_popup_menu()
     {
         return hdlg.get_panel().popup_menu_main;
@@ -103,6 +104,7 @@ public class MenuState extends InteractiveState
     /**
      * Action to be taken when a key shortcut is pressed.
      */
+    @Override
     public InteractiveState key_typed(char p_key_char)
     {
         InteractiveState curr_return_state = this;
@@ -205,6 +207,7 @@ public class MenuState extends InteractiveState
     /**
      * Do nothing on complete.
      */
+    @Override
     public InteractiveState complete()
     {
         return this;
@@ -213,11 +216,13 @@ public class MenuState extends InteractiveState
     /**
      * Do nothing on cancel.
      */
+    @Override
     public InteractiveState cancel()
     {
         return this;
     }
     
+    @Override
     public void set_toolbar()
     {
         hdlg.get_panel().board_frame.set_menu_toolbar();

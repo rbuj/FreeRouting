@@ -78,6 +78,7 @@ public class ComboBoxLayer extends javax.swing.JComboBox
             index = p_index;
         }
         
+        @Override
         public String toString()
         {
             return name;

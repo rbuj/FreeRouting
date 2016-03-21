@@ -65,6 +65,7 @@ public class PolylineTrace extends Trace implements java.io.Serializable
         lines = p_polyline;
     }
 
+    @Override
     public Item copy(int p_id_no)
     {
         int[] curr_net_no_arr = new int[this.net_count()];
@@ -79,6 +80,7 @@ public class PolylineTrace extends Trace implements java.io.Serializable
     /**
      * checks, if this trace is on layer p_layer
      */
+    @Override
     public boolean is_on_layer(int p_layer)
     {
         return get_layer() == p_layer;
@@ -88,6 +90,7 @@ public class PolylineTrace extends Trace implements java.io.Serializable
      * returns the first corner of this trace, which is the intersection
      * of the first and second lines of its polyline
      */
+    @Override
     public Point first_corner()
     {
         return lines.corner(0);
@@ -97,6 +100,7 @@ public class PolylineTrace extends Trace implements java.io.Serializable
      * returns the last corner of this trace, which is the intersection
      * of the last two lines of its polyline
      */
+    @Override
     public Point last_corner()
     {
         return lines.corner(lines.arr.length - 2);
@@ -111,17 +115,20 @@ public class PolylineTrace extends Trace implements java.io.Serializable
         return lines.arr.length - 1;
     }
 
+    @Override
     public double get_length()
     {
         return lines.length_approx();
     }
 
+    @Override
     public IntBox bounding_box()
     {
         IntBox result = this.lines.bounding_box();
         return result.offset(this.get_half_width());
     }
 
+    @Override
     public void draw(Graphics p_g, GraphicsContext p_graphics_context, Color[] p_color_arr, double p_intensity)
     {
         if (p_graphics_context == null)
@@ -143,6 +150,7 @@ public class PolylineTrace extends Trace implements java.io.Serializable
         return lines;
     }
 
+    @Override
     protected TileShape[] calculate_tree_shapes(ShapeSearchTree p_search_tree)
     {
         return p_search_tree.calculate_tree_shapes(this);
@@ -151,28 +159,33 @@ public class PolylineTrace extends Trace implements java.io.Serializable
     /**
      * returns the count of tile shapes of this polyline
      */
+    @Override
     public int tile_shape_count()
     {
         return Math.max(lines.arr.length - 2, 0);
     }
 
+    @Override
     public void translate_by(Vector p_vector)
     {
         lines = lines.translate_by(p_vector);
         this.clear_derived_data();
     }
 
+    @Override
     public void turn_90_degree(int p_factor, IntPoint p_pole)
     {
         lines = lines.turn_90_degree(p_factor, p_pole);
         this.clear_derived_data();
     }
 
+    @Override
     public void rotate_approx(double p_angle_in_degree, FloatPoint p_pole)
     {
         this.lines = this.lines.rotate_approx(Math.toRadians(p_angle_in_degree), p_pole);
     }
 
+    @Override
     public void change_placement_side(IntPoint p_pole)
     {
         lines = lines.mirror_vertical(p_pole);
@@ -189,6 +202,7 @@ public class PolylineTrace extends Trace implements java.io.Serializable
      * Returns true, if somthing has been combined.
      * This trace will be the combined trace, so that only other traces may be deleted.
      */
+    @Override
     public boolean combine()
     {
         if (!this.is_on_the_board())
@@ -477,6 +491,7 @@ public class PolylineTrace extends Trace implements java.io.Serializable
      * If nothing is split, the result will contain just this Trace.
      * If p_clip_shape != null, the split may be resticted to p_clip_shape.
      */
+    @Override
     public Collection<PolylineTrace> split(IntOctagon p_clip_shape)
     {
         Collection<PolylineTrace> result = new LinkedList<PolylineTrace>();
@@ -730,6 +745,7 @@ public class PolylineTrace extends Trace implements java.io.Serializable
      * Returns the 2 pieces of the splitted trace, or null if nothing was splitted because for example 
      * p_point is not located on a line segment of the p_polyline of this trace.
      */
+    @Override
     public Trace[] split(Point p_point)
     {
         for (int i = 0; i < this.lines.arr.length - 2; ++i)
@@ -835,6 +851,7 @@ public class PolylineTrace extends Trace implements java.io.Serializable
      * Tries to shorten this trace without creating clearance violations
      * Returns true, if the trace was changed.
      */
+    @Override
     public boolean pull_tight(PullTightAlgo p_pull_tight_algo)
     {
         if (!this.is_on_the_board())
@@ -946,6 +963,7 @@ public class PolylineTrace extends Trace implements java.io.Serializable
         return pull_tight_algo.smoothen_end_corners_at_trace(this);
     }
 
+    @Override
     public TileShape get_trace_connection_shape(ShapeSearchTree p_search_tree, int p_index)
     {
         if (p_index < 0 || p_index >= this.tile_shape_count())
@@ -958,6 +976,7 @@ public class PolylineTrace extends Trace implements java.io.Serializable
         return result;
     }
 
+    @Override
     public boolean write(java.io.ObjectOutputStream p_stream)
     {
         try
@@ -1050,6 +1069,7 @@ public class PolylineTrace extends Trace implements java.io.Serializable
      * else the end. Returns false, if a pin is at that end, where
      * the connection is checked and the connection is not ok.
      */
+    @Override
     public boolean check_connection_to_pin(boolean p_at_start)
     {
         if (this.board == null)

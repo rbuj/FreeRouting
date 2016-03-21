@@ -163,6 +163,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
     /**
      * Recalculates all displayed values
      */
+    @Override
     public void refresh()
     {
         interactive.AutorouteSettings settings = this.board_handling.settings.autoroute_settings;
@@ -192,18 +193,21 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
         this.detail_window.refresh();
     }
 
+    @Override
     public void dispose()
     {
         detail_window.dispose();
         super.dispose();
     }
 
+    @Override
     public void parent_iconified()
     {
         detail_window.parent_iconified();
         super.parent_iconified();
     }
 
+    @Override
     public void parent_deiconified()
     {
         detail_window.parent_deiconified();
@@ -225,6 +229,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
     private class DetailListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             if (first_time)
@@ -246,6 +251,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
             signal_layer_no = p_layer_no;
         }
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             int curr_layer_no = board_handling.get_routing_board().layer_structure.get_layer_no(this.signal_layer_no);
@@ -262,6 +268,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
             signal_layer_no = p_layer_no;
         }
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             int curr_layer_no = board_handling.get_routing_board().layer_structure.get_layer_no(this.signal_layer_no);
@@ -274,6 +281,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
     private class ViasAllowedListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             board_handling.settings.autoroute_settings.set_vias_allowed(vias_allowed.isSelected());
@@ -283,6 +291,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
     private class FanoutListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             interactive.AutorouteSettings autoroute_settings = board_handling.settings.autoroute_settings;
@@ -294,6 +303,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
     private class AutorouteListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             interactive.AutorouteSettings autoroute_settings = board_handling.settings.autoroute_settings;
@@ -305,6 +315,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
     private class PostrouteListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             interactive.AutorouteSettings autoroute_settings = board_handling.settings.autoroute_settings;

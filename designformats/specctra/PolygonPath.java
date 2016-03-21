@@ -45,6 +45,7 @@ public class PolygonPath extends Path
     /**
      * Writes this path as a scope to an output dsn-file.
      */
+    @Override
     public void write_scope(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException
     {
         p_file.start_scope();
@@ -63,6 +64,7 @@ public class PolygonPath extends Path
         p_file.end_scope();
     }
     
+    @Override
     public void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException
     {
         p_file.start_scope();
@@ -83,6 +85,7 @@ public class PolygonPath extends Path
         p_file.end_scope();
     }
     
+    @Override
     public geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform)
     {
         FloatPoint [] corner_arr = new FloatPoint[this.coordinate_arr.length / 2];
@@ -112,6 +115,7 @@ public class PolygonPath extends Path
         return result;
     }
     
+    @Override
     public geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform)
     {
         FloatPoint [] corner_arr = new FloatPoint[this.coordinate_arr.length / 2];
@@ -141,6 +145,7 @@ public class PolygonPath extends Path
         return result;
     }
     
+    @Override
     public Rectangle bounding_box()
     {
         double offset = this.width/2;

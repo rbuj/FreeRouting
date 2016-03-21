@@ -232,6 +232,7 @@ public class MoveItemState extends InteractiveState
         this.net_items_list.add(new_net_items);
     }
     
+    @Override
     public InteractiveState mouse_moved()
     {
         super.mouse_moved();
@@ -243,17 +244,20 @@ public class MoveItemState extends InteractiveState
         return this;
     }
     
+    @Override
     public InteractiveState process_logfile_point(FloatPoint p_point)
     {
         move(p_point);
         return this;
     }
     
+    @Override
     public InteractiveState left_button_clicked(FloatPoint p_location)
     {
         return this.complete();
     }
     
+    @Override
     public InteractiveState complete()
     {
         for (Item curr_item : this.item_list)
@@ -290,6 +294,7 @@ public class MoveItemState extends InteractiveState
         return this.return_state;
     }
     
+    @Override
     public InteractiveState cancel()
     {
         hdlg.get_routing_board().undo(null);
@@ -304,6 +309,7 @@ public class MoveItemState extends InteractiveState
         return this.return_state;
     }
     
+    @Override
     public InteractiveState mouse_wheel_moved(int p_rotation)
     {
         if (hdlg.settings.zoom_with_wheel)
@@ -533,6 +539,7 @@ public class MoveItemState extends InteractiveState
     /**
      * Action to be taken when a key is pressed (Shortcut).
      */
+    @Override
     public InteractiveState key_typed(char p_key_char)
     {
         InteractiveState curr_return_state = this;
@@ -567,16 +574,19 @@ public class MoveItemState extends InteractiveState
         return curr_return_state;
     }
     
+    @Override
     public javax.swing.JPopupMenu get_popup_menu()
     {
         return hdlg.get_panel().popup_menu_move;
     }
     
+    @Override
     public String get_help_id()
     {
         return "MoveItemState";
     }
     
+    @Override
     public void draw(java.awt.Graphics p_graphics)
     {
         if (this.item_list == null)

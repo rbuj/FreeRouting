@@ -69,6 +69,7 @@ public class WindowAssignNetClass extends BoardSavableSubWindow
         this.table.getColumnModel().getColumn(1).setCellEditor(new javax.swing.DefaultCellEditor(net_rule_combo_box));
     }
     
+    @Override
     public void refresh()
     {
         // Reinsert the net class column.
@@ -104,10 +105,12 @@ public class WindowAssignNetClass extends BoardSavableSubWindow
             super(p_table_model);
         }
         //Implement table header tool tips.
+        @Override
         protected javax.swing.table.JTableHeader createDefaultTableHeader()
         {
             return new javax.swing.table.JTableHeader(columnModel)
             {
+                @Override
                 public String getToolTipText(java.awt.event.MouseEvent e)
                 {
                     java.awt.Point p = e.getPoint();
@@ -163,31 +166,37 @@ public class WindowAssignNetClass extends BoardSavableSubWindow
         }
         
         
+        @Override
         public String getColumnName(int p_col)
         {
             return column_names[p_col];
         }
         
+        @Override
         public int getRowCount()
         {
             return data.length;
         }
         
+        @Override
         public int getColumnCount()
         {
             return column_names.length;
         }
         
+        @Override
         public Object getValueAt(int p_row, int p_col)
         {
             return data[p_row][p_col];
         }
         
+        @Override
         public boolean isCellEditable(int p_row, int p_col)
         {
             return p_col > 0;
         }
         
+        @Override
         public void setValueAt(Object p_value, int p_row, int p_col)
         {
             if (p_col != 1 || !(p_value instanceof NetClass))

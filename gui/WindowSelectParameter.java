@@ -136,6 +136,7 @@ public class WindowSelectParameter extends BoardSavableSubWindow
     /**
      * Refreshs the displayed values in this window.
      */
+    @Override
     public void refresh()
     {
         if (this.board_handling.settings.get_select_on_all_visible_layers())
@@ -190,6 +191,7 @@ public class WindowSelectParameter extends BoardSavableSubWindow
             layer_no = p_layer_no;
         }
         
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             board_handling.set_current_layer(layer_no);
@@ -201,6 +203,7 @@ public class WindowSelectParameter extends BoardSavableSubWindow
     
     private class AllVisibleListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             board_handling.settings.set_select_on_all_visible_layers(true);
@@ -209,6 +212,7 @@ public class WindowSelectParameter extends BoardSavableSubWindow
     
     private class CurrentOnlyListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             board_handling.settings.set_select_on_all_visible_layers(false);
@@ -221,6 +225,7 @@ public class WindowSelectParameter extends BoardSavableSubWindow
         {
             item_no = p_item_no;
         }
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             boolean is_selected = item_selection_choices[item_no].isSelected();

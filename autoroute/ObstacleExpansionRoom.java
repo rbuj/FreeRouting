@@ -54,11 +54,13 @@ public class ObstacleExpansionRoom implements CompleteExpansionRoom
         return this.index_in_item;
     }
     
+    @Override
     public int get_layer()
     {
         return this.item.shape_layer(this.index_in_item);
     }
     
+    @Override
     public TileShape get_shape()
     {
         return this.shape;
@@ -67,6 +69,7 @@ public class ObstacleExpansionRoom implements CompleteExpansionRoom
     /**
      * Checks, if this room has already a 1-dimensional door to p_other
      */
+    @Override
     public boolean door_exists(ExpansionRoom p_other)
     {
         if (doors != null)
@@ -85,6 +88,7 @@ public class ObstacleExpansionRoom implements CompleteExpansionRoom
     /**
      * Adds a door to the door list of this room.
      */
+    @Override
     public void add_door(ExpansionDoor p_door)
     {
         this.doors.add(p_door);
@@ -130,6 +134,7 @@ public class ObstacleExpansionRoom implements CompleteExpansionRoom
     /**
      * Returns the list of doors of this room to neighbour expansion rooms
      */
+    @Override
     public List<ExpansionDoor> get_doors()
     {
         return this.doors;
@@ -138,11 +143,13 @@ public class ObstacleExpansionRoom implements CompleteExpansionRoom
     /**
      * Removes all doors from this room.
      */
+    @Override
     public void clear_doors()
     {
         this.doors = new java.util.LinkedList<ExpansionDoor>();
     }
     
+    @Override
     public void reset_doors()
     {
         for (ExpandableObject curr_door : this.doors)
@@ -151,6 +158,7 @@ public class ObstacleExpansionRoom implements CompleteExpansionRoom
         }
     }
     
+    @Override
     public Collection<TargetItemExpansionDoor> get_target_doors()
     {
         return new java.util.LinkedList<TargetItemExpansionDoor>();
@@ -161,11 +169,13 @@ public class ObstacleExpansionRoom implements CompleteExpansionRoom
         return this.item;
     }
     
+    @Override
     public SearchTreeObject get_object()
     {
         return this.item;
     }
     
+    @Override
     public boolean remove_door(ExpandableObject p_door)
     {
         return this.doors.remove(p_door);
@@ -188,6 +198,7 @@ public class ObstacleExpansionRoom implements CompleteExpansionRoom
     /**
      * Draws the shape of this room.
      */
+    @Override
     public void draw(java.awt.Graphics p_graphics, boardgraphics.GraphicsContext p_graphics_context, double p_intensity)
     {
         java.awt.Color draw_color = java.awt.Color.WHITE;

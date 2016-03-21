@@ -61,6 +61,7 @@ public class ExpandTestState extends InteractiveState
 
     }
 
+    @Override
     public InteractiveState key_typed(char p_key_char)
     {
         InteractiveState result;
@@ -151,22 +152,26 @@ public class ExpandTestState extends InteractiveState
         return result;
     }
 
+    @Override
     public InteractiveState left_button_clicked(FloatPoint p_location)
     {
         return cancel();
     }
 
+    @Override
     public InteractiveState cancel()
     {
         autoroute_engine.clear();
         return this.return_state;
     }
 
+    @Override
     public InteractiveState complete()
     {
         return cancel();
     }
 
+    @Override
     public void draw(java.awt.Graphics p_graphics)
     {
         autoroute_engine.draw(p_graphics, hdlg.graphics_context, 0.1);

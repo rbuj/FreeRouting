@@ -111,6 +111,7 @@ public class ColorManager extends BoardSavableSubWindow
         //First, set up the button that brings up the dialog.
         final JButton button = new JButton("")
         {
+            @Override
             public void setText(String s)
             {
                 //Button never shows text -- only color.
@@ -129,6 +130,7 @@ public class ColorManager extends BoardSavableSubWindow
         final JColorChooser colorChooser = new JColorChooser();
         ActionListener okListener = new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 colorEditor.currentColor = colorChooser.getColor();
@@ -142,6 +144,7 @@ public class ColorManager extends BoardSavableSubWindow
         //Here's the code that brings up the dialog.
         button.addActionListener(new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 button.setBackground(colorEditor.currentColor);
@@ -170,6 +173,7 @@ public class ColorManager extends BoardSavableSubWindow
             setOpaque(true); //MUST do this for background to show up.
         }
         
+        @Override
         public Component getTableCellRendererComponent(
                 JTable p_table, Object p_color,
                 boolean p_is_selected, boolean p_has_focus,
@@ -225,6 +229,7 @@ public class ColorManager extends BoardSavableSubWindow
             //Must do this so that editing stops when appropriate.
             b.addActionListener(new ActionListener()
             {
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     fireEditingStopped();
@@ -232,16 +237,19 @@ public class ColorManager extends BoardSavableSubWindow
             });
         }
         
+        @Override
         protected void fireEditingStopped()
         {
             super.fireEditingStopped();
         }
         
+        @Override
         public Object getCellEditorValue()
         {
             return currentColor;
         }
         
+        @Override
         public Component getTableCellEditorComponent(JTable table,
                 Object value,
                 boolean isSelected,

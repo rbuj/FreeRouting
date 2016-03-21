@@ -58,6 +58,7 @@ class Wiring extends ScopeKeyword
         super("wiring");
     }
     
+    @Override
     public boolean read_scope(ReadScopeParameter p_par)
     {
         Object next_token = null;

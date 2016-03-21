@@ -43,6 +43,7 @@ public class ComponentObstacleArea extends ObstacleArea
                 p_clearance_type, p_id_no, p_component_no, p_name, p_fixed_state, p_board);
     }
     
+    @Override
     public Item copy(int p_id_no)
     {
         return new ComponentObstacleArea(get_relative_area(), get_layer(), get_translation(),
@@ -50,17 +51,20 @@ public class ComponentObstacleArea extends ObstacleArea
                 get_component_no(), this.name, get_fixed_state(), board);
     }
     
+    @Override
     public boolean is_obstacle(Item p_other)
     {
         return p_other != this && p_other instanceof ComponentObstacleArea
                 && p_other.get_component_no() != this.get_component_no();
     }
     
+    @Override
     public boolean is_trace_obstacle(int p_net_no)
     {
         return false;
     }
     
+    @Override
     public boolean is_selected_by_filter(ItemSelectionFilter p_filter)
     {
         if (!this.is_selected_by_fixed_filter(p_filter))
@@ -71,11 +75,13 @@ public class ComponentObstacleArea extends ObstacleArea
     }
     
     
+    @Override
     public java.awt.Color[] get_draw_colors(boardgraphics.GraphicsContext p_graphics_context)
     {
         return  p_graphics_context.get_place_obstacle_colors();
     }
     
+    @Override
     public double get_draw_intensity(boardgraphics.GraphicsContext p_graphics_context)
     {
         return p_graphics_context.get_place_obstacle_color_intensity();
@@ -90,6 +96,7 @@ public class ComponentObstacleArea extends ObstacleArea
         return p_filter.is_selected(ItemSelectionFilter.SelectableChoices.COMPONENT_KEEPOUT);
     }
     
+    @Override
     public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale)
     {
         java.util.ResourceBundle resources = 

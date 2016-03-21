@@ -35,6 +35,7 @@ public class WindowNetSampleDesigns extends WindowNetSamples
         super(p_locale, "sample_designs", "open_sample_design", 11);
     }
 
+    @Override
     protected void fill_list()
     {
         list_model.addElement("hexapod_empty.dsn");
@@ -51,6 +52,7 @@ public class WindowNetSampleDesigns extends WindowNetSamples
         list_model.addElement("single_layer_handrouted.dsn");
     }
 
+    @Override
     protected void button_pushed()
     {
         int index = list.getSelectedIndex();

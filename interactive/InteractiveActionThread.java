@@ -62,17 +62,20 @@ public abstract class InteractiveActionThread extends Thread implements datastru
 
     protected abstract void thread_action();
 
+    @Override
     public void run()
     {
         thread_action();
         hdlg.repaint();
     }
 
+    @Override
     public synchronized void request_stop()
     {
         stop_requested = true;
     }
 
+    @Override
     public synchronized boolean is_stop_requested()
     {
         return stop_requested;
@@ -93,6 +96,7 @@ public abstract class InteractiveActionThread extends Thread implements datastru
             super(p_board_handling);
         }
 
+        @Override
         protected void thread_action()
         {
             if (!(hdlg.interactive_state instanceof SelectedItemState))
@@ -112,6 +116,7 @@ public abstract class InteractiveActionThread extends Thread implements datastru
             super(p_board_handling);
         }
 
+        @Override
         protected void thread_action()
         {
             if (!(hdlg.interactive_state instanceof SelectedItemState))
@@ -131,6 +136,7 @@ public abstract class InteractiveActionThread extends Thread implements datastru
             super(p_board_handling);
         }
 
+        @Override
         protected void thread_action()
         {
             if (!(hdlg.interactive_state instanceof SelectedItemState))
@@ -151,6 +157,7 @@ public abstract class InteractiveActionThread extends Thread implements datastru
             this.input_stream = p_input_stream;
         }
 
+        @Override
         protected void thread_action()
         {
 

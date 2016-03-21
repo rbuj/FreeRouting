@@ -54,6 +54,7 @@ class BoardToolbar extends javax.swing.JPanel
         select_button.setToolTipText(resources.getString("select_button_tooltip"));
         select_button.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_frame.board_panel.board_handling.set_select_menu_state();
@@ -67,6 +68,7 @@ class BoardToolbar extends javax.swing.JPanel
         route_button.setToolTipText(resources.getString("route_button_tooltip"));
         route_button.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_frame.board_panel.board_handling.set_route_menu_state();
@@ -80,6 +82,7 @@ class BoardToolbar extends javax.swing.JPanel
         drag_button.setToolTipText(resources.getString("drag_button_tooltip"));
         drag_button.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_frame.board_panel.board_handling.set_drag_menu_state();
@@ -104,6 +107,7 @@ class BoardToolbar extends javax.swing.JPanel
         autoroute_button.setToolTipText(resources.getString("autoroute_button_tooltip"));
         autoroute_button.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_frame.board_panel.board_handling.start_batch_autorouter();
@@ -123,6 +127,7 @@ class BoardToolbar extends javax.swing.JPanel
         undo_button.setToolTipText(resources.getString("undo_button_tooltip"));
         undo_button.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_frame.board_panel.board_handling.cancel_state();
@@ -138,6 +143,7 @@ class BoardToolbar extends javax.swing.JPanel
         redo_button.setToolTipText(resources.getString("redo_button_tooltip"));
         redo_button.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_frame.board_panel.board_handling.redo();
@@ -156,6 +162,7 @@ class BoardToolbar extends javax.swing.JPanel
         incompletes_button.setToolTipText(resources.getString("incompletes_button_tooltip"));
         incompletes_button.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_frame.board_panel.board_handling.toggle_ratsnest();
@@ -169,6 +176,7 @@ class BoardToolbar extends javax.swing.JPanel
         violation_button.setToolTipText(resources.getString("violations_button_tooltip"));
         violation_button.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_frame.board_panel.board_handling.toggle_clearance_violations();
@@ -188,6 +196,7 @@ class BoardToolbar extends javax.swing.JPanel
         display_all_button.setToolTipText(resources.getString("display_all_button_tooltip"));
         display_all_button.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_frame.zoom_all();
@@ -201,6 +210,7 @@ class BoardToolbar extends javax.swing.JPanel
         display_region_button.setToolTipText(resources.getString("display_region_button_tooltip"));
         display_region_button.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_frame.board_panel.board_handling.zoom_region();
@@ -234,6 +244,7 @@ class BoardToolbar extends javax.swing.JPanel
         unit_factor_field.setPreferredSize(new java.awt.Dimension(80, 18));
         unit_factor_field.addKeyListener(new java.awt.event.KeyAdapter()
         {
+            @Override
             public void keyTyped(java.awt.event.KeyEvent evt)
             {
                 if (evt.getKeyChar() == '\n')
@@ -266,6 +277,7 @@ class BoardToolbar extends javax.swing.JPanel
         unit_combo_box.setPreferredSize(new java.awt.Dimension(60, 18));
         unit_combo_box.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board.Unit new_unit = (board.Unit) unit_combo_box.getSelectedItem();

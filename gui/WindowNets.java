@@ -58,6 +58,7 @@ public class WindowNets extends WindowObjectListWithFilter
     /**
      * Fills the list with the nets in the net list.
      */
+    @Override
     protected void fill_list()
     {
         Nets nets = this.board_frame.board_panel.board_handling.get_routing_board().rules.nets;
@@ -74,6 +75,7 @@ public class WindowNets extends WindowObjectListWithFilter
         this.list.setVisibleRowCount(Math.min(sorted_arr.length, DEFAULT_TABLE_SIZE));
     }
     
+    @Override
     protected void select_instances()
     {
         Object[] selected_nets = list.getSelectedValues();
@@ -113,6 +115,7 @@ public class WindowNets extends WindowObjectListWithFilter
     
     private class AssignClassListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             Object[] selected_nets = list.getSelectedValues();
@@ -144,6 +147,7 @@ public class WindowNets extends WindowObjectListWithFilter
     
     private class FilterIncompletesListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             Object[] selected_nets = list.getSelectedValues();

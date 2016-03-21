@@ -114,6 +114,7 @@ public class WindowManualRules extends BoardSavableSubWindow
     /**
      * Recalculates the values in the trace width fields.
      */
+    @Override
     public void refresh()
     {
         board.RoutingBoard routing_board = board_handling.get_routing_board();
@@ -216,6 +217,7 @@ public class WindowManualRules extends BoardSavableSubWindow
     private class LayerComboBoxListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent evt)
         {
             ComboBoxLayer.Layer new_selected_layer = layer_combo_box.get_selected_layer();
@@ -226,6 +228,7 @@ public class WindowManualRules extends BoardSavableSubWindow
     private class ClearanceComboBoxListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent evt)
         {
             int new_index = clearance_combo_box.get_selected_class_index();
@@ -236,6 +239,7 @@ public class WindowManualRules extends BoardSavableSubWindow
     private class ViaRuleComboBoxListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent evt)
         {
             int new_index = via_rule_combo_box.getSelectedIndex();
@@ -246,6 +250,7 @@ public class WindowManualRules extends BoardSavableSubWindow
     private class TraceWidthFieldKeyListener extends java.awt.event.KeyAdapter
     {
 
+        @Override
         public void keyTyped(java.awt.event.KeyEvent p_evt)
         {
             if (p_evt.getKeyChar() == '\n')
@@ -276,6 +281,7 @@ public class WindowManualRules extends BoardSavableSubWindow
     private class TraceWidthFieldFocusListener implements java.awt.event.FocusListener
     {
 
+        @Override
         public void focusLost(java.awt.event.FocusEvent p_evt)
         {
             if (!key_input_completed)
@@ -286,6 +292,7 @@ public class WindowManualRules extends BoardSavableSubWindow
             }
         }
 
+        @Override
         public void focusGained(java.awt.event.FocusEvent p_evt)
         {
         }

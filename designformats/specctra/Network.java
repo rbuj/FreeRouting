@@ -49,6 +49,7 @@ public class Network extends ScopeKeyword
         super("network");
     }
 
+    @Override
     public boolean read_scope(ReadScopeParameter p_par)
     {
         Collection<NetClass> classes = new LinkedList<NetClass>();

@@ -43,6 +43,7 @@ public class WindowClearanceViolations extends WindowObjectListWithFilter
     }
     
     
+    @Override
     protected void fill_list()
     {
         interactive.BoardHandling board_handling = this.board_frame.board_panel.board_handling;
@@ -61,6 +62,7 @@ public class WindowClearanceViolations extends WindowObjectListWithFilter
         this.list.setVisibleRowCount(Math.min(sorted_set.size(), DEFAULT_TABLE_SIZE));
     }
     
+    @Override
     protected void select_instances()
     {
         Object[] selected_violations = list.getSelectedValues();
@@ -135,6 +137,7 @@ public class WindowClearanceViolations extends WindowObjectListWithFilter
             this.location = board_frame.board_panel.board_handling.coordinate_transform.board_to_user(board_location);
         }
         
+        @Override
         public String toString()
         {
             board.LayerStructure layer_structure =  board_frame.board_panel.board_handling.get_routing_board().layer_structure;
@@ -144,11 +147,13 @@ public class WindowClearanceViolations extends WindowObjectListWithFilter
             return result;
         }
         
+        @Override
         public void print_info(board.ObjectInfoPanel p_window, java.util.Locale p_locale)
         {
             this.violation.print_info(p_window, p_locale);
         }
         
+        @Override
         public int compareTo(ViolationInfo p_other)
         {
             if (this.location.x > p_other.location.x)

@@ -60,6 +60,7 @@ public class ZoomRegionState extends SelectRegionState
         }
     }
     
+    @Override
     public InteractiveState complete()
     {
         corner2 = hdlg.get_current_mouse_position();

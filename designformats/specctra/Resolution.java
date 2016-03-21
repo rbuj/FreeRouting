@@ -34,6 +34,7 @@ public class Resolution extends ScopeKeyword
         super("resolution");
     }
     
+    @Override
     public boolean read_scope(ReadScopeParameter p_par)
     {
         try

@@ -42,6 +42,7 @@ public class PopupMenuDynamicRoute extends PopupMenuDisplay
         end_route_item.setText(resources.getString("end_route"));
         end_route_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_panel.board_handling.return_from_state();
@@ -54,6 +55,7 @@ public class PopupMenuDynamicRoute extends PopupMenuDisplay
         cancel_item.setText(resources.getString("cancel_route"));
         cancel_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_panel.board_handling.cancel_state();
@@ -66,6 +68,7 @@ public class PopupMenuDynamicRoute extends PopupMenuDisplay
         snapshot_item.setText(resources.getString("generate_snapshot"));
         snapshot_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_panel.board_handling.generate_snapshot();

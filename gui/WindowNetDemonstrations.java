@@ -41,6 +41,7 @@ public class WindowNetDemonstrations extends WindowNetSamples
      * To be edited when the demonstration examples change.
      * For every String in the second column a String has to be added to the resource file WindowNetSamples.
      */
+    @Override
     protected void fill_list()
     {
         add("sample_45.dsn", "45_degree_logfile", AdditionalAction.READ_LOGFILE);
@@ -51,6 +52,7 @@ public class WindowNetDemonstrations extends WindowNetSamples
         add("sharp_empty.dsn", "autorouter_example_3", AdditionalAction.AUTOROUTE);
     }
     
+    @Override
     protected void button_pushed()
     {
         int index = list.getSelectedIndex();
@@ -102,6 +104,7 @@ public class WindowNetDemonstrations extends WindowNetSamples
     {
         READ_LOGFILE
         {
+            @Override
             void perform(BoardFrame p_board_frame, String p_archive_name)
             {
                 String logfile_archive_name = "route_" + p_archive_name;
@@ -112,6 +115,7 @@ public class WindowNetDemonstrations extends WindowNetSamples
         
         AUTOROUTE
         {
+            @Override
             void perform(BoardFrame p_board_frame, String p_archive_name)
             {
                 p_board_frame.board_panel.board_handling.start_batch_autorouter();
@@ -120,6 +124,7 @@ public class WindowNetDemonstrations extends WindowNetSamples
         
         NONE
         {
+            @Override
             void perform(BoardFrame p_board_frame, String p_archive_name)
             {
                 
@@ -143,6 +148,7 @@ public class WindowNetDemonstrations extends WindowNetSamples
             additional_action = p_additional_action;
         }
         
+        @Override
         public String toString()
         {
             return message_name;

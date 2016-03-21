@@ -88,6 +88,7 @@ public class CutoutRouteState extends SelectRegionState
         this.trace_list = p_item_list;
     }
     
+    @Override
     public InteractiveState complete()
     {
         hdlg.screen_messages.set_status_message("");
@@ -134,6 +135,7 @@ public class CutoutRouteState extends SelectRegionState
         }
     }
     
+    @Override
     public void draw(java.awt.Graphics p_graphics)
     {
         if (trace_list == null)

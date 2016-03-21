@@ -52,6 +52,7 @@ public class PinSwapState extends InteractiveState
     }
     
     
+    @Override
     public InteractiveState left_button_clicked(FloatPoint p_location)
     {
         ItemSelectionFilter selection_filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.PINS);
@@ -76,6 +77,7 @@ public class PinSwapState extends InteractiveState
         return complete();
     }
     
+    @Override
     public InteractiveState complete()
     {
         if (this.from_pin == null || this.to_pin == null)
@@ -130,6 +132,7 @@ public class PinSwapState extends InteractiveState
         return this.return_state;
     }
     
+    @Override
     public void draw(java.awt.Graphics p_graphics)
     {
         java.awt.Color highlight_color = hdlg.graphics_context.get_hilight_color();

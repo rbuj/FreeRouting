@@ -55,6 +55,7 @@ public class LocateFoundConnectionAlgo45Degree extends LocateFoundConnectionAlgo
         super(p_maze_search_result, p_ctrl, p_search_tree, p_angle_restriction, p_ripped_item_list, p_test_level);
     }
     
+    @Override
     protected Collection<FloatPoint> calculate_next_trace_corners()
     {
         Collection<FloatPoint> result =  new LinkedList<FloatPoint>();

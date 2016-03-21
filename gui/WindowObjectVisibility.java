@@ -57,6 +57,7 @@ public class WindowObjectVisibility extends WindowVisibility
     /**
      * Refreshs the displayed values in this window.
      */
+    @Override
     public void refresh()
     {
         boardgraphics.ColorIntensityTable color_intensity_table = this.get_board_handling().graphics_context.color_intensity_table;
@@ -66,6 +67,7 @@ public class WindowObjectVisibility extends WindowVisibility
         }
     }
     
+    @Override
     protected void set_changed_value(int p_index, double p_value)
     {
         

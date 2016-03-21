@@ -437,6 +437,7 @@ public class BoardFrame extends javax.swing.JFrame
     /**
      * Actions to be taken when this frame vanishes.
      */
+    @Override
     public void dispose()
     {
         for (int i = 0; i < this.permanent_subwindows.length; ++i)
@@ -742,6 +743,7 @@ public class BoardFrame extends javax.swing.JFrame
     
     private class WindowStateListener extends java.awt.event.WindowAdapter
     {
+        @Override
         public void windowClosing(java.awt.event.WindowEvent evt)
         {
             setDefaultCloseOperation(DISPOSE_ON_CLOSE );
@@ -756,6 +758,7 @@ public class BoardFrame extends javax.swing.JFrame
             }
         }
         
+        @Override
         public void windowIconified(java.awt.event.WindowEvent evt)
         {
             for (int i = 0; i < permanent_subwindows.length; ++i)
@@ -771,6 +774,7 @@ public class BoardFrame extends javax.swing.JFrame
             }
         }
         
+        @Override
         public void windowDeiconified(java.awt.event.WindowEvent evt)
         {
             for (int i = 0; i < permanent_subwindows.length; ++i)

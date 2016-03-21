@@ -143,21 +143,25 @@ class DrillPage implements ExpandableObject
         return this.drills;
     }
     
+    @Override
     public TileShape get_shape()
     {
         return this.shape;
     }
     
+    @Override
     public int get_dimension()
     {
         return 2;
     }
     
+    @Override
     public int maze_search_element_count()
     {
         return this.maze_search_info_arr.length;
     }
     
+    @Override
     public MazeSearchElement get_maze_search_element (int p_no)
     {
         return this.maze_search_info_arr[p_no];
@@ -166,6 +170,7 @@ class DrillPage implements ExpandableObject
     /**
      * Resets all drills of this page for autorouting the next connection.
      */
+    @Override
     public void reset()
     {
         if (this.drills != null)
@@ -205,6 +210,7 @@ class DrillPage implements ExpandableObject
         }
     }
     
+    @Override
     public CompleteExpansionRoom other_room(CompleteExpansionRoom p_room)
     {
         return null;

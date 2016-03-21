@@ -41,6 +41,7 @@ public class PopupMenuDisplay extends javax.swing.JPopupMenu
         center_display_item.setText(resources.getString("center_display"));
         center_display_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_panel.center_display(board_panel.right_button_click_location);
@@ -56,6 +57,7 @@ public class PopupMenuDisplay extends javax.swing.JPopupMenu
         zoom_in_item.setText(resources.getString("zoom_in"));
         zoom_in_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_panel.zoom_in(board_panel.right_button_click_location);
@@ -68,6 +70,7 @@ public class PopupMenuDisplay extends javax.swing.JPopupMenu
         zoom_out_item.setText(resources.getString("zoom_out"));
         zoom_out_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_panel.zoom_out(board_panel.right_button_click_location);

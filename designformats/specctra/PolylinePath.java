@@ -41,6 +41,7 @@ public class PolylinePath extends Path
     /**
      * Writes this path as a scope to an output dsn-file.
      */
+    @Override
     public void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException
     {
         p_file.start_scope();
@@ -61,6 +62,7 @@ public class PolylinePath extends Path
         p_file.end_scope();
     }
     
+    @Override
     public void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException
     {
         p_file.start_scope();
@@ -82,12 +84,14 @@ public class PolylinePath extends Path
         p_file.end_scope();
     }
     
+    @Override
     public geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform)
     {
         System.out.println("PolylinePath.transform_to_board_rel not implemented");
         return null;
     }
     
+    @Override
     public geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform)
     {
         System.out.println("PolylinePath.transform_to_board_rel not implemented");
@@ -95,6 +99,7 @@ public class PolylinePath extends Path
     }
     
     
+    @Override
     public Rectangle bounding_box()
     {
         System.out.println("PolylinePath.boundingbox not implemented");

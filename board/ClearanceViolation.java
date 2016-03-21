@@ -40,6 +40,7 @@ public class ClearanceViolation implements ObjectInfoPanel.Printable
         layer = p_layer;
     }
     
+    @Override
     public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale)
     {
         java.util.ResourceBundle resources = 

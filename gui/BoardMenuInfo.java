@@ -37,6 +37,7 @@ public class BoardMenuInfo extends javax.swing.JMenu
         package_window.setText(info_menu.resources.getString("library_packages"));
         package_window.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 info_menu.board_frame.packages_window.setVisible(true);
@@ -48,6 +49,7 @@ public class BoardMenuInfo extends javax.swing.JMenu
         padstacks_window.setText(info_menu.resources.getString("library_padstacks"));
         padstacks_window.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 info_menu.board_frame.padstacks_window.setVisible(true);
@@ -59,6 +61,7 @@ public class BoardMenuInfo extends javax.swing.JMenu
         components_window.setText(info_menu.resources.getString("board_components"));
         components_window.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 info_menu.board_frame.components_window.setVisible(true);
@@ -70,6 +73,7 @@ public class BoardMenuInfo extends javax.swing.JMenu
         incompletes_window.setText(info_menu.resources.getString("incompletes"));
         incompletes_window.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 info_menu.board_frame.incompletes_window.setVisible(true);
@@ -82,6 +86,7 @@ public class BoardMenuInfo extends javax.swing.JMenu
         length_violations_window.setText(info_menu.resources.getString("length_violations"));
         length_violations_window.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 info_menu.board_frame.length_violations_window.setVisible(true);
@@ -93,6 +98,7 @@ public class BoardMenuInfo extends javax.swing.JMenu
         clearance_violations_window.setText(info_menu.resources.getString("clearance_violations"));
         clearance_violations_window.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 info_menu.board_frame.clearance_violations_window.setVisible(true);
@@ -104,6 +110,7 @@ public class BoardMenuInfo extends javax.swing.JMenu
         unconnnected_route_window.setText(info_menu.resources.getString("unconnected_route"));
         unconnnected_route_window.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 info_menu.board_frame.unconnected_route_window.setVisible(true);
@@ -115,6 +122,7 @@ public class BoardMenuInfo extends javax.swing.JMenu
         route_stubs_window.setText(info_menu.resources.getString("route_stubs"));
         route_stubs_window.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 info_menu.board_frame.route_stubs_window.setVisible(true);

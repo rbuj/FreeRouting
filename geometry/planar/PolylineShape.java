@@ -56,28 +56,33 @@ public abstract class PolylineShape implements Shape, java.io.Serializable
     /**
      * Turns this shape by p_factor times 90 degree around p_pole.
      */
+    @Override
     public abstract PolylineShape turn_90_degree(int p_factor, IntPoint p_pole);
     
     /**
      * Rotates this shape around p_pole by p_angle.
      * The result may be not exact.
      */
+    @Override
     public abstract PolylineShape rotate_approx(double p_angle, FloatPoint p_pole);
     
     /**
      * Mirrors this shape at the horizontal line through p_pole.
      */
+    @Override
     public abstract PolylineShape mirror_horizontal(IntPoint p_pole);
     
     
     /**
      * Mirrors this shape at the vertical line through p_pole.
      */
+    @Override
     public abstract PolylineShape mirror_vertical(IntPoint p_pole);
     
     /**
      * Returns the affine translation of the area by p_vector
      */
+    @Override
     public abstract PolylineShape translate_by(Vector p_vector);
     
     /**
@@ -120,6 +125,7 @@ public abstract class PolylineShape implements Shape, java.io.Serializable
      * If the shape is not bounded at a corner, the
      * coordinates will be set to Integer.MAX_VALUE.
      */
+    @Override
     public FloatPoint [] corner_approx_arr()
     {
         int corner_count = this.border_line_count();
@@ -151,6 +157,7 @@ public abstract class PolylineShape implements Shape, java.io.Serializable
      * Returns the cumulative border line length of the shape.
      * If the shape is unbounded, Integer.MAX_VALUE is returned.
      */
+    @Override
     public double circumference()
     {
         if (!is_bounded())
@@ -172,6 +179,7 @@ public abstract class PolylineShape implements Shape, java.io.Serializable
     /**
      * Returns the arithmetic middle of the corners of this shape
      */
+    @Override
     public FloatPoint centre_of_gravity()
     {
         int corner_count = border_line_count();
@@ -191,6 +199,7 @@ public abstract class PolylineShape implements Shape, java.io.Serializable
     /**
      * checks, if this shape is completely contained in p_box.
      */
+    @Override
     public boolean is_contained_in(IntBox p_box)
     {
         return p_box.contains(bounding_box());
@@ -309,11 +318,13 @@ public abstract class PolylineShape implements Shape, java.io.Serializable
         return result;
     }
     
+    @Override
     public PolylineShape get_border()
     {
         return this;
     }
     
+    @Override
     public Shape[] get_holes()
     {
         return new Shape[0];

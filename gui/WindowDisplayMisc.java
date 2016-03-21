@@ -181,6 +181,7 @@ public class WindowDisplayMisc extends BoardSavableSubWindow
     /**
      * Refreshs the displayed values in this window.
      */
+    @Override
     public void refresh()
     {
         small_cursor_checkbox.setSelected(!panel.is_custom_cross_hair_cursor());
@@ -242,6 +243,7 @@ public class WindowDisplayMisc extends BoardSavableSubWindow
     
     private class SmallCursorListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             panel.set_custom_crosshair_cursor(false);
@@ -250,6 +252,7 @@ public class WindowDisplayMisc extends BoardSavableSubWindow
     
     private class BigCursorListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             panel.set_custom_crosshair_cursor(true);
@@ -258,6 +261,7 @@ public class WindowDisplayMisc extends BoardSavableSubWindow
     
     private class RotationNoneListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             boardgraphics.CoordinateTransform coordinate_transform
@@ -269,6 +273,7 @@ public class WindowDisplayMisc extends BoardSavableSubWindow
     
     private class Rotation90Listener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             boardgraphics.CoordinateTransform coordinate_transform
@@ -280,6 +285,7 @@ public class WindowDisplayMisc extends BoardSavableSubWindow
     
     private class Rotation180Listener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             boardgraphics.CoordinateTransform coordinate_transform
@@ -291,6 +297,7 @@ public class WindowDisplayMisc extends BoardSavableSubWindow
     
     private class Rotation270Listener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             boardgraphics.CoordinateTransform coordinate_transform
@@ -302,6 +309,7 @@ public class WindowDisplayMisc extends BoardSavableSubWindow
     
     private class MirrorNoneListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             boardgraphics.CoordinateTransform coordinate_transform
@@ -323,6 +331,7 @@ public class WindowDisplayMisc extends BoardSavableSubWindow
     
     private class VerticalMirrorListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             boardgraphics.CoordinateTransform coordinate_transform
@@ -343,6 +352,7 @@ public class WindowDisplayMisc extends BoardSavableSubWindow
     
     private class HorizontalMirrorListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             boardgraphics.CoordinateTransform coordinate_transform
@@ -363,6 +373,7 @@ public class WindowDisplayMisc extends BoardSavableSubWindow
     
     private class SliderChangeListener implements javax.swing.event.ChangeListener
     {
+        @Override
         public void stateChanged(javax.swing.event.ChangeEvent evt)
         {
             double new_value = 1 - (double) auto_layer_dim_slider.getValue()/(double) MAX_SLIDER_VALUE;

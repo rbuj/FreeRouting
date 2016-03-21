@@ -177,6 +177,7 @@ public abstract class LogfileScope
          * interiour scopes (layer change for example) from the input logfile.
          * Returns the active interactive state after reading the scope.
          */
+        @Override
         public InteractiveState  read_scope(Logfile p_logfile,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -240,6 +241,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState start_scope( FloatPoint p_location,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -255,6 +257,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState start_scope( FloatPoint p_location,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -269,6 +272,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState start_scope( FloatPoint p_location,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -283,6 +287,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState start_scope( FloatPoint p_location,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -297,6 +302,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState start_scope( FloatPoint p_location,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -311,6 +317,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState start_scope( FloatPoint p_location,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -325,6 +332,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState start_scope( FloatPoint p_location,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -339,6 +347,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState start_scope( FloatPoint p_location,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -365,6 +374,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState start_scope( FloatPoint p_location,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -383,6 +393,7 @@ public abstract class LogfileScope
             return result;
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -402,6 +413,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -424,6 +436,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -446,6 +459,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -467,6 +481,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -496,6 +511,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -512,6 +528,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -537,6 +554,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -562,6 +580,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -595,6 +614,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile,
                 InteractiveState p_return_state, BoardHandling p_board_handling)
         {
@@ -629,6 +649,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             InteractiveState result;
@@ -653,6 +674,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             InteractiveState result;
@@ -677,6 +699,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             InteractiveState result;
@@ -701,6 +724,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             InteractiveState result;
@@ -728,6 +752,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             InteractiveState result;
@@ -757,6 +782,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             InteractiveState result;
@@ -784,6 +810,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             InteractiveState result;
@@ -808,6 +835,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             InteractiveState return_state = null;
@@ -830,6 +858,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             InteractiveState return_state = null;
@@ -852,6 +881,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             InteractiveState return_state = null;
@@ -874,6 +904,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             InteractiveState return_state = null;
@@ -896,6 +927,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             if (p_return_state instanceof SelectedItemState)
@@ -917,6 +949,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             if (p_return_state instanceof SelectedItemState)
@@ -938,6 +971,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             return p_return_state.complete();
@@ -951,6 +985,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             return p_return_state.cancel();
@@ -964,6 +999,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int layer = p_logfile.read_int();
@@ -980,6 +1016,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int new_tidy_width = p_logfile.read_int();
@@ -995,6 +1032,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int int_value = p_logfile.read_int();
@@ -1017,6 +1055,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int int_value = p_logfile.read_int();
@@ -1039,6 +1078,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int new_accuracy = p_logfile.read_int();
@@ -1054,6 +1094,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int int_value = p_logfile.read_int();
@@ -1069,6 +1110,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int new_layer = p_logfile.read_int();
@@ -1084,6 +1126,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int new_clearance_type = p_logfile.read_int();
@@ -1106,6 +1149,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int layer = p_logfile.read_int();
@@ -1122,6 +1166,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int index = p_logfile.read_int();
@@ -1137,6 +1182,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int manual_selection = p_logfile.read_int();
@@ -1159,6 +1205,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int new_snap_angle_no = p_logfile.read_int();
@@ -1174,6 +1221,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int new_value = p_logfile.read_int();
@@ -1189,6 +1237,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int new_value = p_logfile.read_int();
@@ -1205,6 +1254,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             int item_type_no = p_logfile.read_int();
@@ -1234,6 +1284,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             p_board_handling.get_routing_board().undo(null);
@@ -1249,6 +1300,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             p_board_handling.get_routing_board().redo(null);
@@ -1264,6 +1316,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             p_board_handling.get_routing_board().generate_snapshot();
@@ -1278,6 +1331,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             FloatPoint curr_location = p_logfile.read_corner();
@@ -1294,6 +1348,7 @@ public abstract class LogfileScope
             super( p_name);
         }
         
+        @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling)
         {
             java.awt.geom.Point2D lower_left =

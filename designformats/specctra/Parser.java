@@ -35,6 +35,7 @@ public class Parser extends ScopeKeyword
         super("parser");
     }
 
+    @Override
     public boolean read_scope(ReadScopeParameter p_par)
     {
         Object next_token = null;

@@ -163,6 +163,7 @@ public class BatchFanout
         /**
          *  Sort the components, so that components with maor pins come first
          */
+        @Override
         public int compareTo(Component p_other)
         {
             int compare_value = this.smd_pin_count - p_other.smd_pin_count;
@@ -197,6 +198,7 @@ public class BatchFanout
                 this.distance_to_component_center = pin_location.distance(gravity_center_of_smd_pins);
             }
 
+            @Override
             public int compareTo(Pin p_other)
             {
                 int result;

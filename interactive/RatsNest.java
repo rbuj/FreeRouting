@@ -255,11 +255,13 @@ public class RatsNest
             this.locale = p_locale;
         }
         
+        @Override
         public int compareTo(AirLine p_other)
         {
             return this.net.name.compareTo(p_other.net.name);
         }
         
+        @Override
         public String toString()
         {
             
@@ -296,6 +298,7 @@ public class RatsNest
             return result;
         }
         
+        @Override
         public void print_info(board.ObjectInfoPanel p_window, java.util.Locale p_locale)
         {
             java.util.ResourceBundle resources =

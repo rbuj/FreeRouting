@@ -33,6 +33,7 @@ public class PartLibrary  extends ScopeKeyword
         super("part_library");
     }
     
+    @Override
     public boolean read_scope(ReadScopeParameter p_par)
     {
         Object next_token = null;

@@ -31,6 +31,7 @@ public class BoardObserverAdaptor implements BoardObservers
     /**
      * Tell the observers the deletion p_object.
      */
+    @Override
     public void notify_deleted(Item p_item)
     {
         
@@ -39,6 +40,7 @@ public class BoardObserverAdaptor implements BoardObservers
     /**
      * Notify the observers, that they can syncronize the changes on p_object.
      */
+    @Override
     public void notify_changed(Item p_item)
     {
         
@@ -47,6 +49,7 @@ public class BoardObserverAdaptor implements BoardObservers
     /**
      * Enable the observers to syncronize the new created item.
      */
+    @Override
     public void notify_new(Item p_item)
     {
         
@@ -55,6 +58,7 @@ public class BoardObserverAdaptor implements BoardObservers
     /**
      * Enable the observers to syncronize the moved component.
      */
+    @Override
     public void notify_moved(Component p_component)
     {
         
@@ -63,6 +67,7 @@ public class BoardObserverAdaptor implements BoardObservers
     /**
      * activate the observers
      */
+    @Override
     public void activate()
     {
         active = true;
@@ -71,6 +76,7 @@ public class BoardObserverAdaptor implements BoardObservers
     /**
      * Deactivate the observers.
      **/
+    @Override
     public void deactivate()
     {
         active = false;
@@ -79,6 +85,7 @@ public class BoardObserverAdaptor implements BoardObservers
     /**
      * Returns, if the observer is activated.
      */
+    @Override
     public boolean is_active()
     {
         return active;

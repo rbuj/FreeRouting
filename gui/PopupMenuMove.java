@@ -48,6 +48,7 @@ public class PopupMenuMove extends PopupMenuDisplay
         turn_90_item.setText(resources.getString("90_degree"));
         turn_90_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 turn_45_degree(2);
@@ -59,6 +60,7 @@ public class PopupMenuMove extends PopupMenuDisplay
         turn_180_item.setText(resources.getString("180_degree"));
         turn_180_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 turn_45_degree(4);
@@ -70,6 +72,7 @@ public class PopupMenuMove extends PopupMenuDisplay
         turn_270_item.setText(resources.getString("-90_degree"));
         turn_270_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 turn_45_degree(6);
@@ -81,6 +84,7 @@ public class PopupMenuMove extends PopupMenuDisplay
         turn_45_item.setText(resources.getString("45_degree"));
         turn_45_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 turn_45_degree(1);
@@ -92,6 +96,7 @@ public class PopupMenuMove extends PopupMenuDisplay
         turn_135_item.setText(resources.getString("135_degree"));
         turn_135_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 turn_45_degree(3);
@@ -103,6 +108,7 @@ public class PopupMenuMove extends PopupMenuDisplay
         turn_225_item.setText(resources.getString("-135_degree"));
         turn_225_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 turn_45_degree(5);
@@ -114,6 +120,7 @@ public class PopupMenuMove extends PopupMenuDisplay
         turn_315_item.setText(resources.getString("-45_degree"));
         turn_315_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 turn_45_degree(7);
@@ -125,6 +132,7 @@ public class PopupMenuMove extends PopupMenuDisplay
         change_side_item.setText(resources.getString("change_side"));
         change_side_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_panel.board_handling.change_placement_side();
@@ -137,6 +145,7 @@ public class PopupMenuMove extends PopupMenuDisplay
         reset_rotation_item.setText(resources.getString("reset_rotation"));
         reset_rotation_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 interactive.InteractiveState interactive_state = board_panel.board_handling.get_interactive_state();
@@ -153,6 +162,7 @@ public class PopupMenuMove extends PopupMenuDisplay
         insert_item.setText(resources.getString("insert"));
         insert_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_panel.board_handling.return_from_state();
@@ -165,6 +175,7 @@ public class PopupMenuMove extends PopupMenuDisplay
         cancel_item.setText(resources.getString("cancel"));
         cancel_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_panel.board_handling.cancel_state();

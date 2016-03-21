@@ -32,27 +32,32 @@ import java.math.BigInteger;
 
 public class BigIntDirection extends Direction implements java.io.Serializable
 {
+    @Override
     public boolean is_orthogonal()
     {
         return (x.signum() == 0 || y.signum() == 0);
     }
     
+    @Override
     public boolean is_diagonal()
     {
         return x.abs().equals(y.abs());
     }
     
+    @Override
     public Vector get_vector()
     {
         return new RationalVector(x, y, BigInteger.ONE);
     }
     
+    @Override
     public Direction turn_45_degree(int p_factor)
     {
         System.out.println("BigIntDirection: turn_45_degree not yet implemented");
         return this;
     }
     
+    @Override
     public Direction opposite()
     {
         return new BigIntDirection(x.negate(), y.negate());
@@ -84,17 +89,20 @@ public class BigIntDirection extends Direction implements java.io.Serializable
      * and -1 otherwise.
      * Throws an exception, if p_other_direction is not a Direction.
      */
+    @Override
     public int compareTo(Direction p_other_direction)
     {
         return -p_other_direction.compareTo(this);
     }
     
+    @Override
     int compareTo(IntDirection p_other)
     {
         BigIntDirection other = new BigIntDirection(p_other);
         return compareTo(other);
     }
     
+    @Override
     int compareTo(BigIntDirection p_other)
     {
         int x1 = x.signum();

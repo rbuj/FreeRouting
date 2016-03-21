@@ -44,6 +44,7 @@ public class WindowIncompletes extends WindowObjectListWithFilter
     /**
      * Fills the list with the board incompletes.
      */
+    @Override
     protected void fill_list()
     {
         RatsNest ratsnest = board_frame.board_panel.board_handling.get_ratsnest();
@@ -57,6 +58,7 @@ public class WindowIncompletes extends WindowObjectListWithFilter
         this.list.setVisibleRowCount(Math.min(sorted_arr.length, DEFAULT_TABLE_SIZE));
     }
     
+    @Override
     protected void select_instances()
     {
         Object[] selected_incompletes = list.getSelectedValues();

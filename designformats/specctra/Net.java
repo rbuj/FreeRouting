@@ -120,6 +120,7 @@ public class Net
             subnet_number = p_subnet_number;
         }
         
+        @Override
         public int compareTo(Id p_other)
         {
             int result = this.name.compareTo(p_other.name);
@@ -146,6 +147,7 @@ public class Net
             pin_name = p_pin_name;
         }
         
+        @Override
         public int compareTo(Pin p_other)
         {
             int result = this.component_name.compareTo(p_other.component_name);

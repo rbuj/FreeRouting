@@ -54,6 +54,7 @@ class Structure extends ScopeKeyword
         super("structure");
     }
 
+    @Override
     public boolean read_scope(ReadScopeParameter p_par)
     {
         BoardConstructionInfo board_construction_info = new BoardConstructionInfo();

@@ -48,6 +48,7 @@ public class DragItemState extends DragState
     }
     
     
+    @Override
     public void display_default_message()
     {
         hdlg.screen_messages.set_status_message(resources.getString("dragging_item"));
@@ -58,6 +59,7 @@ public class DragItemState extends DragState
      * Return this.return_state, if an error eccured  while moving,
      * so that an undo may be necessary.
      */
+    @Override
     public InteractiveState move_to(FloatPoint p_to_location)
     {
         IntPoint to_location = p_to_location.round();
@@ -136,6 +138,7 @@ public class DragItemState extends DragState
         return this;
     }
     
+    @Override
     public InteractiveState button_released()
     {
         if (this.observers_activated)

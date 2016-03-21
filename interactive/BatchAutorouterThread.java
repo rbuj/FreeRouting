@@ -47,6 +47,7 @@ public class BatchAutorouterThread extends InteractiveActionThread
 
     }
 
+    @Override
     protected void thread_action()
     {
         try
@@ -127,6 +128,7 @@ public class BatchAutorouterThread extends InteractiveActionThread
         }
     }
 
+    @Override
     public void draw(java.awt.Graphics p_graphics)
     {
         FloatLine curr_air_line = batch_autorouter.get_air_line();

@@ -46,6 +46,7 @@ public class WindowPadstacks extends WindowObjectListWithFilter
     /**
      * Fills the list with the library padstacks.
      */
+    @Override
     protected void fill_list()
     {
         Padstacks padstacks = this.board_frame.board_panel.board_handling.get_routing_board().library.padstacks;
@@ -62,6 +63,7 @@ public class WindowPadstacks extends WindowObjectListWithFilter
         this.list.setVisibleRowCount(Math.min(padstacks.count(), DEFAULT_TABLE_SIZE));
     }
     
+    @Override
     protected void select_instances()
     {
         Object[] selected_padstacks = list.getSelectedValues();

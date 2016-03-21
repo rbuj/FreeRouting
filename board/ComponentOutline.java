@@ -48,12 +48,14 @@ public class ComponentOutline extends Item implements java.io.Serializable
         this.rotation_in_degree = p_rotation_in_degree;
     }
 
+    @Override
     public Item copy(int p_id_no)
     {
         return new ComponentOutline(this.relative_area, this.is_front, this.translation, this.rotation_in_degree,
                 this.get_component_no(), this.get_fixed_state(), this.board);
     }
 
+    @Override
     public boolean is_selected_by_filter(ItemSelectionFilter p_filter)
     {
         return false;
@@ -73,46 +75,55 @@ public class ComponentOutline extends Item implements java.io.Serializable
         return result;
     }
 
+    @Override
     public int first_layer()
     {
         return get_layer();
     }
 
+    @Override
     public int last_layer()
     {
         return get_layer();
     }
 
+    @Override
     public boolean is_on_layer(int p_layer)
     {
         return get_layer() == p_layer;
     }
 
+    @Override
     public boolean is_obstacle(Item p_item)
     {
         return false;
     }
 
+    @Override
     public int shape_layer(int p_index)
     {
         return get_layer();
     }
 
+    @Override
     public int tile_shape_count()
     {
         return 0;
     }
 
+    @Override
     protected geometry.planar.TileShape[] calculate_tree_shapes(ShapeSearchTree p_search_tree)
     {
         return new geometry.planar.TileShape[0];
     }
 
+    @Override
     public double get_draw_intensity(GraphicsContext p_graphics_context)
     {
         return p_graphics_context.get_component_outline_color_intensity();
     }
 
+    @Override
     public Color[] get_draw_colors(GraphicsContext p_graphics_context)
     {
         Color[] color_arr = new java.awt.Color[this.board.layer_structure.arr.length];
@@ -128,11 +139,13 @@ public class ComponentOutline extends Item implements java.io.Serializable
         return color_arr;
     }
 
+    @Override
     public int get_draw_priority()
     {
         return boardgraphics.Drawable.MIDDLE_DRAW_PRIORITY;
     }
 
+    @Override
     public void draw(java.awt.Graphics p_g, GraphicsContext p_graphics_context, Color[] p_color_arr, double p_intensity)
     {
         if (p_graphics_context == null || p_intensity <= 0)
@@ -146,17 +159,20 @@ public class ComponentOutline extends Item implements java.io.Serializable
         p_graphics_context.draw_boundary(this.get_area(), draw_width, color, p_g, intensity);
     }
 
+    @Override
     public geometry.planar.IntBox bounding_box()
     {
         return get_area().bounding_box();
     }
 
+    @Override
     public void translate_by(Vector p_vector)
     {
         this.translation = this.translation.add(p_vector);
         clear_derived_data();
     }
 
+    @Override
     public void change_placement_side(IntPoint p_pole)
     {
         this.is_front = !this.is_front;
@@ -165,6 +181,7 @@ public class ComponentOutline extends Item implements java.io.Serializable
         clear_derived_data();
     }
 
+    @Override
     public void rotate_approx(double p_angle_in_degree, FloatPoint p_pole)
     {
         double turn_angle = p_angle_in_degree;
@@ -186,6 +203,7 @@ public class ComponentOutline extends Item implements java.io.Serializable
         clear_derived_data();
     }
 
+    @Override
     public void turn_90_degree(int p_factor, IntPoint p_pole)
     {
         this.rotation_in_degree += p_factor * 90;
@@ -238,15 +256,18 @@ public class ComponentOutline extends Item implements java.io.Serializable
         return this.precalculated_absolute_area;
     }
 
+    @Override
     public void clear_derived_data()
     {
         precalculated_absolute_area = null;
     }
 
+    @Override
     public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale)
     {
     }
 
+    @Override
     public boolean write(java.io.ObjectOutputStream p_stream)
     {
         try

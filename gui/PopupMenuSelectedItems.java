@@ -38,6 +38,7 @@ class PopupMenuSelectedItems extends PopupMenuDisplay
         copy_item.setText(resources.getString("copy"));
         copy_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_panel.board_handling.copy_selected_items(board_panel.right_button_click_location);
@@ -53,6 +54,7 @@ class PopupMenuSelectedItems extends PopupMenuDisplay
         move_item.setText(resources.getString("move"));
         move_item.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 board_panel.board_handling.move_selected_items(board_panel.right_button_click_location);

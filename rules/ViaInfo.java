@@ -51,6 +51,7 @@ public class ViaInfo implements Comparable<ViaInfo>, board.ObjectInfoPanel.Print
         name = p_name;
     }
     
+    @Override
     public String toString()
     {
         return this.name;
@@ -86,11 +87,13 @@ public class ViaInfo implements Comparable<ViaInfo>, board.ObjectInfoPanel.Print
         attach_smd_allowed = p_attach_smd_allowed;
     }
     
+    @Override
     public int compareTo(ViaInfo p_other)
     {
         return this.name.compareTo(p_other.name);
     }
     
+    @Override
     public void print_info(board.ObjectInfoPanel p_window, java.util.Locale p_locale)
     {
         java.util.ResourceBundle resources = 

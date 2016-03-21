@@ -272,6 +272,7 @@ public abstract class ShapeTree
             shape_index_in_object = p_index ;
         }
         
+        @Override
         public int compareTo(Leaf p_other)
         {
             int result = this.object.compareTo(p_other.object);

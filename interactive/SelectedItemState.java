@@ -87,11 +87,13 @@ public class SelectedItemState extends InteractiveState
         return item_list;
     }
 
+    @Override
     public InteractiveState left_button_clicked(FloatPoint p_location)
     {
         return toggle_select(p_location);
     }
 
+    @Override
     public InteractiveState mouse_dragged(FloatPoint p_point)
     {
         return SelectItemsInRegionState.get_instance(hdlg.get_current_mouse_position(), this, hdlg, logfile);
@@ -100,6 +102,7 @@ public class SelectedItemState extends InteractiveState
     /**
      * Action to be taken when a key is pressed (Shortcut).
      */
+    @Override
     public InteractiveState key_typed(char p_key_char)
     {
         InteractiveState result = this;
@@ -905,11 +908,13 @@ public class SelectedItemState extends InteractiveState
         return this;
     }
 
+    @Override
     public String get_help_id()
     {
         return "SelectedItemState";
     }
 
+    @Override
     public void draw(java.awt.Graphics p_graphics)
     {
         if (item_list == null)
@@ -928,16 +933,19 @@ public class SelectedItemState extends InteractiveState
         }
     }
 
+    @Override
     public javax.swing.JPopupMenu get_popup_menu()
     {
         return hdlg.get_panel().popup_menu_select;
     }
 
+    @Override
     public void set_toolbar()
     {
         hdlg.get_panel().board_frame.set_select_toolbar();
     }
 
+    @Override
     public void display_default_message()
     {
         hdlg.screen_messages.set_status_message(resources.getString("in_select_item_mode"));

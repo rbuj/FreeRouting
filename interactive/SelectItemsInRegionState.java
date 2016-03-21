@@ -75,6 +75,7 @@ public class SelectItemsInRegionState extends SelectRegionState
         }
     }
 
+    @Override
     public InteractiveState complete()
     {
         if (!hdlg.is_board_read_only())

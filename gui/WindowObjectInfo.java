@@ -186,6 +186,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
         /** Dispose this window and all subwindows when closing the window. */
         this.addWindowListener(new java.awt.event.WindowAdapter()
         {
+            @Override
             public void windowClosing(java.awt.event.WindowEvent evt)
             {
                 dispose();
@@ -218,6 +219,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
      * Appends p_string to the text pane.
      * Returns false, if that was not possible.
      */
+    @Override
     public boolean append(String p_string)
     {
         return append(p_string, "normal");
@@ -227,6 +229,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
      * Appends p_string in bold styleto the text pane.
      * Returns false, if that was not possible.
      */
+    @Override
     public boolean append_bold(String p_string)
     {
         return append(p_string, "bold");
@@ -237,6 +240,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
      * transforming it to the user coordinate sytem.
      * Returns false, if that was not possible.
      */
+    @Override
     public boolean append(double p_value)
     {
         Float value = (float) this.coordinate_transform.board_to_user(p_value);
@@ -248,6 +252,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
      * transforming it to the user coordinate sytem.
      * Returns false, if that was not possible.
      */
+    @Override
     public boolean append_without_transforming(double p_value)
     {
         Float value = (float) p_value;
@@ -259,6 +264,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
      * after transforming to the user coordinate sytem.
      * Returns false, if that was not possible.
      */
+    @Override
     public boolean append(geometry.planar.FloatPoint p_point)
     {
         geometry.planar.FloatPoint transformed_point = this.coordinate_transform.board_to_user(p_point);
@@ -270,6 +276,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
      * after transforming to the user coordinate sytem.
      * Returns false, if that was not possible.
      */
+    @Override
     public boolean append(geometry.planar.Shape p_shape, java.util.Locale p_locale)
     {
         board.PrintableShape transformed_shape = this.coordinate_transform.board_to_user(p_shape, p_locale);
@@ -283,6 +290,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
     /**
      * Begins a new line in the text pane.
      */
+    @Override
     public boolean newline()
     {
         return append("\n");
@@ -291,6 +299,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
     /**
      * Appends a fixed number of spaces to the text pane.
      */
+    @Override
     public boolean indent()
     {
         return append("       ");
@@ -300,6 +309,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
      * Appends a button for creating a new ObjectInfoWindow with the information
      * of p_object to the text pane. Returns false, if that was not possible.
      */
+    @Override
     public boolean append( String p_button_name, String p_window_title, WindowObjectInfo.Printable p_object)
     {
         java.util.Collection<WindowObjectInfo.Printable> object_list = new java.util.LinkedList<WindowObjectInfo.Printable>();
@@ -311,6 +321,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
      * Appends a button for creating a new ObjectInfoWindow with the information
      * of p_items to the text pane. Returns false, if that was not possible.
      */
+    @Override
     public boolean append_items( String p_button_name, String p_window_title, java.util.Collection<board.Item> p_items)
     {
         java.util.Collection<WindowObjectInfo.Printable> object_list = new java.util.LinkedList<WindowObjectInfo.Printable>();
@@ -322,6 +333,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
      * Appends a button for creating a new ObjectInfoWindow with the information
      * of p_objects to the text pane. Returns false, if that was not possible.
      */
+    @Override
     public boolean append_objects( String p_button_name, String p_window_title,
             java.util.Collection<WindowObjectInfo.Printable> p_objects)
     {
@@ -358,6 +370,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
         return true;
     }
     
+    @Override
     public void dispose()
     {
         for (WindowObjectInfo curr_subwindow : this.subwindows)
@@ -394,6 +407,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements board.O
             this.objects = p_objects;
         }
         
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             WindowObjectInfo new_window = display(this.title, this.objects, board_frame, coordinate_transform);

@@ -54,6 +54,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
     /**
      * Works only for symmettric DrillItems
      */
+    @Override
     public void translate_by(Vector p_vector)
     {
         if (center != null)
@@ -64,6 +65,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
     }
     
     
+    @Override
     public void turn_90_degree(int p_factor, IntPoint p_pole)
     {
         if (center != null)
@@ -73,6 +75,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         this.clear_derived_data();
     }
     
+    @Override
     public void rotate_approx(double p_angle_in_degree, FloatPoint p_pole)
     {
         if (center != null)
@@ -83,6 +86,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         this.clear_derived_data();
     }
     
+    @Override
     public void change_placement_side(IntPoint p_pole)
     {
         if (center != null)
@@ -92,6 +96,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         this.clear_derived_data();
     }
     
+    @Override
     public void move_by(Vector p_vector)
     {
         Point old_center = this.get_center();
@@ -150,6 +155,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         }
     }
     
+    @Override
     public int shape_layer(int p_index)
     {
         int index = Math.max( p_index, 0);
@@ -159,12 +165,14 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         return from_layer + index;
     }
     
+    @Override
     public boolean is_on_layer(int p_layer)
     {
         return p_layer >=  first_layer() && p_layer <= last_layer();
     }
     
     
+    @Override
     public int first_layer()
     {
         if (this.precalculated_first_layer < 0)
@@ -182,6 +190,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         return this.precalculated_first_layer;
     }
     
+    @Override
     public int last_layer()
     {
         if (this.precalculated_last_layer < 0)
@@ -201,6 +210,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
     
     public abstract Shape get_shape(int p_index);
     
+    @Override
     public IntBox bounding_box()
     {
         IntBox result = IntBox.EMPTY;
@@ -215,6 +225,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         return result;
     }
     
+    @Override
     public int tile_shape_count()
     {
         Padstack padstack = get_padstack();
@@ -223,6 +234,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         return to_layer - from_layer + 1;
     }
     
+    @Override
     protected TileShape[] calculate_tree_shapes(ShapeSearchTree p_search_tree)
     {
         return p_search_tree.calculate_tree_shapes(this);
@@ -300,6 +312,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         return get_shape(p_layer - from_layer);
     }
     
+    @Override
     public Set<Item> get_normal_contacts()
     {
         Point drill_center = this.get_center();
@@ -347,11 +360,13 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         return result;
     }
     
+    @Override
     public Point normal_contact_point(Item p_other)
     {
         return p_other.normal_contact_point(this);
     }
     
+    @Override
     Point normal_contact_point(DrillItem p_other)
     {
         if (this.shares_layer(p_other) && this.get_center().equals(p_other.get_center()))
@@ -361,6 +376,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         return null;
     }
     
+    @Override
     Point normal_contact_point(Trace p_trace)
     {
         if (!this.shares_layer(p_trace))
@@ -375,6 +391,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         return null;
     }
     
+    @Override
     public Point[] get_ratsnest_corners()
     {
         Point[] result = new Point[1];
@@ -382,6 +399,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         return result;
     }
     
+    @Override
     public TileShape get_trace_connection_shape(ShapeSearchTree p_search_tree, int p_index)
     {
         return TileShape.get_instance(this.get_center());
@@ -422,6 +440,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         return this.precalculated_min_width;
     }
     
+    @Override
     public void clear_derived_data()
     {
           super.clear_derived_data();
@@ -429,11 +448,13 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
           this.precalculated_last_layer = -1;
     }
     
+    @Override
     public int get_draw_priority()
     {
         return boardgraphics.Drawable.MIDDLE_DRAW_PRIORITY;
     }
     
+    @Override
     public void draw(java.awt.Graphics p_g, boardgraphics.GraphicsContext p_graphics_context,
             java.awt.Color[] p_color_arr, double p_intensity)
     {
@@ -504,6 +525,7 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         /**
          * Implements the comparable interface.
          */
+        @Override
         public int compareTo(TraceInfo p_other)
         {
             return p_other.layer - this.layer;

@@ -805,6 +805,7 @@ class SpecctraFileScanner implements Scanner {
    *
    * @param newState the new lexical state
    */
+  @Override
   public final void yybegin(int newState) {
     zzLexicalState = newState;
   }
@@ -892,6 +893,7 @@ class SpecctraFileScanner implements Scanner {
    * @return      the next token
    * @exception   java.io.IOException  if any I/O-Error occurs
    */
+  @Override
   public Object next_token() throws java.io.IOException {
     int zzInput;
     int zzAction;

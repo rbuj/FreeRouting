@@ -60,6 +60,7 @@ public class CircleConstructionState extends InteractiveState
         }
     }
     
+    @Override
     public InteractiveState left_button_clicked(FloatPoint p_location)
     {
         if (logfile != null)
@@ -69,6 +70,7 @@ public class CircleConstructionState extends InteractiveState
         return this.complete();
     }
     
+    @Override
     public InteractiveState mouse_moved()
     {
         super.mouse_moved();
@@ -79,6 +81,7 @@ public class CircleConstructionState extends InteractiveState
     /**
      * completes the circle construction state
      */
+    @Override
     public InteractiveState complete()
     {
         IntPoint center = this.circle_center.round();
@@ -137,6 +140,7 @@ public class CircleConstructionState extends InteractiveState
      * Used when reading the next point from a logfile.
      * Calls complete, because only 1 additional point is stored in the logfile.
      */
+    @Override
     public InteractiveState process_logfile_point(FloatPoint p_point)
     {
         this.circle_radius = circle_center.distance(p_point);
@@ -146,6 +150,7 @@ public class CircleConstructionState extends InteractiveState
     /**
      * draws the graphic construction aid for the circle
      */
+    @Override
     public void draw(java.awt.Graphics p_graphics)
     {
         FloatPoint current_mouse_position = hdlg.get_current_mouse_position();
@@ -157,11 +162,13 @@ public class CircleConstructionState extends InteractiveState
         hdlg.graphics_context.draw_circle(circle_center, circle_radius, 300, java.awt.Color.white, p_graphics, 1);
     }
     
+    @Override
     public javax.swing.JPopupMenu get_popup_menu()
     {
         return hdlg.get_panel().popup_menu_insert_cancel;
     }
     
+    @Override
     public void display_default_message()
     {
         hdlg.screen_messages.set_status_message(resources.getString("creating_circle"));

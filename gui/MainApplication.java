@@ -121,6 +121,7 @@ public class MainApplication extends javax.swing.JFrame
             new_frame.addWindowListener(new java.awt.event.WindowAdapter()
             {
 
+                @Override
                 public void windowClosed(java.awt.event.WindowEvent evt)
                 {
                     Runtime.getRuntime().exit(0);
@@ -180,6 +181,7 @@ public class MainApplication extends javax.swing.JFrame
                 demonstration_button.addActionListener(new java.awt.event.ActionListener()
                 {
 
+                    @Override
                     public void actionPerformed(java.awt.event.ActionEvent evt)
                     {
                         window_net_demonstrations.setVisible(true);
@@ -194,6 +196,7 @@ public class MainApplication extends javax.swing.JFrame
                 sample_board_button.addActionListener(new java.awt.event.ActionListener()
                 {
 
+                    @Override
                     public void actionPerformed(java.awt.event.ActionEvent evt)
                     {
                         window_net_sample_designs.setVisible(true);
@@ -210,6 +213,7 @@ public class MainApplication extends javax.swing.JFrame
         open_board_button.addActionListener(new java.awt.event.ActionListener()
         {
 
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 open_board_design_action(evt);
@@ -229,6 +233,7 @@ public class MainApplication extends javax.swing.JFrame
             restore_defaults_button.addActionListener(new java.awt.event.ActionListener()
             {
 
+                @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt)
                 {
                     if (is_webstart)
@@ -393,6 +398,7 @@ public class MainApplication extends javax.swing.JFrame
             this.board_frame = p_board_frame;
         }
 
+        @Override
         public void windowClosed(java.awt.event.WindowEvent evt)
         {
             if (board_frame != null)
@@ -409,6 +415,7 @@ public class MainApplication extends javax.swing.JFrame
     private class WindowStateListener extends java.awt.event.WindowAdapter
     {
 
+        @Override
         public void windowClosing(java.awt.event.WindowEvent evt)
         {
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -429,11 +436,13 @@ public class MainApplication extends javax.swing.JFrame
             }
         }
 
+        @Override
         public void windowIconified(java.awt.event.WindowEvent evt)
         {
             window_net_sample_designs.parent_iconified();
         }
 
+        @Override
         public void windowDeiconified(java.awt.event.WindowEvent evt)
         {
             window_net_sample_designs.parent_deiconified();

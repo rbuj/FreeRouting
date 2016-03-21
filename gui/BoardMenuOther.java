@@ -40,6 +40,7 @@ public class BoardMenuOther extends javax.swing.JMenu
         snapshots.setToolTipText(other_menu.resources.getString("snapshots_tooltip"));
         snapshots.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 other_menu.board_frame.snapshot_window.setVisible(true);

@@ -119,6 +119,7 @@ public class WindowRouteDetail extends BoardSavableSubWindow
     /**
      * Recalculates all displayed values
      */
+    @Override
     public void refresh()
     {
         if (this.board_handling.get_routing_board().search_tree_manager.is_clearance_compensation_used())
@@ -148,6 +149,7 @@ public class WindowRouteDetail extends BoardSavableSubWindow
     private class CompensationOnListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             board_handling.set_clearance_compensation(true);
@@ -157,6 +159,7 @@ public class WindowRouteDetail extends BoardSavableSubWindow
     private class CompensationOffListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             board_handling.set_clearance_compensation(false);
@@ -166,6 +169,7 @@ public class WindowRouteDetail extends BoardSavableSubWindow
     private class SliderChangeListener implements javax.swing.event.ChangeListener
     {
 
+        @Override
         public void stateChanged(javax.swing.event.ChangeEvent evt)
         {
             int new_accurracy = (c_max_slider_value - accuracy_slider.getValue() + 1) * c_accuracy_scale_factor;
@@ -176,6 +180,7 @@ public class WindowRouteDetail extends BoardSavableSubWindow
     private class OutLineKeepoutListener implements java.awt.event.ActionListener
     {
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             if (board_handling.is_board_read_only())

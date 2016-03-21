@@ -56,6 +56,7 @@ class LocateFoundConnectionAlgoAnyAngle extends LocateFoundConnectionAlgo
      * Calculates a list with the next  point  of the trace under construction.
      * If the trace is completed, the result list will be empty.
      */
+    @Override
     protected Collection<FloatPoint> calculate_next_trace_corners()
     {
         Collection<FloatPoint> result = new LinkedList<FloatPoint>();

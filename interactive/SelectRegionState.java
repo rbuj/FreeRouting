@@ -36,12 +36,14 @@ public class SelectRegionState extends InteractiveState
         super(p_parent_state, p_board_handling, p_logfile);
     }
     
+    @Override
     public InteractiveState button_released()
     {
         hdlg.screen_messages.set_status_message("");
         return complete();
     }
     
+    @Override
     public InteractiveState mouse_dragged(FloatPoint p_point)
     {
         if (corner1 == null)
@@ -56,6 +58,7 @@ public class SelectRegionState extends InteractiveState
         return this;
     }
     
+    @Override
     public void draw(java.awt.Graphics p_graphics)
     {
         this.return_state.draw(p_graphics);

@@ -64,6 +64,7 @@ public abstract class WindowNetSamples extends BoardSubWindow
         this.list.setVisibleRowCount(p_row_count);
         this.list.addMouseListener(new java.awt.event.MouseAdapter()
         {
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
                 if (evt.getClickCount() > 1)
@@ -196,6 +197,7 @@ public abstract class WindowNetSamples extends BoardSubWindow
     
     private class OpenListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             button_pushed();

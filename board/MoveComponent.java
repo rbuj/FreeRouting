@@ -224,6 +224,7 @@ public class MoveComponent
             projection = p_projection;
         }
 
+        @Override
         public int compareTo(SortedItem p_other)
         {
             return Signum.as_int(this.projection - p_other.projection);

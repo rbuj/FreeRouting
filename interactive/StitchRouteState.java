@@ -37,11 +37,13 @@ public class StitchRouteState extends RouteState
         super(p_parent_state, p_board_handling, p_logfile);
     }
     
+    @Override
     public InteractiveState left_button_clicked(FloatPoint p_location)
     {
         return add_corner(p_location);
     }
     
+    @Override
     public InteractiveState add_corner(FloatPoint p_location)
     {
         // make the current situation restorable by undo
@@ -49,6 +51,7 @@ public class StitchRouteState extends RouteState
         return super.add_corner(p_location);
     }
     
+    @Override
     public InteractiveState mouse_moved()
     {
         super.mouse_moved();
@@ -57,16 +60,19 @@ public class StitchRouteState extends RouteState
         return this;
     }
     
+    @Override
     public javax.swing.JPopupMenu get_popup_menu()
     {
         return hdlg.get_panel().popup_menu_stitch_route;
     }
     
+    @Override
     public String get_help_id()
     {
         return "RouteState_StitchingRouteState";
     }
     
+    @Override
     public void draw(java.awt.Graphics p_graphics)
     {
         super.draw(p_graphics);

@@ -52,6 +52,7 @@ public class SnapShot implements java.io.Serializable
         this.subwindow_filters = p_board_handling.get_panel().board_frame.get_snapshot_subwindow_selections();
     }
     
+    @Override
     public String toString()
     {
         return this.name;

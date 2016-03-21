@@ -163,6 +163,7 @@ public class WindowVia extends BoardSavableSubWindow
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE );
     }
     
+    @Override
     public void refresh()
     {
         // reinsert the elements in the rule list
@@ -187,6 +188,7 @@ public class WindowVia extends BoardSavableSubWindow
         }
     }
     
+    @Override
     public void dispose()
     {
         for (javax.swing.JFrame curr_subwindow : this.subwindows)
@@ -220,6 +222,7 @@ public class WindowVia extends BoardSavableSubWindow
     
     private class ShowPadstacksListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             java.util.Collection<WindowObjectInfo.Printable> object_list = new java.util.LinkedList<WindowObjectInfo.Printable>();
@@ -241,6 +244,7 @@ public class WindowVia extends BoardSavableSubWindow
     
     private class AddPadstackListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             board.BasicBoard pcb = board_frame.board_panel.board_handling.get_routing_board();
@@ -399,6 +403,7 @@ public class WindowVia extends BoardSavableSubWindow
     
     private class RemovePadstackListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             board.BasicBoard pcb = board_frame.board_panel.board_handling.get_routing_board();
@@ -433,6 +438,7 @@ public class WindowVia extends BoardSavableSubWindow
     
     private class ShowViasListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             java.util.Collection<WindowObjectInfo.Printable> object_list = new java.util.LinkedList<WindowObjectInfo.Printable>();
@@ -454,6 +460,7 @@ public class WindowVia extends BoardSavableSubWindow
     
     private class EditViasListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             board_frame.edit_vias_window.setVisible(true);
@@ -462,6 +469,7 @@ public class WindowVia extends BoardSavableSubWindow
     
     private class ShowViaRuleListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             Object[] selected_objects = rule_list.getSelectedValues();
@@ -487,6 +495,7 @@ public class WindowVia extends BoardSavableSubWindow
     
     private class EditViaRuleListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             Object selected_object = rule_list.getSelectedValue();
@@ -506,6 +515,7 @@ public class WindowVia extends BoardSavableSubWindow
     
     private class AddViaRuleListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             String new_name = javax.swing.JOptionPane.showInputDialog(resources.getString("message_5"));
@@ -528,6 +538,7 @@ public class WindowVia extends BoardSavableSubWindow
     
     private class RemoveViaRuleListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             Object selected_object = rule_list.getSelectedValue();

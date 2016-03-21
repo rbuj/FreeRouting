@@ -36,6 +36,7 @@ public class BoardTemporarySubWindow extends BoardSubWindow
         
         this.addWindowListener(new java.awt.event.WindowAdapter()
         {
+            @Override
             public void windowClosing(java.awt.event.WindowEvent evt)
             {
                 dispose();
@@ -49,6 +50,7 @@ public class BoardTemporarySubWindow extends BoardSubWindow
         super.dispose();
     }
     
+    @Override
     public void dispose()
     {
         this.board_frame.temporary_subwindows.remove(this);

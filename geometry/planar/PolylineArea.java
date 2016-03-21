@@ -39,46 +39,55 @@ public class PolylineArea implements Area, java.io.Serializable
         hole_arr = p_hole_arr;
     }
 
+    @Override
     public int dimension()
     {
         return border_shape.dimension();
     }
 
+    @Override
     public boolean is_bounded()
     {
         return border_shape.is_bounded();
     }
 
+    @Override
     public boolean is_empty()
     {
         return border_shape.is_empty();
     }
 
+    @Override
     public boolean is_contained_in(IntBox p_box)
     {
         return border_shape.is_contained_in(p_box);
     }
 
+    @Override
     public PolylineShape get_border()
     {
         return border_shape;
     }
 
+    @Override
     public PolylineShape[] get_holes()
     {
         return hole_arr;
     }
 
+    @Override
     public IntBox bounding_box()
     {
         return border_shape.bounding_box();
     }
 
+    @Override
     public IntOctagon bounding_octagon()
     {
         return border_shape.bounding_octagon();
     }
 
+    @Override
     public boolean contains(FloatPoint p_point)
     {
         if (!border_shape.contains(p_point))
@@ -95,6 +104,7 @@ public class PolylineArea implements Area, java.io.Serializable
         return true;
     }
 
+    @Override
     public boolean contains(Point p_point)
     {
         if (!border_shape.contains(p_point))
@@ -111,6 +121,7 @@ public class PolylineArea implements Area, java.io.Serializable
         return true;
     }
 
+    @Override
     public FloatPoint nearest_point_approx(FloatPoint p_from_point)
     {
         double min_dist = Double.MAX_VALUE;
@@ -129,6 +140,7 @@ public class PolylineArea implements Area, java.io.Serializable
         return result;
     }
 
+    @Override
     public PolylineArea translate_by(Vector p_vector)
     {
         if (p_vector.equals(Vector.ZERO))
@@ -144,6 +156,7 @@ public class PolylineArea implements Area, java.io.Serializable
         return new PolylineArea(translated_border, translated_holes);
     }
 
+    @Override
     public FloatPoint[] corner_approx_arr()
     {
         int corner_count = border_shape.border_line_count();
@@ -170,6 +183,7 @@ public class PolylineArea implements Area, java.io.Serializable
      * used in the result pieces. It can be made exact, if Polylines are returned
      * instead of Polygons, so that no intersection points are needed in the result.
      */
+    @Override
     public TileShape[] split_to_convex()
     {
         return split_to_convex(null);
@@ -236,6 +250,7 @@ public class PolylineArea implements Area, java.io.Serializable
         return precalculated_convex_pieces;
     }
 
+    @Override
     public PolylineArea turn_90_degree(int p_factor, IntPoint p_pole)
     {
         PolylineShape new_border = border_shape.turn_90_degree(p_factor, p_pole);
@@ -247,6 +262,7 @@ public class PolylineArea implements Area, java.io.Serializable
         return new PolylineArea(new_border, new_hole_arr);
     }
 
+    @Override
     public PolylineArea rotate_approx(double p_angle, FloatPoint p_pole)
     {
         PolylineShape new_border = border_shape.rotate_approx(p_angle, p_pole);
@@ -258,6 +274,7 @@ public class PolylineArea implements Area, java.io.Serializable
         return new PolylineArea(new_border, new_hole_arr);
     }
 
+    @Override
     public PolylineArea mirror_vertical(IntPoint p_pole)
     {
         PolylineShape new_border = border_shape.mirror_vertical(p_pole);
@@ -270,6 +287,7 @@ public class PolylineArea implements Area, java.io.Serializable
 
     }
 
+    @Override
     public PolylineArea mirror_horizontal(IntPoint p_pole)
     {
         PolylineShape new_border = border_shape.mirror_horizontal(p_pole);

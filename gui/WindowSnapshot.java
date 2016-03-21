@@ -58,6 +58,7 @@ public class WindowSnapshot extends BoardSavableSubWindow
         this.list.setVisibleRowCount(5);
         this.list.addMouseListener(new java.awt.event.MouseAdapter()
         {
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
                 if (evt.getClickCount() > 1)
@@ -121,18 +122,21 @@ public class WindowSnapshot extends BoardSavableSubWindow
         this.pack();
     }
     
+    @Override
     public void dispose()
     {
         settings_window.dispose();
         super.dispose();
     }
     
+    @Override
     public void parent_iconified()
     {
         settings_window.parent_iconified();
         super.parent_iconified();
     }
     
+    @Override
     public void parent_deiconified()
     {
         settings_window.parent_deiconified();
@@ -143,6 +147,7 @@ public class WindowSnapshot extends BoardSavableSubWindow
      * Reads the data of this frame from disk.
      * Returns false, if the reading failed.
      */
+    @Override
     public boolean read(java.io.ObjectInputStream p_object_stream)
     {
         try
@@ -168,6 +173,7 @@ public class WindowSnapshot extends BoardSavableSubWindow
     /**
      * Saves this frame to disk.
      */
+    @Override
     public void save(java.io.ObjectOutputStream p_object_stream)
     {
         SavedAttributes saved_attributes = new SavedAttributes(this.list_model, this.snapshot_count, this.getLocation(), this.isVisible());
@@ -225,6 +231,7 @@ public class WindowSnapshot extends BoardSavableSubWindow
     /**
      * Refreshs the displayed values in this window.
      */
+    @Override
     public void refresh()
     {
         this.settings_window.refresh();
@@ -241,6 +248,7 @@ public class WindowSnapshot extends BoardSavableSubWindow
     
     private class AddListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             interactive.SnapShot new_snapshot = interactive.SnapShot.get_instance(name_field.getText(), board_frame.board_panel.board_handling);
@@ -293,6 +301,7 @@ public class WindowSnapshot extends BoardSavableSubWindow
     
     private class DeleteListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             Object selected_snapshot = list.getSelectedValue();
@@ -305,6 +314,7 @@ public class WindowSnapshot extends BoardSavableSubWindow
     
     private class DeleteAllListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             list_model.removeAllElements();
@@ -313,6 +323,7 @@ public class WindowSnapshot extends BoardSavableSubWindow
     
     private class GotoListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             goto_selected();
@@ -321,6 +332,7 @@ public class WindowSnapshot extends BoardSavableSubWindow
     
     private class SettingsListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             if (first_time)

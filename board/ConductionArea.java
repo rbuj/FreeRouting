@@ -49,6 +49,7 @@ public class ConductionArea extends ObstacleArea implements Connectable
         is_obstacle = p_is_obstacle;
     }
     
+    @Override
     public Item copy(int p_id_no)
     {
         if (this.net_count() != 1)
@@ -61,6 +62,7 @@ public class ConductionArea extends ObstacleArea implements Connectable
                 this.name, is_obstacle, get_fixed_state(), board);
     }
     
+    @Override
     public Set<Item> get_normal_contacts()
     {
         Set<Item> result = new TreeSet<Item>();
@@ -102,6 +104,7 @@ public class ConductionArea extends ObstacleArea implements Connectable
         return result;
     }
     
+    @Override
     public TileShape get_trace_connection_shape(ShapeSearchTree p_search_tree, int p_index)
     {
         if (p_index < 0 || p_index >= this.tree_shape_count(p_search_tree))
@@ -112,6 +115,7 @@ public class ConductionArea extends ObstacleArea implements Connectable
         return this.get_tree_shape(p_search_tree, p_index);
     }
     
+    @Override
     public Point[] get_ratsnest_corners()
     {
         Point [] result;
@@ -125,6 +129,7 @@ public class ConductionArea extends ObstacleArea implements Connectable
         return result;
     }
     
+    @Override
     public boolean is_obstacle(Item p_other)
     {
         if (this.is_obstacle)
@@ -151,16 +156,19 @@ public class ConductionArea extends ObstacleArea implements Connectable
         this.is_obstacle = p_value;
     }
     
+    @Override
     public boolean is_trace_obstacle(int p_net_no)
     {
         return this.is_obstacle && !this.contains_net(p_net_no);
     }
     
+    @Override
     public boolean is_drillable(int p_net_no)
     {
         return !this.is_obstacle || this.contains_net(p_net_no);
     }
     
+    @Override
     public boolean is_selected_by_filter(ItemSelectionFilter p_filter)
     {
         if (!this.is_selected_by_fixed_filter(p_filter))
@@ -170,16 +178,19 @@ public class ConductionArea extends ObstacleArea implements Connectable
         return p_filter.is_selected(ItemSelectionFilter.SelectableChoices.CONDUCTION);
     }
     
+    @Override
     public java.awt.Color[] get_draw_colors(boardgraphics.GraphicsContext p_graphics_context)
     {
         return p_graphics_context.get_conduction_colors();
     }
     
+    @Override
     public double get_draw_intensity(boardgraphics.GraphicsContext p_graphics_context)
     {
         return p_graphics_context.get_conduction_color_intensity();
     }
     
+    @Override
     public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale)
     {
         java.util.ResourceBundle resources = 

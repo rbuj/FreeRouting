@@ -40,6 +40,7 @@ public class ItemIdNoGenerator implements datastructures.IdNoGenerator, java.io.
      * Use eventually the id_no generater from the host system
      * for syncronisation
      */
+    @Override
     public int new_no()
     {
         if (last_generated_id_no >= c_max_id_no)
@@ -53,6 +54,7 @@ public class ItemIdNoGenerator implements datastructures.IdNoGenerator, java.io.
     /**
      * Return the maximum generated id number so far.
      */
+    @Override
     public int max_generated_no()
     {
         return last_generated_id_no;

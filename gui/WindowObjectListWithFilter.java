@@ -47,6 +47,7 @@ public abstract class WindowObjectListWithFilter extends WindowObjectList
     /**
      * Adds p_object to the list only if its name matches the filter.
      */
+    @Override
     protected void add_to_list(Object p_object)
     {
         String curr_filter_string = this.filter_string.getText().trim();
@@ -98,6 +99,7 @@ public abstract class WindowObjectListWithFilter extends WindowObjectList
     /**
      * Saves also the filter string to disk.
      */
+    @Override
     public void save(java.io.ObjectOutputStream p_object_stream)
     {
         try
@@ -111,6 +113,7 @@ public abstract class WindowObjectListWithFilter extends WindowObjectList
         super.save(p_object_stream);
     }
     
+    @Override
     public boolean read(java.io.ObjectInputStream p_object_stream)
     {
         try

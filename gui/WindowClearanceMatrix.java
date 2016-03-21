@@ -94,6 +94,7 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow
     /**
      * Recalculates all displayed values
      */
+    @Override
     public void refresh()
     {
         board.BasicBoard routing_board = this.board_frame.board_panel.board_handling.get_routing_board();
@@ -288,6 +289,7 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow
     
     private class ComboBoxListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent evt)
         {
             refresh();
@@ -307,6 +309,7 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow
     
     private class AddClassListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             add_class();
@@ -315,6 +318,7 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow
     
     private class PruneListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             prune_clearance_matrix();
@@ -343,26 +347,31 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow
             this.set_values(0);
         }
         
+        @Override
         public String getColumnName(int p_col)
         {
             return column_names[p_col];
         }
         
+        @Override
         public int getRowCount()
         {
             return data.length;
         }
         
+        @Override
         public int getColumnCount()
         {
             return column_names.length;
         }
         
+        @Override
         public Object getValueAt(int p_row, int p_col)
         {
             return data[p_row][p_col];
         }
         
+        @Override
         public void setValueAt(Object p_value, int p_row, int p_col)
         {
             Number number_value = null;
@@ -471,11 +480,13 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow
             }
         }
         
+        @Override
         public boolean isCellEditable(int p_row, int p_col)
         {
             return p_row > 0 && p_col > 1;
         }
         
+        @Override
         public Class<?> getColumnClass(int p_col)
         {
             if (p_col == 0)

@@ -57,6 +57,7 @@ public class ShapeSearchTree45Degree extends ShapeSearchTree
      * which intersect with p_room.get_contained_shape().
      * The result room is not yet complete, because its doors are not yet calculated.
      */
+    @Override
     public Collection<IncompleteFreeSpaceExpansionRoom> complete_shape(IncompleteFreeSpaceExpansionRoom p_room,
                                                                        int p_net_no, SearchTreeObject p_ignore_object, TileShape p_ignore_shape)
     {
@@ -176,6 +177,7 @@ public class ShapeSearchTree45Degree extends ShapeSearchTree
      * even if there are no objects on the layer. Otherwise the maze search algprithm gets problems
      * with vias.
      */
+    @Override
     protected Collection<IncompleteFreeSpaceExpansionRoom> divide_large_room(
             Collection<IncompleteFreeSpaceExpansionRoom> p_room_list, IntBox p_board_bounding_box)
     {
@@ -482,6 +484,7 @@ public class ShapeSearchTree45Degree extends ShapeSearchTree
         return result.normalize();
     }
 
+    @Override
     TileShape[] calculate_tree_shapes(DrillItem p_drill_item)
     {
         if (this.board == null)
@@ -515,6 +518,7 @@ public class ShapeSearchTree45Degree extends ShapeSearchTree
         return result;
     }
 
+    @Override
     TileShape[] calculate_tree_shapes(ObstacleArea p_obstacle_area)
     {
         TileShape[] result = super.calculate_tree_shapes(p_obstacle_area);
@@ -525,6 +529,7 @@ public class ShapeSearchTree45Degree extends ShapeSearchTree
         return result;
     }
 
+    @Override
     TileShape[] calculate_tree_shapes(BoardOutline p_outline)
     {
         TileShape[] result = super.calculate_tree_shapes(p_outline);

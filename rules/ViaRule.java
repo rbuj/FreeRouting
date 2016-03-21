@@ -65,6 +65,7 @@ public class ViaRule implements java.io.Serializable, board.ObjectInfoPanel.Prin
         return list.get(p_index);
     }
     
+    @Override
     public String toString()
     {
         return this.name;
@@ -137,6 +138,7 @@ public class ViaRule implements java.io.Serializable, board.ObjectInfoPanel.Prin
         return true;
     }
     
+    @Override
     public void print_info(board.ObjectInfoPanel p_window, java.util.Locale p_locale)
     {
         java.util.ResourceBundle resources =

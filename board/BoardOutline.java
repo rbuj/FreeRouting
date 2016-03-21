@@ -46,6 +46,7 @@ public class BoardOutline extends Item implements java.io.Serializable
         shapes = p_shapes;
     }
 
+    @Override
     public int tile_shape_count()
     {
         int result;
@@ -69,6 +70,7 @@ public class BoardOutline extends Item implements java.io.Serializable
         return result;
     }
 
+    @Override
     public int shape_layer(int p_index)
     {
         int shape_count = this.tile_shape_count();
@@ -88,11 +90,13 @@ public class BoardOutline extends Item implements java.io.Serializable
         return result;
     }
 
+    @Override
     public boolean is_obstacle(Item p_other)
     {
         return !(p_other instanceof BoardOutline || p_other instanceof ObstacleArea);
     }
 
+    @Override
     public IntBox bounding_box()
     {
         IntBox result = IntBox.EMPTY;
@@ -103,21 +107,25 @@ public class BoardOutline extends Item implements java.io.Serializable
         return result;
     }
 
+    @Override
     public int first_layer()
     {
         return 0;
     }
 
+    @Override
     public int last_layer()
     {
         return this.board.layer_structure.arr.length - 1;
     }
 
+    @Override
     public boolean is_on_layer(int p_layer)
     {
         return true;
     }
 
+    @Override
     public void translate_by(Vector p_vector)
     {
         for (PolylineShape curr_shape : this.shapes)
@@ -131,6 +139,7 @@ public class BoardOutline extends Item implements java.io.Serializable
         keepout_lines = null;
     }
 
+    @Override
     public void turn_90_degree(int p_factor, IntPoint p_pole)
     {
         for (PolylineShape curr_shape : this.shapes)
@@ -144,6 +153,7 @@ public class BoardOutline extends Item implements java.io.Serializable
         keepout_lines = null;
     }
 
+    @Override
     public void rotate_approx(double p_angle_in_degree, FloatPoint p_pole)
     {
         double angle = Math.toRadians(p_angle_in_degree);
@@ -159,6 +169,7 @@ public class BoardOutline extends Item implements java.io.Serializable
         keepout_lines = null;
     }
 
+    @Override
     public void change_placement_side(IntPoint p_pole)
     {
         for (PolylineShape curr_shape : this.shapes)
@@ -172,11 +183,13 @@ public class BoardOutline extends Item implements java.io.Serializable
         keepout_lines = null;
     }
 
+    @Override
     public double get_draw_intensity(GraphicsContext p_graphics_context)
     {
         return 1;
     }
 
+    @Override
     public int get_draw_priority()
     {
         return boardgraphics.Drawable.MAX_DRAW_PRIORITY;
@@ -197,6 +210,7 @@ public class BoardOutline extends Item implements java.io.Serializable
         return this.shapes[p_index];
     }
 
+    @Override
     public boolean is_selected_by_filter(ItemSelectionFilter p_filter)
     {
         if (!this.is_selected_by_fixed_filter(p_filter))
@@ -206,6 +220,7 @@ public class BoardOutline extends Item implements java.io.Serializable
         return p_filter.is_selected(ItemSelectionFilter.SelectableChoices.BOARD_OUTLINE);
     }
 
+    @Override
     public java.awt.Color[] get_draw_colors(GraphicsContext p_graphics_context)
     {
         java.awt.Color[] color_arr = new java.awt.Color[this.board.layer_structure.arr.length];
@@ -244,6 +259,7 @@ public class BoardOutline extends Item implements java.io.Serializable
         return this.keepout_lines;
     }
 
+    @Override
     public void draw(java.awt.Graphics p_g, GraphicsContext p_graphics_context, java.awt.Color[] p_color_arr, double p_intensity)
     {
         if (p_graphics_context == null || p_intensity <= 0)
@@ -260,11 +276,13 @@ public class BoardOutline extends Item implements java.io.Serializable
         }
     }
 
+    @Override
     public Item copy(int p_id_no)
     {
         return new BoardOutline(this.shapes, this.clearance_class_no(), p_id_no, this.board);
     }
 
+    @Override
     public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale)
     {
         java.util.ResourceBundle resources =
@@ -274,6 +292,7 @@ public class BoardOutline extends Item implements java.io.Serializable
         p_window.newline();
     }
 
+    @Override
     public boolean write(java.io.ObjectOutputStream p_stream)
     {
         try
@@ -336,6 +355,7 @@ public class BoardOutline extends Item implements java.io.Serializable
         return HALF_WIDTH;
     }
 
+    @Override
     protected TileShape[] calculate_tree_shapes(ShapeSearchTree p_search_tree)
     {
         return p_search_tree.calculate_tree_shapes(this);

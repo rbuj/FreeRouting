@@ -160,6 +160,7 @@ public class WindowMoveParameter extends BoardSavableSubWindow
     
     private class HorizontalGridFieldKeyListener extends java.awt.event.KeyAdapter
     {
+        @Override
         public void keyTyped(java.awt.event.KeyEvent p_evt)
         {
             if (p_evt.getKeyChar() == '\n')
@@ -190,6 +191,7 @@ public class WindowMoveParameter extends BoardSavableSubWindow
     
     private class HorizontalGridFieldFocusListener implements java.awt.event.FocusListener
     {
+        @Override
         public void focusLost(java.awt.event.FocusEvent p_evt)
         {
             if (!key_input_completed)
@@ -199,6 +201,7 @@ public class WindowMoveParameter extends BoardSavableSubWindow
                 key_input_completed = true;
             }
         }
+        @Override
         public void focusGained(java.awt.event.FocusEvent p_evt)
         {
         }
@@ -206,6 +209,7 @@ public class WindowMoveParameter extends BoardSavableSubWindow
     
     private class VerticalGridFieldKeyListener extends java.awt.event.KeyAdapter
     {
+        @Override
         public void keyTyped(java.awt.event.KeyEvent p_evt)
         {
             if (p_evt.getKeyChar() == '\n')
@@ -235,6 +239,7 @@ public class WindowMoveParameter extends BoardSavableSubWindow
     
     private class VerticalGridFieldFocusListener implements java.awt.event.FocusListener
     {
+        @Override
         public void focusLost(java.awt.event.FocusEvent p_evt)
         {
             if (!key_input_completed)
@@ -244,6 +249,7 @@ public class WindowMoveParameter extends BoardSavableSubWindow
                 key_input_completed = true;
             }
         }
+        @Override
         public void focusGained(java.awt.event.FocusEvent p_evt)
         {
         }
@@ -251,6 +257,7 @@ public class WindowMoveParameter extends BoardSavableSubWindow
     
     private class ZoomButtonListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             board_handling.settings.set_zoom_with_wheel(true);
@@ -259,6 +266,7 @@ public class WindowMoveParameter extends BoardSavableSubWindow
     
     private class RotateButtonListener implements java.awt.event.ActionListener
     {
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             board_handling.settings.set_zoom_with_wheel(false);

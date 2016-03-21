@@ -42,11 +42,13 @@ public class DragMenuState extends MenuState
         super(p_board_handling, p_logfile);
     }
     
+    @Override
     public InteractiveState mouse_pressed(FloatPoint p_point)
     {
         return DragState.get_instance(p_point, this, hdlg, logfile);
     }
     
+    @Override
     public String get_help_id()
     {
         return "MenuState_DragMenuState";
