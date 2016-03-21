@@ -523,7 +523,7 @@ public class WindowVia extends BoardSavableSubWindow
                 return;
             }
             new_name = new_name.trim();
-            if (new_name.equals(""))
+            if (new_name.isEmpty())
             {
                 return;
             }

@@ -51,7 +51,7 @@ public class CopyItemState extends InteractiveState
     public static CopyItemState get_instance(FloatPoint p_location, Collection<Item> p_item_list,
     InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile)
     {
-        if (p_item_list.size() == 0)
+        if (p_item_list.isEmpty())
         {
             return null;
         }

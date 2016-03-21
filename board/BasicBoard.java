@@ -1416,7 +1416,7 @@ public class BasicBoard implements java.io.Serializable
                 if (curr_trace.first_corner().equals(p_location))
                 {
                     Collection<Item> contacts = curr_trace.get_start_contacts();
-                    if (contacts.size() == 0)
+                    if (contacts.isEmpty())
                     {
                         return curr_trace;
                     }
@@ -1424,7 +1424,7 @@ public class BasicBoard implements java.io.Serializable
                 if (curr_trace.last_corner().equals(p_location))
                 {
                     Collection<Item> contacts = curr_trace.get_end_contacts();
-                    if (contacts.size() == 0)
+                    if (contacts.isEmpty())
                     {
                         return curr_trace;
                     }

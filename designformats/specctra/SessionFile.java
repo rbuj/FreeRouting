@@ -180,7 +180,7 @@ public class SessionFile
             p_file.write(" back ");
         }
         int rotation = (int) Math.round(p_component.get_rotation_in_degree());
-        p_file.write((new Integer(rotation).toString()));
+        p_file.write((Integer.toString(rotation)));
         if (p_component.position_fixed)
         {
             p_file.new_line();
@@ -470,9 +470,9 @@ public class SessionFile
         for (int i = 0; i < corner_count; ++i)
         {
             p_file.new_line();
-            p_file.write(new Integer(p_coors[2 * i]).toString());
+            p_file.write(Integer.toString(p_coors[2 * i]));
             p_file.write(" ");
-            p_file.write(new Integer(p_coors[2 * i + 1]).toString());
+            p_file.write(Integer.toString(p_coors[2 * i + 1]));
         }
         p_file.end_scope();
     }

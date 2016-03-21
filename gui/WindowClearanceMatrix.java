@@ -260,7 +260,7 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow
      */
     private boolean is_legal_class_name(String p_string)
     {
-        if (p_string.equals(""))
+        if (p_string.isEmpty())
         {
             return false;
         }

@@ -55,7 +55,7 @@ public class PolylinePath extends Path
             p_file.new_line();
             for (int j = 0; j < 4; ++j)
             {
-                p_file.write(new Double(coordinate_arr[4 * i + j]).toString());
+                p_file.write(Double.toString(coordinate_arr[4 * i + j]));
                 p_file.write(" ");
             }
         }

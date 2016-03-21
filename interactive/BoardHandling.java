@@ -1691,7 +1691,7 @@ public class BoardHandling
     {
         IntPoint location = p_location.round();
         java.util.Set<Item> result = board.pick_items(location, settings.layer, p_item_filter);
-        if (result.size() == 0 && settings.select_on_all_visible_layers)
+        if (result.isEmpty() && settings.select_on_all_visible_layers)
         {
             for (int i = 0; i < graphics_context.layer_count(); ++i)
             {

@@ -57,9 +57,9 @@ public class PolygonPath extends Path
         for (int i = 0; i < corner_count; ++i)
         {
             p_file.new_line();
-            p_file.write(new Double(coordinate_arr[2 * i]).toString());
+            p_file.write(Double.toString(coordinate_arr[2 * i]));
             p_file.write(" ");
-            p_file.write(new Double(coordinate_arr[2 * i + 1]).toString());
+            p_file.write(Double.toString(coordinate_arr[2 * i + 1]));
         }
         p_file.end_scope();
     }

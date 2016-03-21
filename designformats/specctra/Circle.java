@@ -96,7 +96,7 @@ public class Circle extends Shape
         for (int i = 0; i < coor.length; ++i)
         {
             p_file.write(" ");
-            p_file.write(new Double(coor[i]).toString());
+            p_file.write(Double.toString(coor[i]));
         }
         p_file.write(")");
     }

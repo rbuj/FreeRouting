@@ -27,6 +27,7 @@ import datastructures.PlanarDelaunayTriangulation;
 import geometry.planar.FloatPoint;
 import geometry.planar.Point;
 import java.awt.Graphics;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -59,10 +60,7 @@ public class NetIncompletes
         // create a Delauny Triangulation for the net_items
         Collection<PlanarDelaunayTriangulation.Storable> triangulation_objects =
                 new LinkedList<PlanarDelaunayTriangulation.Storable>();
-        for (PlanarDelaunayTriangulation.Storable curr_object : net_items)
-        {
-            triangulation_objects.add(curr_object);
-        }
+        triangulation_objects.addAll(Arrays.asList(net_items));
         PlanarDelaunayTriangulation triangulation = new PlanarDelaunayTriangulation(triangulation_objects);
         
         // sort the result edges of the triangulation by length in ascending order.
@@ -123,7 +121,7 @@ public class NetIncompletes
         {
             new_violation = trace_length - max_length;
         }
-        if (min_length > 0  && trace_length < min_length && this.incompletes.size() == 0)
+        if (min_length > 0  && trace_length < min_length && this.incompletes.isEmpty())
         {
             new_violation = trace_length - min_length;
         }
