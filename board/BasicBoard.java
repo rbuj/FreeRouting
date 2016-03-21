@@ -1307,7 +1307,7 @@ public class BasicBoard implements java.io.Serializable
             {
                 for (int i = 0; i < curr_item.net_count(); ++i)
                 {
-                    p_changed_nets.add(new Integer(curr_item.get_net_no(i)));
+                    p_changed_nets.add(curr_item.get_net_no(i));
                 }
             }
         }
@@ -1324,7 +1324,7 @@ public class BasicBoard implements java.io.Serializable
             {
                 for (int i = 0; i < curr_item.net_count(); ++i)
                 {
-                    p_changed_nets.add(new Integer(curr_item.get_net_no(i)));
+                    p_changed_nets.add(curr_item.get_net_no(i));
                 }
             }
         }

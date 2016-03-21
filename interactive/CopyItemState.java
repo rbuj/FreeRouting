@@ -180,7 +180,7 @@ public class CopyItemState extends InteractiveState
             {
                 //This item belongs to a component
                 int new_cmp_no;
-                Integer curr_key = new Integer(curr_cmp_no);
+                Integer curr_key = curr_cmp_no;
                 if (cmp_no_pairs.containsKey(curr_key))
                 {
                     // the new component for this pin is already created
@@ -224,7 +224,7 @@ public class CopyItemState extends InteractiveState
                             old_component.placed_on_front(), new_package);
                     copied_components.add(new_component);
                     new_cmp_no = new_component.no;
-                    cmp_no_pairs.put(new Integer(curr_cmp_no), new Integer(new_cmp_no));
+                    cmp_no_pairs.put(curr_cmp_no, new_cmp_no);
                 }
                 curr_item.assign_component_no(new_cmp_no);
             }
