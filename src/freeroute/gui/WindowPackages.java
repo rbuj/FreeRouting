@@ -20,7 +20,6 @@
 
 package gui;
 
-import java.util.Iterator;
 import java.util.List;
 import library.Package;
 import library.Packages;
