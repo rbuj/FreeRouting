@@ -111,7 +111,7 @@ public class Component implements UndoableObjects.Storable, ObjectInfoPanel.Prin
         {
             return;
         }
-        this.rotation_in_degree = this.rotation_in_degree  + p_factor  * 90;
+        this.rotation_in_degree += p_factor  * 90;
         while (this.rotation_in_degree >= 360)
         {
             this.rotation_in_degree -= 360;
@@ -140,7 +140,7 @@ public class Component implements UndoableObjects.Storable, ObjectInfoPanel.Prin
             // take care of the order of mirroring and rotating on the back side of the board
             turn_angle = 360 - p_angle_in_degree;
         }
-        this.rotation_in_degree = this.rotation_in_degree  + turn_angle;
+        this.rotation_in_degree += turn_angle;
         while (this.rotation_in_degree >= 360)
         {
             this.rotation_in_degree -= 360;

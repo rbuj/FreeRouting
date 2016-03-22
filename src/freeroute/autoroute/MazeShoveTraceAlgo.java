@@ -207,7 +207,7 @@ public class MazeShoveTraceAlgo
         if (shove_width < Integer.MAX_VALUE)
         {
             // shorten shove_line_segment
-            shove_width = shove_width - 1;
+            shove_width -= 1;
             if (shove_width <= 0)
             {
                 return true;
