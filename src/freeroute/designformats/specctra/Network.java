@@ -333,7 +333,7 @@ public class Network extends ScopeKeyword
         boolean scope_is_empty = (next_token == CLOSED_BRACKET);
         if (next_token instanceof Integer)
         {
-            subnet_number = ((Integer) next_token).intValue();
+            subnet_number = (int) next_token;
         }
         boolean pin_order_found = false;
         Collection<Net.Pin> pin_list = new LinkedList<>();

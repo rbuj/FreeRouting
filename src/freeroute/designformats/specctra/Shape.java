@@ -156,11 +156,11 @@ public abstract class Shape
             Object next_object = it.next();
             if (next_object instanceof Double)
             {
-                width = ((Double) next_object).doubleValue();
+                width = (double) next_object;
             }
             else if (next_object instanceof Integer)
             {
-                width = ((Integer) next_object).intValue();
+                width = (int) next_object;
             }
             else
             {
@@ -173,11 +173,11 @@ public abstract class Shape
                 next_object = it.next();
                 if (next_object instanceof Double)
                 {
-                    corner_arr[i] = ((Double) next_object).doubleValue();
+                    corner_arr[i] = (double) next_object;
                 }
                 else if (next_object instanceof Integer)
                 {
-                    corner_arr[i] = ((Integer) next_object).intValue();
+                    corner_arr[i] = (int) next_object;
                 }
                 else
                 {
@@ -347,11 +347,11 @@ public abstract class Shape
                 next_token = p_scanner.next_token();
                 if (next_token instanceof Double)
                 {
-                    rect_coor[i] = ((Double) next_token).doubleValue();
+                    rect_coor[i] = (double) next_token;
                 }
                 else if (next_token instanceof Integer)
                 {
-                    rect_coor[i] = ((Integer) next_token).intValue();
+                    rect_coor[i] = (int) next_token;
                 }
                 else
                 {
@@ -463,11 +463,11 @@ public abstract class Shape
                 Object next_object = it.next();
                 if (next_object instanceof Double)
                 {
-                    coor_arr[i] = ((Double) next_object).doubleValue();
+                    coor_arr[i] = (double) next_object;
                 }
                 else if (next_object instanceof Integer)
                 {
-                    coor_arr[i] = ((Integer) next_object).intValue();
+                    coor_arr[i] = (int) next_object;
                 }
                 else
                 {
@@ -547,11 +547,11 @@ public abstract class Shape
                 }
                 if (next_token instanceof Double)
                 {
-                    circle_coor[curr_index] = ((Double) next_token).doubleValue();
+                    circle_coor[curr_index] = (double) next_token;
                 }
                 else if (next_token instanceof Integer)
                 {
-                    circle_coor[curr_index] = ((Integer) next_token).intValue();
+                    circle_coor[curr_index] = (int) next_token;
                 }
                 else
                 {
@@ -649,11 +649,11 @@ public abstract class Shape
             Object next_object = it.next();
             if (next_object instanceof Double)
             {
-                width = ((Double) next_object).doubleValue();
+                width = (double) next_object;
             }
             else if (next_object instanceof Integer)
             {
-                width = ((Integer) next_object).intValue();
+                width = (int) next_object;
             }
             else
             {
@@ -666,11 +666,11 @@ public abstract class Shape
                 next_object = it.next();
                 if (next_object instanceof Double)
                 {
-                    coordinate_arr[i] = ((Double) next_object).doubleValue();
+                    coordinate_arr[i] = (double) next_object;
                 }
                 else if (next_object instanceof Integer)
                 {
-                    coordinate_arr[i] = ((Integer) next_object).intValue();
+                    coordinate_arr[i] = (int) next_object;
                 }
                 else
                 {

@@ -59,7 +59,7 @@ public class Resolution extends ScopeKeyword
                 System.out.println("Resolution.read_scope: integer expected");
                 return false;
             }
-            p_par.resolution = ((Integer)next_token).intValue();
+            p_par.resolution = (int) next_token;
             // overread the closing bracket
             next_token = p_par.scanner.next_token();
             if (next_token != Keyword.CLOSED_BRACKET)

@@ -260,11 +260,11 @@ public class Component extends ScopeKeyword
                 next_token = p_scanner.next_token();
                 if (next_token instanceof Double)
                 {
-                    location[i] = ((Double) next_token).doubleValue();
+                    location[i] = (double) next_token;
                 }
                 else if (next_token instanceof Integer)
                 {
-                    location[i] = ((Integer) next_token).intValue();
+                    location[i] = (int) next_token;
                 }
                 else if (next_token == Keyword.CLOSED_BRACKET)
                 {
@@ -292,11 +292,11 @@ public class Component extends ScopeKeyword
             next_token = p_scanner.next_token();
             if (next_token instanceof Double)
             {
-                rotation = ((Double) next_token).doubleValue();
+                rotation = (double) next_token;
             }
             else if (next_token instanceof Integer)
             {
-                rotation = ((Integer) next_token).intValue();
+                rotation = (int) next_token;
             }
             else
             {

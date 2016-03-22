@@ -595,11 +595,11 @@ class Wiring extends ScopeKeyword
                 next_token = p_par.scanner.next_token();
                 if (next_token instanceof Double)
                 {
-                    location[i] = ((Double) next_token).doubleValue();
+                    location[i] = (double) next_token;
                 }
                 else if (next_token instanceof Integer)
                 {
-                    location[i] = ((Integer) next_token).intValue();
+                    location[i] = (int) next_token;
                 }
                 else
                 {

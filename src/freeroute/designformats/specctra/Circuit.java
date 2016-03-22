@@ -106,11 +106,11 @@ public class Circuit
             }
             if (next_token instanceof Double)
             {
-                length_arr[i] = ((Double) next_token).doubleValue();
+                length_arr[i] = (double) next_token;
             }
             else if (next_token instanceof Integer)
             {
-                length_arr[i] = ((Integer) next_token).intValue();
+                length_arr[i] = (int) next_token;
             }
             else
             {

@@ -326,11 +326,11 @@ public class Package
                 next_token = p_scanner.next_token();
                 if (next_token instanceof Double)
                 {
-                    pin_coor[i] = ((Double) next_token).doubleValue();
+                    pin_coor[i] = (double) next_token;
                 }
                 else if (next_token instanceof Integer)
                 {
-                    pin_coor[i] = ((Integer) next_token).intValue();
+                    pin_coor[i] = (int) next_token;
                 }
                 else
                 {
@@ -383,11 +383,11 @@ public class Package
             Object next_token = p_scanner.next_token();
             if (next_token instanceof Integer)
             {
-                result = ((Integer)next_token).intValue();
+                result = (int) next_token;
             }
             else if (next_token instanceof Double)
             {
-                result = ((Double)next_token).doubleValue();
+                result = (double) next_token;
             }
             else
             {

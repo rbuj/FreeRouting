@@ -143,11 +143,11 @@ public abstract class Rule
             Object next_token = p_scanner.next_token();
             if (next_token instanceof Double)
             {
-                value = ((Double) next_token).doubleValue();
+                value = (double) next_token;
             }
             else if (next_token instanceof Integer)
             {
-                value = ((Integer) next_token).intValue();
+                value = (int) next_token;
             }
             else
             {
@@ -283,11 +283,11 @@ public abstract class Rule
             Object next_token = p_scanner.next_token();
             if (next_token instanceof Double)
             {
-                value = ((Double) next_token).doubleValue();
+                value = (double) next_token;
             }
             else if (next_token instanceof Integer)
             {
-                value = ((Integer) next_token).intValue();
+                value = (int) next_token;
             }
             else
             {
