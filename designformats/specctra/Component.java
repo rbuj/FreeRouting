@@ -102,7 +102,7 @@ public class Component extends ScopeKeyword
             for (int i = 0; i < coor.length; ++i)
             {
                 p_par.file.write(" ");
-                p_par.file.write((new Double(coor[i])).toString());
+                p_par.file.write(Double.toString(coor[i]));
             }
             if (p_component.placed_on_front())
             {

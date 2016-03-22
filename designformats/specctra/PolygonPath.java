@@ -52,7 +52,7 @@ public class PolygonPath extends Path
         p_file.write("path ");
         p_identifier_type.write(this.layer.name, p_file);
         p_file.write(" ");
-        p_file.write((new Double(this.width)).toString());
+        p_file.write(Double.toString(this.width));
         int corner_count = coordinate_arr.length/ 2;
         for (int i = 0; i < corner_count; ++i)
         {
@@ -71,7 +71,7 @@ public class PolygonPath extends Path
         p_file.write("path ");
         p_identifier_type.write(this.layer.name, p_file);
         p_file.write(" ");
-        p_file.write((new Double(this.width)).toString());
+        p_file.write(Double.toString(this.width));
         int corner_count = coordinate_arr.length/ 2;
         for (int i = 0; i < corner_count; ++i)
         {

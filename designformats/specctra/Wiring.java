@@ -172,7 +172,7 @@ class Wiring extends ScopeKeyword
         for (int i = 0; i < via_coor.length; ++i)
         {
             p_par.file.write(" ");
-            p_par.file.write((new Double(via_coor[i])).toString());
+            p_par.file.write(Double.toString(via_coor[i]));
         }
         if (via_net != null)
         {

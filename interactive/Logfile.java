@@ -239,7 +239,7 @@ public class Logfile
             }
             try
             {
-                this.file_writer.write((new Double(p_corner.x)).toString());
+                this.file_writer.write(Double.toString(p_corner.x));
                 this.file_writer.write(" ");
                 this.file_writer.write((new Double(p_corner.y)).toString());
                 this.file_writer.write("\n");
