@@ -28,6 +28,9 @@ import geometry.planar.PolylineArea;
 import geometry.planar.PolylineShape;
 import geometry.planar.TileShape;
 import geometry.planar.Vector;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Class describing a board outline.
@@ -41,7 +44,7 @@ public class BoardOutline extends Item implements java.io.Serializable
     public BoardOutline(PolylineShape[] p_shapes, int p_clearance_class_no, int p_id_no, BasicBoard p_board)
     {
         super(new int[0], p_clearance_class_no, p_id_no, 0, FixedState.SYSTEM_FIXED, p_board);
-        shapes = p_shapes;
+        shapes = Arrays.asList(p_shapes);
     }
 
     @Override
@@ -126,9 +129,9 @@ public class BoardOutline extends Item implements java.io.Serializable
     @Override
     public void translate_by(Vector p_vector)
     {
-        for (PolylineShape curr_shape : this.shapes)
-        {
-            curr_shape = curr_shape.translate_by(p_vector);
+        for (Iterator<PolylineShape> it = this.shapes.iterator(); it.hasNext();) {
+            PolylineShape curr_shape = it.next();
+            curr_shape.translate_by(p_vector);
         }
         if (keepout_area != null)
         {
@@ -140,9 +143,9 @@ public class BoardOutline extends Item implements java.io.Serializable
     @Override
     public void turn_90_degree(int p_factor, IntPoint p_pole)
     {
-        for (PolylineShape curr_shape : this.shapes)
-        {
-            curr_shape = curr_shape.turn_90_degree(p_factor, p_pole);
+        for (Iterator<PolylineShape> it = this.shapes.iterator(); it.hasNext();) {
+            PolylineShape curr_shape = it.next();
+            curr_shape.turn_90_degree(p_factor, p_pole);
         }
         if (keepout_area != null)
         {
@@ -155,10 +158,9 @@ public class BoardOutline extends Item implements java.io.Serializable
     public void rotate_approx(double p_angle_in_degree, FloatPoint p_pole)
     {
         double angle = Math.toRadians(p_angle_in_degree);
-        for (PolylineShape curr_shape : this.shapes)
-        {
-            curr_shape = curr_shape.rotate_approx(angle, p_pole);
-
+        for (Iterator<PolylineShape> it = this.shapes.iterator(); it.hasNext();) {
+            PolylineShape curr_shape = it.next();
+            curr_shape.rotate_approx(angle, p_pole);
         }
         if (keepout_area != null)
         {
@@ -170,9 +172,9 @@ public class BoardOutline extends Item implements java.io.Serializable
     @Override
     public void change_placement_side(IntPoint p_pole)
     {
-        for (PolylineShape curr_shape : this.shapes)
-        {
-            curr_shape = curr_shape.mirror_vertical(p_pole);
+        for (Iterator<PolylineShape> it = this.shapes.iterator(); it.hasNext();) {
+            PolylineShape curr_shape = it.next();
+            curr_shape.mirror_vertical(p_pole);
         }
         if (keepout_area != null)
         {
@@ -195,17 +197,17 @@ public class BoardOutline extends Item implements java.io.Serializable
 
     public int shape_count()
     {
-        return this.shapes.length;
+        return this.shapes.size();
     }
 
     public PolylineShape get_shape(int p_index)
     {
-        if (p_index < 0 || p_index >= this.shapes.length)
+        if (p_index < 0 || p_index >= this.shapes.size())
         {
             System.out.println("BoardOutline.get_shape: p_index out of range");
             return null;
         }
-        return this.shapes[p_index];
+        return this.shapes.get(p_index);
     }
 
     @Override
@@ -238,10 +240,10 @@ public class BoardOutline extends Item implements java.io.Serializable
     {
         if (this.keepout_area == null)
         {
-            PolylineShape[] hole_arr = new PolylineShape[this.shapes.length];
+            PolylineShape[] hole_arr = new PolylineShape[this.shapes.size()];
             for (int i = 0; i < hole_arr.length; ++i)
             {
-                hole_arr[i] = this.shapes[i];
+                hole_arr[i] = this.shapes.get(i);
             }
             keepout_area = new PolylineArea(this.board.bounding_box, hole_arr);
         }
@@ -277,7 +279,7 @@ public class BoardOutline extends Item implements java.io.Serializable
     @Override
     public Item copy(int p_id_no)
     {
-        return new BoardOutline(this.shapes, this.clearance_class_no(), p_id_no, this.board);
+        return new BoardOutline(this.shapes.toArray(new PolylineShape[this.shapes.size()]), this.clearance_class_no(), p_id_no, this.board);
     }
 
     @Override
@@ -359,7 +361,7 @@ public class BoardOutline extends Item implements java.io.Serializable
         return p_search_tree.calculate_tree_shapes(this);
     }
     /** The board shapes inside the outline curves. */
-    private PolylineShape[] shapes;
+    private List<PolylineShape> shapes;
     /**
      * The board shape outside the outline curves, where a keepout will be generated
      * The outline curves are holes of the keepout_area.
