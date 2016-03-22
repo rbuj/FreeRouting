@@ -273,7 +273,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
         {
             int curr_layer_no = board_handling.get_routing_board().layer_structure.get_layer_no(this.signal_layer_no);
             board_handling.settings.autoroute_settings.set_preferred_direction_is_horizontal(curr_layer_no,
-                    combo_box_arr[signal_layer_no].getSelectedItem() == horizontal);
+                    combo_box_arr[signal_layer_no].getSelectedItem().equals(horizontal));
         }
         private final int signal_layer_no;
     }

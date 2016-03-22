@@ -447,7 +447,7 @@ public class WindowAutorouteDetailParameter extends BoardSavableSubWindow
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
             boolean old_is_slow = board_handling.get_routing_board().rules.get_slow_autoroute_algorithm();
-            boolean new_is_slow = speed_combo_box.getSelectedItem() == speed_slow;
+            boolean new_is_slow = speed_combo_box.getSelectedItem().equals(speed_slow);
             if (old_is_slow != new_is_slow)
             {
                 board_handling.get_routing_board().rules.set_slow_autoroute_algorithm(new_is_slow);
