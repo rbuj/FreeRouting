@@ -29,8 +29,8 @@ import geometry.planar.PolylineShape;
 import geometry.planar.TileShape;
 import geometry.planar.Vector;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Class describing a board outline.
@@ -129,9 +129,9 @@ public class BoardOutline extends Item implements java.io.Serializable
     @Override
     public void translate_by(Vector p_vector)
     {
-        for (Iterator<PolylineShape> it = this.shapes.iterator(); it.hasNext();) {
+        for (ListIterator<PolylineShape> it = this.shapes.listIterator(); it.hasNext();) {
             PolylineShape curr_shape = it.next();
-            curr_shape.translate_by(p_vector);
+            it.set(curr_shape.translate_by(p_vector));
         }
         if (keepout_area != null)
         {
@@ -143,9 +143,9 @@ public class BoardOutline extends Item implements java.io.Serializable
     @Override
     public void turn_90_degree(int p_factor, IntPoint p_pole)
     {
-        for (Iterator<PolylineShape> it = this.shapes.iterator(); it.hasNext();) {
+        for (ListIterator<PolylineShape> it = this.shapes.listIterator(); it.hasNext();) {
             PolylineShape curr_shape = it.next();
-            curr_shape.turn_90_degree(p_factor, p_pole);
+            it.set(curr_shape.turn_90_degree(p_factor, p_pole));
         }
         if (keepout_area != null)
         {
@@ -158,9 +158,9 @@ public class BoardOutline extends Item implements java.io.Serializable
     public void rotate_approx(double p_angle_in_degree, FloatPoint p_pole)
     {
         double angle = Math.toRadians(p_angle_in_degree);
-        for (Iterator<PolylineShape> it = this.shapes.iterator(); it.hasNext();) {
+        for (ListIterator<PolylineShape> it = this.shapes.listIterator(); it.hasNext();) {
             PolylineShape curr_shape = it.next();
-            curr_shape.rotate_approx(angle, p_pole);
+            it.set(curr_shape.rotate_approx(angle, p_pole));
         }
         if (keepout_area != null)
         {
@@ -172,9 +172,9 @@ public class BoardOutline extends Item implements java.io.Serializable
     @Override
     public void change_placement_side(IntPoint p_pole)
     {
-        for (Iterator<PolylineShape> it = this.shapes.iterator(); it.hasNext();) {
+        for (ListIterator<PolylineShape> it = this.shapes.listIterator(); it.hasNext();) {
             PolylineShape curr_shape = it.next();
-            curr_shape.mirror_vertical(p_pole);
+            it.set(curr_shape.mirror_vertical(p_pole));
         }
         if (keepout_area != null)
         {
