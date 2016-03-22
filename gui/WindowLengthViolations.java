@@ -22,6 +22,7 @@
 package gui;
 
 import interactive.RatsNest;
+import java.util.List;
 import rules.Net;
 import rules.NetClass;
 import rules.Nets;
@@ -69,15 +70,14 @@ public class WindowLengthViolations  extends WindowObjectListWithFilter
     @Override
     protected void select_instances()
     {
-        Object[] selected_violations = list.getSelectedValues();
-        if (selected_violations.length <= 0)
+        List<LengthViolation> selected_violations = list.getSelectedValuesList();
+        if (selected_violations.isEmpty())
         {
             return;
         }
         java.util.Set<board.Item> selected_items = new java.util.TreeSet<>();
-        for (int i = 0; i < selected_violations.length; ++i)
+        for (LengthViolation curr_violation : selected_violations)
         {
-            LengthViolation curr_violation = ((LengthViolation) selected_violations[i]);
             selected_items.addAll(curr_violation.net.get_items());            
         }
         interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;

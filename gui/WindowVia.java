@@ -21,6 +21,7 @@
 package gui;
 
 import board.Layer;
+import java.util.List;
 import rules.BoardRules;
 import rules.ViaRule;
 
@@ -471,16 +472,12 @@ public class WindowVia extends BoardSavableSubWindow
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
-            Object[] selected_objects = rule_list.getSelectedValues();
-            if (selected_objects.length <= 0)
+            List<WindowObjectInfo.Printable> selected_objects = rule_list.getSelectedValuesList();
+            if (selected_objects.isEmpty())
             {
                 return;
             }
-            java.util.Collection<WindowObjectInfo.Printable> object_list = new java.util.LinkedList<>();
-            for (int i = 0; i < selected_objects.length; ++i)
-            {
-                object_list.add((WindowObjectInfo.Printable)(selected_objects[i]));
-            }
+            java.util.Collection<WindowObjectInfo.Printable> object_list = new java.util.LinkedList<>(selected_objects);
             board.CoordinateTransform coordinate_transform = board_frame.board_panel.board_handling.coordinate_transform;
             WindowObjectInfo new_window =
                     WindowObjectInfo.display(resources.getString("selected_rule"), object_list, board_frame, coordinate_transform);

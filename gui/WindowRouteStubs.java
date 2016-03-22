@@ -26,6 +26,7 @@ import datastructures.Signum;
 import geometry.planar.FloatPoint;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 
@@ -138,15 +139,15 @@ public class WindowRouteStubs extends WindowObjectListWithFilter
     @Override
     protected void select_instances()
     {
-        Object[] selected_list_values = list.getSelectedValues();
-        if (selected_list_values.length <= 0)
+        List<RouteStubInfo> selected_list_values = list.getSelectedValuesList();
+        if (selected_list_values.isEmpty())
         {
             return;
         }
         Set<board.Item> selected_items = new java.util.TreeSet<>();
-        for (int i = 0; i < selected_list_values.length; ++i)
+        for (RouteStubInfo current_value : selected_list_values)
         {
-            selected_items.add(((RouteStubInfo)selected_list_values[i]).stub_item);
+            selected_items.add(current_value.stub_item);
         }
         interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;
         board_handling.select_items(selected_items);

@@ -21,6 +21,7 @@
 package gui;
 import board.Component;
 import board.Components;
+import java.util.List;
 
 /**
  * Window displaying the components on the board.
@@ -63,8 +64,8 @@ public class WindowComponents extends WindowObjectListWithFilter
     @Override
     protected void select_instances()
     {
-        Object[] selected_components = list.getSelectedValues();
-        if (selected_components.length <= 0)
+        List<Object> selected_components = list.getSelectedValuesList();
+        if (selected_components.isEmpty())
         {
             return;
         }
@@ -76,16 +77,7 @@ public class WindowComponents extends WindowObjectListWithFilter
             if (curr_item.get_component_no() > 0)
             {
                 board.Component curr_component = routing_board.components.get(curr_item.get_component_no());
-                boolean component_matches = false;
-                for (int i = 0; i < selected_components.length; ++i)
-                {
-                    if (curr_component == selected_components[i])
-                    {
-                        component_matches = true;
-                        break;
-                    }
-                }
-                if (component_matches)
+                if (selected_components.contains(curr_component))
                 {
                     selected_items.add(curr_item);
                 }

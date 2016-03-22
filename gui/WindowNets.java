@@ -20,6 +20,8 @@
 
 package gui;
 
+import java.util.Iterator;
+import java.util.List;
 import rules.Net;
 import rules.Nets;
 
@@ -78,15 +80,15 @@ public class WindowNets extends WindowObjectListWithFilter
     @Override
     protected void select_instances()
     {
-        Object[] selected_nets = list.getSelectedValues();
-        if (selected_nets.length <= 0)
+        List<Net> selected_nets = list.getSelectedValuesList();
+        if (selected_nets.isEmpty())
         {
             return;
         }
-        int [] selected_net_numbers = new int[selected_nets.length];
-        for (int i = 0; i < selected_nets.length; ++i)
+        int [] selected_net_numbers = new int[selected_nets.size()];
+        for (int i = 0; i < selected_nets.size(); ++i)
         {
-            selected_net_numbers[i] = ((Net) selected_nets[i]).net_number;
+            selected_net_numbers[i] = selected_nets.get(i).net_number;
         }
         board.RoutingBoard routing_board = board_frame.board_panel.board_handling.get_routing_board();
         java.util.Set<board.Item> selected_items = new java.util.TreeSet<>();
@@ -118,8 +120,8 @@ public class WindowNets extends WindowObjectListWithFilter
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
-            Object[] selected_nets = list.getSelectedValues();
-            if (selected_nets.length <= 0)
+            List<Net> selected_nets = list.getSelectedValuesList();
+            if (selected_nets.isEmpty())
             {
                 return;
             }
@@ -137,9 +139,10 @@ public class WindowNets extends WindowObjectListWithFilter
                 return;
             }
             rules.NetClass selected_class = (rules.NetClass) selected_value;
-            for (int i = 0; i < selected_nets.length; ++i)
+            Iterator<Net> it = selected_nets.iterator();
+            while (it.hasNext())
             {
-                ((Net) selected_nets[i]).set_class(selected_class);
+                it.next().set_class(selected_class);
             }
             board_frame.refresh_windows();
         }
@@ -150,8 +153,8 @@ public class WindowNets extends WindowObjectListWithFilter
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
-            Object[] selected_nets = list.getSelectedValues();
-            if (selected_nets.length <= 0)
+            List<Net> selected_nets = list.getSelectedValuesList();
+            if (selected_nets.isEmpty())
             {
                 return;
             }
@@ -161,9 +164,9 @@ public class WindowNets extends WindowObjectListWithFilter
             {
                 board_handling.set_incompletes_filter(i, true);
             }
-            for (int i = 0; i < selected_nets.length; ++i)
-            {
-                board_handling.set_incompletes_filter(((Net) selected_nets[i]).net_number, false);
+            for (Iterator<Net> it = selected_nets.iterator(); it.hasNext();) {
+                Net current_net = it.next();
+                board_handling.set_incompletes_filter(current_net.net_number, false);
             }
             board_frame.board_panel.repaint();
         }

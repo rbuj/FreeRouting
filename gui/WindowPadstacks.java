@@ -21,6 +21,7 @@
 package gui;
 
 import datastructures.UndoableObjects;
+import java.util.List;
 import library.Padstack;
 import library.Padstacks;
 
@@ -65,16 +66,12 @@ public class WindowPadstacks extends WindowObjectListWithFilter
     @Override
     protected void select_instances()
     {
-        Object[] selected_padstacks = list.getSelectedValues();
-        if (selected_padstacks.length <= 0)
+        List<Padstack> selected_padstacks = list.getSelectedValuesList();
+        if (selected_padstacks.isEmpty())
         {
             return;
         }
-        java.util.Collection<Padstack> padstack_list = new java.util.LinkedList<>();
-        for (int i = 0; i < selected_padstacks.length; ++i)
-        {
-            padstack_list.add((Padstack)selected_padstacks[i]);
-        }
+        java.util.Collection<Padstack> padstack_list = new java.util.LinkedList<>(selected_padstacks);
         board.RoutingBoard routing_board = board_frame.board_panel.board_handling.get_routing_board();
         java.util.Set<board.Item> board_instances = new java.util.TreeSet<>();
         java.util.Iterator<UndoableObjects.UndoableObjectNode> it = routing_board.item_list.start_read_object();

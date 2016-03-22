@@ -20,6 +20,8 @@
 
 package gui;
 
+import java.util.Iterator;
+import java.util.List;
 import library.Package;
 import library.Packages;
 
@@ -64,8 +66,8 @@ public class WindowPackages extends WindowObjectListWithFilter
     @Override
     protected void select_instances()
     {
-        Object[] selected_packages = list.getSelectedValues();
-        if (selected_packages.length <= 0)
+        List<Object> selected_packages = list.getSelectedValuesList();
+        if (selected_packages.isEmpty())
         {
             return;
         }
@@ -77,17 +79,7 @@ public class WindowPackages extends WindowObjectListWithFilter
             if (curr_item.get_component_no() > 0)
             {
                 board.Component curr_component = routing_board.components.get(curr_item.get_component_no());
-                Package curr_package = curr_component.get_package();
-                boolean package_matches = false;
-                for (int i = 0; i < selected_packages.length; ++i)
-                {
-                    if (curr_package == selected_packages[i])
-                    {
-                        package_matches = true;
-                        break;
-                    }
-                }
-                if (package_matches)
+                if (selected_packages.contains(curr_component.get_package()))
                 {
                     board_instances.add(curr_item);
                 }

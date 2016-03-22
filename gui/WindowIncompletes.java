@@ -21,6 +21,7 @@
 package gui;
 
 import interactive.RatsNest;
+import java.util.List;
 
 /**
  *
@@ -61,18 +62,16 @@ public class WindowIncompletes extends WindowObjectListWithFilter
     @Override
     protected void select_instances()
     {
-        Object[] selected_incompletes = list.getSelectedValues();
-        if (selected_incompletes.length <= 0)
+        List<RatsNest.AirLine> selected_incompletes = list.getSelectedValuesList();
+        if (selected_incompletes.isEmpty())
         {
             return;
         }
         java.util.Set<board.Item> selected_items = new java.util.TreeSet<>();
-        for (int i = 0; i < selected_incompletes.length; ++i)
+        for (RatsNest.AirLine curr_airline : selected_incompletes)
         {
-            RatsNest.AirLine curr_airline = (RatsNest.AirLine) selected_incompletes[i];
             selected_items.add(curr_airline.from_item);
             selected_items.add(curr_airline.to_item);
-            
         }
         board_frame.board_panel.board_handling.select_items(selected_items);
         board_frame.board_panel.board_handling.zoom_selection();
