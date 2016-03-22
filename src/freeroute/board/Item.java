@@ -210,7 +210,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
 
     /**
      * Creates a copy of this item with id number p_id_no.
-     * If p_id_no <= 0, the id_no of the new item is generated internally
+     * If p_id_no {@literal <}= 0, the id_no of the new item is generated internally
      */
     public abstract Item copy(int p_id_no);
 
@@ -569,7 +569,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
     /**
      * Returns the set of all Connectable items of the net with number p_net_no which can be reached recursively
      * via normal contacts from this item.
-     * If p_net_no <= 0, the net number is ignored.
+     * If p_net_no {@literal <}= 0, the net number is ignored.
      */
     public Set<Item> get_connected_set(int p_net_no)
     {
@@ -579,7 +579,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
     /**
      * Returns the set of all Connectable items of the net with number p_net_no which can be reached recursively
      * via normal contacts from this item.
-     * If p_net_no <= 0, the net number is ignored.
+     * If p_net_no {@literal <}= 0, the net number is ignored.
      * If p_stop_at_plane, the recursive algorithm stops, when a conduction area is reached,
      * which does not belong to a component.
      */
@@ -672,7 +672,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
     /**
      * Returns the set of all Connectable items belonging to the net with number p_net_no,
      * which are not in the connected set of this item.
-     * If p_net_no <= 0, the net numbers contained in this items are used  instead of p_net_no.
+     * If p_net_no {@literal <}= 0, the net numbers contained in this items are used  instead of p_net_no.
      */
     public Set<Item> get_unconnected_set(int p_net_no)
     {
@@ -876,7 +876,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
 
     /**
      * Returns for this item the layer of the shape with index p_index.
-     * If p_id_no <= 0, it w2ill be generated internally.
+     * If p_id_no {@literal <}= 0, it w2ill be generated internally.
      */
     @Override
     public abstract int shape_layer(int p_index);
@@ -1005,7 +1005,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
     }
 
     /**
-     * gets the p_no-th net number of this item for 0 <= p_no < this.net_count().
+     * gets the p_no-th net number of this item for 0 {@literal <}= p_no {@literal <} this.net_count().
      */
     public int get_net_no(int p_no)
     {
@@ -1104,7 +1104,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
 
     /**
      * Makes this item connectable and assigns it to the input net.
-     * If p_net_no < 0, the net items net number will be removed and the item will no longer be connectable.
+     * If p_net_no {@literal <} 0, the net items net number will be removed and the item will no longer be connectable.
      */
     public void assign_net_no(int p_net_no)
     {

@@ -22,7 +22,7 @@
 package board;
 
 /**
- * If > RELEASE, some features may be used, which are still in experimental state.
+ * If {@literal >} RELEASE, some features may be used, which are still in experimental state.
  * Also warnings for debugging may be printed depending on the test_level.
  *
  * @author alfons

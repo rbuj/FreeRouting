@@ -340,7 +340,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
     /**
      * Puts all items in the tree overlapping with p_shape
      * on layer p_layer into p_obstacles.
-     * If p_layer < 0, the layer is ignored.
+     * If p_layer {@literal <} 0, the layer is ignored.
      */
     public void overlapping_objects(ConvexShape p_shape, int p_layer, int[] p_ignore_net_nos,
             Set<SearchTreeObject> p_obstacles)
@@ -360,7 +360,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
 
     /**
      * Returns all SearchTreeObjects on layer p_layer, which overlap with p_shape.
-     * If p_layer < 0, the layer is ignored
+     * If p_layer {@literal <} 0, the layer is ignored
      */
     public Set<SearchTreeObject> overlapping_objects(ConvexShape p_shape, int p_layer)
     {
@@ -372,7 +372,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
     /**
      * Puts all tree entries overlapping with p_shape
      * on layer p_layer into the list p_obstacles.
-     * If p_layer < 0, the layer is ignored.
+     * If p_layer {@literal <} 0, the layer is ignored.
      */
     public void overlapping_tree_entries(ConvexShape p_shape, int p_layer, Collection<TreeEntry> p_tree_entries)
     {
@@ -382,7 +382,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
     /**
      * Puts all tree entries overlapping with p_shape
      * on layer p_layer into the list p_obstacles.
-     * If p_layer < 0, the layer is ignored.
+     * If p_layer {@literal <} 0, the layer is ignored.
      * tree_entries with object containing a net number of p_ignore_net_nos are ignored.
      */
     public void overlapping_tree_entries(ConvexShape p_shape, int p_layer, int[] p_ignore_net_nos,
@@ -546,7 +546,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
     /**
      * Puts all items in the tree overlapping with p_shape
      * on layer p_layer into p_obstacles, if p_obstacles != null.
-     * If p_layer < 0, the layer is ignored.
+     * If p_layer {@literal <} 0, the layer is ignored.
      */
     public void overlapping_objects_with_clearance(ConvexShape p_shape, int p_layer, int[] p_ignore_net_nos,
             int p_cl_type, Set<SearchTreeObject> p_obstacles)
@@ -578,7 +578,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
      * which describes the required clearance restrictions to other items.
      * The function may also return items, which are nearly overlapping,
      * but do not overlap with exact calculation.
-     * If p_layer < 0, the layer is ignored.
+     * If p_layer {@literal <} 0, the layer is ignored.
      */
     public Set<Item> overlapping_items_with_clearance(ConvexShape p_shape, int p_layer, int[] p_ignore_net_nos,
             int p_clearance_class)
@@ -603,7 +603,7 @@ public class ShapeSearchTree extends datastructures.MinAreaTree
      * inclusive clearance.
      * p_clearance_class is the index in the clearance matrix,
      * which describes the required clearance restrictions to other items.
-     * If p_layer < 0, the layer is ignored.
+     * If p_layer {@literal <} 0, the layer is ignored.
      */
     public Collection<TreeEntry> overlapping_tree_entries_with_clearance(ConvexShape p_shape, int p_layer,
             int[] p_ignore_net_nos, int p_clearance_class)

@@ -701,7 +701,7 @@ public class BasicBoard implements java.io.Serializable
     /**
      * Combines the connected traces of this net, which have only 1 contact
      * at the connection point.
-     * if p_net_no < 0 traces of all nets are combined.
+     * if p_net_no {@literal <} 0 traces of all nets are combined.
      */
     public boolean combine_traces(int p_net_no)
     {
@@ -841,7 +841,7 @@ public class BasicBoard implements java.io.Serializable
 
     /**
      * Returns all SearchTreeObjects on layer p_layer, which overlap with p_shape.
-     * If p_layer < 0, the layer is ignored
+     * If p_layer {@literal <} 0, the layer is ignored
      */
     public Set<SearchTreeObject> overlapping_objects(ConvexShape p_shape, int p_layer)
     {
@@ -855,7 +855,7 @@ public class BasicBoard implements java.io.Serializable
      * which describes the required clearance restrictions to other items.
      * The function may also return items, which are nearly overlapping,
      * but do not overlap with exact calculation.
-     * If p_layer < 0, the layer is ignored.
+     * If p_layer {@literal <} 0, the layer is ignored.
      */
     public Set<Item> overlapping_items_with_clearance(ConvexShape p_shape, int p_layer, int[] p_ignore_net_nos,
                                                       int p_clearance_class)
@@ -866,7 +866,7 @@ public class BasicBoard implements java.io.Serializable
 
     /**
      * Returns all items on layer p_layer, which overlap with p_area.
-     * If p_layer < 0, the layer is ignored
+     * If p_layer {@literal <} 0, the layer is ignored
      */
     public Set<Item> overlapping_items(Area p_area, int p_layer)
     {
@@ -1078,7 +1078,7 @@ public class BasicBoard implements java.io.Serializable
 
     /**
      * Returns the list of items on the board, whose shape on layer p_layer contains the point at p_location.
-     * If p_layer < 0, the layer is ignored.
+     * If p_layer {@literal <} 0, the layer is ignored.
      * If p_item_selection_filter != null, only items of types selected by the filter are picked.
      */
     public Set<Item> pick_items(Point p_location, int p_layer, ItemSelectionFilter p_filter)

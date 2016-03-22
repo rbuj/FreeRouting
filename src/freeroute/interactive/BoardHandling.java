@@ -383,7 +383,7 @@ public class BoardHandling
 
     /**
      * Sets the manual trace half width used in interactive routing.
-     * If p_layer_no < 0, the manual trace half width is changed on all layers.
+     * If p_layer_no {@literal <} 0, the manual trace half width is changed on all layers.
      */
     public void set_manual_trace_half_width(int p_layer_no, int p_value)
     {
