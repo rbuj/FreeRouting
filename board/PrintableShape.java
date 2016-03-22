@@ -59,17 +59,17 @@ public abstract class PrintableShape
         {
             java.util.ResourceBundle resources = 
                     java.util.ResourceBundle.getBundle("board.resources.ObjectInfoPanel", this.locale);
-            String result = resources.getString("circle") + ": ";
+            StringBuilder sb = new StringBuilder();
+            sb.append(resources.getString("circle")).append(": ");
             if (center.x != 0 || center.y != 0)
             {
-                String center_string = resources.getString("center") + " =" + center.to_string(this.locale);
-                result += center_string;
+                sb.append(resources.getString("center")).append(" =").append(center.to_string(this.locale));
             }
             java.text.NumberFormat nf =  java.text.NumberFormat.getInstance(this.locale);
             nf.setMaximumFractionDigits(4);
             String radius_string = resources.getString("radius") + " = " + nf.format((float)radius);
-            result += radius_string;
-            return result;
+            sb.append(radius_string);
+            return sb.toString();
         }
         
         public final FloatPoint center;
@@ -93,10 +93,9 @@ public abstract class PrintableShape
         {
             java.util.ResourceBundle resources = 
                     java.util.ResourceBundle.getBundle("board.resources.ObjectInfoPanel", this.locale);
-            String result = resources.getString("rectangle") + ": " + resources.getString("lower_left") + " = "
-                    + lower_left.to_string(this.locale) + ", " + resources.getString("upper_right") + " = "
-                    + upper_right.to_string(this.locale) ;
-            return result;
+            StringBuilder sb = new StringBuilder();
+            sb.append(resources.getString("rectangle")).append(": ").append(resources.getString("lower_left")).append(" = ").append(lower_left.to_string(this.locale)).append(", ").append(resources.getString("upper_right")).append(" = ").append(upper_right.to_string(this.locale)) ;
+            return sb.toString();
         }
         
         public final FloatPoint lower_left;
@@ -117,16 +116,17 @@ public abstract class PrintableShape
         {
             java.util.ResourceBundle resources = 
                     java.util.ResourceBundle.getBundle("board.resources.ObjectInfoPanel", this.locale);
-            String result = resources.getString("polygon") + ": ";
+            StringBuilder sb = new StringBuilder();
+            sb.append(resources.getString("polygon")).append(": ");
             for (int i = 0; i < corner_arr.length; ++i)
             {
                 if (i > 0)
                 {
-                    result += ", ";
+                    sb.append(", ");
                 }
-                result += corner_arr[i].to_string(this.locale);
+                sb.append(corner_arr[i].to_string(this.locale));
             }
-            return result;
+            return sb.toString();
         }
         
         public final FloatPoint[] corner_arr;

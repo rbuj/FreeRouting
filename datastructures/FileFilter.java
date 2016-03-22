@@ -36,20 +36,22 @@ public class FileFilter extends javax.swing.filechooser.FileFilter
     @Override
     public String getDescription()
     {
-        String message = "files with the extensions";
+        StringBuilder sb = new StringBuilder();
+        sb.append("files with the extensions");
         for (int i = 0; i < extensions.length; ++i)
         {
-            message += " ." + extensions[i];
+            sb.append(" .");
+            sb.append(extensions[i]);
             if (i == extensions.length -2)
             {
-                message += " or ";
+                sb.append(" or ");
             }
             else if (i < extensions.length -2)
             {
-                message += ", ";
+                sb.append(", ");
             }
         }
-        return message;
+        return sb.toString();
     }
     
     @Override
