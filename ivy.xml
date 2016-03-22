@@ -1,0 +1,15 @@
+<ivy-module version="2.0">
+    <info organisation="freeroute" module="freeroute"/>
+
+    <configurations>
+        <conf name="compile" description="Required to compile application"/>
+        <conf name="runtime" description="Additional run-time dependencies" extends="compile"/>
+        <conf name="test"    description="Required for test only" extends="runtime"/>
+    </configurations>
+
+    <dependencies>
+        <dependency org="junit" name="junit" rev="4.8.2"/>
+        <dependency org="javax.help" name="javahelp" rev="2.0.05"/>
+    </dependencies>
+
+</ivy-module>
