@@ -108,7 +108,7 @@ public class Polygon extends Shape
         p_file.write("polygon ");
         p_identifier_type.write(this.layer.name, p_file);
         p_file.write(" ");
-        p_file.write((new Integer(0)).toString());
+        p_file.write(Integer.toString(0));
         int corner_count = coor.length/ 2;
         for (int i = 0; i < corner_count; ++i)
         {
@@ -127,7 +127,7 @@ public class Polygon extends Shape
         p_file.write("polygon ");
         p_identifier_type.write(this.layer.name, p_file);
         p_file.write(" ");
-        p_file.write((new Integer(0)).toString());
+        p_file.write(Integer.toString(0));
         int corner_count = coor.length/ 2;
         for (int i = 0; i < corner_count; ++i)
         {

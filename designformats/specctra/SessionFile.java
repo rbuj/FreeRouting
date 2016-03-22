@@ -465,7 +465,7 @@ public class SessionFile
         p_file.write("path ");
         p_identifier_type.write(p_layer_name, p_file);
         p_file.write(" ");
-        p_file.write((new Integer(p_width)).toString());
+        p_file.write(Integer.toString(p_width));
         int corner_count = p_coors.length/ 2;
         for (int i = 0; i < corner_count; ++i)
         {

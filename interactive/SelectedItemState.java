@@ -283,7 +283,7 @@ public class SelectedItemState extends InteractiveState
         {
             Via curr_via = (Via) it.next();
             Vector rel_coor = curr_via.get_center().difference_by(gravity_point);
-            String pin_name = (new Integer(i + 1)).toString();
+            String pin_name = Integer.toString(i + 1);
             pin_arr[i] = new Package.Pin(pin_name, curr_via.get_padstack().no, rel_coor, 0);
         }
         Package new_package = board.library.packages.add(pin_arr);

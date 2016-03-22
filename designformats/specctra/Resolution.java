@@ -82,7 +82,7 @@ public class Resolution extends ScopeKeyword
         p_file.write("(resolution ");
         p_file.write(p_board_communication.unit.toString());
         p_file.write(" ");
-        p_file.write((new Integer(p_board_communication.resolution)).toString());
+        p_file.write(Integer.toString(p_board_communication.resolution));
         p_file.write(")");
     }
     

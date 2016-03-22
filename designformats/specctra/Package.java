@@ -190,7 +190,7 @@ public class Package
             if (rotation != 0)
             {
                 p_par.file.write("(rotate ");
-                p_par.file.write((new Integer(rotation)).toString());
+                p_par.file.write(Integer.toString(rotation));
                 p_par.file.write(")");
             }
             p_par.file.write(")");

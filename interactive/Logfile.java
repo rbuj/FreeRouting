@@ -199,7 +199,7 @@ public class Logfile
         {
             try
             {
-                this.file_writer.write((new Integer(p_int)).toString());
+                this.file_writer.write(Integer.toString(p_int));
                 this.file_writer.write("\n");
             }
             catch (IOException e2)
