@@ -241,7 +241,7 @@ public class Logfile
             {
                 this.file_writer.write(Double.toString(p_corner.x));
                 this.file_writer.write(" ");
-                this.file_writer.write((new Double(p_corner.y)).toString());
+                this.file_writer.write(Double.toString(p_corner.y));
                 this.file_writer.write("\n");
             }
             catch (IOException e2)
