@@ -118,7 +118,7 @@ public class WindowManualRules extends BoardSavableSubWindow {
     @Override
     public void refresh() {
         board.RoutingBoard routing_board = board_handling.get_routing_board();
-        javax.swing.ComboBoxModel<ViaRule> new_model = new javax.swing.DefaultComboBoxModel<ViaRule>(routing_board.rules.via_rules);
+        javax.swing.ComboBoxModel<ViaRule> new_model = new javax.swing.DefaultComboBoxModel<>(routing_board.rules.via_rules);
         this.via_rule_combo_box.setModel(new_model);
         rules.ClearanceMatrix clearance_matrix = board_handling.get_routing_board().rules.clearance_matrix;
         if (this.clearance_combo_box.get_class_count() != routing_board.rules.clearance_matrix.get_class_count()) {
