@@ -54,11 +54,20 @@ Additional steps for users of CadSoft-Eagle:
 Here are some instructions how to run the Freerouting project in the NetBeans IDE.
 ==================================================================================
 
-1) Go to the Java SE download web page of Oracle to download and install JDK 8 with NetBeans 8.0
+1) Go to the Java SE download web page of Oracle to download and install JDK 8 with NetBeans 8.0. https://netbeans.org/downloads/
 
 2) Start the NetBeans IDE and select File | Open Project in the pull down menu and select freeroute project.
 
 3) Build the project. The router should run now.
 
 For optional parameters of the Freerouting outfile check the usage of the variable p_args in the source file gui/MainApplication.java.
+
+Here are some instructions how to run the Freerouting project from a Terminal.
+==================================================================================
+
+1) Go to the Java SE download web page of Oracle to download and install JRE 8. https://www.java.com/en/download/
+
+2) Install Apache Ant (Java opensource build system). http://ant.apache.org
+
+4) Open a terminal, go to poject base dir, type 'ant run' and press enter
 
