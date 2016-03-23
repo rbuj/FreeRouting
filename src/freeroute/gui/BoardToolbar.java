@@ -228,7 +228,7 @@ class BoardToolbar extends javax.swing.JPanel
         java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(p_board_frame.get_locale());
         number_format.setMaximumFractionDigits(7);
         this.unit_factor_field = new javax.swing.JFormattedTextField(number_format);
-        this.unit_combo_box = new javax.swing.JComboBox();
+        this.unit_combo_box = new javax.swing.JComboBox<>();
         final javax.swing.JLabel jLabel4 = new javax.swing.JLabel();
         
         right_toolbar.setAutoscrolls(true);
@@ -268,7 +268,7 @@ class BoardToolbar extends javax.swing.JPanel
         
         right_toolbar.add(unit_factor_field);
         
-        unit_combo_box.setModel(new javax.swing.DefaultComboBoxModel(board.Unit.values()));
+        unit_combo_box.setModel(new javax.swing.DefaultComboBoxModel<>(board.Unit.values()));
         unit_combo_box.setFocusTraversalPolicyProvider(true);
         unit_combo_box.setInheritsPopupMenu(true);
         unit_combo_box.setMaximumSize(new java.awt.Dimension(60, 18));
@@ -320,5 +320,5 @@ class BoardToolbar extends javax.swing.JPanel
     private final javax.swing.JToggleButton route_button;
     private final javax.swing.JToggleButton drag_button;
     final javax.swing.JFormattedTextField unit_factor_field;
-    final javax.swing.JComboBox unit_combo_box;
+    final javax.swing.JComboBox<board.Unit> unit_combo_box;
 }

@@ -20,6 +20,8 @@
 
 package gui;
 
+import board.ObjectInfoPanel;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -192,12 +194,16 @@ public abstract class WindowObjectList extends BoardSavableSubWindow
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
-            List<WindowObjectInfo.Printable> selected_objects = list.getSelectedValuesList();
+            List<?> selected_objects = list.getSelectedValuesList();
             if (selected_objects.isEmpty())
             {
                 return;
             }
-            java.util.Collection<WindowObjectInfo.Printable> object_list = new java.util.LinkedList<>(selected_objects);
+            java.util.Collection<WindowObjectInfo.Printable> object_list = new java.util.LinkedList<>();
+            for (Iterator<?> it = selected_objects.iterator(); it.hasNext();) {
+                WindowObjectInfo.Printable selected_object = (ObjectInfoPanel.Printable) it.next();
+                object_list.add(selected_object);
+            }
             board.CoordinateTransform coordinate_transform = board_frame.board_panel.board_handling.coordinate_transform;
             WindowObjectInfo new_window =
                     WindowObjectInfo.display(resources.getString("window_title"), object_list, board_frame, coordinate_transform);
