@@ -22,15 +22,15 @@ package designformats.specctra;
 /**
  * Enumeration class for keywords of the specctra dsn file format
  *
- * @author  alfons
+ * @author alfons
  */
-public class Keyword
-{
+public class Keyword {
 
     /**
      * The only instances of the internal classes:
      *
-     * ScopeKeywords  with an inividual read_scope method are defined in an extra class,
+     * ScopeKeywords with an inividual read_scope method are defined in an extra
+     * class,
      */
     public static final Keyword ABSOLUTE = new Keyword("absolute");
     public static final Keyword ACTIVE = new Keyword("active");
@@ -138,18 +138,18 @@ public class Keyword
     public static final Keyword WRITE_RESOLUTION = new Keyword("write_resolution");
 
     /**
-     * Returns the name string of this Keyword.
-     * The name is used for debugging purposes.
+     * Returns the name string of this Keyword. The name is used for debugging
+     * purposes.
      */
-    public String get_name()
-    {
+    public String get_name() {
         return name;
     }
     private final String name;
 
-    /** prevents creating more instances */
-    protected Keyword(String p_name)
-    {
+    /**
+     * prevents creating more instances
+     */
+    protected Keyword(String p_name) {
         name = p_name;
     }
 }

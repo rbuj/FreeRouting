@@ -18,7 +18,6 @@
  * Created on 7. Maerz 2006, 09:46
  *
  */
-
 package datastructures;
 
 /**
@@ -26,13 +25,13 @@ package datastructures;
  *
  * @author alfons
  */
-public interface Stoppable
-{
+public interface Stoppable {
+
     /**
      * Requests this thread to be stopped.
      */
     void request_stop();
-    
+
     /**
      * Returns true, if this thread is requested to be stopped.
      */

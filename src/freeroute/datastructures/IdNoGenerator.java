@@ -17,7 +17,6 @@
  *
  * Created on 13. Februar 2005, 08:21
  */
-
 package datastructures;
 
 /**
@@ -25,13 +24,13 @@ package datastructures;
  *
  * @author Alfons Wirtz
  */
-public interface IdNoGenerator
-{
+public interface IdNoGenerator {
+
     /**
      * Create a new unique identification number.
      */
     int new_no();
-    
+
     /**
      * Return the maximum generated id number so far.
      */

@@ -17,8 +17,8 @@
  *
  * Created on 8. Maerz 2005, 05:56
  */
-
 package gui;
+
 import board.Component;
 import board.Components;
 import java.util.List;
@@ -28,57 +28,49 @@ import java.util.List;
  *
  * @author Alfons Wirtz
  */
-public class WindowComponents extends WindowObjectListWithFilter
-{
-    
-    /** Creates a new instance of ComponentsWindow */
-    public WindowComponents(BoardFrame p_board_frame)
-    {
+public class WindowComponents extends WindowObjectListWithFilter {
+
+    /**
+     * Creates a new instance of ComponentsWindow
+     */
+    public WindowComponents(BoardFrame p_board_frame) {
         super(p_board_frame);
-        java.util.ResourceBundle resources = 
-                java.util.ResourceBundle.getBundle("gui.resources.Default", p_board_frame.get_locale());
+        java.util.ResourceBundle resources
+                = java.util.ResourceBundle.getBundle("gui.resources.Default", p_board_frame.get_locale());
         this.setTitle(resources.getString("components"));
         p_board_frame.set_context_sensitive_help(this, "WindowObjectList_BoardComponents");
     }
-    
+
     /**
      * Fills the list with the board components.
      */
     @Override
-    protected void fill_list()
-    {
+    protected void fill_list() {
         Components components = this.board_frame.board_panel.board_handling.get_routing_board().components;
         Component[] sorted_arr = new Component[components.count()];
-        for (int i = 0; i < sorted_arr.length; ++i)
-        {
+        for (int i = 0; i < sorted_arr.length; ++i) {
             sorted_arr[i] = components.get(i + 1);
         }
         java.util.Arrays.sort(sorted_arr);
-        for (int i = 0; i < sorted_arr.length; ++i)
-        {
+        for (int i = 0; i < sorted_arr.length; ++i) {
             this.add_to_list(sorted_arr[i]);
         }
         this.list.setVisibleRowCount(Math.min(components.count(), DEFAULT_TABLE_SIZE));
     }
-    
+
     @Override
-    protected void select_instances()
-    {
+    protected void select_instances() {
         List<?> selected_components = (List<?>) list.getSelectedValuesList();
-        if (selected_components.isEmpty())
-        {
+        if (selected_components.isEmpty()) {
             return;
         }
         board.RoutingBoard routing_board = board_frame.board_panel.board_handling.get_routing_board();
         java.util.Set<board.Item> selected_items = new java.util.TreeSet<>();
         java.util.Collection<board.Item> board_items = routing_board.get_items();
-        for (board.Item curr_item : board_items)
-        {
-            if (curr_item.get_component_no() > 0)
-            {
+        for (board.Item curr_item : board_items) {
+            if (curr_item.get_component_no() > 0) {
                 board.Component curr_component = routing_board.components.get(curr_item.get_component_no());
-                if (selected_components.contains(curr_component))
-                {
+                if (selected_components.contains(curr_component)) {
                     selected_items.add(curr_item);
                 }
             }

@@ -18,7 +18,6 @@
  * Created on 17. Maerz 2006, 06:52
  *
  */
-
 package gui;
 
 import java.awt.AlphaComposite;
@@ -31,62 +30,53 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
-
 /**
  *
  * @author Alfons Wirtz
  */
-public abstract class Cursor
-{
-    
-    public static Cursor get_45_degree_cross_hair_cursor()
-    {
+public abstract class Cursor {
+
+    public static Cursor get_45_degree_cross_hair_cursor() {
         return new FortyfiveDegreeCrossHairCursor();
     }
-    
+
     public abstract void draw(Graphics p_graphics);
-    
-    public void set_location(Point2D p_location)
-    {
+
+    public void set_location(Point2D p_location) {
         this.x_coor = p_location.getX();
         this.y_coor = p_location.getY();
         location_initialized = true;
     }
-    
-    protected static void init_graphics(Graphics2D p_graphics)
-    {
+
+    protected static void init_graphics(Graphics2D p_graphics) {
         BasicStroke bs = new BasicStroke(0, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
         p_graphics.setStroke(bs);
         p_graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         p_graphics.setColor(Color.WHITE);
         p_graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
     }
-    
+
     double x_coor;
     double y_coor;
-    
+
     boolean location_initialized = false;
-    
+
     private static final double MAX_COOR = 1000;
-    
+
     private static Line2D VERTICAL_LINE = new Line2D.Double(0, -MAX_COOR, 0, MAX_COOR);
     private static Line2D HORIZONTAL_LINE = new Line2D.Double(-MAX_COOR, 0, MAX_COOR, 0);
     private static Line2D RIGHT_DIAGONAL_LINE = new Line2D.Double(-MAX_COOR, -MAX_COOR, MAX_COOR, MAX_COOR);
     private static Line2D LEFT_DIAGONAL_LINE = new Line2D.Double(-MAX_COOR, MAX_COOR, MAX_COOR, -MAX_COOR);
-    
-    
-    private static class FortyfiveDegreeCrossHairCursor extends Cursor
-    {
-        
+
+    private static class FortyfiveDegreeCrossHairCursor extends Cursor {
+
         @Override
-        public void draw(Graphics p_graphics)
-        {
-            
-            if (!location_initialized)
-            {
+        public void draw(Graphics p_graphics) {
+
+            if (!location_initialized) {
                 return;
             }
-            Graphics2D g2 = (Graphics2D)p_graphics;
+            Graphics2D g2 = (Graphics2D) p_graphics;
             init_graphics(g2);
             GeneralPath draw_path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
             draw_path.append(VERTICAL_LINE, false);
@@ -97,5 +87,5 @@ public abstract class Cursor
             g2.draw(draw_path);
         }
     }
-    
+
 }

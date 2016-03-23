@@ -17,7 +17,6 @@
  *
  * Created on 21. Juni 2004, 08:37
  */
-
 package designformats.specctra;
 
 import board.BasicBoard;
@@ -27,20 +26,18 @@ import datastructures.IndentFileWriter;
 /**
  * Default parameter type used while writing a Specctra dsn-file.
  *
- * @author  alfons
+ * @author alfons
  */
-public class WriteScopeParameter
-{
-    
-    /** 
-     * Creates a new instance of WriteScopeParameter. 
-     * If p_compat_mode is true, only standard speecctra dsb scopes are written, so that any
-     * host system with an specctra interface can read them.
+public class WriteScopeParameter {
+
+    /**
+     * Creates a new instance of WriteScopeParameter. If p_compat_mode is true,
+     * only standard speecctra dsb scopes are written, so that any host system
+     * with an specctra interface can read them.
      */
     WriteScopeParameter(BasicBoard p_board, interactive.AutorouteSettings p_autoroute_settings,
-            IndentFileWriter p_file, String p_string_quote, CoordinateTransform p_coordinate_transform, 
-            boolean p_compat_mode)
-    {
+            IndentFileWriter p_file, String p_string_quote, CoordinateTransform p_coordinate_transform,
+            boolean p_compat_mode) {
         board = p_board;
         autoroute_settings = p_autoroute_settings;
         file = p_file;
@@ -49,7 +46,7 @@ public class WriteScopeParameter
         String[] reserved_chars = {"(", ")", " ", ";", "-", "_"};
         identifier_type = new IdentifierType(reserved_chars, p_string_quote);
     }
-    
+
     final BasicBoard board;
     final interactive.AutorouteSettings autoroute_settings;
     final IndentFileWriter file;

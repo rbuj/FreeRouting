@@ -17,65 +17,58 @@
  *
  * Created on 30. Juni 2004, 08:24
  */
-
 package designformats.specctra;
 
 import datastructures.IdentifierType;
 import datastructures.IndentFileWriter;
 
-
 /**
- * Describes a path defined by a sequence of lines (instead of a sequence of corners.
+ * Describes a path defined by a sequence of lines (instead of a sequence of
+ * corners.
  *
- * @author  alfons
+ * @author alfons
  */
-public class PolylinePath extends Path
-{
-    
-    /** Creates a new instance of PolylinePath */
-    public PolylinePath(Layer p_layer, double p_width, double[] p_corner_arr)
-    {
+public class PolylinePath extends Path {
+
+    /**
+     * Creates a new instance of PolylinePath
+     */
+    public PolylinePath(Layer p_layer, double p_width, double[] p_corner_arr) {
         super(p_layer, p_width, p_corner_arr);
     }
-    
+
     /**
      * Writes this path as a scope to an output dsn-file.
      */
     @Override
-    public void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException
-    {
+    public void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
         p_file.start_scope();
         p_file.write("polyline_path ");
         p_identifier.write(this.layer.name, p_file);
         p_file.write(" ");
         p_file.write(Double.toString(this.width));
-        int line_count = coordinate_arr.length/ 4;
-        for (int i = 0; i < line_count; ++i)
-        {
+        int line_count = coordinate_arr.length / 4;
+        for (int i = 0; i < line_count; ++i) {
             p_file.new_line();
-            for (int j = 0; j < 4; ++j)
-            {
+            for (int j = 0; j < 4; ++j) {
                 p_file.write(Double.toString(coordinate_arr[4 * i + j]));
                 p_file.write(" ");
             }
         }
         p_file.end_scope();
     }
-    
+
     @Override
-    public void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException
-    {
+    public void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
         p_file.start_scope();
         p_file.write("polyline_path ");
         p_identifier.write(this.layer.name, p_file);
         p_file.write(" ");
         p_file.write(Double.toString(this.width));
-        int line_count = coordinate_arr.length/ 4;
-        for (int i = 0; i < line_count; ++i)
-        {
+        int line_count = coordinate_arr.length / 4;
+        for (int i = 0; i < line_count; ++i) {
             p_file.new_line();
-            for (int j = 0; j < 4; ++j)
-            {
+            for (int j = 0; j < 4; ++j) {
                 Integer curr_coor = (int) Math.round(coordinate_arr[4 * i + j]);
                 p_file.write(curr_coor.toString());
                 p_file.write(" ");
@@ -83,25 +76,21 @@ public class PolylinePath extends Path
         }
         p_file.end_scope();
     }
-    
+
     @Override
-    public geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform)
-    {
+    public geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
         System.out.println("PolylinePath.transform_to_board_rel not implemented");
         return null;
     }
-    
+
     @Override
-    public geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform)
-    {
+    public geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform) {
         System.out.println("PolylinePath.transform_to_board_rel not implemented");
         return null;
     }
-    
-    
+
     @Override
-    public Rectangle bounding_box()
-    {
+    public Rectangle bounding_box() {
         System.out.println("PolylinePath.boundingbox not implemented");
         return null;
     }

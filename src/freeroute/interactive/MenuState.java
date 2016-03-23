@@ -17,7 +17,6 @@
  *
  * Created on 28. November 2003, 10:04
  */
-
 package interactive;
 
 import board.Item;
@@ -29,82 +28,69 @@ import java.util.Collection;
 /**
  * Common base class for the main menus, which can be selected in the tool bar.
  *
- * @author  Alfons Wirtz
+ * @author Alfons Wirtz
  */
-public class MenuState extends InteractiveState
-{
-    
-    /** Creates a new instance of MenuState */
-    MenuState(BoardHandling p_board_handle, Logfile p_logfile)
-    {
+public class MenuState extends InteractiveState {
+
+    /**
+     * Creates a new instance of MenuState
+     */
+    MenuState(BoardHandling p_board_handle, Logfile p_logfile) {
         super(null, p_board_handle, p_logfile);
         this.return_state = this;
     }
-    
+
     @Override
-    public javax.swing.JPopupMenu get_popup_menu()
-    {
+    public javax.swing.JPopupMenu get_popup_menu() {
         return hdlg.get_panel().popup_menu_main;
     }
-    
+
     /**
-     * Selects items at p_location.
-     * Returns a new instance of SelectedItemState with the selected items,
-     * if somthing was selected.
+     * Selects items at p_location. Returns a new instance of SelectedItemState
+     * with the selected items, if somthing was selected.
      */
-    public InteractiveState select_items(FloatPoint p_location)
-    {
+    public InteractiveState select_items(FloatPoint p_location) {
         this.hdlg.display_layer_messsage();
         java.util.Set<Item> picked_items = hdlg.pick_items(p_location);
         boolean something_found = (picked_items.size() > 0);
         InteractiveState result;
-        if (something_found)
-        {
+        if (something_found) {
             result = SelectedItemState.get_instance(picked_items, this, hdlg, this.logfile);
             hdlg.screen_messages.set_status_message(resources.getString("in_select_mode"));
-            if (logfile != null)
-            {
+            if (logfile != null) {
                 logfile.start_scope(LogfileScope.START_SELECT, p_location);
             }
-        }
-        else
-        {
+        } else {
             result = this;
         }
         hdlg.repaint();
         return result;
     }
-    
-    public InteractiveState swap_pin(FloatPoint p_location)
-    {
+
+    public InteractiveState swap_pin(FloatPoint p_location) {
         ItemSelectionFilter selection_filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.PINS);
         Collection<Item> picked_items = hdlg.pick_items(p_location, selection_filter);
         InteractiveState result = this;
-        if (picked_items.size() > 0)
-        {
+        if (picked_items.size() > 0) {
             Item first_item = picked_items.iterator().next();
-            if (!(first_item instanceof board.Pin))
-            {
+            if (!(first_item instanceof board.Pin)) {
                 System.out.println("MenuState.swap_pin: Pin expected");
                 return this;
             }
             board.Pin selected_pin = (board.Pin) first_item;
             result = PinSwapState.get_instance(selected_pin, this, hdlg, this.logfile);
-        }
-        else
-        {
+        } else {
             hdlg.screen_messages.set_status_message(resources.getString("no_pin_selected"));
         }
         hdlg.repaint();
         return result;
     }
-    
+
     /**
      * Action to be taken when a key shortcut is pressed.
      */
     @Override
-    public InteractiveState key_typed(char p_key_char)
-    {
+    public InteractiveState key_typed(char p_key_char) {
         InteractiveState curr_return_state = this;
         switch (p_key_char) {
             case 'b':
@@ -114,10 +100,10 @@ public class MenuState extends InteractiveState
                 curr_return_state = DragMenuState.get_instance(hdlg, logfile);
                 break;
             case 'e':
-                if (hdlg.get_routing_board().get_test_level() != TestLevel.RELEASE_VERSION)
-                {
+                if (hdlg.get_routing_board().get_test_level() != TestLevel.RELEASE_VERSION) {
                     curr_return_state = ExpandTestState.get_instance(hdlg.get_current_mouse_position(), this, hdlg);
-                }   break;
+                }
+                break;
             case 'g':
                 hdlg.toggle_ratsnest();
                 break;
@@ -146,68 +132,61 @@ public class MenuState extends InteractiveState
             case 'w':
                 curr_return_state = swap_pin(hdlg.get_current_mouse_position());
                 break;
-            case '+':
-                {
-                    // increase the current layer to the next signal layer
-                    board.LayerStructure layer_structure = hdlg.get_routing_board().layer_structure;
-                    int current_layer_no = hdlg.settings.layer;
-                    for(;;)
-                    {
-                        ++current_layer_no;
-                        if (current_layer_no >=  layer_structure.arr.length || layer_structure.arr[current_layer_no].is_signal)
-                        {
-                            break;
-                        }
-                    }       if (current_layer_no < layer_structure.arr.length)
-                    {
-                        hdlg.set_current_layer(current_layer_no);
-                    }       break;
+            case '+': {
+                // increase the current layer to the next signal layer
+                board.LayerStructure layer_structure = hdlg.get_routing_board().layer_structure;
+                int current_layer_no = hdlg.settings.layer;
+                for (;;) {
+                    ++current_layer_no;
+                    if (current_layer_no >= layer_structure.arr.length || layer_structure.arr[current_layer_no].is_signal) {
+                        break;
+                    }
                 }
-            case '-':
-                {
-                    // decrease the current layer to the previous signal layer
-                    board.LayerStructure layer_structure = hdlg.get_routing_board().layer_structure;
-                    int current_layer_no = hdlg.settings.layer;
-                    for(;;)
-                    {
-                        --current_layer_no;
-                        if (current_layer_no < 0 || layer_structure.arr[current_layer_no].is_signal)
-                        {
-                            break;
-                        }
-                    }       if (current_layer_no >= 0)
-                    {
-                        hdlg.set_current_layer(current_layer_no);
-                    }       break;
+                if (current_layer_no < layer_structure.arr.length) {
+                    hdlg.set_current_layer(current_layer_no);
                 }
+                break;
+            }
+            case '-': {
+                // decrease the current layer to the previous signal layer
+                board.LayerStructure layer_structure = hdlg.get_routing_board().layer_structure;
+                int current_layer_no = hdlg.settings.layer;
+                for (;;) {
+                    --current_layer_no;
+                    if (current_layer_no < 0 || layer_structure.arr[current_layer_no].is_signal) {
+                        break;
+                    }
+                }
+                if (current_layer_no >= 0) {
+                    hdlg.set_current_layer(current_layer_no);
+                }
+                break;
+            }
             default:
                 curr_return_state = super.key_typed(p_key_char);
                 break;
         }
         return curr_return_state;
     }
-    
+
     /**
      * Do nothing on complete.
      */
     @Override
-    public InteractiveState complete()
-    {
+    public InteractiveState complete() {
         return this;
     }
-    
+
     /**
      * Do nothing on cancel.
      */
     @Override
-    public InteractiveState cancel()
-    {
+    public InteractiveState cancel() {
         return this;
     }
-    
+
     @Override
-    public void set_toolbar()
-    {
+    public void set_toolbar() {
         hdlg.get_panel().board_frame.set_menu_toolbar();
     }
 }

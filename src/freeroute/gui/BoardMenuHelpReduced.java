@@ -18,39 +18,35 @@
  * Created on 21. Oktober 2005, 09:06
  *
  */
-
 package gui;
 
 /**
  *
  * @author Alfons Wirtz
  */
-public class BoardMenuHelpReduced extends javax.swing.JMenu
-{
+public class BoardMenuHelpReduced extends javax.swing.JMenu {
+
     /**
-     * Creates a new instance of BoardMenuHelpReduced
-     * Separated from BoardMenuHelp to avoid ClassNotFound exception when the library
-     * jh.jar is not found, which is only used in the  extended help menu.
+     * Creates a new instance of BoardMenuHelpReduced Separated from
+     * BoardMenuHelp to avoid ClassNotFound exception when the library jh.jar is
+     * not found, which is only used in the extended help menu.
      */
-    public BoardMenuHelpReduced(BoardFrame p_board_frame)
-    {
+    public BoardMenuHelpReduced(BoardFrame p_board_frame) {
         this.board_frame = p_board_frame;
         this.resources = java.util.ResourceBundle.getBundle("gui.resources.BoardMenuHelp", p_board_frame.get_locale());
         this.setText(this.resources.getString("help"));
-        
+
         javax.swing.JMenuItem about_window = new javax.swing.JMenuItem();
         about_window.setText(this.resources.getString("about"));
-        about_window.addActionListener(new java.awt.event.ActionListener()
-        {
+        about_window.addActionListener(new java.awt.event.ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 board_frame.about_window.setVisible(true);
             }
         });
         this.add(about_window);
     }
-    
+
     protected final BoardFrame board_frame;
     protected final java.util.ResourceBundle resources;
 }

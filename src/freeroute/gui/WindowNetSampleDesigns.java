@@ -26,18 +26,17 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class WindowNetSampleDesigns extends WindowNetSamples
-{
+public class WindowNetSampleDesigns extends WindowNetSamples {
 
-    /** Creates a new instance of WindowNeetSampleDesigns */
-    public WindowNetSampleDesigns(java.util.Locale p_locale)
-    {
+    /**
+     * Creates a new instance of WindowNeetSampleDesigns
+     */
+    public WindowNetSampleDesigns(java.util.Locale p_locale) {
         super(p_locale, "sample_designs", "open_sample_design", 11);
     }
 
     @Override
-    protected void fill_list()
-    {
+    protected void fill_list() {
         list_model.addElement("hexapod_empty.dsn");
         list_model.addElement("hexapod_autorouted.dsn");
         list_model.addElement("sharc_handrouted.dsn");
@@ -53,11 +52,9 @@ public class WindowNetSampleDesigns extends WindowNetSamples
     }
 
     @Override
-    protected void button_pushed()
-    {
+    protected void button_pushed() {
         int index = list.getSelectedIndex();
-        if (index < 0 || index >= list_model.getSize())
-        {
+        if (index < 0 || index >= list_model.getSize()) {
             return;
         }
         String design_name = (String) list_model.elementAt(index);

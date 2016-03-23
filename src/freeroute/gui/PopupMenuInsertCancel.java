@@ -17,7 +17,6 @@
  *
  * Created on 17. Februar 2005, 08:05
  */
-
 package gui;
 
 /**
@@ -25,41 +24,37 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-class PopupMenuInsertCancel extends javax.swing.JPopupMenu
-{
-    
-    /** Creates a new instance of CompleteCancelPopupMenu */
-    PopupMenuInsertCancel(BoardFrame p_board_frame)
-    {
+class PopupMenuInsertCancel extends javax.swing.JPopupMenu {
+
+    /**
+     * Creates a new instance of CompleteCancelPopupMenu
+     */
+    PopupMenuInsertCancel(BoardFrame p_board_frame) {
         this.board_panel = p_board_frame.board_panel;
-        java.util.ResourceBundle resources = 
-                java.util.ResourceBundle.getBundle("gui.resources.Default", p_board_frame.get_locale());
+        java.util.ResourceBundle resources
+                = java.util.ResourceBundle.getBundle("gui.resources.Default", p_board_frame.get_locale());
         javax.swing.JMenuItem insert_item = new javax.swing.JMenuItem();
         insert_item.setText(resources.getString("insert"));
-        insert_item.addActionListener(new java.awt.event.ActionListener()
-        {
+        insert_item.addActionListener(new java.awt.event.ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 board_panel.board_handling.return_from_state();
             }
         });
-        
+
         this.add(insert_item);
-        
+
         javax.swing.JMenuItem cancel_item = new javax.swing.JMenuItem();
         cancel_item.setText(resources.getString("cancel"));
-        cancel_item.addActionListener(new java.awt.event.ActionListener()
-        {
+        cancel_item.addActionListener(new java.awt.event.ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 board_panel.board_handling.cancel_state();
             }
         });
-        
+
         this.add(cancel_item);
     }
-    
+
     private final BoardPanel board_panel;
 }

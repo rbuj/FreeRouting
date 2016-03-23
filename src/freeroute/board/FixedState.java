@@ -17,7 +17,6 @@
  *
  * Created on 15. Maerz 2005, 06:34
  */
-
 package board;
 
 /**
@@ -25,7 +24,6 @@ package board;
  *
  * @author alfons
  */
-public enum FixedState
-{
+public enum FixedState {
     UNFIXED, SHOVE_FIXED, USER_FIXED, SYSTEM_FIXED
 }

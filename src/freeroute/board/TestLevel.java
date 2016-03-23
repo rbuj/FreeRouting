@@ -18,16 +18,15 @@
  * Created on 20. April 2006, 07:32
  *
  */
-
 package board;
 
 /**
- * If {@literal >} RELEASE, some features may be used, which are still in experimental state.
- * Also warnings for debugging may be printed depending on the test_level.
+ * If {@literal >} RELEASE, some features may be used, which are still in
+ * experimental state. Also warnings for debugging may be printed depending on
+ * the test_level.
  *
  * @author alfons
  */
-public enum TestLevel
-{
+public enum TestLevel {
     RELEASE_VERSION, TEST_VERSION, CRITICAL_DEBUGGING_OUTPUT, ALL_DEBUGGING_OUTPUT
 }

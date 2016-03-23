@@ -22,23 +22,22 @@ package gui;
 import board.BoardOutline;
 
 /**
- *  Window handling detail parameters of the interactive routing.
+ * Window handling detail parameters of the interactive routing.
  *
- * @author  Alfons Wirtz
+ * @author Alfons Wirtz
  */
-public class WindowRouteDetail extends BoardSavableSubWindow
-{
+public class WindowRouteDetail extends BoardSavableSubWindow {
 
-    /** Creates a new instance of RouteDetailWindow */
-    public WindowRouteDetail(BoardFrame p_board_frame)
-    {
+    /**
+     * Creates a new instance of RouteDetailWindow
+     */
+    public WindowRouteDetail(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
-        java.util.ResourceBundle resources =
-                java.util.ResourceBundle.getBundle("gui.resources.WindowRouteDetail", p_board_frame.get_locale());
+        java.util.ResourceBundle resources
+                = java.util.ResourceBundle.getBundle("gui.resources.WindowRouteDetail", p_board_frame.get_locale());
         this.setTitle(resources.getString("title"));
 
         // create main panel
-
         final javax.swing.JPanel main_panel = new javax.swing.JPanel();
         getContentPane().add(main_panel);
         java.awt.GridBagLayout gridbag = new java.awt.GridBagLayout();
@@ -48,7 +47,6 @@ public class WindowRouteDetail extends BoardSavableSubWindow
         gridbag_constraints.insets = new java.awt.Insets(5, 10, 5, 10);
 
         // add label and button group for the clearance compensation.
-
         javax.swing.JLabel clearance_compensation_label = new javax.swing.JLabel(resources.getString("clearance_compensation"));
         clearance_compensation_label.setToolTipText(resources.getString("clearance_compensation_tooltip"));
 
@@ -80,7 +78,6 @@ public class WindowRouteDetail extends BoardSavableSubWindow
         main_panel.add(separator, gridbag_constraints);
 
         // add label and slider for the pull tight accuracy.
-
         javax.swing.JLabel pull_tight_accuracy_label = new javax.swing.JLabel(resources.getString("pull_tight_accuracy"));
         pull_tight_accuracy_label.setToolTipText(resources.getString("pull_tight_accuracy_tooltip"));
         gridbag_constraints.insets = new java.awt.Insets(5, 10, 5, 10);
@@ -98,7 +95,6 @@ public class WindowRouteDetail extends BoardSavableSubWindow
         main_panel.add(separator, gridbag_constraints);
 
         // add switch to define, if keepout is generated outside the outline.
-
         this.outline_keepout_check_box = new javax.swing.JCheckBox(resources.getString("keepout_outside_outline"));
         this.outline_keepout_check_box.setSelected(false);
         this.outline_keepout_check_box.addActionListener(new OutLineKeepoutListener());
@@ -119,19 +115,14 @@ public class WindowRouteDetail extends BoardSavableSubWindow
      * Recalculates all displayed values
      */
     @Override
-    public void refresh()
-    {
-        if (this.board_handling.get_routing_board().search_tree_manager.is_clearance_compensation_used())
-        {
+    public void refresh() {
+        if (this.board_handling.get_routing_board().search_tree_manager.is_clearance_compensation_used()) {
             this.on_button.setSelected(true);
-        }
-        else
-        {
+        } else {
             this.off_button.setSelected(true);
         }
         BoardOutline outline = this.board_handling.get_routing_board().get_outline();
-        if (outline != null)
-        {
+        if (outline != null) {
             this.outline_keepout_check_box.setSelected(outline.keepout_outside_outline_generated());
         }
         int accuracy_slider_value = c_max_slider_value - this.board_handling.settings.get_trace_pull_tight_accuracy() / c_accuracy_scale_factor + 1;
@@ -145,50 +136,40 @@ public class WindowRouteDetail extends BoardSavableSubWindow
     private static final int c_max_slider_value = 100;
     private static final int c_accuracy_scale_factor = 20;
 
-    private class CompensationOnListener implements java.awt.event.ActionListener
-    {
+    private class CompensationOnListener implements java.awt.event.ActionListener {
 
         @Override
-        public void actionPerformed(java.awt.event.ActionEvent p_evt)
-        {
+        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             board_handling.set_clearance_compensation(true);
         }
     }
 
-    private class CompensationOffListener implements java.awt.event.ActionListener
-    {
+    private class CompensationOffListener implements java.awt.event.ActionListener {
 
         @Override
-        public void actionPerformed(java.awt.event.ActionEvent p_evt)
-        {
+        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             board_handling.set_clearance_compensation(false);
         }
     }
 
-    private class SliderChangeListener implements javax.swing.event.ChangeListener
-    {
+    private class SliderChangeListener implements javax.swing.event.ChangeListener {
 
         @Override
-        public void stateChanged(javax.swing.event.ChangeEvent evt)
-        {
+        public void stateChanged(javax.swing.event.ChangeEvent evt) {
             int new_accurracy = (c_max_slider_value - accuracy_slider.getValue() + 1) * c_accuracy_scale_factor;
             board_handling.settings.set_current_pull_tight_accuracy(new_accurracy);
         }
     }
 
-    private class OutLineKeepoutListener implements java.awt.event.ActionListener
-    {
+    private class OutLineKeepoutListener implements java.awt.event.ActionListener {
 
         @Override
-        public void actionPerformed(java.awt.event.ActionEvent p_evt)
-        {
-            if (board_handling.is_board_read_only())
-            {
+        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
+            if (board_handling.is_board_read_only()) {
                 return;
             }
             BoardOutline outline = board_handling.get_routing_board().get_outline();
-            if (outline != null)
-            {
+            if (outline != null) {
                 outline.generate_keepout_outside(outline_keepout_check_box.isSelected());
             }
         }

@@ -17,67 +17,57 @@
  *
  * Created on 30. Oktober 2004, 08:00
  */
-
 package designformats.specctra;
 
 /**
  * Class for reading resolution scopes from dsn-files.
  *
- * @author  alfons
+ * @author alfons
  */
-public class Resolution extends ScopeKeyword
-{
-    
-    /** Creates a new instance of Resolution */
-    public Resolution()
-    {
+public class Resolution extends ScopeKeyword {
+
+    /**
+     * Creates a new instance of Resolution
+     */
+    public Resolution() {
         super("resolution");
     }
-    
+
     @Override
-    public boolean read_scope(ReadScopeParameter p_par)
-    {
-        try
-        {
+    public boolean read_scope(ReadScopeParameter p_par) {
+        try {
             // read the unit
             Object next_token = p_par.scanner.next_token();
-            if (!(next_token instanceof String))
-            {
+            if (!(next_token instanceof String)) {
                 System.out.println("Resolution.read_scope: string expected");
                 return false;
             }
             p_par.unit = board.Unit.from_string((String) next_token);
-            if (p_par.unit == null)
-            {
+            if (p_par.unit == null) {
                 System.out.println("Resolution.read_scope: unit mil, inch or mm expected");
                 return false;
             }
             // read the scale factor
             next_token = p_par.scanner.next_token();
-            if (!(next_token instanceof Integer))
-            {
+            if (!(next_token instanceof Integer)) {
                 System.out.println("Resolution.read_scope: integer expected");
                 return false;
             }
             p_par.resolution = (int) next_token;
             // overread the closing bracket
             next_token = p_par.scanner.next_token();
-            if (next_token != Keyword.CLOSED_BRACKET)
-            {
+            if (next_token != Keyword.CLOSED_BRACKET) {
                 System.out.println("Resolution.read_scope: closing bracket expected");
                 return false;
             }
             return true;
-        }
-        catch (java.io.IOException e)
-        {
+        } catch (java.io.IOException e) {
             System.out.println("Resolution.read_scope: IO error scanning file");
             return false;
         }
     }
-    
-    public static void write_scope(datastructures.IndentFileWriter p_file, board.Communication p_board_communication)  throws java.io.IOException
-    {
+
+    public static void write_scope(datastructures.IndentFileWriter p_file, board.Communication p_board_communication) throws java.io.IOException {
         p_file.new_line();
         p_file.write("(resolution ");
         p_file.write(p_board_communication.unit.toString());
@@ -85,5 +75,5 @@ public class Resolution extends ScopeKeyword
         p_file.write(Integer.toString(p_board_communication.resolution));
         p_file.write(")");
     }
-    
+
 }

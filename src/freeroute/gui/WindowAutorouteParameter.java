@@ -25,21 +25,20 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class WindowAutorouteParameter extends BoardSavableSubWindow
-{
+public class WindowAutorouteParameter extends BoardSavableSubWindow {
 
-    /** Creates a new instance of WindowAutorouteParameter */
-    public WindowAutorouteParameter(BoardFrame p_board_frame)
-    {
+    /**
+     * Creates a new instance of WindowAutorouteParameter
+     */
+    public WindowAutorouteParameter(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
-        java.util.ResourceBundle resources =
-                java.util.ResourceBundle.getBundle("gui.resources.WindowAutorouteParameter", p_board_frame.get_locale());
+        java.util.ResourceBundle resources
+                = java.util.ResourceBundle.getBundle("gui.resources.WindowAutorouteParameter", p_board_frame.get_locale());
         this.setTitle(resources.getString("title"));
 
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         // create main panel
-
         final javax.swing.JPanel main_panel = new javax.swing.JPanel();
         getContentPane().add(main_panel);
         java.awt.GridBagLayout gridbag = new java.awt.GridBagLayout();
@@ -70,8 +69,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
         signal_layer_name_arr = new javax.swing.JLabel[signal_layer_count];
         signal_layer_active_arr = new javax.swing.JCheckBox[signal_layer_count];
         combo_box_arr = new javax.swing.JComboBox[signal_layer_count];
-        for (int i = 0; i < signal_layer_count; ++i)
-        {
+        for (int i = 0; i < signal_layer_count; ++i) {
             signal_layer_name_arr[i] = new javax.swing.JLabel();
             board.Layer curr_signal_layer = layer_structure.get_signal_layer(i);
             signal_layer_name_arr[i].setText(curr_signal_layer.name);
@@ -125,11 +123,9 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
         autoroute_pass_button.addActionListener(new AutorouteListener());
         postroute_pass_button.addActionListener(new PostrouteListener());
 
-
         fanout_pass_button.setSelected(false);
         autoroute_pass_button.setSelected(true);
         autoroute_pass_button.setSelected(true);
-
 
         gridbag_constraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridbag_constraints.gridheight = 1;
@@ -164,8 +160,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
      * Recalculates all displayed values
      */
     @Override
-    public void refresh()
-    {
+    public void refresh() {
         interactive.AutorouteSettings settings = this.board_handling.settings.autoroute_settings;
         board.LayerStructure layer_structure = this.board_handling.get_routing_board().layer_structure;
 
@@ -174,19 +169,14 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
         this.autoroute_pass_button.setSelected(settings.get_with_autoroute());
         this.postroute_pass_button.setSelected(settings.get_with_postroute());
 
-        for (int i = 0; i < signal_layer_active_arr.length; ++i)
-        {
+        for (int i = 0; i < signal_layer_active_arr.length; ++i) {
             this.signal_layer_active_arr[i].setSelected(settings.get_layer_active(layer_structure.get_layer_no(i)));
         }
 
-        for (int i = 0; i < combo_box_arr.length; ++i)
-        {
-            if (settings.get_preferred_direction_is_horizontal(layer_structure.get_layer_no(i)))
-            {
+        for (int i = 0; i < combo_box_arr.length; ++i) {
+            if (settings.get_preferred_direction_is_horizontal(layer_structure.get_layer_no(i))) {
                 this.combo_box_arr[i].setSelectedItem(this.horizontal);
-            }
-            else
-            {
+            } else {
                 this.combo_box_arr[i].setSelectedItem(this.vertical);
             }
         }
@@ -194,22 +184,19 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
     }
 
     @Override
-    public void dispose()
-    {
+    public void dispose() {
         detail_window.dispose();
         super.dispose();
     }
 
     @Override
-    public void parent_iconified()
-    {
+    public void parent_iconified() {
         detail_window.parent_iconified();
         super.parent_iconified();
     }
 
     @Override
-    public void parent_deiconified()
-    {
+    public void parent_deiconified() {
         detail_window.parent_deiconified();
         super.parent_deiconified();
     }
@@ -226,14 +213,11 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
     private final String horizontal;
     private final String vertical;
 
-    private class DetailListener implements java.awt.event.ActionListener
-    {
+    private class DetailListener implements java.awt.event.ActionListener {
 
         @Override
-        public void actionPerformed(java.awt.event.ActionEvent p_evt)
-        {
-            if (first_time)
-            {
+        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
+            if (first_time) {
                 java.awt.Point location = getLocation();
                 detail_window.setLocation((int) location.getX() + 200, (int) location.getY() + 100);
                 first_time = false;
@@ -243,34 +227,28 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
         private boolean first_time = true;
     }
 
-    private class LayerActiveListener implements java.awt.event.ActionListener
-    {
+    private class LayerActiveListener implements java.awt.event.ActionListener {
 
-        public LayerActiveListener(int p_layer_no)
-        {
+        public LayerActiveListener(int p_layer_no) {
             signal_layer_no = p_layer_no;
         }
 
         @Override
-        public void actionPerformed(java.awt.event.ActionEvent p_evt)
-        {
+        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             int curr_layer_no = board_handling.get_routing_board().layer_structure.get_layer_no(this.signal_layer_no);
             board_handling.settings.autoroute_settings.set_layer_active(curr_layer_no, signal_layer_active_arr[this.signal_layer_no].isSelected());
         }
         private final int signal_layer_no;
     }
 
-    private class PreferredDirectionListener implements java.awt.event.ActionListener
-    {
+    private class PreferredDirectionListener implements java.awt.event.ActionListener {
 
-        public PreferredDirectionListener(int p_layer_no)
-        {
+        public PreferredDirectionListener(int p_layer_no) {
             signal_layer_no = p_layer_no;
         }
 
         @Override
-        public void actionPerformed(java.awt.event.ActionEvent p_evt)
-        {
+        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             int curr_layer_no = board_handling.get_routing_board().layer_structure.get_layer_no(this.signal_layer_no);
             board_handling.settings.autoroute_settings.set_preferred_direction_is_horizontal(curr_layer_no,
                     combo_box_arr[signal_layer_no].getSelectedItem().equals(horizontal));
@@ -278,46 +256,38 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow
         private final int signal_layer_no;
     }
 
-    private class ViasAllowedListener implements java.awt.event.ActionListener
-    {
+    private class ViasAllowedListener implements java.awt.event.ActionListener {
 
         @Override
-        public void actionPerformed(java.awt.event.ActionEvent p_evt)
-        {
+        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             board_handling.settings.autoroute_settings.set_vias_allowed(vias_allowed.isSelected());
         }
     }
 
-    private class FanoutListener implements java.awt.event.ActionListener
-    {
+    private class FanoutListener implements java.awt.event.ActionListener {
 
         @Override
-        public void actionPerformed(java.awt.event.ActionEvent p_evt)
-        {
+        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             interactive.AutorouteSettings autoroute_settings = board_handling.settings.autoroute_settings;
             autoroute_settings.set_with_fanout(fanout_pass_button.isSelected());
             autoroute_settings.set_pass_no(1);
         }
     }
 
-    private class AutorouteListener implements java.awt.event.ActionListener
-    {
+    private class AutorouteListener implements java.awt.event.ActionListener {
 
         @Override
-        public void actionPerformed(java.awt.event.ActionEvent p_evt)
-        {
+        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             interactive.AutorouteSettings autoroute_settings = board_handling.settings.autoroute_settings;
             autoroute_settings.set_with_autoroute(autoroute_pass_button.isSelected());
             autoroute_settings.set_pass_no(1);
         }
     }
 
-    private class PostrouteListener implements java.awt.event.ActionListener
-    {
+    private class PostrouteListener implements java.awt.event.ActionListener {
 
         @Override
-        public void actionPerformed(java.awt.event.ActionEvent p_evt)
-        {
+        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             interactive.AutorouteSettings autoroute_settings = board_handling.settings.autoroute_settings;
             autoroute_settings.set_with_postroute(postroute_pass_button.isSelected());
             autoroute_settings.set_pass_no(1);

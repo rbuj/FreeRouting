@@ -13,7 +13,6 @@
  *   GNU General Public License at <http://www.gnu.org/licenses/> 
  *   for more details.
  */
-
 package geometry.planar;
 
 /**
@@ -22,9 +21,8 @@ package geometry.planar;
  *
  * @author Alfons Wirtz
  */
+public interface ShapeBoundingDirections {
 
-public interface ShapeBoundingDirections
-{
     /**
      * Retuns the count of the fixed directions.
      */
@@ -32,34 +30,38 @@ public interface ShapeBoundingDirections
 
     /**
      * Calculates for an abitrary ConvexShape a surrounding RegularTileShape
-     * with this fixed directions.
-     * Is used in the implementation of the seach trees.
+     * with this fixed directions. Is used in the implementation of the seach
+     * trees.
      */
     RegularTileShape bounds(ConvexShape p_shape);
 
     /**
-     * Auxiliary function to implement the same function with parameter
-     * type ConvexShape.
+     * Auxiliary function to implement the same function with parameter type
+     * ConvexShape.
      */
     RegularTileShape bounds(IntBox p_box);
+
     /**
-     * Auxiliary function to implement the same function with parameter
-     * type ConvexShape.
+     * Auxiliary function to implement the same function with parameter type
+     * ConvexShape.
      */
     RegularTileShape bounds(IntOctagon p_oct);
+
     /**
-     * Auxiliary function to implement the same function with parameter
-     * type ConvexShape.
+     * Auxiliary function to implement the same function with parameter type
+     * ConvexShape.
      */
     RegularTileShape bounds(Simplex p_simplex);
+
     /**
-     * Auxiliary function to implement the same function with parameter
-     * type ConvexShape.
+     * Auxiliary function to implement the same function with parameter type
+     * ConvexShape.
      */
     RegularTileShape bounds(Circle p_circle);
+
     /**
-     * Auxiliary function to implement the same function with parameter
-     * type ConvexShape.
+     * Auxiliary function to implement the same function with parameter type
+     * ConvexShape.
      */
     RegularTileShape bounds(PolygonShape p_polygon);
 }

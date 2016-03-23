@@ -18,7 +18,6 @@
  * Created on 20. September 2007, 07:39
  *
  */
-
 package board;
 
 import datastructures.Observers;
@@ -27,8 +26,8 @@ import datastructures.Observers;
  *
  * @author alfons
  */
-public interface BoardObservers extends Observers<Item>
-{
+public interface BoardObservers extends Observers<Item> {
+
     /**
      * Enable the observers to syncronize the moved component.
      */
