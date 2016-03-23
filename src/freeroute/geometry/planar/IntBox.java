@@ -200,7 +200,7 @@ public class IntBox extends RegularTileShape implements java.io.Serializable {
 
         int nearest_projection_x = p_point.x;
         int nearest_projection_y = p_point.y;
-        int second_nearest_projection_x = p_point.x;
+        int second_nearest_projection_x;
         int second_nearest_projection_y = p_point.y;
         if (lower_x_diff <= upper_x_diff) {
             min_diff = lower_x_diff;
@@ -226,14 +226,11 @@ public class IntBox extends RegularTileShape implements java.io.Serializable {
             second_nearest_projection_y = ll.y;
         }
         if (upper_y_diff < min_diff) {
-            second_min_diff = min_diff;
-            min_diff = upper_y_diff;
             second_nearest_projection_x = nearest_projection_x;
             second_nearest_projection_y = nearest_projection_y;
             nearest_projection_x = p_point.x;
             nearest_projection_y = ur.y;
         } else if (upper_y_diff < second_min_diff) {
-            second_min_diff = upper_y_diff;
             second_nearest_projection_x = p_point.x;
             second_nearest_projection_y = ur.y;
         }

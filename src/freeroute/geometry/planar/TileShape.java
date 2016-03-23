@@ -379,7 +379,7 @@ public abstract class TileShape extends PolylineShape implements ConvexShape, ja
         if (line_count == 1) {
             return border_line(0).perpendicular_projection(p_from_point);
         }
-        Point nearest_point = null;
+
         double min_dist = Double.MAX_VALUE;
         int min_dist_ind = 0;
 
@@ -393,7 +393,7 @@ public abstract class TileShape extends PolylineShape implements ConvexShape, ja
             }
         }
 
-        nearest_point = corner(min_dist_ind);
+        Point nearest_point = corner(min_dist_ind);
 
         int prev_ind = line_count - 2;
         int curr_ind = line_count - 1;

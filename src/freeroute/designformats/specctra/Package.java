@@ -218,7 +218,7 @@ public class Package {
         try {
             // Read the padstack name.
             p_scanner.yybegin(SpecctraFileScanner.NAME);
-            String padstack_name = null;
+            String padstack_name;
             Object next_token = p_scanner.next_token();
             if (next_token instanceof String) {
                 padstack_name = (String) next_token;
@@ -244,7 +244,7 @@ public class Package {
                 next_token = p_scanner.next_token();
             }
             // Read the pin name.
-            String pin_name = null;
+            String pin_name;
             if (next_token instanceof String) {
                 pin_name = (String) next_token;
             } else if (next_token instanceof Integer) {

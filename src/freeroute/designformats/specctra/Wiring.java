@@ -136,7 +136,6 @@ class Wiring extends ScopeKeyword {
             net_no = p_via.get_net_no(0);
             via_net = p_par.board.rules.nets.get(net_no);
         } else {
-            net_no = 0;
             via_net = null;
         }
         p_par.file.start_scope();
@@ -364,7 +363,7 @@ class Wiring extends ScopeKeyword {
 
         IntBox bounding_box = board.get_bounding_box();
 
-        Item result = null;
+        Item result;
         if (border_shape != null) {
             if (clearance_class_no < 0) {
                 clearance_class_no

@@ -179,7 +179,7 @@ public class PartLibrary extends ScopeKeyword {
 
     private LogicalPart read_logical_part(Scanner p_scanner) {
         java.util.Collection<PartPin> part_pins = new java.util.LinkedList<>();
-        Object next_token = null;
+        Object next_token;
         try {
             next_token = p_scanner.next_token();
         } catch (java.io.IOException e) {

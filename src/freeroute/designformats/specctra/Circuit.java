@@ -72,7 +72,6 @@ public class Circuit {
     }
 
     static LengthMatchingRule read_length_scope(Scanner p_scanner) {
-        LengthMatchingRule result = null;
         double[] length_arr = new double[2];
         Object next_token = null;
         for (int i = 0; i < 2; ++i) {
@@ -91,7 +90,7 @@ public class Circuit {
                 return null;
             }
         }
-        result = new LengthMatchingRule(length_arr[0], length_arr[1]);
+        LengthMatchingRule result = new LengthMatchingRule(length_arr[0], length_arr[1]);
         for (;;) {
             Object prev_token = next_token;
             try {

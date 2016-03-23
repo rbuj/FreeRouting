@@ -566,7 +566,7 @@ public class PolygonShape extends PolylineShape {
             prev_corner = corners[corners.length - 1];
         }
 
-        Point next_corner = null;
+        Point next_corner;
 
         // search for the next concave corner from here
         int concave_corner_no = -1;

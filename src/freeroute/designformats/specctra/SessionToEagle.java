@@ -38,7 +38,7 @@ public class SessionToEagle extends javax.swing.JFrame {
         // create a file_writer for the eagle script file.
         java.io.OutputStreamWriter file_writer = new java.io.OutputStreamWriter(p_output_stream);
 
-        boolean result = true;
+        boolean result;
 
         double board_scale_factor = p_board.communication.coordinate_transform.board_to_dsn(1);
         SessionToEagle new_instance = new SessionToEagle(scanner, file_writer, p_board,

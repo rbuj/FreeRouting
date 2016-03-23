@@ -43,7 +43,7 @@ public class DsnFile {
     public static ReadResult read(java.io.InputStream p_input_stream, interactive.BoardHandling p_board_handling,
             board.BoardObservers p_observers, datastructures.IdNoGenerator p_item_id_no_generator, TestLevel p_test_level) {
         Scanner scanner = new SpecctraFileScanner(p_input_stream);
-        Object curr_token = null;
+        Object curr_token;
         for (int i = 0; i < 3; ++i) {
             try {
                 curr_token = scanner.next_token();

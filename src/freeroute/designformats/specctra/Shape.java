@@ -85,7 +85,7 @@ public abstract class Shape {
      */
     public static PolylinePath read_polyline_path_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
         try {
-            Layer layer = null;
+            Layer layer;
             Object next_token = p_scanner.next_token();
             if (next_token == Keyword.PCB_SCOPE) {
                 layer = Layer.PCB;
@@ -124,7 +124,7 @@ public abstract class Shape {
                 return null;
             }
             Iterator<Object> it = corner_list.iterator();
-            double width = 0;
+            double width;
             Object next_object = it.next();
             if (next_object instanceof Double) {
                 width = (double) next_object;
@@ -166,7 +166,7 @@ public abstract class Shape {
         String clearance_class_name = null;
         String area_name = null;
         boolean result_ok = true;
-        Object next_token = null;
+        Object next_token;
         try {
             next_token = p_scanner.next_token();
         } catch (java.io.IOException e) {
@@ -493,7 +493,7 @@ public abstract class Shape {
                 return null;
             }
             Iterator<Object> it = corner_list.iterator();
-            double width = 0;
+            double width;
             Object next_object = it.next();
             if (next_object instanceof Double) {
                 width = (double) next_object;
