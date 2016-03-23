@@ -932,14 +932,21 @@ public class Network extends ScopeKeyword {
                 p_clearance_matrix.set_value(i, result, j, curr_value);
             }
         }
-        if (p_item_class_name.equals("via")) {
-            p_net_class.default_item_clearance_classes.set(ItemClass.VIA, result);
-        } else if (p_item_class_name.equals("pin")) {
-            p_net_class.default_item_clearance_classes.set(ItemClass.PIN, result);
-        } else if (p_item_class_name.equals("smd")) {
-            p_net_class.default_item_clearance_classes.set(ItemClass.SMD, result);
-        } else if (p_item_class_name.equals("area")) {
-            p_net_class.default_item_clearance_classes.set(ItemClass.AREA, result);
+        switch (p_item_class_name) {
+            case "via":
+                p_net_class.default_item_clearance_classes.set(ItemClass.VIA, result);
+                break;
+            case "pin":
+                p_net_class.default_item_clearance_classes.set(ItemClass.PIN, result);
+                break;
+            case "smd":
+                p_net_class.default_item_clearance_classes.set(ItemClass.SMD, result);
+                break;
+            case "area":
+                p_net_class.default_item_clearance_classes.set(ItemClass.AREA, result);
+                break;
+            default:
+                break;
         }
         return result;
     }

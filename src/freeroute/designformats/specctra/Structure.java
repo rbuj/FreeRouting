@@ -951,14 +951,21 @@ class Structure extends ScopeKeyword {
         p_board_rules.clearance_matrix.append_class(p_name);
         int result = p_board_rules.clearance_matrix.get_no(p_name);
         rules.NetClass default_net_class = p_board_rules.get_default_net_class();
-        if (p_name.equals("via")) {
-            default_net_class.default_item_clearance_classes.set(ItemClass.VIA, result);
-        } else if (p_name.equals("pin")) {
-            default_net_class.default_item_clearance_classes.set(ItemClass.PIN, result);
-        } else if (p_name.equals("smd")) {
-            default_net_class.default_item_clearance_classes.set(ItemClass.SMD, result);
-        } else if (p_name.equals("area")) {
-            default_net_class.default_item_clearance_classes.set(ItemClass.AREA, result);
+        switch (p_name) {
+            case "via":
+                default_net_class.default_item_clearance_classes.set(ItemClass.VIA, result);
+                break;
+            case "pin":
+                default_net_class.default_item_clearance_classes.set(ItemClass.PIN, result);
+                break;
+            case "smd":
+                default_net_class.default_item_clearance_classes.set(ItemClass.SMD, result);
+                break;
+            case "area":
+                default_net_class.default_item_clearance_classes.set(ItemClass.AREA, result);
+                break;
+            default:
+                break;
         }
         return result;
     }
