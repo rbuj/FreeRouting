@@ -108,9 +108,7 @@ public abstract class WindowNetSamples extends BoardSubWindow {
         }
         try {
             input_stream = net_connection.getInputStream();
-        } catch (java.io.IOException e) {
-            return null;
-        } catch (java.security.AccessControlException e) {
+        } catch (java.io.IOException | java.security.AccessControlException e) {
             return null;
         }
         try {
