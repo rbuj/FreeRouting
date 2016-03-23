@@ -23,6 +23,7 @@ package gui;
 import board.ClearanceViolation;
 import geometry.planar.FloatPoint;
 import interactive.ClearanceViolations;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -65,14 +66,14 @@ public class WindowClearanceViolations extends WindowObjectListWithFilter
     @Override
     protected void select_instances()
     {
-        List<ViolationInfo> selected_violations = list.getSelectedValuesList();
+        List<?> selected_violations = (List<?>) list.getSelectedValuesList();
         if (selected_violations.isEmpty())
         {
             return;
         }
         java.util.Set<board.Item> selected_items = new java.util.TreeSet<>();
-        for (ViolationInfo violationInfo : selected_violations)
-        {
+        for (Iterator<?> it = selected_violations.iterator(); it.hasNext();) {
+            ViolationInfo violationInfo = (ViolationInfo) it.next();
             ClearanceViolation curr_violation = violationInfo.violation;
             selected_items.add(curr_violation.first_item);
             selected_items.add(curr_violation.second_item);

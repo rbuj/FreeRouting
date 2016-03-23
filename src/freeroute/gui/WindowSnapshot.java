@@ -239,7 +239,7 @@ public class WindowSnapshot extends BoardSavableSubWindow
     
     private final BoardFrame board_frame;
     
-    private javax.swing.DefaultListModel list_model = new javax.swing.DefaultListModel();
+    private javax.swing.DefaultListModel<interactive.SnapShot> list_model = new javax.swing.DefaultListModel<>();
     private final javax.swing.JList list;
     private final javax.swing.JTextField name_field;
     final WindowSnapshotSettings settings_window;

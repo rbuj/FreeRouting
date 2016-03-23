@@ -23,6 +23,7 @@ package gui;
 
 import board.Item;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
@@ -104,14 +105,14 @@ public class WindowUnconnectedRoute extends WindowObjectListWithFilter
     @Override
     protected void select_instances()
     {
-        List<UnconnectedRouteInfo> selected_list_values = list.getSelectedValuesList();
+        List<?> selected_list_values = (List<?>) list.getSelectedValuesList();
         if (selected_list_values.isEmpty())
         {
             return;
         }
         Set<board.Item> selected_items = new java.util.TreeSet<>();
-        for (UnconnectedRouteInfo current_value : selected_list_values)
-        {
+        for (Iterator<?> it = selected_list_values.iterator(); it.hasNext();) {
+            UnconnectedRouteInfo current_value = (UnconnectedRouteInfo) it.next();
             selected_items.addAll(current_value.item_list);
         }
         interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;

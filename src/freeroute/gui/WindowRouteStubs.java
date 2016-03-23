@@ -139,14 +139,14 @@ public class WindowRouteStubs extends WindowObjectListWithFilter
     @Override
     protected void select_instances()
     {
-        List<RouteStubInfo> selected_list_values = list.getSelectedValuesList();
+        List<?> selected_list_values = (List<?>) list.getSelectedValuesList();
         if (selected_list_values.isEmpty())
         {
             return;
         }
         Set<board.Item> selected_items = new java.util.TreeSet<>();
-        for (RouteStubInfo current_value : selected_list_values)
-        {
+        for (Iterator<?> it = selected_list_values.iterator(); it.hasNext();) {
+            RouteStubInfo current_value = (RouteStubInfo) it.next();
             selected_items.add(current_value.stub_item);
         }
         interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;
