@@ -167,7 +167,7 @@ public class CopyItemState extends InteractiveState {
                 if (cmp_no_pairs.containsKey(curr_key)) {
                     // the new component for this pin is already created
                     Integer curr_value = cmp_no_pairs.get(curr_key);
-                    new_cmp_no = curr_value.intValue();
+                    new_cmp_no = curr_value;
                 } else {
                     Component old_component = board.components.get(curr_cmp_no);
                     if (old_component == null) {

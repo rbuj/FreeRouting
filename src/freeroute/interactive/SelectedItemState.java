@@ -308,7 +308,7 @@ public class SelectedItemState extends InteractiveState {
         }
 
         for (Integer curr_net_no : changed_nets) {
-            hdlg.update_ratsnest(curr_net_no.intValue());
+            hdlg.update_ratsnest(curr_net_no);
         }
         hdlg.repaint();
         return this.return_state;
