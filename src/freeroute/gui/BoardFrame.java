@@ -22,6 +22,7 @@ import datastructures.IdNoGenerator;
 import designformats.specctra.DsnFile;
 import interactive.ScreenMessages;
 import java.io.File;
+import java.io.IOException;
 
 /**
  *
@@ -184,7 +185,7 @@ public class BoardFrame extends javax.swing.JFrame {
                 viewport_position = (java.awt.Point) object_stream.readObject();
                 frame_location = (java.awt.Point) object_stream.readObject();
                 frame_bounds = (java.awt.Rectangle) object_stream.readObject();
-            } catch (Exception e) {
+            } catch (IOException | ClassNotFoundException e) {
                 return false;
             }
             this.setLocation(frame_location);

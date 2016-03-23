@@ -21,6 +21,8 @@
 package gui;
 
 import datastructures.FileFilter;
+import java.io.IOException;
+import javax.jnlp.UnavailableServiceException;
 
 /**
  * File functionality with security restrictions used, when the application is
@@ -361,7 +363,7 @@ public class DesignFile {
             javax.jnlp.FileContents file_contents
                     = file_open_service.openFileDialog(p_design_dir_name, DesignFile.text_file_extensions);
             return new DesignFile(true, file_contents, null, null);
-        } catch (Exception e) {
+        } catch (UnavailableServiceException | IOException e) {
             return null;
         }
     }

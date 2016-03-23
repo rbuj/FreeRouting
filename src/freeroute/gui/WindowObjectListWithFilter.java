@@ -19,6 +19,8 @@
  */
 package gui;
 
+import java.io.IOException;
+
 /**
  * Abstract class for windows displaying a list of objects The object name can
  * be filttered by an alphanumeric input string. * @author Alfons Wirtz
@@ -101,7 +103,7 @@ public abstract class WindowObjectListWithFilter extends WindowObjectList {
         try {
             String curr_string = (String) p_object_stream.readObject();
             this.filter_string.setText(curr_string);
-        } catch (Exception e) {
+        } catch (IOException | ClassNotFoundException e) {
             System.out.println("WindowObjectListWithFilter.read: read failed");
         }
         return super.read(p_object_stream);

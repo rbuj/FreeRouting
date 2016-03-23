@@ -40,6 +40,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collection;
@@ -885,7 +886,7 @@ public class BoardHandling {
             settings.set_logfile(this.logfile);
             coordinate_transform = (CoordinateTransform) p_design.readObject();
             graphics_context = (GraphicsContext) p_design.readObject();
-        } catch (Exception e) {
+        } catch (IOException | ClassNotFoundException e) {
             return false;
         }
         board.set_test_level(p_test_level);

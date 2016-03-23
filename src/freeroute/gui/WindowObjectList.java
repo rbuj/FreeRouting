@@ -20,6 +20,7 @@
 package gui;
 
 import board.ObjectInfoPanel;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -258,7 +259,7 @@ public abstract class WindowObjectList extends BoardSavableSubWindow {
         int[] saved_selected_indices = null;
         try {
             saved_selected_indices = (int[]) p_object_stream.readObject();
-        } catch (Exception e) {
+        } catch (IOException | ClassNotFoundException e) {
             System.out.println("WindowObjectListWithFilter.read: read failed");
             return false;
         }

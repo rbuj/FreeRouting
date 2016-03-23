@@ -19,6 +19,8 @@
  */
 package gui;
 
+import java.io.IOException;
+
 /**
  * Window handling snapshots of the interactive situation.
  *
@@ -151,7 +153,7 @@ public class WindowSnapshot extends BoardSavableSubWindow {
             this.setVisible(saved_attributes.is_visible);
             this.settings_window.read(p_object_stream);
             return true;
-        } catch (Exception e) {
+        } catch (IOException | ClassNotFoundException e) {
             System.out.println("VisibilityFrame.read_attriutes: read failed");
             return false;
         }

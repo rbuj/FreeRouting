@@ -19,6 +19,8 @@
  */
 package gui;
 
+import java.io.IOException;
+
 /**
  * Subwindow of the board frame, whose location and visibility can be saved and
  * read from disc.
@@ -37,7 +39,7 @@ public abstract class BoardSavableSubWindow extends BoardSubWindow {
             this.setBounds(saved_attributes.bounds);
             this.setVisible(saved_attributes.is_visible);
             return true;
-        } catch (Exception e) {
+        } catch (IOException | ClassNotFoundException e) {
             System.out.println("SelectParameterWindow.read: read failed");
             return false;
         }

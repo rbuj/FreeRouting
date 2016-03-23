@@ -20,6 +20,9 @@
  */
 package gui;
 
+import java.io.IOException;
+import javax.jnlp.UnavailableServiceException;
+
 /**
  * Function used for Java Websrart. Some put to a separate class to avoid
  * runtime undefined in offline applications.
@@ -49,7 +52,7 @@ public class WebStart {
             javax.jnlp.FileContents curr_file_contents
                     = file_save_service.saveFileDialog(p_parent, p_file_extensions, p_input_stream, p_name);
             return curr_file_contents;
-        } catch (Exception e) {
+        } catch (UnavailableServiceException | IOException e) {
             return null;
         }
     }
@@ -73,7 +76,7 @@ public class WebStart {
                         return file_contents.getInputStream();
                     }
                 }
-            } catch (Exception e) {
+            } catch (UnavailableServiceException | IOException e) {
 
             }
         }
@@ -95,7 +98,7 @@ public class WebStart {
                 persistence_service
                         = (javax.jnlp.PersistenceService) javax.jnlp.ServiceManager.lookup("javax.jnlp.PersistenceService");
                 muffins = persistence_service.getNames(code_base);
-            } catch (Exception e) {
+            } catch (UnavailableServiceException | IOException e) {
                 muffins = null;
             }
         }
@@ -153,7 +156,7 @@ public class WebStart {
                     }
                 }
             }
-        } catch (Exception e) {
+        } catch (UnavailableServiceException | IOException e) {
             file_deleted = false;
         }
         return file_deleted;
