@@ -114,8 +114,8 @@ public class WindowVia extends BoardSavableSubWindow
         north_panel.add(via_rule_list_name, gridbag_constraints);
         
         
-        this.rule_list_model = new javax.swing.DefaultListModel();
-        this.rule_list = new javax.swing.JList(this.rule_list_model);
+        this.rule_list_model = new javax.swing.DefaultListModel<>();
+        this.rule_list = new javax.swing.JList<>(this.rule_list_model);
         
         this.rule_list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         this.rule_list.setSelectedIndex(0);
@@ -209,8 +209,8 @@ public class WindowVia extends BoardSavableSubWindow
     
     private final java.util.ResourceBundle resources;
     
-    private final javax.swing.JList rule_list;
-    private final javax.swing.DefaultListModel rule_list_model;
+    private final javax.swing.JList<ViaRule> rule_list;
+    private final javax.swing.DefaultListModel<ViaRule> rule_list_model;
     
     private final javax.swing.JPanel main_panel;
     
@@ -472,7 +472,7 @@ public class WindowVia extends BoardSavableSubWindow
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt)
         {
-            List<WindowObjectInfo.Printable> selected_objects = rule_list.getSelectedValuesList();
+            List<ViaRule> selected_objects = rule_list.getSelectedValuesList();
             if (selected_objects.isEmpty())
             {
                 return;
