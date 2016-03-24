@@ -23,6 +23,7 @@ import designformats.specctra.DsnFile;
 import interactive.ScreenMessages;
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 /**
  *
@@ -479,7 +480,7 @@ public class BoardFrame extends javax.swing.JFrame {
      * Returns the currently used locale for the language dependent output.
      */
     public java.util.Locale get_locale() {
-        return this.locale;
+        return Locale.getDefault();
     }
 
     /**
