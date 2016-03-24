@@ -70,10 +70,46 @@
     nbproject/build-impl.xml file. 
 
     -->
+
+    <!--
+        Ant contrib bootstrap
+    -->
+    <property name="ant-contrib.install.version" value="1.0b3" />
+
+    <condition property="ant-contrib.home" value="${ant-contrib.ANT_CONTRIB_HOME}">
+        <isset property="ant-contrib.ANT_CONTRIB_HOME" />
+    </condition>
+
+    <property name="ant-contrib.home" value="${user.home}/.ant" />
+    <property name="ant-contrib.jar.dir" value="${ant-contrib.home}/lib" />
+    <property name="ant-contrib.jar.file" value="${ant-contrib.jar.dir}/ant-contrib.jar" />
+
+    <target name="download-ant-contrib" unless="offline">
+        <mkdir dir="${ant-contrib.jar.dir}"/>
+        <!-- download Ivy from web site so that it can be used even without any special installation -->
+        <get src="http://central.maven.org/maven2/ant-contrib/ant-contrib/${ant-contrib.install.version}/ant-contrib-${ant-contrib.install.version}.jar" dest="${ant-contrib.jar.file}" usetimestamp="true"/>
+    </target>
+
+    <target name="init-ant-contrib" depends="download-ant-contrib">
+        <!-- try to load ivy here from ivy home, in case the user has not already dropped
+        it into ant's lib dir (note that the latter copy will always take precedence).
+        We will not fail as long as local lib dir exists (it may be empty) and
+        ivy is in at least one of ant's lib dir or the local lib dir. -->
+        <path id="ant-contrib.lib.path">
+            <fileset dir="${ant-contrib.jar.dir}" includes="*.jar"/>
+        </path>
+        <taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="ant-contrib.lib.path"/>
+    </target>
+
+    <!--
+        Ivy bootstrap
+    -->
     <property name="ivy.install.version" value="2.4.0" />
+
     <condition property="ivy.home" value="${env.IVY_HOME}">
         <isset property="env.IVY_HOME" />
     </condition>
+
     <property name="ivy.home" value="${user.home}/.ant" />
     <property name="ivy.jar.dir" value="${ivy.home}/lib" />
     <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
@@ -95,6 +131,9 @@
         <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
     </target>
     
+    <!--
+        Fetch external libs by using ivy
+    -->
     <target name="-ivy-retrieve" depends="init-ivy">
         <ivy:resolve/> <!-- Tell Ivy to resolve dependencies -->
         <ivy:retrieve/> <!-- Load dependencies to the project -->
@@ -111,8 +150,35 @@
         </propertyfile>
     </target>
 
-    <target name="-pre-compile" depends="-ivy-retrieve"/>
-    <target name="-pre-compile-single" depends="-ivy-retrieve"/>
+    <!--
+        JavaHelpSearch
+    -->
+    <target name="help" depends="init-ant-contrib,-ivy-retrieve">
+        <pathconvert property="javah.computed" dirsep="/" pathsep=":">
+            <path>
+                <fileset dir="lib" includes="javahelp*.jar"/>
+            </path>
+            <map from="${basedir}${file.separator}" to=""/>
+        </pathconvert>
+        <for param="lang" list="en,de">
+            <sequential>
+                <echo message="JavaHelpSearch: @{lang}"/>
+                <delete dir="${src.dir}/helpset/@{lang}/JavaHelpSearch"/>
+                <mkdir dir="${src.dir}/helpset/@{lang}/JavaHelpSearch"/>
+                <java classname="com.sun.java.help.search.Indexer" 
+                      classpath="${javah.computed}"
+                      fork="true" failonerror="true">
+                    <arg value="${src.dir}/helpset/@{lang}/html_files"/>
+                </java>
+                <move todir="${src.dir}/helpset/@{lang}/JavaHelpSearch">
+                    <fileset dir="JavaHelpSearch" includes="**"/>
+                </move>
+            </sequential>
+        </for>
+    </target>        
+        
+    <target name="-pre-compile" depends="help"/>
+    <target name="-pre-compile-single" depends="help"/>
 
     <target name="-post-clean">
         <delete dir="lib"/>
