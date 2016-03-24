@@ -40,7 +40,7 @@ public class MainApplication extends javax.swing.JFrame {
         boolean webstart_option = false;
         String design_file_name = null;
         String design_dir_name = null;
-        java.util.Locale current_locale = java.util.Locale.ENGLISH;
+        java.util.Locale current_locale = null;
         for (int i = 0; i < p_args.length; ++i) {
             if (p_args[i].startsWith("-de")) // the design file is provided
             {
@@ -65,6 +65,9 @@ public class MainApplication extends javax.swing.JFrame {
             } else if (p_args[i].startsWith("-test")) {
                 test_version_option = true;
             }
+        }
+        if (current_locale==null){
+            current_locale = java.util.Locale.getDefault();
         }
         if (!(OFFLINE_ALLOWED || webstart_option)) {
             Runtime.getRuntime().exit(1);
