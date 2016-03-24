@@ -102,9 +102,7 @@ made subject to such option by the copyright holder.
     <target name="-check-webstart-in-platform-home-jre" if="platform.home">
         <condition property="do.set.webstart.in.platform.home.jre">
             <and>
-                <not>
-                    <isset property="active.webstart.executable"/>
-                </not>
+                <not><isset property="active.webstart.executable"/></not>
                 <or>
                     <available file="${platform.home}${file.separator}jre${file.separator}bin${file.separator}javaws.exe"/>
                     <available file="${platform.home}${file.separator}jre${file.separator}bin${file.separator}javaws"/>
@@ -118,9 +116,7 @@ made subject to such option by the copyright holder.
     <target name="-check-webstart-in-platform-home" if="platform.home">
         <condition property="do.set.webstart.in.platform.home">
             <and>
-                <not>
-                    <isset property="active.webstart.executable"/>
-                </not>
+                <not><isset property="active.webstart.executable"/></not>
                 <or>
                     <available file="${platform.home}${file.separator}bin${file.separator}javaws.exe"/>
                     <available file="${platform.home}${file.separator}bin${file.separator}javaws"/>
@@ -134,9 +130,7 @@ made subject to such option by the copyright holder.
     <target name="-check-webstart-in-platform-home-220918workaround" if="platform.home">
         <condition property="do.set.webstart.in.platform.home.220918workaround">
             <and>
-                <not>
-                    <isset property="active.webstart.executable"/>
-                </not>
+                <not><isset property="active.webstart.executable"/></not>
                 <or>
                     <available file="${platform.home}${file.separator}..${file.separator}bin${file.separator}javaws.exe"/>
                     <available file="${platform.home}${file.separator}..${file.separator}bin${file.separator}javaws"/>
@@ -150,9 +144,7 @@ made subject to such option by the copyright holder.
     <target name="-check-webstart-in-jre" unless="active.webstart.executable">
         <condition property="do.set.webstart.in.jre">
             <and>
-                <not>
-                    <isset property="active.webstart.executable"/>
-                </not>
+                <not><isset property="active.webstart.executable"/></not>
                 <or>
                     <available file="${java.home}${file.separator}bin${file.separator}javaws.exe"/>
                     <available file="${java.home}${file.separator}bin${file.separator}javaws"/>
@@ -166,9 +158,7 @@ made subject to such option by the copyright holder.
     <target name="-check-webstart-in-probjdk" unless="active.webstart.executable">
         <condition property="do.set.webstart.in.probjdk">
             <and>
-                <not>
-                    <isset property="active.webstart.executable"/>
-                </not>
+                <not><isset property="active.webstart.executable"/></not>
                 <or>
                     <available file="${java.home}${file.separator}..${file.separator}bin${file.separator}javaws.exe"/>
                     <available file="${java.home}${file.separator}..${file.separator}bin${file.separator}javaws"/>
@@ -183,9 +173,7 @@ made subject to such option by the copyright holder.
         <property environment="env"/>
         <condition property="do.set.webstart.in.envjdk">
             <and>
-                <not>
-                    <isset property="active.webstart.executable"/>
-                </not>
+                <not><isset property="active.webstart.executable"/></not>
                 <or>
                     <available file="${env.JAVA_HOME}${file.separator}bin${file.separator}javaws.exe"/>
                     <available file="${env.JAVA_HOME}${file.separator}bin${file.separator}javaws"/>
@@ -199,9 +187,7 @@ made subject to such option by the copyright holder.
     <target name="-check-webstart-in-usr-bin" unless="active.webstart.executable">
         <condition property="do.set.webstart.in.usr.bin">
             <and>
-                <not>
-                    <isset property="active.webstart.executable"/>
-                </not>
+                <not><isset property="active.webstart.executable"/></not>
                 <available file="${file.separator}usr${file.separator}bin${file.separator}javaws"/>
             </and>
         </condition>
@@ -212,9 +198,7 @@ made subject to such option by the copyright holder.
     <target name="-pre-check-webstart-in-unix" depends="-check-operating-system,-set-webstart-in-usr-bin" unless="active.webstart.executable">
         <condition property="running.on.unix-active.webstart.executable">
             <and>
-                <not>
-                    <isset property="active.webstart.executable"/>
-                </not>
+                <not><isset property="active.webstart.executable"/></not>
                 <isset property="running.on.unix"/>
             </and>
         </condition>
@@ -226,15 +210,11 @@ made subject to such option by the copyright holder.
         </exec>
         <condition property="do.set.webstart.in.unix">
             <and>
-                <not>
-                    <isset property="active.webstart.executable"/>
-                </not>
+                <not><isset property="active.webstart.executable"/></not>
                 <isset property="exec.which.javaws.result"/>
                 <equals arg1="${exec.which.javaws.result}" arg2="0"/>
                 <isset property="exec.which.javaws.output"/>
-                <not>
-                    <equals arg1="${exec.which.javaws.output}" arg2=""/>
-                </not>
+                <not><equals arg1="${exec.which.javaws.output}" arg2=""/></not>
             </and>
         </condition>
         <echo message="do.set.webstart.in.unix = ${do.set.webstart.in.unix}" level="verbose"/>
@@ -360,9 +340,7 @@ made subject to such option by the copyright holder.
                 <isset property="jnlp.codebase.type"/>
                 <equals arg1="${jnlp.codebase.type}" arg2="local"/>
                 <or>
-                    <not>
-                        <isset property="manifest.custom.codebase"/>
-                    </not>
+                    <not><isset property="manifest.custom.codebase"/></not>
                     <equals arg1="${manifest.custom.codebase}" arg2=""/>
                 </or>
             </and>
@@ -372,13 +350,9 @@ made subject to such option by the copyright holder.
                 <isset property="jnlp.codebase.type"/>
                 <equals arg1="${jnlp.codebase.type}" arg2="user"/>
                 <isset property="jnlp.codebase.user"/>
-                <not>
-                    <equals arg1="${jnlp.codebase.type}" arg2=""/>
-                </not>
+                <not><equals arg1="${jnlp.codebase.type}" arg2=""/></not>
                 <or>
-                    <not>
-                        <isset property="manifest.custom.codebase"/>
-                    </not>
+                    <not><isset property="manifest.custom.codebase"/></not>
                     <equals arg1="${manifest.custom.codebase}" arg2=""/>
                 </or>
             </and>
@@ -388,25 +362,17 @@ made subject to such option by the copyright holder.
                 <isset property="jnlp.codebase.type"/>
                 <equals arg1="${jnlp.codebase.type}" arg2="web"/>
                 <or>
-                    <not>
-                        <isset property="manifest.custom.codebase"/>
-                    </not>
+                    <not><isset property="manifest.custom.codebase"/></not>
                     <equals arg1="${manifest.custom.codebase}" arg2=""/>
                 </or>
             </and>
         </condition>
         <condition property="manifest.codebase.other">
             <and>
-                <not>
-                    <isset property="manifest.codebase.copy"/>
-                </not>
-                <not>
-                    <isset property="manifest.codebase.web"/>
-                </not>
+                <not><isset property="manifest.codebase.copy"/></not>
+                <not><isset property="manifest.codebase.web"/></not>
                 <or>
-                    <not>
-                        <isset property="manifest.custom.codebase"/>
-                    </not>
+                    <not><isset property="manifest.custom.codebase"/></not>
                     <equals arg1="${manifest.custom.codebase}" arg2=""/>
                 </or>
             </and>
@@ -414,9 +380,7 @@ made subject to such option by the copyright holder.
         <condition property="manifest.codebase.override">
             <and>
                 <isset property="manifest.custom.codebase"/>
-                <not>
-                    <equals arg1="${manifest.custom.codebase}" arg2=""/>
-                </not>
+                <not><equals arg1="${manifest.custom.codebase}" arg2=""/></not>
             </and>
         </condition>
         <condition property="manifest.codebase.override.warning">
@@ -454,9 +418,7 @@ made subject to such option by the copyright holder.
                 <isset property="jnlp.codebase.type"/>
                 <equals arg1="${jnlp.codebase.type}" arg2="local"/>
                 <or>
-                    <not>
-                        <isset property="manifest.custom.application.library.allowable.codebase"/>
-                    </not>
+                    <not><isset property="manifest.custom.application.library.allowable.codebase"/></not>
                     <equals arg1="${manifest.custom.application.library.allowable.codebase}" arg2=""/>
                 </or>
             </and>
@@ -466,13 +428,9 @@ made subject to such option by the copyright holder.
                 <isset property="jnlp.codebase.type"/>
                 <equals arg1="${jnlp.codebase.type}" arg2="user"/>
                 <isset property="jnlp.codebase.user"/>
-                <not>
-                    <equals arg1="${jnlp.codebase.type}" arg2=""/>
-                </not>
+                <not><equals arg1="${jnlp.codebase.type}" arg2=""/></not>
                 <or>
-                    <not>
-                        <isset property="manifest.custom.application.library.allowable.codebase"/>
-                    </not>
+                    <not><isset property="manifest.custom.application.library.allowable.codebase"/></not>
                     <equals arg1="${manifest.custom.application.library.allowable.codebase}" arg2=""/>
                 </or>
             </and>
@@ -482,25 +440,17 @@ made subject to such option by the copyright holder.
                 <isset property="jnlp.codebase.type"/>
                 <equals arg1="${jnlp.codebase.type}" arg2="web"/>
                 <or>
-                    <not>
-                        <isset property="manifest.custom.application.library.allowable.codebase"/>
-                    </not>
+                    <not><isset property="manifest.custom.application.library.allowable.codebase"/></not>
                     <equals arg1="${manifest.custom.application.library.allowable.codebase}" arg2=""/>
                 </or>
             </and>
         </condition>
         <condition property="manifest.application.library.allowable.codebase.other">
             <and>
-                <not>
-                    <isset property="manifest.application.library.allowable.codebase.copy"/>
-                </not>
-                <not>
-                    <isset property="manifest.application.library.allowable.codebase.web"/>
-                </not>
+                <not><isset property="manifest.application.library.allowable.codebase.copy"/></not>
+                <not><isset property="manifest.application.library.allowable.codebase.web"/></not>
                 <or>
-                    <not>
-                        <isset property="manifest.custom.application.library.allowable.codebase"/>
-                    </not>
+                    <not><isset property="manifest.custom.application.library.allowable.codebase"/></not>
                     <equals arg1="${manifest.custom.application.library.allowable.codebase}" arg2=""/>
                 </or>
             </and>
@@ -508,9 +458,7 @@ made subject to such option by the copyright holder.
         <condition property="manifest.application.library.allowable.codebase.override">
             <and>
                 <isset property="manifest.custom.application.library.allowable.codebase"/>
-                <not>
-                    <equals arg1="${manifest.custom.application.library.allowable.codebase}" arg2=""/>
-                </not>
+                <not><equals arg1="${manifest.custom.application.library.allowable.codebase}" arg2=""/></not>
             </and>
         </condition>
         <condition property="manifest.application.library.allowable.codebase.override.warning">
@@ -543,9 +491,7 @@ made subject to such option by the copyright holder.
                 <isset property="jnlp.codebase.type"/>
                 <equals arg1="${jnlp.codebase.type}" arg2="local"/>
                 <or>
-                    <not>
-                        <isset property="manifest.custom.caller.allowable.codebase"/>
-                    </not>
+                    <not><isset property="manifest.custom.caller.allowable.codebase"/></not>
                     <equals arg1="${manifest.custom.caller.allowable.codebase}" arg2=""/>
                 </or>
             </and>
@@ -555,13 +501,9 @@ made subject to such option by the copyright holder.
                 <isset property="jnlp.codebase.type"/>
                 <equals arg1="${jnlp.codebase.type}" arg2="user"/>
                 <isset property="jnlp.codebase.user"/>
-                <not>
-                    <equals arg1="${jnlp.codebase.type}" arg2=""/>
-                </not>
+                <not><equals arg1="${jnlp.codebase.type}" arg2=""/></not>
                 <or>
-                    <not>
-                        <isset property="manifest.custom.caller.allowable.codebase"/>
-                    </not>
+                    <not><isset property="manifest.custom.caller.allowable.codebase"/></not>
                     <equals arg1="${manifest.custom.caller.allowable.codebase}" arg2=""/>
                 </or>
             </and>
@@ -571,25 +513,17 @@ made subject to such option by the copyright holder.
                 <isset property="jnlp.codebase.type"/>
                 <equals arg1="${jnlp.codebase.type}" arg2="web"/>
                 <or>
-                    <not>
-                        <isset property="manifest.custom.caller.allowable.codebase"/>
-                    </not>
+                    <not><isset property="manifest.custom.caller.allowable.codebase"/></not>
                     <equals arg1="${manifest.custom.caller.allowable.codebase}" arg2=""/>
                 </or>
             </and>
         </condition>
         <condition property="manifest.caller.allowable.codebase.other">
             <and>
-                <not>
-                    <isset property="manifest.caller.allowable.codebase.copy"/>
-                </not>
-                <not>
-                    <isset property="manifest.caller.allowable.codebase.web"/>
-                </not>
+                <not><isset property="manifest.caller.allowable.codebase.copy"/></not>
+                <not><isset property="manifest.caller.allowable.codebase.web"/></not>
                 <or>
-                    <not>
-                        <isset property="manifest.custom.caller.allowable.codebase"/>
-                    </not>
+                    <not><isset property="manifest.custom.caller.allowable.codebase"/></not>
                     <equals arg1="${manifest.custom.caller.allowable.codebase}" arg2=""/>
                 </or>
             </and>
@@ -597,9 +531,7 @@ made subject to such option by the copyright holder.
         <condition property="manifest.caller.allowable.codebase.override">
             <and>
                 <isset property="manifest.custom.caller.allowable.codebase"/>
-                <not>
-                    <equals arg1="${manifest.custom.caller.allowable.codebase}" arg2=""/>
-                </not>
+                <not><equals arg1="${manifest.custom.caller.allowable.codebase}" arg2=""/></not>
             </and>
         </condition>
         <condition property="manifest.caller.allowable.codebase.override.warning">
@@ -631,22 +563,16 @@ made subject to such option by the copyright holder.
             <and>
                 <istrue value="${jnlp.signed}"/>
                 <or>
-                    <not>
-                        <isset property="manifest.custom.permissions"/>
-                    </not>
+                    <not><isset property="manifest.custom.permissions"/></not>
                     <equals arg1="${manifest.custom.permissions}" arg2=""/>
                 </or>
             </and>
         </condition>
         <condition property="manifest.permissions.sandbox">
             <and>
-                <not>
-                    <istrue value="${jnlp.signed}"/>
-                </not>
+                <not><istrue value="${jnlp.signed}"/></not>
                 <or>
-                    <not>
-                        <isset property="manifest.custom.permissions"/>
-                    </not>
+                    <not><isset property="manifest.custom.permissions"/></not>
                     <equals arg1="${manifest.custom.permissions}" arg2=""/>
                 </or>
             </and>
@@ -654,9 +580,7 @@ made subject to such option by the copyright holder.
         <condition property="manifest.permissions.override">
             <and>
                 <isset property="manifest.custom.permissions"/>
-                <not>
-                    <equals arg1="${manifest.custom.permissions}" arg2=""/>
-                </not>
+                <not><equals arg1="${manifest.custom.permissions}" arg2=""/></not>
             </and>
         </condition>
         <echo message="manifest.permissions.all = ${manifest.permissions.all}" level="verbose"/>
@@ -676,9 +600,7 @@ made subject to such option by the copyright holder.
         <condition property="manifest.application.name.attribute" value="${manifest.custom.application.name}" else="${application.title}">
             <and>
                 <isset property="manifest.custom.application.name"/>
-                <not>
-                    <equals arg1="${manifest.custom.application.name}" arg2=""/>
-                </not>
+                <not><equals arg1="${manifest.custom.application.name}" arg2=""/></not>
             </and>
         </condition>
     </target>
@@ -757,9 +679,7 @@ made subject to such option by the copyright holder.
             <and>
                 <istrue value="${jnlp.enabled}"/>
                 <or>
-                    <not>
-                        <istrue value="${jnlp.signed}"/>
-                    </not>
+                    <not><istrue value="${jnlp.signed}"/></not>
                     <equals arg1="${jnlp.signing}" arg2="generated" casesensitive="false" trim="true"/>
                 </or>
             </and>
@@ -770,7 +690,7 @@ made subject to such option by the copyright holder.
     
     <target name="generate-jnlp" depends="sign-jars,-test-generate-task-available,-unavailable-generate-task" if="generate.task.available">
         <taskdef name="generate-jnlp" classname="org.netbeans.modules.javawebstart.anttasks.GenerateJnlpFileTask" 
-                 classpath="${libs.JWSAntTasks.classpath}"/>
+            classpath="${libs.JWSAntTasks.classpath}"/>
         <property name="jnlp.lazy.jars" value=""/>
         <generate-jnlp destfile="${jnlp.dest.dir}/${jnlp.file}_" template="master-${jnlp.descriptor}.jnlp" destdir="dist" lazyJars="${jnlp.lazy.jars}"/>
         <antcall target="-strip-empty-lines"/>
@@ -789,7 +709,7 @@ made subject to such option by the copyright holder.
     
     <target name="-test-generate-task-available">
         <available property="generate.task.available" classname="org.netbeans.modules.javawebstart.anttasks.GenerateJnlpFileTask" 
-                   classpath="${libs.JWSAntTasks.classpath}"/>
+        classpath="${libs.JWSAntTasks.classpath}"/>
     </target>
     
     <target name="-unavailable-generate-task" unless="generate.task.available">
@@ -858,7 +778,7 @@ made subject to such option by the copyright holder.
         <property name="jnlp.signjar.vendor" value="CN=${application.vendor.filtered}"/>
         <echo message="Going to create default keystore in ${jnlp.signjar.keystore}"/>
         <genkey dname="${jnlp.signjar.vendor}" alias="${jnlp.signjar.alias}" keystore="${jnlp.signjar.keystore}"
-                storepass="${jnlp.signjar.storepass}" keypass="${jnlp.signjar.keypass}"/>
+            storepass="${jnlp.signjar.storepass}" keypass="${jnlp.signjar.keypass}"/>
     </target>
     
     <target name="-check-keystore-exists" depends="-security-props-check">
@@ -866,9 +786,7 @@ made subject to such option by the copyright holder.
         <condition property="do.init.keystore">
             <and>
                 <isset property="jnlp.signed.true"/>
-                <not>
-                    <isset property="jnlp.signjar.keystore.exists"/>
-                </not>
+                <not><isset property="jnlp.signjar.keystore.exists"/></not>
             </and>
         </condition>
     </target>
@@ -901,8 +819,8 @@ made subject to such option by the copyright holder.
 
     <target name="-test-signjars-task-available">
         <available property="signjars.task.available" 
-                   classname="org.netbeans.modules.javawebstart.anttasks.SignJarsTask" 
-                   classpath="${libs.JWSAntTasks.classpath}"/>
+            classname="org.netbeans.modules.javawebstart.anttasks.SignJarsTask" 
+            classpath="${libs.JWSAntTasks.classpath}"/>
     </target>
     
     <target name="-check-signing-possible" depends="-security-props-check,-test-signjars-task-available,-unavailable-signjars-task">
@@ -920,11 +838,11 @@ made subject to such option by the copyright holder.
 
     <target name="sign-jars" depends="-jnlp-init-keystore,-check-signing-possible" if="jnlp.signed.true+signjars.task.available">
         <taskdef name="sign-jars" classname="org.netbeans.modules.javawebstart.anttasks.SignJarsTask" 
-                 classpath="${libs.JWSAntTasks.classpath}"/>
+            classpath="${libs.JWSAntTasks.classpath}"/>
         <sign-jars keystore="${jnlp.signjar.keystore}" storepass="${jnlp.signjar.storepass}" 
-                   keypass="${jnlp.signjar.keypass}" alias="${jnlp.signjar.alias}" mainjar="${dist.jar}" destdir="dist"
-                   codebase="${jnlp.codebase.value}" signedjarsprop="jnlp.signed.jars"
-                   componentsprop="jnlp.components">
+                keypass="${jnlp.signjar.keypass}" alias="${jnlp.signjar.alias}" mainjar="${dist.jar}" destdir="dist"
+                codebase="${jnlp.codebase.value}" signedjarsprop="jnlp.signed.jars"
+                componentsprop="jnlp.components">
             <fileset dir="dist/lib">
                 <include name="*.jar"/>
             </fileset>
@@ -945,7 +863,7 @@ made subject to such option by the copyright holder.
     </target>
     
     <target name="jws-debug" if="netbeans.home" depends="jar,-verify-jnlp-enabled,-verify-codebase,-debug-start-debugger,-debug-javaws-debuggee" 
-            description="Debug javaws project in IDE"/>
+        description="Debug javaws project in IDE"/>
         
     <target name="-init-debug-args">
         <property name="version-output" value="java version &quot;${ant.java.version}"/>
@@ -988,17 +906,17 @@ made subject to such option by the copyright holder.
     <!-- Generate simple HTML preview page -->
 
     <target name="-check-html-preview">
-        <condition property="generate.html.preview">
-            <or>
-                <equals arg1="${jnlp.descriptor}" arg2="application"/>
-                <equals arg1="${jnlp.descriptor}" arg2="applet"/>
-            </or>
-        </condition>
-    </target>
+         <condition property="generate.html.preview">
+             <or>
+                 <equals arg1="${jnlp.descriptor}" arg2="application"/>
+                 <equals arg1="${jnlp.descriptor}" arg2="applet"/>
+             </or>
+         </condition>
+     </target>
 
     <target name="generate-html-preview" depends="-check-html-preview" if="generate.html.preview">
         <taskdef name="copy-template-page" classname="org.netbeans.modules.javawebstart.anttasks.CopyTemplatePageTask"
-                 classpath="${libs.JWSAntTasks.classpath}"/>
+            classpath="${libs.JWSAntTasks.classpath}"/>
         <copy-template-page destfile="${jnlp.dest.dir}/launch.html" template="preview-${jnlp.descriptor}.html" destdir="${jnlp.dest.dir}"/>
     </target>
     
