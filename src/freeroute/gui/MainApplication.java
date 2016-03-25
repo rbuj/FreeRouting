@@ -21,6 +21,7 @@
 package gui;
 
 import board.TestLevel;
+import java.util.Locale;
 
 /**
  *
@@ -44,19 +45,54 @@ public class MainApplication extends javax.swing.JFrame {
         for (int i = 0; i < p_args.length; ++i) {
             if (p_args[i].startsWith("-de")) // the design file is provided
             {
-                if (p_args.length > i + 1 && !p_args[i + 1].startsWith("-")) {
-                    single_design_option = true;
-                    design_file_name = p_args[i + 1];
+                try {
+                    if (!p_args[i + 1].startsWith("-")) {
+                        single_design_option = true;
+                        design_file_name = p_args[i + 1];
+                        ++i;
+                    }
+                } catch (Exception E) {
+                    // TODO
                 }
             } else if (p_args[i].startsWith("-di")) // the design directory is provided
             {
+                try {
+                    if (!p_args[i + 1].startsWith("-")) {
+                        design_dir_name = p_args[i + 1];
+                        ++i;
+                    }
+                } catch (Exception E) {
+                    // TODO
+                }
                 if (p_args.length > i + 1 && !p_args[i + 1].startsWith("-")) {
                     design_dir_name = p_args[i + 1];
                 }
             } else if (p_args[i].startsWith("-l")) // the locale is provided
             {
-                if (p_args.length > i + 1 && p_args[i + 1].startsWith("d")) {
-                    current_locale = java.util.Locale.GERMAN;
+                try {
+                    switch (p_args[i + 1].substring(0, 2)) {
+                        case "ca":
+                            current_locale = new Locale("ca", "");
+                            ++i;
+                            break;
+                        case "de":
+                            current_locale = new Locale("de", "");
+                            ++i;
+                            break;
+                        case "en":
+                            current_locale = new Locale("en", "");
+                            ++i;
+                            break;
+                        case "es":
+                            current_locale = new Locale("es", "");
+                            ++i;
+                            break;
+                        default:
+                            current_locale = new Locale("en", "");
+                            break;
+                    }
+                } catch (Exception E) {
+                    // TODO
                 }
             } else if (p_args[i].startsWith("-s")) {
                 session_file_option = true;
@@ -67,6 +103,23 @@ public class MainApplication extends javax.swing.JFrame {
             }
         }
         if (current_locale==null){
+            switch (java.util.Locale.getDefault().getLanguage()) {
+                case "ca":
+                    current_locale = new Locale("ca", "");
+                    break;
+                case "de":
+                    current_locale = new Locale("de", "");
+                    break;
+                case "en":
+                    current_locale = new Locale("en", "");
+                    break;
+                case "es":
+                    current_locale = new Locale("es", "");
+                    break;
+                default:
+                    current_locale = new Locale("en", "");
+                    break;
+            }
             current_locale = java.util.Locale.getDefault();
         }
         if (!(OFFLINE_ALLOWED || webstart_option)) {
