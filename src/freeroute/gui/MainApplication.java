@@ -46,7 +46,6 @@ public class MainApplication extends javax.swing.JFrame {
         String design_file_name = null;
         String design_dir_name = null;
         java.util.Locale current_locale = null;
-        String language = "en";
         for (int i = 0; i < p_args.length; ++i) {
             if (p_args[i].startsWith("-de")) // the design file is provided
             {
@@ -79,7 +78,7 @@ public class MainApplication extends javax.swing.JFrame {
                     List<String> locale_list = Files.readAllLines(path);
                     String new_locale = p_args[i + 1].substring(0, 2);
                     if (locale_list.contains(new_locale)) {
-                        language = new_locale;
+                        current_locale = new Locale(new_locale, "");
                         ++i;
                     }
                 } catch (Exception E) {
@@ -101,14 +100,15 @@ public class MainApplication extends javax.swing.JFrame {
                 List<String> locale_list = Files.readAllLines(path);
                 String new_locale = java.util.Locale.getDefault().getLanguage();
                 if (locale_list.contains(new_locale)) {
-                    language = new_locale;
+                    current_locale = new Locale(new_locale, "");
+                } else {
+                    current_locale = new Locale("en", "");
                 }
             } catch (Exception E) {
                 System.out.println(E.toString());
                 return;
             }
         }
-        current_locale = new Locale(language, "");
         if (!(OFFLINE_ALLOWED || webstart_option)) {
             Runtime.getRuntime().exit(1);
         }
