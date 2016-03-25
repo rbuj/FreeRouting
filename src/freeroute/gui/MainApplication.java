@@ -21,6 +21,10 @@
 package gui;
 
 import board.TestLevel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -42,6 +46,7 @@ public class MainApplication extends javax.swing.JFrame {
         String design_file_name = null;
         String design_dir_name = null;
         java.util.Locale current_locale = null;
+        String language = "en";
         for (int i = 0; i < p_args.length; ++i) {
             if (p_args[i].startsWith("-de")) // the design file is provided
             {
@@ -52,7 +57,8 @@ public class MainApplication extends javax.swing.JFrame {
                         ++i;
                     }
                 } catch (Exception E) {
-                    // TODO
+                    System.out.println(E.toString());
+                    return;
                 }
             } else if (p_args[i].startsWith("-di")) // the design directory is provided
             {
@@ -62,37 +68,23 @@ public class MainApplication extends javax.swing.JFrame {
                         ++i;
                     }
                 } catch (Exception E) {
-                    // TODO
-                }
-                if (p_args.length > i + 1 && !p_args[i + 1].startsWith("-")) {
-                    design_dir_name = p_args[i + 1];
+                    System.out.println(E.toString());
+                    return;
                 }
             } else if (p_args[i].startsWith("-l")) // the locale is provided
             {
                 try {
-                    switch (p_args[i + 1].substring(0, 2)) {
-                        case "ca":
-                            current_locale = new Locale("ca", "");
-                            ++i;
-                            break;
-                        case "de":
-                            current_locale = new Locale("de", "");
-                            ++i;
-                            break;
-                        case "en":
-                            current_locale = new Locale("en", "");
-                            ++i;
-                            break;
-                        case "es":
-                            current_locale = new Locale("es", "");
-                            ++i;
-                            break;
-                        default:
-                            current_locale = new Locale("en", "");
-                            break;
+                    java.net.URL uri = MainApplication.class.getResource("/LOCALES");
+                    Path path = Paths.get(uri.toURI());
+                    List<String> locale_list = Files.readAllLines(path);
+                    String new_locale = p_args[i + 1].substring(0, 2);
+                    if (locale_list.contains(new_locale)) {
+                        language = new_locale;
+                        ++i;
                     }
                 } catch (Exception E) {
-                    // TODO
+                    System.out.println(E.toString());
+                    return;
                 }
             } else if (p_args[i].startsWith("-s")) {
                 session_file_option = true;
@@ -103,25 +95,20 @@ public class MainApplication extends javax.swing.JFrame {
             }
         }
         if (current_locale==null){
-            switch (java.util.Locale.getDefault().getLanguage()) {
-                case "ca":
-                    current_locale = new Locale("ca", "");
-                    break;
-                case "de":
-                    current_locale = new Locale("de", "");
-                    break;
-                case "en":
-                    current_locale = new Locale("en", "");
-                    break;
-                case "es":
-                    current_locale = new Locale("es", "");
-                    break;
-                default:
-                    current_locale = new Locale("en", "");
-                    break;
+            try {
+                java.net.URL uri = MainApplication.class.getResource("/LOCALES");
+                Path path = Paths.get(uri.toURI());
+                List<String> locale_list = Files.readAllLines(path);
+                String new_locale = java.util.Locale.getDefault().getLanguage();
+                if (locale_list.contains(new_locale)) {
+                    language = new_locale;
+                }
+            } catch (Exception E) {
+                System.out.println(E.toString());
+                return;
             }
-            current_locale = java.util.Locale.getDefault();
         }
+        current_locale = new Locale(language, "");
         if (!(OFFLINE_ALLOWED || webstart_option)) {
             Runtime.getRuntime().exit(1);
         }
