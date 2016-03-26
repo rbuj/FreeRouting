@@ -70,6 +70,46 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <property name="languages.list" value="ca,de,en,es" />
+
+    <property name="docbook.base.dir" value="${basedir}/src/freeroute/help" />
+    <property name="docbook.lib.dir" value="${docbook.base.dir}/lib" />
+    <property name="docbook.input.dir" value="${docbook.base.dir}/manual" />
+    <property name="docbook.output.dir" value="${basedir}/src/freeroute/helpset" />
+
+    <property name="docbook.xsl.version" value="1.79.1" />
+    <property name="docbook.xsl.base.dir" value="${docbook.base.dir}"/>
+    <property name="docbook.xsl.dir" value="${docbook.xsl.base.dir}/docbook"/>
+    <property name="docbook.xsl.file" value="${docbook.xsl.base.dir}/docbook.zip"/>
+
+    <property name="html.stylesheet" value="${docbook.xsl.dir}/html/docbook.xsl" />
+    <property name="javahelp.stylesheet" value="${docbook.xsl.dir}/javahelp/javahelp.xsl" />
+
+    <property name="docbook.xml.version" value="4.5" />
+    <property name="docbook.xml.base.dir" value="${docbook.base.dir}"/>
+    <property name="docbook.xml.dir" value="${docbook.xml.base.dir}/docbook-xml-${docbook.xml.version}"/>
+    <property name="docbook.xml.file" value="${docbook.xml.base.dir}/docbook.zip"/>
+
+    <property name="xerces2-j.install.version" value="2.11.0" />
+    <property name="xerces2-j.jar.dir" value="${docbook.lib.dir}" />
+    <property name="xerces2-j.jar.file" value="${xerces2-j.jar.dir}/xerces2-j.jar" />
+
+    <property name="xalan2-j.install.version" value="2.7.2" />
+    <property name="xalan2-j.jar.dir" value="${docbook.lib.dir}" />
+    <property name="xalan2-j.jar.file" value="${xalan2-j.jar.dir}/xalan2-j.jar" />
+
+    <property name="saxon.install.version" value="6.5.3" />
+    <property name="saxon.jar.dir" value="${docbook.lib.dir}" />
+    <property name="saxon.jar.file" value="${saxon.jar.dir}/saxon.jar" />
+
+    <property name="ant-contrib.home" value="${user.home}/.ant" />
+    <property name="ant-contrib.jar.dir" value="${ant-contrib.home}/lib" />
+    <property name="ant-contrib.jar.file" value="${ant-contrib.jar.dir}/ant-contrib.jar" />
+
+    <property name="ivy.install.version" value="2.4.0" />
+    <property name="ivy.home" value="${user.home}/.ant" />
+    <property name="ivy.jar.dir" value="${ivy.home}/lib" />
+    <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
 
     <!--
         Ant contrib bootstrap
@@ -80,21 +120,17 @@
         <isset property="ant-contrib.ANT_CONTRIB_HOME" />
     </condition>
 
-    <property name="ant-contrib.home" value="${user.home}/.ant" />
-    <property name="ant-contrib.jar.dir" value="${ant-contrib.home}/lib" />
-    <property name="ant-contrib.jar.file" value="${ant-contrib.jar.dir}/ant-contrib.jar" />
-
     <target name="download-ant-contrib" unless="offline">
         <mkdir dir="${ant-contrib.jar.dir}"/>
-        <!-- download Ivy from web site so that it can be used even without any special installation -->
+        <!-- download ant-contrib from web site so that it can be used even without any special installation -->
         <get src="http://central.maven.org/maven2/ant-contrib/ant-contrib/${ant-contrib.install.version}/ant-contrib-${ant-contrib.install.version}.jar" dest="${ant-contrib.jar.file}" usetimestamp="true"/>
     </target>
 
     <target name="init-ant-contrib" depends="download-ant-contrib">
-        <!-- try to load ivy here from ivy home, in case the user has not already dropped
+        <!-- try to load ant-contrib here from ant-contrib home, in case the user has not already dropped
         it into ant's lib dir (note that the latter copy will always take precedence).
         We will not fail as long as local lib dir exists (it may be empty) and
-        ivy is in at least one of ant's lib dir or the local lib dir. -->
+        init-ant is in at least one of ant's lib dir or the local lib dir. -->
         <path id="ant-contrib.lib.path">
             <fileset dir="${ant-contrib.jar.dir}" includes="*.jar"/>
         </path>
@@ -104,15 +140,9 @@
     <!--
         Ivy bootstrap
     -->
-    <property name="ivy.install.version" value="2.4.0" />
-
     <condition property="ivy.home" value="${env.IVY_HOME}">
         <isset property="env.IVY_HOME" />
     </condition>
-
-    <property name="ivy.home" value="${user.home}/.ant" />
-    <property name="ivy.jar.dir" value="${ivy.home}/lib" />
-    <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
 
     <target name="download-ivy" unless="offline">
         <mkdir dir="${ivy.jar.dir}"/>
@@ -151,26 +181,152 @@
     </target>
 
     <!--
+        docbook-xsl
+    -->
+    <available file="${docbook.xsl.dir}" property="docbook.xsl.dir.exists"/>
+
+    <target name="docbook.xsl.dir.check">
+        <condition property="docbook.xsl.dir.exists">
+            <available file="${docbook.xsl.dir}" type="dir"/>
+        </condition>
+    </target>
+
+    <target name="download-docbook-xsl" depends="docbook.xsl.dir.check" unless="docbook.xsl.dir.exists">
+        <get src="http://search.maven.org/remotecontent?filepath=net/sf/docbook/docbook-xsl/${docbook.xsl.version}/docbook-xsl-${docbook.xsl.version}-resources.zip" dest="${docbook.xsl.file}" usetimestamp="true"/>
+        <unzip src="${docbook.xsl.file}"
+               dest="${docbook.xsl.base.dir}">
+        </unzip>
+        <delete file="${docbook.xsl.file}"/>
+    </target>
+
+    <!--
+        docbook-xml
+    -->
+    <available file="${docbook.xml.dir}" property="docbook.xml.dir.exists"/>
+
+    <target name="docbook.xml.dir.check">
+        <condition property="docbook.xml.dir.exists">
+            <available file="${docbook.xml.dir}" type="dir"/>
+        </condition>
+    </target>
+
+    <target name="download-docbook-xml" depends="docbook.xml.dir.check" unless="docbook.xml.dir.exists">
+        <get src="http://www.oasis-open.org/docbook/xml/${docbook.xml.version}/docbook-xml-${docbook.xml.version}.zip" dest="${docbook.xml.file}" usetimestamp="true"/>
+        <unzip src="${docbook.xml.file}"
+               dest="${docbook.xml.dir}">
+        </unzip>
+        <delete file="${docbook.xml.file}"/>
+    </target>
+
+    <!--
+        xerces2-j
+    -->
+    <available file="${xerces2-j.jar.file}" property="xerces2-j.jar.file.exists"/>
+
+    <target name="xerces2-j.jar.file.check">
+        <condition property="docbook.jar.file.exists">
+            <available file="${xerces2-j.jar.file}" type="file"/>
+        </condition>
+    </target>
+
+    <target name="download-xerces2-j" depends="xerces2-j.jar.file.check" unless="xerces2-j.jar.file.exists">
+        <mkdir dir="${xerces2-j.jar.dir}"/>
+        <!-- download xerces2-j from web site so that it can be used even without any special installation -->
+        <get src="http://central.maven.org/maven2/xerces/xercesImpl/${xerces2-j.install.version}/xercesImpl-${xerces2-j.install.version}.jar" dest="${xerces2-j.jar.file}" usetimestamp="true"/>
+    </target>
+
+    <!--
+        xalan2-j
+    -->
+    <available file="${xalan2-j.jar.file}" property="xalan2-j.jar.file.exists"/>
+
+    <target name="xalan2-j.jar.file.check">
+        <condition property="docbook.jar.file.exists">
+            <available file="${xalan2-j.jar.file}" type="file"/>
+        </condition>
+    </target>
+
+    <target name="download-xalan2-j" depends="xalan2-j.jar.file.check" unless="xalan2-j.jar.file.exists">
+        <mkdir dir="${xalan2-j.jar.dir}"/>
+        <!-- download xalan2-j from web site so that it can be used even without any special installation -->
+        <get src="http://central.maven.org/maven2/xalan/xalan/${xalan2-j.install.version}/xalan-${xalan2-j.install.version}.jar" dest="${xalan2-j.jar.file}" usetimestamp="true"/>
+    </target>
+
+    <!--
+        saxon
+    -->
+    <available file="${saxon.jar.file}" property="saxon.jar.file.exists"/>
+
+    <target name="saxon.jar.file.check">
+        <condition property="docbook.jar.file.exists">
+            <available file="${saxon.jar.file}" type="file"/>
+        </condition>
+    </target>
+
+    <target name="download-saxon" depends="saxon.jar.file.check" unless="docbook.jar.file.exists">
+        <mkdir dir="${saxon.jar.dir}"/>
+        <!-- download saxon from web site so that it can be used even without any special installation -->
+        <get src="http://central.maven.org/maven2/saxon/saxon/${saxon.install.version}/saxon-${saxon.install.version}.jar" dest="${saxon.jar.file}" usetimestamp="true"/>
+    </target>
+
+    <!--
+        docbook-libs
+    -->
+    <target name="docbook-libs" depends="download-saxon,download-xerces2-j,download-xalan2-j"/>
+
+    <!--
+        Convert docbook XSLT to JavaHelp
+    -->
+    <macrodef name="xslt-saxon">
+        <attribute name="in"/>
+        <attribute name="out"/>
+        <attribute name="style"/>
+        <sequential>
+            <echo level="info">XSLT Generating @{out}</echo>
+            <java classname="com.icl.saxon.StyleSheet"
+                  classpath="${saxon.jar.file}"
+                  logError="true"
+                  dir="@{out}"
+                  fork="true">
+                <arg value="@{in}"/>
+                <arg value="@{style}"/>
+            </java>
+        </sequential>
+    </macrodef>
+
+    <target name="build-javahelp" depends="init-ant-contrib,docbook-libs,download-docbook-xsl,download-docbook-xml" description="JavaHelp from DocBook XML">
+        <echo message="Building JavaHelp output" />
+        <for param="lang" list="${languages.list}">
+            <sequential>
+                <delete dir="${docbook.output.dir}/@{lang}"/>
+                <mkdir dir="${docbook.output.dir}/@{lang}"/>
+                <echo message="JavaHelp @{lang}"/>
+                <xslt-saxon in="${docbook.input.dir}/@{lang}/book.xml" style="${javahelp.stylesheet}" out="${docbook.output.dir}/@{lang}"/>
+            </sequential>
+        </for>
+    </target>
+
+    <!--
         JavaHelpSearch
     -->
-    <target name="help" depends="init-ant-contrib,-ivy-retrieve">
+    <target name="help" depends="init-ant-contrib,-ivy-retrieve,build-javahelp" description="JavaHelpSearch from JavaHelp">
         <pathconvert property="javah.computed" dirsep="/" pathsep=":">
             <path>
                 <fileset dir="lib" includes="javahelp*.jar"/>
             </path>
             <map from="${basedir}${file.separator}" to=""/>
         </pathconvert>
-        <for param="lang" list="en,de">
+        <for param="lang" list="${languages.list}">
             <sequential>
                 <echo message="JavaHelpSearch: @{lang}"/>
-                <delete dir="${src.dir}/helpset/@{lang}/JavaHelpSearch"/>
-                <mkdir dir="${src.dir}/helpset/@{lang}/JavaHelpSearch"/>
+                <delete dir="${docbook.output.dir}/@{lang}/JavaHelpSearch"/>
+                <mkdir dir="${docbook.output.dir}/@{lang}/JavaHelpSearch"/>
                 <java classname="com.sun.java.help.search.Indexer" 
                       classpath="${javah.computed}"
                       fork="true" failonerror="true">
-                    <arg value="${src.dir}/helpset/@{lang}/html_files"/>
+                    <arg value="${docbook.output.dir}/@{lang}"/>
                 </java>
-                <move todir="${src.dir}/helpset/@{lang}/JavaHelpSearch">
+                <move todir="${docbook.output.dir}/@{lang}/JavaHelpSearch">
                     <fileset dir="JavaHelpSearch" includes="**"/>
                 </move>
             </sequential>
@@ -182,5 +338,9 @@
 
     <target name="-post-clean">
         <delete dir="lib"/>
+        <delete dir="${docbook.xsl.dir}"/>
+        <delete dir="${docbook.xml.dir}"/>
+        <delete dir="${docbook.lib.dir}"/>
+        <delete dir="${docbook.output.dir}"/>
     </target>
 </project>

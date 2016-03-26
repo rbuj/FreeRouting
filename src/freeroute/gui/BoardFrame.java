@@ -298,19 +298,19 @@ public class BoardFrame extends javax.swing.JFrame {
      * is used.
      */
     public void set_context_sensitive_help(java.awt.Component p_component, String p_help_id) {
-        if (this.help_system_used) {
-            java.awt.Component curr_component;
-            if (p_component instanceof javax.swing.JFrame) {
-                curr_component = ((javax.swing.JFrame) p_component).getRootPane();
-            } else {
-                curr_component = p_component;
-            }
-            String help_id = "html_files." + p_help_id;
-            javax.help.CSH.setHelpIDString(curr_component, help_id);
-            if (!this.is_web_start) {
-                help_broker.enableHelpKey(curr_component, help_id, help_set);
-            }
-        }
+//        if (this.help_system_used) {
+//            java.awt.Component curr_component;
+//            if (p_component instanceof javax.swing.JFrame) {
+//                curr_component = ((javax.swing.JFrame) p_component).getRootPane();
+//            } else {
+//                curr_component = p_component;
+//            }
+//            String help_id = "html_files." + p_help_id;
+//            javax.help.CSH.setHelpIDString(curr_component, help_id);
+//            if (!this.is_web_start) {
+//                help_broker.enableHelpKey(curr_component, help_id, help_set);
+//            }
+//        }
     }
 
     /**

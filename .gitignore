@@ -3,5 +3,7 @@
 /build/
 /dist/
 /lib/
-/src/freeroute/helpset/de/JavaHelpSearch/
-/src/freeroute/helpset/en/JavaHelpSearch/
+/src/freeroute/helpset/
+/src/freeroute/help/lib/
+/src/freeroute/help/docbook/
+/src/freeroute/help/docbook-xml-*/

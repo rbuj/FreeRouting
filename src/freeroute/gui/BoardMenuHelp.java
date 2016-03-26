@@ -20,7 +20,14 @@
  */
 package gui;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Locale;
 import javax.help.CSH;
 import javax.help.HelpSet;
 import javax.help.HelpSetException;
@@ -58,10 +65,18 @@ public class BoardMenuHelp extends BoardMenuHelpReduced {
         if (BoardFrame.help_broker == null) {
             String language = p_locale.getLanguage();
             String helpset_name;
-            if (language.equalsIgnoreCase("de")) {
-                helpset_name = "helpset/de/Help.hs";
-            } else {
-                helpset_name = "helpset/en/Help.hs";
+            try {
+                java.net.URL uri = MainApplication.class.getResource("/LOCALES");
+                Path path = Paths.get(uri.toURI());
+                List<String> locale_list = Files.readAllLines(path);
+                if (locale_list.contains(language)) {
+                    helpset_name = "helpset/" + language + "/jhelpset.hs";
+                } else {
+                    helpset_name = "helpset/en/jhelpset.hs";
+                }
+            } catch (URISyntaxException | IOException E) {
+                System.out.println(E.toString());
+                return;
             }
             try {
                 URL hsURL = HelpSet.findHelpSet(this.getClass().getClassLoader(), helpset_name);
