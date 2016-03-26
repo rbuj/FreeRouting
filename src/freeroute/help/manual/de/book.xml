@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../docbook-xml-4.5/docbookx.dtd">
-
-<article>
+<article lang="de">
     <title>FreeRouting</title>
     <preface>
         <title>Using the IDE Help System</title>
@@ -892,7 +891,7 @@
                         </term>
                         <listitem>
                             <para>
-                                Items are selected on all layers with visibility factor > 0 (see also Layer Visibility). Objects on the current layer are preferred.
+                                Items are selected on all layers with visibility factor &gt; 0 (see also Layer Visibility). Objects on the current layer are preferred.
                             </para>
                         </listitem>
                     </varlistentry>

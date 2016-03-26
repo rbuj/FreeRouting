@@ -1,0 +1,752 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2016-03-26 23:17+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../manual/en/book.xml:5(title)
+msgid "FreeRouting"
+msgstr ""
+
+#: ../manual/en/book.xml:7(title)
+msgid "Using the IDE Help System"
+msgstr ""
+
+#: ../manual/en/book.xml:9(title)
+msgid "The Contents Tab"
+msgstr ""
+
+#: ../manual/en/book.xml:8(formalpara)
+msgid "<placeholder-1/> The Contents tab contains the three folders MenuBar, Interactive States and Windows. In the Menu Bar folder you find help about the entries in the Pull Down Menus. The folder Interactive States contains help for the possible states of the program in interactive action. In the folder Windows you can get help about the contents of the additional windows of the IDE."
+msgstr ""
+
+#: ../manual/en/book.xml:13(title)
+msgid "Getting Help for IDE Windows and Interactive States"
+msgstr ""
+
+#: ../manual/en/book.xml:12(formalpara)
+msgid "<placeholder-1/> After selecting Help Context in the help menu a question mark appears on the right side of the cursor. In this state push the left button in the graphics area of the main window to open a help topic that is specific to the task you are currrently doing or in an additional window to get help about the contents of that specific window. In the offline version you can use the F1-key as a shortcut for Help Context."
+msgstr ""
+
+#: ../manual/en/book.xml:17(title)
+msgid "Searching the Online Help"
+msgstr ""
+
+#: ../manual/en/book.xml:16(formalpara)
+msgid "<placeholder-1/> To perform a full-text search of all IDE help topics, click the Search tab and type a keyword in the Find text box."
+msgstr ""
+
+#: ../manual/en/book.xml:21(title)
+msgid "Using the Index"
+msgstr ""
+
+#: ../manual/en/book.xml:20(formalpara)
+msgid "<placeholder-1/> Click any entry in the Index tab to view the topic. To search the index, enter a term in the search field and press Enter. Press Enter multiple times to cycle through all occurrences of the term in the index."
+msgstr ""
+
+#: ../manual/en/book.xml:27(title)
+msgid "Interactive States"
+msgstr ""
+
+#: ../manual/en/book.xml:29(title)
+msgid "The Menu States"
+msgstr ""
+
+#: ../manual/en/book.xml:30(para)
+msgid "The program contains the following three Menu States: Select, Route and Drag. By selecting one of the three buttons on the upper left side of the tool bar you can switch between this states. In the beginning the program will be in the Select Menu State."
+msgstr ""
+
+#: ../manual/en/book.xml:33(para)
+msgid "The three states have a common tool bar and a common popup menu under the right mouse button."
+msgstr ""
+
+#: ../manual/en/book.xml:37(title)
+msgid "Further Entries in the Tool Bar:"
+msgstr ""
+
+#: ../manual/en/book.xml:42(filename)
+msgid "Autorouter"
+msgstr ""
+
+#: ../manual/en/book.xml:47(para)
+msgid "To start the batch autorouter on the whole board."
+msgstr ""
+
+#: ../manual/en/book.xml:54(filename)
+msgid "Undo"
+msgstr ""
+
+#: ../manual/en/book.xml:57(filename)
+msgid "Redo"
+msgstr ""
+
+#: ../manual/en/book.xml:62(para)
+msgid "The program has unlimited Undo Redo capability. In the offline version the Undo stack does not get lost even after saving the design and restarting the program. Shortcuts are u for Undo and b for Redo."
+msgstr ""
+
+#: ../manual/en/book.xml:69(filename)
+msgid "Incompletes"
+msgstr ""
+
+#: ../manual/en/book.xml:74(para)
+msgid "Here you can switch on or off displaying the open connections as air lines. If the airlines were switched off before, they will be switched on and vice versa. Shortcut is g."
+msgstr ""
+
+#: ../manual/en/book.xml:81(filename) ../manual/en/book.xml:405(filename)
+msgid "Violations"
+msgstr ""
+
+#: ../manual/en/book.xml:86(para) ../manual/en/book.xml:410(para)
+msgid "Here you can switch on or off displaying the clearance violations. If the violations were switched off before, they will be switched on and vice versa. Shortcut is v."
+msgstr ""
+
+#: ../manual/en/book.xml:93(filename)
+msgid "Zoom All"
+msgstr ""
+
+#: ../manual/en/book.xml:98(para)
+msgid "To display the whole board. Shortcut is a."
+msgstr ""
+
+#: ../manual/en/book.xml:105(filename)
+msgid "Zoom Region"
+msgstr ""
+
+#: ../manual/en/book.xml:110(para)
+msgid "After selecting this button you can choose a display rectangle by dragging the mouse with the left button pressed. Shortcut is f. You can also zoom by turning the mouse wheel and pan by dragging the mouse with the mouse wheel pressed."
+msgstr ""
+
+#: ../manual/en/book.xml:118(title)
+msgid "The Entries in the Popup Menu:"
+msgstr ""
+
+#: ../manual/en/book.xml:123(filename)
+msgid "select item"
+msgstr ""
+
+#: ../manual/en/book.xml:128(para)
+msgid "To select the items under the cursor. Only items switched on in the Select Parameter window can be selected. After selecting some items the current interactive state will change to the Selected Item State. In the Select Menu State you can select items also with the left mouse button."
+msgstr ""
+
+#: ../manual/en/book.xml:135(filename)
+msgid "start route"
+msgstr ""
+
+#: ../manual/en/book.xml:140(para)
+msgid "A new trace will be started beginning at the item under the cursor. For the selection of the start item the settings in the Select Parameter window are evaluated . If a suitable item was found the interactive state will change to the Route State. In the Route Menu State you can do this also by clicking the left mouse button."
+msgstr ""
+
+#: ../manual/en/book.xml:147(filename)
+msgid "create keepout"
+msgstr ""
+
+#: ../manual/en/book.xml:152(para)
+msgid "To create a keepout on the current layer. You can create a circle, a polygons or a hole into an existing polygonal keepout."
+msgstr ""
+
+#: ../manual/en/book.xml:159(filename)
+msgid "swap pin"
+msgstr ""
+
+#: ../manual/en/book.xml:164(para)
+msgid "This menu entry appears only if the board contains swappable pins. If the pin under the cursor is swappable, you can change the net of this pin with a suitable other pin."
+msgstr ""
+
+#: ../manual/en/book.xml:171(para)
+msgid "The letters in brackets behind the Popup Menu entries describe the shortcuts for the corresponding actions."
+msgstr ""
+
+#: ../manual/en/book.xml:179(title)
+msgid "The Function of the Mouse Wheel:"
+msgstr ""
+
+#: ../manual/en/book.xml:184(para)
+msgid "By rotating the mouse wheel you can zoom in or out and by dragging the mouse with the mouse wheel pressed you can change the displayed section of the board."
+msgstr ""
+
+#: ../manual/en/book.xml:192(title)
+msgid "The Select Menu State"
+msgstr ""
+
+#: ../manual/en/book.xml:195(para)
+msgid "If on the upper left side in the tool bar the button Select is selected, the program will be in the Select Menu State. Here you can use the left mouse button as a shortcut for the action select item in the popup menu. You also can select all items in a rectangle by dragging the mouse with the left button pressed."
+msgstr ""
+
+#: ../manual/en/book.xml:201(title)
+msgid "The Route Menu State"
+msgstr ""
+
+#: ../manual/en/book.xml:204(para)
+msgid "If on the upper left side in the tool bar the button Route is selected, the program will be in the Route Menu State. Here you can use the left mouse button as a shortcut for the action start route in the popup menu."
+msgstr ""
+
+#: ../manual/en/book.xml:210(title)
+msgid "The Drag Menu State"
+msgstr ""
+
+#: ../manual/en/book.xml:213(para)
+msgid "If on the upper left side in the tool bar the button Drag is selected, the program will be in the Drag Menu State Here you can drag vias or components with the left button pressed. The connected traces will be adjusted automatically. You can also out of the empty space shove traces aside with the left button pressed This way you can for example make space for inserting another component. This action will be performed on the current layer, which can be set in the Select Parameter window."
+msgstr ""
+
+#: ../manual/en/book.xml:221(title)
+msgid "The Selected Item State"
+msgstr ""
+
+#: ../manual/en/book.xml:222(para)
+msgid "After you have selected items in a basic state, the IDE will change to the Selected Item State. The selected items get highlighted and a new tool bar appears at the upper border. With the left button you can select more items or deselect already selected items."
+msgstr ""
+
+#: ../manual/en/book.xml:226(title)
+msgid "The toolbar in the Selected Item State"
+msgstr ""
+
+#: ../manual/en/book.xml:231(filename)
+msgid "Cancel"
+msgstr ""
+
+#: ../manual/en/book.xml:236(para)
+msgid "The IDE returns to the interactive state before selecting. Shortcut is the Esc-key."
+msgstr ""
+
+#: ../manual/en/book.xml:243(filename) ../manual/en/book.xml:955(title)
+msgid "Info"
+msgstr ""
+
+#: ../manual/en/book.xml:248(para)
+msgid "Information about the selected items will be printed to a new window. The blue marked words in this window can be clicked for more information. Shortcut is i."
+msgstr ""
+
+#: ../manual/en/book.xml:255(filename)
+msgid "Delete"
+msgstr ""
+
+#: ../manual/en/book.xml:260(para)
+msgid "The selected items will be deleted, if they are not fixed. Shortcut is the Delete-key."
+msgstr ""
+
+#: ../manual/en/book.xml:267(filename)
+msgid "Cutout"
+msgstr ""
+
+#: ../manual/en/book.xml:272(para)
+msgid "By dragging the mouse with the left button pressed you can select a rectangle, from which the selected trace and vias will be cut out. Shortcut is d."
+msgstr ""
+
+#: ../manual/en/book.xml:279(filename)
+msgid "Fix"
+msgstr ""
+
+#: ../manual/en/book.xml:284(para)
+msgid "To fix the selected items, so that they cannot be pushed or deleted any more. Shortcut is f."
+msgstr ""
+
+#: ../manual/en/book.xml:291(filename)
+msgid "Unfix"
+msgstr ""
+
+#: ../manual/en/book.xml:296(para)
+msgid "To unfix the selected items. Shortcut is u."
+msgstr ""
+
+#: ../manual/en/book.xml:303(filename)
+msgid "Autoroute"
+msgstr ""
+
+#: ../manual/en/book.xml:308(para)
+msgid "To route the selected items automatically. Shortcut is a."
+msgstr ""
+
+#: ../manual/en/book.xml:315(filename)
+msgid "Pull Tight"
+msgstr ""
+
+#: ../manual/en/book.xml:320(para)
+msgid "To optimize the selected traces by pulling them tight. Shortcut is p."
+msgstr ""
+
+#: ../manual/en/book.xml:327(filename)
+msgid "Fanout"
+msgstr ""
+
+#: ../manual/en/book.xml:332(para)
+msgid "To autoroute the selected SMD-Pins until the next via."
+msgstr ""
+
+#: ../manual/en/book.xml:339(filename)
+msgid "Clearance"
+msgstr ""
+
+#: ../manual/en/book.xml:344(para)
+msgid "To assign a new clearance class to the selected items."
+msgstr ""
+
+#: ../manual/en/book.xml:347(para)
+msgid "Example: If you need in a special area of the board a different spacing, you can select all pins in a rectangle and assign to them a new clearance class."
+msgstr ""
+
+#: ../manual/en/book.xml:354(filename)
+msgid "Nets"
+msgstr ""
+
+#: ../manual/en/book.xml:359(para)
+msgid "To extend the selection to all items with the same net as an already selected item. Shortcut is n."
+msgstr ""
+
+#: ../manual/en/book.xml:366(filename)
+msgid "Conn. Sets"
+msgstr ""
+
+#: ../manual/en/book.xml:371(para)
+msgid "To extend the selection to all items, which belong to the same connected set as an already selected item. Shortcut is s."
+msgstr ""
+
+#: ../manual/en/book.xml:378(filename)
+msgid "Connections"
+msgstr ""
+
+#: ../manual/en/book.xml:383(para)
+msgid "To extend the selection to all traces and vias, which belong to the same connection as an already selected item. Shortcut is e."
+msgstr ""
+
+#: ../manual/en/book.xml:386(para)
+msgid "Example: You want to delete a whole connection. Select a trace of the connection, push the Connections button to extend the selection to the whole connection and push then the Delete button."
+msgstr ""
+
+#: ../manual/en/book.xml:393(filename)
+msgid "Components"
+msgstr ""
+
+#: ../manual/en/book.xml:398(para)
+msgid "To extend the selection to all items, which belong to the same component as an already selected item. Shortcut is b."
+msgstr ""
+
+#: ../manual/en/book.xml:417(filename)
+msgid "Zoom Selection"
+msgstr ""
+
+#: ../manual/en/book.xml:422(para)
+msgid "To display a rectangle containing all selected items."
+msgstr ""
+
+#: ../manual/en/book.xml:430(title)
+msgid "The popup menu below the left mouse button"
+msgstr ""
+
+#: ../manual/en/book.xml:435(filename)
+msgid "move"
+msgstr ""
+
+#: ../manual/en/book.xml:440(para)
+msgid "The selected items will be prepared for moving. The pivot for rotating and moving is the current cursor position. Several components can be moved at once. After this action the IDE will be in the Move State."
+msgstr ""
+
+#: ../manual/en/book.xml:448(title)
+msgid "The Move State"
+msgstr ""
+
+#: ../manual/en/book.xml:449(para)
+msgid "You will get into this state after selecting in the popup menu of the Selected Item State the menu entry move. The selected items are now following the cursor."
+msgstr ""
+
+#: ../manual/en/book.xml:452(para)
+msgid "If parts of the moving items are marked red, inserting at the current location would cause a clearance violation."
+msgstr ""
+
+#: ../manual/en/book.xml:455(para)
+msgid "Several components can be moved at once. The internal route will also change location, if he is completely marked for moving. Components connected to items, which are not marked for moving, will not change location. Such components can eventually be moved in the Drag Menu State by dragging them with the left mouse button. If that does not work, you have to remove the route first."
+msgstr ""
+
+#: ../manual/en/book.xml:458(para)
+msgid "The settings in the Move Parameter window are evaluated while moving components."
+msgstr ""
+
+#: ../manual/en/book.xml:462(title)
+msgid "The entries in the popup menu under the left mouse button:"
+msgstr ""
+
+#: ../manual/en/book.xml:467(filename)
+msgid "turn"
+msgstr ""
+
+#: ../manual/en/book.xml:472(para)
+msgid "Here you can rotate the selected components by multiples of 45 degree around the cursor location. For turning by 90, 180, and -90 degree there are the shortcuts +, * and - on the right of the number key block. If you want to rotate by an angle, which is not a multiple of 45 degree, you can do that with the mouse wheel after first changing in the Move Parameter window the wheel function from zoom to rotate."
+msgstr ""
+
+#: ../manual/en/book.xml:479(filename)
+msgid "change side"
+msgstr ""
+
+#: ../manual/en/book.xml:484(para)
+msgid "Here you can change the placement side of the selected components. Shortcut is /."
+msgstr ""
+
+#: ../manual/en/book.xml:491(filename)
+msgid "reset rotation"
+msgstr ""
+
+#: ../manual/en/book.xml:496(para)
+msgid "Here you can reset the rotation of the selected components, which you have changed with the mouse wheel, to 0 degree."
+msgstr ""
+
+#: ../manual/en/book.xml:503(filename) ../manual/en/book.xml:615(filename)
+msgid "insert"
+msgstr ""
+
+#: ../manual/en/book.xml:508(para)
+msgid "To insert the moving components. If there would occur clearance violations, he insertion will be rejected. Shortcut is the left mouse button."
+msgstr ""
+
+#: ../manual/en/book.xml:515(filename)
+msgid "cancel"
+msgstr ""
+
+#: ../manual/en/book.xml:520(para)
+msgid "To cancel the move action. The selected components will spring back to their location before the moving. Shortcut is the Esc-key."
+msgstr ""
+
+#: ../manual/en/book.xml:530(title)
+msgid "The Route States"
+msgstr ""
+
+#: ../manual/en/book.xml:531(para)
+msgid "After you have started a new route in a basic state, the IDE will change to the Dynamic Route State or to the Stitching Route State depending on your selection for the route mode in the Route Parameter window."
+msgstr ""
+
+#: ../manual/en/book.xml:534(para)
+msgid "If rule selection is set to automatic, the routing rules such as trace width, trace clearance class and via rule are defined by the net class of the current net, if it is set to manual, the routing rules are defined by the settings in the Manual Rules window."
+msgstr ""
+
+#: ../manual/en/book.xml:537(para)
+msgid "If the new trace gets near to a not yet connected item of the same net on the same layer, the connection will be completed automatically. After completion the IDE will return to the state before routing."
+msgstr ""
+
+#: ../manual/en/book.xml:542(title)
+msgid "The Dynamic Route State"
+msgstr ""
+
+#: ../manual/en/book.xml:545(para)
+msgid "If the IDE is in this route state, at each change of the cursor location a piece of trace will be inserted automatically from the previous cursor location to the current cursor location. The new trace piece will then immediately be optimized depending on the settings for the pull tight region in the Route Parameter window."
+msgstr ""
+
+#: ../manual/en/book.xml:549(title)
+msgid "The entries in the popup menu under the left mouse button in the Dynamic Route state:"
+msgstr ""
+
+#: ../manual/en/book.xml:554(filename) ../manual/en/book.xml:639(filename)
+msgid "change layer"
+msgstr ""
+
+#: ../manual/en/book.xml:559(para) ../manual/en/book.xml:644(para)
+msgid "To change to a different layer. The corresponding via will be selected from the selected via rule in the following way. The vias in the via rules will be tried from top to bottom, if they contain the old and the new layer, and if inserting would be possible without clearance violations. The first via found in this way will be inserted. Shortcuts are the number keys 1-9 and the keys \"+\" and \"-\". With \"+\" you can change to the next bigger layer and with \"-\" to the next smaller layer."
+msgstr ""
+
+#: ../manual/en/book.xml:566(filename)
+msgid "end route"
+msgstr ""
+
+#: ../manual/en/book.xml:571(para)
+msgid "The routing will be finished and the IDE changes back to the previous state. Shortcut is the left mouse button."
+msgstr ""
+
+#: ../manual/en/book.xml:578(filename)
+msgid "cancel route"
+msgstr ""
+
+#: ../manual/en/book.xml:583(para)
+msgid "The last routed trace will be discarded and the IDE changes back to the previous state Shortcut is the Esc-key."
+msgstr ""
+
+#: ../manual/en/book.xml:590(filename)
+msgid "generate snapshot"
+msgstr ""
+
+#: ../manual/en/book.xml:595(para)
+msgid "The program generates a snapshot, so that the current situation can be restored later on with Undo. Otherwise you could only restore the situation before starting the last trace with Undo."
+msgstr ""
+
+#: ../manual/en/book.xml:603(title)
+msgid "Der Stitching Route State"
+msgstr ""
+
+#: ../manual/en/book.xml:606(para)
+msgid "In this route state a piece of trace will be inserted from the previous click position to the current cursor position, when you click the left mouse key. The new trace piece will then be optimized depending on the settings for the pull tight region in the Route Parameter window."
+msgstr ""
+
+#: ../manual/en/book.xml:610(title)
+msgid "The entries in the popup menu under the left mouse button in the Stitching Route state:"
+msgstr ""
+
+#: ../manual/en/book.xml:620(para)
+msgid "A trace will be inserted from the previous insert position to the current position and then be optimized depending on the settings for the pull tight region in the Route Parameter window."
+msgstr ""
+
+#: ../manual/en/book.xml:627(filename)
+msgid "done"
+msgstr ""
+
+#: ../manual/en/book.xml:632(para)
+msgid "The program returns to the state before routing. Shortcut is the Esc-key."
+msgstr ""
+
+#: ../manual/en/book.xml:656(title)
+msgid "Menubar"
+msgstr ""
+
+#: ../manual/en/book.xml:658(title)
+msgid "File"
+msgstr ""
+
+#: ../manual/en/book.xml:660(title)
+msgid "The File Menu Entries"
+msgstr ""
+
+#: ../manual/en/book.xml:663(filename)
+msgid "Save"
+msgstr ""
+
+#: ../manual/en/book.xml:668(para)
+msgid "The current state of the design will be saved in the internal .bin file format. Not available in the web-based version because designs in the .bin format may be not compatible acrosss different versions of the router."
+msgstr ""
+
+#: ../manual/en/book.xml:675(filename)
+msgid "Save and Exit"
+msgstr ""
+
+#: ../manual/en/book.xml:680(para)
+msgid "The program exits after saving the current state of the design in the internal .bin file format.Not available in the web-based version because designs in the .bin format may be not compatible across different versions of the router."
+msgstr ""
+
+#: ../manual/en/book.xml:687(filename)
+msgid "Cancel and Exit"
+msgstr ""
+
+#: ../manual/en/book.xml:692(para)
+msgid "The program exits discarding the changes in the design."
+msgstr ""
+
+#: ../manual/en/book.xml:699(filename)
+msgid "Save as"
+msgstr ""
+
+#: ../manual/en/book.xml:704(para)
+msgid "Here you can save the current state of the design in a file with a file name of your choice. Allowed are the extensions .bin and .dsn. If you choose the extension .bin, the design will be saved in the internal binary format. In this case the current state of the IDE will also be saved. Because a design saved in this file format cannot be read in general by a later version of the router, the .bin-format is only available in the offline version. If you want to be able to read the saved design with a later version of this software, you have to select the extension .dsn.The design will then be saved in a text file format which is an extension of the Specctra-dsn format."
+msgstr ""
+
+#: ../manual/en/book.xml:711(filename)
+msgid "Generate Logfile"
+msgstr ""
+
+#: ../manual/en/book.xml:716(para)
+msgid "From now on all interactive actions are written to a log-file, so that this sequence can be repeated later on with Replay Logfile. Only actions, where the design is changed, are saved. This menu entry is provided in order to make short interactive actions repeatable for debugging. There is no warranty that it will work correctly on long interactive sequences. The name of such a log-file must have the extension .log. Not available in the web-based version."
+msgstr ""
+
+#: ../manual/en/book.xml:723(filename)
+msgid "Replay Logfile"
+msgstr ""
+
+#: ../manual/en/book.xml:728(para)
+msgid "The sequence of actions in a file with the extension .log generated by Generate Logfile will be repeated. The design must be in the same state as it was before generating the log-file. Not available in the web-based version."
+msgstr ""
+
+#: ../manual/en/book.xml:735(filename)
+msgid "Save GUI Settings as Default"
+msgstr ""
+
+#: ../manual/en/book.xml:740(para)
+msgid "The current interactive settings will be saved in a file with name gui_defaults.par. In the web-based version this file is hidden in the the Java Control Panel cache. You can delete it with Restore System Defaults in the router control panel. When you open later on a design in the .dsn format and a file with name gui_defaults.par is found, the saved settings are restored. In this way you can save your personal preferences for the GUI independent of the design. If you prefer different colors for the object types, or if you have two display screens and want to move the positions of the subwindows to the second screen, you do not have to make this change each time you open a new design. It is recommended to create the file gui_defaults.par from a design with as many layers as possible. Otherwise the layer dependent colors of the single object types would repeat, if this file was created from a design with fewer layers than the current design."
+msgstr ""
+
+#: ../manual/en/book.xml:747(filename)
+msgid "Export Specctra Session File"
+msgstr ""
+
+#: ../manual/en/book.xml:752(para)
+msgid "If you want to transfer the changes of the design created by this software back to the host system, you can write here a session file in the Specctra .ses format. You can then import this file into the host system, as you would do it when using the Specctra or Electra autorouter. After the session file is written, you will be asked if you also want to save the rules created inside this program for later reuse. Answer with yes, if for example you have created Via Rules, which you want to reuse after switching forth and back to the host system. However a new created rule in the host system might be overwritten by a saved rule in this case."
+msgstr ""
+
+#: ../manual/en/book.xml:755(para)
+msgid "If the original design file was created by Cadsoft-Eagle, you will see the following entry instead:"
+msgstr ""
+
+#: ../manual/en/book.xml:762(filename)
+msgid "Export Eagle Session Script"
+msgstr ""
+
+#: ../manual/en/book.xml:767(para)
+msgid "A text file with the same name as the design file and the extension .scr will be written. You can import the changes of the design to Cadsoft Eagle by selecting in the Files pull down menu of Eagle script... and choosing this text file. After the text file is written, you will be asked if you also want to save the rules created inside this program for later reuse. Answer with yes, if for example you have created Via Rules, which you want to reuse after switching forth and back to Eagle. However a new created rule in the Eagle might be overwritten by a saved rule in this case"
+msgstr ""
+
+#: ../manual/en/book.xml:776(title) ../manual/en/book.xml:992(title)
+msgid "Display Settings"
+msgstr ""
+
+#: ../manual/en/book.xml:778(title)
+msgid "Describes the windows with the display parameters"
+msgstr ""
+
+#: ../manual/en/book.xml:781(filename)
+msgid "Object Visibility"
+msgstr ""
+
+#: ../manual/en/book.xml:786(para)
+msgid "With the sliders in this window you can adjust the intensity for displaying the single object types. If you push the slider for an object type is to the right, objects of this type will get displayed with full intensity, if you push it to the left, objects of this type will become invisible."
+msgstr ""
+
+#: ../manual/en/book.xml:793(filename)
+msgid "Layer Visibility"
+msgstr ""
+
+#: ../manual/en/book.xml:798(para)
+msgid "With the sliders in this window you can adjust the intensity for displaying objects on each layer individually. If you push a slider to the left, all objects on the corresponding layer will get invisible."
+msgstr ""
+
+#: ../manual/en/book.xml:805(filename)
+msgid "Colors"
+msgstr ""
+
+#: ../manual/en/book.xml:810(para)
+msgid "Here you can define the colors for displaying objects on the board by clicking the corresponding color field with the left button. For the object types in the upper table you can choose the color for each layer individually."
+msgstr ""
+
+#: ../manual/en/book.xml:819(filename)
+msgid "Miscellaneous"
+msgstr ""
+
+#: ../manual/en/book.xml:827(filename)
+msgid "crosshair cursor"
+msgstr ""
+
+#: ../manual/en/book.xml:832(para)
+msgid "Here you can change from the standard small crosshair cursor to a big 45-degree crosshair cursor. Using the big crosshair cursor may slow down the display performance a lot. Shortcut is the comma-key."
+msgstr ""
+
+#: ../manual/en/book.xml:839(filename)
+msgid "board rotation"
+msgstr ""
+
+#: ../manual/en/book.xml:844(para)
+msgid "To turn the board by multiples of 90 degree."
+msgstr ""
+
+#: ../manual/en/book.xml:851(filename)
+msgid "board mirroring"
+msgstr ""
+
+#: ../manual/en/book.xml:856(para)
+msgid "For horizontal or vertical mirroring of the board."
+msgstr ""
+
+#: ../manual/en/book.xml:863(filename)
+msgid "automatic layer dimming"
+msgstr ""
+
+#: ../manual/en/book.xml:868(para)
+msgid "With this slider you can increase the intensity of the items on the current layer. If you push the slider to the left, the automatic layer dimming will get switched off, if you push it to the right, all layers beside the current layer will become invisible."
+msgstr ""
+
+#: ../manual/en/book.xml:879(title) ../manual/en/book.xml:968(title)
+msgid "Parameter"
+msgstr ""
+
+#: ../manual/en/book.xml:881(title)
+msgid "Select Parameter"
+msgstr ""
+
+#: ../manual/en/book.xml:882(para)
+msgid "Description of the Select Parameter window."
+msgstr ""
+
+#: ../manual/en/book.xml:886(title)
+msgid "Selections Layers:"
+msgstr ""
+
+#: ../manual/en/book.xml:889(filename)
+msgid "all visible:"
+msgstr ""
+
+#: ../manual/en/book.xml:894(para)
+msgid "Items are selected on all layers with visibility factor &gt; 0 (see also Layer Visibility). Objects on the current layer are preferred."
+msgstr ""
+
+#: ../manual/en/book.xml:901(filename)
+msgid "current only:"
+msgstr ""
+
+#: ../manual/en/book.xml:906(para)
+msgid "Items can be selected only on the current layer."
+msgstr ""
+
+#: ../manual/en/book.xml:914(title)
+msgid "Selectable Items:"
+msgstr ""
+
+#: ../manual/en/book.xml:917(para)
+msgid "To define the selectable item types."
+msgstr ""
+
+#: ../manual/en/book.xml:925(title)
+msgid "Current Layer:"
+msgstr ""
+
+#: ../manual/en/book.xml:928(para)
+msgid "Here you can change the layer, which is used in interactive actions."
+msgstr ""
+
+#: ../manual/en/book.xml:937(title)
+msgid "Route Parameter"
+msgstr ""
+
+#: ../manual/en/book.xml:938(para) ../manual/en/book.xml:942(para) ../manual/en/book.xml:946(para) ../manual/en/book.xml:952(para) ../manual/en/book.xml:956(para) ../manual/en/book.xml:960(para) ../manual/en/book.xml:969(para) ../manual/en/book.xml:973(para) ../manual/en/book.xml:977(para) ../manual/en/book.xml:981(para) ../manual/en/book.xml:985(para) ../manual/en/book.xml:989(para) ../manual/en/book.xml:993(para)
+msgid "TODO"
+msgstr ""
+
+#: ../manual/en/book.xml:941(title)
+msgid "Autoroute Parameter"
+msgstr ""
+
+#: ../manual/en/book.xml:945(title)
+msgid "Move Parameter"
+msgstr ""
+
+#: ../manual/en/book.xml:951(title)
+msgid "Rules"
+msgstr ""
+
+#: ../manual/en/book.xml:959(title)
+msgid "Other"
+msgstr ""
+
+#: ../manual/en/book.xml:966(title)
+msgid "Windows"
+msgstr ""
+
+#: ../manual/en/book.xml:972(title)
+msgid "The Clearance Matrix"
+msgstr ""
+
+#: ../manual/en/book.xml:976(title)
+msgid "The Via Rules"
+msgstr ""
+
+#: ../manual/en/book.xml:980(title)
+msgid "Net Classes"
+msgstr ""
+
+#: ../manual/en/book.xml:984(title)
+msgid "Snapshots"
+msgstr ""
+
+#: ../manual/en/book.xml:988(title)
+msgid "The Object Lists"
+msgstr ""
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
+#: ../manual/en/book.xml:0(None)
+msgid "translator-credits"
+msgstr ""
+
