@@ -1,0 +1,50 @@
+#. extracted from ../gui/resources/BoardFrame_en.properties, de/gui/gui-de.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the class BoardMenuInfo
+#: title
+msgid "Board Layout"
+msgstr ""
+
+#: confirm_cancel
+msgid "Please confirm cancel"
+msgstr ""
+
+#: error_1
+msgid "unable to read file gui defaults file"
+msgstr "no es pot llegir el fitxer predeterminat de la IGU"
+
+#: error_2
+msgid "unable to save board to file"
+msgstr "no es pot desar la placa al fitxer"
+
+#: error_3
+msgid "sorry, no write permission"
+msgstr "ho sentim, sense permisos d'escriptura"
+
+#: error_4
+msgid "unable to write board frame to file"
+msgstr "no es pot escriure el marc de la placa al fitxer"
+
+#: error_5
+msgid "unable to close output file"
+msgstr "no es pot tancar el fitxer de sortida"
+
+#: error_6
+msgid "unable to read .dsn-file"
+msgstr "no es pot llegir el fitxer .dsn"
+
+#: error_7
+msgid "outline missing in .dsn-file"
+msgstr "falta la delimitació al fitxer .dsn"

@@ -1,0 +1,66 @@
+#. extracted from ../gui/resources/WindowViaRule_en.properties, de/gui/gui-de.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the class WindowViaRule
+#: title
+msgid "Via Rule"
+msgstr ""
+
+#: append
+msgid "Append"
+msgstr "Annexa"
+
+#: append_tooltip
+msgid "appends a via to the rule"
+msgstr "annexa una via a la regla"
+
+#: remove
+msgid "Remove"
+msgstr ""
+
+#: remove_tooltip
+msgid "removes the selected via from the rule"
+msgstr ""
+
+#: move_up
+msgid "Move Up"
+msgstr "Mou amunt"
+
+#: move_up_tooltip
+msgid "increases the priority of the selected via in the rule"
+msgstr "incrementa la prioriat de la regla seleccionada a la regla"
+
+#: move_down
+msgid "Move Down"
+msgstr "Mou avall"
+
+#: move_down_tooltip
+msgid "decreases the priority of the selected via in the rule"
+msgstr "disminueix la prioriat de la regla seleccionada a la regla"
+
+#: choose_via_to_append
+msgid "Choose via to append"
+msgstr "Tria la via a annexar"
+
+#: append_via_to_rule
+msgid "Append Via to Rule"
+msgstr "Annexa la via a la regla"
+
+#: remove_2
+msgid "remove "
+msgstr "suprimeix "
+
+#: from_the_rule
+msgid "from the rule"
+msgstr "a partir de la regla"

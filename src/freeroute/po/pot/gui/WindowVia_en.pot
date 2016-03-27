@@ -1,0 +1,144 @@
+#. extracted from ../gui/resources/WindowVia_en.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-27 16:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the class WindowVia
+#: title
+msgctxt "title"
+msgid "Via Rules"
+msgstr ""
+
+#: available_via_padstacks
+msgid "Available Via Padstacks"
+msgstr ""
+
+#: info
+msgid "Info"
+msgstr ""
+
+#: info_tooltip
+msgid "shows the available via padstacks"
+msgstr ""
+
+#: info_tooltip_2
+msgid "shows the vias, which can be used in a via rule"
+msgstr ""
+
+#: info_tooltip_3
+msgid "shows information about the selected via rule"
+msgstr ""
+
+#: create
+msgid "Create"
+msgstr ""
+
+#: create_tooltip
+msgid "to create a new via padstack"
+msgstr ""
+
+#: create_tooltip_2
+msgid "to create a new empty via rule"
+msgstr ""
+
+#: remove
+msgid "Remove"
+msgstr ""
+
+#: remove_tooltip
+msgid "to remove an existing via padstack"
+msgstr ""
+
+#: remove_tooltip_2
+msgid "to remove the selected via rule"
+msgstr ""
+
+#: available_vias
+msgid "Available Vias"
+msgstr ""
+
+#: edit
+msgid "Edit"
+msgstr ""
+
+#: edit_tooltip
+msgid "to edits the vias, which can be used in a via rule"
+msgstr ""
+
+#: edit_tooltip_2
+msgid "to edit the selected via rule"
+msgstr ""
+
+#: via_rules
+msgctxt "via_rules"
+msgid "Via Rules"
+msgstr ""
+
+#: select_start_layer
+msgid "Select start layer"
+msgstr ""
+
+#: start_layer_selection
+msgid "Start Layer Selection"
+msgstr ""
+
+#: select_end_layer
+msgid "Select end layer"
+msgstr ""
+
+#: end_layer_selection
+msgid "End Layer Selection"
+msgstr ""
+
+#: adjust_circles
+msgid "Adjust Circles"
+msgstr ""
+
+#: radius_on_layer
+msgid "radius on layer"
+msgstr ""
+
+#: choose_padstack_to_remove
+msgid "Choose padstack to remove"
+msgstr ""
+
+#: remove_via_padstack
+msgid "Remove Via Padstack"
+msgstr ""
+
+#: selected_rule
+msgid "Selected Rule"
+msgstr ""
+
+#: remove_via_rule
+msgid "Remove via rule"
+msgstr ""
+
+#: message_1
+msgid "Please enter the name of the new padstack"
+msgstr ""
+
+#: message_2
+msgid "Name exists already, please adjust"
+msgstr ""
+
+#: message_3
+msgid "Please enter the default radius"
+msgstr ""
+
+#: message_4
+msgid "Via padstack not removed because it is used in via"
+msgstr ""
+
+#: message_5
+msgid "Please enter the name of the new via rule"
+msgstr ""

@@ -1,0 +1,54 @@
+#. extracted from ../gui/resources/WindowRouteDetail_en.properties, es/gui/gui-es.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the class WindowRouteDetail
+#: title
+msgid "Detail Route Parameter"
+msgstr ""
+
+#: clearance_compensation
+msgid "clearance compensation:"
+msgstr "clearance compensation:"
+
+#: clearance_compensation_tooltip
+msgid ""
+"Clearance compensation on may be useful if you have only one trace clearance "
+"type"
+msgstr ""
+"Clearance compensation on may be useful if you have only one trace clearance "
+"type"
+
+#: on
+msgid "on"
+msgstr "on"
+
+#: off
+msgid "off"
+msgstr "off"
+
+#: pull_tight_accuracy
+msgid "pull tight accuracy:"
+msgstr "pull tight accuracy:"
+
+#: pull_tight_accuracy_tooltip
+msgid "Use slider to change the accuracy for pulling tight traces"
+msgstr "Use slider to change the accuracy for pulling tight traces"
+
+#: keepout_outside_outline
+msgid "keepout outside board outline"
+msgstr "keepout outside board outline"
+
+#: keepout_outside_outline_tooltip
+msgid "If enabled, the complete area outside the board outline gets keepout"
+msgstr "If enabled, the complete area outside the board outline gets keepout"

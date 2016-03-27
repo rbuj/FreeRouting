@@ -1,0 +1,66 @@
+#. extracted from ../interactive/resources/ScreenMessages_en.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-27 16:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the class ScreenMessages
+#: current_layer
+msgid "current layer:"
+msgstr ""
+
+#: target_layer
+msgid "target layer:"
+msgstr ""
+
+#: found
+msgid "found:"
+msgstr ""
+
+#: failed
+msgid "failed:"
+msgstr ""
+
+#: to_route
+msgid "to route:"
+msgstr ""
+
+#: ripped
+msgid "ripped:"
+msgstr ""
+
+#: connections_not_found
+msgid "connections not found"
+msgstr ""
+
+#: routed
+msgid "routed:"
+msgstr ""
+
+#: fanout_pass
+msgid "Fanout Pass"
+msgstr ""
+
+#: components
+msgid "components"
+msgstr ""
+
+#: still
+msgid "still"
+msgstr ""
+
+#: via_count
+msgid "Via Count:"
+msgstr ""
+
+#: trace_length
+msgid "Trace Length:"
+msgstr ""

@@ -1,0 +1,318 @@
+#. extracted from ../board/resources/ObjectInfoPanel_en.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-27 16:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text written into an ObjectInfoPanel
+#: at
+msgid "at"
+msgstr ""
+
+#: attach_smd
+msgid "attach smd"
+msgstr ""
+
+#: back
+msgid "back"
+msgstr ""
+
+#: between
+msgid "between"
+msgstr ""
+
+#: board_outline
+msgid "Board Outline"
+msgstr ""
+
+#: center
+msgid "center"
+msgstr ""
+
+#: circle
+msgid "Circle"
+msgstr ""
+
+#: class
+msgid "class"
+msgstr ""
+
+#: clearance_class
+msgid "clearance class"
+msgstr ""
+
+#: clearance_class_2
+msgid "Clearance Class"
+msgstr ""
+
+#: clearance_info
+msgid "Clearance Info"
+msgstr ""
+
+#: clearance_violation
+msgid "clearance violation"
+msgstr ""
+
+#: clearance_violation_2
+msgid "Clearance violation"
+msgstr ""
+
+#: clearance_violations
+msgid "clearance violations"
+msgstr ""
+
+#: component
+msgid "Component"
+msgstr ""
+
+#: component_2
+msgid "component"
+msgstr ""
+
+#: component_info
+msgid "Component Info"
+msgstr ""
+
+#: component_keepout
+msgid "Component Keepout"
+msgstr ""
+
+#: conduction_area
+msgid "Conduction Area"
+msgstr ""
+
+#: contact_info
+msgid "Contact Info"
+msgstr ""
+
+#: contacts
+msgid "contacts"
+msgstr ""
+
+#: from
+msgid "from"
+msgstr ""
+
+#: front
+msgid "front"
+msgstr ""
+
+#: gate
+msgid "gate"
+msgstr ""
+
+#: gate_pin
+msgid "gate pin"
+msgstr ""
+
+#: hole
+msgid "hole"
+msgstr ""
+
+#: holes
+msgid "holes"
+msgstr ""
+
+#: keepout
+msgid "Keepout"
+msgstr ""
+
+#: layer
+msgid "layer"
+msgstr ""
+
+#: length
+msgid "length"
+msgstr ""
+
+#: logical_part
+msgid "logical part"
+msgstr ""
+
+#: logical_part_2
+msgid "Logical Part"
+msgstr ""
+
+#: logical_part_info
+msgid "Logical Part Info"
+msgstr ""
+
+#: lower_left
+msgid "lower left"
+msgstr ""
+
+#: net
+msgid "Net"
+msgstr ""
+
+#: net_class
+msgid "Net Class"
+msgstr ""
+
+#: net_class_2
+msgid "Net class"
+msgstr ""
+
+#: net_info
+msgid "Net Info"
+msgstr ""
+
+#: not_yet_placed
+msgid "not yet placed"
+msgstr ""
+
+#: of_component
+msgid "of component"
+msgstr ""
+
+#: off
+msgid "off"
+msgstr ""
+
+#: on
+msgid "on"
+msgstr ""
+
+#: on_layer
+msgid "on layer"
+msgstr ""
+
+#: package
+msgid "Package"
+msgstr ""
+
+#: package_info
+msgid "Package Info"
+msgstr ""
+
+#: padstack
+msgid "padstack"
+msgstr ""
+
+#: padstack_info
+msgid "Padstack Info"
+msgstr ""
+
+#: pin
+msgid "Pin"
+msgstr ""
+
+#: pin_2
+msgid "pin"
+msgstr ""
+
+#: polygon
+msgid "Polygon"
+msgstr ""
+
+#: radius
+msgid "radius"
+msgstr ""
+
+#: rectangle
+msgid "Rectangle"
+msgstr ""
+
+#: rotation
+msgid "rotation"
+msgstr ""
+
+#: shove_fixed
+msgid "shove fixed"
+msgstr ""
+
+#: spacing_from_clearance_class
+msgid "Spacing from clearance class "
+msgstr ""
+
+#: swap_code
+msgid "swap code"
+msgstr ""
+
+#: terminal_items
+msgid "terminal items"
+msgstr ""
+
+#: terminal_items_2
+msgid "Terminal Items"
+msgstr ""
+
+#: to
+msgid "to"
+msgstr ""
+
+#: to_class
+msgid "to class"
+msgstr ""
+
+#: trace
+msgid "Trace"
+msgstr ""
+
+#: trace_clearance_class
+msgid "trace clearance class"
+msgstr ""
+
+#: trace_clearance_class_2
+msgid "Trace Clearance Class"
+msgstr ""
+
+#: trace_length
+msgid "trace length"
+msgstr ""
+
+#: trace_width
+msgid "trace width"
+msgstr ""
+
+#: upper_right
+msgid "upper right"
+msgstr ""
+
+#: via
+msgid "Via"
+msgstr ""
+
+#: via_count
+msgid "via count"
+msgstr ""
+
+#: via_info
+msgid "Via Info"
+msgstr ""
+
+#: via_keepout
+msgid "Via Keepout"
+msgstr ""
+
+#: via_rule
+msgid "via rule"
+msgstr ""
+
+#: via_rule_2
+msgid "Via Rule"
+msgstr ""
+
+#: vias
+msgid "Vias"
+msgstr ""
+
+#: violation_info
+msgid "Violation Info"
+msgstr ""
+
+#: with
+msgid "with"
+msgstr ""
+
+#: width
+msgid "width"
+msgstr ""

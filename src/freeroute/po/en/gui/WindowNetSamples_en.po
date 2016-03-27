@@ -1,0 +1,54 @@
+#. extracted from ../gui/resources/WindowNetSamples_en.properties, en/gui/gui-en.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the subclasses of WindowNetSamples
+#: router_demonstrations
+msgid "Router Demonstrations"
+msgstr ""
+
+#: open_sample_design
+msgid "Open Sample Design"
+msgstr "Open Sample Design"
+
+#: sample_designs
+msgid "Sample Designs"
+msgstr ""
+
+#: replay_example
+msgid "Replay Example"
+msgstr "Replay Example"
+
+#: 45_degree_logfile
+msgid "45 degree routing example"
+msgstr "45 degree routing example"
+
+#: drag_component_logfile
+msgid "Example for dragging components"
+msgstr "Example for dragging components"
+
+#: any_angle_logfile
+msgid "Free angle routing example"
+msgstr "Free angle routing example"
+
+#: autorouter_example_1
+msgid "first autorouter example"
+msgstr "first autorouter example"
+
+#: autorouter_example_2
+msgid "second autorouter example"
+msgstr "second autorouter example"
+
+#: autorouter_example_3
+msgid "third autorouter example"
+msgstr "third autorouter example"

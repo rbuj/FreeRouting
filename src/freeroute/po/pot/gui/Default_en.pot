@@ -1,0 +1,142 @@
+#. extracted from ../gui/resources/Default_en.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-27 16:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of the default file with language dependent text
+#: add_corner
+msgid "add corner (left button)"
+msgstr ""
+
+#: all
+msgid "all"
+msgstr ""
+
+#: cancel
+msgid "cancel (Esc)"
+msgstr ""
+
+#: cancel_route
+msgid "cancel route (Esc)"
+msgstr ""
+
+#: center_display
+msgid "center display (c)"
+msgstr ""
+
+#: change_layer
+msgid "change layer"
+msgstr ""
+
+#: change_layer_tooltip
+msgid "also possible with number key or '+' '-' "
+msgstr ""
+
+#: close
+msgid "close"
+msgstr ""
+
+#: color_manager
+msgid "Color Manager"
+msgstr ""
+
+#: components
+msgid "Components"
+msgstr ""
+
+#: copy
+msgid "copy"
+msgstr ""
+
+#: done
+msgid "done (Space)"
+msgstr ""
+
+#: end_route
+msgid "end route (left button)"
+msgstr ""
+
+#: generate_snapshot
+msgid "generate snapshot (s)"
+msgstr ""
+
+#: incompletes
+msgid "Incompletes"
+msgstr ""
+
+#: inner
+msgid "inner"
+msgstr ""
+
+#: insert
+msgid "insert (left button)"
+msgstr ""
+
+#: layer_changed_to
+msgid "layer changed to"
+msgstr ""
+
+#: layer_visibility
+msgid "Layer Visibility"
+msgstr ""
+
+#: layer_visibility_header
+msgid "Use slider to modify the visibility on layer "
+msgstr ""
+
+#: maximum_all
+msgid "Maximum All"
+msgstr ""
+
+#: maximum_all_tooltip
+msgid "pushs all sliders to the right"
+msgstr ""
+
+#: minimum_all
+msgid "Minimum All"
+msgstr ""
+
+#: minimum_all_tooltip
+msgid "pushs all sliders to the left"
+msgstr ""
+
+#: move
+msgid "move (m)"
+msgstr ""
+
+#: packages
+msgid "Packages"
+msgstr ""
+
+#: padstacks
+msgid "Padstacks"
+msgstr ""
+
+#: pick_a_color
+msgid "Pick a Color"
+msgstr ""
+
+#: route_completed
+msgid "route completed"
+msgstr ""
+
+#: zoom
+msgid "zoom"
+msgstr ""
+
+#: zoom_in
+msgid "in (z)"
+msgstr ""
+
+#: zoom_out
+msgid "out (o)"
+msgstr ""

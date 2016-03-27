@@ -1,0 +1,86 @@
+#. extracted from ../boardgraphics/resources/ColorTableModel_en.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-27 16:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text for ItemColorTableModel and OtherColorTableModel
+#: LAYER
+msgid "Layer"
+msgstr ""
+
+#: TRACES
+msgid "Traces"
+msgstr ""
+
+#: FIXED_TRACES
+msgid "Fixed Traces"
+msgstr ""
+
+#: VIAS
+msgid "Vias"
+msgstr ""
+
+#: FIXED_VIAS
+msgid "Fixed Vias"
+msgstr ""
+
+#: PINS
+msgid "Pins"
+msgstr ""
+
+#: CONDUCTION_AREAS
+msgid "Conduction"
+msgstr ""
+
+#: KEEPOUTS
+msgid "Obstacles"
+msgstr ""
+
+#: VIA_KEEPOUTS
+msgid "Via Obstacles"
+msgstr ""
+
+#: PLACE_KEEPOUTS
+msgid "Place Obstacles"
+msgstr ""
+
+#: BACKGROUND
+msgid "Background"
+msgstr ""
+
+#: HIGHLIGHT
+msgid "Highlight "
+msgstr ""
+
+#: INCOMPLETES
+msgid "Incompletes"
+msgstr ""
+
+#: VIOLATIONS
+msgid "Violations"
+msgstr ""
+
+#: OUTLINE
+msgid "Outline"
+msgstr ""
+
+#: COMPONENT_FRONT
+msgid "Comp. Outline Front"
+msgstr ""
+
+#: COMPONENT_BACK
+msgid "Comp. Outline Back"
+msgstr ""
+
+#: LENGTH_MATCHING_AREA
+msgid "Lenght Matching "
+msgstr ""

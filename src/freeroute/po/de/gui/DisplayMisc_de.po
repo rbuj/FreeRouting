@@ -1,0 +1,74 @@
+#. extracted from ../gui/resources/DisplayMisc_en.properties, de/gui/gui-de.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the class DisplayMisc
+#: title
+msgid "Display Miscellaneous"
+msgstr ""
+
+#: cross_hair_cursor
+msgid "crosshair cursor"
+msgstr "crosshair cursor"
+
+#: small
+msgid "small"
+msgstr "petit"
+
+#: big
+msgid "big"
+msgstr "grn"
+
+#: cursor_checkbox_tooltip
+msgid "Shortcut is the comma-key"
+msgstr "Shortcut is the comma-key"
+
+#: rotation
+msgid "board rotation: "
+msgstr "gir de la placa "
+
+#: none
+msgid "none"
+msgstr ""
+
+#: 90_degree
+msgid "90 degree   "
+msgstr ""
+
+#: 180_degree
+msgid "180 degree "
+msgstr ""
+
+#: -90_degree
+msgid "-90 degree"
+msgstr ""
+
+#: board_mirroring
+msgid "board mirroring:"
+msgstr "board mirroring:"
+
+#: left_right
+msgid "left right"
+msgstr "left right"
+
+#: top_bottom
+msgid "top bottom"
+msgstr "top bottom"
+
+#: layer_dimming
+msgid "automatic layer dimming:"
+msgstr "automatic layer dimming:"
+
+#: layer_dimming_tooltip
+msgid "Use slider to change intensity of automatic layer dimming"
+msgstr "Use slider to change intensity of automatic layer dimming"

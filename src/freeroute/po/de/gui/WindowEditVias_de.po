@@ -1,0 +1,70 @@
+#. extracted from ../gui/resources/WindowEditVias_en.properties, de/gui/gui-de.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the class WindowEditVias
+#: title
+msgid "Edit Vias"
+msgstr ""
+
+#: add
+msgid "Add"
+msgstr ""
+
+#: add_tooltip
+msgid "Append a new via"
+msgstr ""
+
+#: remove
+msgid "Remove"
+msgstr ""
+
+#: remove_tooltip
+msgid "Remove the selected via"
+msgstr ""
+
+#: new_via
+msgid "new_via_"
+msgstr "nova_via_"
+
+#: via
+msgid "via"
+msgstr ""
+
+#: removed
+msgid "removed"
+msgstr ""
+
+#: NAME
+msgid "name"
+msgstr ""
+
+#: PADSTACK
+msgid "padstack"
+msgstr "padstack"
+
+#: CLEARANCE_CLASS
+msgid "clearance class"
+msgstr ""
+
+#: ATTACH_SMD
+msgid "attach smd"
+msgstr "adjunta smd"
+
+#: message_1
+msgid "last via not removed"
+msgstr ""
+
+#: message_2
+msgid "via not removed because it is still used in via rule "
+msgstr ""

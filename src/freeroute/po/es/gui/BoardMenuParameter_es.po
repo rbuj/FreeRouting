@@ -1,0 +1,34 @@
+#. extracted from ../gui/resources/BoardMenuParameter_en.properties, es/gui/gui-es.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the class BoardMenuParameter
+#: parameter
+msgid "Parameter"
+msgstr "Paràmetre"
+
+#: select
+msgid "Select"
+msgstr ""
+
+#: route
+msgid "Route"
+msgstr "Encamina"
+
+#: autoroute
+msgid "Autoroute"
+msgstr ""
+
+#: move
+msgid "Move"
+msgstr ""

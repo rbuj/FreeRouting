@@ -1,0 +1,258 @@
+#. extracted from ../interactive/resources/InteractiveState_en.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-27 16:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the derived classes of InteractiveState
+#: adding_hole_completed
+msgid "adding hole completed"
+msgstr ""
+
+#: adding_hole_failed
+msgid "adding hole failed"
+msgstr ""
+
+#: adding_hole_to_circle_not_yet_implemented
+msgid "adding hole to circle not yet implemented"
+msgstr ""
+
+#: adding_hole_to_obstacle_area
+msgid "adding hole to obstacle area"
+msgstr ""
+
+#: all_connections_routed
+msgid "all connections routed"
+msgstr ""
+
+#: all_items_inserted
+msgid "all items inserted"
+msgstr ""
+
+#: autoroute
+msgid "Autoroute"
+msgstr ""
+
+#: batch_autorouter
+msgid "Batch Autorouter"
+msgstr ""
+
+#: batch_optimizer
+msgid "Batch Optimizer"
+msgstr ""
+
+#: cannot_change_placement_side
+msgid "cannot change placement side"
+msgstr ""
+
+#: clearance_violations_found
+msgid "clearance violations found"
+msgstr ""
+
+#: completed
+msgid "completed"
+msgstr ""
+
+#: connections_could_not_be_routed
+msgid "connections could not be routed"
+msgstr ""
+
+#: connections_found
+msgid "connections found"
+msgstr ""
+
+#: connections_not_found
+msgid "connections not found"
+msgstr ""
+
+#: creating_circle
+msgid "creating circular keepout"
+msgstr ""
+
+#: creating_polygonshape
+msgid "creating polygonshape keepout"
+msgstr ""
+
+#: creatig_tile
+msgid "creatig tile-shaped keepout"
+msgstr ""
+
+#: drag_left_mouse_button_to_create_region_to_display
+msgid "drag left mouse button to create region to display"
+msgstr ""
+
+#: drag_left_mouse_button_to_select_cutout_rectangle
+msgid "drag left mouse button to select cutout rectangle"
+msgstr ""
+
+#: drag_left_mouse_button_to_selects_items_in_region
+msgid "drag left mouse button to selects items in region"
+msgstr ""
+
+#: dragging_item
+msgid "dragging item"
+msgstr ""
+
+#: fanout
+msgid "Fanout"
+msgstr ""
+
+#: in_select_menu
+msgid "in select menu"
+msgstr ""
+
+#: in_select_mode
+msgid "in select mode"
+msgstr ""
+
+#: in_select_item_mode
+msgid "in select item mode"
+msgstr ""
+
+#: is_not_active_for_the_current_net
+msgid "is not active for the current net"
+msgstr ""
+
+#: move_completed
+msgid "move completed"
+msgstr ""
+
+#: insertion_failed_because_of_obstacles
+msgid "insertion failed because of obstacles"
+msgstr ""
+
+#: interrupted
+msgid "interrupted"
+msgstr ""
+
+#: keepout_cancelled_because_of_overlaps
+msgid "keepout cancelled because of overlaps"
+msgstr ""
+
+#: keepout_successful_completed
+msgid "keepout successful completed"
+msgstr ""
+
+#: layer_changed_to
+msgid "layer changed to"
+msgstr ""
+
+#: layer_not_changed_because_layer
+msgid "layer not changed because layer"
+msgstr ""
+
+#: layer_not_changed_because_of_obstacle_on_layer
+msgid "layer not changed because of obstacle on layer"
+msgstr ""
+
+#: logfile
+msgid "Logfile"
+msgstr ""
+
+#: move_component_failed_because_no_item_selected
+msgid "move component failed because no item selected"
+msgstr ""
+
+#: new_net_created_from_selected_items
+msgid "new net created from selected items"
+msgstr ""
+
+#: no_item_found_for_adding_hole
+msgid "no item found for adding hole"
+msgstr ""
+
+#: no_obstacle_area_found_for_adding_hole
+msgid "no obstacle area found for adding hole"
+msgstr ""
+
+#: no_pin_selected
+msgid "no pin selected"
+msgstr ""
+
+#: no_swappable_pin_found
+msgid "no swappable pin found"
+msgstr ""
+
+#: nothing_selected
+msgid "nothing selected"
+msgstr ""
+
+#: pass
+msgid "Pass"
+msgstr ""
+
+#: picked_pin_expected
+msgid "picked pin expected"
+msgstr ""
+
+#: pin_not_swapped_because_it_is_already_connected
+msgid "pin not swapped because it is already connected"
+msgstr ""
+
+#: pin_not_swapped_because_second_pin_is_already_connected
+msgid "pin not swapped because second pin is already connected"
+msgstr ""
+
+#: pin_swap_completed
+msgid "pin swap completed"
+msgstr ""
+
+#: pin_to_swap_missing
+msgid "pin to swap missing"
+msgstr ""
+
+#: please_click_second_pin_with_the_left_mouse_button
+msgid "please click second pin with the left mouse button"
+msgstr ""
+
+#: please_unfix_selected_items_before_moving
+msgid "please unfix selected items before moving"
+msgstr ""
+
+#: postroute
+msgid "Postroute"
+msgstr ""
+
+#: routing_net
+msgid "routing net"
+msgstr ""
+
+#: please_unroute_or_extend_selection_before_moving
+msgid "please unroute or extend selection before moving"
+msgstr ""
+
+#: pull_tight
+msgid "Pull tight"
+msgstr ""
+
+#: some_items_are_fixed_and_could_therefore_not_be_removed
+msgid "some items are fixed and could therefore not be removed"
+msgstr ""
+
+#: some_items_are_not_changed_because_they_are_already_connected
+msgid "some items are not changed because they are already connected"
+msgstr ""
+
+#: some_items_cannot_be_moved_because_they_are_fixed
+msgid "some items cannot be moved, because they are fixed"
+msgstr ""
+
+#: some_items_not_inserted_because_of_obstacles
+msgid "some items not inserted because of obstacles"
+msgstr ""
+
+#: stop_message
+msgid "running, press left button to stop"
+msgstr ""
+
+#: unable_to_reset_components_with_different_rotations
+msgid "unable to reset components with different rotations"
+msgstr ""
