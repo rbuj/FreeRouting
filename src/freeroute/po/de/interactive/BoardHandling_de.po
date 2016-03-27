@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,46 +19,46 @@ msgstr ""
 
 #: incomplete_connections_to_route
 msgid "incomplete connections to route"
-msgstr "connexions incompletes a l'encaminament"
+msgstr "offene Verbindungen"
 
 #: incompletes
 msgid "incompletes,"
-msgstr "incompletes,"
+msgstr "offene Verbindungen,"
 
 #: length_violations
 msgid "length violations"
-msgstr "violacions de longitud"
+msgstr "L�ngenverletzungen"
 
 #: undo
 msgid "undo"
-msgstr "desfés"
+msgstr "undo"
 
 #: no_more_undo_possible
 msgid "no more undo possible"
-msgstr "no es pot desfer res més"
+msgstr "kein undo mehr m�glich"
 
 #: redo
 msgid "redo"
-msgstr "refés"
+msgstr "redo"
 
 #: no_more_redo_possible
 msgid "no more redo possible"
-msgstr "no es pot refer res més"
+msgstr "kein redo mehr m�glich"
 
 #: select_menu
 msgid "select menu: use button 1 to select item"
-msgstr "menú de selecció: utilitzeu el botó 1 per a seleccionat l'element"
+msgstr "Auswahl-Men�: Linke Maustaste zum Selektieren von Objekten verwenden"
 
 #: route_menu
 msgid "route menu: use button 1 to start route"
-msgstr "menú d'encaminament: utilitzeu el botó 1 per iniciar l'encaminament"
+msgstr "Route-Men�: mit linker  Maustaste neue Bahn beginnen "
 
 #: drag_menu
 msgid "press button 1 to drag items or to push traces from behind"
 msgstr ""
-"premeu el botó 1 per arrossegar els elements o per a empenyer les traces del "
-"darrere"
+"linke Maustaste dr�cken um Objekte zu  ziehen oder Bahnen von hinten zu "
+"schieben"
 
 #: save_error
 msgid "unable to write board to file"
-msgstr "no es pot escriure la placa al fitxer"
+msgstr "Schreiben des Designs auf Datei ist fehlgeschlagen"

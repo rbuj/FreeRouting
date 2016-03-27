@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,36 +19,38 @@ msgstr ""
 
 #: clearance_compensation
 msgid "clearance compensation:"
-msgstr "clearance compensation:"
+msgstr "Clearance-Kompensation:"
 
 #: clearance_compensation_tooltip
 msgid ""
 "Clearance compensation on may be useful if you have only one trace clearance "
 "type"
 msgstr ""
-"Clearance compensation on may be useful if you have only one trace clearance "
-"type"
+"Clearance-Kompensation ist sinnvoll, wenn es nur eine Clearance-Klasse für "
+"Bahnen gibt"
 
 #: on
 msgid "on"
-msgstr "on"
+msgstr "ein"
 
 #: off
 msgid "off"
-msgstr "off"
+msgstr "aus"
 
 #: pull_tight_accuracy
 msgid "pull tight accuracy:"
-msgstr "pull tight accuracy:"
+msgstr "Glattzieh-Genauigkeit für Bahnen:"
 
 #: pull_tight_accuracy_tooltip
 msgid "Use slider to change the accuracy for pulling tight traces"
-msgstr "Use slider to change the accuracy for pulling tight traces"
+msgstr "Regler zum Ändern der Glattzieh-Genauigkeit für Bahnen"
 
 #: keepout_outside_outline
 msgid "keepout outside board outline"
-msgstr "keepout outside board outline"
+msgstr "Keepout außerhalb der Board-Outline"
 
 #: keepout_outside_outline_tooltip
 msgid "If enabled, the complete area outside the board outline gets keepout"
-msgstr "If enabled, the complete area outside the board outline gets keepout"
+msgstr ""
+"Falls gesetzt, wird die gesamte Fläche außerhalb der Board-Outline zu "
+"Keepout."

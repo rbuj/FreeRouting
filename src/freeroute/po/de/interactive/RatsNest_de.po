@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,32 +15,32 @@ msgstr ""
 #. # English version of language dependent text of the class RatsNest
 #: via
 msgid "via"
-msgstr "via"
+msgstr "Via"
 
 #: trace
 msgid "trace"
-msgstr "traça"
+msgstr "Bahn"
 
 #: conduction_area
 msgid "conduction area"
-msgstr "àrea de conducció"
+msgstr "Leitungsfl�che"
 
 #: unknown
 msgid "unknown"
-msgstr "desconegut"
+msgstr "unbekannt"
 
 #: incomplete
 msgid "Incomplete connection"
-msgstr "Connexió incompleta"
+msgstr "Offene Verbindung"
 
 #: net
 msgid "net"
-msgstr "xarxa"
+msgstr "Netz"
 
 #: from
 msgid "from"
-msgstr "de"
+msgstr "von"
 
 #: to
 msgid "to"
-msgstr "a"
+msgstr "nach"

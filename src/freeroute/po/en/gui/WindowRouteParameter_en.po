@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,11 +39,11 @@ msgstr ""
 
 #: route_mode
 msgid "route mode:"
-msgstr "mode d'encaminament:"
+msgstr "route mode:"
 
 #: dynamic
 msgid "dynamic"
-msgstr "dinàmic"
+msgstr "dynamic"
 
 #: stitching
 msgid "stitching"
@@ -55,7 +55,7 @@ msgstr ""
 
 #: automatic
 msgid "automatic"
-msgstr "automàtic"
+msgstr "automatic"
 
 #: manual
 msgid "manual"

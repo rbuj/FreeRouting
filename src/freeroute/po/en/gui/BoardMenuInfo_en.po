@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,15 +23,15 @@ msgstr ""
 
 #: length_violations
 msgid "Length Violations"
-msgstr "Violacions de llargada"
+msgstr "Length Violations"
 
 #: clearance_violations
 msgid "Clearance Violations"
-msgstr "Violacions del marge de seguretat"
+msgstr "Clearance Violations"
 
 #: library_packages
 msgid "Library Packages"
-msgstr "Paquets de biblioteques"
+msgstr "Library Packages"
 
 #: library_padstacks
 msgid "Library Padstacks"
@@ -39,7 +39,7 @@ msgstr "Library Padstacks"
 
 #: board_components
 msgid "Placed Components"
-msgstr "Components posicionats"
+msgstr "Placed Components"
 
 #: unconnected_route
 msgid "Unconnected Route"

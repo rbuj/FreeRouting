@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,15 +19,15 @@ msgstr ""
 
 #: via_rule
 msgid "via rule:"
-msgstr "regla de via:"
+msgstr "Via-Regel:"
 
 #: trace_clearance_class
 msgid "trace clearance class:"
-msgstr "classe de marge de seguretat del traç:"
+msgstr "Clearance-Klasse f�r Bahnen:"
 
 #: trace_width
 msgid "trace width:"
-msgstr "amplada del traç:"
+msgstr "Bahnbreite:"
 
 #: on_layer
 msgid "on layer:"

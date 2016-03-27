@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: available_via_padstacks
 msgid "Available Via Padstacks"
-msgstr "Available Via Padstacks"
+msgstr "Verf�gbare Via-Padstacks"
 
 #: info
 msgid "Info"
@@ -32,11 +32,11 @@ msgstr ""
 
 #: info_tooltip_2
 msgid "shows the vias, which can be used in a via rule"
-msgstr "shows the vias, which can be used in a via rule"
+msgstr "zeigt die Vias, die in eiiner Via-Regel verwendet werden k�nnen"
 
 #: info_tooltip_3
 msgid "shows information about the selected via rule"
-msgstr "shows information about the selected via rule"
+msgstr "zeigt Informationen �ber die ausgew�hlte  Via-Regel"
 
 #: create
 msgid "Create"
@@ -44,11 +44,11 @@ msgstr ""
 
 #: create_tooltip
 msgid "to create a new via padstack"
-msgstr "to create a new via padstack"
+msgstr "einen neuen Via-Padstack definieren"
 
 #: create_tooltip_2
 msgid "to create a new empty via rule"
-msgstr "to create a new empty via rule"
+msgstr "eine neue leere Via-Regel erzeugen"
 
 #: remove
 msgid "Remove"
@@ -60,68 +60,68 @@ msgstr ""
 
 #: remove_tooltip_2
 msgid "to remove the selected via rule"
-msgstr "to remove the selected via rule"
+msgstr "die ausgew�hlte Via-Regel l�schen"
 
 #: available_vias
 msgid "Available Vias"
-msgstr "Available Vias"
+msgstr "Verf�gbare Vias"
 
 #: edit
 msgid "Edit"
-msgstr "Edita"
+msgstr "Editieren"
 
 #: edit_tooltip
 msgid "to edits the vias, which can be used in a via rule"
-msgstr "to edits the vias, which can be used in a via rule"
+msgstr "die Vias editieren, die in einer Via-Regel verwendet werden k�nnen"
 
 #: edit_tooltip_2
 msgid "to edit the selected via rule"
-msgstr "to edit the selected via rule"
+msgstr "die ausgew�hlte Via-Regel editieren"
 
 #: via_rules
 msgctxt "via_rules"
 msgid "Via Rules"
-msgstr "Regles de les vies"
+msgstr "Via-Regeln"
 
 #: select_start_layer
 msgid "Select start layer"
-msgstr "Select start layer"
+msgstr "bitte die erste Lage w�hlen"
 
 #: start_layer_selection
 msgid "Start Layer Selection"
-msgstr "Start Layer Selection"
+msgstr "Auswahl der ersten Lage"
 
 #: select_end_layer
 msgid "Select end layer"
-msgstr "Select end layer"
+msgstr "bitte die letzte Lage w�hlen"
 
 #: end_layer_selection
 msgid "End Layer Selection"
-msgstr "End Layer Selection"
+msgstr "Auswahl der letzten Lage"
 
 #: adjust_circles
 msgid "Adjust Circles"
-msgstr "Adjust Circles"
+msgstr "Kreise anpassen"
 
 #: radius_on_layer
 msgid "radius on layer"
-msgstr "radius on layer"
+msgstr "Radius auf Lage"
 
 #: choose_padstack_to_remove
 msgid "Choose padstack to remove"
-msgstr "Choose padstack to remove"
+msgstr "bitte zu l�schenden Padstach ausw�hlen"
 
 #: remove_via_padstack
 msgid "Remove Via Padstack"
-msgstr "Remove Via Padstack"
+msgstr "Via-Padstack l�schen"
 
 #: selected_rule
 msgid "Selected Rule"
-msgstr "Regla seleccionada"
+msgstr "ausgew�hlte Regel"
 
 #: remove_via_rule
 msgid "Remove via rule"
-msgstr "Suprimeix la regla de via"
+msgstr "Via-Regel l�schen"
 
 #: message_1
 msgid "Please enter the name of the new padstack"

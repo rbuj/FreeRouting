@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 #: assign_class
 msgid "Assign Class"
-msgstr "Assign Class"
+msgstr "Klasse zuweisen"
 
 #: assign_class_tooltip
 msgid "Assign class to selected nets"
-msgstr "Assign class to selected nets"
+msgstr "den ausgew�hlten Netzen eine Klasse zuweisen"
 
 #: filter_incompletes
 msgid "Filter Incompletes"

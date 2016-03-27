@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 #. # English version of language dependent text for ItemColorTableModel and OtherColorTableModel
 #: LAYER
 msgid "Layer"
-msgstr "Capa"
+msgstr "Layer"
 
 #: TRACES
 msgid "Traces"
@@ -23,15 +23,15 @@ msgstr "Traces"
 
 #: FIXED_TRACES
 msgid "Fixed Traces"
-msgstr "Traces fixes"
+msgstr "Fixed Traces"
 
 #: VIAS
 msgid "Vias"
-msgstr "Vies"
+msgstr "Vias"
 
 #: FIXED_VIAS
 msgid "Fixed Vias"
-msgstr "Vies fixes"
+msgstr "Fixed Vias"
 
 #: PINS
 msgid "Pins"
@@ -39,27 +39,27 @@ msgstr "Pins"
 
 #: CONDUCTION_AREAS
 msgid "Conduction"
-msgstr "Conduccció"
+msgstr "Conduction"
 
 #: KEEPOUTS
 msgid "Obstacles"
-msgstr "Obstruccions"
+msgstr "Obstacles"
 
 #: VIA_KEEPOUTS
 msgid "Via Obstacles"
-msgstr "Obstruccions de la via"
+msgstr "Via Obstacles"
 
 #: PLACE_KEEPOUTS
 msgid "Place Obstacles"
-msgstr "Obstruccions del posicionament"
+msgstr "Place Obstacles"
 
 #: BACKGROUND
 msgid "Background"
-msgstr "Fons"
+msgstr "Background"
 
 #: HIGHLIGHT
 msgid "Highlight "
-msgstr "Ressaltament "
+msgstr "Highlight "
 
 #: INCOMPLETES
 msgid "Incompletes"
@@ -67,20 +67,20 @@ msgstr "Incompletes"
 
 #: VIOLATIONS
 msgid "Violations"
-msgstr "Violaciions"
+msgstr "Violations"
 
 #: OUTLINE
 msgid "Outline"
-msgstr "Delimitació"
+msgstr "Outline"
 
 #: COMPONENT_FRONT
 msgid "Comp. Outline Front"
-msgstr "Delimitació frontal del component"
+msgstr "Comp. Outline Front"
 
 #: COMPONENT_BACK
 msgid "Comp. Outline Back"
-msgstr "Delimitació posterior del component"
+msgstr "Comp. Outline Back"
 
 #: LENGTH_MATCHING_AREA
 msgid "Lenght Matching "
-msgstr "Coincidència de longitud "
+msgstr "Lenght Matching "

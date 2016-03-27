@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,19 +23,19 @@ msgstr ""
 
 #: active
 msgid "Active:"
-msgstr "Actiu:"
+msgstr "aktiv:"
 
 #: preferred_direction
 msgid "Preferred Direction:"
-msgstr "Preferred Direction:"
+msgstr "Vorzugsrichtung:"
 
 #: horizontal
 msgid "horizontal"
-msgstr "horitzontal"
+msgstr "horizontal"
 
 #: vertical
 msgid "vertical"
-msgstr "vertical"
+msgstr "vertikal"
 
 #: detail_parameter
 msgid "Detail parameter"
@@ -43,59 +43,59 @@ msgstr ""
 
 #: detail_autoroute_parameter
 msgid "Detail Autoroute Parameter"
-msgstr "Detail Autoroute Parameter"
+msgstr "Detailierte Autoroute-Einstellungen"
 
 #: trace_costs_on_layer
 msgid "Trace costs on layer:"
-msgstr "Trace costs on layer:"
+msgstr "Trace-Kosten auf Lage:"
 
 #: in_preferred_direction
 msgid "In preferred direction:"
-msgstr "In preferred direction:"
+msgstr "in Vorzugsrichtung:"
 
 #: against_preferred_direction
 msgid "Against preferred direction:"
-msgstr "Against preferred direction:"
+msgstr "gegen die Vorzugsrichtung:"
 
 #: with_fanout
 msgid "Preroute fanout:"
-msgstr "Preroute fanout:"
+msgstr "Fanout vorrouten:"
 
 #: vias_allowed
 msgid "Vias allowed: "
-msgstr "Vies permeses: "
+msgstr "Vias erlaubt: "
 
 #: via_costs
 msgid "Via costs:"
-msgstr "Cost de les vies:"
+msgstr "Via-Kosten:"
 
 #: plane_via_costs
 msgid "Powerplane via costs:"
-msgstr "Powerplane via costs:"
+msgstr "Stromlagen-Via-Kosten:"
 
 #: start_ripup_costs
 msgid "Ripup start costs:"
-msgstr "Ripup start costs:"
+msgstr "Ripup-Anfangskosten:"
 
 #: start_pass
 msgid "Start pass:"
-msgstr "Start pass:"
+msgstr "Start-Pass:"
 
 #: speed
 msgid "Speed:"
-msgstr "Velocitat:"
+msgstr "Tempo:"
 
 #: fast
 msgid "fast"
-msgstr "ràpida"
+msgstr "schnell"
 
 #: slow
 msgid "slow"
-msgstr "lenta"
+msgstr "langsam"
 
 #: passes
 msgid "Passes:"
-msgstr "Passades:"
+msgstr "Passes:"
 
 #: fanout
 msgid "Fanout"

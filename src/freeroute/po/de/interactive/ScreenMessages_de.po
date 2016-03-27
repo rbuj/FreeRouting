@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,27 +15,27 @@ msgstr ""
 #. # English version of language dependent text of the class ScreenMessages
 #: current_layer
 msgid "current layer:"
-msgstr "capa actual:"
+msgstr "aktuelle Lage:"
 
 #: target_layer
 msgid "target layer:"
-msgstr "capa objectiu:"
+msgstr "Ziellage:"
 
 #: found
 msgid "found:"
-msgstr "trobat:"
+msgstr "gefunden:"
 
 #: failed
 msgid "failed:"
-msgstr "fallat:"
+msgstr "Fehlversuche:"
 
 #: to_route
 msgid "to route:"
-msgstr "a encaminar:"
+msgstr "zu routen:"
 
 #: ripped
 msgid "ripped:"
-msgstr "ripped:"
+msgstr "geripped:"
 
 #: connections_not_found
 msgid "connections not found"
@@ -43,7 +43,7 @@ msgstr ""
 
 #: routed
 msgid "routed:"
-msgstr "encaminat:"
+msgstr "gerouted:"
 
 #: fanout_pass
 msgid "Fanout Pass"
@@ -51,16 +51,16 @@ msgstr "Fanout Pass"
 
 #: components
 msgid "components"
-msgstr "components"
+msgstr "Bauteile"
 
 #: still
 msgid "still"
-msgstr "still"
+msgstr "noch"
 
 #: via_count
 msgid "Via Count:"
-msgstr "Nombre de vies:"
+msgstr "Via-Anzahl:"
 
 #: trace_length
 msgid "Trace Length:"
-msgstr "Longitud de la traça:"
+msgstr "Bahnlänge:"

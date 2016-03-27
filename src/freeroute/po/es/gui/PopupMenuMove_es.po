@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 #. # English version of language dependent text of the class PopupMenuMain
 #: turn
 msgid "turn"
-msgstr "gira"
+msgstr "girar"
 
 #: 90_degree
 msgid "90 degree (+)"
@@ -35,23 +35,23 @@ msgstr ""
 
 #: 135_degree
 msgid "135 degree"
-msgstr "135 graus"
+msgstr "135 grados"
 
 #: -135_degree
 msgid "-135 degree"
-msgstr "-135 graus"
+msgstr "-135 grados"
 
 #: -45_degree
 msgid "-45 degree"
-msgstr "-45 graus"
+msgstr "-45 grados"
 
 #: change_side
 msgid "change side (/)"
-msgstr "canvia la cara (/)"
+msgstr "cambiar lado (/)"
 
 #: reset_rotation
 msgid "reset rotation"
-msgstr "restableix el gir"
+msgstr "restablecer rotación"
 
 #: insert
 msgid "insert (left button)"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: header_message
 msgid "Use slider to modify the visibility of"
-msgstr "Use slider to modify the visibility of"
+msgstr "Regler zum �ndern der Sichtbarkeit von"
 
 #: TRACES
 msgid "traces"
@@ -35,32 +35,32 @@ msgstr ""
 
 #: CONDUCTION_AREAS
 msgid "conduction areas"
-msgstr "conduction areas"
+msgstr "Leitungsfl�chen"
 
 #: KEEPOUTS
 msgid "keepouts"
-msgstr "keepouts"
+msgstr "Sperrfl�chen"
 
 #: VIA_KEEPOUTS
 msgid "via keepouts "
-msgstr "via keepouts "
+msgstr "Via-Sperrfl�chen"
 
 #: PLACE_KEEPOUTS
 msgid "place keepouts "
-msgstr "place keepouts "
+msgstr "Platzierungs-Sperrfl�chen "
 
 #: COMPONENT_OUTLINES
 msgid "component outlines"
-msgstr "component outlines"
+msgstr "Bauteil-Umrandungen"
 
 #: HILIGHT
 msgid "hilight"
-msgstr "hilight"
+msgstr "markierten Objekten"
 
 #: INCOMPLETES
 msgid "incompletes"
-msgstr "incompletes"
+msgstr "Incompletes"
 
 #: LENGTH_MATCHING_AREAS
 msgid "length matching areas"
-msgstr "length matching areas"
+msgstr "L�ngenbeschr�nkungs-Fl�chen"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,28 +23,28 @@ msgstr ""
 
 #: error_1
 msgid "unable to read file gui defaults file"
-msgstr "no es pot llegir el fitxer predeterminat de la IGU"
+msgstr "Lesen der Gui-Defaults-Datei ist fehlgeschlagen"
 
 #: error_2
 msgid "unable to save board to file"
-msgstr "no es pot desar la placa al fitxer"
+msgstr "Speichern des Platinendesigns ist fehhlgeschlagen"
 
 #: error_3
 msgid "sorry, no write permission"
-msgstr "ho sentim, sense permisos d'escriptura"
+msgstr "Schreiberlaubnis verweigert"
 
 #: error_4
 msgid "unable to write board frame to file"
-msgstr "no es pot escriure el marc de la placa al fitxer"
+msgstr "Speichern des Board-Frames ist fehlgeschlagen"
 
 #: error_5
 msgid "unable to close output file"
-msgstr "no es pot tancar el fitxer de sortida"
+msgstr "Scließen der Output-Datei ist fehlgeschlagen"
 
 #: error_6
 msgid "unable to read .dsn-file"
-msgstr "no es pot llegir el fitxer .dsn"
+msgstr "Lesen der .dsn-Datei fehlgeschlagen"
 
 #: error_7
 msgid "outline missing in .dsn-file"
-msgstr "falta la delimitació al fitxer .dsn"
+msgstr "Outline fehlt in der  .dsn-Datei"

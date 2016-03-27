@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,19 +19,19 @@ msgstr ""
 
 #: horizontal_component_grid
 msgid "horizontal component grid:"
-msgstr "horizontal component grid:"
+msgstr "horizontales Bauteilraster:"
 
 #: vertical_component_grid
 msgid "vertical component grid:"
-msgstr "vertical component grid:"
+msgstr "vertikales Bauteilraste:"
 
 #: wheel_function
 msgid "wheel function:"
-msgstr "wheel function:"
+msgstr "Mausrad-Funktion:"
 
 #: wheel_function_tooltip
 msgid "Defines the function of the mouse wheel while moving components"
-msgstr "Defines the function of the mouse wheel while moving components"
+msgstr "Definiert die Funktion des Mausrads beim Platzieren von Bauteilen"
 
 #: zoom
 msgid "zoom"
@@ -39,4 +39,4 @@ msgstr ""
 
 #: rotate
 msgid "rotate"
-msgstr "gira"
+msgstr "drehen"

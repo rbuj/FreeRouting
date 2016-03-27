@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 #: goto_snapshot
 msgid "Goto Selected Snapshot"
-msgstr "Vés a la captura"
+msgstr "Gehe zu ausgew�hltem Snapshot"
 
 #: goto_tooltip
 msgid "shortcut is j"
-msgstr "la drecera de teclat és j"
+msgstr "Shortcut ist j"
 
 #: create
 msgid "Create"
@@ -31,7 +31,7 @@ msgstr ""
 
 #: snapshot
 msgid "snapshot"
-msgstr "instantània"
+msgstr "Snapshot"
 
 #: remove
 msgid "Remove Selected Snapshot"
@@ -39,7 +39,7 @@ msgstr ""
 
 #: remove_all
 msgid "Remove All Snapshots"
-msgstr "Suprimeix totes les instantànies"
+msgstr "Alle Snapshots l�schen"
 
 #: settings
 msgid "Snapshot Settings"

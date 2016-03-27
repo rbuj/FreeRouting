@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,28 +19,28 @@ msgstr "via"
 
 #: trace
 msgid "trace"
-msgstr "traça"
+msgstr "trace"
 
 #: conduction_area
 msgid "conduction area"
-msgstr "àrea de conducció"
+msgstr "conduction area"
 
 #: unknown
 msgid "unknown"
-msgstr "desconegut"
+msgstr "unknown"
 
 #: incomplete
 msgid "Incomplete connection"
-msgstr "Connexió incompleta"
+msgstr "Incomplete connection"
 
 #: net
 msgid "net"
-msgstr "xarxa"
+msgstr "net"
 
 #: from
 msgid "from"
-msgstr "de"
+msgstr "from"
 
 #: to
 msgid "to"
-msgstr "a"
+msgstr "to"

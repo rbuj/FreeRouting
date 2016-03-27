@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,19 +23,19 @@ msgstr ""
 
 #: all_visible
 msgid "all visible"
-msgstr "totes visibles"
+msgstr "alle sichtbaren"
 
 #: all_visible_tooltip
 msgid "selection on all visible layer, the current layer is preferred"
-msgstr "selecció en totes les capes visibles, es prefereix la capa actual"
+msgstr "Selektion auf allen sichtbaren Lagen, die aktuelle Lage wird bevorzugt"
 
 #: current_only
 msgid "current only"
-msgstr "únicament l'actual"
+msgstr "nur aktuelle"
 
 #: current_only_tooltip
 msgid "selection only on the current layer"
-msgstr "selecció només a la capa actual"
+msgstr "Selektion nur auf der aktuellen Lage"
 
 #: selectable_items
 msgid "Selectable Items:"
@@ -55,31 +55,31 @@ msgstr ""
 
 #: CONDUCTION
 msgid "conduction areas"
-msgstr "àrees de conducció"
+msgstr "Leitungsfl�chen"
 
 #: KEEPOUT
 msgid "keepout"
-msgstr "prohibit el pas"
+msgstr "Sperrfl�chen"
 
 #: VIA_KEEPOUT
 msgid "via keepout "
-msgstr "prohibit el pas en vies"
+msgstr "Via-Sperrfl�chen "
 
 #: COMPONENT_KEEPOUT
 msgid "place keepout"
-msgstr "prohibit el pas en posicionaments"
+msgstr "Platzierungs-Sperrfl�chen"
 
 #: BOARD_OUTLINE
 msgid "board outline"
-msgstr "delimitació de la placa"
+msgstr "Platinenrand"
 
 #: FIXED
 msgid "fixed"
-msgstr "fixe"
+msgstr "fixiert"
 
 #: UNFIXED
 msgid "unfixed"
-msgstr "sense fixar"
+msgstr "unfixiert"
 
 #: current_layer
 msgid "Current Layer:"
@@ -87,4 +87,4 @@ msgstr ""
 
 #: current_layer_tooltip
 msgid "can be changed also with number key or '+' '-'"
-msgstr "També es pot canviar amb la tecla numèrica o '+' '-'"
+msgstr "kann auch mit Ziffertasten oder '+' '-' ge�ndert werden"

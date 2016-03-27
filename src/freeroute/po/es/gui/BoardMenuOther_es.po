@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,12 +15,12 @@ msgstr ""
 #. # English version of language dependent text of the class BoardMenuOther
 #: other
 msgid "Other"
-msgstr "Altres"
+msgstr "Otros"
 
 #: snapshots
 msgid "Snapshots"
-msgstr "Instantànies"
+msgstr "Instantáneas"
 
 #: snapshots_tooltip
 msgid "opens window for interactive snapshots"
-msgstr "obre la finestra per a les instantànies interactives"
+msgstr "obre una ventana para realizar instantáneas interactivas"

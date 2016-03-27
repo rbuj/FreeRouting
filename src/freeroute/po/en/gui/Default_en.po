@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr "add corner (left button)"
 
 #: all
 msgid "all"
-msgstr "tot"
+msgstr "all"
 
 #: cancel
 msgid "cancel (Esc)"
@@ -43,11 +43,11 @@ msgstr "also possible with number key or '+' '-' "
 
 #: close
 msgid "close"
-msgstr "tanca"
+msgstr "close"
 
 #: color_manager
 msgid "Color Manager"
-msgstr "Gestor de colors"
+msgstr "Color Manager"
 
 #: components
 msgid "Components"
@@ -55,11 +55,11 @@ msgstr ""
 
 #: copy
 msgid "copy"
-msgstr "copia"
+msgstr "copy"
 
 #: done
 msgid "done (Space)"
-msgstr "fet (espai)"
+msgstr "done (Space)"
 
 #: end_route
 msgid "end route (left button)"
@@ -75,7 +75,7 @@ msgstr ""
 
 #: inner
 msgid "inner"
-msgstr "intern"
+msgstr "inner"
 
 #: insert
 msgid "insert (left button)"
@@ -95,7 +95,7 @@ msgstr "Use slider to modify the visibility on layer "
 
 #: maximum_all
 msgid "Maximum All"
-msgstr "Maximitza-ho tot"
+msgstr "Maximum All"
 
 #: maximum_all_tooltip
 msgid "pushs all sliders to the right"
@@ -103,7 +103,7 @@ msgstr "pushs all sliders to the right"
 
 #: minimum_all
 msgid "Minimum All"
-msgstr "Minimitza-ho tot"
+msgstr "Minimum All"
 
 #: minimum_all_tooltip
 msgid "pushs all sliders to the left"
@@ -115,7 +115,7 @@ msgstr ""
 
 #: packages
 msgid "Packages"
-msgstr "Paquets"
+msgstr "Packages"
 
 #: padstacks
 msgid "Padstacks"
@@ -123,7 +123,7 @@ msgstr "Padstacks"
 
 #: pick_a_color
 msgid "Pick a Color"
-msgstr "Tria un color"
+msgstr "Pick a Color"
 
 #: route_completed
 msgid "route completed"
@@ -135,8 +135,8 @@ msgstr ""
 
 #: zoom_in
 msgid "in (z)"
-msgstr "dins (z)"
+msgstr "in (z)"
 
 #: zoom_out
 msgid "out (o)"
-msgstr "fora (o)"
+msgstr "out (o)"

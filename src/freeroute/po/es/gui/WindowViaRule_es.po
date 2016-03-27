@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 #: append
 msgid "Append"
-msgstr "Annexa"
+msgstr "Anexar"
 
 #: append_tooltip
 msgid "appends a via to the rule"
-msgstr "annexa una via a la regla"
+msgstr "anexa una vía a la regla"
 
 #: remove
 msgid "Remove"
@@ -35,32 +35,32 @@ msgstr ""
 
 #: move_up
 msgid "Move Up"
-msgstr "Mou amunt"
+msgstr "Mover arriba"
 
 #: move_up_tooltip
 msgid "increases the priority of the selected via in the rule"
-msgstr "incrementa la prioriat de la regla seleccionada a la regla"
+msgstr "aumenta la prioridad de la vía seleccionada de la regla"
 
 #: move_down
 msgid "Move Down"
-msgstr "Mou avall"
+msgstr "Mover abajo"
 
 #: move_down_tooltip
 msgid "decreases the priority of the selected via in the rule"
-msgstr "disminueix la prioriat de la regla seleccionada a la regla"
+msgstr "disminuye la prioridad de la vía seleccionada de la regla"
 
 #: choose_via_to_append
 msgid "Choose via to append"
-msgstr "Tria la via a annexar"
+msgstr "Escoger vía a anexar"
 
 #: append_via_to_rule
 msgid "Append Via to Rule"
-msgstr "Annexa la via a la regla"
+msgstr "Anexar vía a regla"
 
 #: remove_2
 msgid "remove "
-msgstr "suprimeix "
+msgstr "eliminar "
 
 #: from_the_rule
 msgid "from the rule"
-msgstr "a partir de la regla"
+msgstr "desde la regla"

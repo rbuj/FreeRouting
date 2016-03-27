@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,7 @@ msgstr "all items inserted"
 
 #: autoroute
 msgid "Autoroute"
-msgstr "Encamina automàticament"
+msgstr "Autoroute"
 
 #: batch_autorouter
 msgid "Batch Autorouter"
@@ -59,7 +59,7 @@ msgstr ""
 
 #: completed
 msgid "completed"
-msgstr "completat"
+msgstr "completed"
 
 #: connections_could_not_be_routed
 msgid "connections could not be routed"
@@ -107,11 +107,11 @@ msgstr "Fanout"
 
 #: in_select_menu
 msgid "in select menu"
-msgstr "al menú de selecció"
+msgstr "in select menu"
 
 #: in_select_mode
 msgid "in select mode"
-msgstr "al mode de selecció"
+msgstr "in select mode"
 
 #: in_select_item_mode
 msgid "in select item mode"

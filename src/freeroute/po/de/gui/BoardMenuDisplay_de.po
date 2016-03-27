@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 #. # English version of language dependent text of the class BoardMenuDisplay
 #: display
 msgid "Display"
-msgstr "Visualització"
+msgstr "Display"
 
 #: object_visibility
 msgid "Object Visibility"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: object_visibility_tooltip
 msgid "to change the drawing intensity of an object"
-msgstr "per a canviar la intensitat del traçat d'un objecte"
+msgstr "die Abbildungsintensit�t eines Objekts �ndern"
 
 #: layer_visibility
 msgid "Layer Visibility"
@@ -31,16 +31,16 @@ msgstr ""
 
 #: layer_visibility_tooltip
 msgid "to change the visibility of individual layers"
-msgstr "per a canviar individualent la intensitat de les capes"
+msgstr "die Sichtbarkeit einzelner Lagen �ndern"
 
 #: colors
 msgid "Colors"
-msgstr "Colors"
+msgstr "Farben"
 
 #: colors_tooltip
 msgid "to change the colors of the board objects on the screen"
-msgstr "per a canviar els colors dels objectes de la placa en pantalla"
+msgstr "Die Farben der Objekte auf der Platine �ndern"
 
 #: miscellaneous
 msgid "Miscellaneous"
-msgstr "Miscel·lànea"
+msgstr "sonstiges"

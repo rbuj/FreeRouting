@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 #. # English version of language dependent text of the class BoardMenuFile
 #: file
 msgid "File"
-msgstr "Fitxer"
+msgstr "File"
 
 #: save
 msgid "Save"
-msgstr "Desa"
+msgstr "Save"
 
 #: save_tooltip
 msgid "saves the design to disk in the internal .bin file format"
@@ -31,7 +31,7 @@ msgstr "design file saved"
 
 #: save_and_exit
 msgid "Save and Exit"
-msgstr "Desa i surt"
+msgstr "Save and Exit"
 
 #: save_and_exit_tooltip
 msgid "exits the program after saving the design to disk"
@@ -39,7 +39,7 @@ msgstr "exits the program after saving the design to disk"
 
 #: cancel_and_exit
 msgid "Cancel and Exit"
-msgstr "Cancel·la i surt"
+msgstr "Cancel and Exit"
 
 #: cancel_and_exit_tooltip
 msgid "exits the program without saving the design"
@@ -47,7 +47,7 @@ msgstr "exits the program without saving the design"
 
 #: save_as
 msgid "Save as"
-msgstr "Anomena i desa"
+msgstr "Save as"
 
 #: save_as_tooltip
 msgid "use extensions .bin for binary and .dsn for Specctra text format"
@@ -139,7 +139,7 @@ msgstr "unable to read logfile"
 
 #: message_11
 msgid "session file"
-msgstr "fitxer de sessió"
+msgstr "session file"
 
 #: message_12
 msgid "in Specctra format written"

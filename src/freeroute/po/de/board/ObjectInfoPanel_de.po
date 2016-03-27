@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,191 +15,191 @@ msgstr ""
 #. # English version of language dependent text written into an ObjectInfoPanel
 #: at
 msgid "at"
-msgstr "at"
+msgstr "bei"
 
 #: attach_smd
 msgid "attach smd"
-msgstr "adjunta smd"
+msgstr "SMD-�berlappung"
 
 #: back
 msgid "back"
-msgstr "back"
+msgstr "R�ckseite"
 
 #: between
 msgid "between"
-msgstr "entre"
+msgstr "zwischen"
 
 #: board_outline
 msgid "Board Outline"
-msgstr "Delimitació de la placa"
+msgstr "Platinenrand"
 
 #: center
 msgid "center"
-msgstr "center"
+msgstr "Mitte"
 
 #: circle
 msgid "Circle"
-msgstr "Cercle"
+msgstr "Kreis"
 
 #: class
 msgid "class"
-msgstr "classe"
+msgstr "Klasse"
 
 #: clearance_class
 msgid "clearance class"
-msgstr "classe de marge de seguretat"
+msgstr "Clearance-Klasse"
 
 #: clearance_class_2
 msgid "Clearance Class"
-msgstr "Classe de marge de seguretat"
+msgstr "Clearance-Klasse"
 
 #: clearance_info
 msgid "Clearance Info"
-msgstr "Informació del marge de seguretat"
+msgstr "Clearance-Klassen-Info"
 
 #: clearance_violation
 msgid "clearance violation"
-msgstr "violació del marge de seguretat"
+msgstr "Clearance-Verletzung"
 
 #: clearance_violation_2
 msgid "Clearance violation"
-msgstr "Violació del marge de seguretat"
+msgstr "Clearance-Verletzung"
 
 #: clearance_violations
 msgid "clearance violations"
-msgstr "Violacions del marge de seguretat"
+msgstr "Clearance-Verletzungen"
 
 #: component
 msgid "Component"
-msgstr "Component"
+msgstr "Bauteil"
 
 #: component_2
 msgid "component"
-msgstr "component"
+msgstr "Bauteil"
 
 #: component_info
 msgid "Component Info"
-msgstr "Informació del component"
+msgstr "Bauteil-Info"
 
 #: component_keepout
 msgid "Component Keepout"
-msgstr "Component Keepout"
+msgstr "Bauteil-Sperrfl�che"
 
 #: conduction_area
 msgid "Conduction Area"
-msgstr "Àrea de conducció"
+msgstr "Leitungsfl�che"
 
 #: contact_info
 msgid "Contact Info"
-msgstr "Informació de contacte"
+msgstr "Kontakt-Info"
 
 #: contacts
 msgid "contacts"
-msgstr "contacta"
+msgstr "Kontakte"
 
 #: from
 msgid "from"
-msgstr "de"
+msgstr "von"
 
 #: front
 msgid "front"
-msgstr "posterior"
+msgstr "Vorderseite"
 
 #: gate
 msgid "gate"
-msgstr "porta"
+msgstr "Gatter"
 
 #: gate_pin
 msgid "gate pin"
-msgstr "pin de la porta"
+msgstr "Gatter-Pin"
 
 #: hole
 msgid "hole"
-msgstr "forat"
+msgstr "Loch"
 
 #: holes
 msgid "holes"
-msgstr "forat"
+msgstr "L�chern"
 
 #: keepout
 msgid "Keepout"
-msgstr "prohibit el pas"
+msgstr "Sperrfl�che"
 
 #: layer
 msgid "layer"
-msgstr "capa"
+msgstr "Lage"
 
 #: length
 msgid "length"
-msgstr "longitud"
+msgstr "L�nge"
 
 #: logical_part
 msgid "logical part"
-msgstr "part lògica"
+msgstr "logical-Part"
 
 #: logical_part_2
 msgid "Logical Part"
-msgstr "Part lògica"
+msgstr "logical-Part"
 
 #: logical_part_info
 msgid "Logical Part Info"
-msgstr "Infomació de la part lògica"
+msgstr "Logical-Part-Info"
 
 #: lower_left
 msgid "lower left"
-msgstr "lower left"
+msgstr "links unten"
 
 #: net
 msgid "Net"
-msgstr "Xarxa"
+msgstr "Netz"
 
 #: net_class
 msgid "Net Class"
-msgstr "Classe de xarxa"
+msgstr "Netz-Klasse"
 
 #: net_class_2
 msgid "Net class"
-msgstr "Classe de xarxa"
+msgstr "Netz-Klasse"
 
 #: net_info
 msgid "Net Info"
-msgstr "Informació de la xarxa"
+msgstr "Netz-Info"
 
 #: not_yet_placed
 msgid "not yet placed"
-msgstr "encara no posicionat"
+msgstr "noch nicht plaziert"
 
 #: of_component
 msgid "of component"
-msgstr "del comonent"
+msgstr "von Bauteil"
 
 #: off
 msgid "off"
-msgstr "off"
+msgstr "aus"
 
 #: on
 msgid "on"
-msgstr "en"
+msgstr "an"
 
 #: on_layer
 msgid "on layer"
-msgstr "en la cala"
+msgstr "auf Lage"
 
 #: package
 msgid "Package"
-msgstr "Paquet"
+msgstr "Package"
 
 #: package_info
 msgid "Package Info"
-msgstr "Informació del paquet"
+msgstr "Package-Info"
 
 #: padstack
 msgid "padstack"
-msgstr "padstack"
+msgstr "Padstack"
 
 #: padstack_info
 msgid "Padstack Info"
-msgstr "Padstack Info"
+msgstr "Padstack-Info"
 
 #: pin
 msgid "Pin"
@@ -207,75 +207,75 @@ msgstr "Pin"
 
 #: pin_2
 msgid "pin"
-msgstr "pin"
+msgstr "Pin"
 
 #: polygon
 msgid "Polygon"
-msgstr "Polígon"
+msgstr "Polygon"
 
 #: radius
 msgid "radius"
-msgstr "radi"
+msgstr "Radius"
 
 #: rectangle
 msgid "Rectangle"
-msgstr "Rectangle"
+msgstr "Rechteck"
 
 #: rotation
 msgid "rotation"
-msgstr "gir"
+msgstr "Rotation"
 
 #: shove_fixed
 msgid "shove fixed"
-msgstr "shove fixed"
+msgstr "verschiebe-fixiert"
 
 #: spacing_from_clearance_class
 msgid "Spacing from clearance class "
-msgstr "Spacing from clearance class "
+msgstr "Clearance-Regeln von Klasse "
 
 #: swap_code
 msgid "swap code"
-msgstr "swap code"
+msgstr "Tausch-Code"
 
 #: terminal_items
 msgid "terminal items"
-msgstr "alements terminals"
+msgstr "Zielobjekte"
 
 #: terminal_items_2
 msgid "Terminal Items"
-msgstr "Elements terminals"
+msgstr "Zielobjekte"
 
 #: to
 msgid "to"
-msgstr "a"
+msgstr "nach"
 
 #: to_class
 msgid "to class"
-msgstr "a la classe"
+msgstr "zu Klasse"
 
 #: trace
 msgid "Trace"
-msgstr "Traça"
+msgstr "Bahn"
 
 #: trace_clearance_class
 msgid "trace clearance class"
-msgstr "trace clearance class"
+msgstr "Clearance-Klasse f�r Bahnen"
 
 #: trace_clearance_class_2
 msgid "Trace Clearance Class"
-msgstr "Trace Clearance Class"
+msgstr "Clearance-Klasse f�r Bahnen"
 
 #: trace_length
 msgid "trace length"
-msgstr "trace length"
+msgstr "Bahnl�nge"
 
 #: trace_width
 msgid "trace width"
-msgstr "trace width"
+msgstr "Bahnbreite"
 
 #: upper_right
 msgid "upper right"
-msgstr "upper right"
+msgstr "rechts oben"
 
 #: via
 msgid "Via"
@@ -283,36 +283,36 @@ msgstr "Via"
 
 #: via_count
 msgid "via count"
-msgstr "nombre de vies"
+msgstr "Via-Anzahl"
 
 #: via_info
 msgid "Via Info"
-msgstr "Informació de la via"
+msgstr "Via-Info"
 
 #: via_keepout
 msgid "Via Keepout"
-msgstr "Via Keepout"
+msgstr "Via-Sperrfl�che"
 
 #: via_rule
 msgid "via rule"
-msgstr "via rule"
+msgstr "Via-Regel"
 
 #: via_rule_2
 msgid "Via Rule"
-msgstr "Regla de via"
+msgstr "Via-Regel"
 
 #: vias
 msgid "Vias"
-msgstr "Vies"
+msgstr "Vias"
 
 #: violation_info
 msgid "Violation Info"
-msgstr "Informació de violació"
+msgstr "Clearance-Verletzungs-Info"
 
 #: with
 msgid "with"
-msgstr "amb"
+msgstr "mit"
 
 #: width
 msgid "width"
-msgstr "amplada"
+msgstr "Breite"

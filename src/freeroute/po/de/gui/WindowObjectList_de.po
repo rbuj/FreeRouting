@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,19 +31,19 @@ msgstr ""
 
 #: invert
 msgid "Inverse"
-msgstr "Inverteix"
+msgstr "Invertieren"
 
 #: invert_tooltip
 msgid "inverts the selection"
-msgstr "inverts the selection"
+msgstr "invertiert die Auswahl"
 
 #: recalculate
 msgid "Recalculate"
-msgstr "Torna a calcular"
+msgstr "Neu berechnen"
 
 #: recalculate_tooltip
 msgid "Recalculates the content of this window"
-msgstr "Recalculates the content of this window"
+msgstr "berechnet den Inhalt dieses Fensters neu"
 
 #: list_empty
 msgid "no items found"
@@ -51,8 +51,8 @@ msgstr ""
 
 #: window_title
 msgid "Selected Objects"
-msgstr "Objectes seleccionats"
+msgstr "Selektierte Objekte"
 
 #: filter
 msgid "Filter: "
-msgstr "Filtre: "
+msgstr "Filter:"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,19 +19,19 @@ msgstr "capa actual:"
 
 #: target_layer
 msgid "target layer:"
-msgstr "capa objectiu:"
+msgstr "capa destino:"
 
 #: found
 msgid "found:"
-msgstr "trobat:"
+msgstr "encontrados:"
 
 #: failed
 msgid "failed:"
-msgstr "fallat:"
+msgstr "fallidos:"
 
 #: to_route
 msgid "to route:"
-msgstr "a encaminar:"
+msgstr "por encaminar:"
 
 #: ripped
 msgid "ripped:"
@@ -43,7 +43,7 @@ msgstr ""
 
 #: routed
 msgid "routed:"
-msgstr "encaminat:"
+msgstr "encaminado:"
 
 #: fanout_pass
 msgid "Fanout Pass"
@@ -51,16 +51,16 @@ msgstr "Fanout Pass"
 
 #: components
 msgid "components"
-msgstr "components"
+msgstr "componentes"
 
 #: still
 msgid "still"
-msgstr "still"
+msgstr "todavía"
 
 #: via_count
 msgid "Via Count:"
-msgstr "Nombre de vies:"
+msgstr "Número de vías:"
 
 #: trace_length
 msgid "Trace Length:"
-msgstr "Longitud de la traça:"
+msgstr "Longitud del trazo:"

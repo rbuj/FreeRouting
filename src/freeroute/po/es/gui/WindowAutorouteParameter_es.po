@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,15 +23,15 @@ msgstr ""
 
 #: active
 msgid "Active:"
-msgstr "Actiu:"
+msgstr "Activa:"
 
 #: preferred_direction
 msgid "Preferred Direction:"
-msgstr "Preferred Direction:"
+msgstr "Dirección preferida:"
 
 #: horizontal
 msgid "horizontal"
-msgstr "horitzontal"
+msgstr "horizontal"
 
 #: vertical
 msgid "vertical"
@@ -59,15 +59,15 @@ msgstr "Against preferred direction:"
 
 #: with_fanout
 msgid "Preroute fanout:"
-msgstr "Preroute fanout:"
+msgstr "Preencamina la ramificación:"
 
 #: vias_allowed
 msgid "Vias allowed: "
-msgstr "Vies permeses: "
+msgstr "Vías permitidas: "
 
 #: via_costs
 msgid "Via costs:"
-msgstr "Cost de les vies:"
+msgstr "Costé de la vía:"
 
 #: plane_via_costs
 msgid "Powerplane via costs:"
@@ -79,15 +79,15 @@ msgstr "Ripup start costs:"
 
 #: start_pass
 msgid "Start pass:"
-msgstr "Start pass:"
+msgstr "Iniciar pasada:"
 
 #: speed
 msgid "Speed:"
-msgstr "Velocitat:"
+msgstr "Velocidad:"
 
 #: fast
 msgid "fast"
-msgstr "ràpida"
+msgstr "rápida"
 
 #: slow
 msgid "slow"
@@ -95,7 +95,7 @@ msgstr "lenta"
 
 #: passes
 msgid "Passes:"
-msgstr "Passades:"
+msgstr "Pasadas:"
 
 #: fanout
 msgid "Fanout"
@@ -107,4 +107,4 @@ msgstr ""
 
 #: postroute
 msgid "Postroute"
-msgstr "Postroute"
+msgstr "Postencaminar"

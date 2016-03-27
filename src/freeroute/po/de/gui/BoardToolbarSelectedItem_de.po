@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,55 +27,55 @@ msgstr ""
 
 #: cancel_tooltip
 msgid "to cancel the current selection (esc)"
-msgstr "to cancel the current selection (esc)"
+msgstr "das Auswahlmenü verlassen (Esc)"
 
 #: delete
 msgid "Delete"
-msgstr "Elimina"
+msgstr "Löschen"
 
 #: delete_tooltip
 msgid "to delete the selected items which are not fixed (del)"
-msgstr "to delete the selected items which are not fixed (del)"
+msgstr "die unfixierten ausgewählten Objekte löschen (Entf)"
 
 #: cutout
 msgid "Cutout"
-msgstr "Cutout"
+msgstr "Ausschneiden"
 
 #: cutout_tooltip
 msgid "to delete the selected route inside a rectangle (d)"
-msgstr "to delete the selected route inside a rectangle (d)"
+msgstr "den ausgewählten Route innerhalb eines Rechtecks löschen (d)"
 
 #: fix
 msgid "Fix"
-msgstr "Fixa"
+msgstr "Fix"
 
 #: fix_tooltip
 msgid "to fix the selected items (f)"
-msgstr "to fix the selected items (f)"
+msgstr "die ausgewählten Objekte fixieren (f)"
 
 #: unfix
 msgid "Unfix"
-msgstr "Desfixa"
+msgstr "Unfix"
 
 #: unfix_tooltip
 msgid "to unfix the selected items (u)"
-msgstr "to unfix the selected items (u)"
+msgstr "die Fixierung der ausgewählten Objekte aufheben (u)"
 
 #: spacing
 msgid "Clearance"
-msgstr "Marges de seguretat"
+msgstr "Clearance"
 
 #: spacing_tooltip
 msgid "to assign a new clearance class to the selected items"
-msgstr "to assign a new clearance class to the selected items"
+msgstr "den ausgewählten Objekten eine neue Clearance-Klasse zuweisen"
 
 #: pull_tight
 msgid "Pull Tight"
-msgstr "Pull Tight"
+msgstr "Glätten"
 
 #: pull_tight_tooltip
 msgid "to optimize the selected traces and vias (p)"
-msgstr "to optimize the selected traces and vias (p)"
+msgstr "Die ausgewählten Bahnen und Vias glattt ziehen (p)"
 
 #: autoroute
 msgid "Autoroute"
@@ -83,7 +83,7 @@ msgstr ""
 
 #: autoroute_tooltip
 msgid "to autoroute the selected items (a)"
-msgstr "to autoroute the selected items (a)"
+msgstr "die ausgewählten Objekte autorouten (a)"
 
 #: fanout
 msgid "Fanout"
@@ -91,7 +91,7 @@ msgstr ""
 
 #: fanout_tooltip
 msgid "to autoroute the selected SMD pins until the first via"
-msgstr "to autoroute the selected SMD pins until the first via"
+msgstr "die ausgewählten SMD-Pins bis zum ersten Via autorouten"
 
 #: nets
 msgid "Nets"
@@ -99,23 +99,23 @@ msgstr ""
 
 #: nets_tooltip
 msgid "to extend the selection to whole nets (n)"
-msgstr "to extend the selection to whole nets (n)"
+msgstr "die Auswahl auf ganze Netze erweitern (n)"
 
 #: conn_sets
 msgid "Conn. Sets"
-msgstr "Conjunts de connexions"
+msgstr "Zush."
 
 #: conn_sets_tooltip
 msgid "to extend the selection to whole connected sets (s)"
-msgstr "to extend the selection to whole connected sets (s)"
+msgstr "die Auswahl auf ganze zusammenhängende Teilmengen erweitern (s)"
 
 #: connections
 msgid "Connections"
-msgstr "Connexions"
+msgstr "Verb."
 
 #: connections_tooltip
 msgid "to extend the selection until the next fork or terminal item (e)"
-msgstr "to extend the selection until the next fork or terminal item (e)"
+msgstr "die Auswahl auf ganze Verbindungen erweitern (e)"
 
 #: components
 msgid "Components"
@@ -123,60 +123,62 @@ msgstr ""
 
 #: components_tooltip
 msgid "to extend the selection to whole components (b)"
-msgstr "to extend the selection to whole components (b)"
+msgstr "die Auswahl auf ganze Bauteile erweitern (b)"
 
 #: new_net
 msgid "New Net"
-msgstr "Nova xarxa"
+msgstr "Neues Netz"
 
 #: new_net_tooltip
 msgid "to assign the selected items to a new net"
-msgstr "to assign the selected items to a new net"
+msgstr "die ausgewählten Objekte einem neuen Netz zuweisen"
 
 #: new_component
 msgid "New Component"
-msgstr "Nou component"
+msgstr "Neues Bauteil"
 
 #: new_component_tooltip
 msgid "to assign the selected items to a new component"
-msgstr "to assign the selected items to a new component"
+msgstr "die ausgewählten Objekte einem neuen Bauteil zuweisen"
 
 #: violations
 msgid "Violations"
-msgstr "Violacions"
+msgstr "Verletzungen"
 
 #: violations_tooltip
 msgid "to show or hide the clearance violations of the selected items (v)"
-msgstr "to show or hide the clearance violations of the selected items (v)"
+msgstr ""
+"Das Zeigen der Clearance-Verletzungen der ausgewählten Objekte an- oder "
+"abschalten (v)"
 
 #: zoom_selection
 msgid "Zoom Selection"
-msgstr "Selecció del zoom"
+msgstr "Auswahl abbilden"
 
 #: zoom_selection_tooltip
 msgid "to display a window containing the selected items (w)"
-msgstr "to display a window containing the selected items (w)"
+msgstr "ein umgebendes Rechteck der ausgewählten Objekte abbilden(w)"
 
 #: zoom_all
 msgid "Zoom All"
-msgstr "Zoom All"
+msgstr "Alles abb."
 
 #: zoom_all_tooltip
 msgid "to display the whole board (a)"
-msgstr "to display the whole board (a)"
+msgstr "die gesamte Platine abbilden (a)"
 
 #: zoom_region
 msgid "Zoom Region"
-msgstr "Zoom Region"
+msgstr "Ausschnitt abb."
 
 #: zoom_region_tooltip
 msgid "to display a region of the board (r)"
-msgstr "to display a region of the board (r)"
+msgstr "ein Rechteck der Platine zum Abbilden auswählen (r)"
 
 #: select_clearance_class
 msgid "Select clearance class"
-msgstr "Select clearance class"
+msgstr "Wähle Clearance-Klasse"
 
 #: assign_clearance_class
 msgid "Assign Clearance Class"
-msgstr "Assign Clearance Class"
+msgstr "Clearance-Klasse zuweisen"

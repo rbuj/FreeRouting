@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 #. # English version of the default file with language dependent text
 #: add_corner
 msgid "add corner (left button)"
-msgstr "add corner (left button)"
+msgstr "Ecke hinzuf�gen (linke Maustaste)"
 
 #: all
 msgid "all"
-msgstr "tot"
+msgstr "alle"
 
 #: cancel
 msgid "cancel (Esc)"
@@ -27,27 +27,27 @@ msgstr ""
 
 #: cancel_route
 msgid "cancel route (Esc)"
-msgstr "cancel route (Esc)"
+msgstr "Route abbrechen(Esc)"
 
 #: center_display
 msgid "center display (c)"
-msgstr "center display (c)"
+msgstr "Bild zentrieren (c)"
 
 #: change_layer
 msgid "change layer"
-msgstr "change layer"
+msgstr "Lage wechseln "
 
 #: change_layer_tooltip
 msgid "also possible with number key or '+' '-' "
-msgstr "also possible with number key or '+' '-' "
+msgstr "geht auch mit Zifferntaste oder '+' '-' "
 
 #: close
 msgid "close"
-msgstr "tanca"
+msgstr "schlie�en"
 
 #: color_manager
 msgid "Color Manager"
-msgstr "Gestor de colors"
+msgstr "Farbverwaltung"
 
 #: components
 msgid "Components"
@@ -55,19 +55,19 @@ msgstr ""
 
 #: copy
 msgid "copy"
-msgstr "copia"
+msgstr "kopieren"
 
 #: done
 msgid "done (Space)"
-msgstr "fet (espai)"
+msgstr "beenden (Leertaste)"
 
 #: end_route
 msgid "end route (left button)"
-msgstr "end route (left button)"
+msgstr "Route beenden (linke Maustaste)"
 
 #: generate_snapshot
 msgid "generate snapshot (s)"
-msgstr "generate snapshot (s)"
+msgstr "Snapshot erzeugen (s)"
 
 #: incompletes
 msgid "Incompletes"
@@ -75,7 +75,7 @@ msgstr ""
 
 #: inner
 msgid "inner"
-msgstr "intern"
+msgstr "innere"
 
 #: insert
 msgid "insert (left button)"
@@ -83,7 +83,7 @@ msgstr ""
 
 #: layer_changed_to
 msgid "layer changed to"
-msgstr "layer changed to"
+msgstr "Lage gewechselt nach"
 
 #: layer_visibility
 msgid "Layer Visibility"
@@ -91,23 +91,23 @@ msgstr ""
 
 #: layer_visibility_header
 msgid "Use slider to modify the visibility on layer "
-msgstr "Use slider to modify the visibility on layer "
+msgstr "Regler zum �ndern der Sichtbarkeit von Lage"
 
 #: maximum_all
 msgid "Maximum All"
-msgstr "Maximitza-ho tot"
+msgstr "Alle Maximum"
 
 #: maximum_all_tooltip
 msgid "pushs all sliders to the right"
-msgstr "pushs all sliders to the right"
+msgstr "schiebt alle Regler nach rechts"
 
 #: minimum_all
 msgid "Minimum All"
-msgstr "Minimitza-ho tot"
+msgstr "Alle Minimum"
 
 #: minimum_all_tooltip
 msgid "pushs all sliders to the left"
-msgstr "pushs all sliders to the left"
+msgstr "schiebt alle Regler nach links"
 
 #: move
 msgid "move (m)"
@@ -115,7 +115,7 @@ msgstr ""
 
 #: packages
 msgid "Packages"
-msgstr "Paquets"
+msgstr "Packages"
 
 #: padstacks
 msgid "Padstacks"
@@ -123,11 +123,11 @@ msgstr "Padstacks"
 
 #: pick_a_color
 msgid "Pick a Color"
-msgstr "Tria un color"
+msgstr "W�hlen Sie eine Farbe"
 
 #: route_completed
 msgid "route completed"
-msgstr "route completed"
+msgstr "Platine vollst�ndig entflochten"
 
 #: zoom
 msgid "zoom"
@@ -135,8 +135,8 @@ msgstr ""
 
 #: zoom_in
 msgid "in (z)"
-msgstr "dins (z)"
+msgstr "gr��er (z)"
 
 #: zoom_out
 msgid "out (o)"
-msgstr "fora (o)"
+msgstr "kleiner (o)"

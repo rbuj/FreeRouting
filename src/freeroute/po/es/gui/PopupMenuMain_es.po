@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,19 +15,19 @@ msgstr ""
 #. # English version of language dependent text of the class PopupMenuMain
 #: select_item
 msgid "select item (i)"
-msgstr "selecciona l'element (i)"
+msgstr "seleccionar elemento (i)"
 
 #: start_route
 msgid "start route (t)"
-msgstr "comença l'encaminament (t)"
+msgstr "iniciar encaminamiento (t)"
 
 #: swap_pin
 msgid "swap pin (w)"
-msgstr "intercanvia el pin (w)"
+msgstr "intercambiar pines (w)"
 
 #: create_keepout
 msgid "create keepout"
-msgstr "crea prohibició del pas"
+msgstr "crear zona de prohibido el paso"
 
 #: tile
 msgid "tile"
@@ -35,12 +35,12 @@ msgstr "tile"
 
 #: circle
 msgid "circle"
-msgstr "cercle"
+msgstr "círculo"
 
 #: polygon
 msgid "polygon"
-msgstr "polígon"
+msgstr "polígono"
 
 #: hole
 msgid "hole"
-msgstr "forat"
+msgstr "agujero"

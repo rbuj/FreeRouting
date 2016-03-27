@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: clearance_compensation
 msgid "clearance compensation:"
-msgstr "clearance compensation:"
+msgstr "compensación del margen de seguridad:"
 
 #: clearance_compensation_tooltip
 msgid ""
@@ -31,11 +31,11 @@ msgstr ""
 
 #: on
 msgid "on"
-msgstr "on"
+msgstr "encendido"
 
 #: off
 msgid "off"
-msgstr "off"
+msgstr "apagado"
 
 #: pull_tight_accuracy
 msgid "pull tight accuracy:"

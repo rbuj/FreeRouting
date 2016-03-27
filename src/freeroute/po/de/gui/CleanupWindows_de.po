@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,11 +23,11 @@ msgstr ""
 
 #: no_route_stubs_found
 msgid "no route stubs found"
-msgstr "no route stubs found"
+msgstr "keine Route-Stummel gefunden"
 
 #: no_unconnected_route_found
 msgid "no unconnected traces or vias found"
-msgstr "no unconnected traces or vias found"
+msgstr "keine nicht verbundenen Traces oder Vias gefunden"
 
 #: on_layer
 msgid "on layer"
@@ -39,7 +39,7 @@ msgstr ""
 
 #: stub_net
 msgid "stub net"
-msgstr "stub net"
+msgstr "Stummel Netz"
 
 #: trace
 msgid "Trace"
@@ -47,7 +47,7 @@ msgstr ""
 
 #: trace_count
 msgid "trace count"
-msgstr "nombre de traces"
+msgstr "Trace-Anzahl"
 
 #: unconnected_route
 msgid "Unconnected Route"
@@ -59,4 +59,4 @@ msgstr ""
 
 #: via_count
 msgid "via count"
-msgstr "nombre de vies"
+msgstr "Via-Anzahl"

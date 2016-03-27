@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,51 +23,51 @@ msgstr ""
 
 #: layer_tooltip
 msgid "Set the layer, where the clearance matrix can be changed"
-msgstr "Set the layer, where the clearance matrix can be changed"
+msgstr "Establezca la capa, donde el margen de seguridad pueda ser cambiado"
 
 #: add_class
 msgid "Add Class"
-msgstr "Afegeix una classe"
+msgstr "Añadir clase"
 
 #: add_class_tooltip
 msgid "Append a new clearance class"
-msgstr "Append a new clearance class"
+msgstr "Añadir una nueva clase de margen de seguridad"
 
 #: prune
 msgid "Trim"
-msgstr "Trim"
+msgstr "Recortar"
 
 #: prune_tooltip
 msgid "Remove redundant classes"
-msgstr "Suprimeix les classes redundants"
+msgstr "Eliminar las clases redundantes"
 
 #: new_name
 msgid "Please enter the name of the new class"
-msgstr "Please enter the name of the new class"
+msgstr "Introduzca el nombre de la nueva clase"
 
 #: confirm_remove
 msgid "Please confirm removing class"
-msgstr "Please confirm removing class"
+msgstr "Confirmar eliminación de la clase"
 
 #: class
 msgid "class"
-msgstr "classe"
+msgstr "clase"
 
 #: the_class
 msgid "the class"
-msgstr "la classe"
+msgstr "la clase"
 
 #: the_classes
 msgid "the classes"
-msgstr "les classes"
+msgstr "las clases"
 
 #: and
 msgid "and"
-msgstr "i"
+msgstr "y"
 
 #: already_assigned
 msgid "Items already assigned to"
-msgstr "Els elements ja estan assignats a"
+msgstr "Elementos ya asignados a"
 
 #: change_anyway
 msgid ""
@@ -75,4 +75,4 @@ msgid ""
 "Change clearance anyway?"
 msgstr ""
 "!\n"
-"Voleu canviar de totes maneres els marges de seguretat?"
+"Cambiar de todos modos el margen de seguridad?"

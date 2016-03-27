@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgstr "to cancel the current selection (esc)"
 
 #: delete
 msgid "Delete"
-msgstr "Elimina"
+msgstr "Eliminar"
 
 #: delete_tooltip
 msgid "to delete the selected items which are not fixed (del)"
@@ -39,7 +39,7 @@ msgstr "to delete the selected items which are not fixed (del)"
 
 #: cutout
 msgid "Cutout"
-msgstr "Cutout"
+msgstr "Cortar"
 
 #: cutout_tooltip
 msgid "to delete the selected route inside a rectangle (d)"
@@ -47,7 +47,7 @@ msgstr "to delete the selected route inside a rectangle (d)"
 
 #: fix
 msgid "Fix"
-msgstr "Fixa"
+msgstr "Fijar"
 
 #: fix_tooltip
 msgid "to fix the selected items (f)"
@@ -55,7 +55,7 @@ msgstr "to fix the selected items (f)"
 
 #: unfix
 msgid "Unfix"
-msgstr "Desfixa"
+msgstr "Desfijar"
 
 #: unfix_tooltip
 msgid "to unfix the selected items (u)"
@@ -63,7 +63,7 @@ msgstr "to unfix the selected items (u)"
 
 #: spacing
 msgid "Clearance"
-msgstr "Marges de seguretat"
+msgstr "Margen de seguridad"
 
 #: spacing_tooltip
 msgid "to assign a new clearance class to the selected items"
@@ -103,7 +103,7 @@ msgstr "to extend the selection to whole nets (n)"
 
 #: conn_sets
 msgid "Conn. Sets"
-msgstr "Conjunts de connexions"
+msgstr "Conjuntos de componentes"
 
 #: conn_sets_tooltip
 msgid "to extend the selection to whole connected sets (s)"
@@ -111,7 +111,7 @@ msgstr "to extend the selection to whole connected sets (s)"
 
 #: connections
 msgid "Connections"
-msgstr "Connexions"
+msgstr "Conexiones"
 
 #: connections_tooltip
 msgid "to extend the selection until the next fork or terminal item (e)"
@@ -127,7 +127,7 @@ msgstr "to extend the selection to whole components (b)"
 
 #: new_net
 msgid "New Net"
-msgstr "Nova xarxa"
+msgstr "Nueva red"
 
 #: new_net_tooltip
 msgid "to assign the selected items to a new net"
@@ -135,7 +135,7 @@ msgstr "to assign the selected items to a new net"
 
 #: new_component
 msgid "New Component"
-msgstr "Nou component"
+msgstr "Nuevo componente"
 
 #: new_component_tooltip
 msgid "to assign the selected items to a new component"
@@ -143,7 +143,7 @@ msgstr "to assign the selected items to a new component"
 
 #: violations
 msgid "Violations"
-msgstr "Violacions"
+msgstr "Violaciones"
 
 #: violations_tooltip
 msgid "to show or hide the clearance violations of the selected items (v)"
@@ -151,7 +151,7 @@ msgstr "to show or hide the clearance violations of the selected items (v)"
 
 #: zoom_selection
 msgid "Zoom Selection"
-msgstr "Selecció del zoom"
+msgstr "Seleccionar Zoom"
 
 #: zoom_selection_tooltip
 msgid "to display a window containing the selected items (w)"
@@ -159,7 +159,7 @@ msgstr "to display a window containing the selected items (w)"
 
 #: zoom_all
 msgid "Zoom All"
-msgstr "Zoom All"
+msgstr "Zoom a todo"
 
 #: zoom_all_tooltip
 msgid "to display the whole board (a)"
@@ -167,7 +167,7 @@ msgstr "to display the whole board (a)"
 
 #: zoom_region
 msgid "Zoom Region"
-msgstr "Zoom Region"
+msgstr "Región de zoom"
 
 #: zoom_region_tooltip
 msgid "to display a region of the board (r)"

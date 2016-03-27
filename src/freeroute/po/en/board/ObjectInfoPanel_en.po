@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr "at"
 
 #: attach_smd
 msgid "attach smd"
-msgstr "adjunta smd"
+msgstr "attach smd"
 
 #: back
 msgid "back"
@@ -27,11 +27,11 @@ msgstr "back"
 
 #: between
 msgid "between"
-msgstr "entre"
+msgstr "between"
 
 #: board_outline
 msgid "Board Outline"
-msgstr "Delimitació de la placa"
+msgstr "Board Outline"
 
 #: center
 msgid "center"
@@ -39,35 +39,35 @@ msgstr "center"
 
 #: circle
 msgid "Circle"
-msgstr "Cercle"
+msgstr "Circle"
 
 #: class
 msgid "class"
-msgstr "classe"
+msgstr "class"
 
 #: clearance_class
 msgid "clearance class"
-msgstr "classe de marge de seguretat"
+msgstr "clearance class"
 
 #: clearance_class_2
 msgid "Clearance Class"
-msgstr "Classe de marge de seguretat"
+msgstr "Clearance Class"
 
 #: clearance_info
 msgid "Clearance Info"
-msgstr "Informació del marge de seguretat"
+msgstr "Clearance Info"
 
 #: clearance_violation
 msgid "clearance violation"
-msgstr "violació del marge de seguretat"
+msgstr "clearance violation"
 
 #: clearance_violation_2
 msgid "Clearance violation"
-msgstr "Violació del marge de seguretat"
+msgstr "Clearance violation"
 
 #: clearance_violations
 msgid "clearance violations"
-msgstr "Violacions del marge de seguretat"
+msgstr "clearance violations"
 
 #: component
 msgid "Component"
@@ -79,7 +79,7 @@ msgstr "component"
 
 #: component_info
 msgid "Component Info"
-msgstr "Informació del component"
+msgstr "Component Info"
 
 #: component_keepout
 msgid "Component Keepout"
@@ -87,63 +87,63 @@ msgstr "Component Keepout"
 
 #: conduction_area
 msgid "Conduction Area"
-msgstr "Àrea de conducció"
+msgstr "Conduction Area"
 
 #: contact_info
 msgid "Contact Info"
-msgstr "Informació de contacte"
+msgstr "Contact Info"
 
 #: contacts
 msgid "contacts"
-msgstr "contacta"
+msgstr "contacts"
 
 #: from
 msgid "from"
-msgstr "de"
+msgstr "from"
 
 #: front
 msgid "front"
-msgstr "posterior"
+msgstr "front"
 
 #: gate
 msgid "gate"
-msgstr "porta"
+msgstr "gate"
 
 #: gate_pin
 msgid "gate pin"
-msgstr "pin de la porta"
+msgstr "gate pin"
 
 #: hole
 msgid "hole"
-msgstr "forat"
+msgstr "hole"
 
 #: holes
 msgid "holes"
-msgstr "forat"
+msgstr "holes"
 
 #: keepout
 msgid "Keepout"
-msgstr "prohibit el pas"
+msgstr "Keepout"
 
 #: layer
 msgid "layer"
-msgstr "capa"
+msgstr "layer"
 
 #: length
 msgid "length"
-msgstr "longitud"
+msgstr "length"
 
 #: logical_part
 msgid "logical part"
-msgstr "part lògica"
+msgstr "logical part"
 
 #: logical_part_2
 msgid "Logical Part"
-msgstr "Part lògica"
+msgstr "Logical Part"
 
 #: logical_part_info
 msgid "Logical Part Info"
-msgstr "Infomació de la part lògica"
+msgstr "Logical Part Info"
 
 #: lower_left
 msgid "lower left"
@@ -151,27 +151,27 @@ msgstr "lower left"
 
 #: net
 msgid "Net"
-msgstr "Xarxa"
+msgstr "Net"
 
 #: net_class
 msgid "Net Class"
-msgstr "Classe de xarxa"
+msgstr "Net Class"
 
 #: net_class_2
 msgid "Net class"
-msgstr "Classe de xarxa"
+msgstr "Net class"
 
 #: net_info
 msgid "Net Info"
-msgstr "Informació de la xarxa"
+msgstr "Net Info"
 
 #: not_yet_placed
 msgid "not yet placed"
-msgstr "encara no posicionat"
+msgstr "not yet placed"
 
 #: of_component
 msgid "of component"
-msgstr "del comonent"
+msgstr "of component"
 
 #: off
 msgid "off"
@@ -179,19 +179,19 @@ msgstr "off"
 
 #: on
 msgid "on"
-msgstr "en"
+msgstr "on"
 
 #: on_layer
 msgid "on layer"
-msgstr "en la cala"
+msgstr "on layer"
 
 #: package
 msgid "Package"
-msgstr "Paquet"
+msgstr "Package"
 
 #: package_info
 msgid "Package Info"
-msgstr "Informació del paquet"
+msgstr "Package Info"
 
 #: padstack
 msgid "padstack"
@@ -211,11 +211,11 @@ msgstr "pin"
 
 #: polygon
 msgid "Polygon"
-msgstr "Polígon"
+msgstr "Polygon"
 
 #: radius
 msgid "radius"
-msgstr "radi"
+msgstr "radius"
 
 #: rectangle
 msgid "Rectangle"
@@ -223,7 +223,7 @@ msgstr "Rectangle"
 
 #: rotation
 msgid "rotation"
-msgstr "gir"
+msgstr "rotation"
 
 #: shove_fixed
 msgid "shove fixed"
@@ -239,23 +239,23 @@ msgstr "swap code"
 
 #: terminal_items
 msgid "terminal items"
-msgstr "alements terminals"
+msgstr "terminal items"
 
 #: terminal_items_2
 msgid "Terminal Items"
-msgstr "Elements terminals"
+msgstr "Terminal Items"
 
 #: to
 msgid "to"
-msgstr "a"
+msgstr "to"
 
 #: to_class
 msgid "to class"
-msgstr "a la classe"
+msgstr "to class"
 
 #: trace
 msgid "Trace"
-msgstr "Traça"
+msgstr "Trace"
 
 #: trace_clearance_class
 msgid "trace clearance class"
@@ -283,11 +283,11 @@ msgstr "Via"
 
 #: via_count
 msgid "via count"
-msgstr "nombre de vies"
+msgstr "via count"
 
 #: via_info
 msgid "Via Info"
-msgstr "Informació de la via"
+msgstr "Via Info"
 
 #: via_keepout
 msgid "Via Keepout"
@@ -299,20 +299,20 @@ msgstr "via rule"
 
 #: via_rule_2
 msgid "Via Rule"
-msgstr "Regla de via"
+msgstr "Via Rule"
 
 #: vias
 msgid "Vias"
-msgstr "Vies"
+msgstr "Vias"
 
 #: violation_info
 msgid "Violation Info"
-msgstr "Informació de violació"
+msgstr "Violation Info"
 
 #: with
 msgid "with"
-msgstr "amb"
+msgstr "with"
 
 #: width
 msgid "width"
-msgstr "amplada"
+msgstr "width"

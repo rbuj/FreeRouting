@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: open_sample_design
 msgid "Open Sample Design"
-msgstr "Open Sample Design"
+msgstr "Beispiel-Design �ffnen"
 
 #: sample_designs
 msgid "Sample Designs"
@@ -27,28 +27,28 @@ msgstr ""
 
 #: replay_example
 msgid "Replay Example"
-msgstr "Replay Example"
+msgstr "Beispiel abspielen"
 
 #: 45_degree_logfile
 msgid "45 degree routing example"
-msgstr "45 degree routing example"
+msgstr "Router-Beispiel f�r 45 Grad"
 
 #: drag_component_logfile
 msgid "Example for dragging components"
-msgstr "Example for dragging components"
+msgstr "Beispiel f�r das Ziehen von Bauteilen"
 
 #: any_angle_logfile
 msgid "Free angle routing example"
-msgstr "Free angle routing example"
+msgstr "Router-Beispiel f�r beliebige Winkel"
 
 #: autorouter_example_1
 msgid "first autorouter example"
-msgstr "first autorouter example"
+msgstr "erstes Autorouter-Beispiel"
 
 #: autorouter_example_2
 msgid "second autorouter example"
-msgstr "second autorouter example"
+msgstr "zweites Autorouter-Beispiel"
 
 #: autorouter_example_3
 msgid "third autorouter example"
-msgstr "third autorouter example"
+msgstr "drittes Autorouter-Beispiel"

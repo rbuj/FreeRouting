@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: object_colors
 msgid "object colors"
-msgstr "object colors"
+msgstr "Objekt-Farben"
 
 #: object_visibility
 msgid "object visibility"
@@ -31,11 +31,11 @@ msgstr ""
 
 #: display_region
 msgid "display region"
-msgstr "display region"
+msgstr "Abbildungs-Ausschnitt"
 
 #: interactive_state
 msgid "interactive state"
-msgstr "interactive state"
+msgstr "interaktiver Zustand"
 
 #: selection_layers
 msgid "selection layers"
@@ -55,7 +55,7 @@ msgstr ""
 
 #: manual_rule_settings
 msgid "manual rule settings"
-msgstr "manual rule settings"
+msgstr "manuelle Regel-Einstellungen"
 
 #: push&shove_enabled
 msgid "push&shove enabled"
@@ -71,8 +71,8 @@ msgstr ""
 
 #: component_grid
 msgid "component grid"
-msgstr "component grid"
+msgstr "Bauteil-Raster"
 
 #: info_list_selections
 msgid "info list selections"
-msgstr "info list selections"
+msgstr "Info-Listen-Selektion"

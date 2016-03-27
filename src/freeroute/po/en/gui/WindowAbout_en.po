@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,20 +19,20 @@ msgstr ""
 
 #: description
 msgid "Free software for Printed Circuit Board Routing"
-msgstr "Programari lliure per a l'l'encament de plaques de circuits impresos"
+msgstr "Free software for Printed Circuit Board Routing"
 
 #: version
 msgid "Version:"
-msgstr "Versió:"
+msgstr "Version:"
 
 #: warranty
 msgid "This program comes with absolutely no warranty!"
-msgstr "Aquest programa no compta cap garantia!"
+msgstr "This program comes with absolutely no warranty!"
 
 #: homepage
 msgid "Homepage: http://www.freerouting.net "
-msgstr "Pagina inicial: http://www.freerouting.net "
+msgstr "Homepage: http://www.freerouting.net "
 
 #: support
 msgid "Contact: support@freerouting.net"
-msgstr "Contacte: support@freerouting.net"
+msgstr "Contact: support@freerouting.net"

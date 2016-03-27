@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: list_empty_message
 msgid "no violations found"
-msgstr "no s'ha trobat cap violació"
+msgstr "keine Verletzungen gefunden"
 
 #: at
 msgid "at"
@@ -43,24 +43,24 @@ msgstr ""
 
 #: conduction_area
 msgid "conduction area"
-msgstr "càrea de conducció"
+msgstr "Leitungsfl�che"
 
 #: keepout
 msgid "keepout"
-msgstr "prohibit el pas"
+msgstr "Sperrfl�che"
 
 #: via_keepout
 msgid "via keepout"
-msgstr "prohibit el pas a les vies"
+msgstr "Via-Sperrfl�che"
 
 #: component_keepout
 msgid "component keepout"
-msgstr "rohibit el pas als components"
+msgstr "Bauteil-Sperrfl�che"
 
 #: board_outline
 msgid "board outline"
-msgstr "delimitació de la placa"
+msgstr "Platinen-Rand"
 
 #: unknown
 msgid "unknown"
-msgstr "desconegut"
+msgstr "unbekannt"

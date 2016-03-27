@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,23 +19,23 @@ msgstr ""
 
 #: cross_hair_cursor
 msgid "crosshair cursor"
-msgstr "crosshair cursor"
+msgstr "Crosshair-Cursor"
 
 #: small
 msgid "small"
-msgstr "petit"
+msgstr "klein"
 
 #: big
 msgid "big"
-msgstr "grn"
+msgstr "gro�"
 
 #: cursor_checkbox_tooltip
 msgid "Shortcut is the comma-key"
-msgstr "Shortcut is the comma-key"
+msgstr "Shortcut ist die Komma-Taste"
 
 #: rotation
 msgid "board rotation: "
-msgstr "gir de la placa "
+msgstr "Platinenrotation: "
 
 #: none
 msgid "none"
@@ -55,20 +55,22 @@ msgstr ""
 
 #: board_mirroring
 msgid "board mirroring:"
-msgstr "board mirroring:"
+msgstr "Platinenspiegelung:"
 
 #: left_right
 msgid "left right"
-msgstr "left right"
+msgstr "links rechts"
 
 #: top_bottom
 msgid "top bottom"
-msgstr "top bottom"
+msgstr "oben unten"
 
 #: layer_dimming
 msgid "automatic layer dimming:"
-msgstr "automatic layer dimming:"
+msgstr "automatisches Lagen-Dimmen:"
 
 #: layer_dimming_tooltip
 msgid "Use slider to change intensity of automatic layer dimming"
-msgstr "Use slider to change intensity of automatic layer dimming"
+msgstr ""
+"Mit dem Regler k�nnen Sie die Intensit�t des automatischen Lagen-Dimmens "
+"ver�ndern"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: summary
 msgid "Summary:"
-msgstr "Resum:"
+msgstr "Resumen:"
 
 #: pin
 msgid "pin"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: pins
 msgid "pins"
-msgstr "pins"
+msgstr "pines"
 
 #: via
 msgid "via"
@@ -43,7 +43,7 @@ msgstr ""
 
 #: traces
 msgid "traces, cumulative trace length"
-msgstr "traces, cumulative trace length"
+msgstr "trazo, longitud acumulada del trazo"
 
 #: list_empty
 msgid "list is empty"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,7 +68,7 @@ msgstr "Available Vias"
 
 #: edit
 msgid "Edit"
-msgstr "Edita"
+msgstr "Edit"
 
 #: edit_tooltip
 msgid "to edits the vias, which can be used in a via rule"
@@ -81,7 +81,7 @@ msgstr "to edit the selected via rule"
 #: via_rules
 msgctxt "via_rules"
 msgid "Via Rules"
-msgstr "Regles de les vies"
+msgstr "Via Rules"
 
 #: select_start_layer
 msgid "Select start layer"
@@ -117,11 +117,11 @@ msgstr "Remove Via Padstack"
 
 #: selected_rule
 msgid "Selected Rule"
-msgstr "Regla seleccionada"
+msgstr "Selected Rule"
 
 #: remove_via_rule
 msgid "Remove via rule"
-msgstr "Suprimeix la regla de via"
+msgstr "Remove via rule"
 
 #: message_1
 msgid "Please enter the name of the new padstack"

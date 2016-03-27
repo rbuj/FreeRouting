@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 #. # English version of language dependent text of the class BoardPanelStatus
 #: status_line
 msgid "status line"
-msgstr "línia d'estat"
+msgstr "línea de estado"
 
 #: additional_text_field
 msgid "additional text field"
-msgstr "camp de text addicional"
+msgstr "campo de texto adicional"
 
 #: current_layer
 msgid "current layer: Component Side"

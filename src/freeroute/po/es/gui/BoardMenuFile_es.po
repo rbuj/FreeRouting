@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 #. # English version of language dependent text of the class BoardMenuFile
 #: file
 msgid "File"
-msgstr "Fitxer"
+msgstr "Fichero"
 
 #: save
 msgid "Save"
-msgstr "Desa"
+msgstr "Guardar"
 
 #: save_tooltip
 msgid "saves the design to disk in the internal .bin file format"
@@ -31,7 +31,7 @@ msgstr "design file saved"
 
 #: save_and_exit
 msgid "Save and Exit"
-msgstr "Desa i surt"
+msgstr "Guardar y salir"
 
 #: save_and_exit_tooltip
 msgid "exits the program after saving the design to disk"
@@ -39,7 +39,7 @@ msgstr "exits the program after saving the design to disk"
 
 #: cancel_and_exit
 msgid "Cancel and Exit"
-msgstr "Cancel·la i surt"
+msgstr "Cancelar y salir"
 
 #: cancel_and_exit_tooltip
 msgid "exits the program without saving the design"
@@ -47,7 +47,7 @@ msgstr "exits the program without saving the design"
 
 #: save_as
 msgid "Save as"
-msgstr "Anomena i desa"
+msgstr "Guardar como"
 
 #: save_as_tooltip
 msgid "use extensions .bin for binary and .dsn for Specctra text format"
@@ -55,7 +55,7 @@ msgstr "use extensions .bin for binary and .dsn for Specctra text format"
 
 #: generate_logfile
 msgid "Generate Logfile"
-msgstr "Generate Logfile"
+msgstr "Generar fichero de registro"
 
 #: generate_logfile_tooltip
 msgid "starts writing the interactive actions to a logfile"
@@ -63,7 +63,7 @@ msgstr "starts writing the interactive actions to a logfile"
 
 #: replay_logfile
 msgid "Replay Logfile"
-msgstr "Replay Logfile"
+msgstr "Reproducir fichero de registro"
 
 #: replay_logfile_tooltip
 msgid "repeats the interactive actions stored in a logfile"
@@ -71,7 +71,7 @@ msgstr "repeats the interactive actions stored in a logfile"
 
 #: session_file
 msgid "Export Specctra Session File"
-msgstr "Export Specctra Session File"
+msgstr "Exportar fichero de sesión Specctra"
 
 #: session_file_tooltip
 msgid "writes a session file in the Specctra .ses format"
@@ -139,7 +139,7 @@ msgstr "unable to read logfile"
 
 #: message_11
 msgid "session file"
-msgstr "fitxer de sessió"
+msgstr "fichero de sesión"
 
 #: message_12
 msgid "in Specctra format written"

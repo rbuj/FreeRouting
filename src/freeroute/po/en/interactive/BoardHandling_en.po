@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: incomplete_connections_to_route
 msgid "incomplete connections to route"
-msgstr "connexions incompletes a l'encaminament"
+msgstr "incomplete connections to route"
 
 #: incompletes
 msgid "incompletes,"
@@ -27,38 +27,36 @@ msgstr "incompletes,"
 
 #: length_violations
 msgid "length violations"
-msgstr "violacions de longitud"
+msgstr "length violations"
 
 #: undo
 msgid "undo"
-msgstr "desfés"
+msgstr "undo"
 
 #: no_more_undo_possible
 msgid "no more undo possible"
-msgstr "no es pot desfer res més"
+msgstr "no more undo possible"
 
 #: redo
 msgid "redo"
-msgstr "refés"
+msgstr "redo"
 
 #: no_more_redo_possible
 msgid "no more redo possible"
-msgstr "no es pot refer res més"
+msgstr "no more redo possible"
 
 #: select_menu
 msgid "select menu: use button 1 to select item"
-msgstr "menú de selecció: utilitzeu el botó 1 per a seleccionat l'element"
+msgstr "select menu: use button 1 to select item"
 
 #: route_menu
 msgid "route menu: use button 1 to start route"
-msgstr "menú d'encaminament: utilitzeu el botó 1 per iniciar l'encaminament"
+msgstr "route menu: use button 1 to start route"
 
 #: drag_menu
 msgid "press button 1 to drag items or to push traces from behind"
-msgstr ""
-"premeu el botó 1 per arrossegar els elements o per a empenyer les traces del "
-"darrere"
+msgstr "press button 1 to drag items or to push traces from behind"
 
 #: save_error
 msgid "unable to write board to file"
-msgstr "no es pot escriure la placa al fitxer"
+msgstr "unable to write board to file"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,31 +15,31 @@ msgstr ""
 #. # English version of language dependent text of the derived classes of InteractiveState
 #: adding_hole_completed
 msgid "adding hole completed"
-msgstr "adding hole completed"
+msgstr "Loch erfolgreich eingefügt"
 
 #: adding_hole_failed
 msgid "adding hole failed"
-msgstr "adding hole failed"
+msgstr "Loch Einfügen gescheitert"
 
 #: adding_hole_to_circle_not_yet_implemented
 msgid "adding hole to circle not yet implemented"
-msgstr "adding hole to circle not yet implemented"
+msgstr "Loch in Kreis einfügen noch nicht implementiert"
 
 #: adding_hole_to_obstacle_area
 msgid "adding hole to obstacle area"
-msgstr "adding hole to obstacle area"
+msgstr "füge Loch in Keepout ein"
 
 #: all_connections_routed
 msgid "all connections routed"
-msgstr "all connections routed"
+msgstr "alle Verbindungen gerouted"
 
 #: all_items_inserted
 msgid "all items inserted"
-msgstr "all items inserted"
+msgstr "alle Objekte eingefügt"
 
 #: autoroute
 msgid "Autoroute"
-msgstr "Encamina automàticament"
+msgstr "Autoroute"
 
 #: batch_autorouter
 msgid "Batch Autorouter"
@@ -47,11 +47,11 @@ msgstr "Batch Autorouter"
 
 #: batch_optimizer
 msgid "Batch Optimizer"
-msgstr "Batch Optimizer"
+msgstr "Batch Optimierer"
 
 #: cannot_change_placement_side
 msgid "cannot change placement side"
-msgstr "cannot change placement side"
+msgstr "kann Plazierungsseite nicht wechseln"
 
 #: clearance_violations_found
 msgid "clearance violations found"
@@ -59,15 +59,15 @@ msgstr ""
 
 #: completed
 msgid "completed"
-msgstr "completat"
+msgstr "beendet"
 
 #: connections_could_not_be_routed
 msgid "connections could not be routed"
-msgstr "connections could not be routed"
+msgstr "Verbindungen konnten nicht gerouted werden"
 
 #: connections_found
 msgid "connections found"
-msgstr "connections found"
+msgstr "Verbindungen gefunden"
 
 #: connections_not_found
 msgid "connections not found"
@@ -75,31 +75,31 @@ msgstr ""
 
 #: creating_circle
 msgid "creating circular keepout"
-msgstr "creating circular keepout"
+msgstr "bilde kreisförmige Sperrrfläche "
 
 #: creating_polygonshape
 msgid "creating polygonshape keepout"
-msgstr "creating polygonshape keepout"
+msgstr "bilde polygonale Sperrfläche"
 
 #: creatig_tile
 msgid "creatig tile-shaped keepout"
-msgstr "creatig tile-shaped keepout"
+msgstr "bilde konvexe polygonale Sperrfläche"
 
 #: drag_left_mouse_button_to_create_region_to_display
 msgid "drag left mouse button to create region to display"
-msgstr "drag left mouse button to create region to display"
+msgstr "zur Definition des Abbildungs-Rechtecks linke Maustaste ziehen"
 
 #: drag_left_mouse_button_to_select_cutout_rectangle
 msgid "drag left mouse button to select cutout rectangle"
-msgstr "drag left mouse button to select cutout rectangle"
+msgstr "zur Definition des Ausschneide-Rechtecks linke Maustaste ziehen"
 
 #: drag_left_mouse_button_to_selects_items_in_region
 msgid "drag left mouse button to selects items in region"
-msgstr "drag left mouse button to selects items in region"
+msgstr "zur Definition des Auswahl-Rechtecks linke Maustaste ziehen"
 
 #: dragging_item
 msgid "dragging item"
-msgstr "dragging item"
+msgstr "ziehe Objekt"
 
 #: fanout
 msgid "Fanout"
@@ -107,83 +107,84 @@ msgstr "Fanout"
 
 #: in_select_menu
 msgid "in select menu"
-msgstr "al menú de selecció"
+msgstr "im Auswahl-Menü"
 
 #: in_select_mode
 msgid "in select mode"
-msgstr "al mode de selecció"
+msgstr "im Auswahl-Modus"
 
 #: in_select_item_mode
 msgid "in select item mode"
-msgstr "in select item mode"
+msgstr "im Objektauswahl-Modus"
 
 #: is_not_active_for_the_current_net
 msgid "is not active for the current net"
-msgstr "is not active for the current net"
+msgstr "für das zu routende Netz nicht aktiv ist"
 
 #: move_completed
 msgid "move completed"
-msgstr "move completed"
+msgstr "Verschieben abgeschlossen"
 
 #: insertion_failed_because_of_obstacles
 msgid "insertion failed because of obstacles"
-msgstr "insertion failed because of obstacles"
+msgstr "Einfügen auf Grund von Hindernissen fehlgeschlagen"
 
 #: interrupted
 msgid "interrupted"
-msgstr "interrupted"
+msgstr "abgebrochen"
 
 #: keepout_cancelled_because_of_overlaps
 msgid "keepout cancelled because of overlaps"
-msgstr "keepout cancelled because of overlaps"
+msgstr "Sperrfläche wegen Überlappungen verworfen"
 
 #: keepout_successful_completed
 msgid "keepout successful completed"
-msgstr "keepout successful completed"
+msgstr "Sperrfläche erfolgreich eingefügt"
 
 #: layer_changed_to
 msgid "layer changed to"
-msgstr "layer changed to"
+msgstr "Lage gewechselt nach"
 
 #: layer_not_changed_because_layer
 msgid "layer not changed because layer"
-msgstr "layer not changed because layer"
+msgstr "Lage nicht gewechselt weil Lage "
 
 #: layer_not_changed_because_of_obstacle_on_layer
 msgid "layer not changed because of obstacle on layer"
-msgstr "layer not changed because of obstacle on layer"
+msgstr "Lage nicht gewechselt wegen Hindernis auf Lage"
 
 #: logfile
 msgid "Logfile"
-msgstr "Logfile"
+msgstr "Logdatei"
 
 #: move_component_failed_because_no_item_selected
 msgid "move component failed because no item selected"
-msgstr "move component failed because no item selected"
+msgstr ""
+"Bauteil-Verschieben fehlgeschlagen weil kein Bauteil-Objekt selektiert ist"
 
 #: new_net_created_from_selected_items
 msgid "new net created from selected items"
-msgstr "new net created from selected items"
+msgstr "neues Netz aus den ausgewählten Objekten erzeugt"
 
 #: no_item_found_for_adding_hole
 msgid "no item found for adding hole"
-msgstr "no item found for adding hole"
+msgstr "kein Objekt zum Loch-Einfügen gefunden"
 
 #: no_obstacle_area_found_for_adding_hole
 msgid "no obstacle area found for adding hole"
-msgstr "no obstacle area found for adding hole"
+msgstr "keine Sperrfläche zum Loch-Einfügen gefunden"
 
 #: no_pin_selected
 msgid "no pin selected"
-msgstr "no pin selected"
+msgstr "kein Pin selektiert"
 
 #: no_swappable_pin_found
 msgid "no swappable pin found"
-msgstr "no swappable pin found"
+msgstr "kein tauschbarer Pin gefunden"
 
 #: nothing_selected
 msgid "nothing selected"
-msgstr "nothing selected"
+msgstr "nichts selektiert"
 
 #: pass
 msgid "Pass"
@@ -191,31 +192,32 @@ msgstr "Pass"
 
 #: picked_pin_expected
 msgid "picked pin expected"
-msgstr "picked pin expected"
+msgstr "selektierten Pin erwartet"
 
 #: pin_not_swapped_because_it_is_already_connected
 msgid "pin not swapped because it is already connected"
-msgstr "pin not swapped because it is already connected"
+msgstr "Pin nicht getauscht, weil er schon angeschlossen ist"
 
 #: pin_not_swapped_because_second_pin_is_already_connected
 msgid "pin not swapped because second pin is already connected"
-msgstr "pin not swapped because second pin is already connected"
+msgstr "Pin nicht getauscht, weil der andere Pin schon angeschlossen ist"
 
 #: pin_swap_completed
 msgid "pin swap completed"
-msgstr "pin swap completed"
+msgstr "Pintausch vollständig"
 
 #: pin_to_swap_missing
 msgid "pin to swap missing"
-msgstr "pin to swap missing"
+msgstr "zu tauschender Pin fehlt"
 
 #: please_click_second_pin_with_the_left_mouse_button
 msgid "please click second pin with the left mouse button"
-msgstr "please click second pin with the left mouse button"
+msgstr "bitte zweiten Pin mit der linken Maustaste wählen"
 
 #: please_unfix_selected_items_before_moving
 msgid "please unfix selected items before moving"
-msgstr "please unfix selected items before moving"
+msgstr ""
+"bitte die Fixierung der ausgewählten Objekte vor dem Verschieben aufheben "
 
 #: postroute
 msgid "Postroute"
@@ -223,36 +225,37 @@ msgstr "Postroute"
 
 #: routing_net
 msgid "routing net"
-msgstr "routing net"
+msgstr "route Netz"
 
 #: please_unroute_or_extend_selection_before_moving
 msgid "please unroute or extend selection before moving"
-msgstr "please unroute or extend selection before moving"
+msgstr "bitte vor dem Verschieben unrouten oder die Auswahl erweitern"
 
 #: pull_tight
 msgid "Pull tight"
-msgstr "Pull tight"
+msgstr "Glatt ziehen "
 
 #: some_items_are_fixed_and_could_therefore_not_be_removed
 msgid "some items are fixed and could therefore not be removed"
-msgstr "some items are fixed and could therefore not be removed"
+msgstr "einige Objekte sind fixiert und konnten deshalb nicht gelöscht werden"
 
 #: some_items_are_not_changed_because_they_are_already_connected
 msgid "some items are not changed because they are already connected"
-msgstr "some items are not changed because they are already connected"
+msgstr ""
+"einige Objekte können nicht geändert werden weil sie schon verbunden sind"
 
 #: some_items_cannot_be_moved_because_they_are_fixed
 msgid "some items cannot be moved, because they are fixed"
-msgstr "some items cannot be moved, because they are fixed"
+msgstr "einige Objekte sind fixiert und können nicht verschoben werden"
 
 #: some_items_not_inserted_because_of_obstacles
 msgid "some items not inserted because of obstacles"
-msgstr "some items not inserted because of obstacles"
+msgstr "einige Objekte wegen Abstandsverletzungen nicht eingefügt "
 
 #: stop_message
 msgid "running, press left button to stop"
-msgstr "running, press left button to stop"
+msgstr "läuft, stoppen mit linker Maustaste"
 
 #: unable_to_reset_components_with_different_rotations
 msgid "unable to reset components with different rotations"
-msgstr "unable to reset components with different rotations"
+msgstr "kann Bauteile mit ungleichen Drehungen nicht zurücksetzen"

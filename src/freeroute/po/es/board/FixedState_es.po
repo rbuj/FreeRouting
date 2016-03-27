@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:48+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 #. # English version of language dependent text of the class FixedState
 #: UNFIXED
 msgid "unfixed"
-msgstr "sense fixar"
+msgstr "sin fiar"
 
 #: SHOVE_FIXED
 msgid "shove fixed"
@@ -23,8 +23,10 @@ msgstr "shove fixed"
 
 #: USER_FIXED
 msgid "user fixed"
-msgstr "fix de l'usuari"
+msgstr "fijado por el usuario"
 
 #: SYSTEM_FIXED
 msgid "system fixed "
-msgstr "fix del sistema"
+msgstr ""
+"fijado por el sistema# Spanish version of language dependent text written "
+"into an ObjectInfoPanel"

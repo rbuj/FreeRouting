@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:47+0200\n"
+"POT-Creation-Date: 2016-03-27 20:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,45 +15,46 @@ msgstr ""
 #. # English version of language dependent text of the board toolbar
 #: select_button
 msgid "Select"
-msgstr "Selecciona"
+msgstr "Selektieren"
 
 #: select_button_tooltip
 msgid "left button selects items (s)"
-msgstr "left button selects items (s)"
+msgstr "linke Maustaste selektiert Objekte (s)"
 
 #: route_button
 msgid "Route"
-msgstr "Encamina"
+msgstr "Routen"
 
 #: route_button_tooltip
 msgid "left button starts a new trace (r)"
-msgstr "left button starts a new trace (r)"
+msgstr "linke Maustaste beginnt eine neue Bahn (r)"
 
 #: drag_button
 msgid "Drag"
-msgstr "Arrossega"
+msgstr "Ziehen"
 
 #: drag_button_tooltip
 msgid ""
 "to drag items with the left button or to push traces out of empty space (d)"
 msgstr ""
-"to drag items with the left button or to push traces out of empty space (d)"
+"Objekte mit gedrückter linker Maustaste ziehen oder Bahnen vom leeren Raum "
+"aus schieben(d)"
 
 #: undo_button
 msgid "Undo"
-msgstr "Desfés"
+msgstr "Undo"
 
 #: undo_button_tooltip
 msgid "to undo the last change (u)"
-msgstr "to undo the last change (u)"
+msgstr "die letzte Änderung rückgängig machen (u)"
 
 #: redo_button
 msgid "Redo"
-msgstr "Refés"
+msgstr "Redo"
 
 #: redo_button_tooltip
 msgid "to redo the last change (b)"
-msgstr "to redo the last change (b)"
+msgstr "die letzte Änderung wiederherstellen (b)"
 
 #: incompletes_button
 msgid "Incompletes"
@@ -61,40 +62,40 @@ msgstr "Incompletes"
 
 #: incompletes_button_tooltip
 msgid "to display or hide the incomplete connections (g)"
-msgstr "to display or hide the incomplete connections (g)"
+msgstr "das Zeigen der offenen Verbindungen an- oder abschalten (g)"
 
 #: violations_button
 msgid "Violations"
-msgstr "Violacions"
+msgstr "Verletzungen"
 
 #: violations_button_tooltip
 msgid "to display or hide the clearance violations (v)"
-msgstr "to display or hide the clearance violations (v)"
+msgstr "das Zeigen der Clearance-Verletzungen an- oder abschalten (v)"
 
 #: autoroute_button
 msgid "Autorouter"
-msgstr "Encaminador automàtic"
+msgstr "Autorouter"
 
 #: autoroute_button_tooltip
 msgid "to start the batch autorouter"
-msgstr "to start the batch autorouter"
+msgstr "den Batch-Autorouter starten"
 
 #: display_all_button
 msgid "Zoom All"
-msgstr "Zoom All"
+msgstr "Alles abbilden"
 
 #: display_all_button_tooltip
 msgid "to display the whole board (a)"
-msgstr "to display the whole board (a)"
+msgstr "die gesamte Platine abbilden (a)"
 
 #: display_region_button
 msgid "Zoom Region"
-msgstr "Zoom Region"
+msgstr "Ausschnitt abbilden"
 
 #: display_region_button_tooltip
 msgid "to select a region of the board for display(f)"
-msgstr "to select a region of the board for display(f)"
+msgstr "ein Rechteck der Platine zum Abbilden auswählen (f)"
 
 #: unit_button
 msgid "Unit:"
-msgstr "Unitat:"
+msgstr "Unit:"
