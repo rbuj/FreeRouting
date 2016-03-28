@@ -3,7 +3,7 @@
 /build/
 /dist/
 /lib/
-/src/freeroute/helpset/
-/src/freeroute/help/lib/
-/src/freeroute/help/docbook/
-/src/freeroute/help/docbook-xml-*/
+/src/helpset/
+/src/help/lib/
+/src/help/docbook/
+/src/help/docbook-xml-*/

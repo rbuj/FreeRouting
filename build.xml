@@ -72,10 +72,10 @@
     -->
     <property name="languages.list" value="ca,de,en,es" />
 
-    <property name="docbook.base.dir" value="${basedir}/src/freeroute/help" />
+    <property name="docbook.base.dir" value="${basedir}/src/help" />
     <property name="docbook.lib.dir" value="${docbook.base.dir}/lib" />
     <property name="docbook.input.dir" value="${docbook.base.dir}/manual" />
-    <property name="docbook.output.dir" value="${basedir}/src/freeroute/helpset" />
+    <property name="docbook.output.dir" value="${basedir}/src/helpset" />
 
     <property name="docbook.xsl.version" value="1.79.1" />
     <property name="docbook.xsl.base.dir" value="${docbook.base.dir}"/>
@@ -110,7 +110,7 @@
     <property name="ivy.home" value="${user.home}/.ant" />
     <property name="ivy.jar.dir" value="${ivy.home}/lib" />
     <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
-
+    <property name="ivy.lib.dir" value="${basedir}/lib" />
     <!--
         Ant contrib bootstrap
     -->
@@ -294,7 +294,7 @@
         </sequential>
     </macrodef>
 
-    <target name="build-javahelp" depends="init-ant-contrib,docbook-libs,download-docbook-xsl,download-docbook-xml" description="JavaHelp from DocBook XML">
+    <target name="build-javahelp" depends="docbook-libs,download-docbook-xsl,download-docbook-xml,init-ant-contrib" description="JavaHelp from DocBook XML">
         <echo message="Building JavaHelp output" />
         <for param="lang" list="${languages.list}">
             <sequential>
@@ -333,14 +333,15 @@
         </for>
     </target>        
         
-    <target name="-pre-compile" depends="help"/>
-    <target name="-pre-compile-single" depends="help"/>
+    <target name="-pre-compile" depends="-ivy-retrieve,help"/>
+    <target name="-pre-compile-single" depends="-ivy-retrieve,help"/>
 
     <target name="-post-clean">
         <delete dir="lib"/>
-        <delete dir="${docbook.xsl.dir}"/>
+        <delete dir="${dist.dir}"/>
         <delete dir="${docbook.xml.dir}"/>
         <delete dir="${docbook.lib.dir}"/>
         <delete dir="${docbook.output.dir}"/>
+        <delete dir="${docbook.xsl.dir}"/>
     </target>
 </project>
