@@ -1,0 +1,174 @@
+#. extracted from ../gui/resources/WindowRouteParameter_en.properties, es/gui/WindowRouteParameter-es.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-28 05:24+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # Spanish version of language dependent text of the class WindowRouteParameter
+#: title
+msgid "Route Parameter"
+msgstr "Parámetros encaminamiento"
+
+#: snap_angle
+msgid "snap angle:"
+msgstr "snap angle:"
+
+#: snap_angle_tooltip
+msgid "Angle Restriction for Traces"
+msgstr "Angle Restriction for Traces"
+
+#: 90_degree
+msgid "90 degree"
+msgstr "90 grados"
+
+#: 45_degree
+msgid "45 degree"
+msgstr "45 grados"
+
+#: none
+msgid "none"
+msgstr "sin"
+
+#: route_mode
+msgid "route mode:"
+msgstr "modo encaminamiento:"
+
+#: dynamic
+msgid "dynamic"
+msgstr "dinámico"
+
+#: stitching
+msgid "stitching"
+msgstr "stitching"
+
+#: rule_selection
+msgid "rule selection:"
+msgstr "selección de reglas:"
+
+#: automatic
+msgid "automatic"
+msgstr "automático"
+
+#: manual
+msgid "manual"
+msgstr "manual"
+
+#: push&shove_enabled
+msgid "push & shove enabled"
+msgstr "push & shove enabled"
+
+#: push&shove_enabled_tooltip
+msgid "Enables pushing obstacles"
+msgstr "Permite empujar los obstáculos"
+
+#: drag_components_enabled
+msgid "drag components enabled"
+msgstr "arrastrar componentes habilitado"
+
+#: drag_components_enabled_tooltip
+msgid "Enables dragging components with the pressed left mouse button"
+msgstr ""
+"Permite arrastrar componentes con la presión del botón izquierdo del ratón"
+
+#: via_snap_to_smd_center
+msgid "vias snap to smd center"
+msgstr "ajustar vías al centro smd"
+
+#: via_snap_to_smd_center_tooltip
+msgid "If set, vias attaching smd pins snap to the pin center"
+msgstr ""
+"Si se activa, la vías se fijan a los pines SMD para ajustarse al centro del "
+"pin"
+
+#: hilight_routing_obstacle
+msgid "highlight routing obstacle"
+msgstr "resaltar obstáculos en encaminamiento"
+
+#: hilight_routing_obstacle_tooltip
+msgid "to highlight the current routing obstacle in dynamic routing"
+msgstr ""
+"para resaltar el obstáculo del encaminamiento actual en el encaminamiento "
+"dinámico"
+
+#: ignore_conduction_areas
+msgid "ignore conduction areas"
+msgstr "ignorar zonas de conducción"
+
+#: ignore_conduction_areas_tooltip
+msgid "If set, conduction areas are not regarded as routing obstacles"
+msgstr ""
+"Si se activa, las áreas de conducción no se consideran como obstáculos de "
+"encaminamiento"
+
+#: automatic_neckdown
+msgid "automatic neckdown"
+msgstr "estrechamiento automático"
+
+#: automatic_neckdown_tooltip
+msgid ""
+"If set, at pins smaller than the current trace width the trace width will be "
+"automatically lowered"
+msgstr ""
+"Si se activa, en los pines más pequeños que el ancho del trazo actual se "
+"reducen automáticamente el ancho del trazo"
+
+#: restrict_pin_exit_directions
+msgid "restrict pin exit directions"
+msgstr "restringir las direcciones de salida del pin"
+
+#: restrict_pin_exit_directions_tooltip
+msgid ""
+"If set, the trace exit directions of rectangular pins are restricted to the "
+"small sides"
+msgstr ""
+"Si se activa, las direcciones de salida del trazo de los pines rectangulares "
+"se restringen a caras inferiores"
+
+#: pin_pad_to_turn_gap
+msgid "pad to turn gap:"
+msgstr "pad para dar la vuelta a la separación:"
+
+#: pin_pad_to_turn_gap_tooltip
+msgid "Defines the length of the trace exit restrictions for rectangular pins"
+msgstr ""
+"Define la longitud de las restricciones de salida del trazo para pines "
+"rectangulares"
+
+#: pull_tight_region
+msgid "pull tight region:"
+msgstr "región estrecha de tracción:"
+
+#: pull_tight_region_tooltip
+msgid ""
+"Use text field or slider to change the pull tight region around the cursor"
+msgstr ""
+"Utilice el campo de texto o el deslizante para cambiar la región estrecha de "
+"tracción alrededor del cursor"
+
+#: detail_parameter
+msgid "detail parameter"
+msgstr "detail parameter"
+
+#: change_snap_angle_45
+msgid ""
+"Free angle traces with snap angle 45 degree not yet fully supported. Change "
+"snap angle anyway?"
+msgstr ""
+"Los trazos de ángulo libre con encaje de ángulo de 45 grados aún no está "
+"totalmente admitido. Cambiar el ángulo de encaje de todos modos?"
+
+#: change_snap_angle_90
+msgid ""
+"Only orthoganal traces with snap angle 90 degree fully supported yet. Change "
+"snap angle anyway?"
+msgstr ""
+"Sólo los trazos ortogonales con encaje de ángulo de 90 grado son totalmente "
+"compatibles por ahora. Cambiar el ángulo de encaje de todos modos?"

@@ -3,11 +3,21 @@ locale=$1
 while read resource
 do
   mkdir -p $locale/$resource
-  cat ../$resource/resources/*_$locale.properties > $locale/$resource/$resource-$locale.properties
   for filename in ../$resource/resources/*_en.properties; do
     file=`basename $filename`
-    prop2po --duplicates=msgctxt -t $filename $locale/$resource/$resource-$locale.properties $locale/$resource/${file/_en.properties/_$locale.po}
+    cp ../$resource/resources/${file/_en.properties/_${locale}.properties} $locale/$resource/${file/_en.properties/}-$locale.properties
+    prop2po --progress=none --duplicates=msgctxt -t $filename $locale/$resource/${file/_en.properties/}-$locale.properties $locale/$resource/${file/_en.properties/.po}
+    case $locale in
+      "ca")
+       sed -i -e 's/English version/Catalan version/g' $locale/$resource/${file/_en.properties/.po}
+       ;;
+      "de")
+       sed -i -e 's/English version/German version/g' $locale/$resource/${file/_en.properties/.po}
+       ;;
+      "es")
+       sed -i -e 's/English version/Spanish version/g' $locale/$resource/${file/_en.properties/.po}
+       ;;
+    esac
+    rm -f $locale/$resource/${file/_en.properties/}-$locale.properties
   done
-  rm -f $locale/$resource/$resource-$locale.properties
 done < RESOURCES
-

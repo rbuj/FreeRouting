@@ -1,0 +1,318 @@
+#. extracted from ../board/resources/ObjectInfoPanel_en.properties, ca/board/ObjectInfoPanel-ca.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-28 05:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # Catalan version of language dependent text written into an ObjectInfoPanel
+#: at
+msgid "at"
+msgstr "at"
+
+#: attach_smd
+msgid "attach smd"
+msgstr "adjunta smd"
+
+#: back
+msgid "back"
+msgstr "back"
+
+#: between
+msgid "between"
+msgstr "entre"
+
+#: board_outline
+msgid "Board Outline"
+msgstr "Delimitació de la placa"
+
+#: center
+msgid "center"
+msgstr "center"
+
+#: circle
+msgid "Circle"
+msgstr "Cercle"
+
+#: class
+msgid "class"
+msgstr "classe"
+
+#: clearance_class
+msgid "clearance class"
+msgstr "classe de marge de seguretat"
+
+#: clearance_class_2
+msgid "Clearance Class"
+msgstr "Classe de marge de seguretat"
+
+#: clearance_info
+msgid "Clearance Info"
+msgstr "Informació del marge de seguretat"
+
+#: clearance_violation
+msgid "clearance violation"
+msgstr "violació del marge de seguretat"
+
+#: clearance_violation_2
+msgid "Clearance violation"
+msgstr "Violació del marge de seguretat"
+
+#: clearance_violations
+msgid "clearance violations"
+msgstr "Violacions del marge de seguretat"
+
+#: component
+msgid "Component"
+msgstr "Component"
+
+#: component_2
+msgid "component"
+msgstr "component"
+
+#: component_info
+msgid "Component Info"
+msgstr "Informació del component"
+
+#: component_keepout
+msgid "Component Keepout"
+msgstr "Component Keepout"
+
+#: conduction_area
+msgid "Conduction Area"
+msgstr "Àrea de conducció"
+
+#: contact_info
+msgid "Contact Info"
+msgstr "Informació de contacte"
+
+#: contacts
+msgid "contacts"
+msgstr "contacta"
+
+#: from
+msgid "from"
+msgstr "de"
+
+#: front
+msgid "front"
+msgstr "posterior"
+
+#: gate
+msgid "gate"
+msgstr "porta"
+
+#: gate_pin
+msgid "gate pin"
+msgstr "pin de la porta"
+
+#: hole
+msgid "hole"
+msgstr "forat"
+
+#: holes
+msgid "holes"
+msgstr "forat"
+
+#: keepout
+msgid "Keepout"
+msgstr "prohibit el pas"
+
+#: layer
+msgid "layer"
+msgstr "capa"
+
+#: length
+msgid "length"
+msgstr "longitud"
+
+#: logical_part
+msgid "logical part"
+msgstr "part lògica"
+
+#: logical_part_2
+msgid "Logical Part"
+msgstr "Part lògica"
+
+#: logical_part_info
+msgid "Logical Part Info"
+msgstr "Infomació de la part lògica"
+
+#: lower_left
+msgid "lower left"
+msgstr "lower left"
+
+#: net
+msgid "Net"
+msgstr "Xarxa"
+
+#: net_class
+msgid "Net Class"
+msgstr "Classe de xarxa"
+
+#: net_class_2
+msgid "Net class"
+msgstr "Classe de xarxa"
+
+#: net_info
+msgid "Net Info"
+msgstr "Informació de la xarxa"
+
+#: not_yet_placed
+msgid "not yet placed"
+msgstr "encara no posicionat"
+
+#: of_component
+msgid "of component"
+msgstr "del comonent"
+
+#: off
+msgid "off"
+msgstr "off"
+
+#: on
+msgid "on"
+msgstr "en"
+
+#: on_layer
+msgid "on layer"
+msgstr "en la cala"
+
+#: package
+msgid "Package"
+msgstr "Paquet"
+
+#: package_info
+msgid "Package Info"
+msgstr "Informació del paquet"
+
+#: padstack
+msgid "padstack"
+msgstr "padstack"
+
+#: padstack_info
+msgid "Padstack Info"
+msgstr "Padstack Info"
+
+#: pin
+msgid "Pin"
+msgstr "Pin"
+
+#: pin_2
+msgid "pin"
+msgstr "pin"
+
+#: polygon
+msgid "Polygon"
+msgstr "Polígon"
+
+#: radius
+msgid "radius"
+msgstr "radi"
+
+#: rectangle
+msgid "Rectangle"
+msgstr "Rectangle"
+
+#: rotation
+msgid "rotation"
+msgstr "gir"
+
+#: shove_fixed
+msgid "shove fixed"
+msgstr "shove fixed"
+
+#: spacing_from_clearance_class
+msgid "Spacing from clearance class "
+msgstr "Spacing from clearance class "
+
+#: swap_code
+msgid "swap code"
+msgstr "swap code"
+
+#: terminal_items
+msgid "terminal items"
+msgstr "alements terminals"
+
+#: terminal_items_2
+msgid "Terminal Items"
+msgstr "Elements terminals"
+
+#: to
+msgid "to"
+msgstr "a"
+
+#: to_class
+msgid "to class"
+msgstr "a la classe"
+
+#: trace
+msgid "Trace"
+msgstr "Traça"
+
+#: trace_clearance_class
+msgid "trace clearance class"
+msgstr "trace clearance class"
+
+#: trace_clearance_class_2
+msgid "Trace Clearance Class"
+msgstr "Trace Clearance Class"
+
+#: trace_length
+msgid "trace length"
+msgstr "trace length"
+
+#: trace_width
+msgid "trace width"
+msgstr "trace width"
+
+#: upper_right
+msgid "upper right"
+msgstr "upper right"
+
+#: via
+msgid "Via"
+msgstr "Via"
+
+#: via_count
+msgid "via count"
+msgstr "nombre de vies"
+
+#: via_info
+msgid "Via Info"
+msgstr "Informació de la via"
+
+#: via_keepout
+msgid "Via Keepout"
+msgstr "Via Keepout"
+
+#: via_rule
+msgid "via rule"
+msgstr "via rule"
+
+#: via_rule_2
+msgid "Via Rule"
+msgstr "Regla de via"
+
+#: vias
+msgid "Vias"
+msgstr "Vies"
+
+#: violation_info
+msgid "Violation Info"
+msgstr "Informació de violació"
+
+#: with
+msgid "with"
+msgstr "amb"
+
+#: width
+msgid "width"
+msgstr "amplada"

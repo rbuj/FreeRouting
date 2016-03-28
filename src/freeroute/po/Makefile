@@ -23,15 +23,8 @@ export: $(LOC_EXP)
 $(LOC_EXP):
 	./export.sh $(@:.e=)
 
-create: $(RESOURCES)
-
-$(RESOURCES):
-	mkdir -p pot
-	prop2po -P --personality=java \
-	-x *_ca.properties \
-        -x *_de.properties \
-        -x *_es.properties \
-	../$@/resources pot/$@
+create:
+	./create.sh
 
 clean:
-	rm -fr pot
+	rm -fr *.pot $(LOCALES) pot

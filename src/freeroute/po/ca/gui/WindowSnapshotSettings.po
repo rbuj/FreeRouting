@@ -1,0 +1,78 @@
+#. extracted from ../gui/resources/WindowSnapshotSettings_en.properties, ca/gui/WindowSnapshotSettings-ca.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-28 05:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # Catalan version of language dependent text of the class WindowSnapshotSettings
+#: title
+msgid "Snapshot Settings"
+msgstr "Snapshot Settings"
+
+#: object_colors
+msgid "object colors"
+msgstr "object colors"
+
+#: object_visibility
+msgid "object visibility"
+msgstr "object visibility"
+
+#: layer_visibility
+msgid "layer visibility"
+msgstr "layer visibility"
+
+#: display_region
+msgid "display region"
+msgstr "display region"
+
+#: interactive_state
+msgid "interactive state"
+msgstr "interactive state"
+
+#: selection_layers
+msgid "selection layers"
+msgstr "selection layers"
+
+#: selectable_items
+msgid "selectable items"
+msgstr "selectable items"
+
+#: current_layer
+msgid "current layer"
+msgstr "current layer"
+
+#: rule_selection
+msgid "rule selection"
+msgstr "rule selection"
+
+#: manual_rule_settings
+msgid "manual rule settings"
+msgstr "manual rule settings"
+
+#: push&shove_enabled
+msgid "push&shove enabled"
+msgstr "push&shove enabled"
+
+#: drag_components_enabled
+msgid "drag components enabled"
+msgstr "drag components enabled"
+
+#: pull_tight_region
+msgid "pull tight region"
+msgstr "pull tight region"
+
+#: component_grid
+msgid "component grid"
+msgstr "component grid"
+
+#: info_list_selections
+msgid "info list selections"
+msgstr "info list selections"

@@ -1,0 +1,70 @@
+#. extracted from ../gui/resources/WindowEditVias_en.properties, es/gui/WindowEditVias-es.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-28 05:24+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # Spanish version of language dependent text of the class WindowEditVias
+#: title
+msgid "Edit Vias"
+msgstr "Editar vías"
+
+#: add
+msgid "Add"
+msgstr "Añadir"
+
+#: add_tooltip
+msgid "Append a new via"
+msgstr "Anexa una nueva vía"
+
+#: remove
+msgid "Remove"
+msgstr "Eliminar"
+
+#: remove_tooltip
+msgid "Remove the selected via"
+msgstr "Elimina la vía seleccionada"
+
+#: new_via
+msgid "new_via_"
+msgstr "nueva_vía_"
+
+#: via
+msgid "via"
+msgstr "vía"
+
+#: removed
+msgid "removed"
+msgstr "eliminada"
+
+#: NAME
+msgid "name"
+msgstr "nombre"
+
+#: PADSTACK
+msgid "padstack"
+msgstr "pila de pads"
+
+#: CLEARANCE_CLASS
+msgid "clearance class"
+msgstr "clase de margen de seguridad"
+
+#: ATTACH_SMD
+msgid "attach smd"
+msgstr "adjuntar SMD"
+
+#: message_1
+msgid "last via not removed"
+msgstr "no se eliminó la última vía"
+
+#: message_2
+msgid "via not removed because it is still used in via rule "
+msgstr "la vía no fue eliminada porqué todavía se utiliza con la regla de vía "

@@ -1,0 +1,194 @@
+#. extracted from ../gui/resources/BoardMenuFile_en.properties, de/gui/BoardMenuFile-de.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-28 05:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # German version of language dependent text of the class BoardMenuFile
+#: file
+msgid "File"
+msgstr "Datei"
+
+#: save
+msgid "Save"
+msgstr "speichern"
+
+#: save_tooltip
+msgid "saves the design to disk in the internal .bin file format"
+msgstr "speichert das Design auf Platte im internen .bin Dateiformat"
+
+#: save_message
+msgid "design file saved"
+msgstr "Design-Datei gespeichert"
+
+#: save_and_exit
+msgid "Save and Exit"
+msgstr "speichern und beenden"
+
+#: save_and_exit_tooltip
+msgid "exits the program after saving the design to disk"
+msgstr "beendet das Programm nach Speichern des Designs auf Platte"
+
+#: cancel_and_exit
+msgid "Cancel and Exit"
+msgstr "abbrechen und beenden"
+
+#: cancel_and_exit_tooltip
+msgid "exits the program without saving the design"
+msgstr "beendet das Programm ohne das Design zu speichern"
+
+#: save_as
+msgid "Save as"
+msgstr "speichern unter"
+
+#: save_as_tooltip
+msgid "use extensions .bin for binary and .dsn for Specctra text format"
+msgstr ""
+"Erweiterungen .bin f�r bin�r oder .dsn f�r Specctra-Text-Format k�nnen "
+"verwendet werden"
+
+#: generate_logfile
+msgid "Generate Logfile"
+msgstr "Log-Datei erzeugen"
+
+#: generate_logfile_tooltip
+msgid "starts writing the interactive actions to a logfile"
+msgstr "schreibt ab jetzt die interaktiven Aktionen in eine Log-Datei"
+
+#: replay_logfile
+msgid "Replay Logfile"
+msgstr "Log-Datei abspielen"
+
+#: replay_logfile_tooltip
+msgid "repeats the interactive actions stored in a logfile"
+msgstr "wiederholt die in einer Log_Datei gespeicherten interactiven Aktionen"
+
+#: session_file
+msgid "Export Specctra Session File"
+msgstr "Specctra-Session-Datei exportieren"
+
+#: session_file_tooltip
+msgid "writes a session file in the Specctra .ses format"
+msgstr "Schreibt eine Session-Datei im .ses-Format von Specctra"
+
+#: eagle_script
+msgid "Export Eagle Session Script"
+msgstr "Eagle-Session-Script exportieren"
+
+#: eagle_script_tooltip
+msgid "creates an eagle script to export the changes in routing"
+msgstr ""
+"Schreibt die �nderungen im Routing in ein Eagle-Script zum Update der "
+"entsprechenden .brd-Datei in Eagle"
+
+#: settings
+msgid "Save GUI Settings as Default"
+msgstr "GUI-Einstellungen als Default speichern "
+
+#: settings_tooltip
+msgid "saves the current settings of the graphical user interface as default"
+msgstr ""
+"Speichert die aktuellen Einstellungen im graphischen User-Interface als "
+"default"
+
+#: confirm
+msgid "Save also the rules created in this program for later reuse?"
+msgstr ""
+"M�chten Sie auch die in diesem Programm erzeugten Regeln zur sp�teren "
+"Wiederverwendung speichern?"
+
+#: message_1
+msgid "unable to save design file"
+msgstr "Speichern der Design-Datei ist fehlgeschlagen"
+
+#: message_2
+msgid "saving design file from now on as"
+msgstr "die Design-Datei wird von jetzt ab gespeichert unter dem Namen"
+
+#: message_3
+msgid "legal file extensions are .bin and .dsn"
+msgstr "legale Dateierweiterungen sind .bin and .dsn"
+
+#: message_4
+msgid "textfile"
+msgstr "Textdatei"
+
+#: message_5
+msgid "in Specctra text format written"
+msgstr "im Specctra-Textformat geschrieben"
+
+#: message_6
+msgid "writing to textfile "
+msgstr "Schreiben auf Textdatei "
+
+#: message_7
+msgid "failed"
+msgstr "ist fehlgeschlagen"
+
+#: message_8
+msgid "unable to create logfile"
+msgstr "Erzeugen der Log-Datei ist fehlgeschlagen."
+
+#: message_9
+msgid "writing logfile"
+msgstr "Schreibe Log-Datei"
+
+#: message_10
+msgid "unable to read logfile"
+msgstr "Lesen der Log_datei ist fehlgeschlagen"
+
+#: message_11
+msgid "session file"
+msgstr "Session-Datei"
+
+#: message_12
+msgid "in Specctra format written"
+msgstr "im Specctra-Format geschrieben"
+
+#: message_13
+msgid "writing session file"
+msgstr "schreibe Session-Datei"
+
+#: message_14
+msgid "Eagle script file"
+msgstr "Eagle-Script-Datei"
+
+#: message_15
+msgid "written"
+msgstr "geschrieben"
+
+#: message_16
+msgid "creating Eagle script file"
+msgstr "erzeuge Eagle-Script-Datei"
+
+#: message_17
+msgid "GUI default settings saved"
+msgstr "GUI-Default-Einstellungen gespeichert"
+
+#: message_18
+msgid "saving GUI default settings failed"
+msgstr "Speichern der GUI-Default-Einstellungen ist fehlgeschlagen"
+
+#: message_19
+msgid "File not saved because file extension .dsn expected"
+msgstr "Speichern fehlgeschlagen da Datei nicht mit .dsn endet"
+
+#: message_20
+msgid "Host cad system might expect the session file name"
+msgstr "Das Host-Cad-System erwartet evtl. den Session-Dateinamen"
+
+#: message_21
+msgid "Please rename the file if necessary"
+msgstr "Bitte Datei gegebenenfalls umbenennen"
+
+#: message_22
+msgid "Eagle might expect the script file extension .scr "
+msgstr "Eagle erwartet evtl. die Dateierweiterung .scr f�r das Script-File."

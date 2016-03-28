@@ -1,0 +1,142 @@
+#. extracted from ../gui/resources/Default_en.properties, ca/gui/Default-ca.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-28 05:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # Catalan version of the default file with language dependent text
+#: add_corner
+msgid "add corner (left button)"
+msgstr "add corner (left button)"
+
+#: all
+msgid "all"
+msgstr "tot"
+
+#: cancel
+msgid "cancel (Esc)"
+msgstr "cancel (Esc)"
+
+#: cancel_route
+msgid "cancel route (Esc)"
+msgstr "cancel route (Esc)"
+
+#: center_display
+msgid "center display (c)"
+msgstr "center display (c)"
+
+#: change_layer
+msgid "change layer"
+msgstr "change layer"
+
+#: change_layer_tooltip
+msgid "also possible with number key or '+' '-' "
+msgstr "also possible with number key or '+' '-' "
+
+#: close
+msgid "close"
+msgstr "tanca"
+
+#: color_manager
+msgid "Color Manager"
+msgstr "Gestor de colors"
+
+#: components
+msgid "Components"
+msgstr "Components"
+
+#: copy
+msgid "copy"
+msgstr "copia"
+
+#: done
+msgid "done (Space)"
+msgstr "fet (espai)"
+
+#: end_route
+msgid "end route (left button)"
+msgstr "end route (left button)"
+
+#: generate_snapshot
+msgid "generate snapshot (s)"
+msgstr "generate snapshot (s)"
+
+#: incompletes
+msgid "Incompletes"
+msgstr "Incompletes"
+
+#: inner
+msgid "inner"
+msgstr "intern"
+
+#: insert
+msgid "insert (left button)"
+msgstr "insert (left button)"
+
+#: layer_changed_to
+msgid "layer changed to"
+msgstr "layer changed to"
+
+#: layer_visibility
+msgid "Layer Visibility"
+msgstr "Layer Visibility"
+
+#: layer_visibility_header
+msgid "Use slider to modify the visibility on layer "
+msgstr "Use slider to modify the visibility on layer "
+
+#: maximum_all
+msgid "Maximum All"
+msgstr "Maximitza-ho tot"
+
+#: maximum_all_tooltip
+msgid "pushs all sliders to the right"
+msgstr "pushs all sliders to the right"
+
+#: minimum_all
+msgid "Minimum All"
+msgstr "Minimitza-ho tot"
+
+#: minimum_all_tooltip
+msgid "pushs all sliders to the left"
+msgstr "pushs all sliders to the left"
+
+#: move
+msgid "move (m)"
+msgstr "move (m)"
+
+#: packages
+msgid "Packages"
+msgstr "Paquets"
+
+#: padstacks
+msgid "Padstacks"
+msgstr "Padstacks"
+
+#: pick_a_color
+msgid "Pick a Color"
+msgstr "Tria un color"
+
+#: route_completed
+msgid "route completed"
+msgstr "route completed"
+
+#: zoom
+msgid "zoom"
+msgstr "zoom"
+
+#: zoom_in
+msgid "in (z)"
+msgstr "dins (z)"
+
+#: zoom_out
+msgid "out (o)"
+msgstr "fora (o)"

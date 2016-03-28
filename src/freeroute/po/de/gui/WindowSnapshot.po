@@ -1,0 +1,50 @@
+#. extracted from ../gui/resources/WindowSnapshot_en.properties, de/gui/WindowSnapshot-de.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-28 05:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # German version of language dependent text of the class WindowSnapshot
+#: title
+msgid "Snapshots"
+msgstr "Snapshots"
+
+#: goto_snapshot
+msgid "Goto Selected Snapshot"
+msgstr "Gehe zu ausgew�hltem Snapshot"
+
+#: goto_tooltip
+msgid "shortcut is j"
+msgstr "Shortcut ist j"
+
+#: create
+msgid "Create"
+msgstr "Neuer Snapshot"
+
+#: snapshot
+msgid "snapshot"
+msgstr "Snapshot"
+
+#: remove
+msgid "Remove Selected Snapshot"
+msgstr "Ausgew�hlten Snapshot l�schen"
+
+#: remove_all
+msgid "Remove All Snapshots"
+msgstr "Alle Snapshots l�schen"
+
+#: settings
+msgid "Snapshot Settings"
+msgstr "Snapshot-Einstellungen"
+
+#: settings_tooltip
+msgid "to define the settings of a new snapshot"
+msgstr "zum Feslegen der Eigenschaften eines neuen Snapshots"

@@ -1,0 +1,64 @@
+#. extracted from ../interactive/resources/BoardHandling_en.properties, es/interactive/BoardHandling-es.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-28 05:24+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # Spanish version of language dependent text of the class BoardHandling
+#: clearance_violations_found
+msgid "clearance violations found"
+msgstr "se han encontrado violaciones del margen de seguridad"
+
+#: incomplete_connections_to_route
+msgid "incomplete connections to route"
+msgstr "conexiones incompletas por encaminar"
+
+#: incompletes
+msgid "incompletes,"
+msgstr "incompletos,"
+
+#: length_violations
+msgid "length violations"
+msgstr "violaciones de longitud"
+
+#: undo
+msgid "undo"
+msgstr "deshaz"
+
+#: no_more_undo_possible
+msgid "no more undo possible"
+msgstr "no se puede realizar ninguna operación deshacer"
+
+#: redo
+msgid "redo"
+msgstr "rehaz"
+
+#: no_more_redo_possible
+msgid "no more redo possible"
+msgstr "no se puede realizar ninguna operación rehacer"
+
+#: select_menu
+msgid "select menu: use button 1 to select item"
+msgstr "menú de selección: utilice el botón 1 para seleccionar el elemento"
+
+#: route_menu
+msgid "route menu: use button 1 to start route"
+msgstr ""
+"menú de encaminamiento: utilice el botón 1 para iniciar el encaminamiento"
+
+#: drag_menu
+msgid "press button 1 to drag items or to push traces from behind"
+msgstr ""
+"presione el botón 1 para arrastrar o para empujar los trazos desde atrás"
+
+#: save_error
+msgid "unable to write board to file"
+msgstr "no se puede escribir la placa al fichero"

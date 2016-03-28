@@ -1,0 +1,46 @@
+#. extracted from ../interactive/resources/RatsNest_en.properties, de/interactive/RatsNest-de.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-28 05:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # German version of language dependent text of the class RatsNest
+#: via
+msgid "via"
+msgstr "Via"
+
+#: trace
+msgid "trace"
+msgstr "Bahn"
+
+#: conduction_area
+msgid "conduction area"
+msgstr "Leitungsfl�che"
+
+#: unknown
+msgid "unknown"
+msgstr "unbekannt"
+
+#: incomplete
+msgid "Incomplete connection"
+msgstr "Offene Verbindung"
+
+#: net
+msgid "net"
+msgstr "Netz"
+
+#: from
+msgid "from"
+msgstr "von"
+
+#: to
+msgid "to"
+msgstr "nach"

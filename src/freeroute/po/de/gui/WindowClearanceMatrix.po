@@ -1,0 +1,80 @@
+#. extracted from ../gui/resources/WindowClearanceMatrix_en.properties, de/gui/WindowClearanceMatrix-de.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-28 05:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # German version of language dependent text of the class WindowClearanceClass
+#: title
+msgid "Clearance Matrix"
+msgstr "Clearance-Matrix"
+
+#: layer
+msgid "Layer: "
+msgstr "Lage: "
+
+#: layer_tooltip
+msgid "Set the layer, where the clearance matrix can be changed"
+msgstr ""
+"Lage einstellen, wo die die Werte der Clearance-Matrix ge�ndert werden "
+"k�nnen"
+
+#: add_class
+msgid "Add Class"
+msgstr "Klasse hinzuf�gen"
+
+#: add_class_tooltip
+msgid "Append a new clearance class"
+msgstr "Eine neue Clearance-Klasse Klasse hinzuf�gen"
+
+#: prune
+msgid "Trim"
+msgstr "Trimmen"
+
+#: prune_tooltip
+msgid "Remove redundant classes"
+msgstr "Redundante Klassen l�schen"
+
+#: new_name
+msgid "Please enter the name of the new class"
+msgstr "Bitte geben Sie den Namen der neuen Klasse ein"
+
+#: confirm_remove
+msgid "Please confirm removing class"
+msgstr "Bitte best�tigen Sie das L�schen der Klasse"
+
+#: class
+msgid "class"
+msgstr "Klasse"
+
+#: the_class
+msgid "the class"
+msgstr "der Klasse"
+
+#: the_classes
+msgid "the classes"
+msgstr "den Klassen"
+
+#: and
+msgid "and"
+msgstr "und"
+
+#: already_assigned
+msgid "Items already assigned to"
+msgstr "Objekte sind schon zugewiesen zu"
+
+#: change_anyway
+msgid ""
+"!\n"
+"Change clearance anyway?"
+msgstr ""
+"!\n"
+"Clearance-Regel trotzdem �ndern?"

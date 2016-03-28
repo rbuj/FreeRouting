@@ -1,0 +1,90 @@
+#. extracted from ../gui/resources/WindowSelectParameter_en.properties, en/gui/WindowSelectParameter-en.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-28 05:24+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the class WindowSelectParameter
+#: title
+msgid "Select Parameter"
+msgstr "Select Parameter"
+
+#: selection_layers
+msgid "Selection Layers:"
+msgstr "Selection Layers:"
+
+#: all_visible
+msgid "all visible"
+msgstr "all visible"
+
+#: all_visible_tooltip
+msgid "selection on all visible layer, the current layer is preferred"
+msgstr "selection on all visible layer, the current layer is preferred"
+
+#: current_only
+msgid "current only"
+msgstr "current only"
+
+#: current_only_tooltip
+msgid "selection only on the current layer"
+msgstr "selection only on the current layer"
+
+#: selectable_items
+msgid "Selectable Items:"
+msgstr "Selectable Items:"
+
+#: TRACES
+msgid "traces"
+msgstr "traces"
+
+#: VIAS
+msgid "vias"
+msgstr "vias"
+
+#: PINS
+msgid "pins"
+msgstr "pins"
+
+#: CONDUCTION
+msgid "conduction areas"
+msgstr "conduction areas"
+
+#: KEEPOUT
+msgid "keepout"
+msgstr "keepout"
+
+#: VIA_KEEPOUT
+msgid "via keepout "
+msgstr "via keepout "
+
+#: COMPONENT_KEEPOUT
+msgid "place keepout"
+msgstr "place keepout"
+
+#: BOARD_OUTLINE
+msgid "board outline"
+msgstr "board outline"
+
+#: FIXED
+msgid "fixed"
+msgstr "fixed"
+
+#: UNFIXED
+msgid "unfixed"
+msgstr "unfixed"
+
+#: current_layer
+msgid "Current Layer:"
+msgstr "Current Layer:"
+
+#: current_layer_tooltip
+msgid "can be changed also with number key or '+' '-'"
+msgstr "can be changed also with number key or '+' '-'"

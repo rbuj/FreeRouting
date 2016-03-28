@@ -1,0 +1,50 @@
+#. extracted from ../gui/resources/WindowObjectInfo_en.properties, es/gui/WindowObjectInfo-es.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-28 05:24+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # Spanish version of language dependent text of the class WindowObjectInfo
+#: title
+msgid "Selected Items"
+msgstr "Elementos seleccionados"
+
+#: summary
+msgid "Summary:"
+msgstr "Resumen:"
+
+#: pin
+msgid "pin"
+msgstr "pin"
+
+#: pins
+msgid "pins"
+msgstr "pines"
+
+#: via
+msgid "via"
+msgstr "vía"
+
+#: vias
+msgid "vias"
+msgstr "vías"
+
+#: trace
+msgid "trace, cumulative trace length"
+msgstr "trazo, longitud acumulada del trazo"
+
+#: traces
+msgid "traces, cumulative trace length"
+msgstr "trazo, longitud acumulada del trazo"
+
+#: list_empty
+msgid "list is empty"
+msgstr "la lista está vacía"

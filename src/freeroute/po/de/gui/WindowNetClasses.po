@@ -1,0 +1,159 @@
+#. extracted from ../gui/resources/WindowNetClasses_en.properties, de/gui/WindowNetClasses-de.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-28 05:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # German version of language dependent text of the class WindowNetClasses
+#: title
+msgid "Net Classes"
+msgstr "Netzklassen"
+
+#: add
+msgid "Add"
+msgstr "Hinzuf�gen"
+
+#: add_tooltip
+msgid "Append a new class"
+msgstr "eine neue Netzklasse hinzuf�gen"
+
+#: remove
+msgid "Remove"
+msgstr "L�schen"
+
+#: remove_tooltip
+msgid "Remove the selected class"
+msgstr "die ausgew�hlte Netzklasse l�schen"
+
+#: assign
+msgid "Assign"
+msgstr "Zuweisen"
+
+#: assign_tooltip
+msgid "Assign net classes"
+msgstr "Netzklassen zuweisen"
+
+#: select
+msgid "Select"
+msgstr "Selektieren"
+
+#: select_tooltip
+msgid "Select the items of the chosen net classes on the board"
+msgstr "Die Objekte der ausgew�hlten Netzklassen auf der Platine selektieren"
+
+#: filter_incompletes
+msgid "Filter Incompletes"
+msgstr "Incompletes filtern"
+
+#: filter_incompletes_tooltip
+msgid "Display only the open connections of the selected net classes"
+msgstr "Nur die offenen Verbindungen der ausgew�hlten Netzklassen anzeigen"
+
+#: show_nets
+msgid "Show Nets"
+msgstr "Netze anzeigen"
+
+#: show_nets_tooltip
+msgid "Displays a list with all nets contained in the selected classes"
+msgstr ""
+"�ffnet eine Liste mit allen in den ausgew�hlten Klassen enthaltenen Netzen"
+
+#: contained_nets
+msgid "Contained Nets"
+msgstr "Enthaltene Netze"
+
+#: message_1
+msgid "default net class not removed"
+msgstr "Default-Netzklasse nicht gel�scht"
+
+#: message_2
+msgid "net class not removed because it is still used in net "
+msgstr "Netzklasse nicht gel�scht, weil sie noch benutzt wird f�r Netz "
+
+#: net_class
+msgid "net class"
+msgstr "Netzklasse"
+
+#: removed
+msgid "removed"
+msgstr "gel�scht"
+
+#: column_tool_tip_1
+msgid "The orded set of vias"
+msgstr "Der geordnete Satz von Vias"
+
+#: column_tool_tip_2
+msgid "The trace clearance class"
+msgstr "Die Clearance-Klasse f�r Bahnen"
+
+#: column_tool_tip_3
+msgid "The trace width"
+msgstr "Die Bahnbreite"
+
+#: column_tool_tip_4
+msgid "The layers of the trace width"
+msgstr "Die Lagen f�r die Bahnbreite"
+
+#: column_tool_tip_5
+msgid "Indicates, if items of this net can be pushed aside or pulled tight"
+msgstr ""
+"Gibt an, ob Bahnen aus dieser Netzklasse verschoben oder glattgezogen werden "
+"d�rfen "
+
+#: column_tool_tip_6
+msgid "If not selected, multiple connections to conduction areas are removed"
+msgstr ""
+"Wenn nicht selektiert, werden Mehrfachverbindungen zu Leitungsfl�chen "
+"entfernt "
+
+#: column_tool_tip_7
+msgid "If > 0, the cumulative trace length must be at least this value"
+msgstr "Wenn > 0 muss die kumulative Bahnl�nge mindestens diesen Wert haben"
+
+#: column_tool_tip_8
+msgid "If > 0, the cumulative trace length must be less than this value"
+msgstr "Wenn > 0 darf die kumulative Bahnl�nge h�chstens diesen Wert haben"
+
+#: NAME
+msgid "name"
+msgstr "Name"
+
+#: VIA_RULE
+msgid "via rule"
+msgstr "Via-Regel"
+
+#: CLEARANCE_CLASS
+msgid "clearance class"
+msgstr "Clearance-Klasse"
+
+#: TRACE_WIDTH
+msgid "trace width"
+msgstr "Bahnbreite"
+
+#: ON_LAYER
+msgid "on layer"
+msgstr "auf Lage"
+
+#: SHOVE_FIXED
+msgid "shove fixed"
+msgstr "schiebe-fixiert"
+
+#: CYCLES_WITH_AREAS
+msgid "cycles with areas"
+msgstr "Zykeln mit Fl�chen"
+
+#: MIN_TRACE_LENGTH
+msgid "min. length"
+msgstr "min. L�nge"
+
+#: MAX_TRACE_LENGTH
+msgid "max. length"
+msgstr "max. L�nge"

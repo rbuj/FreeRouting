@@ -1,0 +1,86 @@
+#. extracted from ../boardgraphics/resources/ColorTableModel_en.properties, de/boardgraphics/ColorTableModel-de.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-28 05:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # German version of language dependent text for ItemColorTableModel and OtherColorTableModel
+#: LAYER
+msgid "Layer"
+msgstr "Lage"
+
+#: TRACES
+msgid "Traces"
+msgstr "Bahnen"
+
+#: FIXED_TRACES
+msgid "Fixed Traces"
+msgstr "Fixierte Bahnen"
+
+#: VIAS
+msgid "Vias"
+msgstr "Vias"
+
+#: FIXED_VIAS
+msgid "Fixed Vias"
+msgstr "Fixierte Vias"
+
+#: PINS
+msgid "Pins"
+msgstr "Pins"
+
+#: CONDUCTION_AREAS
+msgid "Conduction"
+msgstr "Leitungsfl�chen"
+
+#: KEEPOUTS
+msgid "Obstacles"
+msgstr "Sperrfl�chen"
+
+#: VIA_KEEPOUTS
+msgid "Via Obstacles"
+msgstr "Via-Sperrfl�chen"
+
+#: PLACE_KEEPOUTS
+msgid "Place Obstacles"
+msgstr "Platzierungs-Sperrfl�chen"
+
+#: BACKGROUND
+msgid "Background"
+msgstr "Hintergrund"
+
+#: HIGHLIGHT
+msgid "Highlight "
+msgstr "Highlight "
+
+#: INCOMPLETES
+msgid "Incompletes"
+msgstr "Incompletes"
+
+#: VIOLATIONS
+msgid "Violations"
+msgstr "Verletzungen"
+
+#: OUTLINE
+msgid "Outline"
+msgstr "Platinenrand"
+
+#: COMPONENT_FRONT
+msgid "Comp. Outline Front"
+msgstr "Bauteilrand vorne"
+
+#: COMPONENT_BACK
+msgid "Comp. Outline Back"
+msgstr "Bauteilrand hinten"
+
+#: LENGTH_MATCHING_AREA
+msgid "Lenght Matching "
+msgstr "L�ngenabgleich "
