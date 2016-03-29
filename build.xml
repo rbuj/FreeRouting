@@ -229,25 +229,6 @@
     </target>
 
     <!--
-        javahelp source dir
-    -->
-    <available file="${javahelp.src.dir}" property="javahelp.src.dir.exists"/>
-
-    <target name="javahelp.src.dir.check">
-        <condition property="javahelp.src.dir.exists">
-            <available file="${javahelp.src.dir}" type="dir"/>
-        </condition>
-    </target>
-
-    <target name="javahelp-src" depends="javahelp.src.dir.check" unless="javahelp.src.dir.exists">
-        <exec executable="svn">
-            <arg value="co" />
-            <arg value="https://svn.java.net/svn/javahelp~svn" />
-            <arg value="${javahelp.src.dir}" />
-        </exec>
-    </target>
-
-    <!--
         docbook-libs
     -->
     <target name="docbook-libs" depends="download-saxon,download-xerces2-j,download-xalan2-j"/>
@@ -287,20 +268,14 @@
     <!--
         JavaHelpSearch
     -->
-    <target name="help" depends="init-ant-contrib,-ivy-retrieve,build-javahelp,javahelp-src" description="JavaHelpSearch from JavaHelp">
-        <pathconvert property="javah.computed" dirsep="/" pathsep=":">
-            <path path="${reference.JavaHelp.jar}">
-                <filelist files="${reference.JavaHelp.jar} ${reference.JSearchIndexer.jar}"/>
-            </path>
-            <map from="${basedir}${file.separator}" to=""/>
-        </pathconvert>
+    <target name="help" depends="init-ant-contrib,-ivy-retrieve,build-javahelp" description="JavaHelpSearch from JavaHelp">
         <for param="lang" list="${languages.list}">
             <sequential>
                 <echo message="JavaHelpSearch: @{lang}"/>
                 <delete dir="${docbook.output.dir}/@{lang}/JavaHelpSearch"/>
                 <mkdir dir="${docbook.output.dir}/@{lang}/JavaHelpSearch"/>
                 <java classname="com.sun.java.help.search.Indexer" 
-                      classpath="${reference.JavaHelp.jar}\:${reference.JSearchIndexer.jar}"
+                      classpath="${ivy.classpath}"
                       fork="true" failonerror="true">
                     <arg value="-locale"/>
                     <arg value="@{lang}"/>
