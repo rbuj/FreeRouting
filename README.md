@@ -73,11 +73,10 @@ Here are some instructions how to run the Freerouting project from a Terminal.
 
 Fedora: icedtea-web, java-1.8.0-openjdk-devel, ant, NetBeans
 ```bash
-$ 
 ant -Dendorsed.classpath=/usr/share/java/icedtea-web.jar -Dlibs.CopyLibs.classpath=/usr/local/netbeans-8.1/java/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar -Dlibs.JWSAntTasks.classpath=/usr/local/netbeans-8.1/java/ant/extra/org-netbeans-modules-javawebstart-anttasks.jar jar
 ```
 
 OS X: Go to the Java SE download web page of Oracle to download and install JDK & JRE 8. https://www.java.com/en/download/ . Install Apache Ant (Java opensource build system). http://ant.apache.org . 
 ```bash
-ant -Dendorsed.classpath="$(/usr/libexec/java_home -v 1.8)/jre/lib/javaws.jar" -Dlibs.CopyLibs.classpath="/Applications/NetBeans/NetBeans 8.1.app/Contents/Resources/NetBeans/java/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar" -Dlibs.JWSAntTasks.classpath="/Applications/NetBeans/NetBeans 8.1.app/Contents/Resources/NetBeans/java/ant/extra/org-netbeans-modules-javawebstart-anttasks.jar"
+ant -Dendorsed.classpath="$(/usr/libexec/java_home -v 1.8)/jre/lib/javaws.jar" -Dlibs.CopyLibs.classpath="/Applications/NetBeans/NetBeans 8.1.app/Contents/Resources/NetBeans/java/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar" -Dlibs.JWSAntTasks.classpath="/Applications/NetBeans/NetBeans 8.1.app/Contents/Resources/NetBeans/java/ant/extra/org-netbeans-modules-javawebstart-anttasks.jar" jar
 ```
