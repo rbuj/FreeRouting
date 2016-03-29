@@ -64,19 +64,7 @@ public class BoardMenuHelp extends BoardMenuHelpReduced {
         if (BoardFrame.help_broker == null) {
             String language = p_locale.getLanguage();
             String helpset_name;
-            try {
-                java.net.URL uri = MainApplication.class.getResource("/LOCALES");
-                Path path = Paths.get(uri.toURI());
-                List<String> locale_list = Files.readAllLines(path);
-                if (locale_list.contains(language)) {
-                    helpset_name = "helpset/" + language + "/jhelpset.hs";
-                } else {
-                    helpset_name = "helpset/en/jhelpset.hs";
-                }
-            } catch (URISyntaxException | IOException E) {
-                System.out.println(E.toString());
-                return;
-            }
+            helpset_name = "helpset/" + language + "/jhelpset.hs";
             try {
                 URL hsURL = HelpSet.findHelpSet(this.getClass().getClassLoader(), helpset_name);
                 if (hsURL == null) {

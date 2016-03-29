@@ -21,9 +21,10 @@
 package gui;
 
 import board.TestLevel;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -45,101 +46,100 @@ public class MainApplication extends javax.swing.JFrame {
         String design_file_name = null;
         String design_dir_name = null;
         java.util.Locale current_locale = null;
-        for (int i = 0; i < p_args.length; ++i) {
-            if (p_args[i].startsWith("-de")) // the design file is provided
-            {
-                try {
+        try {
+            for (int i = 0; i < p_args.length; ++i) {
+                if (p_args[i].startsWith("-de")) // the design file is provided
+                {
                     if (!p_args[i + 1].startsWith("-")) {
                         single_design_option = true;
                         design_file_name = p_args[i + 1];
                         ++i;
                     }
-                } catch (Exception E) {
-                    System.out.println(E.toString());
-                    return;
-                }
-            } else if (p_args[i].startsWith("-di")) // the design directory is provided
-            {
-                try {
+                } else if (p_args[i].startsWith("-di")) // the design directory is provided
+                {
                     if (!p_args[i + 1].startsWith("-")) {
                         design_dir_name = p_args[i + 1];
                         ++i;
                     }
-                } catch (Exception E) {
-                    System.out.println(E.toString());
-                    return;
-                }
-            } else if (p_args[i].startsWith("-l")) // the locale is provided
-            {
-                try {
-                    java.net.URL uri = MainApplication.class.getResource("/LOCALES");
-                    Path path = Paths.get(uri.toURI());
-                    List<String> locale_list = Files.readAllLines(path);
+                } else if (p_args[i].startsWith("-l")) // the locale is provided
+                {
+                    InputStream in = MainApplication.class.getClass().getResourceAsStream("/LOCALES");
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                    List<String> locale_list = new ArrayList<>();
+                    String line = reader.readLine();
+                    while (line != null) {
+                        locale_list.add(line);
+                        line = reader.readLine();
+                    }
+                    reader.close();
+                    in.close();
                     String new_locale = p_args[i + 1].substring(0, 2);
                     if (locale_list.contains(new_locale)) {
                         current_locale = new Locale(new_locale, "");
                         ++i;
                     }
-                } catch (Exception E) {
-                    System.out.println(E.toString());
-                    return;
+                } else if (p_args[i].startsWith("-s")) {
+                    session_file_option = true;
+                } else if (p_args[i].startsWith("-test")) {
+                    test_version_option = true;
                 }
-            } else if (p_args[i].startsWith("-s")) {
-                session_file_option = true;
-            } else if (p_args[i].startsWith("-test")) {
-                test_version_option = true;
             }
-        }
-        if (current_locale==null){
-            try {
-                java.net.URL uri = MainApplication.class.getResource("/LOCALES");
-                Path path = Paths.get(uri.toURI());
-                List<String> locale_list = Files.readAllLines(path);
+            if (current_locale == null) {
+                InputStream in = MainApplication.class.getClass().getResourceAsStream("/LOCALES");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                List<String> locale_list = new ArrayList<>();
+                String line = reader.readLine();
+                while (line != null) {
+                    locale_list.add(line);
+                    line = reader.readLine();
+                }
+                reader.close();
+                in.close();
                 String new_locale = java.util.Locale.getDefault().getLanguage();
                 if (locale_list.contains(new_locale)) {
                     current_locale = new Locale(new_locale, "");
                 } else {
                     current_locale = new Locale("en", "");
                 }
-            } catch (Exception E) {
-                System.out.println(E.toString());
-                return;
             }
-        }
 
-        if (single_design_option) {
-            java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("gui.resources.MainApplication", current_locale);
-            BoardFrame.Option board_option;
-            if (session_file_option) {
-                board_option = BoardFrame.Option.SESSION_FILE;
-            } else {
-                board_option = BoardFrame.Option.SINGLE_FRAME;
-            }
-            DesignFile design_file = DesignFile.get_instance(design_file_name, false);
-            if (design_file == null) {
-                System.out.print(resources.getString("message_6") + " ");
-                System.out.print(design_file_name);
-                System.out.println(" " + resources.getString("message_7"));
-                return;
-            }
-            String message = resources.getString("loading_design") + " " + design_file_name;
-            WindowMessage welcome_window = WindowMessage.show(message);
-            final BoardFrame new_frame
-                    = create_board_frame(design_file, null, board_option, test_version_option, current_locale);
-            welcome_window.dispose();
-            if (new_frame == null) {
-                Runtime.getRuntime().exit(1);
-            }
-            new_frame.addWindowListener(new java.awt.event.WindowAdapter() {
-
-                @Override
-                public void windowClosed(java.awt.event.WindowEvent evt) {
-                    Runtime.getRuntime().exit(0);
+            if (single_design_option) {
+                java.util.ResourceBundle resources
+                        = java.util.ResourceBundle.getBundle("gui.resources.MainApplication", current_locale);
+                BoardFrame.Option board_option;
+                if (session_file_option) {
+                    board_option = BoardFrame.Option.SESSION_FILE;
+                } else {
+                    board_option = BoardFrame.Option.SINGLE_FRAME;
                 }
-            });
-        } else {
-            new MainApplication(design_dir_name, test_version_option, current_locale).setVisible(true);
+                DesignFile design_file = DesignFile.get_instance(design_file_name, false);
+                if (design_file == null) {
+                    System.out.print(resources.getString("message_6") + " ");
+                    System.out.print(design_file_name);
+                    System.out.println(" " + resources.getString("message_7"));
+                    return;
+                }
+                String message = resources.getString("loading_design") + " " + design_file_name;
+                WindowMessage welcome_window = WindowMessage.show(message);
+                final BoardFrame new_frame
+                        = create_board_frame(design_file, null, board_option, test_version_option, current_locale);
+                welcome_window.dispose();
+                if (new_frame == null) {
+                    Runtime.getRuntime().exit(1);
+                }
+                new_frame.addWindowListener(new java.awt.event.WindowAdapter() {
+
+                    @Override
+                    public void windowClosed(java.awt.event.WindowEvent evt) {
+                        Runtime.getRuntime().exit(0);
+                    }
+                });
+            } else {
+                new MainApplication(design_dir_name, test_version_option, current_locale).setVisible(true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+            return;
         }
     }
 
@@ -215,7 +215,7 @@ public class MainApplication extends javax.swing.JFrame {
         }
 
         BoardFrame.Option option;
-            option = BoardFrame.Option.FROM_START_MENU;
+        option = BoardFrame.Option.FROM_START_MENU;
         String message = resources.getString("loading_design") + " " + design_file.get_name();
         message_field.setText(message);
         WindowMessage welcome_window = WindowMessage.show(message);
