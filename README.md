@@ -62,7 +62,7 @@ Here are some instructions how to run the Freerouting project in the NetBeans ID
 
 For optional parameters of the Freerouting outfile check the usage of the variable p_args in the source file gui/MainApplication.java.
 
-Here are some instructions how to run the Freerouting project from a Terminal.
+Here are some instructions how to build the Freerouting project from a Terminal.
 ==================================================================================
 
 1) Go to the Java SE download web page of Oracle to download and install JDK & JRE 8. https://www.java.com/en/download/
@@ -73,10 +73,16 @@ Here are some instructions how to run the Freerouting project from a Terminal.
 
 Fedora: icedtea-web, java-1.8.0-openjdk-devel, ant, NetBeans
 ```bash
-ant -Dendorsed.classpath=/usr/share/java/icedtea-web.jar -Dlibs.CopyLibs.classpath=/usr/local/netbeans-8.1/java/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar -Dlibs.JWSAntTasks.classpath=/usr/local/netbeans-8.1/java/ant/extra/org-netbeans-modules-javawebstart-anttasks.jar jar
+export ENDORSED_CP=/usr/share/java/icedtea-web.jar
+export COPYLIBS_CP=/usr/local/netbeans-8.1/java/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar
+export export JWSANTTASKS_CP=/usr/local/netbeans-8.1/java/ant/extra/org-netbeans-modules-javawebstart-anttasks.jar
+ant -Dendorsed.classpath=$ENDORSED_CP -Dlibs.CopyLibs.classpath=$COPYLIBS_CP -Dlibs.JWSAntTasks.classpath=$JWSANTTASKS_CP -Dnb.internal.action.name=build jar
 ```
 
 OS X: Go to the Java SE download web page of Oracle to download and install JDK & JRE 8. https://www.java.com/en/download/ . Install Apache Ant (Java opensource build system). http://ant.apache.org . 
 ```bash
-ant -Dendorsed.classpath="$(/usr/libexec/java_home -v 1.8)/jre/lib/javaws.jar" -Dlibs.CopyLibs.classpath="/Applications/NetBeans/NetBeans 8.1.app/Contents/Resources/NetBeans/java/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar" -Dlibs.JWSAntTasks.classpath="/Applications/NetBeans/NetBeans 8.1.app/Contents/Resources/NetBeans/java/ant/extra/org-netbeans-modules-javawebstart-anttasks.jar" jar
+export ENDORSED_CP="$(/usr/libexec/java_home -v 1.8)/jre/lib/javaws.jar"
+export COPYLIBS_CP="/Applications/NetBeans/NetBeans 8.1.app/Contents/Resources/NetBeans/java/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar"
+export JWSANTTASKS_CP="/Applications/NetBeans/NetBeans 8.1.app/Contents/Resources/NetBeans/java/ant/extra/org-netbeans-modules-javawebstart-anttasks.jar"
+ant -Dendorsed.classpath="$ENDORSED_CP" -Dlibs.CopyLibs.classpath="$COPYLIBS_CP" -Dlibs.JWSAntTasks.classpath="$JWSANTTASKS_CP" -Dnb.internal.action.name=build jar
 ```
