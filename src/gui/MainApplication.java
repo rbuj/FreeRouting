@@ -63,16 +63,15 @@ public final class MainApplication extends javax.swing.JFrame {
                     }
                 } else if (p_args[i].startsWith("-l")) // the locale is provided
                 {
-                    InputStream in = MainApplication.class.getClass().getResourceAsStream("/LOCALES");
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                    List<String> locale_list = new ArrayList<>();
-                    String line = reader.readLine();
-                    while (line != null) {
-                        locale_list.add(line);
-                        line = reader.readLine();
+                    List<String> locale_list;
+                    try (InputStream in = MainApplication.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+                        locale_list = new ArrayList<>();
+                        String line = reader.readLine();
+                        while (line != null) {
+                            locale_list.add(line);
+                            line = reader.readLine();
+                        }
                     }
-                    reader.close();
-                    in.close();
                     String new_locale = p_args[i + 1].substring(0, 2);
                     if (locale_list.contains(new_locale)) {
                         current_locale = new Locale(new_locale, "");
@@ -85,16 +84,15 @@ public final class MainApplication extends javax.swing.JFrame {
                 }
             }
             if (current_locale == null) {
-                InputStream in = MainApplication.class.getClass().getResourceAsStream("/LOCALES");
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                List<String> locale_list = new ArrayList<>();
-                String line = reader.readLine();
-                while (line != null) {
-                    locale_list.add(line);
-                    line = reader.readLine();
+                List<String> locale_list;
+                try (InputStream in = MainApplication.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+                    locale_list = new ArrayList<>();
+                    String line = reader.readLine();
+                    while (line != null) {
+                        locale_list.add(line);
+                        line = reader.readLine();
+                    }
                 }
-                reader.close();
-                in.close();
                 String new_locale = java.util.Locale.getDefault().getLanguage();
                 if (locale_list.contains(new_locale)) {
                     current_locale = new Locale(new_locale, "");
