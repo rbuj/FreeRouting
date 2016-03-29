@@ -26,7 +26,7 @@ import board.ItemSelectionFilter;
  *
  * @author Alfons Wirtz
  */
-public class WindowSelectParameter extends BoardSavableSubWindow {
+public final class WindowSelectParameter extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of SelectWindow

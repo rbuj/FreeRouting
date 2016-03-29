@@ -25,7 +25,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class WindowAbout extends BoardSavableSubWindow {
+final public class WindowAbout extends BoardSavableSubWindow {
 
     public WindowAbout(java.util.Locale p_locale) {
         java.util.ResourceBundle resources

@@ -28,7 +28,7 @@ import rules.ViaInfos;
  *
  * @author Alfons Wirtz
  */
-public class WindowEditVias extends BoardSavableSubWindow {
+public final class WindowEditVias extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of ViaTablePanel

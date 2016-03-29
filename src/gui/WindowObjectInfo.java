@@ -27,7 +27,7 @@ import java.util.Collection;
  *
  * @author Alfons Wirtz
  */
-public class WindowObjectInfo extends BoardTemporarySubWindow implements board.ObjectInfoPanel {
+public final class WindowObjectInfo extends BoardTemporarySubWindow implements board.ObjectInfoPanel {
 
     /**
      * Displays a new ObjectInfoWindow with information about the items in

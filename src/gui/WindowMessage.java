@@ -25,7 +25,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class WindowMessage extends javax.swing.JFrame {
+public final class WindowMessage extends javax.swing.JFrame {
 
     /**
      * Displays a window with the input message at the center of the screen.

@@ -26,7 +26,7 @@ import rules.ViaRule;
  *
  * @author Alfons Wirtz
  */
-public class WindowManualRules extends BoardSavableSubWindow {
+public final class WindowManualRules extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of TraceWidthWindow

@@ -25,7 +25,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-class BoardPanelStatus extends javax.swing.JPanel {
+final class BoardPanelStatus extends javax.swing.JPanel {
 
     /**
      * Creates a new instance of BoardStatusPanel

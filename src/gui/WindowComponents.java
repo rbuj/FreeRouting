@@ -28,7 +28,7 @@ import java.util.List;
  *
  * @author Alfons Wirtz
  */
-public class WindowComponents extends WindowObjectListWithFilter {
+public final class WindowComponents extends WindowObjectListWithFilter {
 
     /**
      * Creates a new instance of ComponentsWindow

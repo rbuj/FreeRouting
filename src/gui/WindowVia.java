@@ -29,7 +29,7 @@ import rules.ViaRule;
  *
  * @author Alfons Wirtz
  */
-public class WindowVia extends BoardSavableSubWindow {
+public final class WindowVia extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of ViaWindow

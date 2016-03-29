@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class PopupMenuCopy extends PopupMenuDisplay {
+public final class PopupMenuCopy extends PopupMenuDisplay {
 
     /**
      * Creates a new instance of CopyPopupMenu

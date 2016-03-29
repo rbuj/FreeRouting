@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-class PupupMenuCornerItemConstruction extends javax.swing.JPopupMenu {
+final class PupupMenuCornerItemConstruction extends javax.swing.JPopupMenu {
 
     /**
      * Creates a new instance of CornerItemConstructionPopupMenu

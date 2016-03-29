@@ -26,7 +26,7 @@ import java.io.IOException;
  *
  * @author Alfons Wirtz
  */
-public class WindowSnapshot extends BoardSavableSubWindow {
+public final class WindowSnapshot extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of SnapshotFrame

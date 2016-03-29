@@ -27,7 +27,7 @@ import rules.ClearanceMatrix;
  *
  * @author Alfons Wirtz
  */
-public class WindowClearanceMatrix extends BoardSavableSubWindow {
+public final class WindowClearanceMatrix extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of ClearanceMatrixWindow

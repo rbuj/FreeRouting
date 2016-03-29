@@ -39,7 +39,7 @@ import rules.Net;
  *
  * @author Alfons Wirtz
  */
-public class NetIncompletes {
+public final class NetIncompletes {
 
     /**
      * Creates a new instance of NetIncompletes

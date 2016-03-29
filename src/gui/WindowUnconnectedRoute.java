@@ -31,7 +31,7 @@ import java.util.SortedSet;
  *
  * @author Alfons Wirtz
  */
-public class WindowUnconnectedRoute extends WindowObjectListWithFilter {
+public final class WindowUnconnectedRoute extends WindowObjectListWithFilter {
 
     /**
      * Creates a new instance of WindowUnconnectedRoute

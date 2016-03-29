@@ -26,7 +26,7 @@ import board.BoardOutline;
  *
  * @author Alfons Wirtz
  */
-public class WindowRouteDetail extends BoardSavableSubWindow {
+public final class WindowRouteDetail extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of RouteDetailWindow

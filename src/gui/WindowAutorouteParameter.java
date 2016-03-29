@@ -25,7 +25,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class WindowAutorouteParameter extends BoardSavableSubWindow {
+public final class WindowAutorouteParameter extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of WindowAutorouteParameter

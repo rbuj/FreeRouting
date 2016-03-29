@@ -973,7 +973,7 @@ public class PlanarDelaunayTriangulation {
      * internal nodes are triangles, that were part of the triangulationn at
      * some earlier stage, but have been replaced their children.
      */
-    private static class TriangleGraph {
+    private static final class TriangleGraph {
 
         public TriangleGraph(Triangle p_triangle) {
             if (p_triangle != null) {

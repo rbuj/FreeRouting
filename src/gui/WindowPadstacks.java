@@ -30,7 +30,7 @@ import library.Padstacks;
  *
  * @author Alfons Wirtz
  */
-public class WindowPadstacks extends WindowObjectListWithFilter {
+public final class WindowPadstacks extends WindowObjectListWithFilter {
 
     /**
      * Creates a new instance of PadstacksWindow

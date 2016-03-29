@@ -25,7 +25,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class WindowMoveParameter extends BoardSavableSubWindow {
+public final class WindowMoveParameter extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of WindowMoveParameter

@@ -34,7 +34,7 @@ import java.util.Locale;
  *
  * @author Alfons Wirtz
  */
-public class MainApplication extends javax.swing.JFrame {
+public final class MainApplication extends javax.swing.JFrame {
 
     /**
      * Main function of the Application

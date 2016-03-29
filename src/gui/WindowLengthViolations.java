@@ -31,7 +31,7 @@ import rules.Nets;
  *
  * @author Alfons Wirtz
  */
-public class WindowLengthViolations extends WindowObjectListWithFilter {
+public final class WindowLengthViolations extends WindowObjectListWithFilter {
 
     /**
      * Creates a new instance of WindowLengthViolations

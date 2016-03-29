@@ -29,7 +29,7 @@ import rules.ViaRule;
  *
  * @author Alfons Wirtz
  */
-public class WindowNetClasses extends BoardSavableSubWindow {
+public final class WindowNetClasses extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of NetClassesWindow

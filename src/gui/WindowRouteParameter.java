@@ -26,7 +26,7 @@ import java.util.Collection;
  *
  * @author Alfons Wirtz
  */
-public class WindowRouteParameter extends BoardSavableSubWindow {
+public final class WindowRouteParameter extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of RouteParameterWindow

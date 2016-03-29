@@ -28,7 +28,7 @@ import rules.Nets;
  *
  * @author Alfons Wirtz
  */
-public class WindowNets extends WindowObjectListWithFilter {
+public final class WindowNets extends WindowObjectListWithFilter {
 
     /**
      * Creates a new instance of NetsWindow

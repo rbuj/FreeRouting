@@ -25,7 +25,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class WindowSnapshotSettings extends BoardSavableSubWindow {
+public final class WindowSnapshotSettings extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of WindowSnapshotSettings

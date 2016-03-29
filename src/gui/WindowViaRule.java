@@ -28,7 +28,7 @@ import rules.ViaRule;
  *
  * @author Alfons Wirtz
  */
-public class WindowViaRule extends javax.swing.JFrame {
+public final class WindowViaRule extends javax.swing.JFrame {
 
     /**
      * Creates a new instance of ViaRuleWindow

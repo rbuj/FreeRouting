@@ -33,7 +33,7 @@ import java.util.SortedSet;
  *
  * @author Alfons Wirtz
  */
-public class WindowRouteStubs extends WindowObjectListWithFilter {
+public final class WindowRouteStubs extends WindowObjectListWithFilter {
 
     /**
      * Creates a new instance of WindowRouteStubs

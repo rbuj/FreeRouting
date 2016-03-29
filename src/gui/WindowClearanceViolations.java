@@ -29,7 +29,7 @@ import java.util.List;
  *
  * @author Alfons Wirtz
  */
-public class WindowClearanceViolations extends WindowObjectListWithFilter {
+public final class WindowClearanceViolations extends WindowObjectListWithFilter {
 
     /**
      * Creates a new instance of IncompletesWindow

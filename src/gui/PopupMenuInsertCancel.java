@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-class PopupMenuInsertCancel extends javax.swing.JPopupMenu {
+final class PopupMenuInsertCancel extends javax.swing.JPopupMenu {
 
     /**
      * Creates a new instance of CompleteCancelPopupMenu

@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-class BoardToolbar extends javax.swing.JPanel {
+final class BoardToolbar extends javax.swing.JPanel {
 
     /**
      * Creates a new instance of BoardToolbarPanel

@@ -54,7 +54,7 @@ import rules.BoardRules;
  *
  * @author Alfons Wirtz
  */
-public class BoardHandling {
+public final class BoardHandling {
 
     /**
      * Creates a new BoardHandling

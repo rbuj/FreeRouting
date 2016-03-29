@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-class PopupMenuChangeLayer extends javax.swing.JMenu {
+final class PopupMenuChangeLayer extends javax.swing.JMenu {
 
     /**
      * Creates a new instance of ChangeLayerMenu

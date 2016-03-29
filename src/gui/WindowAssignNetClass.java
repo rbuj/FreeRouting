@@ -27,7 +27,7 @@ import rules.NetClass;
  *
  * @author Alfons Wirtz
  */
-public class WindowAssignNetClass extends BoardSavableSubWindow {
+public final class WindowAssignNetClass extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of AssignNetRulesWindow

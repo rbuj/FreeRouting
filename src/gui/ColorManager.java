@@ -45,7 +45,7 @@ import javax.swing.table.TableCellRenderer;
  *
  * @author Alfons Wirtz
  */
-public class ColorManager extends BoardSavableSubWindow {
+public final class ColorManager extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of ColorManager

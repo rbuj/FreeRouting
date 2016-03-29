@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class WindowDisplayMisc extends BoardSavableSubWindow {
+public final class WindowDisplayMisc extends BoardSavableSubWindow {
 
     /**
      * Creates a new instance of DisplayMiscWindow
