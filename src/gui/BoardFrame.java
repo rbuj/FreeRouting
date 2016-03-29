@@ -33,7 +33,7 @@ import java.io.IOException;
 public class BoardFrame extends javax.swing.JFrame {
 
     public enum Option {
-        FROM_START_MENU, SINGLE_FRAME, SESSION_FILE, WEBSTART, EXTENDED_TOOL_BAR
+        FROM_START_MENU, SINGLE_FRAME, SESSION_FILE, EXTENDED_TOOL_BAR
     }
 
     /**
@@ -91,7 +91,6 @@ public class BoardFrame extends javax.swing.JFrame {
     BoardFrame(DesignFile p_design, Option p_option, TestLevel p_test_level, BoardObservers p_observers,
             datastructures.IdNoGenerator p_item_id_no_generator, java.util.Locale p_locale, boolean p_confirm_cancel) {
         this.design_file = p_design;
-        this.is_web_start = (p_option == Option.WEBSTART);
         this.test_level = p_test_level;
 
         this.confirm_cancel = p_confirm_cancel;
@@ -131,7 +130,7 @@ public class BoardFrame extends javax.swing.JFrame {
         this.scroll_pane.setVerifyInputWhenFocusTarget(false);
         this.add(scroll_pane, java.awt.BorderLayout.CENTER);
 
-        this.board_panel = new BoardPanel(screen_messages, this, this.is_web_start, p_locale);
+        this.board_panel = new BoardPanel(screen_messages, this, p_locale);
         this.scroll_pane.setViewportView(board_panel);
 
         this.setTitle(resources.getString("title"));
@@ -603,8 +602,6 @@ public class BoardFrame extends javax.swing.JFrame {
      * true, if the frame is created by an application running under Java Web
      * Start
      */
-    final boolean is_web_start;
-
     private final boolean help_system_used;
     static javax.help.HelpSet help_set = null;
     static javax.help.HelpBroker help_broker = null;

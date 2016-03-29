@@ -166,11 +166,6 @@ public final class MainApplication extends javax.swing.JFrame {
         restore_defaults_button = new javax.swing.JButton();
         message_field = new javax.swing.JTextField();
         message_field.setText("");
-        this.window_net_demonstrations = new WindowNetDemonstrations(p_current_locale);
-        java.awt.Point location = getLocation();
-        this.window_net_demonstrations.setLocation((int) location.getX() + 50, (int) location.getY() + 50);
-        this.window_net_sample_designs = new WindowNetSampleDesigns(p_current_locale);
-        this.window_net_sample_designs.setLocation((int) location.getX() + 90, (int) location.getY() + 90);
 
         setTitle(resources.getString("title"));
         boolean add_buttons = true;
@@ -271,7 +266,7 @@ public final class MainApplication extends javax.swing.JFrame {
             String[] name_parts = file_name.split("\\.");
             String confirm_import_rules_message = resources.getString("confirm_import_rules");
             DesignFile.read_rules_file(name_parts[0], p_design_file.get_parent(),
-                    new_frame.board_panel.board_handling, p_option == BoardFrame.Option.WEBSTART,
+                    new_frame.board_panel.board_handling,
                     confirm_import_rules_message);
             new_frame.refresh_windows();
         }
@@ -284,14 +279,7 @@ public final class MainApplication extends javax.swing.JFrame {
     private final javax.swing.JButton restore_defaults_button;
     private javax.swing.JTextField message_field;
     private javax.swing.JPanel main_panel;
-    /**
-     * A Frame with routing demonstrations in the net.
-     */
-    private final WindowNetSamples window_net_demonstrations;
-    /**
-     * A Frame with sample board designs in the net.
-     */
-    private final WindowNetSamples window_net_sample_designs;
+
     /**
      * The list of open board frames
      */
@@ -338,18 +326,8 @@ public final class MainApplication extends javax.swing.JFrame {
             }
         }
 
-        @Override
-        public void windowIconified(java.awt.event.WindowEvent evt) {
-            window_net_sample_designs.parent_iconified();
-        }
-
-        @Override
-        public void windowDeiconified(java.awt.event.WindowEvent evt) {
-            window_net_sample_designs.parent_deiconified();
-        }
     }
-    static final String WEB_FILE_BASE_NAME = "http://www.freerouting.net/java/";
-    private static final boolean OFFLINE_ALLOWED = true;
+
     /**
      * Change this string when creating a new version
      */

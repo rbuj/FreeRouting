@@ -43,15 +43,13 @@ public class BoardPanel extends javax.swing.JPanel {
      * Creates a new BoardPanel in an Application
      */
     public BoardPanel(ScreenMessages p_screen_messages, BoardFrame p_board_frame,
-            boolean p_is_web_application, java.util.Locale p_locale) {
+            java.util.Locale p_locale) {
         screen_messages = p_screen_messages;
-        if (!p_is_web_application) {
-            try {
-                // used to be able to change the location of the mouse pointer
-                robot = new java.awt.Robot();
-            } catch (java.awt.AWTException e) {
-                System.out.println("unable to create robot");
-            }
+        try {
+            // used to be able to change the location of the mouse pointer
+            robot = new java.awt.Robot();
+        } catch (java.awt.AWTException e) {
+            System.out.println("unable to create robot");
         }
         board_frame = p_board_frame;
         this.scroll_pane = board_frame.scroll_pane;
@@ -167,15 +165,6 @@ public class BoardPanel extends javax.swing.JPanel {
             if (curr_menu != null) {
                 int curr_x = evt.getX();
                 int curr_y = evt.getY();
-                if (curr_menu == popup_menu_dynamic_route && board_frame.is_web_start) {
-                    int dx = curr_menu.getWidth();
-                    if (dx <= 0) {
-                        // force the width to be calculated
-                        curr_menu.show(this, curr_x, curr_y);
-                        dx = curr_menu.getWidth();
-                    }
-                    curr_x -= dx;
-                }
                 curr_menu.show(this, curr_x, curr_y);
             }
             right_button_click_location = evt.getPoint();

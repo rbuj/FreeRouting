@@ -208,7 +208,7 @@ public class DesignFile {
     }
 
     public static boolean read_rules_file(String p_design_name, String p_parent_name,
-            interactive.BoardHandling p_board_handling, boolean p_is_web_start, String p_confirm_message) {
+            interactive.BoardHandling p_board_handling, String p_confirm_message) {
 
         boolean result = true;
         String rule_file_name = p_design_name + ".rules";
