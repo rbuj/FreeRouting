@@ -70,47 +70,6 @@
     nbproject/build-impl.xml file. 
 
     -->
-    <property name="languages.list" value="ca,de,en,es" />
-
-    <property name="docbook.base.dir" value="${basedir}/src/help" />
-    <property name="docbook.lib.dir" value="${docbook.base.dir}/lib" />
-    <property name="docbook.input.dir" value="${docbook.base.dir}/manual" />
-    <property name="docbook.output.dir" value="${basedir}/src/helpset" />
-
-    <property name="docbook.xsl.version" value="1.79.1" />
-    <property name="docbook.xsl.base.dir" value="${docbook.base.dir}"/>
-    <property name="docbook.xsl.dir" value="${docbook.xsl.base.dir}/docbook"/>
-    <property name="docbook.xsl.file" value="${docbook.xsl.base.dir}/docbook.zip"/>
-
-    <property name="html.stylesheet" value="${docbook.xsl.dir}/html/docbook.xsl" />
-    <property name="javahelp.stylesheet" value="${docbook.xsl.dir}/javahelp/javahelp.xsl" />
-
-    <property name="docbook.xml.version" value="4.5" />
-    <property name="docbook.xml.base.dir" value="${docbook.base.dir}"/>
-    <property name="docbook.xml.dir" value="${docbook.xml.base.dir}/docbook-xml-${docbook.xml.version}"/>
-    <property name="docbook.xml.file" value="${docbook.xml.base.dir}/docbook.zip"/>
-
-    <property name="xerces2-j.install.version" value="2.11.0" />
-    <property name="xerces2-j.jar.dir" value="${docbook.lib.dir}" />
-    <property name="xerces2-j.jar.file" value="${xerces2-j.jar.dir}/xerces2-j.jar" />
-
-    <property name="xalan2-j.install.version" value="2.7.2" />
-    <property name="xalan2-j.jar.dir" value="${docbook.lib.dir}" />
-    <property name="xalan2-j.jar.file" value="${xalan2-j.jar.dir}/xalan2-j.jar" />
-
-    <property name="saxon.install.version" value="6.5.3" />
-    <property name="saxon.jar.dir" value="${docbook.lib.dir}" />
-    <property name="saxon.jar.file" value="${saxon.jar.dir}/saxon.jar" />
-
-    <property name="ant-contrib.home" value="${user.home}/.ant" />
-    <property name="ant-contrib.jar.dir" value="${ant-contrib.home}/lib" />
-    <property name="ant-contrib.jar.file" value="${ant-contrib.jar.dir}/ant-contrib.jar" />
-
-    <property name="ivy.install.version" value="2.4.0" />
-    <property name="ivy.home" value="${user.home}/.ant" />
-    <property name="ivy.jar.dir" value="${ivy.home}/lib" />
-    <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
-    <property name="ivy.lib.dir" value="${basedir}/lib" />
     <!--
         Ant contrib bootstrap
     -->
@@ -270,6 +229,25 @@
     </target>
 
     <!--
+        javahelp source dir
+    -->
+    <available file="${javahelp.src.dir}" property="javahelp.src.dir.exists"/>
+
+    <target name="javahelp.src.dir.check">
+        <condition property="javahelp.src.dir.exists">
+            <available file="${javahelp.src.dir}" type="dir"/>
+        </condition>
+    </target>
+
+    <target name="javahelp-src" depends="javahelp.src.dir.check" unless="javahelp.src.dir.exists">
+        <exec executable="svn">
+            <arg value="co" />
+            <arg value="https://svn.java.net/svn/javahelp~svn" />
+            <arg value="${javahelp.src.dir}" />
+        </exec>
+    </target>
+
+    <!--
         docbook-libs
     -->
     <target name="docbook-libs" depends="download-saxon,download-xerces2-j,download-xalan2-j"/>
@@ -309,10 +287,10 @@
     <!--
         JavaHelpSearch
     -->
-    <target name="help" depends="init-ant-contrib,-ivy-retrieve,build-javahelp" description="JavaHelpSearch from JavaHelp">
+    <target name="help" depends="init-ant-contrib,-ivy-retrieve,build-javahelp,javahelp-src" description="JavaHelpSearch from JavaHelp">
         <pathconvert property="javah.computed" dirsep="/" pathsep=":">
-            <path>
-                <fileset dir="lib" includes="javahelp*.jar"/>
+            <path path="${reference.JavaHelp.jar}">
+                <filelist files="${reference.JavaHelp.jar} ${reference.JSearchIndexer.jar}"/>
             </path>
             <map from="${basedir}${file.separator}" to=""/>
         </pathconvert>
@@ -322,13 +300,14 @@
                 <delete dir="${docbook.output.dir}/@{lang}/JavaHelpSearch"/>
                 <mkdir dir="${docbook.output.dir}/@{lang}/JavaHelpSearch"/>
                 <java classname="com.sun.java.help.search.Indexer" 
-                      classpath="${javah.computed}"
+                      classpath="${reference.JavaHelp.jar}\:${reference.JSearchIndexer.jar}"
                       fork="true" failonerror="true">
+                    <arg value="-locale"/>
+                    <arg value="@{lang}"/>
+                    <arg value="-db"/>
+                    <arg value="${docbook.output.dir}/@{lang}/JavaHelpSearch"/>
                     <arg value="${docbook.output.dir}/@{lang}"/>
                 </java>
-                <move todir="${docbook.output.dir}/@{lang}/JavaHelpSearch">
-                    <fileset dir="JavaHelpSearch" includes="**"/>
-                </move>
             </sequential>
         </for>
     </target>        
@@ -338,6 +317,7 @@
 
     <target name="-post-clean">
         <delete dir="lib"/>
+        <delete dir="ext"/>
         <delete dir="${dist.dir}"/>
         <delete dir="${docbook.xml.dir}"/>
         <delete dir="${docbook.lib.dir}"/>

@@ -8,7 +8,7 @@
     </configurations>
 
     <dependencies>
-        <dependency org="javax.help" name="javahelp" rev="2.0.05"/>
+        <!--dependency org="javax.help" name="javahelp" rev="2.0.05"/-->
         <dependency org="junit" name="junit" rev="4.8.2"/>
     </dependencies>
 
