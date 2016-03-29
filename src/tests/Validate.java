@@ -41,7 +41,7 @@ public class Validate {
      * Does some consistancy checking on the routing board and may be some other
      * actions. Returns false, if problems were detected.
      */
-    public static boolean check(String p_s, BasicBoard p_board) {
+    public synchronized static boolean check(String p_s, BasicBoard p_board) {
         if (p_board.get_test_level() == board.TestLevel.RELEASE_VERSION) {
             return true;
         }
