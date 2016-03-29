@@ -3,15 +3,6 @@ FreeRouting
 
 Java Based Printed Circuit Board Routing Software from FreeRouting.net written by Alfons Wirtz.
 
-http://www.freerouting.net/fen/viewtopic.php?f=4&t=255
-
-by alfons » Sat Mar 08, 2014 12:07 pm
-
-Because I am no more maintaining the Freerouting project since 4 years and future Java versions may block my Freerouting Java Web Start application completely, I finally decided to open the source of the Freerouting project under the GNU public license version 3.
-
-I have attached the complete source code of the Freerouting project. Please feel free downloading and using the sources according to the GPLv3 license.
-
-
 Introduction:
 =============
 
@@ -71,18 +62,14 @@ Here are some instructions how to build the Freerouting project from a Terminal.
 
 4) Open a terminal, and run the following command:
 
-Fedora: icedtea-web, java-1.8.0-openjdk-devel, ant, NetBeans
+Fedora: java-1.8.0-openjdk-devel, ant, svn, NetBeans
 ```bash
-export ENDORSED_CP=/usr/share/java/icedtea-web.jar
 export COPYLIBS_CP=/usr/local/netbeans-8.1/java/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar
-export export JWSANTTASKS_CP=/usr/local/netbeans-8.1/java/ant/extra/org-netbeans-modules-javawebstart-anttasks.jar
-ant -Dendorsed.classpath=$ENDORSED_CP -Dlibs.CopyLibs.classpath=$COPYLIBS_CP -Dlibs.JWSAntTasks.classpath=$JWSANTTASKS_CP -Dnb.internal.action.name=build jar
+ant -Dlibs.CopyLibs.classpath=$COPYLIBS_CP -Dnb.internal.action.name=build jar
 ```
 
 OS X: Go to the Java SE download web page of Oracle to download and install JDK & JRE 8. https://www.java.com/en/download/ . Install Apache Ant (Java opensource build system). http://ant.apache.org . 
 ```bash
-export ENDORSED_CP="$(/usr/libexec/java_home -v 1.8)/jre/lib/javaws.jar"
 export COPYLIBS_CP="/Applications/NetBeans/NetBeans 8.1.app/Contents/Resources/NetBeans/java/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar"
-export JWSANTTASKS_CP="/Applications/NetBeans/NetBeans 8.1.app/Contents/Resources/NetBeans/java/ant/extra/org-netbeans-modules-javawebstart-anttasks.jar"
-ant -Dendorsed.classpath="$ENDORSED_CP" -Dlibs.CopyLibs.classpath="$COPYLIBS_CP" -Dlibs.JWSAntTasks.classpath="$JWSANTTASKS_CP" -Dnb.internal.action.name=build jar
+ant -Dlibs.CopyLibs.classpath="$COPYLIBS_CP" -Dnb.internal.action.name=build jar
 ```
