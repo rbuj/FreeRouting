@@ -220,10 +220,6 @@ public class BoardFrame extends javax.swing.JFrame {
             // Read the default gui settings, if gui default file exists.
             java.io.InputStream input_stream = null;
             boolean defaults_file_found;
-            if (this.is_web_start) {
-                input_stream = WebStart.get_file_input_stream(BoardFrame.GUI_DEFAULTS_FILE_NAME);
-                defaults_file_found = (input_stream != null);
-            } else {
                 File defaults_file = new File(this.design_file.get_parent(), GUI_DEFAULTS_FILE_NAME);
                 defaults_file_found = true;
                 try {
@@ -231,7 +227,6 @@ public class BoardFrame extends javax.swing.JFrame {
                 } catch (java.io.FileNotFoundException e) {
                     defaults_file_found = false;
                 }
-            }
             if (defaults_file_found) {
                 boolean read_ok = gui.GUIDefaultsFile.read(this, board_panel.board_handling, input_stream);
                 if (!read_ok) {

@@ -232,9 +232,6 @@ public class BoardMenuFile extends javax.swing.JMenu {
 
     private void save_defaults_action() {
         java.io.OutputStream output_stream = null;
-        if (board_frame.is_web_start) {
-            output_stream = WebStart.get_file_output_stream(BoardFrame.GUI_DEFAULTS_FILE_NAME);
-        } else {
             java.io.File defaults_file = new java.io.File(board_frame.design_file.get_parent(), BoardFrame.GUI_DEFAULTS_FILE_NAME);
             if (defaults_file.exists()) {
                 // Make a backup copy of the old defaulds file.
@@ -249,7 +246,6 @@ public class BoardMenuFile extends javax.swing.JMenu {
             } catch (Exception e) {
                 output_stream = null;
             }
-        }
         boolean write_ok;
         if (output_stream == null) {
             write_ok = false;

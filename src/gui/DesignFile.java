@@ -21,8 +21,6 @@
 package gui;
 
 import datastructures.FileFilter;
-import java.io.IOException;
-import javax.jnlp.UnavailableServiceException;
 
 /**
  * File functionality with security restrictions used, when the application is
@@ -40,30 +38,24 @@ public class DesignFile {
         if (p_design_file_name == null) {
             return null;
         }
-        DesignFile result = new DesignFile(p_is_webstart, null, new java.io.File(p_design_file_name), null);
+        DesignFile result = new DesignFile(new java.io.File(p_design_file_name), null);
         return result;
     }
 
     /**
-     * Shows a file chooser for opening a design file. If p_is_webstart there
-     * are security restrictions because the application was opened with java
-     * web start.
+     * Shows a file chooser for opening a design file.
      */
-    public static DesignFile open_dialog(boolean p_is_webstart, String p_design_dir_name) {
+    public static DesignFile open_dialog(String p_design_dir_name) {
         DesignFile result;
-        if (p_is_webstart) {
-            result = webstart_open_dialog(p_design_dir_name);
-        } else {
-            javax.swing.JFileChooser file_chooser = new javax.swing.JFileChooser(p_design_dir_name);
-            FileFilter file_filter = new FileFilter(all_file_extensions);
-            file_chooser.setFileFilter(file_filter);
-            file_chooser.showOpenDialog(null);
-            java.io.File curr_design_file = file_chooser.getSelectedFile();
-            if (curr_design_file == null) {
-                return null;
-            }
-            result = new DesignFile(false, null, curr_design_file, file_chooser);
+        javax.swing.JFileChooser file_chooser = new javax.swing.JFileChooser(p_design_dir_name);
+        FileFilter file_filter = new FileFilter(all_file_extensions);
+        file_chooser.setFileFilter(file_filter);
+        file_chooser.showOpenDialog(null);
+        java.io.File curr_design_file = file_chooser.getSelectedFile();
+        if (curr_design_file == null) {
+            return null;
         }
+        result = new DesignFile(curr_design_file, file_chooser);
         return result;
     }
 
@@ -71,10 +63,7 @@ public class DesignFile {
      * Creates a new instance of DesignFile. If p_is_webstart, the application
      * was opened with Java Web Start.
      */
-    private DesignFile(boolean p_is_webstart, javax.jnlp.FileContents p_file_contents,
-            java.io.File p_design_file, javax.swing.JFileChooser p_file_chooser) {
-        this.is_webstart = p_is_webstart;
-        this.file_contents = p_file_contents;
+    private DesignFile(java.io.File p_design_file, javax.swing.JFileChooser p_file_chooser) {
         this.file_chooser = p_file_chooser;
         this.input_file = p_design_file;
         this.output_file = p_design_file;
@@ -93,25 +82,13 @@ public class DesignFile {
      */
     public java.io.InputStream get_input_stream() {
         java.io.InputStream result;
-        if (this.is_webstart) {
-
-            if (this.file_contents == null) {
-                return null;
-            }
-            try {
-                result = this.file_contents.getInputStream();
-            } catch (Exception e) {
-                result = null;
-            }
-        } else {
-            if (this.input_file == null) {
-                return null;
-            }
-            try {
-                result = new java.io.FileInputStream(this.input_file);
-            } catch (Exception e) {
-                result = null;
-            }
+        if (this.input_file == null) {
+            return null;
+        }
+        try {
+            result = new java.io.FileInputStream(this.input_file);
+        } catch (Exception e) {
+            result = null;
         }
         return result;
     }
@@ -122,13 +99,7 @@ public class DesignFile {
     public String get_name() {
 
         String result;
-        if (this.file_contents != null) {
-            try {
-                result = this.file_contents.getName();
-            } catch (Exception e) {
-                result = null;
-            }
-        } else if (this.input_file != null) {
+        if (this.input_file != null) {
             result = this.input_file.getName();
         } else {
             result = null;
@@ -141,26 +112,6 @@ public class DesignFile {
                 = java.util.ResourceBundle.getBundle("gui.resources.BoardMenuFile", p_board_frame.get_locale());
         String[] file_name_parts = this.get_name().split("\\.", 2);
         String design_name = file_name_parts[0];
-        if (this.is_webstart) {
-            javax.jnlp.FileContents new_file_contents;
-            java.io.ByteArrayOutputStream output_stream = new java.io.ByteArrayOutputStream();
-
-            if (p_board_frame.board_panel.board_handling.export_to_dsn_file(output_stream, design_name, false)) {
-                java.io.InputStream input_stream = new java.io.ByteArrayInputStream(output_stream.toByteArray());
-                new_file_contents = WebStart.save_dialog(this.get_parent(), DesignFile.text_file_extensions,
-                        input_stream, this.get_name());
-            } else {
-                new_file_contents = null;
-            }
-
-            if (new_file_contents != null) {
-                this.file_contents = new_file_contents;
-                p_board_frame.screen_messages.set_status_message(resources.getString("message_4") + " " + this.get_name() + " " + resources.getString("message_5"));
-            } else {
-                p_board_frame.screen_messages.set_status_message(resources.getString("message_19"));
-            }
-            return;
-        }
 
         if (this.file_chooser == null) {
             String design_dir_name;
@@ -216,33 +167,22 @@ public class DesignFile {
         String design_file_name = this.get_name();
         String[] file_name_parts = design_file_name.split("\\.", 2);
         String design_name = file_name_parts[0];
-        if (this.is_webstart) {
-            String session_file_name = secure_write_session_file(p_board_frame);
-            if (session_file_name == null) {
-                p_board_frame.screen_messages.set_status_message(resources.getString("message_13") + " "
-                        + resources.getString("message_7"));
-                return false;
-            }
-            p_board_frame.screen_messages.set_status_message(resources.getString("message_11") + " "
-                    + session_file_name + " " + resources.getString("message_12"));
-        } else {
-            String output_file_name = design_name + ".ses";
-            java.io.File curr_output_file = new java.io.File(get_parent(), output_file_name);
-            java.io.OutputStream output_stream;
-            try {
-                output_stream = new java.io.FileOutputStream(curr_output_file);
-            } catch (Exception e) {
-                output_stream = null;
-            }
+        String output_file_name = design_name + ".ses";
+        java.io.File curr_output_file = new java.io.File(get_parent(), output_file_name);
+        java.io.OutputStream output_stream;
+        try {
+            output_stream = new java.io.FileOutputStream(curr_output_file);
+        } catch (Exception e) {
+            output_stream = null;
+        }
 
-            if (p_board_frame.board_panel.board_handling.export_specctra_session_file(design_file_name, output_stream)) {
-                p_board_frame.screen_messages.set_status_message(resources.getString("message_11") + " "
-                        + output_file_name + " " + resources.getString("message_12"));
-            } else {
-                p_board_frame.screen_messages.set_status_message(resources.getString("message_13") + " "
-                        + output_file_name + " " + resources.getString("message_7"));
-                return false;
-            }
+        if (p_board_frame.board_panel.board_handling.export_specctra_session_file(design_file_name, output_stream)) {
+            p_board_frame.screen_messages.set_status_message(resources.getString("message_11") + " "
+                    + output_file_name + " " + resources.getString("message_12"));
+        } else {
+            p_board_frame.screen_messages.set_status_message(resources.getString("message_13") + " "
+                    + output_file_name + " " + resources.getString("message_7"));
+            return false;
         }
         if (WindowMessage.confirm(resources.getString("confirm"))) {
             return write_rules_file(design_name, p_board_frame.board_panel.board_handling);
@@ -256,16 +196,12 @@ public class DesignFile {
     private boolean write_rules_file(String p_design_name, interactive.BoardHandling p_board_handling) {
         String rules_file_name = p_design_name + RULES_FILE_EXTENSION;
         java.io.OutputStream output_stream;
-        if (this.is_webstart) {
-            output_stream = WebStart.get_file_output_stream(rules_file_name);
-        } else {
-            java.io.File rules_file = new java.io.File(this.get_parent(), rules_file_name);
-            try {
-                output_stream = new java.io.FileOutputStream(rules_file);
-            } catch (java.io.IOException e) {
-                System.out.println("unable to create rules file");
-                return false;
-            }
+        java.io.File rules_file = new java.io.File(this.get_parent(), rules_file_name);
+        try {
+            output_stream = new java.io.FileOutputStream(rules_file);
+        } catch (java.io.IOException e) {
+            System.out.println("unable to create rules file");
+            return false;
         }
         designformats.specctra.RulesFile.write(p_board_handling, output_stream, p_design_name);
         return true;
@@ -277,20 +213,6 @@ public class DesignFile {
         boolean result = true;
         String rule_file_name = p_design_name + ".rules";
         boolean dsn_file_generated_by_host = p_board_handling.get_routing_board().communication.specctra_parser_info.dsn_file_generated_by_host;
-        if (p_is_web_start) {
-            java.io.InputStream input_stream = WebStart.get_file_input_stream(rule_file_name);
-            if (input_stream != null && dsn_file_generated_by_host && WindowMessage.confirm(p_confirm_message)) {
-                result = designformats.specctra.RulesFile.read(input_stream, p_design_name, p_board_handling);
-                try {
-                    input_stream.close();
-                } catch (Exception e) {
-                    result = false;
-                }
-            } else {
-                result = false;
-            }
-            WebStart.delete_files(RULES_FILE_EXTENSION, null);
-        } else {
             try {
                 java.io.File rules_file = new java.io.File(p_parent_name, rule_file_name);
                 java.io.InputStream input_stream = new java.io.FileInputStream(rules_file);
@@ -310,7 +232,6 @@ public class DesignFile {
             } catch (java.io.FileNotFoundException e) {
                 result = false;
             }
-        }
         return result;
     }
 
@@ -327,119 +248,22 @@ public class DesignFile {
         String[] file_name_parts = design_file_name.split("\\.", 2);
         String design_name = file_name_parts[0];
         String output_file_name = design_name + ".scr";
-        if (this.is_webstart) {
-            String script_file_name = webstart_update_eagle(p_board_frame, output_file_name, input_stream);
+        java.io.File curr_output_file = new java.io.File(get_parent(), output_file_name);
+        java.io.OutputStream output_stream;
+        try {
+            output_stream = new java.io.FileOutputStream(curr_output_file);
+        } catch (Exception e) {
+            output_stream = null;
+        }
 
-            if (script_file_name == null) {
-                p_board_frame.screen_messages.set_status_message(resources.getString("message_16") + " "
-                        + resources.getString("message_7"));
-                return;
-            }
-            p_board_frame.screen_messages.set_status_message(resources.getString("message_14") + " " + script_file_name + " " + resources.getString("message_15"));
+        if (p_board_frame.board_panel.board_handling.export_eagle_session_file(input_stream, output_stream)) {
+            p_board_frame.screen_messages.set_status_message(resources.getString("message_14") + " " + output_file_name + " " + resources.getString("message_15"));
         } else {
-            java.io.File curr_output_file = new java.io.File(get_parent(), output_file_name);
-            java.io.OutputStream output_stream;
-            try {
-                output_stream = new java.io.FileOutputStream(curr_output_file);
-            } catch (Exception e) {
-                output_stream = null;
-            }
-
-            if (p_board_frame.board_panel.board_handling.export_eagle_session_file(input_stream, output_stream)) {
-                p_board_frame.screen_messages.set_status_message(resources.getString("message_14") + " " + output_file_name + " " + resources.getString("message_15"));
-            } else {
-                p_board_frame.screen_messages.set_status_message(resources.getString("message_16") + " " + output_file_name + " " + resources.getString("message_7"));
-            }
+            p_board_frame.screen_messages.set_status_message(resources.getString("message_16") + " " + output_file_name + " " + resources.getString("message_7"));
         }
         if (WindowMessage.confirm(resources.getString("confirm"))) {
             write_rules_file(design_name, p_board_frame.board_panel.board_handling);
         }
-    }
-
-    private static DesignFile webstart_open_dialog(String p_design_dir_name) {
-        try {
-            javax.jnlp.FileOpenService file_open_service
-                    = (javax.jnlp.FileOpenService) javax.jnlp.ServiceManager.lookup("javax.jnlp.FileOpenService");
-            javax.jnlp.FileContents file_contents
-                    = file_open_service.openFileDialog(p_design_dir_name, DesignFile.text_file_extensions);
-            return new DesignFile(true, file_contents, null, null);
-        } catch (UnavailableServiceException | IOException e) {
-            return null;
-        }
-    }
-
-    /**
-     * Returns the name of the created session file or null, if the write
-     * failed. Put into a separate function to avoid undefines in the offline
-     * version.
-     */
-    private String secure_write_session_file(BoardFrame p_board_frame) {
-        java.io.ByteArrayOutputStream output_stream = new java.io.ByteArrayOutputStream();
-        String file_name = this.get_name();
-        if (file_name == null) {
-            return null;
-        }
-        String session_file_name = file_name.replace(".dsn", ".ses");
-
-        if (!p_board_frame.board_panel.board_handling.export_specctra_session_file(file_name, output_stream)) {
-            return null;
-        }
-
-        java.io.InputStream input_stream = new java.io.ByteArrayInputStream(output_stream.toByteArray());
-
-        javax.jnlp.FileContents session_file_contents
-                = WebStart.save_dialog(this.get_parent(), null, input_stream, session_file_name);
-
-        if (session_file_contents == null) {
-            return null;
-        }
-        String new_session_file_name;
-        try {
-            new_session_file_name = session_file_contents.getName();
-        } catch (Exception e) {
-            return null;
-        }
-        if (!new_session_file_name.equalsIgnoreCase(session_file_name)) {
-            final java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("gui.resources.BoardMenuFile", p_board_frame.get_locale());
-            String curr_message = resources.getString("message_20") + " " + session_file_name + "\n" + resources.getString("message_21");
-            WindowMessage.ok(curr_message);
-        }
-        return new_session_file_name;
-    }
-
-    /**
-     * Returns the name of the created script file or null, if the write failed.
-     * Put into a separate function to avoid undefines in the offline version.
-     */
-    private String webstart_update_eagle(BoardFrame p_board_frame,
-            String p_outfile_name, java.io.InputStream p_input_stream) {
-        java.io.ByteArrayOutputStream output_stream = new java.io.ByteArrayOutputStream();
-        if (!p_board_frame.board_panel.board_handling.export_eagle_session_file(p_input_stream, output_stream)) {
-            return null;
-        }
-        java.io.InputStream input_stream = new java.io.ByteArrayInputStream(output_stream.toByteArray());
-        javax.jnlp.FileContents script_file_contents
-                = WebStart.save_dialog(this.get_parent(), null, input_stream, p_outfile_name);
-
-        if (script_file_contents == null) {
-            return null;
-        }
-        String new_script_file_name;
-        try {
-            new_script_file_name = script_file_contents.getName();
-        } catch (Exception e) {
-            return null;
-        }
-
-        if (!new_script_file_name.endsWith(".scr")) {
-            final java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("gui.resources.BoardMenuFile", p_board_frame.get_locale());
-            String curr_message = resources.getString("message_22") + "\n" + resources.getString("message_21");
-            WindowMessage.ok(curr_message);
-        }
-
-        return new_script_file_name;
     }
 
     /**
@@ -469,13 +293,9 @@ public class DesignFile {
     }
 
     public boolean is_created_from_text_file() {
-        return this.is_webstart || this.input_file != this.output_file;
+        return this.input_file != this.output_file;
     }
-    private final boolean is_webstart;
-    /**
-     * Used, if the application is run with Java Web Start.
-     */
-    private javax.jnlp.FileContents file_contents;
+
     /**
      * Used, if the application is run without Java Web Start.
      */
