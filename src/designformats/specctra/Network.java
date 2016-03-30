@@ -685,7 +685,7 @@ public class Network extends ScopeKeyword {
         }
 
         if (!p_class.use_via.isEmpty()) {
-            create_via_rule(p_class.use_via, board_net_class, p_board, p_via_at_smd_allowed);
+            create_via_rule(p_class.use_via, board_net_class, p_board);
         } else if (via_infos_created) {
             p_board.rules.create_default_via_rule(board_net_class, board_net_class.get_name());
         }
@@ -814,7 +814,7 @@ public class Network extends ScopeKeyword {
         get_clearance_class(p_clearance_matrix, p_net_class, "area");
     }
 
-    private static void create_via_rule(Collection<String> p_use_via, rules.NetClass p_net_class, board.BasicBoard p_board, boolean p_attach_allowed) {
+    private static void create_via_rule(Collection<String> p_use_via, rules.NetClass p_net_class, board.BasicBoard p_board) {
         rules.ViaRule new_via_rule = new rules.ViaRule(p_net_class.get_name());
         int default_via_cl_class = p_net_class.default_item_clearance_classes.get(rules.DefaultItemClearanceClasses.ItemClass.VIA);
         for (String curr_via_name : p_use_via) {

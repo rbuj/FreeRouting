@@ -187,13 +187,13 @@ public class InsertFoundConnectionAlgo {
 
     boolean insert_neckdown(Point p_from_corner, Point p_to_corner, int p_layer, board.Pin p_start_pin, board.Pin p_end_pin) {
         if (p_start_pin != null) {
-            Point ok_point = try_neck_down(p_to_corner, p_from_corner, p_layer, p_start_pin, true);
+            Point ok_point = try_neck_down(p_to_corner, p_from_corner, p_layer, p_start_pin);
             if (ok_point == p_from_corner) {
                 return true;
             }
         }
         if (p_end_pin != null) {
-            Point ok_point = try_neck_down(p_from_corner, p_to_corner, p_layer, p_end_pin, false);
+            Point ok_point = try_neck_down(p_from_corner, p_to_corner, p_layer, p_end_pin);
             if (ok_point == p_to_corner) {
                 return true;
             }
@@ -201,7 +201,7 @@ public class InsertFoundConnectionAlgo {
         return false;
     }
 
-    private Point try_neck_down(Point p_from_corner, Point p_to_corner, int p_layer, board.Pin p_pin, boolean p_at_start) {
+    private Point try_neck_down(Point p_from_corner, Point p_to_corner, int p_layer, board.Pin p_pin) {
         if (!p_pin.is_on_layer(p_layer)) {
             return null;
         }

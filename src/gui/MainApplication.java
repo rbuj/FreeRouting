@@ -160,10 +160,7 @@ public final class MainApplication extends javax.swing.JFrame {
         gridbag_constraints.insets = new java.awt.Insets(10, 10, 10, 10);
         gridbag_constraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
 
-        demonstration_button = new javax.swing.JButton();
-        sample_board_button = new javax.swing.JButton();
         open_board_button = new javax.swing.JButton();
-        restore_defaults_button = new javax.swing.JButton();
         message_field = new javax.swing.JTextField();
         message_field.setText("");
 
@@ -273,10 +270,7 @@ public final class MainApplication extends javax.swing.JFrame {
         return new_frame;
     }
     private final java.util.ResourceBundle resources;
-    private final javax.swing.JButton demonstration_button;
-    private final javax.swing.JButton sample_board_button;
     private final javax.swing.JButton open_board_button;
-    private final javax.swing.JButton restore_defaults_button;
     private javax.swing.JTextField message_field;
     private javax.swing.JPanel main_panel;
 

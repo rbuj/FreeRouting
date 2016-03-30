@@ -302,7 +302,7 @@ public class SessionFile {
             if (is_wire) {
                 write_wire((PolylineTrace) curr_item, p_board, p_identifier_type, p_coordinate_transform, p_file);
             } else if (is_via) {
-                write_via((Via) curr_item, p_board, p_identifier_type, p_coordinate_transform, p_file);
+                write_via((Via) curr_item, p_identifier_type, p_coordinate_transform, p_file);
             } else if (is_conduction_area) {
                 write_conduction_area((ConductionArea) curr_item, p_board, p_identifier_type,
                         p_coordinate_transform, p_file);
@@ -350,7 +350,7 @@ public class SessionFile {
         p_file.end_scope();
     }
 
-    private static void write_via(Via p_via, BasicBoard p_board, IdentifierType p_identifier_type,
+    private static void write_via(Via p_via, IdentifierType p_identifier_type,
             CoordinateTransform p_coordinate_transform, IndentFileWriter p_file) throws java.io.IOException {
         library.Padstack via_padstack = p_via.get_padstack();
         FloatPoint via_location = p_via.get_center().to_float();

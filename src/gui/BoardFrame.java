@@ -100,17 +100,8 @@ public class BoardFrame extends javax.swing.JFrame {
         this.resources = java.util.ResourceBundle.getBundle("gui.resources.BoardFrame", p_locale);
         BoardMenuBar curr_menubar;
         boolean session_file_option = (p_option == Option.SESSION_FILE);
-        boolean curr_help_system_used = true;
-        try {
-            curr_menubar = BoardMenuBar.get_instance(this, curr_help_system_used, session_file_option);
-        } catch (java.lang.NoClassDefFoundError e) {
-            // the system-file jh.jar may be missing
-            curr_help_system_used = false;
-            curr_menubar = BoardMenuBar.get_instance(this, false, session_file_option);
-            System.out.println("Online-Help deactivated because system file jh.jar is missing");
-        }
+        curr_menubar = BoardMenuBar.get_instance(this, session_file_option);
         this.menubar = curr_menubar;
-        this.help_system_used = curr_help_system_used;
         setJMenuBar(this.menubar);
 
         this.toolbar_panel = new BoardToolbar(this);
@@ -602,7 +593,6 @@ public class BoardFrame extends javax.swing.JFrame {
      * true, if the frame is created by an application running under Java Web
      * Start
      */
-    private final boolean help_system_used;
     static javax.help.HelpSet help_set = null;
     static javax.help.HelpBroker help_broker = null;
 

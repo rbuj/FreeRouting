@@ -256,7 +256,7 @@ public class ForcedPadAlgo {
         TileShape offset_shape = (TileShape) p_shape.offset(p_offset);
         for (int i = 0; i < offset_shape.border_line_count(); ++i) {
             TileShape check_shape
-                    = calc_check_chape_for_from_side(p_shape, p_shape_center, offset_shape.border_line(i));
+                    = calc_check_chape_for_from_side(p_shape_center, offset_shape.border_line(i));
 
             if (board.check_trace_shape(check_shape, p_layer, empty_arr, p_cl_class, null)) {
                 return new CalcFromSide(i, null);
@@ -265,7 +265,7 @@ public class ForcedPadAlgo {
         // try second check without clearance
         for (int i = 0; i < offset_shape.border_line_count(); ++i) {
             TileShape check_shape
-                    = calc_check_chape_for_from_side(p_shape, p_shape_center, offset_shape.border_line(i));
+                    = calc_check_chape_for_from_side(p_shape_center, offset_shape.border_line(i));
             if (board.check_trace_shape(check_shape, p_layer, empty_arr, 0, null)) {
                 return new CalcFromSide(i, null);
             }
@@ -273,8 +273,7 @@ public class ForcedPadAlgo {
         return CalcFromSide.NOT_CALCULATED;
     }
 
-    private static TileShape calc_check_chape_for_from_side(TileShape p_shape,
-            Point p_shape_center, Line p_border_line) {
+    private static TileShape calc_check_chape_for_from_side(Point p_shape_center, Line p_border_line) {
         FloatPoint shape_center = p_shape_center.to_float();
         FloatPoint offset_projection = shape_center.projection_approx(p_border_line);
         // Make shure, that direction restrictions are retained.

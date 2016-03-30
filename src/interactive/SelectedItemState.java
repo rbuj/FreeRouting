@@ -421,7 +421,6 @@ public class SelectedItemState extends InteractiveState {
         }
         Integer not_found_count = 0;
         Integer found_count = 0;
-        int trace_pull_tight_accuracy = hdlg.settings.trace_pull_tight_accuracy;
         boolean interrupted = false;
         Collection<Pin> fanout_list = new java.util.LinkedList<>();
         for (Item curr_item : item_list) {

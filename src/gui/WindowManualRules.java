@@ -195,8 +195,6 @@ public final class WindowManualRules extends BoardSavableSubWindow {
     private final javax.swing.JComboBox<ViaRule> via_rule_combo_box;
     private final javax.swing.JFormattedTextField trace_width_field;
     private boolean key_input_completed = true;
-    private static final int max_slider_value = 15000;
-    private static double scale_factor = 1;
 
     private class LayerComboBoxListener implements java.awt.event.ActionListener {
 
