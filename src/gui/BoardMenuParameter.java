@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class BoardMenuParameter extends javax.swing.JMenu {
+public final class BoardMenuParameter extends javax.swing.JMenu {
 
     /**
      * Returns a new windows menu for the board frame.

@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class BoardMenuDisplay extends javax.swing.JMenu {
+public final class BoardMenuDisplay extends javax.swing.JMenu {
 
     /**
      * Returns a new display menu for the board frame.

@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class PopupMenuStitchRoute extends PopupMenuDisplay {
+public final class PopupMenuStitchRoute extends PopupMenuDisplay {
 
     /**
      * Creates a new instance of PopupMenuStitchRoute

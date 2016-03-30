@@ -35,7 +35,7 @@ import java.util.Iterator;
  *
  * @author Alfons Wirtz
  */
-public class Validate {
+public final class Validate {
 
     /**
      * Does some consistancy checking on the routing board and may be some other

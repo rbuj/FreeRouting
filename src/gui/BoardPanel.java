@@ -37,7 +37,7 @@ import javax.swing.event.TableModelListener;
  *
  * @author Alfons Wirtz
  */
-public class BoardPanel extends javax.swing.JPanel {
+public final class BoardPanel extends javax.swing.JPanel {
 
     /**
      * Creates a new BoardPanel in an Application

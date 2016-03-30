@@ -27,7 +27,7 @@ import board.LayerStructure;
  *
  * @author Alfons Wirtz
  */
-public class ComboBoxLayer extends javax.swing.JComboBox {
+public final class ComboBoxLayer extends javax.swing.JComboBox {
 
     /**
      * Creates a new instance of LayerComboBox

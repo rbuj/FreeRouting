@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class BoardMenuFile extends javax.swing.JMenu {
+public final class BoardMenuFile extends javax.swing.JMenu {
 
     /**
      * Returns a new file menu for the board frame.

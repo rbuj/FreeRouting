@@ -26,7 +26,7 @@ import rules.ClearanceMatrix;
  *
  * @author alfons
  */
-public class ComboBoxClearance extends javax.swing.JComboBox {
+public final class ComboBoxClearance extends javax.swing.JComboBox {
 
     /**
      * Creates a new instance of ClearanceComboBox

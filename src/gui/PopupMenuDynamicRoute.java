@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class PopupMenuDynamicRoute extends PopupMenuDisplay {
+public final class PopupMenuDynamicRoute extends PopupMenuDisplay {
 
     /**
      * Creates a new instance of RoutePopupMenu

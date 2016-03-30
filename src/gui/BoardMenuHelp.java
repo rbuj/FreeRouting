@@ -29,7 +29,7 @@ import javax.help.HelpSetException;
  *
  * @author Alfons Wirtz
  */
-public class BoardMenuHelp extends BoardMenuHelpReduced {
+public final class BoardMenuHelp extends BoardMenuHelpReduced {
 
     /**
      * Creates a new instance of BoardMenuHelp Separated from

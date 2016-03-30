@@ -23,7 +23,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public class BoardMenuInfo extends javax.swing.JMenu {
+public final class BoardMenuInfo extends javax.swing.JMenu {
 
     /**
      * Returns a new info menu for the board frame.
