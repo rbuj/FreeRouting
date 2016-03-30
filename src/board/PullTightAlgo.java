@@ -461,9 +461,6 @@ public abstract class PullTightAlgo {
      * Wraps around pins of the own net to avoid acid traps.
      */
     protected Polyline avoid_acid_traps(Polyline p_polyline) {
-        if (true) {
-            return p_polyline;
-        }
         Polyline result = p_polyline;
         ShoveTraceAlgo shove_trace_algo = new ShoveTraceAlgo(this.board);
         Polyline new_polyline = shove_trace_algo.spring_over_obstacles(p_polyline,
