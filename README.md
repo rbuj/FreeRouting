@@ -62,14 +62,12 @@ Here are some instructions how to build the Freerouting project from a Terminal.
 
 4) Open a terminal, and run the following command:
 
-Fedora: java-1.8.0-openjdk-devel, ant, svn, NetBeans
+Fedora: java-1.8.0-openjdk-devel, ant, svn
 ```bash
-export COPYLIBS_CP=/usr/local/netbeans-8.1/java/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar
-ant -Dlibs.CopyLibs.classpath=$COPYLIBS_CP -Dnb.internal.action.name=build jar
+ant -Dnb.internal.action.name=build jar
 ```
 
 OS X: Go to the Java SE download web page of Oracle to download and install JDK & JRE 8. https://www.java.com/en/download/ . Install Apache Ant (Java opensource build system). http://ant.apache.org . 
 ```bash
-export COPYLIBS_CP="/Applications/NetBeans/NetBeans 8.1.app/Contents/Resources/NetBeans/java/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar"
-ant -Dlibs.CopyLibs.classpath="$COPYLIBS_CP" -Dnb.internal.action.name=build jar
+ant -Dnb.internal.action.name=build jar
 ```
