@@ -29,6 +29,22 @@ import java.awt.Graphics;
  *
  */
 public class InteractiveState {
+    /**
+     * board setting access handler for the derived classes
+     */
+    protected final BoardHandling hdlg;
+    /**
+     * The intended state after this state is finished
+     */
+    protected InteractiveState return_state;
+    /**
+     * if logfile != null, the interactive actions are stored in a logfile
+     */
+    protected final Logfile logfile;
+    /**
+     * Contains the files with the language dependent messages
+     */
+    protected final java.util.ResourceBundle resources;
 
     /**
      * Creates a new instance of InteractiveState
@@ -229,23 +245,4 @@ public class InteractiveState {
     public void set_toolbar() {
     }
 
-    /**
-     * board setting access handler for the derived classes
-     */
-    protected final BoardHandling hdlg;
-
-    /**
-     * The intended state after this state is finished
-     */
-    protected InteractiveState return_state;
-
-    /**
-     * if logfile != null, the interactive actions are stored in a logfile
-     */
-    protected final Logfile logfile;
-
-    /**
-     * Contains the files with the language dependent messages
-     */
-    protected final java.util.ResourceBundle resources;
 }

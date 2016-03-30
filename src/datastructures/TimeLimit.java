@@ -27,6 +27,8 @@ package datastructures;
  * @author Alfons Wirtz
  */
 public class TimeLimit {
+    private final long time_stamp;
+    private int time_limit;
 
     /**
      * Creates a new instance with a time limit of p_milli_seconds milli seconds
@@ -57,6 +59,4 @@ public class TimeLimit {
         this.time_limit = (int) new_limit;
     }
 
-    private final long time_stamp;
-    private int time_limit;
 }

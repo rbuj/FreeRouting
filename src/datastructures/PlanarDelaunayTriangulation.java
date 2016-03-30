@@ -42,6 +42,26 @@ import java.util.TreeSet;
  * @author Alfons Wirtz
  */
 public class PlanarDelaunayTriangulation {
+    /**
+     * Randum generatur to shuffle the input corners. A fixed seed is used to
+     * make the results reproduceble.
+     */
+    static private int seed = 99;
+    static private java.util.Random random_generator = new java.util.Random(seed);
+    /**
+     * The structure for seaching the triangle containing a given input corner.
+     */
+    private final TriangleGraph search_graph;
+    /**
+     * This list contain the edges of the trinangulation, where the start corner
+     * and end corner are equal.
+     */
+    private Collection<Edge> degenerate_edges;
+    /**
+     * id numbers are for implementing an ordering on the Edges so that they can
+     * be used in a set for example
+     */
+    private int last_edge_id_no = 0;
 
     /**
      * Creates a new instance of PlanarDelaunayTriangulation from p_object_list.
@@ -265,55 +285,8 @@ public class PlanarDelaunayTriangulation {
         return this.last_edge_id_no;
     }
 
-    /**
-     * The structure for seaching the triangle containing a given input corner.
-     */
-    private final TriangleGraph search_graph;
-
-    /**
-     * This list contain the edges of the trinangulation, where the start corner
-     * and end corner are equal.
-     */
-    private Collection<Edge> degenerate_edges;
-
-    /**
-     * id numbers are for implementing an ordering on the Edges so that they can
-     * be used in a set for example
-     */
-    private int last_edge_id_no = 0;
-
-    /**
-     * Randum generatur to shuffle the input corners. A fixed seed is used to
-     * make the results reproduceble.
-     */
-    static private int seed = 99;
-    static private java.util.Random random_generator = new java.util.Random(seed);
-
-    /**
-     * Interface with funktionality required for objects to be used in a planar
-     * triangulation.
-     */
-    public interface Storable {
-
-        /**
-         * Returns an array of corners, which can be used in a planar
-         * triangulation.
-         */
-        geometry.planar.Point[] get_triangulation_corners();
-    }
-
-    /**
-     * Describes a line segment in the result of the Delaunay Triangulation.
-     */
     public static class ResultEdge {
 
-        private ResultEdge(Point p_start_point, PlanarDelaunayTriangulation.Storable p_start_object,
-                Point p_end_point, PlanarDelaunayTriangulation.Storable p_end_object) {
-            start_point = p_start_point;
-            start_object = p_start_object;
-            end_point = p_end_point;
-            end_object = p_end_object;
-        }
         /**
          * The start point of the line segment
          */
@@ -330,12 +303,20 @@ public class PlanarDelaunayTriangulation {
          * The object at the end point of the line segment
          */
         public final PlanarDelaunayTriangulation.Storable end_object;
+
+        private ResultEdge(Point p_start_point, PlanarDelaunayTriangulation.Storable p_start_object,
+                Point p_end_point, PlanarDelaunayTriangulation.Storable p_end_object) {
+            start_point = p_start_point;
+            start_object = p_start_object;
+            end_point = p_end_point;
+            end_object = p_end_object;
+        }
     }
 
-    /**
-     * Contains a corner point together with the objects this corner belongs to.
-     */
     private static class Corner {
+
+        public final PlanarDelaunayTriangulation.Storable object;
+        public final Point coor;
 
         public Corner(PlanarDelaunayTriangulation.Storable p_object, Point p_coor) {
             object = p_object;
@@ -351,16 +332,101 @@ public class PlanarDelaunayTriangulation {
         public Side side_of(Corner p_1, Corner p_2) {
             return this.coor.side_of(p_1.coor, p_2.coor);
         }
+    }
 
-        public final PlanarDelaunayTriangulation.Storable object;
-        public final Point coor;
+    private static class TriangleGraph {
+
+        private Triangle anchor = null;
+
+        public TriangleGraph(Triangle p_triangle) {
+            if (p_triangle != null) {
+                insert(p_triangle, null);
+            } else {
+                this.anchor = null;
+            }
+        }
+
+        public void insert(Triangle p_triangle, Triangle p_parent) {
+            p_triangle.initialize_is_on_the_left_of_edge_line_array();
+            if (p_parent == null) {
+                anchor = p_triangle;
+            } else {
+                p_parent.children.add(p_triangle);
+            }
+        }
+
+        /**
+         * Search for the leaf triangle containing p_corner. It will not be
+         * unique, if p_corner lies on a triangle edge.
+         */
+        public Triangle position_locate(Corner p_corner) {
+            if (this.anchor == null) {
+                return null;
+            }
+            if (this.anchor.children.isEmpty()) {
+                return this.anchor;
+            }
+            for (Triangle curr_child : this.anchor.children) {
+                Triangle result = position_locate_reku(p_corner, curr_child);
+                if (result != null) {
+                    return result;
+                }
+            }
+            System.out.println("TriangleGraph.position_locate: containing triangle not found");
+            return null;
+        }
+
+        /**
+         * Recursive part of position_locate.
+         */
+        private Triangle position_locate_reku(Corner p_corner, Triangle p_triangle) {
+            if (!p_triangle.contains(p_corner)) {
+                return null;
+            }
+            
+            if (p_triangle.is_leaf()) {
+                return p_triangle;
+            }
+            for (Triangle curr_child : p_triangle.children) {
+                Triangle result = position_locate_reku(p_corner, curr_child);
+                if (result != null) {
+                    return result;
+                }
+            }
+            System.out.println("TriangleGraph.position_locate_reku: containing triangle not found");
+            return null;
+        }
     }
 
     /**
-     * Describes an edge between two triangles in the triangulation. The unique
-     * id_nos are for making edges comparable.
+     * Interface with funktionality required for objects to be used in a planar
+     * triangulation.
      */
+    public interface Storable {
+
+        /**
+         * Returns an array of corners, which can be used in a planar
+         * triangulation.
+         */
+        geometry.planar.Point[] get_triangulation_corners();
+    }
+
     private class Edge implements Comparable<Edge> {
+
+        public final Corner start_corner;
+        public final Corner end_corner;
+        /**
+         * The triangle on the left side of this edge.
+         */
+        private Triangle left_triangle = null;
+        /**
+         * The triangle on the right side of this edge.
+         */
+        private Triangle right_triangle = null;
+        /**
+         * The unique id number of this triangle.
+         */
+        private final int id_no;
 
         public Edge(Corner p_start_corner, Corner p_end_corner) {
             start_corner = p_start_corner;
@@ -555,31 +621,33 @@ public class PlanarDelaunayTriangulation {
 
             return result;
         }
-
-        public final Corner start_corner;
-        public final Corner end_corner;
-
-        /**
-         * The triangle on the left side of this edge.
-         */
-        private Triangle left_triangle = null;
-        /**
-         * The triangle on the right side of this edge.
-         */
-        private Triangle right_triangle = null;
-        /**
-         * The unique id number of this triangle.
-         */
-        private final int id_no;
     }
 
-    /**
-     * Describes a triangle in the triagulation. edge_lines ia an array of
-     * dimension 3. The edge lines arec sorted in counter clock sense around the
-     * border of this triangle. The list children points to the children of this
-     * triangle, when used as a node in the search graph.
-     */
     private class Triangle {
+
+        /**
+         * The 3 edge lines of this triangle sorted in counter clock sense
+         * around the border.
+         */
+        private final Edge[] edge_lines;
+        /**
+         * Indicates, if this triangle is on the left of the i-th edge line for
+         * i = 0 to 2. Must be set, if this triagngle is an inner node because
+         * left_triangle and right_triangle of edge lines point only to leaf
+         * nodes.
+         */
+        private boolean[] is_on_the_left_of_edge_line = null;
+        /**
+         * The children of this triangle when used as a node in the triangle
+         * search graph.
+         */
+        private Collection<Triangle> children;
+        /**
+         * Triangles resulting from an edge flip have 2 parents, all other
+         * triangles have 1 parent. first parent is used when traversing the
+         * graph sequentially to avoid visiting children nodes more than once.
+         */
+        private final Triangle first_parent;
 
         public Triangle(Edge[] p_edge_lines, Triangle p_first_parent) {
             this.edge_lines = p_edge_lines;
@@ -938,102 +1006,6 @@ public class PlanarDelaunayTriangulation {
                 this.is_on_the_left_of_edge_line[i] = (this.edge_lines[i].left_triangle == this);
             }
         }
-
-        /**
-         * The 3 edge lines of this triangle sorted in counter clock sense
-         * around the border.
-         */
-        private final Edge[] edge_lines;
-
-        /**
-         * Indicates, if this triangle is on the left of the i-th edge line for
-         * i = 0 to 2. Must be set, if this triagngle is an inner node because
-         * left_triangle and right_triangle of edge lines point only to leaf
-         * nodes.
-         */
-        private boolean[] is_on_the_left_of_edge_line = null;
-
-        /**
-         * The children of this triangle when used as a node in the triangle
-         * search graph.
-         */
-        private Collection<Triangle> children;
-
-        /**
-         * Triangles resulting from an edge flip have 2 parents, all other
-         * triangles have 1 parent. first parent is used when traversing the
-         * graph sequentially to avoid visiting children nodes more than once.
-         */
-        private final Triangle first_parent;
     }
 
-    /**
-     * Directed acyclic graph for finding the triangle containing a search point
-     * p. The leaves contain the trianngles of the current triangulation. The
-     * internal nodes are triangles, that were part of the triangulationn at
-     * some earlier stage, but have been replaced their children.
-     */
-    private static final class TriangleGraph {
-
-        public TriangleGraph(Triangle p_triangle) {
-            if (p_triangle != null) {
-                insert(p_triangle, null);
-            } else {
-                this.anchor = null;
-            }
-        }
-
-        public void insert(Triangle p_triangle, Triangle p_parent) {
-            p_triangle.initialize_is_on_the_left_of_edge_line_array();
-            if (p_parent == null) {
-                anchor = p_triangle;
-            } else {
-                p_parent.children.add(p_triangle);
-            }
-        }
-
-        /**
-         * Search for the leaf triangle containing p_corner. It will not be
-         * unique, if p_corner lies on a triangle edge.
-         */
-        public Triangle position_locate(Corner p_corner) {
-            if (this.anchor == null) {
-                return null;
-            }
-            if (this.anchor.children.isEmpty()) {
-                return this.anchor;
-            }
-            for (Triangle curr_child : this.anchor.children) {
-                Triangle result = position_locate_reku(p_corner, curr_child);
-                if (result != null) {
-                    return result;
-                }
-            }
-            System.out.println("TriangleGraph.position_locate: containing triangle not found");
-            return null;
-        }
-
-        /**
-         * Recursive part of position_locate.
-         */
-        private Triangle position_locate_reku(Corner p_corner, Triangle p_triangle) {
-            if (!p_triangle.contains(p_corner)) {
-                return null;
-            }
-
-            if (p_triangle.is_leaf()) {
-                return p_triangle;
-            }
-            for (Triangle curr_child : p_triangle.children) {
-                Triangle result = position_locate_reku(p_corner, curr_child);
-                if (result != null) {
-                    return result;
-                }
-            }
-            System.out.println("TriangleGraph.position_locate_reku: containing triangle not found");
-            return null;
-        }
-
-        private Triangle anchor = null;
-    }
 }

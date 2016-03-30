@@ -44,6 +44,9 @@ public class CircleConstructionState extends InteractiveState {
         p_board_handling.remove_ratsnest(); // inserting a circle may change the connectivity.
         return new CircleConstructionState(p_location, p_parent_state, p_board_handling, p_logfile);
     }
+    private final FloatPoint circle_center;
+    private double circle_radius = 0;
+    private boolean observers_activated = false;
 
     /**
      * Creates a new instance of CircleConstructionState
@@ -151,8 +154,4 @@ public class CircleConstructionState extends InteractiveState {
         hdlg.screen_messages.set_status_message(resources.getString("creating_circle"));
     }
 
-    private final FloatPoint circle_center;
-    private double circle_radius = 0;
-
-    private boolean observers_activated = false;
 }

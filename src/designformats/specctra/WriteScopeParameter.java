@@ -30,6 +30,13 @@ import datastructures.IndentFileWriter;
  */
 public class WriteScopeParameter {
 
+
+    final BasicBoard board;
+    final interactive.AutorouteSettings autoroute_settings;
+    final IndentFileWriter file;
+    final CoordinateTransform coordinate_transform;
+    final boolean compat_mode;
+    final IdentifierType identifier_type;
     /**
      * Creates a new instance of WriteScopeParameter. If p_compat_mode is true,
      * only standard speecctra dsb scopes are written, so that any host system
@@ -46,11 +53,4 @@ public class WriteScopeParameter {
         String[] reserved_chars = {"(", ")", " ", ";", "-", "_"};
         identifier_type = new IdentifierType(reserved_chars, p_string_quote);
     }
-
-    final BasicBoard board;
-    final interactive.AutorouteSettings autoroute_settings;
-    final IndentFileWriter file;
-    final CoordinateTransform coordinate_transform;
-    final boolean compat_mode;
-    final IdentifierType identifier_type;
 }

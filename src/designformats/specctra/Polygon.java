@@ -29,6 +29,7 @@ import geometry.planar.IntPoint;
  * @author alfons
  */
 public class Polygon extends Shape {
+    public final double[] coor;
 
     /**
      * Creates a new instance of Polygon p_coor is an array of dimension of
@@ -126,5 +127,4 @@ public class Polygon extends Shape {
         p_file.end_scope();
     }
 
-    public final double[] coor;
 }

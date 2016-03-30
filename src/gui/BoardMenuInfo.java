@@ -23,7 +23,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public final class BoardMenuInfo extends javax.swing.JMenu {
+public class BoardMenuInfo extends javax.swing.JMenu {
 
     /**
      * Returns a new info menu for the board frame.
@@ -116,6 +116,9 @@ public final class BoardMenuInfo extends javax.swing.JMenu {
         return info_menu;
     }
 
+
+    private final BoardFrame board_frame;
+    private final java.util.ResourceBundle resources;
     /**
      * Creates a new instance of BoardLibraryMenu
      */
@@ -123,7 +126,4 @@ public final class BoardMenuInfo extends javax.swing.JMenu {
         board_frame = p_board_frame;
         resources = java.util.ResourceBundle.getBundle("gui.resources.BoardMenuInfo", p_board_frame.get_locale());
     }
-
-    private final BoardFrame board_frame;
-    private final java.util.ResourceBundle resources;
 }

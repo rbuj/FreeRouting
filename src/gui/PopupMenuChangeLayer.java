@@ -24,8 +24,12 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-final class PopupMenuChangeLayer extends javax.swing.JMenu {
+class PopupMenuChangeLayer extends javax.swing.JMenu {
 
+
+    private final BoardFrame board_frame;
+
+    private final LayermenuItem[] item_arr;
     /**
      * Creates a new instance of ChangeLayerMenu
      */
@@ -49,7 +53,6 @@ final class PopupMenuChangeLayer extends javax.swing.JMenu {
             }
         }
     }
-
     /**
      * Disables the item with index p_no and enables all other items.
      */
@@ -63,12 +66,11 @@ final class PopupMenuChangeLayer extends javax.swing.JMenu {
         }
     }
 
-    private final BoardFrame board_frame;
-
-    private final LayermenuItem[] item_arr;
-
     private class LayermenuItem extends javax.swing.JMenuItem {
 
+
+        private final int layer_no;
+        private final String message1;
         LayermenuItem(int p_layer_no) {
             java.util.ResourceBundle resources
                     = java.util.ResourceBundle.getBundle("gui.resources.Default", board_frame.get_locale());
@@ -88,8 +90,5 @@ final class PopupMenuChangeLayer extends javax.swing.JMenu {
                 }
             });
         }
-
-        private final int layer_no;
-        private final String message1;
     }
 }

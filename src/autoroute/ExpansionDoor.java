@@ -31,6 +31,23 @@ import geometry.planar.TileShape;
  * @author Alfons Wirtz
  */
 public class ExpansionDoor implements ExpandableObject {
+    /**
+     * each section of the following arrray can be expanded seperately by the
+     * maze search algorithm
+     */
+    MazeSearchElement[] section_arr = null;
+    /**
+     * The first room of this door.
+     */
+    public final ExpansionRoom first_room;
+    /**
+     * The second room of this door.
+     */
+    public final ExpansionRoom second_room;
+    /**
+     * The dimension of a door may be 1 or 2.
+     */
+    public final int dimension;
 
     /**
      * Creates a new instance of ExpansionDoor
@@ -211,21 +228,4 @@ public class ExpansionDoor implements ExpandableObject {
             section_arr[i] = new MazeSearchElement();
         }
     }
-    /**
-     * each section of the following arrray can be expanded seperately by the
-     * maze search algorithm
-     */
-    MazeSearchElement[] section_arr = null;
-    /**
-     * The first room of this door.
-     */
-    public final ExpansionRoom first_room;
-    /**
-     * The second room of this door.
-     */
-    public final ExpansionRoom second_room;
-    /**
-     * The dimension of a door may be 1 or 2.
-     */
-    public final int dimension;
 }

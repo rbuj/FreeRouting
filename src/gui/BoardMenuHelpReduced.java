@@ -26,6 +26,9 @@ package gui;
  */
 public class BoardMenuHelpReduced extends javax.swing.JMenu {
 
+
+    protected final BoardFrame board_frame;
+    protected final java.util.ResourceBundle resources;
     /**
      * Creates a new instance of BoardMenuHelpReduced Separated from
      * BoardMenuHelp to avoid ClassNotFound exception when the library jh.jar is
@@ -46,7 +49,4 @@ public class BoardMenuHelpReduced extends javax.swing.JMenu {
         });
         this.add(about_window);
     }
-
-    protected final BoardFrame board_frame;
-    protected final java.util.ResourceBundle resources;
 }

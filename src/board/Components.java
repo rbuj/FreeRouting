@@ -33,6 +33,13 @@ import library.Package;
  * @author Alfons Wirtz
  */
 public class Components implements java.io.Serializable {
+    private final UndoableObjects undo_list = new UndoableObjects();
+    private Vector<Component> component_arr = new Vector<>();
+    /**
+     * If true, components on the back side are rotated before mirroring, else
+     * they are mirrored before rotating.
+     */
+    private boolean flip_style_rotate_first = false;
 
     /**
      * Inserts a component into the list. The items of the component have to be
@@ -201,13 +208,4 @@ public class Components implements java.io.Serializable {
         return flip_style_rotate_first;
     }
 
-    private final UndoableObjects undo_list = new UndoableObjects();
-
-    private Vector<Component> component_arr = new Vector<>();
-
-    /**
-     * If true, components on the back side are rotated before mirroring, else
-     * they are mirrored before rotating.
-     */
-    private boolean flip_style_rotate_first = false;
 }

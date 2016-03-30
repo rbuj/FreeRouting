@@ -25,6 +25,12 @@ package gui;
  * @author Alfons Wirtz
  */
 public abstract class WindowVisibility extends BoardSavableSubWindow {
+    private static final int MAX_SLIDER_VALUE = 100;
+    // private data
+    private final BoardPanel board_panel;
+    private final javax.swing.JLabel header_message;
+    private final javax.swing.JLabel[] message_arr;
+    private final javax.swing.JSlider[] slider_arr;
 
     /**
      * Creates a new instance of VisibilityFrame
@@ -114,14 +120,6 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
      */
     protected abstract void set_changed_value(int p_index, double p_value);
 
-    // private data
-    private final BoardPanel board_panel;
-
-    private final javax.swing.JLabel header_message;
-    private final javax.swing.JLabel[] message_arr;
-    private final javax.swing.JSlider[] slider_arr;
-
-    private static final int MAX_SLIDER_VALUE = 100;
 
     // private classes
     private class MinAllButtonListener implements java.awt.event.ActionListener {
@@ -142,11 +140,8 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
         }
     }
 
-    /**
-     * p_slider_no is required to identify the number of the slider in
-     * slider_arr.
-     */
     private class SliderChangeListener implements javax.swing.event.ChangeListener {
+        public int slider_no;
 
         public SliderChangeListener(int p_slider_no) {
             slider_no = p_slider_no;
@@ -159,6 +154,5 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
             board_panel.repaint();
         }
 
-        public int slider_no;
     }
 }

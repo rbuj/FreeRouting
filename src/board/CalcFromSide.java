@@ -34,6 +34,8 @@ import geometry.planar.TileShape;
 public class CalcFromSide {
 
     public static final CalcFromSide NOT_CALCULATED = new CalcFromSide(-1, null);
+    final int no;
+    final FloatPoint border_intersection;
 
     /**
      * calculates the number of the edge line of p_shape where p_polyline
@@ -149,6 +151,4 @@ public class CalcFromSide {
         border_intersection = p_border_intersection;
     }
 
-    final int no;
-    final FloatPoint border_intersection;
 }

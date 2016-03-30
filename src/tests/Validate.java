@@ -35,7 +35,10 @@ import java.util.Iterator;
  *
  * @author Alfons Wirtz
  */
-public final class Validate {
+public class Validate {
+    static private int[] last_violation_count = null;
+    static private boolean first_time = true;
+    static private int prev_stub_count = 0;
 
     /**
      * Does some consistancy checking on the routing board and may be some other
@@ -280,7 +283,4 @@ public final class Validate {
         return false;
     }
 
-    static private int[] last_violation_count = null;
-    static private boolean first_time = true;
-    static private int prev_stub_count = 0;
 }

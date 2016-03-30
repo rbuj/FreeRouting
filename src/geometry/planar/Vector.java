@@ -29,6 +29,48 @@ import java.math.BigInteger;
  * @author Alfons Wirtz
  */
 public abstract class Vector implements java.io.Serializable {
+    /**
+     * Standard implementation of the zero vector .
+     */
+    public static final IntVector ZERO = new IntVector(0, 0);
+    /**
+     * Creates a Vector (p_x, p_y) in the plane.
+     */
+    public static Vector get_instance(int p_x, int p_y) {
+        IntVector result = new IntVector(p_x, p_y);
+        if (Math.abs(p_x) > Limits.CRIT_INT
+                || Math.abs(p_x) > Limits.CRIT_INT) {
+            return new RationalVector(result);
+        }
+        return result;
+    }
+    /**
+     * Creates a 2-dimensinal Vector from the 3 input values. If p_z != 0 it
+     * correspondents to the Vector in the plane with rational number
+     * coordinates (p_x / p_z, p_y / p_z).
+     */
+    public static Vector get_instance(BigInteger p_x, BigInteger p_y,
+            BigInteger p_z) {
+        if (p_z.signum() < 0) {
+            // the dominator z of a RationalVector is expected to be positive
+            p_x = p_x.negate();
+            p_y = p_y.negate();
+            p_z = p_z.negate();
+            
+        }
+        if ((p_x.mod(p_z)).signum() == 0 && (p_x.mod(p_z)).signum() == 0) {
+            // p_x and p_y can be divided by p_z
+            p_x = p_x.divide(p_z);
+            p_y = p_y.divide(p_z);
+            p_z = BigInteger.ONE;
+        }
+        if (p_z.equals(BigInteger.ONE) && ((p_x.abs()).compareTo(Limits.CRIT_INT_BIG) <= 0
+                && (p_y.abs()).compareTo(Limits.CRIT_INT_BIG) <= 0)) {
+            // the Point fits into an IntPoint
+            return new IntVector(p_x.intValue(), p_y.intValue());
+        }
+        return new RationalVector(p_x, p_y, p_z);
+    }
 
     /**
      * returns true, if this vector is equal to the zero vector.
@@ -104,50 +146,6 @@ public abstract class Vector implements java.io.Serializable {
      */
     public abstract Vector mirror_at_y_axis();
 
-    /**
-     * Standard implementation of the zero vector .
-     */
-    public static final IntVector ZERO = new IntVector(0, 0);
-
-    /**
-     * Creates a Vector (p_x, p_y) in the plane.
-     */
-    public static Vector get_instance(int p_x, int p_y) {
-        IntVector result = new IntVector(p_x, p_y);
-        if (Math.abs(p_x) > Limits.CRIT_INT
-                || Math.abs(p_x) > Limits.CRIT_INT) {
-            return new RationalVector(result);
-        }
-        return result;
-    }
-
-    /**
-     * Creates a 2-dimensinal Vector from the 3 input values. If p_z != 0 it
-     * correspondents to the Vector in the plane with rational number
-     * coordinates (p_x / p_z, p_y / p_z).
-     */
-    public static Vector get_instance(BigInteger p_x, BigInteger p_y,
-            BigInteger p_z) {
-        if (p_z.signum() < 0) {
-            // the dominator z of a RationalVector is expected to be positive
-            p_x = p_x.negate();
-            p_y = p_y.negate();
-            p_z = p_z.negate();
-
-        }
-        if ((p_x.mod(p_z)).signum() == 0 && (p_x.mod(p_z)).signum() == 0) {
-            // p_x and p_y can be divided by p_z
-            p_x = p_x.divide(p_z);
-            p_y = p_y.divide(p_z);
-            p_z = BigInteger.ONE;
-        }
-        if (p_z.equals(BigInteger.ONE) && ((p_x.abs()).compareTo(Limits.CRIT_INT_BIG) <= 0
-                && (p_y.abs()).compareTo(Limits.CRIT_INT_BIG) <= 0)) {
-            // the Point fits into an IntPoint
-            return new IntVector(p_x.intValue(), p_y.intValue());
-        }
-        return new RationalVector(p_x, p_y, p_z);
-    }
 
     /**
      * returns an approximation of the euclidian length of this vector

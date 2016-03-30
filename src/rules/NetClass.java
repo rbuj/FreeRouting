@@ -25,6 +25,27 @@ package rules;
  * @author Alfons Wirtz
  */
 public class NetClass implements java.io.Serializable, board.ObjectInfoPanel.Printable {
+    private String name;
+    private ViaRule via_rule;
+    private int trace_clearance_class;
+    private int[] trace_half_width_arr;
+    private boolean[] active_routing_layer_arr;
+    /**
+     * if null, all signal layers may be used for routing
+     */
+    private boolean shove_fixed = false;
+    private boolean pull_tight = true;
+    private boolean ignore_cycles_with_areas = false;
+    private double minimum_trace_length = 0;
+    private double maximum_trace_length = 0;
+    private final ClearanceMatrix clearance_matrix;
+    private final board.LayerStructure board_layer_structure;
+    /**
+     * The clearance classes of the item types, if this net class comes from a
+     * class in a Speccctra dsn-file Should evtl be moved to
+     * designformats.specctra.NetClass and used only when reading a dsn-file.
+     */
+    public DefaultItemClearanceClasses default_item_clearance_classes = new DefaultItemClearanceClasses();
 
     /**
      * Creates a new instance of NetClass
@@ -308,25 +329,4 @@ public class NetClass implements java.io.Serializable, board.ObjectInfoPanel.Pri
         }
         return false;
     }
-    private String name;
-    private ViaRule via_rule;
-    private int trace_clearance_class;
-    private int[] trace_half_width_arr;
-    private boolean[] active_routing_layer_arr;
-    /**
-     * if null, all signal layers may be used for routing
-     */
-    private boolean shove_fixed = false;
-    private boolean pull_tight = true;
-    private boolean ignore_cycles_with_areas = false;
-    private double minimum_trace_length = 0;
-    private double maximum_trace_length = 0;
-    private final ClearanceMatrix clearance_matrix;
-    private final board.LayerStructure board_layer_structure;
-    /**
-     * The clearance classes of the item types, if this net class comes from a
-     * class in a Speccctra dsn-file Should evtl be moved to
-     * designformats.specctra.NetClass and used only when reading a dsn-file.
-     */
-    public DefaultItemClearanceClasses default_item_clearance_classes = new DefaultItemClearanceClasses();
 }

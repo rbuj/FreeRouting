@@ -71,12 +71,12 @@ public abstract class BoardSavableSubWindow extends BoardSubWindow {
      */
     static private class SavedAttributes implements java.io.Serializable {
 
+
+        public final java.awt.Rectangle bounds;
+        public final boolean is_visible;
         public SavedAttributes(java.awt.Rectangle p_bounds, boolean p_is_visible) {
             bounds = p_bounds;
             is_visible = p_is_visible;
         }
-
-        public final java.awt.Rectangle bounds;
-        public final boolean is_visible;
     }
 }

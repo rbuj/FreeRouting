@@ -39,7 +39,49 @@ import rules.Net;
  *
  * @author Alfons Wirtz
  */
-public final class NetIncompletes {
+public class NetIncompletes {
+    static void draw_layer_change_marker(FloatPoint p_location, double p_radius, Graphics p_graphics, GraphicsContext p_graphics_context) {
+        final int draw_width = 1;
+        java.awt.Color draw_color = p_graphics_context.get_incomplete_color();
+        double draw_intensity = p_graphics_context.get_incomplete_color_intensity();
+        FloatPoint[] draw_points = new FloatPoint[2];
+        draw_points[0] = new FloatPoint(p_location.x - p_radius, p_location.y - p_radius);
+        draw_points[1] = new FloatPoint(p_location.x + p_radius, p_location.y + p_radius);
+        p_graphics_context.draw(draw_points, draw_width, draw_color, p_graphics, draw_intensity);
+        draw_points[0] = new FloatPoint(p_location.x + p_radius, p_location.y - p_radius);
+        draw_points[1] = new FloatPoint(p_location.x - p_radius, p_location.y + p_radius);
+        p_graphics_context.draw(draw_points, draw_width, draw_color, p_graphics, draw_intensity);
+    }
+    static void draw_length_violation_marker(FloatPoint p_location, double p_diameter, Graphics p_graphics, GraphicsContext p_graphics_context) {
+        final int draw_width = 1;
+        java.awt.Color draw_color = p_graphics_context.get_incomplete_color();
+        double draw_intensity = p_graphics_context.get_incomplete_color_intensity();
+        double circle_radius = 0.5 * Math.abs(p_diameter);
+        p_graphics_context.draw_circle(p_location, circle_radius, draw_width, draw_color, p_graphics, draw_intensity);
+        FloatPoint[] draw_points = new FloatPoint[2];
+        draw_points[0] = new FloatPoint(p_location.x - circle_radius, p_location.y);
+        draw_points[1] = new FloatPoint(p_location.x + circle_radius, p_location.y);
+        p_graphics_context.draw(draw_points, draw_width, draw_color, p_graphics, draw_intensity);
+        if (p_diameter > 0) {
+            // draw also the vertical diameter to create a "+"
+            draw_points[0] = new FloatPoint(p_location.x, p_location.y - circle_radius);
+            draw_points[1] = new FloatPoint(p_location.x, p_location.y + circle_radius);
+            p_graphics_context.draw(draw_points, draw_width, draw_color, p_graphics, draw_intensity);
+        }
+    }
+    /**
+     * Collection of elements of class AirLine.
+     */
+    final Collection<RatsNest.AirLine> incompletes;
+    /**
+     * The length of the violation of the length restriction of the net, > 0, if
+     * the cumulative trace length is to big, < 0, if the trace length is to
+     * smalll, 0, if the thace length is ok or the net has no length
+     * restrictions
+     */
+    private double length_violation = 0;
+    private final Net net;
+    private final double draw_marker_radius;
 
     /**
      * Creates a new instance of NetIncompletes
@@ -160,36 +202,6 @@ public final class NetIncompletes {
         }
     }
 
-    static void draw_layer_change_marker(FloatPoint p_location, double p_radius, Graphics p_graphics, GraphicsContext p_graphics_context) {
-        final int draw_width = 1;
-        java.awt.Color draw_color = p_graphics_context.get_incomplete_color();
-        double draw_intensity = p_graphics_context.get_incomplete_color_intensity();
-        FloatPoint[] draw_points = new FloatPoint[2];
-        draw_points[0] = new FloatPoint(p_location.x - p_radius, p_location.y - p_radius);
-        draw_points[1] = new FloatPoint(p_location.x + p_radius, p_location.y + p_radius);
-        p_graphics_context.draw(draw_points, draw_width, draw_color, p_graphics, draw_intensity);
-        draw_points[0] = new FloatPoint(p_location.x + p_radius, p_location.y - p_radius);
-        draw_points[1] = new FloatPoint(p_location.x - p_radius, p_location.y + p_radius);
-        p_graphics_context.draw(draw_points, draw_width, draw_color, p_graphics, draw_intensity);
-    }
-
-    static void draw_length_violation_marker(FloatPoint p_location, double p_diameter, Graphics p_graphics, GraphicsContext p_graphics_context) {
-        final int draw_width = 1;
-        java.awt.Color draw_color = p_graphics_context.get_incomplete_color();
-        double draw_intensity = p_graphics_context.get_incomplete_color_intensity();
-        double circle_radius = 0.5 * Math.abs(p_diameter);
-        p_graphics_context.draw_circle(p_location, circle_radius, draw_width, draw_color, p_graphics, draw_intensity);
-        FloatPoint[] draw_points = new FloatPoint[2];
-        draw_points[0] = new FloatPoint(p_location.x - circle_radius, p_location.y);
-        draw_points[1] = new FloatPoint(p_location.x + circle_radius, p_location.y);
-        p_graphics_context.draw(draw_points, draw_width, draw_color, p_graphics, draw_intensity);
-        if (p_diameter > 0) {
-            // draw also the vertical diameter to create a "+"
-            draw_points[0] = new FloatPoint(p_location.x, p_location.y - circle_radius);
-            draw_points[1] = new FloatPoint(p_location.x, p_location.y + circle_radius);
-            p_graphics_context.draw(draw_points, draw_width, draw_color, p_graphics, draw_intensity);
-        }
-    }
 
     /**
      * Calculates an array of Item-connected_set pairs for the items of this
@@ -236,24 +248,15 @@ public final class NetIncompletes {
         }
     }
 
-    /**
-     * Collection of elements of class AirLine.
-     */
-    final Collection<RatsNest.AirLine> incompletes;
-
-    /**
-     * The length of the violation of the length restriction of the net, > 0, if
-     * the cumulative trace length is to big, < 0, if the trace length is to
-     * smalll, 0, if the thace length is ok or the net has no length
-     * restrictions
-     */
-    private double length_violation = 0;
-
-    private final Net net;
-    private final double draw_marker_radius;
 
     private static class Edge implements Comparable<Edge> {
 
+
+        public final NetItem from_item;
+        public final FloatPoint from_corner;
+        public final NetItem to_item;
+        public final FloatPoint to_corner;
+        public final double length_square;
         private Edge(NetItem p_from_item, FloatPoint p_from_corner, NetItem p_to_item, FloatPoint p_to_corner) {
             from_item = p_from_item;
             from_corner = p_from_corner;
@@ -261,12 +264,6 @@ public final class NetIncompletes {
             to_corner = p_to_corner;
             length_square = p_to_corner.distance_square(p_from_corner);
         }
-
-        public final NetItem from_item;
-        public final FloatPoint from_corner;
-        public final NetItem to_item;
-        public final FloatPoint to_corner;
-        public final double length_square;
 
         @Override
         public int compareTo(Edge p_other) {
@@ -290,18 +287,17 @@ public final class NetIncompletes {
 
     private static class NetItem implements PlanarDelaunayTriangulation.Storable {
 
+
+        final Item item;
+        Collection<Item> connected_set;
         NetItem(Item p_item, Collection<Item> p_connected_set) {
             item = p_item;
             connected_set = p_connected_set;
         }
-
         @Override
         public Point[] get_triangulation_corners() {
             return this.item.get_ratsnest_corners();
         }
-
-        final Item item;
-        Collection<Item> connected_set;
 
     }
 }

@@ -24,7 +24,8 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public final class PopupMenuDynamicRoute extends PopupMenuDisplay {
+public class PopupMenuDynamicRoute extends PopupMenuDisplay {
+    private final PopupMenuChangeLayer change_layer_menu;
 
     /**
      * Creates a new instance of RoutePopupMenu
@@ -89,5 +90,4 @@ public final class PopupMenuDynamicRoute extends PopupMenuDisplay {
         }
     }
 
-    private final PopupMenuChangeLayer change_layer_menu;
 }

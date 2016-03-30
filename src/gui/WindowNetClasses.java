@@ -29,8 +29,24 @@ import rules.ViaRule;
  *
  * @author Alfons Wirtz
  */
-public final class WindowNetClasses extends BoardSavableSubWindow {
+public class WindowNetClasses extends BoardSavableSubWindow {
 
+    private static final int TEXTFIELD_HEIGHT = 16;
+    private static final int TEXTFIELD_WIDTH = 100;
+    private static final int WINDOW_OFFSET = 30;
+    private final BoardFrame board_frame;
+    private final javax.swing.JPanel main_panel;
+    private javax.swing.JPanel center_panel;
+    private NetClassTable table;
+    private NetClassTableModel table_model;
+    private javax.swing.JComboBox<String> cl_class_combo_box;
+    private javax.swing.JComboBox<String> via_rule_combo_box;
+    private final ComboBoxLayer layer_combo_box;
+    private final java.util.ResourceBundle resources;
+    /**
+     * The subwindows created inside this window
+     */
+    private final java.util.Collection<javax.swing.JFrame> subwindows = new java.util.LinkedList<>();
     /**
      * Creates a new instance of NetClassesWindow
      */
@@ -90,7 +106,6 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
         this.pack();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
-
     @Override
     public void refresh() {
         this.cl_class_combo_box.removeAllItems();
@@ -116,7 +131,6 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
             it.remove();
         }
     }
-
     @Override
     public void dispose() {
         for (javax.swing.JFrame curr_subwindow : this.subwindows) {
@@ -126,7 +140,6 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
         }
         super.dispose();
     }
-
     private void add_table() {
         this.table_model = new NetClassTableModel();
         this.table = new NetClassTable(this.table_model);
@@ -152,7 +165,6 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
         this.table.getColumnModel().getColumn(ColumnName.VIA_RULE.ordinal()).setCellEditor(new javax.swing.DefaultCellEditor(via_rule_combo_box));
         this.table.getColumnModel().getColumn(ColumnName.ON_LAYER.ordinal()).setCellEditor(new javax.swing.DefaultCellEditor(layer_combo_box));
     }
-
     private void add_combobox_items() {
         board.RoutingBoard routing_board = board_frame.board_panel.board_handling.get_routing_board();
         for (int i = 0; i < routing_board.rules.clearance_matrix.get_class_count(); ++i) {
@@ -162,7 +174,6 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
             via_rule_combo_box.addItem(curr_rule.name);
         }
     }
-
     /**
      * Adjusts the displayed window with the net class table after the size of
      * the table has been changed.
@@ -175,22 +186,6 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
         this.pack();
         this.board_frame.refresh_windows();
     }
-    private final BoardFrame board_frame;
-    private final javax.swing.JPanel main_panel;
-    private javax.swing.JPanel center_panel;
-    private NetClassTable table;
-    private NetClassTableModel table_model;
-    private javax.swing.JComboBox<String> cl_class_combo_box;
-    private javax.swing.JComboBox<String> via_rule_combo_box;
-    private final ComboBoxLayer layer_combo_box;
-    private final java.util.ResourceBundle resources;
-    /**
-     * The subwindows created inside this window
-     */
-    private final java.util.Collection<javax.swing.JFrame> subwindows = new java.util.LinkedList<>();
-    private static final int TEXTFIELD_HEIGHT = 16;
-    private static final int TEXTFIELD_WIDTH = 100;
-    private static final int WINDOW_OFFSET = 30;
 
     private class AddNetClassListener implements java.awt.event.ActionListener {
 
@@ -355,6 +350,7 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
     }
 
     private class NetClassTable extends javax.swing.JTable {
+        private final String[] column_tool_tips;
 
         public NetClassTable(NetClassTableModel p_table_model) {
             super(p_table_model);
@@ -384,13 +380,11 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
                 }
             };
         }
-        private final String[] column_tool_tips;
     }
 
-    /**
-     * Table model of the net rule table.
-     */
     private class NetClassTableModel extends javax.swing.table.AbstractTableModel {
+        private Object[][] data = null;
+        private String[] column_names = null;
 
         public NetClassTableModel() {
             column_names = new String[ColumnName.values().length];
@@ -684,8 +678,6 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
             }
             return curr_class;
         }
-        private Object[][] data = null;
-        private String[] column_names = null;
     }
 
     private enum ColumnName {

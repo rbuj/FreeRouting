@@ -151,6 +151,72 @@ public class Sorted45DegreeRoomNeighbours {
         }
         return result;
     }
+    private static IntOctagon remove_not_touching_border_lines(IntOctagon p_room_oct,
+            boolean[] p_edge_interiour_touches_obstacle) {
+        int lx;
+        if (p_edge_interiour_touches_obstacle[6]) {
+            lx = p_room_oct.lx;
+        } else {
+            lx = -Limits.CRIT_INT;
+        }
+        
+        int ly;
+        if (p_edge_interiour_touches_obstacle[0]) {
+            ly = p_room_oct.ly;
+        } else {
+            ly = -Limits.CRIT_INT;
+        }
+        
+        int rx;
+        if (p_edge_interiour_touches_obstacle[2]) {
+            rx = p_room_oct.rx;
+        } else {
+            rx = Limits.CRIT_INT;
+        }
+        
+        int uy;
+        if (p_edge_interiour_touches_obstacle[4]) {
+            uy = p_room_oct.uy;
+        } else {
+            uy = Limits.CRIT_INT;
+        }
+        
+        int ulx;
+        if (p_edge_interiour_touches_obstacle[5]) {
+            ulx = p_room_oct.ulx;
+        } else {
+            ulx = -Limits.CRIT_INT;
+        }
+        
+        int lrx;
+        if (p_edge_interiour_touches_obstacle[1]) {
+            lrx = p_room_oct.lrx;
+        } else {
+            lrx = Limits.CRIT_INT;
+        }
+        
+        int llx;
+        if (p_edge_interiour_touches_obstacle[7]) {
+            llx = p_room_oct.llx;
+        } else {
+            llx = -Limits.CRIT_INT;
+        }
+        
+        int urx;
+        if (p_edge_interiour_touches_obstacle[3]) {
+            urx = p_room_oct.urx;
+        } else {
+            urx = Limits.CRIT_INT;
+        }
+        
+        IntOctagon result = new IntOctagon(lx, ly, rx, uy, ulx, lrx, llx, urx);
+        return result.normalize();
+    }
+    public final CompleteExpansionRoom completed_room;
+    public final SortedSet<SortedRoomNeighbour> sorted_neighbours;
+    private final ExpansionRoom from_room;
+    private final IntOctagon room_shape;
+    private final boolean[] edge_interiour_touches_obstacle;
     
     /**
      * Creates a new instance of Sorted45DegreeRoomNeighbours
@@ -235,67 +301,6 @@ public class Sorted45DegreeRoomNeighbours {
         }
     }
     
-    private static IntOctagon remove_not_touching_border_lines(IntOctagon p_room_oct,
-            boolean[] p_edge_interiour_touches_obstacle) {
-        int lx;
-        if (p_edge_interiour_touches_obstacle[6]) {
-            lx = p_room_oct.lx;
-        } else {
-            lx = -Limits.CRIT_INT;
-        }
-
-        int ly;
-        if (p_edge_interiour_touches_obstacle[0]) {
-            ly = p_room_oct.ly;
-        } else {
-            ly = -Limits.CRIT_INT;
-        }
-
-        int rx;
-        if (p_edge_interiour_touches_obstacle[2]) {
-            rx = p_room_oct.rx;
-        } else {
-            rx = Limits.CRIT_INT;
-        }
-        
-        int uy;
-        if (p_edge_interiour_touches_obstacle[4]) {
-            uy = p_room_oct.uy;
-        } else {
-            uy = Limits.CRIT_INT;
-        }
-
-        int ulx;
-        if (p_edge_interiour_touches_obstacle[5]) {
-            ulx = p_room_oct.ulx;
-        } else {
-            ulx = -Limits.CRIT_INT;
-        }
-
-        int lrx;
-        if (p_edge_interiour_touches_obstacle[1]) {
-            lrx = p_room_oct.lrx;
-        } else {
-            lrx = Limits.CRIT_INT;
-        }
-        
-        int llx;
-        if (p_edge_interiour_touches_obstacle[7]) {
-            llx = p_room_oct.llx;
-        } else {
-            llx = -Limits.CRIT_INT;
-        }
-
-        int urx;
-        if (p_edge_interiour_touches_obstacle[3]) {
-            urx = p_room_oct.urx;
-        } else {
-            urx = Limits.CRIT_INT;
-        }
-
-        IntOctagon result = new IntOctagon(lx, ly, rx, uy, ulx, lrx, llx, urx);
-        return result.normalize();
-    }
 
     /**
      * Check, that each side of the romm shape has at least one touching neighbour.
@@ -765,21 +770,22 @@ public class Sorted45DegreeRoomNeighbours {
         }
     }
     
-    public final CompleteExpansionRoom completed_room;
-    public final SortedSet<SortedRoomNeighbour> sorted_neighbours;
-    private final ExpansionRoom from_room;
-    private final IntOctagon room_shape;
-    
-    private final boolean[] edge_interiour_touches_obstacle;
-    
-    /**
-     * Helper class to sort the doors of an expansion room counterclockwise
-     * arount the border of the room shape.
-     */
+
     
     private class SortedRoomNeighbour implements Comparable<SortedRoomNeighbour>
     {
         
+        /** The shape of the neighbour room */
+        public final IntOctagon shape;
+        
+        /** The intersection of tnis ExpansionRoom shape with the neighbour_shape */
+        public final IntOctagon intersection;
+        
+        /** The first side of the room shape, where the neighbour_shape touches */
+        public final int first_touching_side;
+        
+        /** The last side of the room shape, where the neighbour_shape touches */
+        public final int last_touching_side;
         /**
          * Creates a new instance of SortedRoomNeighbour and calculates the first and last
          * touching sides with the room shape.
@@ -904,7 +910,6 @@ public class Sorted45DegreeRoomNeighbours {
                 
             }
         }
-        
         /**
          * Compare function for or sorting the neighbours in counterclock sense
          * around the border of the room shape in ascending order.
@@ -996,16 +1001,5 @@ public class Sorted45DegreeRoomNeighbours {
             }
             return cmp_value;
         }
-        /** The shape of the neighbour room */
-        public final IntOctagon shape;
-        
-        /** The intersection of tnis ExpansionRoom shape with the neighbour_shape */
-        public final IntOctagon intersection;
-        
-        /** The first side of the room shape, where the neighbour_shape touches */
-        public final int first_touching_side;
-        
-        /** The last side of the room shape, where the neighbour_shape touches */
-        public final int last_touching_side;
     }
 }

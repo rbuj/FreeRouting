@@ -29,6 +29,14 @@ import datastructures.Signum;
  * @author Alfons Wirtz
  */
 public class IntVector extends Vector implements java.io.Serializable {
+    /**
+     * the x coordinate of this vector
+     */
+    public final int x;
+    /**
+     * the y coordinate of this vector
+     */
+    public final int y;
 
     /**
      * creates an IntVector from two integer coordinates
@@ -260,13 +268,4 @@ public class IntVector extends Vector implements java.io.Serializable {
         return p_other.projection(this);
     }
 
-    /**
-     * the x coordinate of this vector
-     */
-    public final int x;
-
-    /**
-     * the y coordinate of this vector
-     */
-    public final int y;
 }

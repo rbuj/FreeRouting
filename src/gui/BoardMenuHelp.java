@@ -29,8 +29,11 @@ import javax.help.HelpSetException;
  *
  * @author Alfons Wirtz
  */
-public final class BoardMenuHelp extends BoardMenuHelpReduced {
+public class BoardMenuHelp extends BoardMenuHelpReduced {
 
+
+    private static CSH.DisplayHelpFromSource contents_help = null;
+    private static CSH.DisplayHelpAfterTracking direct_help = null;
     /**
      * Creates a new instance of BoardMenuHelp Separated from
      * BoardMenuHelpReduced to avoid ClassNotFound exception when the library
@@ -52,7 +55,6 @@ public final class BoardMenuHelp extends BoardMenuHelpReduced {
         }
         this.add(contents_window, 0);
     }
-
     private void initialize_help(java.util.Locale p_locale) {
         // try to find the helpset and create a HelpBroker object
         if (BoardFrame.help_broker == null) {
@@ -80,7 +82,4 @@ public final class BoardMenuHelp extends BoardMenuHelpReduced {
             }
         }
     }
-
-    private static CSH.DisplayHelpFromSource contents_help = null;
-    private static CSH.DisplayHelpAfterTracking direct_help = null;
 }

@@ -28,8 +28,22 @@ import rules.ViaRule;
  *
  * @author Alfons Wirtz
  */
-public final class WindowViaRule extends javax.swing.JFrame {
+public class WindowViaRule extends javax.swing.JFrame {
 
+
+    private final ViaRule via_rule;
+
+    /**
+     * the list of possible vias in a rule
+     */
+    private final ViaInfos via_list;
+
+    private final javax.swing.JPanel main_panel;
+
+    private final javax.swing.JList rule_list;
+    private final javax.swing.DefaultListModel<ViaInfo> rule_list_model;
+
+    private final java.util.ResourceBundle resources;
     /**
      * Creates a new instance of ViaRuleWindow
      */
@@ -100,7 +114,6 @@ public final class WindowViaRule extends javax.swing.JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
-
     /**
      * Swaps the position of the vias with index p_1 and p_2.
      */
@@ -114,20 +127,6 @@ public final class WindowViaRule extends javax.swing.JFrame {
         this.rule_list_model.set(p_2, via_1);
         this.via_rule.swap(via_1, via_2);
     }
-
-    private final ViaRule via_rule;
-
-    /**
-     * the list of possible vias in a rule
-     */
-    private final ViaInfos via_list;
-
-    private final javax.swing.JPanel main_panel;
-
-    private final javax.swing.JList rule_list;
-    private final javax.swing.DefaultListModel<ViaInfo> rule_list_model;
-
-    private final java.util.ResourceBundle resources;
 
     private class AppendListener implements java.awt.event.ActionListener {
 

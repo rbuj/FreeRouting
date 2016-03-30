@@ -25,8 +25,15 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public final class WindowMoveParameter extends BoardSavableSubWindow {
+public class WindowMoveParameter extends BoardSavableSubWindow {
 
+
+    private final interactive.BoardHandling board_handling;
+    private final javax.swing.JFormattedTextField horizontal_grid_field;
+    private final javax.swing.JFormattedTextField vertical_grid_field;
+    private boolean key_input_completed = true;
+    private final javax.swing.JRadioButton zoom_button;
+    private final javax.swing.JRadioButton rotate_button;
     /**
      * Creates a new instance of WindowMoveParameter
      */
@@ -116,7 +123,6 @@ public final class WindowMoveParameter extends BoardSavableSubWindow {
         this.pack();
         this.setResizable(false);
     }
-
     private void set_horizontal_grid_field(double p_value) {
         if (p_value <= 0) {
             this.horizontal_grid_field.setValue(0);
@@ -125,7 +131,6 @@ public final class WindowMoveParameter extends BoardSavableSubWindow {
             this.horizontal_grid_field.setValue(grid_width);
         }
     }
-
     private void set_vertical_grid_field(double p_value) {
         if (p_value <= 0) {
             this.vertical_grid_field.setValue(0);
@@ -134,13 +139,6 @@ public final class WindowMoveParameter extends BoardSavableSubWindow {
             this.vertical_grid_field.setValue(grid_width);
         }
     }
-
-    private final interactive.BoardHandling board_handling;
-    private final javax.swing.JFormattedTextField horizontal_grid_field;
-    private final javax.swing.JFormattedTextField vertical_grid_field;
-    private boolean key_input_completed = true;
-    private final javax.swing.JRadioButton zoom_button;
-    private final javax.swing.JRadioButton rotate_button;
 
     private class HorizontalGridFieldKeyListener extends java.awt.event.KeyAdapter {
 

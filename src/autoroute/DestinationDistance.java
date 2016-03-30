@@ -31,6 +31,36 @@ import geometry.planar.IntBox;
  */
 public class DestinationDistance {
 
+
+    private final ExpansionCostFactor[] trace_costs;
+    private final boolean[] layer_active;
+    private final int layer_count;
+    private final int active_layer_count;
+
+    private double min_normal_via_cost;
+    private double min_cheap_via_cost;
+    double min_component_side_trace_cost;
+    double max_component_side_trace_cost;
+    double min_solder_side_trace_cost;
+    double max_solder_side_trace_cost;
+    double max_inner_side_trace_cost;
+    // minimum of the maximal trace costs on each inner layer
+    double min_component_inner_trace_cost;
+    // minimum of min_component_side_trace_cost and
+    // max_inner_side_trace_cost
+    double min_solder_inner_trace_cost;
+    // minimum of min_solder_side_trace_cost and max_inner_side_trace_cost
+    double min_component_solder_inner_trace_cost;
+    // minimum of min_component_inner_trace_cost and
+    // min_solder_inner_trace_cost
+    private IntBox component_side_box = IntBox.EMPTY;
+    private IntBox solder_side_box = IntBox.EMPTY;
+    private IntBox inner_side_box = IntBox.EMPTY;
+
+    private boolean box_is_empty = true;
+    private boolean component_side_box_is_empty = true;
+    private boolean solder_side_box_is_empty = true;
+    private boolean inner_side_box_is_empty = true;
     /**
      * Creates a new instance of DestinationDistance. p_trace_costs and
      * p_layer_active are arrays of dimension layer_count.
@@ -87,7 +117,6 @@ public class DestinationDistance {
         min_solder_inner_trace_cost = Math.min(min_solder_side_trace_cost, max_inner_side_trace_cost);
         min_component_solder_inner_trace_cost = Math.min(min_component_inner_trace_cost, min_solder_inner_trace_cost);
     }
-
     public void join(IntBox p_box, int p_layer) {
         if (p_layer == 0) {
             component_side_box = component_side_box.union(p_box);
@@ -101,11 +130,9 @@ public class DestinationDistance {
         }
         box_is_empty = false;
     }
-
     public double calculate(FloatPoint p_point, int p_layer) {
         return calculate(p_point.bounding_box(), p_layer);
     }
-
     public double calculate(IntBox p_box, int p_layer) {
         if (box_is_empty) {
             return Integer.MAX_VALUE;
@@ -367,7 +394,6 @@ public class DestinationDistance {
 
         return result;
     }
-
     public double calculate_cheap_distance(IntBox p_box, int p_layer) {
         double min_normal_via_cost_save = min_normal_via_cost;
 
@@ -377,34 +403,4 @@ public class DestinationDistance {
         min_normal_via_cost = min_normal_via_cost_save;
         return result;
     }
-
-    private final ExpansionCostFactor[] trace_costs;
-    private final boolean[] layer_active;
-    private final int layer_count;
-    private final int active_layer_count;
-
-    private double min_normal_via_cost;
-    private double min_cheap_via_cost;
-    double min_component_side_trace_cost;
-    double max_component_side_trace_cost;
-    double min_solder_side_trace_cost;
-    double max_solder_side_trace_cost;
-    double max_inner_side_trace_cost;
-    // minimum of the maximal trace costs on each inner layer
-    double min_component_inner_trace_cost;
-    // minimum of min_component_side_trace_cost and
-    // max_inner_side_trace_cost
-    double min_solder_inner_trace_cost;
-    // minimum of min_solder_side_trace_cost and max_inner_side_trace_cost
-    double min_component_solder_inner_trace_cost;
-    // minimum of min_component_inner_trace_cost and
-    // min_solder_inner_trace_cost
-    private IntBox component_side_box = IntBox.EMPTY;
-    private IntBox solder_side_box = IntBox.EMPTY;
-    private IntBox inner_side_box = IntBox.EMPTY;
-
-    private boolean box_is_empty = true;
-    private boolean component_side_box_is_empty = true;
-    private boolean solder_side_box_is_empty = true;
-    private boolean inner_side_box_is_empty = true;
 }

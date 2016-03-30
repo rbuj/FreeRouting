@@ -26,6 +26,7 @@ import java.io.IOException;
  * be filttered by an alphanumeric input string. * @author Alfons Wirtz
  */
 public abstract class WindowObjectListWithFilter extends WindowObjectList {
+    private final javax.swing.JTextField filter_string;
 
     /**
      * Creates a new instance of ObjectListWindowWithFilter
@@ -109,18 +110,14 @@ public abstract class WindowObjectListWithFilter extends WindowObjectList {
         return super.read(p_object_stream);
     }
 
-    private final javax.swing.JTextField filter_string;
 
-    /**
-     * Information to be stored in a SnapShot.
-     */
     public static class SnapshotInfo implements java.io.Serializable {
 
+        private final String filter;
+        private final int[] selected_indices;
         private SnapshotInfo(String p_filter, int[] p_selected_indices) {
             filter = p_filter;
             selected_indices = p_selected_indices;
         }
-        private final String filter;
-        private final int[] selected_indices;
     }
 }

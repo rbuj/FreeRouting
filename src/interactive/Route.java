@@ -55,6 +55,46 @@ import rules.ViaRule;
 public class Route {
 
     /**
+     * The time limit in milliseconds for the pull tight algorithm
+     */
+    private static final int CHECK_FORCED_TRACE_TIME_LIMIT = 3000;
+    /**
+     * The time limit in milliseconds for the pull tight algorithm
+     */
+    private static final int PULL_TIGHT_TIME_LIMIT = 2000;
+    /**
+     * The net numbers used for routing
+     */
+    final int[] net_no_arr;
+    private Point prev_corner;
+    private int layer;
+    private final Item start_item;
+    private final Set<Item> target_set;
+    /**
+     * Pins, which can be reached by a pin swap by a target pin.
+     */
+    private final Set<SwapPinInfo> swap_pin_infos;
+    private Collection<TargetPoint> target_points; // from drill_items
+    private Collection<Item> target_traces_and_areas; // from traces and conduction areas
+    private FloatPoint nearest_target_point;
+    private Item nearest_target_item;
+    private final int[] pen_half_width_arr;
+    private final boolean[] layer_active;
+    private final int clearance_class;
+    private final ViaRule via_rule;
+    private final int max_shove_trace_recursion_depth;
+    private final int max_shove_via_recursion_depth;
+    private final int max_spring_over_recursion_depth;
+    private final int trace_tidy_width;
+    private final int pull_tight_accuracy;
+    private final RoutingBoard board;
+    private final boolean is_stitch_mode;
+    private final boolean with_neckdown;
+    private final boolean via_snap_to_smd_center;
+    private final boolean hilight_shove_failing_obstacle;
+    private final int pull_tight_time_limit;
+    private Item shove_failing_obstacle = null;
+    /**
      * Starts routing a connection. p_pen_half_width_arr is provided because it
      * may be different from the half width array in p_board.rules.
      */
@@ -96,7 +136,6 @@ public class Route {
         calculate_target_points_and_areas();
         swap_pin_infos = calculate_swap_pin_infos();
     }
-
     /**
      * Append a line to the trace routed so far. Return true, if the route is
      * completed by connecting to a target.
@@ -200,7 +239,6 @@ public class Route {
                 null, null, pull_tight_time_limit, ok_point, layer);
         return route_completed;
     }
-
     /**
      * Changing the layer in interactive route and inserting a via. Returns
      * false, if changing the layer was not possible.
@@ -253,7 +291,6 @@ public class Route {
         }
         return result;
     }
-
     /**
      * Snaps to the center of an smd pin, if the location location on p_layer is
      * inside an smd pin of the own net,
@@ -284,7 +321,6 @@ public class Route {
         }
         return true;
     }
-
     /**
      * If p_from_point is already on a target item, a connection to the target
      * is made and true returned.
@@ -312,7 +348,6 @@ public class Route {
         }
         return route_completed;
     }
-
     /**
      * Tries to make a trace connection from p_from_point to p_to_point
      * according to the angle restriction. Returns true, if the connection
@@ -349,7 +384,6 @@ public class Route {
         }
         return connection_succeeded;
     }
-
     /**
      * Calculates the nearest layer of the nearest target item to this.layer.
      */
@@ -369,7 +403,6 @@ public class Route {
         }
         return result;
     }
-
     /**
      * Returns all pins, which can be reached by a pin swap from a srtart or
      * target pin.
@@ -400,7 +433,6 @@ public class Route {
         }
         return result;
     }
-
     /**
      * Hilights the targets and draws the incomplete.
      */
@@ -504,7 +536,6 @@ public class Route {
         }
 
     }
-
     /**
      * Makes a connection polygon from p_from_point to p_to_point whose lines
      * fulfill the angle restriction.
@@ -531,7 +562,6 @@ public class Route {
         result[result.length - 1] = p_to_point;
         return result;
     }
-
     /**
      * Calculates a list of the center points of DrillItems, end points of
      * traces and areas of ConductionAreas in the target set.
@@ -553,18 +583,15 @@ public class Route {
             }
         }
     }
-
     public Point get_last_corner() {
         return prev_corner;
     }
-
     public boolean is_layer_active(int p_layer) {
         if (p_layer < 0 || p_layer >= layer_active.length) {
             return false;
         }
         return layer_active[p_layer];
     }
-
     /**
      * The nearest point is used for drowing the incomplete
      */
@@ -618,14 +645,12 @@ public class Route {
         // is completely displayed.
         board.join_graphics_update_box(nearest_item.bounding_box());
     }
-
     private void set_shove_failing_obstacle(Item p_item) {
         this.shove_failing_obstacle = p_item;
         if (p_item != null) {
             this.board.join_graphics_update_box(p_item.bounding_box());
         }
     }
-
     /**
      * If the routed starts at a pin and the route failed with the normal trace
      * width, another try with the smalllest pin width is done. Returns the
@@ -669,7 +694,6 @@ public class Route {
                 pull_tight_accuracy, !is_stitch_mode, time_limit);
         return ok_point;
     }
-
     /**
      * If the routed ends at a pin and the route failed with the normal trace
      * width, another try with the smalllest pin width is done. Returns the
@@ -703,59 +727,21 @@ public class Route {
                 pull_tight_accuracy, !is_stitch_mode, time_limit);
         return ok_point;
     }
-    /**
-     * The net numbers used for routing
-     */
-    final int[] net_no_arr;
-    private Point prev_corner;
-    private int layer;
-    private final Item start_item;
-    private final Set<Item> target_set;
-    /**
-     * Pins, which can be reached by a pin swap by a target pin.
-     */
-    private final Set<SwapPinInfo> swap_pin_infos;
-    private Collection<TargetPoint> target_points; // from drill_items
-    private Collection<Item> target_traces_and_areas; // from traces and conduction areas
-    private FloatPoint nearest_target_point;
-    private Item nearest_target_item;
-    private final int[] pen_half_width_arr;
-    private final boolean[] layer_active;
-    private final int clearance_class;
-    private final ViaRule via_rule;
-    private final int max_shove_trace_recursion_depth;
-    private final int max_shove_via_recursion_depth;
-    private final int max_spring_over_recursion_depth;
-    private final int trace_tidy_width;
-    private final int pull_tight_accuracy;
-    private final RoutingBoard board;
-    private final boolean is_stitch_mode;
-    private final boolean with_neckdown;
-    private final boolean via_snap_to_smd_center;
-    private final boolean hilight_shove_failing_obstacle;
-    private final int pull_tight_time_limit;
-    private Item shove_failing_obstacle = null;
-    /**
-     * The time limit in milliseconds for the pull tight algorithm
-     */
-    private static final int CHECK_FORCED_TRACE_TIME_LIMIT = 3000;
-    /**
-     * The time limit in milliseconds for the pull tight algorithm
-     */
-    private static final int PULL_TIGHT_TIME_LIMIT = 2000;
 
     private static class TargetPoint {
 
+        final FloatPoint location;
+        final Item item;
         TargetPoint(FloatPoint p_location, Item p_item) {
             location = p_location;
             item = p_item;
         }
-        final FloatPoint location;
-        final Item item;
     }
 
     private class SwapPinInfo implements Comparable<SwapPinInfo> {
 
+        final board.Pin pin;
+        geometry.planar.FloatLine incomplete;
         SwapPinInfo(board.Pin p_pin) {
             pin = p_pin;
             incomplete = null;
@@ -782,12 +768,9 @@ public class Route {
                 incomplete = new geometry.planar.FloatLine(pin_center, nearest_point);
             }
         }
-
         @Override
         public int compareTo(SwapPinInfo p_other) {
             return this.pin.compareTo(p_other.pin);
         }
-        final board.Pin pin;
-        geometry.planar.FloatLine incomplete;
     }
 }

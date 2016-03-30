@@ -31,6 +31,11 @@ import geometry.planar.TileShape;
  * @author Alfons Wirtz
  */
 public class TargetItemExpansionDoor implements ExpandableObject {
+    public final Item item;
+    public final int tree_entry_no;
+    public final CompleteExpansionRoom room;
+    private final TileShape shape;
+    private final MazeSearchElement maze_search_info;
 
     /**
      * Creates a new instance of ItemExpansionInfo
@@ -83,9 +88,4 @@ public class TargetItemExpansionDoor implements ExpandableObject {
         maze_search_info.reset();
     }
 
-    public final Item item;
-    public final int tree_entry_no;
-    public final CompleteExpansionRoom room;
-    private final TileShape shape;
-    private final MazeSearchElement maze_search_info;
 }

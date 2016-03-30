@@ -24,55 +24,6 @@ package designformats.specctra;
  * @author Alfons Wirtz
  */
 public class PartLibrary extends ScopeKeyword {
-
-    /**
-     * Creates a new instance of PartLibrary
-     */
-    public PartLibrary() {
-        super("part_library");
-    }
-
-    @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
-        Object next_token = null;
-        for (;;) {
-            Object prev_token = next_token;
-            try {
-                next_token = p_par.scanner.next_token();
-            } catch (java.io.IOException e) {
-                System.out.println("PartLibrary.read_scope: IO error scanning file");
-                System.out.println(e);
-                return false;
-            }
-            if (next_token == null) {
-                System.out.println("PartLibrary.read_scope: unexpected end of file");
-                return false;
-            }
-            if (next_token == CLOSED_BRACKET) {
-                // end of scope
-                break;
-            }
-            if (prev_token == OPEN_BRACKET) {
-                if (next_token == Keyword.LOGICAL_PART_MAPPING) {
-                    LogicalPartMapping next_mapping = read_logical_part_mapping(p_par.scanner);
-                    if (next_mapping == null) {
-                        return false;
-                    }
-                    p_par.logical_part_mappings.add(next_mapping);
-                } else if (next_token == Keyword.LOGICAL_PART) {
-                    LogicalPart next_part = read_logical_part(p_par.scanner);
-                    if (next_part == null) {
-                        return false;
-                    }
-                    p_par.logical_parts.add(next_part);
-                } else {
-                    skip_scope(p_par.scanner);
-                }
-            }
-        }
-        return true;
-    }
-
     public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
         library.LogicalParts logical_parts = p_par.board.library.logical_parts;
         if (logical_parts.count() <= 0) {
@@ -129,6 +80,55 @@ public class PartLibrary extends ScopeKeyword {
         }
         p_par.file.end_scope();
     }
+
+    /**
+     * Creates a new instance of PartLibrary
+     */
+    public PartLibrary() {
+        super("part_library");
+    }
+
+    @Override
+    public boolean read_scope(ReadScopeParameter p_par) {
+        Object next_token = null;
+        for (;;) {
+            Object prev_token = next_token;
+            try {
+                next_token = p_par.scanner.next_token();
+            } catch (java.io.IOException e) {
+                System.out.println("PartLibrary.read_scope: IO error scanning file");
+                System.out.println(e);
+                return false;
+            }
+            if (next_token == null) {
+                System.out.println("PartLibrary.read_scope: unexpected end of file");
+                return false;
+            }
+            if (next_token == CLOSED_BRACKET) {
+                // end of scope
+                break;
+            }
+            if (prev_token == OPEN_BRACKET) {
+                if (next_token == Keyword.LOGICAL_PART_MAPPING) {
+                    LogicalPartMapping next_mapping = read_logical_part_mapping(p_par.scanner);
+                    if (next_mapping == null) {
+                        return false;
+                    }
+                    p_par.logical_part_mappings.add(next_mapping);
+                } else if (next_token == Keyword.LOGICAL_PART) {
+                    LogicalPart next_part = read_logical_part(p_par.scanner);
+                    if (next_part == null) {
+                        return false;
+                    }
+                    p_par.logical_parts.add(next_part);
+                } else {
+                    skip_scope(p_par.scanner);
+                }
+            }
+        }
+        return true;
+    }
+
 
     /**
      * Reads the component list of a logical part mapping. Returns null, if an
@@ -282,10 +282,6 @@ public class PartLibrary extends ScopeKeyword {
 
     public static class LogicalPartMapping {
 
-        private LogicalPartMapping(String p_name, java.util.SortedSet<String> p_components) {
-            name = p_name;
-            components = p_components;
-        }
         /**
          * The name of the maopping.
          */
@@ -295,10 +291,20 @@ public class PartLibrary extends ScopeKeyword {
          * The conponents belonging to the mapping.
          */
         public final java.util.SortedSet<String> components;
+        private LogicalPartMapping(String p_name, java.util.SortedSet<String> p_components) {
+            name = p_name;
+            components = p_components;
+        }
     }
 
     public static class PartPin {
 
+
+        public final String pin_name;
+        public final String gate_name;
+        public final int gate_swap_code;
+        public final String gate_pin_name;
+        public final int gate_pin_swap_code;
         private PartPin(String p_pin_name, String p_gate_name, int p_gate_swap_code,
                 String p_gate_pin_name, int p_gate_pin_swap_code) {
             pin_name = p_pin_name;
@@ -307,20 +313,10 @@ public class PartLibrary extends ScopeKeyword {
             gate_pin_name = p_gate_pin_name;
             gate_pin_swap_code = p_gate_pin_swap_code;
         }
-
-        public final String pin_name;
-        public final String gate_name;
-        public final int gate_swap_code;
-        public final String gate_pin_name;
-        public final int gate_pin_swap_code;
     }
 
     public static class LogicalPart {
 
-        private LogicalPart(String p_name, java.util.Collection<PartPin> p_part_pins) {
-            name = p_name;
-            part_pins = p_part_pins;
-        }
         /**
          * The name of the maopping.
          */
@@ -330,5 +326,9 @@ public class PartLibrary extends ScopeKeyword {
          * The pins of this logical part
          */
         public final java.util.Collection<PartPin> part_pins;
+        private LogicalPart(String p_name, java.util.Collection<PartPin> p_part_pins) {
+            name = p_name;
+            part_pins = p_part_pins;
+        }
     }
 }

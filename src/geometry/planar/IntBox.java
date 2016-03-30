@@ -34,6 +34,14 @@ public class IntBox extends RegularTileShape implements java.io.Serializable {
      */
     public static final IntBox EMPTY = new IntBox(Limits.CRIT_INT, Limits.CRIT_INT,
             -Limits.CRIT_INT, -Limits.CRIT_INT);
+    /**
+     * coordinates of the lower left corner
+     */
+    public final IntPoint ll;
+    /**
+     * coordinates of the upper right corner
+     */
+    public final IntPoint ur;
 
     /**
      * Creates an IntBox from its lower left and upper right corners.
@@ -851,13 +859,4 @@ public class IntBox extends RegularTileShape implements java.io.Serializable {
         return this.to_IntOctagon().cutout_from(p_oct);
     }
 
-    /**
-     * coordinates of the lower left corner
-     */
-    public final IntPoint ll;
-
-    /**
-     * coordinates of the upper right corner
-     */
-    public final IntPoint ur;
 }

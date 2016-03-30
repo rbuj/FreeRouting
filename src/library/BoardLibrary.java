@@ -28,6 +28,18 @@ import java.util.Vector;
  * @author alfons
  */
 public class BoardLibrary implements java.io.Serializable {
+    public Padstacks padstacks = null;
+    public Packages packages = null;
+    /**
+     * Containes information for gate swap and pin swap in the Specctra-dsn
+     * format.
+     */
+    public LogicalParts logical_parts = new LogicalParts();
+    /**
+     * The subset of padstacks in the board library, which can be used in
+     * routing for inserting vias.
+     */
+    private List<Padstack> via_padstacks = null;
 
     /**
      * Creates a new instance of BoardLibrary
@@ -175,17 +187,4 @@ public class BoardLibrary implements java.io.Serializable {
         return false;
     }
 
-    public Padstacks padstacks = null;
-    public Packages packages = null;
-    /**
-     * Containes information for gate swap and pin swap in the Specctra-dsn
-     * format.
-     */
-    public LogicalParts logical_parts = new LogicalParts();
-
-    /**
-     * The subset of padstacks in the board library, which can be used in
-     * routing for inserting vias.
-     */
-    private List<Padstack> via_padstacks = null;
 }

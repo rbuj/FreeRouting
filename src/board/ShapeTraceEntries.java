@@ -31,174 +31,7 @@ import java.util.Iterator;
  */
 public class ShapeTraceEntries {
 
-    /**
-     * Used for shoving traces and vias out of the input shape. p_from_side.no
-     * is the side of p_shape, from where the shove comes. if p_from_side.no <
-     * 0, it will be calculated internally.
-     */
-    ShapeTraceEntries(TileShape p_shape, int p_layer, int[] p_own_net_nos, int p_cl_type,
-            CalcFromSide p_from_side, RoutingBoard p_board) {
-        shape = p_shape;
-        layer = p_layer;
-        own_net_nos = p_own_net_nos;
-        cl_class = p_cl_type;
-        from_side = p_from_side;
-        board = p_board;
-        list_anchor = null;
-        trace_piece_count = 0;
-        max_stack_level = 0;
-        shove_via_list = new java.util.LinkedList<>();
-    }
-
-    /**
-     * Stores traces and vias in p_item_list. Returns false, if p_item_list
-     * contains obstacles, which cannot be shoved aside. If p_is_pad_check. the
-     * check is for vias, otherwise it is for traces. If
-     * p_copper_sharing_allowed, overlaps with traces or pads of the own net are
-     * allowed.
-     */
-    boolean store_items(Collection<Item> p_item_list, boolean p_is_pad_check, boolean p_copper_sharing_allowed) {
-        Iterator<Item> it = p_item_list.iterator();
-        while (it.hasNext()) {
-            Item curr_item = it.next();
-
-            if (!p_is_pad_check && curr_item instanceof ViaObstacleArea || curr_item instanceof ComponentObstacleArea) {
-                continue;
-            }
-            boolean contains_own_net = curr_item.shares_net_no(this.own_net_nos);
-            if (curr_item instanceof ConductionArea
-                    && (contains_own_net || !((ConductionArea) curr_item).get_is_obstacle())) {
-                continue;
-            }
-            if (curr_item.is_shove_fixed() && !contains_own_net) {
-                this.found_obstacle = curr_item;
-                return false;
-            }
-            if (curr_item instanceof Via) {
-                if (p_is_pad_check || !contains_own_net) {
-                    shove_via_list.add((Via) curr_item);
-                }
-            } else if (curr_item instanceof PolylineTrace) {
-                PolylineTrace curr_trace = (PolylineTrace) curr_item;
-
-                if (!store_trace(curr_trace)) {
-                    return false;
-                }
-            } else if (contains_own_net) {
-                if (!p_copper_sharing_allowed) {
-                    this.found_obstacle = curr_item;
-                    return false;
-                }
-                if (p_is_pad_check && !((curr_item instanceof Pin) && ((Pin) curr_item).drill_allowed())) {
-                    this.found_obstacle = curr_item;
-                    return false;
-                }
-            } else {
-                this.found_obstacle = curr_item;
-                return false;
-            }
-        }
-        search_from_side();
-        resort();
-        return calculate_stack_levels();
-    }
-
-    /**
-     * calculates the next substitute trace piece. Returns null at he end of the
-     * substitute trace list.
-     */
-    PolylineTrace next_substitute_trace_piece() {
-
-        EntryPoint[] entries = pop_piece();
-        if (entries == null) {
-            return null;
-        }
-        PolylineTrace curr_trace = entries[0].trace;
-        TileShape offset_shape;
-        ShapeSearchTree search_tree = this.board.search_tree_manager.get_default_tree();
-        if (search_tree.is_clearance_compensation_used()) {
-            double curr_offset = curr_trace.get_compensated_half_width(search_tree) + c_offset_add;
-            offset_shape = (TileShape) shape.offset(curr_offset);
-        } else {
-            // enlarge the shape in 2 steps  for symmetry reasons
-            offset_shape = (TileShape) shape.offset(curr_trace.get_half_width());
-            double cl_offset = board.clearance_value(curr_trace.clearance_class_no(), cl_class, layer) + c_offset_add;
-            offset_shape = (TileShape) offset_shape.offset(cl_offset);
-        }
-        int edge_count = shape.border_line_count();
-        int edge_diff = entries[1].edge_no - entries[0].edge_no;
-
-        // calculate the polyline of the substitute trace
-        Line[] piece_lines = new Line[edge_diff + 3];
-        // start with the intersecting line of the trace at the start entry.
-        piece_lines[0] = entries[0].trace.polyline().arr[entries[0].trace_line_no];
-        // end with the intersecting line of the trace at the end entry
-        piece_lines[piece_lines.length - 1]
-                = entries[1].trace.polyline().arr[entries[1].trace_line_no];
-        // fill the interiour lines of piece_lines with the appropriate edge
-        // lines of the offset shape
-        int curr_edge_no = entries[0].edge_no % edge_count;
-        for (int i = 1; i < piece_lines.length - 1; ++i) {
-            piece_lines[i] = offset_shape.border_line(curr_edge_no);
-            if (curr_edge_no == edge_count - 1) {
-                curr_edge_no = 0;
-            } else {
-                ++curr_edge_no;
-            }
-        }
-        Polyline piece_polyline = new Polyline(piece_lines);
-        if (piece_polyline.is_empty()) {
-            // no valid trace piece, return the next one
-            return next_substitute_trace_piece();
-        }
-        return new PolylineTrace(piece_polyline, this.layer,
-                curr_trace.get_half_width(), curr_trace.net_no_arr,
-                curr_trace.clearance_class_no(), 0, 0, FixedState.UNFIXED, this.board);
-    }
-
-    /**
-     * returns the maximum recursion depth for shoving the obstacle traces
-     */
-    int stack_depth() {
-        return max_stack_level;
-    }
-
-    /**
-     * returns the number of substitute trace pieces.
-     */
-    int substitute_trace_count() {
-        return trace_piece_count;
-    }
-
-    /**
-     * Looks if an unconnected endpoint of a trace of a foreign net is contained
-     * in the interiour of the shape.
-     */
-    public boolean trace_tails_in_shape() {
-        return this.shape_contains_trace_tails;
-    }
-
-    /**
-     * Cuts out all traces in p_item_list out of the stored shape. Traces with
-     * net number p_except_net_no are ignored
-     */
-    void cutout_traces(Collection<Item> p_item_list) {
-        Iterator<Item> it = p_item_list.iterator();
-        while (it.hasNext()) {
-            Item curr_item = it.next();
-            if (curr_item instanceof PolylineTrace && !curr_item.shares_net_no(this.own_net_nos)) {
-                cutout_trace((PolylineTrace) curr_item, this.shape, this.cl_class);
-            }
-        }
-    }
-
-    /**
-     * Returns the item responsible for the failing, if the shove algorithm
-     * failed.
-     */
-    Item get_found_obstacle() {
-        return this.found_obstacle;
-    }
+    private static final double c_offset_add = 1;
 
     public static void cutout_trace(PolylineTrace p_trace, ConvexShape p_shape, int p_cl_class) {
         if (!p_trace.is_on_the_board()) {
@@ -261,7 +94,198 @@ public class ShapeTraceEntries {
         board.communication.observers.notify_new(start_piece);
         board.communication.observers.notify_new(end_piece);
     }
+    static private boolean net_nos_equal(int[] p_net_nos_1, int[] p_net_nos_2) {
+        if (p_net_nos_1.length != p_net_nos_2.length) {
+            return false;
+        }
+        for (int curr_net_no_1 : p_net_nos_1) {
+            boolean net_no_found = false;
+            for (int curr_net_no_2 : p_net_nos_2) {
+                if (curr_net_no_1 == curr_net_no_2) {
+                    net_no_found = true;
+                }
+            }
+            if (!net_no_found) {
+                return false;
+            }
+        }
+        return true;
+    }
 
+
+    final Collection<Via> shove_via_list;
+    private final TileShape shape;
+    private final int layer;
+    private final int[] own_net_nos;
+    private final int cl_class;
+    private CalcFromSide from_side;
+    private final RoutingBoard board;
+    private EntryPoint list_anchor;
+    private int trace_piece_count;
+    private int max_stack_level;
+    private boolean shape_contains_trace_tails = false;
+    private Item found_obstacle = null;
+    /**
+     * Used for shoving traces and vias out of the input shape. p_from_side.no
+     * is the side of p_shape, from where the shove comes. if p_from_side.no <
+     * 0, it will be calculated internally.
+     */
+    ShapeTraceEntries(TileShape p_shape, int p_layer, int[] p_own_net_nos, int p_cl_type,
+            CalcFromSide p_from_side, RoutingBoard p_board) {
+        shape = p_shape;
+        layer = p_layer;
+        own_net_nos = p_own_net_nos;
+        cl_class = p_cl_type;
+        from_side = p_from_side;
+        board = p_board;
+        list_anchor = null;
+        trace_piece_count = 0;
+        max_stack_level = 0;
+        shove_via_list = new java.util.LinkedList<>();
+    }
+    /**
+     * Stores traces and vias in p_item_list. Returns false, if p_item_list
+     * contains obstacles, which cannot be shoved aside. If p_is_pad_check. the
+     * check is for vias, otherwise it is for traces. If
+     * p_copper_sharing_allowed, overlaps with traces or pads of the own net are
+     * allowed.
+     */
+    boolean store_items(Collection<Item> p_item_list, boolean p_is_pad_check, boolean p_copper_sharing_allowed) {
+        Iterator<Item> it = p_item_list.iterator();
+        while (it.hasNext()) {
+            Item curr_item = it.next();
+
+            if (!p_is_pad_check && curr_item instanceof ViaObstacleArea || curr_item instanceof ComponentObstacleArea) {
+                continue;
+            }
+            boolean contains_own_net = curr_item.shares_net_no(this.own_net_nos);
+            if (curr_item instanceof ConductionArea
+                    && (contains_own_net || !((ConductionArea) curr_item).get_is_obstacle())) {
+                continue;
+            }
+            if (curr_item.is_shove_fixed() && !contains_own_net) {
+                this.found_obstacle = curr_item;
+                return false;
+            }
+            if (curr_item instanceof Via) {
+                if (p_is_pad_check || !contains_own_net) {
+                    shove_via_list.add((Via) curr_item);
+                }
+            } else if (curr_item instanceof PolylineTrace) {
+                PolylineTrace curr_trace = (PolylineTrace) curr_item;
+
+                if (!store_trace(curr_trace)) {
+                    return false;
+                }
+            } else if (contains_own_net) {
+                if (!p_copper_sharing_allowed) {
+                    this.found_obstacle = curr_item;
+                    return false;
+                }
+                if (p_is_pad_check && !((curr_item instanceof Pin) && ((Pin) curr_item).drill_allowed())) {
+                    this.found_obstacle = curr_item;
+                    return false;
+                }
+            } else {
+                this.found_obstacle = curr_item;
+                return false;
+            }
+        }
+        search_from_side();
+        resort();
+        return calculate_stack_levels();
+    }
+    /**
+     * calculates the next substitute trace piece. Returns null at he end of the
+     * substitute trace list.
+     */
+    PolylineTrace next_substitute_trace_piece() {
+
+        EntryPoint[] entries = pop_piece();
+        if (entries == null) {
+            return null;
+        }
+        PolylineTrace curr_trace = entries[0].trace;
+        TileShape offset_shape;
+        ShapeSearchTree search_tree = this.board.search_tree_manager.get_default_tree();
+        if (search_tree.is_clearance_compensation_used()) {
+            double curr_offset = curr_trace.get_compensated_half_width(search_tree) + c_offset_add;
+            offset_shape = (TileShape) shape.offset(curr_offset);
+        } else {
+            // enlarge the shape in 2 steps  for symmetry reasons
+            offset_shape = (TileShape) shape.offset(curr_trace.get_half_width());
+            double cl_offset = board.clearance_value(curr_trace.clearance_class_no(), cl_class, layer) + c_offset_add;
+            offset_shape = (TileShape) offset_shape.offset(cl_offset);
+        }
+        int edge_count = shape.border_line_count();
+        int edge_diff = entries[1].edge_no - entries[0].edge_no;
+
+        // calculate the polyline of the substitute trace
+        Line[] piece_lines = new Line[edge_diff + 3];
+        // start with the intersecting line of the trace at the start entry.
+        piece_lines[0] = entries[0].trace.polyline().arr[entries[0].trace_line_no];
+        // end with the intersecting line of the trace at the end entry
+        piece_lines[piece_lines.length - 1]
+                = entries[1].trace.polyline().arr[entries[1].trace_line_no];
+        // fill the interiour lines of piece_lines with the appropriate edge
+        // lines of the offset shape
+        int curr_edge_no = entries[0].edge_no % edge_count;
+        for (int i = 1; i < piece_lines.length - 1; ++i) {
+            piece_lines[i] = offset_shape.border_line(curr_edge_no);
+            if (curr_edge_no == edge_count - 1) {
+                curr_edge_no = 0;
+            } else {
+                ++curr_edge_no;
+            }
+        }
+        Polyline piece_polyline = new Polyline(piece_lines);
+        if (piece_polyline.is_empty()) {
+            // no valid trace piece, return the next one
+            return next_substitute_trace_piece();
+        }
+        return new PolylineTrace(piece_polyline, this.layer,
+                curr_trace.get_half_width(), curr_trace.net_no_arr,
+                curr_trace.clearance_class_no(), 0, 0, FixedState.UNFIXED, this.board);
+    }
+    /**
+     * returns the maximum recursion depth for shoving the obstacle traces
+     */
+    int stack_depth() {
+        return max_stack_level;
+    }
+    /**
+     * returns the number of substitute trace pieces.
+     */
+    int substitute_trace_count() {
+        return trace_piece_count;
+    }
+    /**
+     * Looks if an unconnected endpoint of a trace of a foreign net is contained
+     * in the interiour of the shape.
+     */
+    public boolean trace_tails_in_shape() {
+        return this.shape_contains_trace_tails;
+    }
+    /**
+     * Cuts out all traces in p_item_list out of the stored shape. Traces with
+     * net number p_except_net_no are ignored
+     */
+    void cutout_traces(Collection<Item> p_item_list) {
+        Iterator<Item> it = p_item_list.iterator();
+        while (it.hasNext()) {
+            Item curr_item = it.next();
+            if (curr_item instanceof PolylineTrace && !curr_item.shares_net_no(this.own_net_nos)) {
+                cutout_trace((PolylineTrace) curr_item, this.shape, this.cl_class);
+            }
+        }
+    }
+    /**
+     * Returns the item responsible for the failing, if the shove algorithm
+     * failed.
+     */
+    Item get_found_obstacle() {
+        return this.found_obstacle;
+    }
     /**
      * Stores all intersection points of p_trace with the border of the internal
      * shape enlarged by the half width and the clearance of the corresponding
@@ -288,7 +312,7 @@ public class ShapeTraceEntries {
             int[] entry_tuple = entries[i];
             FloatPoint entry_approx
                     = p_trace.polyline().arr[entry_tuple[0]].
-                    intersection_approx(offset_shape.border_line(entry_tuple[1]));
+                            intersection_approx(offset_shape.border_line(entry_tuple[1]));
             insert_entry_point(p_trace, entry_tuple[0], entry_tuple[1], entry_approx);
         }
 
@@ -378,7 +402,6 @@ public class ShapeTraceEntries {
         this.found_obstacle = p_trace;
         return true;
     }
-
     private void search_from_side() {
         if (this.from_side != null && this.from_side.no >= 0) {
             return; // from side is already legal
@@ -396,7 +419,6 @@ public class ShapeTraceEntries {
         }
         this.from_side = new CalcFromSide(curr_fromside_no, curr_entry_approx);
     }
-
     /**
      * resorts the intersection points according to from_side_no and removes
      * redundant points
@@ -524,7 +546,6 @@ public class ShapeTraceEntries {
             }
         }
     }
-
     private boolean calculate_stack_levels() {
         if (list_anchor == null) {
             return true;
@@ -619,7 +640,6 @@ public class ShapeTraceEntries {
         }
         return true;
     }
-
     /**
      * Pops the next piece with minimal level from the imtersection list Returns
      * null, if the stack is empty. The returned array has 2 elements. The first
@@ -685,7 +705,6 @@ public class ShapeTraceEntries {
         }
         return result;
     }
-
     private void insert_entry_point(PolylineTrace p_trace, int p_trace_line_no,
             int p_edge_no, FloatPoint p_entry_approx) {
         EntryPoint new_entry = new EntryPoint(p_trace, p_trace_line_no, p_edge_no, p_entry_approx);
@@ -706,9 +725,9 @@ public class ShapeTraceEntries {
                 }
                 if (prev_corner.scalar_product(p_entry_approx, next_corner)
                         <= prev_corner.scalar_product(curr_next.entry_approx, next_corner)) // the projection of the line from prev_corner to p_entry_approx
-                // onto the line from prev_corner to next_corner is smaller
-                // than the projection of the line from prev_corner to
-                // next.entry_approx onto the same line.
+                    // onto the line from prev_corner to next_corner is smaller
+                    // than the projection of the line from prev_corner to
+                    // next.entry_approx onto the same line.
                 {
                     break;
                 }
@@ -724,25 +743,14 @@ public class ShapeTraceEntries {
         }
     }
 
-    final Collection<Via> shove_via_list;
-    private final TileShape shape;
-    private final int layer;
-    private final int[] own_net_nos;
-    private final int cl_class;
-    private CalcFromSide from_side;
-    private final RoutingBoard board;
-    private EntryPoint list_anchor;
-    private int trace_piece_count;
-    private int max_stack_level;
-    private boolean shape_contains_trace_tails = false;
-    private Item found_obstacle = null;
-    private static final double c_offset_add = 1;
-
-    /**
-     * Information about an entry point of p_trace into the shape. The entry
-     * points are sorted around the border of the shape
-     */
     private static class EntryPoint {
+
+        final PolylineTrace trace;
+        final int trace_line_no;
+        int edge_no;
+        final FloatPoint entry_approx;
+        int stack_level;
+        EntryPoint next;
 
         EntryPoint(PolylineTrace p_trace, int p_trace_line_no, int p_edge_no,
                 FloatPoint p_entry_approx) {
@@ -752,30 +760,5 @@ public class ShapeTraceEntries {
             entry_approx = p_entry_approx;
             stack_level = -1; //not yet calculated
         }
-
-        final PolylineTrace trace;
-        final int trace_line_no;
-        int edge_no;
-        final FloatPoint entry_approx;
-        int stack_level;
-        EntryPoint next;
-    }
-
-    static private boolean net_nos_equal(int[] p_net_nos_1, int[] p_net_nos_2) {
-        if (p_net_nos_1.length != p_net_nos_2.length) {
-            return false;
-        }
-        for (int curr_net_no_1 : p_net_nos_1) {
-            boolean net_no_found = false;
-            for (int curr_net_no_2 : p_net_nos_2) {
-                if (curr_net_no_1 == curr_net_no_2) {
-                    net_no_found = true;
-                }
-            }
-            if (!net_no_found) {
-                return false;
-            }
-        }
-        return true;
     }
 }

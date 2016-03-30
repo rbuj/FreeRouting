@@ -25,8 +25,20 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public final class WindowAutorouteParameter extends BoardSavableSubWindow {
+public class WindowAutorouteParameter extends BoardSavableSubWindow {
 
+    private final interactive.BoardHandling board_handling;
+    private final javax.swing.JLabel[] signal_layer_name_arr;
+    private final javax.swing.JCheckBox[] signal_layer_active_arr;
+    private final javax.swing.JComboBox[] combo_box_arr;
+    private final javax.swing.JCheckBox vias_allowed;
+    private final javax.swing.JRadioButton fanout_pass_button;
+    private final javax.swing.JRadioButton autoroute_pass_button;
+    private final javax.swing.JRadioButton postroute_pass_button;
+    private final WindowAutorouteDetailParameter detail_window;
+    private final DetailListener detail_listener;
+    private final String horizontal;
+    private final String vertical;
     /**
      * Creates a new instance of WindowAutorouteParameter
      */
@@ -155,7 +167,6 @@ public final class WindowAutorouteParameter extends BoardSavableSubWindow {
         this.pack();
         this.setResizable(false);
     }
-
     /**
      * Recalculates all displayed values
      */
@@ -182,39 +193,25 @@ public final class WindowAutorouteParameter extends BoardSavableSubWindow {
         }
         this.detail_window.refresh();
     }
-
     @Override
     public void dispose() {
         detail_window.dispose();
         super.dispose();
     }
-
     @Override
     public void parent_iconified() {
         detail_window.parent_iconified();
         super.parent_iconified();
     }
-
     @Override
     public void parent_deiconified() {
         detail_window.parent_deiconified();
         super.parent_deiconified();
     }
-    private final interactive.BoardHandling board_handling;
-    private final javax.swing.JLabel[] signal_layer_name_arr;
-    private final javax.swing.JCheckBox[] signal_layer_active_arr;
-    private final javax.swing.JComboBox[] combo_box_arr;
-    private final javax.swing.JCheckBox vias_allowed;
-    private final javax.swing.JRadioButton fanout_pass_button;
-    private final javax.swing.JRadioButton autoroute_pass_button;
-    private final javax.swing.JRadioButton postroute_pass_button;
-    private final WindowAutorouteDetailParameter detail_window;
-    private final DetailListener detail_listener;
-    private final String horizontal;
-    private final String vertical;
 
     private class DetailListener implements java.awt.event.ActionListener {
 
+        private boolean first_time = true;
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             if (first_time) {
@@ -224,10 +221,10 @@ public final class WindowAutorouteParameter extends BoardSavableSubWindow {
             }
             detail_window.setVisible(true);
         }
-        private boolean first_time = true;
     }
 
     private class LayerActiveListener implements java.awt.event.ActionListener {
+        private final int signal_layer_no;
 
         public LayerActiveListener(int p_layer_no) {
             signal_layer_no = p_layer_no;
@@ -238,10 +235,10 @@ public final class WindowAutorouteParameter extends BoardSavableSubWindow {
             int curr_layer_no = board_handling.get_routing_board().layer_structure.get_layer_no(this.signal_layer_no);
             board_handling.settings.autoroute_settings.set_layer_active(curr_layer_no, signal_layer_active_arr[this.signal_layer_no].isSelected());
         }
-        private final int signal_layer_no;
     }
 
     private class PreferredDirectionListener implements java.awt.event.ActionListener {
+        private final int signal_layer_no;
 
         public PreferredDirectionListener(int p_layer_no) {
             signal_layer_no = p_layer_no;
@@ -253,7 +250,6 @@ public final class WindowAutorouteParameter extends BoardSavableSubWindow {
             board_handling.settings.autoroute_settings.set_preferred_direction_is_horizontal(curr_layer_no,
                     combo_box_arr[signal_layer_no].getSelectedItem().equals(horizontal));
         }
-        private final int signal_layer_no;
     }
 
     private class ViasAllowedListener implements java.awt.event.ActionListener {

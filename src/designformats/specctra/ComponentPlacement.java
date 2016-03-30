@@ -30,13 +30,6 @@ import java.util.Map;
  */
 public class ComponentPlacement {
 
-    /**
-     * Creates a new instance of ComponentPlacement
-     */
-    public ComponentPlacement(String p_lib_name) {
-        lib_name = p_lib_name;
-        locations = new LinkedList<>();
-    }
 
     /**
      * The name of the corresponding library component
@@ -47,26 +40,16 @@ public class ComponentPlacement {
      * The list of ComponentLocations of the library component on the board.
      */
     public final Collection<ComponentLocation> locations;
-
     /**
-     * The structure of an entry in the list locations.
+     * Creates a new instance of ComponentPlacement
      */
+    public ComponentPlacement(String p_lib_name) {
+        lib_name = p_lib_name;
+        locations = new LinkedList<>();
+    }
+
     public static class ComponentLocation {
 
-        ComponentLocation(String p_name, double[] p_coor, boolean p_is_front, double p_rotation, boolean p_position_fixed,
-                Map<String, ItemClearanceInfo> p_pin_infos, Map<String, ItemClearanceInfo> p_keepout_infos,
-                Map<String, ItemClearanceInfo> p_via_keepout_infos, Map<String, ItemClearanceInfo> p_place_keepout_infos) {
-            name = p_name;
-            coor = p_coor;
-            is_front = p_is_front;
-            rotation = p_rotation;
-            position_fixed = p_position_fixed;
-            pin_infos = p_pin_infos;
-            keepout_infos = p_keepout_infos;
-            via_keepout_infos = p_via_keepout_infos;
-            place_keepout_infos = p_place_keepout_infos;
-
-        }
 
         public final String name;
 
@@ -102,15 +85,29 @@ public class ComponentPlacement {
         public final Map<String, ItemClearanceInfo> via_keepout_infos;
 
         public final Map<String, ItemClearanceInfo> place_keepout_infos;
+        ComponentLocation(String p_name, double[] p_coor, boolean p_is_front, double p_rotation, boolean p_position_fixed,
+                Map<String, ItemClearanceInfo> p_pin_infos, Map<String, ItemClearanceInfo> p_keepout_infos,
+                Map<String, ItemClearanceInfo> p_via_keepout_infos, Map<String, ItemClearanceInfo> p_place_keepout_infos) {
+            name = p_name;
+            coor = p_coor;
+            is_front = p_is_front;
+            rotation = p_rotation;
+            position_fixed = p_position_fixed;
+            pin_infos = p_pin_infos;
+            keepout_infos = p_keepout_infos;
+            via_keepout_infos = p_via_keepout_infos;
+            place_keepout_infos = p_place_keepout_infos;
+            
+        }
     }
 
     public static class ItemClearanceInfo {
 
+        public final String name;
+        public final String clearance_class;
         ItemClearanceInfo(String p_name, String p_clearance_class) {
             name = p_name;
             clearance_class = p_clearance_class;
         }
-        public final String name;
-        public final String clearance_class;
     }
 }

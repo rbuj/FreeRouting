@@ -29,6 +29,10 @@ import java.io.InputStream;
  *
  */
 public class Logfile {
+    private LogfileScanner scanner = null;
+    private FileWriter file_writer = null;
+    private boolean write_enabled = false;
+    private Object pending_token = null;
 
     /**
      * opens the logfile for reading
@@ -219,8 +223,4 @@ public class Logfile {
         }
     }
 
-    private LogfileScanner scanner = null;
-    private FileWriter file_writer = null;
-    private boolean write_enabled = false;
-    private Object pending_token = null;
 }

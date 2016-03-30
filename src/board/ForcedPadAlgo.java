@@ -39,6 +39,166 @@ import java.util.Collection;
  * @author Alfons Wirtz
  */
 public class ForcedPadAlgo {
+    private static TileShape calc_check_chape_for_from_side(Point p_shape_center, Line p_border_line) {
+        FloatPoint shape_center = p_shape_center.to_float();
+        FloatPoint offset_projection = shape_center.projection_approx(p_border_line);
+        // Make shure, that direction restrictions are retained.
+        Line[] line_arr = new Line[3];
+        Direction curr_dir = p_border_line.direction();
+        line_arr[0] = new Line(p_shape_center, curr_dir);
+        line_arr[1] = new Line(p_shape_center, curr_dir.turn_45_degree(2));
+        line_arr[2] = new Line(offset_projection.round(), curr_dir);
+        Polyline check_line = new Polyline(line_arr);
+        return check_line.offset_shape(1, 0);
+    }
+    /**
+     * Checks, if p_line is in frone of p_pad_shape when shoving from
+     * p_from_side
+     */
+    private static boolean in_front_of_pad(Line p_line, TileShape p_pad_shape, int p_from_side,
+            int p_width, boolean p_with_sides) {
+        if (!p_pad_shape.is_IntOctagon()) {
+            // only implemented for octagons
+            return true;
+        }
+        IntOctagon pad_octagon = p_pad_shape.bounding_octagon();
+        if (!(p_line.a instanceof IntPoint && p_line.b instanceof IntPoint)) {
+            // not implemented
+            return true;
+        }
+        IntPoint line_a = (IntPoint) p_line.a;
+        IntPoint line_b = (IntPoint) p_line.b;
+        
+        double diag_width = p_width * Math.sqrt(2);
+        
+        boolean result;
+        switch (p_from_side) {
+            case 0:
+                result = Math.min(line_a.y, line_b.y) >= pad_octagon.uy + p_width
+                        || Math.max(line_a.x - line_a.y, line_b.x - line_b.y)
+                        <= pad_octagon.ulx - diag_width
+                        || Math.min(line_a.x + line_a.y, line_b.x + line_b.x)
+                        >= pad_octagon.urx + diag_width;
+                if (p_with_sides && !result) {
+                    result = Math.max(line_a.x, line_b.x) <= pad_octagon.lx - p_width
+                            && Math.min(line_a.x - line_a.y, line_b.x - line_b.y)
+                            <= pad_octagon.ulx - diag_width
+                            || Math.min(line_a.x, line_b.x) >= pad_octagon.rx + p_width
+                            && Math.min(line_a.x + line_a.y, line_b.x + line_b.y)
+                            >= pad_octagon.urx + diag_width;
+                }
+                break;
+            case 1:
+                result = Math.min(line_a.y, line_b.y) >= pad_octagon.uy + p_width
+                        || Math.max(line_a.x - line_a.y, line_b.x - line_b.y)
+                        <= pad_octagon.ulx - diag_width
+                        || Math.max(line_a.x, line_b.x) <= pad_octagon.lx - p_width;
+                if (p_with_sides && !result) {
+                    result = Math.min(line_a.x, line_b.x) <= pad_octagon.lx - p_width
+                            && Math.max(line_a.x + line_a.y, line_b.x + line_b.y)
+                            <= pad_octagon.llx - diag_width
+                            || Math.max(line_a.y, line_b.y) >= pad_octagon.uy + p_width
+                            && Math.min(line_a.x + line_a.y, line_b.x + line_b.y)
+                            >= pad_octagon.urx + diag_width;
+                }
+                break;
+            case 2:
+                result = Math.max(line_a.x, line_b.x) <= pad_octagon.lx - p_width
+                        || Math.max(line_a.x - line_a.y, line_b.x - line_b.y)
+                        <= pad_octagon.ulx - diag_width
+                        || Math.max(line_a.x + line_a.y, line_b.x + line_b.y)
+                        <= pad_octagon.llx - diag_width;
+                if (p_with_sides && !result) {
+                    result = Math.max(line_a.y, line_b.y) <= pad_octagon.ly - p_width
+                            && Math.min(line_a.x + line_a.y, line_b.x + line_b.y)
+                            <= pad_octagon.llx - diag_width
+                            || Math.min(line_a.y, line_b.y) >= pad_octagon.uy + p_width
+                            && Math.min(line_a.x - line_a.y, line_b.x - line_b.y)
+                            <= pad_octagon.ulx - diag_width;
+                    
+                }
+                break;
+            case 3:
+                result = Math.max(line_a.x, line_b.x) <= pad_octagon.lx - p_width
+                        || Math.max(line_a.y, line_b.y) <= pad_octagon.ly - p_width
+                        || Math.max(line_a.x + line_a.y, line_b.x + line_b.y)
+                        <= pad_octagon.llx - diag_width;
+                if (p_with_sides && !result) {
+                    result = Math.min(line_a.y, line_b.y) <= pad_octagon.ly - p_width
+                            && Math.min(line_a.x - line_a.y, line_b.x - line_b.y)
+                            >= pad_octagon.lrx + diag_width
+                            || Math.min(line_a.x, line_b.x) <= pad_octagon.lx - p_width
+                            && Math.max(line_a.x - line_a.y, line_b.x - line_b.y)
+                            <= pad_octagon.ulx - diag_width;
+                }
+                break;
+            case 4:
+                result = Math.max(line_a.y, line_b.y) <= pad_octagon.ly - p_width
+                        || Math.max(line_a.x + line_a.y, line_b.x + line_b.y)
+                        <= pad_octagon.llx - diag_width
+                        || Math.min(line_a.x - line_a.y, line_b.x - line_b.y)
+                        >= pad_octagon.lrx + diag_width;
+                if (p_with_sides && !result) {
+                    result = Math.min(line_a.x, line_b.x) >= pad_octagon.rx + p_width
+                            && Math.max(line_a.x - line_a.y, line_b.x - line_b.y)
+                            >= pad_octagon.lrx + diag_width
+                            || Math.max(line_a.x, line_b.x) <= pad_octagon.lx - p_width
+                            && Math.min(line_a.x + line_a.y, line_b.x + line_b.y)
+                            <= pad_octagon.llx - diag_width;
+                }
+                break;
+            case 5:
+                result = Math.max(line_a.y, line_b.y) <= pad_octagon.ly - p_width
+                        || Math.min(line_a.x, line_b.x) >= pad_octagon.rx + p_width
+                        || Math.min(line_a.x - line_a.y, line_b.x - line_b.y)
+                        >= pad_octagon.lrx + diag_width;
+                if (p_with_sides && !result) {
+                    result = Math.max(line_a.x, line_b.x) >= pad_octagon.rx + p_width
+                            && Math.min(line_a.x + line_a.y, line_b.x + line_b.y)
+                            >= pad_octagon.urx + diag_width
+                            || Math.min(line_a.y, line_b.y) <= pad_octagon.ly - p_width
+                            && Math.max(line_a.x + line_a.y, line_b.x + line_b.y)
+                            <= pad_octagon.llx - diag_width;
+                }
+                break;
+            case 6:
+                result = Math.min(line_a.x, line_b.x) >= pad_octagon.rx + p_width
+                        || Math.min(line_a.x + line_a.y, line_b.x + line_b.y)
+                        >= pad_octagon.urx + diag_width
+                        || Math.min(line_a.x - line_a.y, line_b.x - line_b.y)
+                        >= pad_octagon.lrx + diag_width;
+                if (p_with_sides && !result) {
+                    result = Math.max(line_a.y, line_b.y) <= pad_octagon.ly - p_width
+                            && Math.max(line_a.x - line_a.y, line_b.x - line_b.y)
+                            >= pad_octagon.lrx + diag_width
+                            || Math.min(line_a.y, line_b.y) >= pad_octagon.uy + p_width
+                            && Math.max(line_a.x + line_a.y, line_b.x + line_b.y)
+                            >= pad_octagon.urx + diag_width;
+                }
+                break;
+            case 7:
+                result = Math.min(line_a.y, line_b.y) >= pad_octagon.uy + p_width
+                        || Math.min(line_a.x + line_a.y, line_b.x + line_b.y)
+                        >= pad_octagon.urx + diag_width
+                        || Math.min(line_a.x, line_b.x) >= pad_octagon.rx + p_width;
+                if (p_with_sides && !result) {
+                    result = Math.max(line_a.y, line_b.y) >= pad_octagon.uy + p_width
+                            && Math.max(line_a.x - line_a.y, line_b.x - line_b.y)
+                            <= pad_octagon.ulx - diag_width
+                            || Math.max(line_a.x, line_b.x) >= pad_octagon.rx + p_width
+                            && Math.min(line_a.x - line_a.y, line_b.x - line_b.y)
+                            >= pad_octagon.lrx + diag_width;
+                }
+                break;
+            default: {
+                System.out.println("ForcedPadAlgo.in_front_of_pad: p_from_side out of range");
+                result = true;
+            }
+        }
+        
+        return result;
+    }
+    private final RoutingBoard board;
 
     /**
      * Creates a new instance of ForcedPadAlgo
@@ -273,168 +433,6 @@ public class ForcedPadAlgo {
         return CalcFromSide.NOT_CALCULATED;
     }
 
-    private static TileShape calc_check_chape_for_from_side(Point p_shape_center, Line p_border_line) {
-        FloatPoint shape_center = p_shape_center.to_float();
-        FloatPoint offset_projection = shape_center.projection_approx(p_border_line);
-        // Make shure, that direction restrictions are retained.
-        Line[] line_arr = new Line[3];
-        Direction curr_dir = p_border_line.direction();
-        line_arr[0] = new Line(p_shape_center, curr_dir);
-        line_arr[1] = new Line(p_shape_center, curr_dir.turn_45_degree(2));
-        line_arr[2] = new Line(offset_projection.round(), curr_dir);
-        Polyline check_line = new Polyline(line_arr);
-        return check_line.offset_shape(1, 0);
-    }
-
-    /**
-     * Checks, if p_line is in frone of p_pad_shape when shoving from
-     * p_from_side
-     */
-    private static boolean in_front_of_pad(Line p_line, TileShape p_pad_shape, int p_from_side,
-            int p_width, boolean p_with_sides) {
-        if (!p_pad_shape.is_IntOctagon()) {
-            // only implemented for octagons
-            return true;
-        }
-        IntOctagon pad_octagon = p_pad_shape.bounding_octagon();
-        if (!(p_line.a instanceof IntPoint && p_line.b instanceof IntPoint)) {
-            // not implemented
-            return true;
-        }
-        IntPoint line_a = (IntPoint) p_line.a;
-        IntPoint line_b = (IntPoint) p_line.b;
-
-        double diag_width = p_width * Math.sqrt(2);
-
-        boolean result;
-        switch (p_from_side) {
-            case 0:
-                result = Math.min(line_a.y, line_b.y) >= pad_octagon.uy + p_width
-                        || Math.max(line_a.x - line_a.y, line_b.x - line_b.y)
-                        <= pad_octagon.ulx - diag_width
-                        || Math.min(line_a.x + line_a.y, line_b.x + line_b.x)
-                        >= pad_octagon.urx + diag_width;
-                if (p_with_sides && !result) {
-                    result = Math.max(line_a.x, line_b.x) <= pad_octagon.lx - p_width
-                            && Math.min(line_a.x - line_a.y, line_b.x - line_b.y)
-                            <= pad_octagon.ulx - diag_width
-                            || Math.min(line_a.x, line_b.x) >= pad_octagon.rx + p_width
-                            && Math.min(line_a.x + line_a.y, line_b.x + line_b.y)
-                            >= pad_octagon.urx + diag_width;
-                }
-                break;
-            case 1:
-                result = Math.min(line_a.y, line_b.y) >= pad_octagon.uy + p_width
-                        || Math.max(line_a.x - line_a.y, line_b.x - line_b.y)
-                        <= pad_octagon.ulx - diag_width
-                        || Math.max(line_a.x, line_b.x) <= pad_octagon.lx - p_width;
-                if (p_with_sides && !result) {
-                    result = Math.min(line_a.x, line_b.x) <= pad_octagon.lx - p_width
-                            && Math.max(line_a.x + line_a.y, line_b.x + line_b.y)
-                            <= pad_octagon.llx - diag_width
-                            || Math.max(line_a.y, line_b.y) >= pad_octagon.uy + p_width
-                            && Math.min(line_a.x + line_a.y, line_b.x + line_b.y)
-                            >= pad_octagon.urx + diag_width;
-                }
-                break;
-            case 2:
-                result = Math.max(line_a.x, line_b.x) <= pad_octagon.lx - p_width
-                        || Math.max(line_a.x - line_a.y, line_b.x - line_b.y)
-                        <= pad_octagon.ulx - diag_width
-                        || Math.max(line_a.x + line_a.y, line_b.x + line_b.y)
-                        <= pad_octagon.llx - diag_width;
-                if (p_with_sides && !result) {
-                    result = Math.max(line_a.y, line_b.y) <= pad_octagon.ly - p_width
-                            && Math.min(line_a.x + line_a.y, line_b.x + line_b.y)
-                            <= pad_octagon.llx - diag_width
-                            || Math.min(line_a.y, line_b.y) >= pad_octagon.uy + p_width
-                            && Math.min(line_a.x - line_a.y, line_b.x - line_b.y)
-                            <= pad_octagon.ulx - diag_width;
-
-                }
-                break;
-            case 3:
-                result = Math.max(line_a.x, line_b.x) <= pad_octagon.lx - p_width
-                        || Math.max(line_a.y, line_b.y) <= pad_octagon.ly - p_width
-                        || Math.max(line_a.x + line_a.y, line_b.x + line_b.y)
-                        <= pad_octagon.llx - diag_width;
-                if (p_with_sides && !result) {
-                    result = Math.min(line_a.y, line_b.y) <= pad_octagon.ly - p_width
-                            && Math.min(line_a.x - line_a.y, line_b.x - line_b.y)
-                            >= pad_octagon.lrx + diag_width
-                            || Math.min(line_a.x, line_b.x) <= pad_octagon.lx - p_width
-                            && Math.max(line_a.x - line_a.y, line_b.x - line_b.y)
-                            <= pad_octagon.ulx - diag_width;
-                }
-                break;
-            case 4:
-                result = Math.max(line_a.y, line_b.y) <= pad_octagon.ly - p_width
-                        || Math.max(line_a.x + line_a.y, line_b.x + line_b.y)
-                        <= pad_octagon.llx - diag_width
-                        || Math.min(line_a.x - line_a.y, line_b.x - line_b.y)
-                        >= pad_octagon.lrx + diag_width;
-                if (p_with_sides && !result) {
-                    result = Math.min(line_a.x, line_b.x) >= pad_octagon.rx + p_width
-                            && Math.max(line_a.x - line_a.y, line_b.x - line_b.y)
-                            >= pad_octagon.lrx + diag_width
-                            || Math.max(line_a.x, line_b.x) <= pad_octagon.lx - p_width
-                            && Math.min(line_a.x + line_a.y, line_b.x + line_b.y)
-                            <= pad_octagon.llx - diag_width;
-                }
-                break;
-            case 5:
-                result = Math.max(line_a.y, line_b.y) <= pad_octagon.ly - p_width
-                        || Math.min(line_a.x, line_b.x) >= pad_octagon.rx + p_width
-                        || Math.min(line_a.x - line_a.y, line_b.x - line_b.y)
-                        >= pad_octagon.lrx + diag_width;
-                if (p_with_sides && !result) {
-                    result = Math.max(line_a.x, line_b.x) >= pad_octagon.rx + p_width
-                            && Math.min(line_a.x + line_a.y, line_b.x + line_b.y)
-                            >= pad_octagon.urx + diag_width
-                            || Math.min(line_a.y, line_b.y) <= pad_octagon.ly - p_width
-                            && Math.max(line_a.x + line_a.y, line_b.x + line_b.y)
-                            <= pad_octagon.llx - diag_width;
-                }
-                break;
-            case 6:
-                result = Math.min(line_a.x, line_b.x) >= pad_octagon.rx + p_width
-                        || Math.min(line_a.x + line_a.y, line_b.x + line_b.y)
-                        >= pad_octagon.urx + diag_width
-                        || Math.min(line_a.x - line_a.y, line_b.x - line_b.y)
-                        >= pad_octagon.lrx + diag_width;
-                if (p_with_sides && !result) {
-                    result = Math.max(line_a.y, line_b.y) <= pad_octagon.ly - p_width
-                            && Math.max(line_a.x - line_a.y, line_b.x - line_b.y)
-                            >= pad_octagon.lrx + diag_width
-                            || Math.min(line_a.y, line_b.y) >= pad_octagon.uy + p_width
-                            && Math.max(line_a.x + line_a.y, line_b.x + line_b.y)
-                            >= pad_octagon.urx + diag_width;
-                }
-                break;
-            case 7:
-                result = Math.min(line_a.y, line_b.y) >= pad_octagon.uy + p_width
-                        || Math.min(line_a.x + line_a.y, line_b.x + line_b.y)
-                        >= pad_octagon.urx + diag_width
-                        || Math.min(line_a.x, line_b.x) >= pad_octagon.rx + p_width;
-                if (p_with_sides && !result) {
-                    result = Math.max(line_a.y, line_b.y) >= pad_octagon.uy + p_width
-                            && Math.max(line_a.x - line_a.y, line_b.x - line_b.y)
-                            <= pad_octagon.ulx - diag_width
-                            || Math.max(line_a.x, line_b.x) >= pad_octagon.rx + p_width
-                            && Math.min(line_a.x - line_a.y, line_b.x - line_b.y)
-                            >= pad_octagon.lrx + diag_width;
-                }
-                break;
-            default: {
-                System.out.println("ForcedPadAlgo.in_front_of_pad: p_from_side out of range");
-                result = true;
-            }
-        }
-
-        return result;
-    }
-
-    private final RoutingBoard board;
 
     public enum CheckDrillResult {
         DRILLABLE, DRILLABLE_WITH_ATTACH_SMD, NOT_DRILLABLE

@@ -34,141 +34,6 @@ import java.util.LinkedList;
  */
 public class Library extends ScopeKeyword {
 
-    /**
-     * Creates a new instance of Library
-     */
-    public Library() {
-        super("library");
-    }
-
-    @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
-        board.RoutingBoard board = p_par.board_handling.get_routing_board();
-        board.library.padstacks = new library.Padstacks(p_par.board_handling.get_routing_board().layer_structure);
-        Collection<Package> package_list = new LinkedList<>();
-        Object next_token = null;
-        for (;;) {
-            Object prev_token = next_token;
-            try {
-                next_token = p_par.scanner.next_token();
-            } catch (java.io.IOException e) {
-                System.out.println("Library.read_scope: IO error scanning file");
-                System.out.println(e);
-                return false;
-            }
-            if (next_token == null) {
-                System.out.println("Library.read_scope: unexpected end of file");
-                return false;
-            }
-            if (next_token == CLOSED_BRACKET) {
-                // end of scope
-                break;
-            }
-            if (prev_token == OPEN_BRACKET) {
-                if (next_token == Keyword.PADSTACK) {
-                    if (!read_padstack_scope(p_par.scanner, p_par.layer_structure,
-                            p_par.coordinate_transform, board.library.padstacks)) {
-                        return false;
-                    }
-                } else if (next_token == Keyword.IMAGE) {
-                    Package curr_package = Package.read_scope(p_par.scanner, p_par.layer_structure);
-                    if (curr_package == null) {
-                        return false;
-                    }
-                    package_list.add(curr_package);
-                } else {
-                    skip_scope(p_par.scanner);
-                }
-            }
-        }
-
-        // Set the via padstacks.
-        if (p_par.via_padstack_names != null) {
-            library.Padstack[] via_padstacks = new library.Padstack[p_par.via_padstack_names.size()];
-            Iterator<String> it = p_par.via_padstack_names.iterator();
-            int found_padstack_count = 0;
-            for (int i = 0; i < via_padstacks.length; ++i) {
-                String curr_padstack_name = it.next();
-                library.Padstack curr_padstack = board.library.padstacks.get(curr_padstack_name);
-                if (curr_padstack != null) {
-                    via_padstacks[found_padstack_count] = curr_padstack;
-                    ++found_padstack_count;
-                } else {
-                    System.out.print("Library.read_scope: via padstack with name ");
-                    System.out.print(curr_padstack_name);
-                    System.out.println(" not found");
-                }
-            }
-            if (found_padstack_count != via_padstacks.length) {
-                // Some via padstacks were not found in the padstacks scope of the dsn-file.
-                library.Padstack[] corrected_padstacks = new library.Padstack[found_padstack_count];
-                System.arraycopy(via_padstacks, 0, corrected_padstacks, 0, found_padstack_count);
-                via_padstacks = corrected_padstacks;
-            }
-            board.library.set_via_padstacks(via_padstacks);
-        }
-
-        // Create the library packages on the board
-        board.library.packages = new library.Packages(board.library.padstacks);
-        Iterator<Package> it = package_list.iterator();
-        while (it.hasNext()) {
-            Package curr_package = it.next();
-            library.Package.Pin[] pin_arr = new library.Package.Pin[curr_package.pin_info_arr.length];
-            for (int i = 0; i < pin_arr.length; ++i) {
-                Package.PinInfo pin_info = curr_package.pin_info_arr[i];
-                int rel_x = (int) Math.round(p_par.coordinate_transform.dsn_to_board(pin_info.rel_coor[0]));
-                int rel_y = (int) Math.round(p_par.coordinate_transform.dsn_to_board(pin_info.rel_coor[1]));
-                Vector rel_coor = new IntVector(rel_x, rel_y);
-                library.Padstack board_padstack = board.library.padstacks.get(pin_info.padstack_name);
-                if (board_padstack == null) {
-                    System.out.println("Library.read_scope: board padstack not found");
-                    return false;
-                }
-                pin_arr[i] = new library.Package.Pin(pin_info.pin_name, board_padstack.no, rel_coor, pin_info.rotation);
-            }
-            geometry.planar.Shape[] outline_arr = new geometry.planar.Shape[curr_package.outline.size()];
-
-            Iterator<Shape> it3 = curr_package.outline.iterator();
-            for (int i = 0; i < outline_arr.length; ++i) {
-                Shape curr_shape = it3.next();
-                if (curr_shape != null) {
-                    outline_arr[i] = curr_shape.transform_to_board_rel(p_par.coordinate_transform);
-                } else {
-                    System.out.println("Library.read_scope: outline shape is null");
-                }
-            }
-            generate_missing_keepout_names("keepout_", curr_package.keepouts);
-            generate_missing_keepout_names("via_keepout_", curr_package.via_keepouts);
-            generate_missing_keepout_names("place_keepout_", curr_package.place_keepouts);
-            library.Package.Keepout[] keepout_arr = new library.Package.Keepout[curr_package.keepouts.size()];
-            Iterator<Shape.ReadAreaScopeResult> it2 = curr_package.keepouts.iterator();
-            for (int i = 0; i < keepout_arr.length; ++i) {
-                Shape.ReadAreaScopeResult curr_keepout = it2.next();
-                Layer curr_layer = curr_keepout.shape_list.iterator().next().layer;
-                geometry.planar.Area curr_area = Shape.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
-                keepout_arr[i] = new library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.no);
-            }
-            library.Package.Keepout[] via_keepout_arr = new library.Package.Keepout[curr_package.via_keepouts.size()];
-            it2 = curr_package.via_keepouts.iterator();
-            for (int i = 0; i < via_keepout_arr.length; ++i) {
-                Shape.ReadAreaScopeResult curr_keepout = it2.next();
-                Layer curr_layer = (curr_keepout.shape_list.iterator().next()).layer;
-                geometry.planar.Area curr_area = Shape.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
-                via_keepout_arr[i] = new library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.no);
-            }
-            library.Package.Keepout[] place_keepout_arr = new library.Package.Keepout[curr_package.place_keepouts.size()];
-            it2 = curr_package.place_keepouts.iterator();
-            for (int i = 0; i < place_keepout_arr.length; ++i) {
-                Shape.ReadAreaScopeResult curr_keepout = it2.next();
-                Layer curr_layer = (curr_keepout.shape_list.iterator().next()).layer;
-                geometry.planar.Area curr_area = Shape.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
-                place_keepout_arr[i] = new library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.no);
-            }
-            board.library.packages.add(curr_package.name, pin_arr, outline_arr,
-                    keepout_arr, via_keepout_arr, place_keepout_arr, curr_package.is_front);
-        }
-        return true;
-    }
 
     public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
         p_par.file.start_scope();
@@ -335,6 +200,140 @@ public class Library extends ScopeKeyword {
             }
         }
         p_board_padstacks.add(padstack_name, padstack_shapes, is_drilllable, placed_absolute);
+        return true;
+    }
+    /**
+     * Creates a new instance of Library
+     */
+    public Library() {
+        super("library");
+    }
+    @Override
+    public boolean read_scope(ReadScopeParameter p_par) {
+        board.RoutingBoard board = p_par.board_handling.get_routing_board();
+        board.library.padstacks = new library.Padstacks(p_par.board_handling.get_routing_board().layer_structure);
+        Collection<Package> package_list = new LinkedList<>();
+        Object next_token = null;
+        for (;;) {
+            Object prev_token = next_token;
+            try {
+                next_token = p_par.scanner.next_token();
+            } catch (java.io.IOException e) {
+                System.out.println("Library.read_scope: IO error scanning file");
+                System.out.println(e);
+                return false;
+            }
+            if (next_token == null) {
+                System.out.println("Library.read_scope: unexpected end of file");
+                return false;
+            }
+            if (next_token == CLOSED_BRACKET) {
+                // end of scope
+                break;
+            }
+            if (prev_token == OPEN_BRACKET) {
+                if (next_token == Keyword.PADSTACK) {
+                    if (!read_padstack_scope(p_par.scanner, p_par.layer_structure,
+                            p_par.coordinate_transform, board.library.padstacks)) {
+                        return false;
+                    }
+                } else if (next_token == Keyword.IMAGE) {
+                    Package curr_package = Package.read_scope(p_par.scanner, p_par.layer_structure);
+                    if (curr_package == null) {
+                        return false;
+                    }
+                    package_list.add(curr_package);
+                } else {
+                    skip_scope(p_par.scanner);
+                }
+            }
+        }
+        
+        // Set the via padstacks.
+        if (p_par.via_padstack_names != null) {
+            library.Padstack[] via_padstacks = new library.Padstack[p_par.via_padstack_names.size()];
+            Iterator<String> it = p_par.via_padstack_names.iterator();
+            int found_padstack_count = 0;
+            for (int i = 0; i < via_padstacks.length; ++i) {
+                String curr_padstack_name = it.next();
+                library.Padstack curr_padstack = board.library.padstacks.get(curr_padstack_name);
+                if (curr_padstack != null) {
+                    via_padstacks[found_padstack_count] = curr_padstack;
+                    ++found_padstack_count;
+                } else {
+                    System.out.print("Library.read_scope: via padstack with name ");
+                    System.out.print(curr_padstack_name);
+                    System.out.println(" not found");
+                }
+            }
+            if (found_padstack_count != via_padstacks.length) {
+                // Some via padstacks were not found in the padstacks scope of the dsn-file.
+                library.Padstack[] corrected_padstacks = new library.Padstack[found_padstack_count];
+                System.arraycopy(via_padstacks, 0, corrected_padstacks, 0, found_padstack_count);
+                via_padstacks = corrected_padstacks;
+            }
+            board.library.set_via_padstacks(via_padstacks);
+        }
+        
+        // Create the library packages on the board
+        board.library.packages = new library.Packages(board.library.padstacks);
+        Iterator<Package> it = package_list.iterator();
+        while (it.hasNext()) {
+            Package curr_package = it.next();
+            library.Package.Pin[] pin_arr = new library.Package.Pin[curr_package.pin_info_arr.length];
+            for (int i = 0; i < pin_arr.length; ++i) {
+                Package.PinInfo pin_info = curr_package.pin_info_arr[i];
+                int rel_x = (int) Math.round(p_par.coordinate_transform.dsn_to_board(pin_info.rel_coor[0]));
+                int rel_y = (int) Math.round(p_par.coordinate_transform.dsn_to_board(pin_info.rel_coor[1]));
+                Vector rel_coor = new IntVector(rel_x, rel_y);
+                library.Padstack board_padstack = board.library.padstacks.get(pin_info.padstack_name);
+                if (board_padstack == null) {
+                    System.out.println("Library.read_scope: board padstack not found");
+                    return false;
+                }
+                pin_arr[i] = new library.Package.Pin(pin_info.pin_name, board_padstack.no, rel_coor, pin_info.rotation);
+            }
+            geometry.planar.Shape[] outline_arr = new geometry.planar.Shape[curr_package.outline.size()];
+            
+            Iterator<Shape> it3 = curr_package.outline.iterator();
+            for (int i = 0; i < outline_arr.length; ++i) {
+                Shape curr_shape = it3.next();
+                if (curr_shape != null) {
+                    outline_arr[i] = curr_shape.transform_to_board_rel(p_par.coordinate_transform);
+                } else {
+                    System.out.println("Library.read_scope: outline shape is null");
+                }
+            }
+            generate_missing_keepout_names("keepout_", curr_package.keepouts);
+            generate_missing_keepout_names("via_keepout_", curr_package.via_keepouts);
+            generate_missing_keepout_names("place_keepout_", curr_package.place_keepouts);
+            library.Package.Keepout[] keepout_arr = new library.Package.Keepout[curr_package.keepouts.size()];
+            Iterator<Shape.ReadAreaScopeResult> it2 = curr_package.keepouts.iterator();
+            for (int i = 0; i < keepout_arr.length; ++i) {
+                Shape.ReadAreaScopeResult curr_keepout = it2.next();
+                Layer curr_layer = curr_keepout.shape_list.iterator().next().layer;
+                geometry.planar.Area curr_area = Shape.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
+                keepout_arr[i] = new library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.no);
+            }
+            library.Package.Keepout[] via_keepout_arr = new library.Package.Keepout[curr_package.via_keepouts.size()];
+            it2 = curr_package.via_keepouts.iterator();
+            for (int i = 0; i < via_keepout_arr.length; ++i) {
+                Shape.ReadAreaScopeResult curr_keepout = it2.next();
+                Layer curr_layer = (curr_keepout.shape_list.iterator().next()).layer;
+                geometry.planar.Area curr_area = Shape.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
+                via_keepout_arr[i] = new library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.no);
+            }
+            library.Package.Keepout[] place_keepout_arr = new library.Package.Keepout[curr_package.place_keepouts.size()];
+            it2 = curr_package.place_keepouts.iterator();
+            for (int i = 0; i < place_keepout_arr.length; ++i) {
+                Shape.ReadAreaScopeResult curr_keepout = it2.next();
+                Layer curr_layer = (curr_keepout.shape_list.iterator().next()).layer;
+                geometry.planar.Area curr_area = Shape.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
+                place_keepout_arr[i] = new library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.no);
+            }
+            board.library.packages.add(curr_package.name, pin_arr, outline_arr,
+                    keepout_arr, via_keepout_arr, place_keepout_arr, curr_package.is_front);
+        }
         return true;
     }
 

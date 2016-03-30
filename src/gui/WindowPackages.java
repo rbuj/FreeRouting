@@ -28,7 +28,7 @@ import library.Packages;
  *
  * @author Alfons Wirtz
  */
-public final class WindowPackages extends WindowObjectListWithFilter {
+public class WindowPackages extends WindowObjectListWithFilter {
 
     /**
      * Creates a new instance of PackagesWindow

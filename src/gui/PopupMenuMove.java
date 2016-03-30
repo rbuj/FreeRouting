@@ -27,7 +27,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public final class PopupMenuMove extends PopupMenuDisplay {
+public class PopupMenuMove extends PopupMenuDisplay {
 
     /**
      * Creates a new instance of PopupMenuMove

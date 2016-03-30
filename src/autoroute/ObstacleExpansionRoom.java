@@ -35,6 +35,14 @@ import java.util.List;
  * @author Alfons Wirtz
  */
 public class ObstacleExpansionRoom implements CompleteExpansionRoom {
+    private final Item item;
+    private final int index_in_item;
+    private final TileShape shape;
+    /**
+     * The list of doors to neighbour expansion rooms
+     */
+    private List<ExpansionDoor> doors;
+    private boolean doors_calculated = false;
 
     /**
      * Creates a new instance of ObstacleExpansionRoom
@@ -177,14 +185,4 @@ public class ObstacleExpansionRoom implements CompleteExpansionRoom {
         p_graphics_context.draw_boundary(this.get_shape(), 0, draw_color, p_graphics, layer_visibility);
     }
 
-    private final Item item;
-    private final int index_in_item;
-    private final TileShape shape;
-
-    /**
-     * The list of doors to neighbour expansion rooms
-     */
-    private List<ExpansionDoor> doors;
-
-    private boolean doors_calculated = false;
 }

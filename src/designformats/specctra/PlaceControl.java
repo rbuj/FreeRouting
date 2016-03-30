@@ -25,6 +25,27 @@ package designformats.specctra;
  * @author Alfons Wirtz
  */
 public class PlaceControl extends ScopeKeyword {
+    /**
+     * Returns true, if rotate_first is read, else false.
+     */
+    static boolean read_flip_style_rotate_first(Scanner p_scanner) {
+        try {
+            boolean result = false;
+            Object next_token = p_scanner.next_token();
+            if (next_token == Keyword.ROTATE_FIRST) {
+                result = true;
+            }
+            next_token = p_scanner.next_token();
+            if (next_token != Keyword.CLOSED_BRACKET) {
+                System.out.println("Structure.read_flip_style: closing bracket expected");
+                return false;
+            }
+            return result;
+        } catch (java.io.IOException e) {
+            System.out.println("Structure.read_flip_style: IO error scanning file");
+            return false;
+        }
+    }
 
     /**
      * Creates a new instance of PlaceControl
@@ -66,26 +87,5 @@ public class PlaceControl extends ScopeKeyword {
         return true;
     }
 
-    /**
-     * Returns true, if rotate_first is read, else false.
-     */
-    static boolean read_flip_style_rotate_first(Scanner p_scanner) {
-        try {
-            boolean result = false;
-            Object next_token = p_scanner.next_token();
-            if (next_token == Keyword.ROTATE_FIRST) {
-                result = true;
-            }
-            next_token = p_scanner.next_token();
-            if (next_token != Keyword.CLOSED_BRACKET) {
-                System.out.println("Structure.read_flip_style: closing bracket expected");
-                return false;
-            }
-            return result;
-        } catch (java.io.IOException e) {
-            System.out.println("Structure.read_flip_style: IO error scanning file");
-            return false;
-        }
-    }
 
 }

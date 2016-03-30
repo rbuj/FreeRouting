@@ -28,6 +28,16 @@ package geometry.planar;
  */
 public class Ellipse implements java.io.Serializable {
 
+
+    public final FloatPoint center;
+
+    /**
+     * Rotation of the ellipse in radian normed to 0 {@literal <}= rotation
+     * {@literal <} pi
+     */
+    public final double rotation;
+    public final double bigger_radius;
+    public final double smaller_radius;
     /**
      * Creates a new instance of Ellipse
      */
@@ -51,14 +61,4 @@ public class Ellipse implements java.io.Serializable {
         }
         this.rotation = curr_rotation;
     }
-
-    public final FloatPoint center;
-
-    /**
-     * Rotation of the ellipse in radian normed to 0 {@literal <}= rotation
-     * {@literal <} pi
-     */
-    public final double rotation;
-    public final double bigger_radius;
-    public final double smaller_radius;
 }

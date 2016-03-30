@@ -39,78 +39,6 @@ import rules.DefaultItemClearanceClasses.ItemClass;
  */
 public class Network extends ScopeKeyword {
 
-    /**
-     * Creates a new instance of Network
-     */
-    public Network() {
-        super("network");
-    }
-
-    @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
-        Collection<NetClass> classes = new LinkedList<>();
-        Collection<NetClass.ClassClass> class_class_list = new LinkedList<>();
-        Collection<rules.ViaInfo> via_infos = new LinkedList<>();
-        Collection<Collection<String>> via_rules = new LinkedList<>();
-        Object next_token = null;
-        for (;;) {
-            Object prev_token = next_token;
-            try {
-                next_token = p_par.scanner.next_token();
-            } catch (java.io.IOException e) {
-                System.out.println("Network.read_scope: IO error scanning file");
-                System.out.println(e);
-                return false;
-            }
-            if (next_token == null) {
-                System.out.println("Network.read_scope: unexpected end of file");
-                return false;
-            }
-            if (next_token == CLOSED_BRACKET) {
-                // end of scope
-                break;
-            }
-            if (prev_token == OPEN_BRACKET) {
-                if (next_token == Keyword.NET) {
-                    read_net_scope(p_par.scanner, p_par.netlist, p_par.board_handling.get_routing_board(),
-                            p_par.coordinate_transform, p_par.layer_structure, p_par.board_handling.get_locale());
-                } else if (next_token == Keyword.VIA) {
-                    rules.ViaInfo curr_via_info = read_via_info(p_par.scanner, p_par.board_handling.get_routing_board());
-                    if (curr_via_info == null) {
-                        return false;
-                    }
-                    via_infos.add(curr_via_info);
-                } else if (next_token == Keyword.VIA_RULE) {
-                    Collection<String> curr_via_rule = read_via_rule(p_par.scanner, p_par.board_handling.get_routing_board());
-                    if (curr_via_rule == null) {
-                        return false;
-                    }
-                    via_rules.add(curr_via_rule);
-                } else if (next_token == Keyword.CLASS) {
-                    NetClass curr_class = NetClass.read_scope(p_par.scanner);
-                    if (curr_class == null) {
-                        return false;
-                    }
-                    classes.add(curr_class);
-                } else if (next_token == Keyword.CLASS_CLASS) {
-                    NetClass.ClassClass curr_class_class = NetClass.read_class_class_scope(p_par.scanner);
-                    if (curr_class_class == null) {
-                        return false;
-                    }
-                    class_class_list.add(curr_class_class);
-                } else {
-                    skip_scope(p_par.scanner);
-                }
-            }
-        }
-        insert_via_infos(via_infos, p_par.board_handling.get_routing_board(), p_par.via_at_smd_allowed);
-        insert_via_rules(via_rules, p_par.board_handling.get_routing_board());
-        insert_net_classes(classes, p_par);
-        insert_class_pairs(class_class_list, p_par);
-        insert_compoments(p_par);
-        insert_logical_parts(p_par);
-        return true;
-    }
 
     public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
         p_par.file.start_scope();
@@ -252,134 +180,6 @@ public class Network extends ScopeKeyword {
         p_par.file.end_scope();
     }
 
-    private boolean read_net_scope(Scanner p_scanner, NetList p_net_list, RoutingBoard p_board,
-            CoordinateTransform p_coordinate_transform, LayerStructure p_layer_structure, java.util.Locale p_locale) {
-        // read the net name
-        Object next_token;
-        try {
-            next_token = p_scanner.next_token();
-        } catch (java.io.IOException e) {
-            System.out.println("Network.read_net_scope: IO error while scanning file");
-            return false;
-        }
-        if (!(next_token instanceof String)) {
-            System.out.println("Network.read_net_scope: String expected");
-            return false;
-        }
-        String net_name = (String) next_token;
-        int subnet_number = 1;
-        try {
-            next_token = p_scanner.next_token();
-        } catch (java.io.IOException e) {
-            System.out.println("Network.read_net_scope: IO error while scanning file");
-            return false;
-        }
-        boolean scope_is_empty = (next_token == CLOSED_BRACKET);
-        if (next_token instanceof Integer) {
-            subnet_number = (Integer) next_token;
-        }
-        boolean pin_order_found = false;
-        Collection<Net.Pin> pin_list = new LinkedList<>();
-        Collection<Rule> net_rules = new LinkedList<>();
-        Collection<Collection<Net.Pin>> subnet_pin_lists = new LinkedList<>();
-        if (!scope_is_empty) {
-            for (;;) {
-                Object prev_token = next_token;
-                try {
-                    next_token = p_scanner.next_token();
-                } catch (java.io.IOException e) {
-                    System.out.println("Network.read_net_scope: IO error scanning file");
-                    return false;
-                }
-                if (next_token == null) {
-                    System.out.println("Network.read_net_scope: unexpected end of file");
-                    return false;
-                }
-                if (next_token == CLOSED_BRACKET) {
-                    // end of scope
-                    break;
-                }
-                if (prev_token == OPEN_BRACKET) {
-                    if (next_token == Keyword.PINS) {
-                        if (!read_net_pins(p_scanner, pin_list)) {
-                            return false;
-                        }
-                    } else if (next_token == Keyword.ORDER) {
-                        pin_order_found = true;
-                        if (!read_net_pins(p_scanner, pin_list)) {
-                            return false;
-                        }
-                    } else if (next_token == Keyword.FROMTO) {
-                        Set<Net.Pin> curr_subnet_pin_list = new java.util.TreeSet<>();
-                        if (!read_net_pins(p_scanner, curr_subnet_pin_list)) {
-                            return false;
-                        }
-                        subnet_pin_lists.add(curr_subnet_pin_list);
-                    } else if (next_token == Keyword.RULE) {
-                        net_rules.addAll(Rule.read_scope(p_scanner));
-                    } else if (next_token == Keyword.LAYER_RULE) {
-                        System.out.println("Netwark.read_net_scope: layer_rule not yet implemented");
-                        skip_scope(p_scanner);
-                    } else {
-                        skip_scope(p_scanner);
-                    }
-                }
-            }
-        }
-        if (subnet_pin_lists.isEmpty()) {
-            if (pin_order_found) {
-                subnet_pin_lists = create_ordered_subnets(pin_list);
-            } else {
-                subnet_pin_lists.add(pin_list);
-            }
-        }
-        for (Collection<Net.Pin> curr_pin_list : subnet_pin_lists) {
-            Net.Id net_id = new Net.Id(net_name, subnet_number);
-            if (!p_net_list.contains(net_id)) {
-                Net new_net = p_net_list.add_net(net_id);
-                boolean contains_plane = p_layer_structure.contains_plane(net_name);
-                if (new_net != null) {
-                    p_board.rules.nets.add(new_net.id.name, new_net.id.subnet_number, contains_plane);
-                }
-            }
-            Net curr_subnet = p_net_list.get_net(net_id);
-            if (curr_subnet == null) {
-                System.out.println("Network.read_net_scope: net not found in netlist");
-                return false;
-            }
-            curr_subnet.set_pins(curr_pin_list);
-            if (!net_rules.isEmpty()) {
-                // Evaluate the net rules.
-                rules.Net board_net = p_board.rules.nets.get(curr_subnet.id.name, curr_subnet.id.subnet_number);
-                if (board_net == null) {
-                    System.out.println("Network.read_net_scope: board net not found");
-                    return false;
-                }
-                Iterator<Rule> it = net_rules.iterator();
-                while (it.hasNext()) {
-                    Rule curr_ob = it.next();
-                    if (curr_ob instanceof Rule.WidthRule) {
-                        rules.NetClass default_net_rule = p_board.rules.get_default_net_class();
-                        double wire_width = ((Rule.WidthRule) curr_ob).value;
-                        int trace_halfwidth = (int) Math.round(p_coordinate_transform.dsn_to_board(wire_width) / 2);
-                        rules.NetClass net_rule
-                                = p_board.rules.net_classes.find(trace_halfwidth, default_net_rule.get_trace_clearance_class(),
-                                        default_net_rule.get_via_rule());
-                        if (net_rule == null) {
-                            // create a new net rule
-                            net_rule = p_board.rules.get_new_net_class(p_locale);
-                        }
-                        net_rule.set_trace_half_width(trace_halfwidth);
-                        board_net.set_class(net_rule);
-                    } else {
-                        System.out.println("Network.read_net_scope: Rule not yet implemented");
-                    }
-                }
-            }
-            ++subnet_number;
-        }
-        return true;
-    }
 
     /**
      * Creates a sequence of subnets with 2 pins from p_pin_list
@@ -1216,5 +1016,204 @@ public class Network extends ScopeKeyword {
             routing_board.insert_component_outline(curr_package.outline[i], p_location.is_front, component_translation,
                     rotation_in_degree, new_component.no, fixed_state);
         }
+    }
+    /**
+     * Creates a new instance of Network
+     */
+    public Network() {
+        super("network");
+    }
+    @Override
+    public boolean read_scope(ReadScopeParameter p_par) {
+        Collection<NetClass> classes = new LinkedList<>();
+        Collection<NetClass.ClassClass> class_class_list = new LinkedList<>();
+        Collection<rules.ViaInfo> via_infos = new LinkedList<>();
+        Collection<Collection<String>> via_rules = new LinkedList<>();
+        Object next_token = null;
+        for (;;) {
+            Object prev_token = next_token;
+            try {
+                next_token = p_par.scanner.next_token();
+            } catch (java.io.IOException e) {
+                System.out.println("Network.read_scope: IO error scanning file");
+                System.out.println(e);
+                return false;
+            }
+            if (next_token == null) {
+                System.out.println("Network.read_scope: unexpected end of file");
+                return false;
+            }
+            if (next_token == CLOSED_BRACKET) {
+                // end of scope
+                break;
+            }
+            if (prev_token == OPEN_BRACKET) {
+                if (next_token == Keyword.NET) {
+                    read_net_scope(p_par.scanner, p_par.netlist, p_par.board_handling.get_routing_board(),
+                            p_par.coordinate_transform, p_par.layer_structure, p_par.board_handling.get_locale());
+                } else if (next_token == Keyword.VIA) {
+                    rules.ViaInfo curr_via_info = read_via_info(p_par.scanner, p_par.board_handling.get_routing_board());
+                    if (curr_via_info == null) {
+                        return false;
+                    }
+                    via_infos.add(curr_via_info);
+                } else if (next_token == Keyword.VIA_RULE) {
+                    Collection<String> curr_via_rule = read_via_rule(p_par.scanner, p_par.board_handling.get_routing_board());
+                    if (curr_via_rule == null) {
+                        return false;
+                    }
+                    via_rules.add(curr_via_rule);
+                } else if (next_token == Keyword.CLASS) {
+                    NetClass curr_class = NetClass.read_scope(p_par.scanner);
+                    if (curr_class == null) {
+                        return false;
+                    }
+                    classes.add(curr_class);
+                } else if (next_token == Keyword.CLASS_CLASS) {
+                    NetClass.ClassClass curr_class_class = NetClass.read_class_class_scope(p_par.scanner);
+                    if (curr_class_class == null) {
+                        return false;
+                    }
+                    class_class_list.add(curr_class_class);
+                } else {
+                    skip_scope(p_par.scanner);
+                }
+            }
+        }
+        insert_via_infos(via_infos, p_par.board_handling.get_routing_board(), p_par.via_at_smd_allowed);
+        insert_via_rules(via_rules, p_par.board_handling.get_routing_board());
+        insert_net_classes(classes, p_par);
+        insert_class_pairs(class_class_list, p_par);
+        insert_compoments(p_par);
+        insert_logical_parts(p_par);
+        return true;
+    }
+    private boolean read_net_scope(Scanner p_scanner, NetList p_net_list, RoutingBoard p_board,
+            CoordinateTransform p_coordinate_transform, LayerStructure p_layer_structure, java.util.Locale p_locale) {
+        // read the net name
+        Object next_token;
+        try {
+            next_token = p_scanner.next_token();
+        } catch (java.io.IOException e) {
+            System.out.println("Network.read_net_scope: IO error while scanning file");
+            return false;
+        }
+        if (!(next_token instanceof String)) {
+            System.out.println("Network.read_net_scope: String expected");
+            return false;
+        }
+        String net_name = (String) next_token;
+        int subnet_number = 1;
+        try {
+            next_token = p_scanner.next_token();
+        } catch (java.io.IOException e) {
+            System.out.println("Network.read_net_scope: IO error while scanning file");
+            return false;
+        }
+        boolean scope_is_empty = (next_token == CLOSED_BRACKET);
+        if (next_token instanceof Integer) {
+            subnet_number = (Integer) next_token;
+        }
+        boolean pin_order_found = false;
+        Collection<Net.Pin> pin_list = new LinkedList<>();
+        Collection<Rule> net_rules = new LinkedList<>();
+        Collection<Collection<Net.Pin>> subnet_pin_lists = new LinkedList<>();
+        if (!scope_is_empty) {
+            for (;;) {
+                Object prev_token = next_token;
+                try {
+                    next_token = p_scanner.next_token();
+                } catch (java.io.IOException e) {
+                    System.out.println("Network.read_net_scope: IO error scanning file");
+                    return false;
+                }
+                if (next_token == null) {
+                    System.out.println("Network.read_net_scope: unexpected end of file");
+                    return false;
+                }
+                if (next_token == CLOSED_BRACKET) {
+                    // end of scope
+                    break;
+                }
+                if (prev_token == OPEN_BRACKET) {
+                    if (next_token == Keyword.PINS) {
+                        if (!read_net_pins(p_scanner, pin_list)) {
+                            return false;
+                        }
+                    } else if (next_token == Keyword.ORDER) {
+                        pin_order_found = true;
+                        if (!read_net_pins(p_scanner, pin_list)) {
+                            return false;
+                        }
+                    } else if (next_token == Keyword.FROMTO) {
+                        Set<Net.Pin> curr_subnet_pin_list = new java.util.TreeSet<>();
+                        if (!read_net_pins(p_scanner, curr_subnet_pin_list)) {
+                            return false;
+                        }
+                        subnet_pin_lists.add(curr_subnet_pin_list);
+                    } else if (next_token == Keyword.RULE) {
+                        net_rules.addAll(Rule.read_scope(p_scanner));
+                    } else if (next_token == Keyword.LAYER_RULE) {
+                        System.out.println("Netwark.read_net_scope: layer_rule not yet implemented");
+                        skip_scope(p_scanner);
+                    } else {
+                        skip_scope(p_scanner);
+                    }
+                }
+            }
+        }
+        if (subnet_pin_lists.isEmpty()) {
+            if (pin_order_found) {
+                subnet_pin_lists = create_ordered_subnets(pin_list);
+            } else {
+                subnet_pin_lists.add(pin_list);
+            }
+        }
+        for (Collection<Net.Pin> curr_pin_list : subnet_pin_lists) {
+            Net.Id net_id = new Net.Id(net_name, subnet_number);
+            if (!p_net_list.contains(net_id)) {
+                Net new_net = p_net_list.add_net(net_id);
+                boolean contains_plane = p_layer_structure.contains_plane(net_name);
+                if (new_net != null) {
+                    p_board.rules.nets.add(new_net.id.name, new_net.id.subnet_number, contains_plane);
+                }
+            }
+            Net curr_subnet = p_net_list.get_net(net_id);
+            if (curr_subnet == null) {
+                System.out.println("Network.read_net_scope: net not found in netlist");
+                return false;
+            }
+            curr_subnet.set_pins(curr_pin_list);
+            if (!net_rules.isEmpty()) {
+                // Evaluate the net rules.
+                rules.Net board_net = p_board.rules.nets.get(curr_subnet.id.name, curr_subnet.id.subnet_number);
+                if (board_net == null) {
+                    System.out.println("Network.read_net_scope: board net not found");
+                    return false;
+                }
+                Iterator<Rule> it = net_rules.iterator();
+                while (it.hasNext()) {
+                    Rule curr_ob = it.next();
+                    if (curr_ob instanceof Rule.WidthRule) {
+                        rules.NetClass default_net_rule = p_board.rules.get_default_net_class();
+                        double wire_width = ((Rule.WidthRule) curr_ob).value;
+                        int trace_halfwidth = (int) Math.round(p_coordinate_transform.dsn_to_board(wire_width) / 2);
+                        rules.NetClass net_rule
+                                = p_board.rules.net_classes.find(trace_halfwidth, default_net_rule.get_trace_clearance_class(),
+                                        default_net_rule.get_via_rule());
+                        if (net_rule == null) {
+                            // create a new net rule
+                            net_rule = p_board.rules.get_new_net_class(p_locale);
+                        }
+                        net_rule.set_trace_half_width(trace_halfwidth);
+                        board_net.set_class(net_rule);
+                    } else {
+                        System.out.println("Network.read_net_scope: Rule not yet implemented");
+                    }
+                }
+            }
+            ++subnet_number;
+        }
+        return true;
     }
 }

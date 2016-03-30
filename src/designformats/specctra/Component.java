@@ -26,30 +26,6 @@ package designformats.specctra;
  */
 public class Component extends ScopeKeyword {
 
-    /**
-     * Creates a new instance of Component
-     */
-    public Component() {
-        super("component");
-    }
-
-    /**
-     * Overwrites the function read_scope in ScopeKeyword
-     */
-    @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
-        try {
-            ComponentPlacement component_placement = read_scope(p_par.scanner);
-            if (component_placement == null) {
-                return false;
-            }
-            p_par.placement_list.add(component_placement);
-        } catch (java.io.IOException e) {
-            System.out.println("Component.read_scope: IO error scanning file");
-            return false;
-        }
-        return true;
-    }
 
     /**
      * Used also when reading a session file.
@@ -338,5 +314,28 @@ public class Component extends ScopeKeyword {
             }
         }
         return result;
+    }
+    /**
+     * Creates a new instance of Component
+     */
+    public Component() {
+        super("component");
+    }
+    /**
+     * Overwrites the function read_scope in ScopeKeyword
+     */
+    @Override
+    public boolean read_scope(ReadScopeParameter p_par) {
+        try {
+            ComponentPlacement component_placement = read_scope(p_par.scanner);
+            if (component_placement == null) {
+                return false;
+            }
+            p_par.placement_list.add(component_placement);
+        } catch (java.io.IOException e) {
+            System.out.println("Component.read_scope: IO error scanning file");
+            return false;
+        }
+        return true;
     }
 }

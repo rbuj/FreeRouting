@@ -25,6 +25,14 @@ package designformats.specctra;
  * @author alfons
  */
 public class Resolution extends ScopeKeyword {
+    public static void write_scope(datastructures.IndentFileWriter p_file, board.Communication p_board_communication) throws java.io.IOException {
+        p_file.new_line();
+        p_file.write("(resolution ");
+        p_file.write(p_board_communication.unit.toString());
+        p_file.write(" ");
+        p_file.write(Integer.toString(p_board_communication.resolution));
+        p_file.write(")");
+    }
 
     /**
      * Creates a new instance of Resolution
@@ -67,13 +75,5 @@ public class Resolution extends ScopeKeyword {
         }
     }
 
-    public static void write_scope(datastructures.IndentFileWriter p_file, board.Communication p_board_communication) throws java.io.IOException {
-        p_file.new_line();
-        p_file.write("(resolution ");
-        p_file.write(p_board_communication.unit.toString());
-        p_file.write(" ");
-        p_file.write(Integer.toString(p_board_communication.resolution));
-        p_file.write(")");
-    }
 
 }

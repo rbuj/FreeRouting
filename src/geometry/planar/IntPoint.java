@@ -28,6 +28,14 @@ import java.math.BigInteger;
  * @author Alfons Wirtz
  */
 public class IntPoint extends Point implements java.io.Serializable {
+    /**
+     * the x coordinate of this point
+     */
+    public final int x;
+    /**
+     * the y coordinate of this point
+     */
+    public final int y;
 
     /**
      * create an IntPoint from two integer coordinates
@@ -420,13 +428,4 @@ public class IntPoint extends Point implements java.io.Serializable {
         return -p_other.compare_y(this);
     }
 
-    /**
-     * the x coordinate of this point
-     */
-    public final int x;
-
-    /**
-     * the y coordinate of this point
-     */
-    public final int y;
 }

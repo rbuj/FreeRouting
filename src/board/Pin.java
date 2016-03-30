@@ -39,6 +39,16 @@ import library.Padstack;
  * @author Alfons Wirtz
  */
 public class Pin extends DrillItem implements java.io.Serializable {
+    /**
+     * The number of this pin in its component (starting with 0).
+     */
+    public final int pin_no;
+    /**
+     * The pin, this pin was changed to by swapping or this pin, if no pin swap
+     * accured.
+     */
+    private Pin changed_to = this;
+    private transient Shape[] precalculated_shapes = null;
 
     /**
      * Creates a new instance of Pin with the input parameters. (p_to_layer -
@@ -663,24 +673,12 @@ public class Pin extends DrillItem implements java.io.Serializable {
         return nearest_exit_corner;
     }
 
-    /**
-     * The number of this pin in its component (starting with 0).
-     */
-    public final int pin_no;
 
-    /**
-     * The pin, this pin was changed to by swapping or this pin, if no pin swap
-     * accured.
-     */
-    private Pin changed_to = this;
-
-    private transient Shape[] precalculated_shapes = null;
-
-    /**
-     * Describes an exit restriction from a trace from a pin pad.
-     */
     public static class TraceExitRestriction {
 
+
+        public final Direction direction;
+        public final double min_length;
         /**
          * Creates a new instance of TraceExitRestriction
          */
@@ -688,8 +686,5 @@ public class Pin extends DrillItem implements java.io.Serializable {
             direction = p_direction;
             min_length = p_min_length;
         }
-
-        public final Direction direction;
-        public final double min_length;
     }
 }

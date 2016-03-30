@@ -89,6 +89,9 @@ public abstract class DragState extends InteractiveState {
         }
         return result;
     }
+    protected FloatPoint previous_location;
+    protected boolean something_dragged = false;
+    protected boolean observers_activated = false;
 
     /**
      * Creates a new instance of DragState
@@ -127,7 +130,4 @@ public abstract class DragState extends InteractiveState {
         return move_to(p_point);
     }
 
-    protected FloatPoint previous_location;
-    protected boolean something_dragged = false;
-    protected boolean observers_activated = false;
 }

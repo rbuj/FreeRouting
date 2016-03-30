@@ -22,6 +22,22 @@ import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
 public class CoordinateTransform implements java.io.Serializable {
+    final IntBox design_box;
+    final IntBox design_box_with_offset;
+    final Dimension screen_bounds;
+    private final double scale_factor;
+    private final double display_x_offset;
+    private final double display_y_offset;
+    /**
+     * Left side and right side of the board are swapped.
+     */
+    private boolean mirror_left_right = false;
+    /**
+     * Top side and bottom side of the board are swapped.
+     */
+    private boolean mirror_top_bottom = true;
+    private double rotation = 0;
+    private FloatPoint rotation_pole;
 
     public CoordinateTransform(IntBox p_design_box, Dimension p_panel_bounds) {
         this.screen_bounds = p_panel_bounds;
@@ -233,24 +249,4 @@ public class CoordinateTransform implements java.io.Serializable {
         return multiple;
     }
 
-    final IntBox design_box;
-    final IntBox design_box_with_offset;
-    final Dimension screen_bounds;
-    private final double scale_factor;
-    private final double display_x_offset;
-    private final double display_y_offset;
-
-    /**
-     * Left side and right side of the board are swapped.
-     */
-    private boolean mirror_left_right = false;
-
-    /**
-     * Top side and bottom side of the board are swapped.
-     */
-    private boolean mirror_top_bottom = true;
-
-    private double rotation = 0;
-
-    private FloatPoint rotation_pole;
 }

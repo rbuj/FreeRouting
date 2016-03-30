@@ -30,6 +30,19 @@ import java.util.LinkedList;
  * @author Alfons Wirtz
  */
 public class PolylineArea implements Area, java.io.Serializable {
+    static private void cutout_hole_piece(TileShape p_divide_piece, TileShape p_hole_piece,
+            Collection<TileShape> p_result_pieces) {
+        TileShape[] result_pieces = p_divide_piece.cutout(p_hole_piece);
+        for (int i = 0; i < result_pieces.length; ++i) {
+            TileShape curr_piece = result_pieces[i];
+            if (curr_piece.dimension() == 2) {
+                p_result_pieces.add(curr_piece);
+            }
+        }
+    }
+    final PolylineShape border_shape;
+    final PolylineShape[] hole_arr;
+    transient private TileShape[] precalculated_convex_pieces = null;
 
     /**
      * Creates a new instance of PolylineShapeWithHoles
@@ -255,17 +268,4 @@ public class PolylineArea implements Area, java.io.Serializable {
 
     }
 
-    static private void cutout_hole_piece(TileShape p_divide_piece, TileShape p_hole_piece,
-            Collection<TileShape> p_result_pieces) {
-        TileShape[] result_pieces = p_divide_piece.cutout(p_hole_piece);
-        for (int i = 0; i < result_pieces.length; ++i) {
-            TileShape curr_piece = result_pieces[i];
-            if (curr_piece.dimension() == 2) {
-                p_result_pieces.add(curr_piece);
-            }
-        }
-    }
-    final PolylineShape border_shape;
-    final PolylineShape[] hole_arr;
-    transient private TileShape[] precalculated_convex_pieces = null;
 }

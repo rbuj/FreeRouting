@@ -26,7 +26,8 @@ import rules.ClearanceMatrix;
  *
  * @author alfons
  */
-public final class ComboBoxClearance extends javax.swing.JComboBox {
+public class ComboBoxClearance extends javax.swing.JComboBox {
+    private ClearanceClass[] class_arr;
 
     /**
      * Creates a new instance of ClearanceComboBox
@@ -68,25 +69,19 @@ public final class ComboBoxClearance extends javax.swing.JComboBox {
         return this.class_arr.length;
     }
 
-    private ClearanceClass[] class_arr;
 
-    /**
-     * Contains the name of a clearance class and its index in the clearance
-     * matrix.
-     */
     private static class ClearanceClass {
 
+
+        public final String name;
+        public final int index;
         public ClearanceClass(String p_name, int p_index) {
             this.name = p_name;
             this.index = p_index;
         }
-
         @Override
         public String toString() {
             return name;
         }
-
-        public final String name;
-        public final int index;
     }
 }

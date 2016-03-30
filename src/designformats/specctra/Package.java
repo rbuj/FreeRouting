@@ -31,19 +31,6 @@ import java.util.LinkedList;
  */
 public class Package {
 
-    /**
-     * Creates a new instance of Package
-     */
-    public Package(String p_name, PinInfo[] p_pin_info_arr, Collection<Shape> p_outline, Collection<Shape.ReadAreaScopeResult> p_keepouts,
-            Collection<Shape.ReadAreaScopeResult> p_via_keepouts, Collection<Shape.ReadAreaScopeResult> p_place_keepouts, boolean p_is_front) {
-        name = p_name;
-        pin_info_arr = p_pin_info_arr;
-        outline = p_outline;
-        keepouts = p_keepouts;
-        via_keepouts = p_via_keepouts;
-        place_keepouts = p_place_keepouts;
-        is_front = p_is_front;
-    }
 
     public static Package read_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
         try {
@@ -389,18 +376,22 @@ public class Package {
      * If false, the package is placed on the back side of the board
      */
     public final boolean is_front;
-
     /**
-     * Describes the Iinformation of a pin in a package.
+     * Creates a new instance of Package
      */
+    public Package(String p_name, PinInfo[] p_pin_info_arr, Collection<Shape> p_outline, Collection<Shape.ReadAreaScopeResult> p_keepouts,
+            Collection<Shape.ReadAreaScopeResult> p_via_keepouts, Collection<Shape.ReadAreaScopeResult> p_place_keepouts, boolean p_is_front) {
+        name = p_name;
+        pin_info_arr = p_pin_info_arr;
+        outline = p_outline;
+        keepouts = p_keepouts;
+        via_keepouts = p_via_keepouts;
+        place_keepouts = p_place_keepouts;
+        is_front = p_is_front;
+    }
+
     static public class PinInfo {
 
-        PinInfo(String p_padstack_name, String p_pin_name, double[] p_rel_coor, double p_rotation) {
-            padstack_name = p_padstack_name;
-            pin_name = p_pin_name;
-            rel_coor = p_rel_coor;
-            rotation = p_rotation;
-        }
         /**
          * Phe name of the pastack of this pin.
          */
@@ -417,5 +408,11 @@ public class Package {
          * The rotation of the pin relative to the package.
          */
         public final double rotation;
+        PinInfo(String p_padstack_name, String p_pin_name, double[] p_rel_coor, double p_rotation) {
+            padstack_name = p_padstack_name;
+            pin_name = p_pin_name;
+            rel_coor = p_rel_coor;
+            rotation = p_rotation;
+        }
     }
 }

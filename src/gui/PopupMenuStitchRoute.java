@@ -24,7 +24,8 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public final class PopupMenuStitchRoute extends PopupMenuDisplay {
+public class PopupMenuStitchRoute extends PopupMenuDisplay {
+    private final PopupMenuChangeLayer change_layer_menu;
 
     /**
      * Creates a new instance of PopupMenuStitchRoute
@@ -87,5 +88,4 @@ public final class PopupMenuStitchRoute extends PopupMenuDisplay {
         }
     }
 
-    private final PopupMenuChangeLayer change_layer_menu;
 }

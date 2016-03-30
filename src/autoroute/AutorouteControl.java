@@ -31,6 +31,111 @@ import rules.ViaRule;
  */
 public class AutorouteControl {
 
+    final int layer_count;
+    /**
+     * The horizontal and vertical trace costs on each layer
+     */
+    public final ExpansionCostFactor[] trace_costs;
+    /**
+     * Defines for each layer, if it may used for routing.
+     */
+    final boolean[] layer_active;
+    /**
+     * The currently used net number in the autoroute algorithm
+     */
+    int net_no;
+    /**
+     * The currently used trace half widths in the autoroute algorithm on each
+     * layer
+     */
+    final int[] trace_half_width;
+    /**
+     * The currently used compensated trace half widths in the autoroute
+     * algorithm on each layer. Equal to trace_half_width if no clearance
+     * compensation is used.
+     */
+    final int[] compensated_trace_half_width;
+    /**
+     * The currently used clearance class for traces in the autoroute algorithm
+     */
+    public int trace_clearance_class_no;
+    /**
+     * The currently used clearance class for vias in the autoroute algorithm
+     */
+    int via_clearance_class;
+    /**
+     * The possible (partial) vias, which can be used by the autorouter
+     */
+    ViaRule via_rule;
+    /**
+     * The array of possible via ranges used bei the autorouter
+     */
+    ViaMask[] via_info_arr;
+    /**
+     * The lower bound for the first layer of vias
+     */
+    int via_lower_bound;
+    /**
+     * The upper bound for the last layer of vias
+     */
+    int via_upper_bound;
+    final double[] via_radius_arr;
+    double max_via_radius;
+    /**
+     * The width of the region around changed traces, where traces are pulled
+     * tight
+     */
+    int tidy_region_width;
+    /**
+     * The pull tight accuracy of traces
+     */
+    int pull_tight_accuracy;
+    /**
+     * The maximum recursion depth for shoving traces
+     */
+    int max_shove_trace_recursion_depth;
+    /**
+     * The maximum recursion depth for shoving obstacles
+     */
+    int max_shove_via_recursion_depth;
+    /**
+     * The maximum recursion depth for traces springing over obstacles
+     */
+    int max_spring_over_recursion_depth;
+    /**
+     * True, if layer change by inserting of vias is allowed
+     */
+    public boolean vias_allowed;
+    /**
+     * True, if vias may drill to the pad of SMD pins
+     */
+    public boolean attach_smd_allowed;
+    /**
+     * the additiomal costs to min_normal via_cost for inserting a via between 2
+     * layers
+     */
+    final ViaCost[] add_via_costs;
+    /**
+     * The minimum cost valua of all normal vias
+     */
+    public double min_normal_via_cost;
+    /**
+     * The minimal cost value of all cheap vias
+     */
+    double min_cheap_via_cost;
+    public boolean ripup_allowed;
+    public int ripup_costs;
+    public int ripup_pass_no;
+    public final boolean with_neckdown;
+    /**
+     * If true, the autoroute algorithm completes after the first drill
+     */
+    public boolean is_fanout;
+    /**
+     * Normally true, if the autorouter contains no fanout pass
+     */
+    public boolean remove_unconnected_vias;
+
     /**
      * Creates a new instance of AutorouteControl for the input net
      */
@@ -146,120 +251,9 @@ public class AutorouteControl {
         min_normal_via_cost = p_via_costs * via_cost_factor;
         min_cheap_via_cost = 0.8 * min_normal_via_cost;
     }
-    final int layer_count;
-    /**
-     * The horizontal and vertical trace costs on each layer
-     */
-    public final ExpansionCostFactor[] trace_costs;
-    /**
-     * Defines for each layer, if it may used for routing.
-     */
-    final boolean[] layer_active;
-    /**
-     * The currently used net number in the autoroute algorithm
-     */
-    int net_no;
-    /**
-     * The currently used trace half widths in the autoroute algorithm on each
-     * layer
-     */
-    final int[] trace_half_width;
-    /**
-     * The currently used compensated trace half widths in the autoroute
-     * algorithm on each layer. Equal to trace_half_width if no clearance
-     * compensation is used.
-     */
-    final int[] compensated_trace_half_width;
-    /**
-     * The currently used clearance class for traces in the autoroute algorithm
-     */
-    public int trace_clearance_class_no;
-    /**
-     * The currently used clearance class for vias in the autoroute algorithm
-     */
-    int via_clearance_class;
-    /**
-     * The possible (partial) vias, which can be used by the autorouter
-     */
-    ViaRule via_rule;
-    /**
-     * The array of possible via ranges used bei the autorouter
-     */
-    ViaMask[] via_info_arr;
-    /**
-     * The lower bound for the first layer of vias
-     */
-    int via_lower_bound;
-    /**
-     * The upper bound for the last layer of vias
-     */
-    int via_upper_bound;
-    final double[] via_radius_arr;
-    double max_via_radius;
-    /**
-     * The width of the region around changed traces, where traces are pulled
-     * tight
-     */
-    int tidy_region_width;
-    /**
-     * The pull tight accuracy of traces
-     */
-    int pull_tight_accuracy;
-    /**
-     * The maximum recursion depth for shoving traces
-     */
-    int max_shove_trace_recursion_depth;
-    /**
-     * The maximum recursion depth for shoving obstacles
-     */
-    int max_shove_via_recursion_depth;
-    /**
-     * The maximum recursion depth for traces springing over obstacles
-     */
-    int max_spring_over_recursion_depth;
-    /**
-     * True, if layer change by inserting of vias is allowed
-     */
-    public boolean vias_allowed;
-    /**
-     * True, if vias may drill to the pad of SMD pins
-     */
-    public boolean attach_smd_allowed;
-    /**
-     * the additiomal costs to min_normal via_cost for inserting a via between 2
-     * layers
-     */
-    final ViaCost[] add_via_costs;
-    /**
-     * The minimum cost valua of all normal vias
-     */
-    public double min_normal_via_cost;
-    /**
-     * The minimal cost value of all cheap vias
-     */
-    double min_cheap_via_cost;
-    public boolean ripup_allowed;
-    public int ripup_costs;
-    public int ripup_pass_no;
-    public final boolean with_neckdown;
-    /**
-     * If true, the autoroute algorithm completes after the first drill
-     */
-    public boolean is_fanout;
-    /**
-     * Normally true, if the autorouter contains no fanout pass
-     */
-    public boolean remove_unconnected_vias;
 
-    /**
-     * horizontal and vertical costs for traces on a board layer
-     */
     public static class ExpansionCostFactor {
 
-        public ExpansionCostFactor(double p_horizontal, double p_vertical) {
-            horizontal = p_horizontal;
-            vertical = p_vertical;
-        }
         /**
          * The horizontal expansion cost factor on a layer of the board
          */
@@ -268,28 +262,31 @@ public class AutorouteControl {
          * The verical expansion cost factor on a layer of the board
          */
         public final double vertical;
+
+        public ExpansionCostFactor(double p_horizontal, double p_vertical) {
+            horizontal = p_horizontal;
+            vertical = p_vertical;
+        }
     }
 
-    /**
-     * Array of via costs from one layer to the other layers
-     */
     static class ViaCost {
+
+        public int[] to_layer;
 
         private ViaCost(int p_layer_count) {
             to_layer = new int[p_layer_count];
         }
-        public int[] to_layer;
     }
 
     static class ViaMask {
 
+        final int from_layer;
+        final int to_layer;
+        final boolean attach_smd_allowed;
         ViaMask(int p_from_layer, int p_to_layer, boolean p_attach_smd_allowed) {
             from_layer = p_from_layer;
             to_layer = p_to_layer;
             attach_smd_allowed = p_attach_smd_allowed;
         }
-        final int from_layer;
-        final int to_layer;
-        final boolean attach_smd_allowed;
     }
 }

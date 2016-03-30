@@ -31,6 +31,48 @@ import geometry.planar.TileShape;
  */
 class CalcShapeAndFromSide {
 
+
+    private static Line calc_cutline_at_end(int p_index, PolylineTrace p_trace) {
+        Polyline trace_lines = p_trace.polyline();
+        ShapeSearchTree search_tree = p_trace.board.search_tree_manager.get_default_tree();
+        if (p_index == trace_lines.arr.length - 3
+                || trace_lines.corner_approx(trace_lines.arr.length - 2).distance(trace_lines.corner_approx(p_index + 1))
+                < p_trace.get_compensated_half_width(search_tree)) {
+
+            Line curr_line = trace_lines.arr[trace_lines.arr.length - 1];
+            FloatPoint is = trace_lines.corner_approx(trace_lines.arr.length - 3);
+            Line cut_line;
+            if (curr_line.side_of(is) == Side.ON_THE_LEFT) {
+                cut_line = curr_line.opposite();
+            } else {
+                cut_line = curr_line;
+            }
+            return cut_line;
+        }
+        return null;
+    }
+
+    private static Line calc_cutline_at_start(int p_index, PolylineTrace p_trace) {
+        Polyline trace_lines = p_trace.polyline();
+        ShapeSearchTree search_tree = p_trace.board.search_tree_manager.get_default_tree();
+        if (p_index == 0
+                || trace_lines.corner_approx(0).distance(trace_lines.corner_approx(p_index))
+                < p_trace.get_compensated_half_width(search_tree)) {
+            Line curr_line = trace_lines.arr[0];
+            FloatPoint is = trace_lines.corner_approx(1);
+            Line cut_line;
+            if (curr_line.side_of(is) == Side.ON_THE_LEFT) {
+                cut_line = curr_line.opposite();
+            } else {
+                cut_line = curr_line;
+            }
+            return cut_line;
+        }
+        return null;
+    }
+
+    final TileShape shape;
+    final CalcFromSide from_side;
     /**
      * Used in the shove algorithm to calculate the fromside for pushing and to
      * cut off dog ears of the trace shape. In the check shove functions,
@@ -90,46 +132,4 @@ class CalcShapeAndFromSide {
         this.shape = curr_shape;
         this.from_side = curr_from_side;
     }
-
-    private static Line calc_cutline_at_end(int p_index, PolylineTrace p_trace) {
-        Polyline trace_lines = p_trace.polyline();
-        ShapeSearchTree search_tree = p_trace.board.search_tree_manager.get_default_tree();
-        if (p_index == trace_lines.arr.length - 3
-                || trace_lines.corner_approx(trace_lines.arr.length - 2).distance(trace_lines.corner_approx(p_index + 1))
-                < p_trace.get_compensated_half_width(search_tree)) {
-
-            Line curr_line = trace_lines.arr[trace_lines.arr.length - 1];
-            FloatPoint is = trace_lines.corner_approx(trace_lines.arr.length - 3);
-            Line cut_line;
-            if (curr_line.side_of(is) == Side.ON_THE_LEFT) {
-                cut_line = curr_line.opposite();
-            } else {
-                cut_line = curr_line;
-            }
-            return cut_line;
-        }
-        return null;
-    }
-
-    private static Line calc_cutline_at_start(int p_index, PolylineTrace p_trace) {
-        Polyline trace_lines = p_trace.polyline();
-        ShapeSearchTree search_tree = p_trace.board.search_tree_manager.get_default_tree();
-        if (p_index == 0
-                || trace_lines.corner_approx(0).distance(trace_lines.corner_approx(p_index))
-                < p_trace.get_compensated_half_width(search_tree)) {
-            Line curr_line = trace_lines.arr[0];
-            FloatPoint is = trace_lines.corner_approx(1);
-            Line cut_line;
-            if (curr_line.side_of(is) == Side.ON_THE_LEFT) {
-                cut_line = curr_line.opposite();
-            } else {
-                cut_line = curr_line;
-            }
-            return cut_line;
-        }
-        return null;
-    }
-
-    final TileShape shape;
-    final CalcFromSide from_side;
 }

@@ -39,6 +39,31 @@ import java.util.SortedSet;
  */
 class LocateFoundConnectionAlgoAnyAngle extends LocateFoundConnectionAlgo {
 
+    static private final double c_tolerance = 1.0;
+
+    /**
+     * Calculates the left most corner of the shape of p_to_info.door seen from
+     * the center of the common room with the previous door.
+     */
+    private static FloatPoint calc_door_left_corner(BacktrackElement p_to_info) {
+        CompleteExpansionRoom from_room = p_to_info.door.other_room(p_to_info.next_room);
+        FloatPoint pole = from_room.get_shape().centre_of_gravity();
+        TileShape curr_to_door_shape = p_to_info.door.get_shape();
+        int left_most_corner_no = curr_to_door_shape.index_of_left_most_corner(pole);
+        return curr_to_door_shape.corner_approx(left_most_corner_no);
+    }
+
+    /**
+     * Calculates the right most corner of the shape of p_to_info.door seen from
+     * the center of the common room with the previous door.
+     */
+    private static FloatPoint calc_door_right_corner(BacktrackElement p_to_info) {
+        CompleteExpansionRoom from_room = p_to_info.door.other_room(p_to_info.next_room);
+        FloatPoint pole = from_room.get_shape().centre_of_gravity();
+        TileShape curr_to_door_shape = p_to_info.door.get_shape();
+        int right_most_corner_no = curr_to_door_shape.index_of_right_most_corner(pole);
+        return curr_to_door_shape.corner_approx(right_most_corner_no);
+    }
     /**
      * Creates a new instance of LocateFoundConnectionAlgo
      */
@@ -47,7 +72,6 @@ class LocateFoundConnectionAlgoAnyAngle extends LocateFoundConnectionAlgo {
             SortedSet<Item> p_ripped_item_list, TestLevel p_test_level) {
         super(p_maze_search_result, p_ctrl, p_search_tree, p_angle_restriction, p_ripped_item_list, p_test_level);
     }
-
     /**
      * Calculates a list with the next point of the trace under construction. If
      * the trace is completed, the result list will be empty.
@@ -164,7 +188,7 @@ class LocateFoundConnectionAlgoAnyAngle extends LocateFoundConnectionAlgo {
                 }
             }
             if (door_left_corner != null && door_right_corner != null) // otherwise the following side_of conditions may not be correct
-            // even if all parameter points are defined
+                // even if all parameter points are defined
             {
                 if (next_left_corner.side_of(this.current_from_point, door_right_corner) == Side.ON_THE_RIGHT) {
                     // bend to the right
@@ -285,30 +309,6 @@ class LocateFoundConnectionAlgoAnyAngle extends LocateFoundConnectionAlgo {
     }
 
     /**
-     * Calculates the left most corner of the shape of p_to_info.door seen from
-     * the center of the common room with the previous door.
-     */
-    private static FloatPoint calc_door_left_corner(BacktrackElement p_to_info) {
-        CompleteExpansionRoom from_room = p_to_info.door.other_room(p_to_info.next_room);
-        FloatPoint pole = from_room.get_shape().centre_of_gravity();
-        TileShape curr_to_door_shape = p_to_info.door.get_shape();
-        int left_most_corner_no = curr_to_door_shape.index_of_left_most_corner(pole);
-        return curr_to_door_shape.corner_approx(left_most_corner_no);
-    }
-
-    /**
-     * Calculates the right most corner of the shape of p_to_info.door seen from
-     * the center of the common room with the previous door.
-     */
-    private static FloatPoint calc_door_right_corner(BacktrackElement p_to_info) {
-        CompleteExpansionRoom from_room = p_to_info.door.other_room(p_to_info.next_room);
-        FloatPoint pole = from_room.get_shape().centre_of_gravity();
-        TileShape curr_to_door_shape = p_to_info.door.get_shape();
-        int right_most_corner_no = curr_to_door_shape.index_of_right_most_corner(pole);
-        return curr_to_door_shape.corner_approx(right_most_corner_no);
-    }
-
-    /**
      * Calculates as first line the left side tangent from p_from_corner to the
      * circle with center p_to_corner and radius p_dist. As second line the
      * right side tangent from p_to_corner to the circle with center
@@ -416,6 +416,5 @@ class LocateFoundConnectionAlgoAnyAngle extends LocateFoundConnectionAlgo {
         return first_line.intersection(second_line);
     }
 
-    static private final double c_tolerance = 1.0;
 
 }

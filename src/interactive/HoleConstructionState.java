@@ -50,6 +50,7 @@ public class HoleConstructionState extends CornerItemConstructionState {
         }
         return new_instance;
     }
+    private ObstacleArea item_to_modify = null;
 
     /**
      * Creates a new instance of HoleConstructionState
@@ -182,5 +183,4 @@ public class HoleConstructionState extends CornerItemConstructionState {
         hdlg.screen_messages.set_status_message(resources.getString("adding_hole_to_obstacle_area"));
     }
 
-    private ObstacleArea item_to_modify = null;
 }

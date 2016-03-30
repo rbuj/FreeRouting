@@ -28,7 +28,8 @@ import rules.Nets;
  *
  * @author Alfons Wirtz
  */
-public final class WindowNets extends WindowObjectListWithFilter {
+public class WindowNets extends WindowObjectListWithFilter {
+    private final java.util.ResourceBundle resources;
 
     /**
      * Creates a new instance of NetsWindow
@@ -99,7 +100,6 @@ public final class WindowNets extends WindowObjectListWithFilter {
         board_frame.board_panel.board_handling.zoom_selection();
     }
 
-    private final java.util.ResourceBundle resources;
 
     private class AssignClassListener implements java.awt.event.ActionListener {
 

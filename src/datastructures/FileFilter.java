@@ -26,6 +26,7 @@ package datastructures;
  * @author alfons
  */
 public class FileFilter extends javax.swing.filechooser.FileFilter {
+    private final String[] extensions;
 
     /**
      * Creates a new FileFilter for the input extension
@@ -69,5 +70,4 @@ public class FileFilter extends javax.swing.filechooser.FileFilter {
         return false;
     }
 
-    private final String[] extensions;
 }

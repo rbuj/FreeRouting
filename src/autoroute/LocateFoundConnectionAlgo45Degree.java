@@ -40,6 +40,66 @@ import java.util.SortedSet;
  */
 public class LocateFoundConnectionAlgo45Degree extends LocateFoundConnectionAlgo {
 
+
+    private static FloatPoint round_to_integer(FloatPoint p_point) {
+        return p_point.round().to_float();
+    }
+
+    /**
+     * Calculates, if the next 45-degree angle should be horizontal first when
+     * coming fromm p_from_point on p_from_door.
+     */
+    private static boolean calc_horizontal_first_from_door(ExpandableObject p_from_door,
+            FloatPoint p_from_point, FloatPoint p_to_point) {
+        TileShape door_shape = p_from_door.get_shape();
+        IntBox from_door_box = door_shape.bounding_box();
+        if (p_from_door.get_dimension() != 1) {
+            return from_door_box.height() >= from_door_box.width();
+        }
+
+        FloatLine door_line_segment = door_shape.diagonal_corner_segment();
+        FloatPoint left_corner;
+        FloatPoint right_corner;
+        if (door_line_segment.a.x < door_line_segment.b.x || door_line_segment.a.x == door_line_segment.b.x
+                && door_line_segment.a.y <= door_line_segment.b.y) {
+            left_corner = door_line_segment.a;
+            right_corner = door_line_segment.b;
+        } else {
+            left_corner = door_line_segment.b;
+            right_corner = door_line_segment.a;
+        }
+        double door_dx = right_corner.x - left_corner.x;
+        double door_dy = right_corner.y - left_corner.y;
+        double abs_door_dy = Math.abs(door_dy);
+        double door_max_width = Math.max(door_dx, abs_door_dy);
+        boolean result;
+        double door_half_max_width = 0.5 * door_max_width;
+        if (from_door_box.width() <= door_half_max_width) {
+            // door is about vertical
+            result = true;
+        } else if (from_door_box.height() <= door_half_max_width) {
+            // door is about horizontal
+            result = false;
+        } else {
+            double dx = p_to_point.x - p_from_point.x;
+            double dy = p_to_point.y - p_from_point.y;
+            if (left_corner.y < right_corner.y) {
+                // door is about right diagonal
+                if (Signum.of(dx) == Signum.of(dy)) {
+                    result = Math.abs(dx) > Math.abs(dy);
+                } else {
+                    result = Math.abs(dx) < Math.abs(dy);
+                }
+
+            } else // door is about left diagonal
+             if (Signum.of(dx) == Signum.of(dy)) {
+                    result = Math.abs(dx) < Math.abs(dy);
+                } else {
+                    result = Math.abs(dx) > Math.abs(dy);
+                }
+        }
+        return result;
+    }
     /**
      * Creates a new instance of LocateFoundConnectionAlgo45Degree
      */
@@ -48,7 +108,6 @@ public class LocateFoundConnectionAlgo45Degree extends LocateFoundConnectionAlgo
             SortedSet<Item> p_ripped_item_list, TestLevel p_test_level) {
         super(p_maze_search_result, p_ctrl, p_search_tree, p_angle_restriction, p_ripped_item_list, p_test_level);
     }
-
     @Override
     protected Collection<FloatPoint> calculate_next_trace_corners() {
         Collection<FloatPoint> result = new LinkedList<>();
@@ -150,66 +209,6 @@ public class LocateFoundConnectionAlgo45Degree extends LocateFoundConnectionAlgo
                 horizontal_first, this.angle_restriction));
         result.add(nearest_to_door_point);
         ++this.current_to_door_index;
-        return result;
-    }
-
-    private static FloatPoint round_to_integer(FloatPoint p_point) {
-        return p_point.round().to_float();
-    }
-
-    /**
-     * Calculates, if the next 45-degree angle should be horizontal first when
-     * coming fromm p_from_point on p_from_door.
-     */
-    private static boolean calc_horizontal_first_from_door(ExpandableObject p_from_door,
-            FloatPoint p_from_point, FloatPoint p_to_point) {
-        TileShape door_shape = p_from_door.get_shape();
-        IntBox from_door_box = door_shape.bounding_box();
-        if (p_from_door.get_dimension() != 1) {
-            return from_door_box.height() >= from_door_box.width();
-        }
-
-        FloatLine door_line_segment = door_shape.diagonal_corner_segment();
-        FloatPoint left_corner;
-        FloatPoint right_corner;
-        if (door_line_segment.a.x < door_line_segment.b.x || door_line_segment.a.x == door_line_segment.b.x
-                && door_line_segment.a.y <= door_line_segment.b.y) {
-            left_corner = door_line_segment.a;
-            right_corner = door_line_segment.b;
-        } else {
-            left_corner = door_line_segment.b;
-            right_corner = door_line_segment.a;
-        }
-        double door_dx = right_corner.x - left_corner.x;
-        double door_dy = right_corner.y - left_corner.y;
-        double abs_door_dy = Math.abs(door_dy);
-        double door_max_width = Math.max(door_dx, abs_door_dy);
-        boolean result;
-        double door_half_max_width = 0.5 * door_max_width;
-        if (from_door_box.width() <= door_half_max_width) {
-            // door is about vertical
-            result = true;
-        } else if (from_door_box.height() <= door_half_max_width) {
-            // door is about horizontal
-            result = false;
-        } else {
-            double dx = p_to_point.x - p_from_point.x;
-            double dy = p_to_point.y - p_from_point.y;
-            if (left_corner.y < right_corner.y) {
-                // door is about right diagonal
-                if (Signum.of(dx) == Signum.of(dy)) {
-                    result = Math.abs(dx) > Math.abs(dy);
-                } else {
-                    result = Math.abs(dx) < Math.abs(dy);
-                }
-
-            } else // door is about left diagonal
-             if (Signum.of(dx) == Signum.of(dy)) {
-                    result = Math.abs(dx) < Math.abs(dy);
-                } else {
-                    result = Math.abs(dx) > Math.abs(dy);
-                }
-        }
         return result;
     }
 

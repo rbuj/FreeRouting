@@ -41,6 +41,10 @@ import java.util.Set;
  * @author Alfons Wirtz
  */
 public abstract class PullTightAlgo {
+    protected static final double c_max_cos_angle = 0.999;
+    // with angles to close to 180 degree the algorithm becomes numerically
+    // unstable
+    protected static final double c_min_corner_dist_square = 0.9;
 
     /**
      * Returns a new instance of PullTightAlgo. If p_only_net_no > 0, only
@@ -67,6 +71,30 @@ public abstract class PullTightAlgo {
         result.min_translate_dist = Math.max(p_min_translate_dist, 100);
         return result;
     }
+    protected final RoutingBoard board;
+    /**
+     * If only_net_no {@literal >} 0, only nets with this net numbers are
+     * optimized.
+     */
+    protected final int[] only_net_no_arr;
+    protected int curr_layer;
+    protected int curr_half_width;
+    protected int[] curr_net_no_arr;
+    protected int curr_cl_type;
+    protected IntOctagon curr_clip_shape;
+    protected Set<Pin> contact_pins;
+    protected int min_translate_dist;
+    /**
+     * If stoppable_thread != null, the agorithm can be requested to be stopped.
+     */
+    private final Stoppable stoppable_thread;
+    private final TimeLimit time_limit;
+    /**
+     * If keep_point != null, traces containing the keep_point must also contain
+     * the keep_point after optimizing.
+     */
+    private final Point keep_point;
+    private final int keep_point_layer;
 
     /**
      * Creates a new instance of PullTightAlgo
@@ -479,32 +507,4 @@ public abstract class PullTightAlgo {
     abstract Polyline smoothen_start_corner_at_trace(PolylineTrace p_trace);
 
     abstract Polyline smoothen_end_corner_at_trace(PolylineTrace p_trace);
-    protected final RoutingBoard board;
-    /**
-     * If only_net_no {@literal >} 0, only nets with this net numbers are
-     * optimized.
-     */
-    protected final int[] only_net_no_arr;
-    protected int curr_layer;
-    protected int curr_half_width;
-    protected int[] curr_net_no_arr;
-    protected int curr_cl_type;
-    protected IntOctagon curr_clip_shape;
-    protected Set<Pin> contact_pins;
-    protected int min_translate_dist;
-    protected static final double c_max_cos_angle = 0.999;
-    // with angles to close to 180 degree the algorithm becomes numerically
-    // unstable
-    protected static final double c_min_corner_dist_square = 0.9;
-    /**
-     * If stoppable_thread != null, the agorithm can be requested to be stopped.
-     */
-    private final Stoppable stoppable_thread;
-    private final TimeLimit time_limit;
-    /**
-     * If keep_point != null, traces containing the keep_point must also contain
-     * the keep_point after optimizing.
-     */
-    private final Point keep_point;
-    private final int keep_point_layer;
 }

@@ -27,6 +27,21 @@ import javax.swing.JLabel;
  * @author arbeit
  */
 public class ScreenMessages {
+    static private final String empty_string = "            ";
+    private final java.util.ResourceBundle resources;
+    private final java.util.Locale locale;
+    private final String active_layer_string;
+    private final String target_layer_string;
+    private JLabel add_field;
+    private JLabel status_field;
+    private JLabel layer_field;
+    private JLabel mouse_position;
+    private String prev_target_layer_name = empty_string;
+    private boolean write_protected = false;
+    /**
+     * The number format for displaying the trace lengtht
+     */
+    private final java.text.NumberFormat number_format;
 
     /**
      * Creates a new instance of ScreenMessageFields
@@ -147,21 +162,4 @@ public class ScreenMessages {
         write_protected = p_value;
     }
 
-    private final java.util.ResourceBundle resources;
-    private final java.util.Locale locale;
-    private final String active_layer_string;
-    private final String target_layer_string;
-    static private final String empty_string = "            ";
-
-    private JLabel add_field;
-    private JLabel status_field;
-    private JLabel layer_field;
-    private JLabel mouse_position;
-    private String prev_target_layer_name = empty_string;
-    private boolean write_protected = false;
-
-    /**
-     * The number format for displaying the trace lengtht
-     */
-    private final java.text.NumberFormat number_format;
 }

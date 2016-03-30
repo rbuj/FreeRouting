@@ -33,6 +33,8 @@ import geometry.planar.FloatPoint;
  * @author Alfons Wirtz
  */
 public class BatchAutorouterThread extends InteractiveActionThread {
+    private final BatchAutorouter batch_autorouter;
+    private final BatchOptRoute batch_opt_route;
 
     /**
      * Creates a new instance of BatchAutorouterThread
@@ -136,6 +138,4 @@ public class BatchAutorouterThread extends InteractiveActionThread {
             this.hdlg.graphics_context.draw_circle(current_opt_position, radius, draw_width, draw_color, p_graphics, 1);
         }
     }
-    private final BatchAutorouter batch_autorouter;
-    private final BatchOptRoute batch_opt_route;
 }

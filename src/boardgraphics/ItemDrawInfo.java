@@ -28,13 +28,6 @@ import java.awt.Color;
  */
 public class ItemDrawInfo {
 
-    /**
-     * Creates a new instance of ItemDrawInfo
-     */
-    public ItemDrawInfo(Color[] p_layer_color, double p_intensity) {
-        layer_color = p_layer_color;
-        intensity = p_intensity;
-    }
 
     /**
      * The color of the item on each layer
@@ -43,4 +36,11 @@ public class ItemDrawInfo {
 
     // The translucency factor of the color. Must be between 0 and 1.
     public final double intensity;
+    /**
+     * Creates a new instance of ItemDrawInfo
+     */
+    public ItemDrawInfo(Color[] p_layer_color, double p_intensity) {
+        layer_color = p_layer_color;
+        intensity = p_intensity;
+    }
 }

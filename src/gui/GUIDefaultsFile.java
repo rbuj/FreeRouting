@@ -30,24 +30,6 @@ import datastructures.IndentFileWriter;
  */
 public class GUIDefaultsFile {
 
-    /**
-     * Keywords in the gui defaults file.
-     */
-    enum Keyword {
-        ALL_VISIBLE, ASSIGN_NET_RULES, AUTOMATIC_LAYER_DIMMING, BACKGROUND, BOARD_FRAME, BOUNDS,
-        CLEARANCE_COMPENSATION, CLEARANCE_MATRIX, CLOSED_BRACKET, COLOR_MANAGER, COLORS,
-        COMPONENT_BACK, COMPONENT_FRONT, COMPONENT_GRID, COMPONENT_INFO, CONDUCTION, CURRENT_LAYER,
-        CURRENT_ONLY, DESELECTED_SNAPSHOT_ATTRIBUTES, DISPLAY_MISCELLANIOUS, DISPLAY_REGION,
-        DRAG_COMPONENTS_ENABLED, DYNAMIC, EDIT_VIAS, EDIT_NET_RULES, FIXED, FIXED_TRACES, FIXED_VIAS,
-        FORTYFIVE_DEGREE, GUI_DEFAULTS, HILIGHT, HILIGHT_ROUTING_OBSTACLE, IGNORE_CONDUCTION_AREAS, INCOMPLETES, INCOMPLETES_INFO,
-        INTERACTIVE_STATE, KEEPOUT, LAYER_VISIBILITY, LENGTH_MATCHING, MANUAL_RULES, MANUAL_RULE_SETTINGS,
-        MOVE_PARAMETER, NET_INFO, NINETY_DEGREE, NONE, NOT_VISIBLE, OBJECT_COLORS, OBJECT_VISIBILITY,
-        OPEN_BRACKET, OFF, ON, OUTLINE, PARAMETER, PACKAGE_INFO, PADSTACK_INFO, PINS, PULL_TIGHT_ACCURACY,
-        PULL_TIGHT_REGION, PUSH_AND_SHOVE_ENABLED, ROUTE_DETAILS, ROUTE_MODE, ROUTE_PARAMETER,
-        RULE_SELECTION, SELECT_PARAMETER, SELECTABLE_ITEMS, SELECTION_LAYERS, SNAPSHOTS,
-        SHOVE_ENABLED, STITCHING, TRACES, UNFIXED, VIA_KEEPOUT, VISIBLE, VIA_RULES, VIA_SNAP_TO_SMD_CENTER,
-        VIAS, VIOLATIONS, VIOLATIONS_INFO, WINDOWS
-    }
 
     /**
      * Writes the GUI setting of p_board_frame as default to p_file. Returns
@@ -98,6 +80,42 @@ public class GUIDefaultsFile {
         }
         return result;
     }
+    /**
+     * Skips the current scope. Returns false, if no legal scope was found.
+     */
+    private static boolean skip_scope(GUIDefaultsScanner p_scanner) {
+        int open_bracked_count = 1;
+        while (open_bracked_count > 0) {
+            Object curr_token = null;
+            try {
+                curr_token = p_scanner.next_token();
+            } catch (Exception e) {
+                System.out.println("GUIDefaultsFile.skip_scope: Error while scanning file");
+                System.out.println(e);
+                return false;
+            }
+            if (curr_token == null) {
+                return false; // end of file
+            }
+            if (curr_token == Keyword.OPEN_BRACKET) {
+                ++open_bracked_count;
+            } else if (curr_token == Keyword.CLOSED_BRACKET) {
+                --open_bracked_count;
+            }
+        }
+        System.out.println("GUIDefaultsFile.skip_spope: unknown scope skipped");
+        return true;
+    }
+    private final gui.BoardFrame board_frame;
+    private final interactive.BoardHandling board_handling;
+    /**
+     * Used, when reading a defaults file, null otherwise.
+     */
+    private final GUIDefaultsScanner scanner;
+    /**
+     * Used, when writing a defaults file; null otherwise.
+     */
+    private final IndentFileWriter out_file;
 
     private GUIDefaultsFile(gui.BoardFrame p_board_frame, interactive.BoardHandling p_board_handling,
             GUIDefaultsScanner p_scanner, IndentFileWriter p_output_file) {
@@ -1419,40 +1437,21 @@ public class GUIDefaultsFile {
     }
 
     /**
-     * Skips the current scope. Returns false, if no legal scope was found.
+     * Keywords in the gui defaults file.
      */
-    private static boolean skip_scope(GUIDefaultsScanner p_scanner) {
-        int open_bracked_count = 1;
-        while (open_bracked_count > 0) {
-            Object curr_token = null;
-            try {
-                curr_token = p_scanner.next_token();
-            } catch (Exception e) {
-                System.out.println("GUIDefaultsFile.skip_scope: Error while scanning file");
-                System.out.println(e);
-                return false;
-            }
-            if (curr_token == null) {
-                return false; // end of file
-            }
-            if (curr_token == Keyword.OPEN_BRACKET) {
-                ++open_bracked_count;
-            } else if (curr_token == Keyword.CLOSED_BRACKET) {
-                --open_bracked_count;
-            }
-        }
-        System.out.println("GUIDefaultsFile.skip_spope: unknown scope skipped");
-        return true;
+    enum Keyword {
+        ALL_VISIBLE, ASSIGN_NET_RULES, AUTOMATIC_LAYER_DIMMING, BACKGROUND, BOARD_FRAME, BOUNDS,
+        CLEARANCE_COMPENSATION, CLEARANCE_MATRIX, CLOSED_BRACKET, COLOR_MANAGER, COLORS,
+        COMPONENT_BACK, COMPONENT_FRONT, COMPONENT_GRID, COMPONENT_INFO, CONDUCTION, CURRENT_LAYER,
+        CURRENT_ONLY, DESELECTED_SNAPSHOT_ATTRIBUTES, DISPLAY_MISCELLANIOUS, DISPLAY_REGION,
+        DRAG_COMPONENTS_ENABLED, DYNAMIC, EDIT_VIAS, EDIT_NET_RULES, FIXED, FIXED_TRACES, FIXED_VIAS,
+        FORTYFIVE_DEGREE, GUI_DEFAULTS, HILIGHT, HILIGHT_ROUTING_OBSTACLE, IGNORE_CONDUCTION_AREAS, INCOMPLETES, INCOMPLETES_INFO,
+        INTERACTIVE_STATE, KEEPOUT, LAYER_VISIBILITY, LENGTH_MATCHING, MANUAL_RULES, MANUAL_RULE_SETTINGS,
+        MOVE_PARAMETER, NET_INFO, NINETY_DEGREE, NONE, NOT_VISIBLE, OBJECT_COLORS, OBJECT_VISIBILITY,
+        OPEN_BRACKET, OFF, ON, OUTLINE, PARAMETER, PACKAGE_INFO, PADSTACK_INFO, PINS, PULL_TIGHT_ACCURACY,
+        PULL_TIGHT_REGION, PUSH_AND_SHOVE_ENABLED, ROUTE_DETAILS, ROUTE_MODE, ROUTE_PARAMETER,
+        RULE_SELECTION, SELECT_PARAMETER, SELECTABLE_ITEMS, SELECTION_LAYERS, SNAPSHOTS,
+        SHOVE_ENABLED, STITCHING, TRACES, UNFIXED, VIA_KEEPOUT, VISIBLE, VIA_RULES, VIA_SNAP_TO_SMD_CENTER,
+        VIAS, VIOLATIONS, VIOLATIONS_INFO, WINDOWS
     }
-
-    private final gui.BoardFrame board_frame;
-    private final interactive.BoardHandling board_handling;
-    /**
-     * Used, when reading a defaults file, null otherwise.
-     */
-    private final GUIDefaultsScanner scanner;
-    /**
-     * Used, when writing a defaults file; null otherwise.
-     */
-    private final IndentFileWriter out_file;
 }

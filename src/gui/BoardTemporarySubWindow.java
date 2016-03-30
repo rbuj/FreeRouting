@@ -26,6 +26,7 @@ package gui;
  * @author Alfons Wirtz
  */
 public class BoardTemporarySubWindow extends BoardSubWindow {
+    protected final BoardFrame board_frame;
 
     /**
      * Creates a new instance of BoardTemporarySubWindow
@@ -55,5 +56,4 @@ public class BoardTemporarySubWindow extends BoardSubWindow {
         super.dispose();
     }
 
-    protected final BoardFrame board_frame;
 }

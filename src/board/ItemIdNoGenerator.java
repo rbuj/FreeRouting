@@ -25,6 +25,8 @@ package board;
  * @author Alfons Wirtz
  */
 public class ItemIdNoGenerator implements datastructures.IdNoGenerator, java.io.Serializable {
+    static final private int c_max_id_no = Integer.MAX_VALUE / 2;
+    private int last_generated_id_no = 0;
 
     /**
      * Creates a new ItemIdNoGenerator
@@ -53,6 +55,4 @@ public class ItemIdNoGenerator implements datastructures.IdNoGenerator, java.io.
         return last_generated_id_no;
     }
 
-    private int last_generated_id_no = 0;
-    static final private int c_max_id_no = Integer.MAX_VALUE / 2;
 }

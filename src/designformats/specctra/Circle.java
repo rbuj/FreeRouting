@@ -29,6 +29,7 @@ import geometry.planar.IntPoint;
  * @author alfons
  */
 public class Circle extends Shape {
+    public final double[] coor;
 
     /**
      * Creates a new circle from the input parameters. p_coor is an array of
@@ -103,5 +104,4 @@ public class Circle extends Shape {
         p_file.write(")");
     }
 
-    public final double[] coor;
 }

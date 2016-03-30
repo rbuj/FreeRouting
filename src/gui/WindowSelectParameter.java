@@ -26,8 +26,18 @@ import board.ItemSelectionFilter;
  *
  * @author Alfons Wirtz
  */
-public final class WindowSelectParameter extends BoardSavableSubWindow {
+public class WindowSelectParameter extends BoardSavableSubWindow {
 
+
+    private final interactive.BoardHandling board_handling;
+
+    private final javax.swing.JRadioButton[] layer_name_arr;
+
+    private final javax.swing.JCheckBox[] item_selection_choices;
+
+    private final javax.swing.JRadioButton all_visible_button;
+
+    private final javax.swing.JRadioButton current_only_button;
     /**
      * Creates a new instance of SelectWindow
      */
@@ -125,7 +135,6 @@ public final class WindowSelectParameter extends BoardSavableSubWindow {
         this.pack();
         this.setResizable(false);
     }
-
     /**
      * Refreshs the displayed values in this window.
      */
@@ -149,7 +158,6 @@ public final class WindowSelectParameter extends BoardSavableSubWindow {
         board.Layer current_layer = layer_structure.arr[this.board_handling.settings.get_layer()];
         layer_name_arr[layer_structure.get_signal_layer_no(current_layer)].setSelected(true);
     }
-
     /**
      * Selects the layer with the input signal number.
      */
@@ -157,30 +165,19 @@ public final class WindowSelectParameter extends BoardSavableSubWindow {
         layer_name_arr[p_signal_layer_no].setSelected(true);
     }
 
-    private final interactive.BoardHandling board_handling;
-
-    private final javax.swing.JRadioButton[] layer_name_arr;
-
-    private final javax.swing.JCheckBox[] item_selection_choices;
-
-    private final javax.swing.JRadioButton all_visible_button;
-
-    private final javax.swing.JRadioButton current_only_button;
-
     private class CurrentLayerListener implements java.awt.event.ActionListener {
 
+
+        public final int signal_layer_no;
+        public final int layer_no;
         public CurrentLayerListener(int p_signal_layer_no, int p_layer_no) {
             signal_layer_no = p_signal_layer_no;
             layer_no = p_layer_no;
         }
-
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             board_handling.set_current_layer(layer_no);
         }
-
-        public final int signal_layer_no;
-        public final int layer_no;
     }
 
     private class AllVisibleListener implements java.awt.event.ActionListener {
@@ -200,6 +197,7 @@ public final class WindowSelectParameter extends BoardSavableSubWindow {
     }
 
     private class ItemSelectionListener implements java.awt.event.ActionListener {
+        private final int item_no;
 
         public ItemSelectionListener(int p_item_no) {
             item_no = p_item_no;
@@ -229,6 +227,5 @@ public final class WindowSelectParameter extends BoardSavableSubWindow {
             }
         }
 
-        private final int item_no;
     }
 }

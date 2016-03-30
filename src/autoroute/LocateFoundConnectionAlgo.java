@@ -59,191 +59,6 @@ public abstract class LocateFoundConnectionAlgo {
         return result;
     }
 
-    /**
-     * Creates a new instance of LocateFoundConnectionAlgo
-     */
-    protected LocateFoundConnectionAlgo(MazeSearchAlgo.Result p_maze_search_result, AutorouteControl p_ctrl,
-            ShapeSearchTree p_search_tree, AngleRestriction p_angle_restriction, SortedSet<Item> p_ripped_item_list, TestLevel p_test_level) {
-        this.ctrl = p_ctrl;
-        this.angle_restriction = p_angle_restriction;
-        this.test_level = p_test_level;
-        Collection<BacktrackElement> backtrack_list = backtrack(p_maze_search_result, p_ripped_item_list);
-        this.backtrack_array = new BacktrackElement[backtrack_list.size()];
-        Iterator<BacktrackElement> it = backtrack_list.iterator();
-        for (int i = 0; i < backtrack_array.length; ++i) {
-            this.backtrack_array[i] = it.next();
-        }
-        this.connection_items = new LinkedList<>();
-        BacktrackElement start_info = this.backtrack_array[backtrack_array.length - 1];
-        if (!(start_info.door instanceof TargetItemExpansionDoor)) {
-            System.out.println("LocateFoundConnectionAlgo: ItemExpansionDoor expected for start_info.door");
-            this.start_item = null;
-            this.start_layer = 0;
-            this.target_item = null;
-            this.target_layer = 0;
-            this.start_door = null;
-            return;
-        }
-        this.start_door = (TargetItemExpansionDoor) start_info.door;
-        this.start_item = start_door.item;
-        this.start_layer = start_door.room.get_layer();
-        this.current_from_door_index = 0;
-        boolean at_fanout_end = false;
-        if (p_maze_search_result.destination_door instanceof TargetItemExpansionDoor) {
-            TargetItemExpansionDoor curr_destination_door = (TargetItemExpansionDoor) p_maze_search_result.destination_door;
-            this.target_item = curr_destination_door.item;
-            this.target_layer = curr_destination_door.room.get_layer();
-
-            this.current_from_point = calculate_starting_point(curr_destination_door, p_search_tree);
-        } else if (p_maze_search_result.destination_door instanceof ExpansionDrill) {
-            // may happen only in case of fanout
-            this.target_item = null;
-            ExpansionDrill curr_drill = (ExpansionDrill) p_maze_search_result.destination_door;
-            this.current_from_point = curr_drill.location.to_float();
-            this.target_layer = curr_drill.first_layer + p_maze_search_result.section_no_of_door;
-            at_fanout_end = true;
-        } else {
-            System.out.println("LocateFoundConnectionAlgo: unexpected type of destination_door");
-            this.target_item = null;
-            this.target_layer = 0;
-            return;
-        }
-        this.current_trace_layer = this.target_layer;
-        this.previous_from_point = this.current_from_point;
-
-        boolean connection_done = false;
-        while (!connection_done) {
-            boolean layer_changed = false;
-            if (at_fanout_end) {
-                // do not increase this.current_target_door_index
-                layer_changed = true;
-            } else {
-                this.current_target_door_index = this.current_from_door_index + 1;
-                while (current_target_door_index < this.backtrack_array.length && !layer_changed) {
-                    if (this.backtrack_array[this.current_target_door_index].door instanceof ExpansionDrill) {
-                        layer_changed = true;
-                    } else {
-                        ++this.current_target_door_index;
-                    }
-                }
-            }
-            if (layer_changed) {
-                // the next trace leads to a via
-                ExpansionDrill current_target_drill = (ExpansionDrill) this.backtrack_array[this.current_target_door_index].door;
-                this.current_target_shape = TileShape.get_instance(current_target_drill.location);
-            } else {
-                // the next trace leads to the final target
-                connection_done = true;
-                this.current_target_door_index = this.backtrack_array.length - 1;
-                TileShape target_shape = ((Connectable) start_item).get_trace_connection_shape(p_search_tree, start_door.tree_entry_no);
-                this.current_target_shape = target_shape.intersection(start_door.room.get_shape());
-                if (this.current_target_shape.dimension() >= 2) {
-                    // the target is a conduction area, make a save connection
-                    // by shrinking the shape by the trace halfwidth.
-                    double trace_half_width = this.ctrl.compensated_trace_half_width[start_door.room.get_layer()];
-                    TileShape shrinked_shape = (TileShape) this.current_target_shape.offset(-trace_half_width);
-                    if (!shrinked_shape.is_empty()) {
-                        this.current_target_shape = shrinked_shape;
-                    }
-                }
-            }
-            this.current_to_door_index = this.current_from_door_index + 1;
-            ResultItem next_trace = this.calculate_next_trace(layer_changed, at_fanout_end);
-            at_fanout_end = false;
-            this.connection_items.add(next_trace);
-        }
-    }
-
-    /**
-     * Calclates the next trace trace of the connection under construction.
-     * Returns null, if all traces are returned.
-     */
-    private ResultItem calculate_next_trace(boolean p_layer_changed, boolean p_at_fanout_end) {
-        Collection<FloatPoint> corner_list = new LinkedList<>();
-        corner_list.add(this.current_from_point);
-        if (!p_at_fanout_end) {
-            FloatPoint adjusted_start_corner = this.adjust_start_corner();
-            if (adjusted_start_corner != this.current_from_point) {
-                FloatPoint add_corner = calculate_additional_corner(this.current_from_point, adjusted_start_corner,
-                        true, this.angle_restriction);
-                corner_list.add(add_corner);
-                corner_list.add(adjusted_start_corner);
-                this.previous_from_point = this.current_from_point;
-                this.current_from_point = adjusted_start_corner;
-            }
-        }
-        FloatPoint prev_corner = this.current_from_point;
-        for (;;) {
-            Collection<FloatPoint> next_corners = calculate_next_trace_corners();
-            if (next_corners.isEmpty()) {
-                break;
-            }
-            Iterator<FloatPoint> it = next_corners.iterator();
-            while (it.hasNext()) {
-                FloatPoint curr_next_corner = it.next();
-                if (curr_next_corner != prev_corner) {
-                    corner_list.add(curr_next_corner);
-                    this.previous_from_point = this.current_from_point;
-                    this.current_from_point = curr_next_corner;
-                    prev_corner = curr_next_corner;
-                }
-            }
-        }
-
-        int next_layer = this.current_trace_layer;
-        if (p_layer_changed) {
-            this.current_from_door_index = this.current_target_door_index + 1;
-            CompleteExpansionRoom next_room = this.backtrack_array[this.current_from_door_index].next_room;
-            if (next_room != null) {
-                next_layer = next_room.get_layer();
-            }
-        }
-
-        // Round the new trace corners to Integer.
-        Collection<IntPoint> rounded_corner_list = new LinkedList<>();
-        Iterator<FloatPoint> it = corner_list.iterator();
-        IntPoint prev_point = null;
-        while (it.hasNext()) {
-            IntPoint curr_point = (it.next()).round();
-            if (!curr_point.equals(prev_point)) {
-                rounded_corner_list.add(curr_point);
-                prev_point = curr_point;
-            }
-        }
-
-        // Construct the result item
-        IntPoint[] corner_arr = new IntPoint[rounded_corner_list.size()];
-        Iterator<IntPoint> it2 = rounded_corner_list.iterator();
-        for (int i = 0; i < corner_arr.length; ++i) {
-            corner_arr[i] = it2.next();
-        }
-        ResultItem result = new ResultItem(corner_arr, this.current_trace_layer);
-        this.current_trace_layer = next_layer;
-        return result;
-    }
-
-    /**
-     * Returns the next list of corners for the construction of the trace in
-     * calculate_next_trace. If the result is emppty, the trace is already
-     * completed.
-     */
-    protected abstract Collection<FloatPoint> calculate_next_trace_corners();
-
-    /**
-     * Test display of the baktrack rooms.
-     */
-    public void draw(java.awt.Graphics p_graphics, boardgraphics.GraphicsContext p_graphics_context) {
-        for (int i = 0; i < backtrack_array.length; ++i) {
-            CompleteExpansionRoom next_room = backtrack_array[i].next_room;
-            if (next_room != null) {
-                next_room.draw(p_graphics, p_graphics_context, 0.2);
-            }
-            ExpandableObject next_door = backtrack_array[i].door;
-            if (next_door instanceof ExpansionDrill) {
-                ((ExpansionDrill) next_door).draw(p_graphics, p_graphics_context, 0.2);
-            }
-        }
-    }
 
     /**
      * Calculates the starting point of the next trace on p_from_door.item. The
@@ -309,25 +124,6 @@ public abstract class LocateFoundConnectionAlgo {
         return result;
     }
 
-    /**
-     * Adjusts the start corner, so that a trace starting at this corner is
-     * completely contained in the start room.
-     */
-    private FloatPoint adjust_start_corner() {
-        if (this.current_from_door_index < 0) {
-            return this.current_from_point;
-        }
-        BacktrackElement curr_from_info = this.backtrack_array[this.current_from_door_index];
-        if (curr_from_info.next_room == null) {
-            return this.current_from_point;
-        }
-        double trace_half_width = this.ctrl.compensated_trace_half_width[this.current_trace_layer];
-        TileShape shrinked_room_shape = (TileShape) curr_from_info.next_room.get_shape().offset(-trace_half_width);
-        if (shrinked_room_shape.is_empty() || shrinked_room_shape.contains(this.current_from_point)) {
-            return this.current_from_point;
-        }
-        return shrinked_room_shape.nearest_point_approx(this.current_from_point).round().to_float();
-    }
 
     private static FloatPoint ninety_degree_corner(FloatPoint p_from_point, FloatPoint p_to_point,
             boolean p_horizontal_first) {
@@ -437,35 +233,227 @@ public abstract class LocateFoundConnectionAlgo {
     protected int current_to_door_index;
     protected int current_target_door_index;
     protected TileShape current_target_shape;
-
     /**
-     * Type of a single item in the result list connection_items. Used to create
-     * a new PolylineTrace.
+     * Creates a new instance of LocateFoundConnectionAlgo
      */
+    protected LocateFoundConnectionAlgo(MazeSearchAlgo.Result p_maze_search_result, AutorouteControl p_ctrl,
+            ShapeSearchTree p_search_tree, AngleRestriction p_angle_restriction, SortedSet<Item> p_ripped_item_list, TestLevel p_test_level) {
+        this.ctrl = p_ctrl;
+        this.angle_restriction = p_angle_restriction;
+        this.test_level = p_test_level;
+        Collection<BacktrackElement> backtrack_list = backtrack(p_maze_search_result, p_ripped_item_list);
+        this.backtrack_array = new BacktrackElement[backtrack_list.size()];
+        Iterator<BacktrackElement> it = backtrack_list.iterator();
+        for (int i = 0; i < backtrack_array.length; ++i) {
+            this.backtrack_array[i] = it.next();
+        }
+        this.connection_items = new LinkedList<>();
+        BacktrackElement start_info = this.backtrack_array[backtrack_array.length - 1];
+        if (!(start_info.door instanceof TargetItemExpansionDoor)) {
+            System.out.println("LocateFoundConnectionAlgo: ItemExpansionDoor expected for start_info.door");
+            this.start_item = null;
+            this.start_layer = 0;
+            this.target_item = null;
+            this.target_layer = 0;
+            this.start_door = null;
+            return;
+        }
+        this.start_door = (TargetItemExpansionDoor) start_info.door;
+        this.start_item = start_door.item;
+        this.start_layer = start_door.room.get_layer();
+        this.current_from_door_index = 0;
+        boolean at_fanout_end = false;
+        if (p_maze_search_result.destination_door instanceof TargetItemExpansionDoor) {
+            TargetItemExpansionDoor curr_destination_door = (TargetItemExpansionDoor) p_maze_search_result.destination_door;
+            this.target_item = curr_destination_door.item;
+            this.target_layer = curr_destination_door.room.get_layer();
+
+            this.current_from_point = calculate_starting_point(curr_destination_door, p_search_tree);
+        } else if (p_maze_search_result.destination_door instanceof ExpansionDrill) {
+            // may happen only in case of fanout
+            this.target_item = null;
+            ExpansionDrill curr_drill = (ExpansionDrill) p_maze_search_result.destination_door;
+            this.current_from_point = curr_drill.location.to_float();
+            this.target_layer = curr_drill.first_layer + p_maze_search_result.section_no_of_door;
+            at_fanout_end = true;
+        } else {
+            System.out.println("LocateFoundConnectionAlgo: unexpected type of destination_door");
+            this.target_item = null;
+            this.target_layer = 0;
+            return;
+        }
+        this.current_trace_layer = this.target_layer;
+        this.previous_from_point = this.current_from_point;
+
+        boolean connection_done = false;
+        while (!connection_done) {
+            boolean layer_changed = false;
+            if (at_fanout_end) {
+                // do not increase this.current_target_door_index
+                layer_changed = true;
+            } else {
+                this.current_target_door_index = this.current_from_door_index + 1;
+                while (current_target_door_index < this.backtrack_array.length && !layer_changed) {
+                    if (this.backtrack_array[this.current_target_door_index].door instanceof ExpansionDrill) {
+                        layer_changed = true;
+                    } else {
+                        ++this.current_target_door_index;
+                    }
+                }
+            }
+            if (layer_changed) {
+                // the next trace leads to a via
+                ExpansionDrill current_target_drill = (ExpansionDrill) this.backtrack_array[this.current_target_door_index].door;
+                this.current_target_shape = TileShape.get_instance(current_target_drill.location);
+            } else {
+                // the next trace leads to the final target
+                connection_done = true;
+                this.current_target_door_index = this.backtrack_array.length - 1;
+                TileShape target_shape = ((Connectable) start_item).get_trace_connection_shape(p_search_tree, start_door.tree_entry_no);
+                this.current_target_shape = target_shape.intersection(start_door.room.get_shape());
+                if (this.current_target_shape.dimension() >= 2) {
+                    // the target is a conduction area, make a save connection
+                    // by shrinking the shape by the trace halfwidth.
+                    double trace_half_width = this.ctrl.compensated_trace_half_width[start_door.room.get_layer()];
+                    TileShape shrinked_shape = (TileShape) this.current_target_shape.offset(-trace_half_width);
+                    if (!shrinked_shape.is_empty()) {
+                        this.current_target_shape = shrinked_shape;
+                    }
+                }
+            }
+            this.current_to_door_index = this.current_from_door_index + 1;
+            ResultItem next_trace = this.calculate_next_trace(layer_changed, at_fanout_end);
+            at_fanout_end = false;
+            this.connection_items.add(next_trace);
+        }
+    }
+    /**
+     * Calclates the next trace trace of the connection under construction.
+     * Returns null, if all traces are returned.
+     */
+    private ResultItem calculate_next_trace(boolean p_layer_changed, boolean p_at_fanout_end) {
+        Collection<FloatPoint> corner_list = new LinkedList<>();
+        corner_list.add(this.current_from_point);
+        if (!p_at_fanout_end) {
+            FloatPoint adjusted_start_corner = this.adjust_start_corner();
+            if (adjusted_start_corner != this.current_from_point) {
+                FloatPoint add_corner = calculate_additional_corner(this.current_from_point, adjusted_start_corner,
+                        true, this.angle_restriction);
+                corner_list.add(add_corner);
+                corner_list.add(adjusted_start_corner);
+                this.previous_from_point = this.current_from_point;
+                this.current_from_point = adjusted_start_corner;
+            }
+        }
+        FloatPoint prev_corner = this.current_from_point;
+        for (;;) {
+            Collection<FloatPoint> next_corners = calculate_next_trace_corners();
+            if (next_corners.isEmpty()) {
+                break;
+            }
+            Iterator<FloatPoint> it = next_corners.iterator();
+            while (it.hasNext()) {
+                FloatPoint curr_next_corner = it.next();
+                if (curr_next_corner != prev_corner) {
+                    corner_list.add(curr_next_corner);
+                    this.previous_from_point = this.current_from_point;
+                    this.current_from_point = curr_next_corner;
+                    prev_corner = curr_next_corner;
+                }
+            }
+        }
+
+        int next_layer = this.current_trace_layer;
+        if (p_layer_changed) {
+            this.current_from_door_index = this.current_target_door_index + 1;
+            CompleteExpansionRoom next_room = this.backtrack_array[this.current_from_door_index].next_room;
+            if (next_room != null) {
+                next_layer = next_room.get_layer();
+            }
+        }
+
+        // Round the new trace corners to Integer.
+        Collection<IntPoint> rounded_corner_list = new LinkedList<>();
+        Iterator<FloatPoint> it = corner_list.iterator();
+        IntPoint prev_point = null;
+        while (it.hasNext()) {
+            IntPoint curr_point = (it.next()).round();
+            if (!curr_point.equals(prev_point)) {
+                rounded_corner_list.add(curr_point);
+                prev_point = curr_point;
+            }
+        }
+
+        // Construct the result item
+        IntPoint[] corner_arr = new IntPoint[rounded_corner_list.size()];
+        Iterator<IntPoint> it2 = rounded_corner_list.iterator();
+        for (int i = 0; i < corner_arr.length; ++i) {
+            corner_arr[i] = it2.next();
+        }
+        ResultItem result = new ResultItem(corner_arr, this.current_trace_layer);
+        this.current_trace_layer = next_layer;
+        return result;
+    }
+    /**
+     * Returns the next list of corners for the construction of the trace in
+     * calculate_next_trace. If the result is emppty, the trace is already
+     * completed.
+     */
+    protected abstract Collection<FloatPoint> calculate_next_trace_corners();
+    /**
+     * Test display of the baktrack rooms.
+     */
+    public void draw(java.awt.Graphics p_graphics, boardgraphics.GraphicsContext p_graphics_context) {
+        for (int i = 0; i < backtrack_array.length; ++i) {
+            CompleteExpansionRoom next_room = backtrack_array[i].next_room;
+            if (next_room != null) {
+                next_room.draw(p_graphics, p_graphics_context, 0.2);
+            }
+            ExpandableObject next_door = backtrack_array[i].door;
+            if (next_door instanceof ExpansionDrill) {
+                ((ExpansionDrill) next_door).draw(p_graphics, p_graphics_context, 0.2);
+            }
+        }
+    }
+    /**
+     * Adjusts the start corner, so that a trace starting at this corner is
+     * completely contained in the start room.
+     */
+    private FloatPoint adjust_start_corner() {
+        if (this.current_from_door_index < 0) {
+            return this.current_from_point;
+        }
+        BacktrackElement curr_from_info = this.backtrack_array[this.current_from_door_index];
+        if (curr_from_info.next_room == null) {
+            return this.current_from_point;
+        }
+        double trace_half_width = this.ctrl.compensated_trace_half_width[this.current_trace_layer];
+        TileShape shrinked_room_shape = (TileShape) curr_from_info.next_room.get_shape().offset(-trace_half_width);
+        if (shrinked_room_shape.is_empty() || shrinked_room_shape.contains(this.current_from_point)) {
+            return this.current_from_point;
+        }
+        return shrinked_room_shape.nearest_point_approx(this.current_from_point).round().to_float();
+    }
+
     protected static class ResultItem {
 
+        public final IntPoint[] corners;
+        public final int layer;
         public ResultItem(IntPoint[] p_corners, int p_layer) {
             corners = p_corners;
             layer = p_layer;
         }
-        public final IntPoint[] corners;
-        public final int layer;
     }
 
-    /**
-     * Type of the elements of the list returned by this.backtrack(). Next_room
-     * is the common room of the current door and the next door in the backtrack
-     * list.
-     */
     protected static class BacktrackElement {
 
+        public final ExpandableObject door;
+        public final int section_no_of_door;
+        public final CompleteExpansionRoom next_room;
         private BacktrackElement(ExpandableObject p_door, int p_section_no_of_door, CompleteExpansionRoom p_room) {
             door = p_door;
             section_no_of_door = p_section_no_of_door;
             next_room = p_room;
         }
-        public final ExpandableObject door;
-        public final int section_no_of_door;
-        public final CompleteExpansionRoom next_room;
     }
 }

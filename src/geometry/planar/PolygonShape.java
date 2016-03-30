@@ -32,6 +32,15 @@ import java.util.LinkedList;
  * @author Alfons Wirtz
  */
 public class PolygonShape extends PolylineShape {
+    static private int seed = 99;
+    static private java.util.Random random_generator = new java.util.Random(seed);
+    public final Point[] corners;
+    /**
+     * the following fields are for storing precalculated data
+     */
+    transient private IntBox precalculated_bounding_box = null;
+    transient private IntOctagon precalculated_bounding_octagon = null;
+    transient private TileShape[] precalculated_convex_pieces = null;
 
     /**
      * Creates a new instance of PolygonShape
@@ -638,19 +647,12 @@ public class PolygonShape extends PolylineShape {
         return result;
     }
 
-    public final Point[] corners;
-
-    /**
-     * the following fields are for storing precalculated data
-     */
-    transient private IntBox precalculated_bounding_box = null;
-    transient private IntOctagon precalculated_bounding_octagon = null;
-    transient private TileShape[] precalculated_convex_pieces = null;
-    static private int seed = 99;
-    static private java.util.Random random_generator = new java.util.Random(seed);
 
     private class DivisionPoint {
 
+
+        final int corner_no_after_projection;
+        final FloatPoint projection;
         /**
          * At a concave corner of the closed polygon, a minimal axis parallel
          * division line is constructed, to divide the closed polygon into two.
@@ -783,8 +785,5 @@ public class PolygonShape extends PolylineShape {
             projection = min_projection;
             corner_no_after_projection = corner_no_after_min_projection;
         }
-
-        final int corner_no_after_projection;
-        final FloatPoint projection;
     }
 }

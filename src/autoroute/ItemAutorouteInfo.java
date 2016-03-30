@@ -28,6 +28,17 @@ import board.ShapeSearchTree;
  * @author Alfons Wirtz
  */
 public class ItemAutorouteInfo {
+    /**
+     * Defines, if this item belongs to the start or destination set of the maze
+     * search algorithm
+     */
+    private boolean start_info;
+    private final Item item;
+    private Connection precalculated_connnection = null;
+    /**
+     * ExpansionRoom for pushing or ripping the this object for each tree shape.
+     */
+    private ObstacleExpansionRoom[] expansion_room_arr;
 
     public ItemAutorouteInfo(Item p_item) {
         this.item = p_item;
@@ -112,18 +123,4 @@ public class ItemAutorouteInfo {
         }
     }
 
-    /**
-     * Defines, if this item belongs to the start or destination set of the maze
-     * search algorithm
-     */
-    private boolean start_info;
-
-    private final Item item;
-
-    private Connection precalculated_connnection = null;
-
-    /**
-     * ExpansionRoom for pushing or ripping the this object for each tree shape.
-     */
-    private ObstacleExpansionRoom[] expansion_room_arr;
 }

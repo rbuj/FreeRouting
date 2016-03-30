@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public final class BoardMenuFile extends javax.swing.JMenu {
+public class BoardMenuFile extends javax.swing.JMenu {
 
     /**
      * Returns a new file menu for the board frame.
@@ -128,6 +128,17 @@ public final class BoardMenuFile extends javax.swing.JMenu {
         file_menu.add_save_settings_item();
 
         return file_menu;
+    }
+    private final BoardFrame board_frame;
+    private final boolean session_file_option;
+    private final java.util.ResourceBundle resources;
+    /**
+     * Creates a new instance of BoardFileMenu
+     */
+    private BoardMenuFile(BoardFrame p_board_frame, boolean p_session_file_option) {
+        session_file_option = p_session_file_option;
+        board_frame = p_board_frame;
+        resources = java.util.ResourceBundle.getBundle("gui.resources.BoardMenuFile", p_board_frame.get_locale());
     }
 
     public void add_design_dependent_items() {
@@ -256,15 +267,4 @@ public final class BoardMenuFile extends javax.swing.JMenu {
 
     }
 
-    /**
-     * Creates a new instance of BoardFileMenu
-     */
-    private BoardMenuFile(BoardFrame p_board_frame, boolean p_session_file_option) {
-        session_file_option = p_session_file_option;
-        board_frame = p_board_frame;
-        resources = java.util.ResourceBundle.getBundle("gui.resources.BoardMenuFile", p_board_frame.get_locale());
-    }
-    private final BoardFrame board_frame;
-    private final boolean session_file_option;
-    private final java.util.ResourceBundle resources;
 }

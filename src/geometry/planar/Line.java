@@ -25,6 +25,16 @@ import java.math.BigInteger;
  * @author Alfons Wirtz
  */
 public class Line implements Comparable<Line>, java.io.Serializable {
+    /**
+     * create a directed line from an IntPoint and an IntDirection
+     */
+    public static Line get_instance(Point p_a, Direction p_dir) {
+        Point b = p_a.translate_by(p_dir.get_vector());
+        return new Line(p_a, b);
+    }
+    public final Point a;
+    public final Point b;
+    transient private Direction dir; // should only be accessed from get_direction().
 
     /**
      * creates a directed Line from two Points
@@ -59,13 +69,6 @@ public class Line implements Comparable<Line>, java.io.Serializable {
         }
     }
 
-    /**
-     * create a directed line from an IntPoint and an IntDirection
-     */
-    public static Line get_instance(Point p_a, Direction p_dir) {
-        Point b = p_a.translate_by(p_dir.get_vector());
-        return new Line(p_a, b);
-    }
 
     /**
      * returns true, if this and p_ob define the same line
@@ -633,7 +636,4 @@ public class Line implements Comparable<Line>, java.io.Serializable {
         return new Line(new_a, new_b);
     }
 
-    public final Point a;
-    public final Point b;
-    transient private Direction dir; // should only be accessed from get_direction().
 }

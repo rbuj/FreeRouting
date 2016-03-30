@@ -45,6 +45,46 @@ import java.awt.geom.Rectangle2D;
  * @author Alfons Wirtz
  */
 public class GraphicsContext implements java.io.Serializable {
+    private static final int update_offset = 10000;
+    private static final boolean show_line_segments = false;
+    private static final boolean show_area_division = false;
+    /**
+     * initialise some values in p_graphics
+     */
+    private static void init_draw_graphics(Graphics2D p_graphics, Color p_color, float p_width) {
+        BasicStroke bs = new BasicStroke(Math.max(p_width, 0), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+        p_graphics.setStroke(bs);
+        p_graphics.setColor(p_color);
+        p_graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    }
+    private static void set_translucency(Graphics2D p_g2, double p_factor) {
+        AlphaComposite curr_alpha_composite;
+        if (p_factor >= 0) {
+            curr_alpha_composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) p_factor);
+        } else {
+            curr_alpha_composite = AlphaComposite.getInstance(AlphaComposite.DST_OVER, (float) -p_factor);
+        }
+        p_g2.setComposite(curr_alpha_composite);
+    }
+    public transient ItemColorTableModel item_color_table;
+    public transient OtherColorTableModel other_color_table;
+    public ColorIntensityTable color_intensity_table;
+    public CoordinateTransform coordinate_transform = null;
+    /**
+     * layer_visibility_arr[i] is between 0 and 1, for each layer i, 0 is
+     * invisible and 1 fully visible.
+     */
+    private double[] layer_visibility_arr;
+    /**
+     * The factor for autoomatic layer dimming of layers different from the
+     * current layer. Values are between 0 and 1. If 1, there is no automatic
+     * layer dimming.
+     */
+    private double auto_layer_dim_factor = 0.7;
+    /**
+     * The layer, which is not automatically dimmed.
+     */
+    private int fully_visible_layer = 0;
 
     public GraphicsContext(IntBox p_design_bounds,
             Dimension p_panel_bounds, board.LayerStructure p_layer_structure, java.util.Locale p_locale) {
@@ -654,25 +694,6 @@ public class GraphicsContext implements java.io.Serializable {
         return Math.min(p_1.y, p_2.y) > p_update_box.ur.y + p_update_offset;
     }
 
-    /**
-     * initialise some values in p_graphics
-     */
-    private static void init_draw_graphics(Graphics2D p_graphics, Color p_color, float p_width) {
-        BasicStroke bs = new BasicStroke(Math.max(p_width, 0), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
-        p_graphics.setStroke(bs);
-        p_graphics.setColor(p_color);
-        p_graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    }
-
-    private static void set_translucency(Graphics2D p_g2, double p_factor) {
-        AlphaComposite curr_alpha_composite;
-        if (p_factor >= 0) {
-            curr_alpha_composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) p_factor);
-        } else {
-            curr_alpha_composite = AlphaComposite.getInstance(AlphaComposite.DST_OVER, (float) -p_factor);
-        }
-        p_g2.setComposite(curr_alpha_composite);
-    }
 
     /**
      * Writes an instance of this class to a file.
@@ -694,33 +715,5 @@ public class GraphicsContext implements java.io.Serializable {
         this.other_color_table = new OtherColorTableModel(p_stream);
     }
 
-    public transient ItemColorTableModel item_color_table;
-    public transient OtherColorTableModel other_color_table;
-    public ColorIntensityTable color_intensity_table;
-
-    public CoordinateTransform coordinate_transform = null;
-
-    /**
-     * layer_visibility_arr[i] is between 0 and 1, for each layer i, 0 is
-     * invisible and 1 fully visible.
-     */
-    private double[] layer_visibility_arr;
-
-    /**
-     * The factor for autoomatic layer dimming of layers different from the
-     * current layer. Values are between 0 and 1. If 1, there is no automatic
-     * layer dimming.
-     */
-    private double auto_layer_dim_factor = 0.7;
-
-    /**
-     * The layer, which is not automatically dimmed.
-     */
-    private int fully_visible_layer = 0;
-
-    private static final int update_offset = 10000;
-
-    private static final boolean show_line_segments = false;
-    private static final boolean show_area_division = false;
 
 }

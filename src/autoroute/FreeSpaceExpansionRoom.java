@@ -30,6 +30,18 @@ import java.util.List;
  * @author Alfons Wirtz
  */
 public abstract class FreeSpaceExpansionRoom implements ExpansionRoom {
+    /**
+     * The layer of this room
+     */
+    private final int layer;
+    /**
+     * The shape of this room
+     */
+    private TileShape shape;
+    /**
+     * The list of doors to neighbour expansion rooms
+     */
+    private List<ExpansionDoor> doors;
 
     /**
      * Creates a new instance of FreeSpaceExpansionRoom. The shape is normally
@@ -118,18 +130,4 @@ public abstract class FreeSpaceExpansionRoom implements ExpansionRoom {
         return false;
     }
 
-    /**
-     * The layer of this room
-     */
-    private final int layer;
-
-    /**
-     * The shape of this room
-     */
-    private TileShape shape;
-
-    /**
-     * The list of doors to neighbour expansion rooms
-     */
-    private List<ExpansionDoor> doors;
 }

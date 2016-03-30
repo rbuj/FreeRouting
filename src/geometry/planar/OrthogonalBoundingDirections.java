@@ -29,6 +29,11 @@ public class OrthogonalBoundingDirections implements ShapeBoundingDirections {
      * the one and only instantiation
      */
     public static final OrthogonalBoundingDirections INSTANCE = new OrthogonalBoundingDirections();
+    /**
+     * prevent instantiation
+     */
+    private OrthogonalBoundingDirections() {
+    }
 
     @Override
     public int count() {
@@ -65,9 +70,4 @@ public class OrthogonalBoundingDirections implements ShapeBoundingDirections {
         return p_polygon.bounding_box();
     }
 
-    /**
-     * prevent instantiation
-     */
-    private OrthogonalBoundingDirections() {
-    }
 }

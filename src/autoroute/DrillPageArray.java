@@ -35,6 +35,30 @@ import java.util.LinkedList;
  */
 public class DrillPageArray {
 
+
+    private final IntBox bounds;
+
+    /**
+     * The number of colums in the array.
+     */
+    private final int COLUMN_COUNT;
+
+    /**
+     * The number of rows in the array.
+     */
+    private final int ROW_COUNT;
+
+    /**
+     * The width of a single page in this array.
+     */
+    private final int PAGE_WIDTH;
+
+    /**
+     * The height of a single page in this array.
+     */
+    private final int PAGE_HEIGHT;
+
+    private final DrillPage[][] page_arr;
     /**
      * Creates a new instance of DrillPageArray
      */
@@ -67,7 +91,6 @@ public class DrillPageArray {
             }
         }
     }
-
     /**
      * Invalidates all drill pages intersecting with p_shape, so the they must
      * be recalculated at the next call of get_ddrills()
@@ -78,7 +101,6 @@ public class DrillPageArray {
             curr_page.invalidate();
         }
     }
-
     /**
      * Collects all drill pages with a 2-dimensional overlap with p_shape.
      */
@@ -104,7 +126,6 @@ public class DrillPageArray {
         }
         return result;
     }
-
     /**
      * Resets all drill pages for autorouting the next connection.
      */
@@ -116,10 +137,9 @@ public class DrillPageArray {
             }
         }
     }
-
     /*
     * Test draw of the all drills
-     */
+    */
     public void draw(java.awt.Graphics p_graphics, boardgraphics.GraphicsContext p_graphics_context, double p_intensity) {
         for (int j = 0; j < page_arr.length; ++j) {
             DrillPage[] curr_row = page_arr[j];
@@ -128,28 +148,4 @@ public class DrillPageArray {
             }
         }
     }
-
-    private final IntBox bounds;
-
-    /**
-     * The number of colums in the array.
-     */
-    private final int COLUMN_COUNT;
-
-    /**
-     * The number of rows in the array.
-     */
-    private final int ROW_COUNT;
-
-    /**
-     * The width of a single page in this array.
-     */
-    private final int PAGE_WIDTH;
-
-    /**
-     * The height of a single page in this array.
-     */
-    private final int PAGE_HEIGHT;
-
-    private final DrillPage[][] page_arr;
 }

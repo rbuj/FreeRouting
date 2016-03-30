@@ -33,6 +33,10 @@ import java.util.LinkedList;
  * @author Alfons Wirtz
  */
 public class SearchTreeManager {
+    private final Collection<ShapeSearchTree> compensated_search_trees;
+    private ShapeSearchTree default_tree;
+    private final BasicBoard board;
+    private boolean clearance_compensation_used;
 
     /**
      * Creates a new instance of SearchTreeManager
@@ -294,11 +298,4 @@ public class SearchTreeManager {
         }
     }
 
-    private final Collection<ShapeSearchTree> compensated_search_trees;
-
-    private ShapeSearchTree default_tree;
-
-    private final BasicBoard board;
-
-    private boolean clearance_compensation_used;
 }

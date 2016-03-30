@@ -28,6 +28,7 @@ import java.util.Iterator;
  * @author alfons
  */
 public class LayerStructure {
+    public final Layer[] arr;
 
     /**
      * Creates a new instance of LayerStructure from a list of layers
@@ -93,5 +94,4 @@ public class LayerStructure {
         return false;
     }
 
-    public final Layer[] arr;
 }

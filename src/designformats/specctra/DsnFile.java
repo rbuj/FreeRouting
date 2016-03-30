@@ -30,10 +30,7 @@ import datastructures.IndentFileWriter;
  */
 public class DsnFile {
 
-    public enum ReadResult {
-
-        OK, OUTLINE_MISSING, ERROR
-    }
+    static final String CLASS_CLEARANCE_SEPARATOR = "-";
 
     /**
      * Creates a routing board from a Specctra dns file. The parameters
@@ -333,5 +330,8 @@ public class DsnFile {
         }
         return result;
     }
-    static final String CLASS_CLEARANCE_SEPARATOR = "-";
+    public enum ReadResult {
+        
+        OK, OUTLINE_MISSING, ERROR
+    }
 }

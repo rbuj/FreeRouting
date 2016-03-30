@@ -30,6 +30,19 @@ import java.math.BigInteger;
  * @author Alfons Wirtz
  */
 public class BigIntDirection extends Direction implements java.io.Serializable {
+    final BigInteger x;
+    final BigInteger y;
+    BigIntDirection(BigInteger p_x, BigInteger p_y) {
+        x = p_x;
+        y = p_y;
+    }
+    /**
+     * creates a BigIntDirection from an IntDirection
+     */
+    BigIntDirection(IntDirection p_dir) {
+        x = BigInteger.valueOf(p_dir.x);
+        y = BigInteger.valueOf(p_dir.y);
+    }
 
     @Override
     public boolean is_orthogonal() {
@@ -57,21 +70,6 @@ public class BigIntDirection extends Direction implements java.io.Serializable {
         return new BigIntDirection(x.negate(), y.negate());
     }
 
-    final BigInteger x;
-    final BigInteger y;
-
-    BigIntDirection(BigInteger p_x, BigInteger p_y) {
-        x = p_x;
-        y = p_y;
-    }
-
-    /**
-     * creates a BigIntDirection from an IntDirection
-     */
-    BigIntDirection(IntDirection p_dir) {
-        x = BigInteger.valueOf(p_dir.x);
-        y = BigInteger.valueOf(p_dir.y);
-    }
 
     /**
      * Implements the Comparable interface. Returns 1, if this direction has a

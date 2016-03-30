@@ -32,6 +32,43 @@ import library.Package;
  * @author Alfons Wirtz
  */
 public class Component implements UndoableObjects.Storable, ObjectInfoPanel.Printable, java.io.Serializable {
+    /**
+     * The name of the component.
+     */
+    public final String name;
+    /**
+     * The location of the component.
+     */
+    private Point location;
+    /**
+     * The rotation of the library package of the component in degree
+     */
+    private double rotation_in_degree;
+    /**
+     * Contains information for gate swapping and pin swapping, if != null
+     */
+    private library.LogicalPart logical_part = null;
+    /**
+     * If false, the component will be placed on the back side of the board.
+     */
+    private boolean on_front;
+    /**
+     * The library package of the component if it is placed on the component
+     * side.
+     */
+    private final Package lib_package_front;
+    /**
+     * The library package of the component if it is placed on the solder side.
+     */
+    private final Package lib_package_back;
+    /**
+     * Internal generated unique identification number.
+     */
+    public final int no;
+    /**
+     * If true, the component cannot be moved.
+     */
+    public final boolean position_fixed;
 
     /**
      * Creates a new instance of Component with the input parameters. If
@@ -228,50 +265,5 @@ public class Component implements UndoableObjects.Storable, ObjectInfoPanel.Prin
         return result;
     }
 
-    /**
-     * The name of the component.
-     */
-    public final String name;
-
-    /**
-     * The location of the component.
-     */
-    private Point location;
-
-    /**
-     * The rotation of the library package of the component in degree
-     */
-    private double rotation_in_degree;
-
-    /**
-     * Contains information for gate swapping and pin swapping, if != null
-     */
-    private library.LogicalPart logical_part = null;
-
-    /**
-     * If false, the component will be placed on the back side of the board.
-     */
-    private boolean on_front;
-
-    /**
-     * The library package of the component if it is placed on the component
-     * side.
-     */
-    private final Package lib_package_front;
-
-    /**
-     * The library package of the component if it is placed on the solder side.
-     */
-    private final Package lib_package_back;
-
-    /**
-     * Internal generated unique identification number.
-     */
-    public final int no;
-
-    /**
-     * If true, the component cannot be moved.
-     */
-    public final boolean position_fixed;
 
 }

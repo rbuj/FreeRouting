@@ -159,13 +159,6 @@ public class RouteState extends InteractiveState {
         return new_instance;
     }
 
-    /**
-     * Creates a new instance of RouteState If p_logfile != null, the creation
-     * of the route is stored in the logfile.
-     */
-    protected RouteState(InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
-        super(p_parent_state, p_board_handling, p_logfile);
-    }
 
     /**
      * Checks starting an interactive route at p_location. Returns the picked
@@ -223,6 +216,41 @@ public class RouteState extends InteractiveState {
             p_hdlg.set_layer(picked_item.first_layer());
         }
         return picked_item;
+    }
+    /**
+     * get nets of p_tie_pin except nets of traces, which are already conneccted
+     * to this pin on p_layer.
+     */
+    static int[] get_route_net_numbers_at_tie_pin(board.Pin p_pin, int p_layer) {
+        Set<Integer> net_number_list = new java.util.TreeSet<>();
+        for (int i = 0; i < p_pin.net_count(); ++i) {
+            net_number_list.add(p_pin.get_net_no(i));
+        }
+        Set<Item> contacts = p_pin.get_normal_contacts();
+        for (Item curr_contact : contacts) {
+            if (curr_contact.first_layer() <= p_layer && curr_contact.last_layer() >= p_layer) {
+                for (int i = 0; i < curr_contact.net_count(); ++i) {
+                    net_number_list.remove(curr_contact.get_net_no(i));
+                }
+            }
+        }
+        int[] result = new int[net_number_list.size()];
+        int curr_ind = 0;
+        for (Integer curr_net_number : net_number_list) {
+            result[curr_ind] = curr_net_number;
+            ++curr_ind;
+        }
+        return result;
+    }
+    protected Route route = null;
+    private Set<Item> routing_target_set = null;
+    protected boolean observers_activated = false;
+    /**
+     * Creates a new instance of RouteState If p_logfile != null, the creation
+     * of the route is stored in the logfile.
+     */
+    protected RouteState(InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
+        super(p_parent_state, p_board_handling, p_logfile);
     }
 
     @Override
@@ -413,31 +441,6 @@ public class RouteState extends InteractiveState {
         return result;
     }
 
-    /**
-     * get nets of p_tie_pin except nets of traces, which are already conneccted
-     * to this pin on p_layer.
-     */
-    static int[] get_route_net_numbers_at_tie_pin(board.Pin p_pin, int p_layer) {
-        Set<Integer> net_number_list = new java.util.TreeSet<>();
-        for (int i = 0; i < p_pin.net_count(); ++i) {
-            net_number_list.add(p_pin.get_net_no(i));
-        }
-        Set<Item> contacts = p_pin.get_normal_contacts();
-        for (Item curr_contact : contacts) {
-            if (curr_contact.first_layer() <= p_layer && curr_contact.last_layer() >= p_layer) {
-                for (int i = 0; i < curr_contact.net_count(); ++i) {
-                    net_number_list.remove(curr_contact.get_net_no(i));
-                }
-            }
-        }
-        int[] result = new int[net_number_list.size()];
-        int curr_ind = 0;
-        for (Integer curr_net_number : net_number_list) {
-            result[curr_ind] = curr_net_number;
-            ++curr_ind;
-        }
-        return result;
-    }
 
     @Override
     public void draw(java.awt.Graphics p_graphics) {
@@ -453,7 +456,4 @@ public class RouteState extends InteractiveState {
             hdlg.screen_messages.set_status_message(resources.getString("routing_net") + " " + curr_net.name);
         }
     }
-    protected Route route = null;
-    private Set<Item> routing_target_set = null;
-    protected boolean observers_activated = false;
 }

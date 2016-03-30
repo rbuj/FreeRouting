@@ -29,27 +29,6 @@ public class Side {
     public static final Side ON_THE_RIGHT = new Side("on_the_right");
     public static final Side COLLINEAR = new Side("collinear");
 
-    /**
-     * returns the string of this instance
-     */
-    public String to_string() {
-        return name;
-    }
-
-    /**
-     * returns the opposite side of this side
-     */
-    public final Side negate() {
-        Side result;
-        if (this == ON_THE_LEFT) {
-            result = ON_THE_RIGHT;
-        } else if (this == ON_THE_RIGHT) {
-            result = ON_THE_LEFT;
-        } else {
-            result = this;
-        }
-        return result;
-    }
 
     /**
      * returns ON_THE_LEFT, if p_value < 0,
@@ -68,9 +47,29 @@ public class Side {
         return result;
     }
 
+
+    private final String name;
     private Side(String p_name) {
         name = p_name;
     }
-
-    private final String name;
+    /**
+     * returns the string of this instance
+     */
+    public String to_string() {
+        return name;
+    }
+    /**
+     * returns the opposite side of this side
+     */
+    public final Side negate() {
+        Side result;
+        if (this == ON_THE_LEFT) {
+            result = ON_THE_RIGHT;
+        } else if (this == ON_THE_RIGHT) {
+            result = ON_THE_LEFT;
+        } else {
+            result = this;
+        }
+        return result;
+    }
 }

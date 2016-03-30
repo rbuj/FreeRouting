@@ -26,6 +26,7 @@ package board;
  * @author Alfons Wirtz
  */
 public class BoardObserverAdaptor implements BoardObservers {
+    private boolean active = false;
 
     /**
      * Tell the observers the deletion p_object.
@@ -84,6 +85,5 @@ public class BoardObserverAdaptor implements BoardObservers {
         return active;
     }
 
-    private boolean active = false;
 
 }

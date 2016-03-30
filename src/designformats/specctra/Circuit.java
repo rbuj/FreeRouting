@@ -119,17 +119,17 @@ public class Circuit {
      */
     public static class ReadScopeResult {
 
+
+        public final double max_length;
+        public final double min_length;
+        public final java.util.Collection<String> use_via;
+        public final java.util.Collection<String> use_layer;
         public ReadScopeResult(double p_max_length, double p_min_length, java.util.Collection<String> p_use_via, java.util.Collection<String> p_use_layer) {
             max_length = p_max_length;
             min_length = p_min_length;
             use_via = p_use_via;
             use_layer = p_use_layer;
         }
-
-        public final double max_length;
-        public final double min_length;
-        public final java.util.Collection<String> use_via;
-        public final java.util.Collection<String> use_layer;
     }
 
     /**
@@ -137,12 +137,12 @@ public class Circuit {
      */
     private static class LengthMatchingRule {
 
+
+        public final double max_length;
+        public final double min_length;
         public LengthMatchingRule(double p_max_length, double p_min_length) {
             max_length = p_max_length;
             min_length = p_min_length;
         }
-
-        public final double max_length;
-        public final double min_length;
     }
 }

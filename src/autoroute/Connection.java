@@ -33,6 +33,8 @@ import java.util.TreeSet;
  * @author Alfons Wirtz
  */
 public class Connection {
+    private static final double DETOUR_ADD = 100;
+    private static final double DETOUR_ITEM_COST = 0.1;
 
     /**
      * Gets the connection this item belongs to. A connection ends at the next
@@ -134,6 +136,17 @@ public class Connection {
         return result;
     }
 
+
+    /**
+     * If the connection ens in empty space, start_point or end_point may be
+     * null.
+     */
+    public final Point start_point;
+    public final int start_layer;
+    public final Point end_point;
+    public final int end_layer;
+    public final Set<Item> item_list;
+
     /**
      * Creates a new instance of Connection
      */
@@ -144,7 +157,6 @@ public class Connection {
         end_layer = p_end_layer;
         item_list = p_item_list;
     }
-
     /**
      * Returns the cumulative length of the traces in this connection.
      */
@@ -157,7 +169,6 @@ public class Connection {
         }
         return result;
     }
-
     /**
      * Returns an estimation of the actual length of the connection divided by
      * the minimal possible length.
@@ -171,17 +182,4 @@ public class Connection {
                 + DETOUR_ITEM_COST * (item_list.size() - 1);
         return detour;
     }
-
-    /**
-     * If the connection ens in empty space, start_point or end_point may be
-     * null.
-     */
-    public final Point start_point;
-    public final int start_layer;
-    public final Point end_point;
-    public final int end_layer;
-    public final Set<Item> item_list;
-
-    private static final double DETOUR_ADD = 100;
-    private static final double DETOUR_ITEM_COST = 0.1;
 }

@@ -47,6 +47,8 @@ public abstract class InteractiveActionThread extends Thread implements datastru
     public static InteractiveActionThread get_read_logfile_instance(BoardHandling p_board_handling, java.io.InputStream p_input_stream) {
         return new ReadLogfileThread(p_board_handling, p_input_stream);
     }
+    private boolean stop_requested = false;
+    public final BoardHandling hdlg;
 
     /**
      * Creates a new instance of InteractiveActionThread
@@ -76,8 +78,6 @@ public abstract class InteractiveActionThread extends Thread implements datastru
     public synchronized void draw(java.awt.Graphics p_graphics) {
         // Can be overwritten in derived classes.
     }
-    private boolean stop_requested = false;
-    public final BoardHandling hdlg;
 
     private static class AutorouteThread extends InteractiveActionThread {
 
@@ -128,6 +128,7 @@ public abstract class InteractiveActionThread extends Thread implements datastru
     }
 
     private static class ReadLogfileThread extends InteractiveActionThread {
+        private final java.io.InputStream input_stream;
 
         private ReadLogfileThread(BoardHandling p_board_handling, java.io.InputStream p_input_stream) {
             super(p_board_handling);
@@ -198,6 +199,5 @@ public abstract class InteractiveActionThread extends Thread implements datastru
             hdlg.set_board_read_only(saved_board_read_only);
             hdlg.get_panel().board_frame.repaint_all();
         }
-        private final java.io.InputStream input_stream;
     }
 }

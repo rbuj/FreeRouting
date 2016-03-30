@@ -28,6 +28,54 @@ import geometry.planar.ConvexShape;
  * @author Alfons Wirtz
  */
 public class BoardRules implements java.io.Serializable {
+    /**
+     * Gets the default item clearance class
+     */
+    public static int default_clearance_class() {
+        return 1;
+    }
+    /**
+     * For items with no clearances
+     */
+    public static int clearance_class_none() {
+        return 0;
+    }
+    /**
+     * The matrix describing the spacing restrictions between item clearance
+     * classes.
+     */
+    public final ClearanceMatrix clearance_matrix;
+    /**
+     * Describes the electrical nets on the board.
+     */
+    public final Nets nets;
+    /**
+     * The angle restriction for traces: 90 degree, 45 degree or none.
+     */
+    private transient board.AngleRestriction trace_angle_restriction;
+    /**
+     * If true, the router ignores conduction areas.
+     */
+    private boolean ignore_conduction = true;
+    private final board.LayerStructure layer_structure;
+    public final ViaInfos via_infos = new ViaInfos();
+    public final java.util.Vector<ViaRule> via_rules = new java.util.Vector<>();
+    public final NetClasses net_classes = new NetClasses();
+    /**
+     * The smallest of all default trace half widths
+     */
+    private int min_trace_half_width;
+    /**
+     * The biggest of all default trace half widths
+     */
+    private int max_trace_half_width;
+    /**
+     * The minimum distance of the pad border to the first turn of a connected
+     * trace to a pin with restricted exit directions. If the value is
+     * {@literal <}= 0, there are no exit restrictions.
+     */
+    private double pin_edge_to_turn_dist;
+    private boolean slow_autoroute_algorithm = false;
 
     /**
      * Creates a new instance of this class.
@@ -119,19 +167,6 @@ public class BoardRules implements java.io.Serializable {
         return this.net_classes.get(0);
     }
 
-    /**
-     * Gets the default item clearance class
-     */
-    public static int default_clearance_class() {
-        return 1;
-    }
-
-    /**
-     * For items with no clearances
-     */
-    public static int clearance_class_none() {
-        return 0;
-    }
 
     /**
      * Returns an empty new net rule with an internally created name.
@@ -446,51 +481,4 @@ public class BoardRules implements java.io.Serializable {
         this.trace_angle_restriction = board.AngleRestriction.arr[snap_angle_no];
     }
 
-    /**
-     * The matrix describing the spacing restrictions between item clearance
-     * classes.
-     */
-    public final ClearanceMatrix clearance_matrix;
-
-    /**
-     * Describes the electrical nets on the board.
-     */
-    public final Nets nets;
-
-    /**
-     * The angle restriction for traces: 90 degree, 45 degree or none.
-     */
-    private transient board.AngleRestriction trace_angle_restriction;
-
-    /**
-     * If true, the router ignores conduction areas.
-     */
-    private boolean ignore_conduction = true;
-
-    private final board.LayerStructure layer_structure;
-
-    public final ViaInfos via_infos = new ViaInfos();
-
-    public final java.util.Vector<ViaRule> via_rules = new java.util.Vector<>();
-
-    public final NetClasses net_classes = new NetClasses();
-
-    /**
-     * The smallest of all default trace half widths
-     */
-    private int min_trace_half_width;
-
-    /**
-     * The biggest of all default trace half widths
-     */
-    private int max_trace_half_width;
-
-    /**
-     * The minimum distance of the pad border to the first turn of a connected
-     * trace to a pin with restricted exit directions. If the value is
-     * {@literal <}= 0, there are no exit restrictions.
-     */
-    private double pin_edge_to_turn_dist;
-
-    private boolean slow_autoroute_algorithm = false;
 }

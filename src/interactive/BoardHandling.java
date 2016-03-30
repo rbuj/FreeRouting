@@ -54,7 +54,68 @@ import rules.BoardRules;
  *
  * @author Alfons Wirtz
  */
-public final class BoardHandling {
+public class BoardHandling {
+    /**
+     * The graphical context for drawing the board.
+     */
+    public GraphicsContext graphics_context = null;
+    /**
+     * For ransforming coordinates between the user and the board coordinate
+     * space
+     */
+    public CoordinateTransform coordinate_transform = null;
+    /**
+     * The text message fields displayed on the screen
+     */
+    public final ScreenMessages screen_messages;
+    /**
+     * The current settings for interactive actions on the board
+     */
+    public Settings settings = null;
+    /**
+     * The currently active interactive state.
+     */
+    InteractiveState interactive_state = null;
+    /**
+     * Used for running an interactive action in a seperate thread.
+     */
+    private InteractiveActionThread interactive_action_thread = null;
+    /**
+     * To display all incomplete connections on the screen.
+     */
+    private RatsNest ratsnest = null;
+    /**
+     * To display all clearance violations between items on the screen.
+     */
+    private ClearanceViolations clearance_violations = null;
+    /**
+     * The board database used in this interactive handling.
+     */
+    private RoutingBoard board = null;
+    /**
+     * The graphical panel used for displaying the board.
+     */
+    private final gui.BoardPanel panel;
+    /**
+     * The file used for logging interactive action, so that they can be
+     * replayed later
+     */
+    public final Logfile logfile;
+    /**
+     * True if currently a logfile is being processed. Used to prevent
+     * interactive changes of the board database in this case.
+     */
+    private boolean board_is_read_only = false;
+    /**
+     * The current position of the mouse pointer.
+     */
+    private FloatPoint current_mouse_position = null;
+    /**
+     * To repaint the board immediately for example when reading a logfile.
+     */
+    boolean paint_immediately = false;
+    private final java.util.ResourceBundle resources;
+    private final java.util.Locale locale;
 
     /**
      * Creates a new BoardHandling
@@ -1497,65 +1558,4 @@ public final class BoardHandling {
         clearance_violations = null;
         board = null;
     }
-    /**
-     * The graphical context for drawing the board.
-     */
-    public GraphicsContext graphics_context = null;
-    /**
-     * For ransforming coordinates between the user and the board coordinate
-     * space
-     */
-    public CoordinateTransform coordinate_transform = null;
-    /**
-     * The text message fields displayed on the screen
-     */
-    public final ScreenMessages screen_messages;
-    /**
-     * The current settings for interactive actions on the board
-     */
-    public Settings settings = null;
-    /**
-     * The currently active interactive state.
-     */
-    InteractiveState interactive_state = null;
-    /**
-     * Used for running an interactive action in a seperate thread.
-     */
-    private InteractiveActionThread interactive_action_thread = null;
-    /**
-     * To display all incomplete connections on the screen.
-     */
-    private RatsNest ratsnest = null;
-    /**
-     * To display all clearance violations between items on the screen.
-     */
-    private ClearanceViolations clearance_violations = null;
-    /**
-     * The board database used in this interactive handling.
-     */
-    private RoutingBoard board = null;
-    /**
-     * The graphical panel used for displaying the board.
-     */
-    private final gui.BoardPanel panel;
-    /**
-     * The file used for logging interactive action, so that they can be
-     * replayed later
-     */
-    public final Logfile logfile;
-    /**
-     * True if currently a logfile is being processed. Used to prevent
-     * interactive changes of the board database in this case.
-     */
-    private boolean board_is_read_only = false;
-    /**
-     * The current position of the mouse pointer.
-     */
-    private FloatPoint current_mouse_position = null;
-    /**
-     * To repaint the board immediately for example when reading a logfile.
-     */
-    boolean paint_immediately = false;
-    private final java.util.ResourceBundle resources;
-    private final java.util.Locale locale;
 }

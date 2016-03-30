@@ -27,7 +27,16 @@ import board.LayerStructure;
  *
  * @author Alfons Wirtz
  */
-public final class ComboBoxLayer extends javax.swing.JComboBox {
+public class ComboBoxLayer extends javax.swing.JComboBox {
+    /**
+     * The layer index, when all layers are selected.
+     */
+    public final static int ALL_LAYER_INDEX = -1;
+    /**
+     * The layer index, when all inner layers ar selected.
+     */
+    public final static int INNER_LAYER_INDEX = -2;
+    private final Layer[] layer_arr;
 
     /**
      * Creates a new instance of LayerComboBox
@@ -61,23 +70,9 @@ public final class ComboBoxLayer extends javax.swing.JComboBox {
         return (Layer) this.getSelectedItem();
     }
 
-    private final Layer[] layer_arr;
 
-    /**
-     * Layers of the board layer structure plus layer "all". Index is the layer
-     * number in the board layer structure or -1 for layer "all".
-     */
     public static class Layer {
 
-        Layer(String p_name, int p_index) {
-            name = p_name;
-            index = p_index;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
 
         final String name;
 
@@ -86,14 +81,14 @@ public final class ComboBoxLayer extends javax.swing.JComboBox {
          * "all" or "inner"
          */
         final int index;
+        Layer(String p_name, int p_index) {
+            name = p_name;
+            index = p_index;
+        }
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 
-    /**
-     * The layer index, when all layers are selected.
-     */
-    public final static int ALL_LAYER_INDEX = -1;
-    /**
-     * The layer index, when all inner layers ar selected.
-     */
-    public final static int INNER_LAYER_INDEX = -2;
 }

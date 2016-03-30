@@ -38,6 +38,22 @@ import java.util.ListIterator;
  * @author alfons
  */
 public class BoardOutline extends Item implements java.io.Serializable {
+    private static final int HALF_WIDTH = 100;
+    /**
+     * The board shapes inside the outline curves.
+     */
+    private List<PolylineShape> shapes;
+    /**
+     * The board shape outside the outline curves, where a keepout will be
+     * generated The outline curves are holes of the keepout_area.
+     */
+    private Area keepout_area = null;
+    /**
+     * Used instead of keepout_area if only the line shapes of the outlines are
+     * inserted as keepout.
+     */
+    private TileShape[] keepout_lines = null;
+    private boolean keepout_outside_outline = false;
 
     /**
      * Creates a new instance of BoardOutline
@@ -304,20 +320,4 @@ public class BoardOutline extends Item implements java.io.Serializable {
     protected TileShape[] calculate_tree_shapes(ShapeSearchTree p_search_tree) {
         return p_search_tree.calculate_tree_shapes(this);
     }
-    /**
-     * The board shapes inside the outline curves.
-     */
-    private List<PolylineShape> shapes;
-    /**
-     * The board shape outside the outline curves, where a keepout will be
-     * generated The outline curves are holes of the keepout_area.
-     */
-    private Area keepout_area = null;
-    /**
-     * Used instead of keepout_area if only the line shapes of the outlines are
-     * inserted as keepout.
-     */
-    private TileShape[] keepout_lines = null;
-    private boolean keepout_outside_outline = false;
-    private static final int HALF_WIDTH = 100;
 }

@@ -30,6 +30,27 @@ import java.util.Iterator;
  * @author alfons
  */
 public class ExpansionDrill implements ExpandableObject {
+    private final MazeSearchElement[] maze_search_info_arr;
+    /**
+     * The shape of the drill.
+     */
+    private final TileShape shape;
+    /**
+     * The location, where the drill is checked.
+     */
+    public final Point location;
+    /**
+     * The first layer of the drill
+     */
+    public final int first_layer;
+    /**
+     * The last layer of the drill
+     */
+    public final int last_layer;
+    /**
+     * Array of dimension last_layer - first_layer + 1.
+     */
+    public final CompleteExpansionRoom[] room_arr;
 
     /**
      * Creates a new instance of Drill
@@ -133,25 +154,4 @@ public class ExpansionDrill implements ExpandableObject {
         p_graphics_context.fill_area(this.shape, p_graphics, draw_color, p_intensity);
         p_graphics_context.draw_boundary(this.shape, 0, draw_color, p_graphics, 1);
     }
-    private final MazeSearchElement[] maze_search_info_arr;
-    /**
-     * The shape of the drill.
-     */
-    private final TileShape shape;
-    /**
-     * The location, where the drill is checked.
-     */
-    public final Point location;
-    /**
-     * The first layer of the drill
-     */
-    public final int first_layer;
-    /**
-     * The last layer of the drill
-     */
-    public final int last_layer;
-    /**
-     * Array of dimension last_layer - first_layer + 1.
-     */
-    public final CompleteExpansionRoom[] room_arr;
 }

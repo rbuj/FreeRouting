@@ -60,6 +60,33 @@ public class SessionToEagle extends javax.swing.JFrame {
         }
         return result;
     }
+    /**
+     * The function for scanning the session file
+     */
+    private final Scanner scanner;
+    /**
+     * The generated Eagle script file.
+     */
+    private final java.io.OutputStreamWriter out_file;
+    /**
+     * Some information is read from the board, because it is not contained in
+     * the speccctra session file.
+     */
+    private final board.BasicBoard board;
+    /**
+     * The layer structure in specctra format
+     */
+    private final LayerStructure specctra_layer_structure;
+    private final board.Unit unit;
+    /**
+     * The scale factor for transforming coordinates from the session file to
+     * Eagle
+     */
+    private final double session_file_scale_denominator;
+    /**
+     * The scale factor for transforming coordinates from the board to Eagle
+     */
+    private final double board_scale_factor;
 
     SessionToEagle(Scanner p_scanner, java.io.OutputStreamWriter p_out_file, board.BasicBoard p_board,
             board.Unit p_unit, double p_session_file_scale_dominator, double p_board_scale_factor) {
@@ -565,47 +592,14 @@ public class SessionToEagle extends javax.swing.JFrame {
         this.out_file.write(");\n");
     }
 
-    /**
-     * The function for scanning the session file
-     */
-    private final Scanner scanner;
-
-    /**
-     * The generated Eagle script file.
-     */
-    private final java.io.OutputStreamWriter out_file;
-
-    /**
-     * Some information is read from the board, because it is not contained in
-     * the speccctra session file.
-     */
-    private final board.BasicBoard board;
-
-    /**
-     * The layer structure in specctra format
-     */
-    private final LayerStructure specctra_layer_structure;
-
-    private final board.Unit unit;
-
-    /**
-     * The scale factor for transforming coordinates from the session file to
-     * Eagle
-     */
-    private final double session_file_scale_denominator;
-
-    /**
-     * The scale factor for transforming coordinates from the board to Eagle
-     */
-    private final double board_scale_factor;
 
     private static class PinInfo {
 
+        final board.Pin pin;
+        board.Pin curr_changed_to;
         PinInfo(board.Pin p_pin) {
             pin = p_pin;
             curr_changed_to = p_pin;
         }
-        final board.Pin pin;
-        board.Pin curr_changed_to;
     }
 }

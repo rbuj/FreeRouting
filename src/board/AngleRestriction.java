@@ -35,20 +35,9 @@ public class AngleRestriction {
                 NONE, FORTYFIVE_DEGREE, NINETY_DEGREE
             };
 
-    /**
-     * Returns the string of this instance
-     */
-    public String to_string() {
-        return name;
-    }
 
-    /**
-     * Returns the number of this instance
-     */
-    public int get_no() {
-        return no;
-    }
-
+    private final String name;
+    private final int no;
     /**
      * Creates a new instance of SnapAngle
      */
@@ -56,7 +45,16 @@ public class AngleRestriction {
         name = p_name;
         no = p_no;
     }
-
-    private final String name;
-    private final int no;
+    /**
+     * Returns the string of this instance
+     */
+    public String to_string() {
+        return name;
+    }
+    /**
+     * Returns the number of this instance
+     */
+    public int get_no() {
+        return no;
+    }
 }

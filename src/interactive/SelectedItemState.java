@@ -62,6 +62,8 @@ public class SelectedItemState extends InteractiveState {
         SelectedItemState new_state = new SelectedItemState(p_item_list, p_parent_state, p_board_handling, p_logfile);
         return new_state;
     }
+    private Set<Item> item_list;
+    private ClearanceViolations clearance_violations = null;
 
     /**
      * Creates a new instance of SelectedItemState
@@ -780,6 +782,4 @@ public class SelectedItemState extends InteractiveState {
     public void display_default_message() {
         hdlg.screen_messages.set_status_message(resources.getString("in_select_item_mode"));
     }
-    private Set<Item> item_list;
-    private ClearanceViolations clearance_violations = null;
 }

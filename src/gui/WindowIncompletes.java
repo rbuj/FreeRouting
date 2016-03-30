@@ -27,7 +27,7 @@ import java.util.List;
  *
  * @author Alfons Wirtz
  */
-public final class WindowIncompletes extends WindowObjectListWithFilter {
+public class WindowIncompletes extends WindowObjectListWithFilter {
 
     /**
      * Creates a new instance of IncompletesWindow

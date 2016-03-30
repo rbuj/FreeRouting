@@ -37,6 +37,31 @@ import java.math.BigInteger;
  * @author Alfons Wirtz
  */
 public class RationalPoint extends Point implements java.io.Serializable {
+    final BigInteger x;
+    final BigInteger y;
+    final BigInteger z;
+    /**
+     * creates a RetionalPoint from 3 BigIntegers p_x, p_y and p_z. They
+     * represent the 2-dimensinal point with the rational number Tuple ( p_x /
+     * p_z , p_y / p_z). Throws IllegalArgumentException if denominator p_z is
+     * <= 0
+     */
+    RationalPoint(BigInteger p_x, BigInteger p_y, BigInteger p_z) {
+        x = p_x;
+        y = p_y;
+        z = p_z;
+        if (p_z.signum() < 0) {
+            throw new IllegalArgumentException("RationalPoint: p_z is expected to be >= 0");
+        }
+    }
+    /**
+     * creates a RetionalPoint from an IntPoint
+     */
+    RationalPoint(IntPoint p_point) {
+        x = BigInteger.valueOf(p_point.x);
+        y = BigInteger.valueOf(p_point.y);
+        z = BigInteger.ONE;
+    }
 
     /**
      * approximates the coordinates of this point by float coordinates
@@ -297,32 +322,5 @@ public class RationalPoint extends Point implements java.io.Serializable {
 
     }
 
-    /**
-     * creates a RetionalPoint from 3 BigIntegers p_x, p_y and p_z. They
-     * represent the 2-dimensinal point with the rational number Tuple ( p_x /
-     * p_z , p_y / p_z). Throws IllegalArgumentException if denominator p_z is
-     * <= 0
-     */
-    RationalPoint(BigInteger p_x, BigInteger p_y, BigInteger p_z) {
-        x = p_x;
-        y = p_y;
-        z = p_z;
-        if (p_z.signum() < 0) {
-            throw new IllegalArgumentException("RationalPoint: p_z is expected to be >= 0");
-        }
-    }
-
-    /**
-     * creates a RetionalPoint from an IntPoint
-     */
-    RationalPoint(IntPoint p_point) {
-        x = BigInteger.valueOf(p_point.x);
-        y = BigInteger.valueOf(p_point.y);
-        z = BigInteger.ONE;
-    }
-
-    final BigInteger x;
-    final BigInteger y;
-    final BigInteger z;
 
 }

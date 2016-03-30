@@ -26,7 +26,14 @@ import java.io.IOException;
  *
  * @author Alfons Wirtz
  */
-public final class WindowSnapshot extends BoardSavableSubWindow {
+public class WindowSnapshot extends BoardSavableSubWindow {
+    private final BoardFrame board_frame;
+    private javax.swing.DefaultListModel<interactive.SnapShot> list_model = new javax.swing.DefaultListModel<>();
+    private final javax.swing.JList list;
+    private final javax.swing.JTextField name_field;
+    final WindowSnapshotSettings settings_window;
+    private int snapshot_count = 0;
+    private final java.util.ResourceBundle resources;
 
     /**
      * Creates a new instance of SnapshotFrame
@@ -216,28 +223,6 @@ public final class WindowSnapshot extends BoardSavableSubWindow {
         this.settings_window.refresh();
     }
 
-    private final BoardFrame board_frame;
-
-    private javax.swing.DefaultListModel<interactive.SnapShot> list_model = new javax.swing.DefaultListModel<>();
-    private final javax.swing.JList list;
-    private final javax.swing.JTextField name_field;
-    final WindowSnapshotSettings settings_window;
-    private int snapshot_count = 0;
-    private final java.util.ResourceBundle resources;
-
-    private class AddListener implements java.awt.event.ActionListener {
-
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
-            interactive.SnapShot new_snapshot = interactive.SnapShot.get_instance(name_field.getText(), board_frame.board_panel.board_handling);
-            if (new_snapshot != null) {
-                ++snapshot_count;
-                list_model.addElement(new_snapshot);
-                String next_default_name = resources.getString("snapshot") + " " + Integer.toString(snapshot_count + 1);
-                name_field.setText(next_default_name);
-            }
-        }
-    }
 
     /**
      * Selects the item, which is previous to the current selected item in the
@@ -270,6 +255,35 @@ public final class WindowSnapshot extends BoardSavableSubWindow {
         this.list.setSelectedIndex(selected_index + 1);
     }
 
+    private static class SavedAttributes implements java.io.Serializable {
+
+        public final javax.swing.DefaultListModel list_model;
+        public final int snapshot_count;
+        public final java.awt.Point location;
+        public final boolean is_visible;
+
+        public SavedAttributes(javax.swing.DefaultListModel p_list_model, int p_snapshot_count, java.awt.Point p_location, boolean p_is_visible) {
+            list_model = p_list_model;
+            snapshot_count = p_snapshot_count;
+            location = p_location;
+            is_visible = p_is_visible;
+            
+        }
+    }
+    private class AddListener implements java.awt.event.ActionListener {
+        
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
+            interactive.SnapShot new_snapshot = interactive.SnapShot.get_instance(name_field.getText(), board_frame.board_panel.board_handling);
+            if (new_snapshot != null) {
+                ++snapshot_count;
+                list_model.addElement(new_snapshot);
+                String next_default_name = resources.getString("snapshot") + " " + Integer.toString(snapshot_count + 1);
+                name_field.setText(next_default_name);
+            }
+        }
+    }
+
     private class DeleteListener implements java.awt.event.ActionListener {
 
         @Override
@@ -299,6 +313,7 @@ public final class WindowSnapshot extends BoardSavableSubWindow {
 
     private class SettingsListener implements java.awt.event.ActionListener {
 
+        boolean first_time = true;
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             if (first_time) {
@@ -308,25 +323,6 @@ public final class WindowSnapshot extends BoardSavableSubWindow {
             }
             settings_window.setVisible(true);
         }
-        boolean first_time = true;
     }
 
-    /**
-     * Type for attributes of this class, which are saved to an Objectstream.
-     */
-    static private class SavedAttributes implements java.io.Serializable {
-
-        public SavedAttributes(javax.swing.DefaultListModel p_list_model, int p_snapshot_count, java.awt.Point p_location, boolean p_is_visible) {
-            list_model = p_list_model;
-            snapshot_count = p_snapshot_count;
-            location = p_location;
-            is_visible = p_is_visible;
-
-        }
-
-        public final javax.swing.DefaultListModel list_model;
-        public final int snapshot_count;
-        public final java.awt.Point location;
-        public final boolean is_visible;
-    }
 }

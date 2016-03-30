@@ -45,45 +45,8 @@ import javax.swing.table.TableCellRenderer;
  *
  * @author Alfons Wirtz
  */
-public final class ColorManager extends BoardSavableSubWindow {
+public class ColorManager extends BoardSavableSubWindow {
 
-    /**
-     * Creates a new instance of ColorManager
-     */
-    public ColorManager(BoardFrame p_board_frame) {
-        GraphicsContext graphics_context = p_board_frame.board_panel.board_handling.graphics_context;
-        java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("gui.resources.Default", p_board_frame.get_locale());
-        this.setTitle(resources.getString("color_manager"));
-        final JPanel panel = new JPanel();
-        final int textfield_height = 17;
-        final int table_width = 1100;
-        final int item_color_table_height = graphics_context.item_color_table.getRowCount() * textfield_height;
-        panel.setPreferredSize(new Dimension(10 + table_width, 70 + item_color_table_height));
-
-        this.item_color_table = new JTable(graphics_context.item_color_table);
-        item_color_table.setPreferredScrollableViewportSize(new Dimension(table_width, item_color_table_height));
-        JScrollPane item_scroll_pane = init_color_table(item_color_table, p_board_frame.get_locale());
-        panel.add(item_scroll_pane, BorderLayout.NORTH);
-
-        this.other_color_table = new JTable(graphics_context.other_color_table);
-        this.other_color_table.setPreferredScrollableViewportSize(new Dimension(table_width, textfield_height));
-        JScrollPane other_scroll_pane = init_color_table(other_color_table, p_board_frame.get_locale());
-        panel.add(other_scroll_pane, BorderLayout.SOUTH);
-        getContentPane().add(panel, BorderLayout.CENTER);
-        p_board_frame.set_context_sensitive_help(this, "WindowDisplay_Colors");
-        this.pack();
-        this.setResizable(false);
-    }
-
-    /**
-     * Reassigns the table model variables because they may have changed in
-     * p_graphics_context.
-     */
-    public void set_table_models(GraphicsContext p_graphics_context) {
-        this.item_color_table.setModel(p_graphics_context.item_color_table);
-        this.other_color_table.setModel(p_graphics_context.other_color_table);
-    }
 
     /**
      * Initializes p_color_table and return the created scroll_pane of the color
@@ -146,6 +109,42 @@ public final class ColorManager extends BoardSavableSubWindow {
 
     private final JTable item_color_table;
     private final JTable other_color_table;
+    /**
+     * Creates a new instance of ColorManager
+     */
+    public ColorManager(BoardFrame p_board_frame) {
+        GraphicsContext graphics_context = p_board_frame.board_panel.board_handling.graphics_context;
+        java.util.ResourceBundle resources
+                = java.util.ResourceBundle.getBundle("gui.resources.Default", p_board_frame.get_locale());
+        this.setTitle(resources.getString("color_manager"));
+        final JPanel panel = new JPanel();
+        final int textfield_height = 17;
+        final int table_width = 1100;
+        final int item_color_table_height = graphics_context.item_color_table.getRowCount() * textfield_height;
+        panel.setPreferredSize(new Dimension(10 + table_width, 70 + item_color_table_height));
+        
+        this.item_color_table = new JTable(graphics_context.item_color_table);
+        item_color_table.setPreferredScrollableViewportSize(new Dimension(table_width, item_color_table_height));
+        JScrollPane item_scroll_pane = init_color_table(item_color_table, p_board_frame.get_locale());
+        panel.add(item_scroll_pane, BorderLayout.NORTH);
+        
+        this.other_color_table = new JTable(graphics_context.other_color_table);
+        this.other_color_table.setPreferredScrollableViewportSize(new Dimension(table_width, textfield_height));
+        JScrollPane other_scroll_pane = init_color_table(other_color_table, p_board_frame.get_locale());
+        panel.add(other_scroll_pane, BorderLayout.SOUTH);
+        getContentPane().add(panel, BorderLayout.CENTER);
+        p_board_frame.set_context_sensitive_help(this, "WindowDisplay_Colors");
+        this.pack();
+        this.setResizable(false);
+    }
+    /**
+     * Reassigns the table model variables because they may have changed in
+     * p_graphics_context.
+     */
+    public void set_table_models(GraphicsContext p_graphics_context) {
+        this.item_color_table.setModel(p_graphics_context.item_color_table);
+        this.other_color_table.setModel(p_graphics_context.other_color_table);
+    }
 
     private static class ColorRenderer extends JLabel implements TableCellRenderer {
 

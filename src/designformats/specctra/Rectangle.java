@@ -30,6 +30,7 @@ import geometry.planar.IntBox;
  * @author alfons
  */
 public class Rectangle extends Shape {
+    public final double[] coor;
 
     /**
      * Creates a new instance of Rectangle p_coor is an array of dimension 4 and
@@ -116,5 +117,4 @@ public class Rectangle extends Shape {
         p_file.write(")");
     }
 
-    public final double[] coor;
 }

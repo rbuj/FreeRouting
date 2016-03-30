@@ -33,16 +33,6 @@ import java.util.LinkedList;
  */
 public abstract class Shape {
 
-    /**
-     * Writes a shape scope to a Specctra dsn file.
-     */
-    public abstract void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException;
-
-    /**
-     * Writes a shape scope to a Specctra session file. In a session file all
-     * coordinates must be integer.
-     */
-    public abstract void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException;
 
     /**
      * Reads shape scope from a Specctra dsn file. If p_layer_structure == null,
@@ -599,6 +589,19 @@ public abstract class Shape {
         }
         return result;
     }
+    public final Layer layer;
+    protected Shape(Layer p_layer) {
+        layer = p_layer;
+    }
+    /**
+     * Writes a shape scope to a Specctra dsn file.
+     */
+    public abstract void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException;
+    /**
+     * Writes a shape scope to a Specctra session file. In a session file all
+     * coordinates must be integer.
+     */
+    public abstract void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException;
 
     public void write_hole_scope(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
         p_file.start_scope();
@@ -623,24 +626,16 @@ public abstract class Shape {
      */
     public abstract geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform);
 
-    protected Shape(Layer p_layer) {
-        layer = p_layer;
-    }
-    public final Layer layer;
 
-    /**
-     * Contains the result of the function read_area_scope. area_name or
-     * clearance_class_name may be null, which means they are not provided.
-     */
     static class ReadAreaScopeResult {
 
+        String area_name; // may be generated later on, if area_name is null.
+        final Collection<Shape> shape_list;
+        final String clearance_class_name;
         private ReadAreaScopeResult(String p_area_name, Collection<Shape> p_shape_list, String p_clearance_class_name) {
             area_name = p_area_name;
             shape_list = p_shape_list;
             clearance_class_name = p_clearance_class_name;
         }
-        String area_name; // may be generated later on, if area_name is null.
-        final Collection<Shape> shape_list;
-        final String clearance_class_name;
     }
 }

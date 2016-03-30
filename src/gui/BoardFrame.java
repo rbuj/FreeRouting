@@ -32,9 +32,20 @@ import java.io.IOException;
  */
 public class BoardFrame extends javax.swing.JFrame {
 
-    public enum Option {
-        FROM_START_MENU, SINGLE_FRAME, SESSION_FILE, EXTENDED_TOOL_BAR
-    }
+    /**
+     * true, if the frame is created by an application running under Java Web
+     * Start
+     */
+    static javax.help.HelpSet help_set = null;
+    static javax.help.HelpBroker help_broker = null;
+    /**
+     * The windows above stored in an array
+     */
+    static final int SUBWINDOW_COUNT = 24;
+    static final String[] log_file_extensions = {"log"};
+    static final String GUI_DEFAULTS_FILE_NAME = "gui_defaults.par";
+    static final String GUI_DEFAULTS_FILE_BACKUP_NAME = "gui_defaults.par.bak";
+    static final FileFilter logfile_filter = new FileFilter(log_file_extensions);
 
     /**
      * Creates a new board frame with the input design file imbedded into a host
@@ -64,6 +75,81 @@ public class BoardFrame extends javax.swing.JFrame {
         return board_frame;
     }
 
+
+    /**
+     * The scroll pane for the panel of the routing board.
+     */
+    final javax.swing.JScrollPane scroll_pane;
+
+    /**
+     * The menubar of this frame
+     */
+    final BoardMenuBar menubar;
+
+    /**
+     * The panel with the graphical representation of the board.
+     */
+    final BoardPanel board_panel;
+
+    /**
+     * The panel with the toolbars
+     */
+    private final BoardToolbar toolbar_panel;
+
+    /**
+     * The toolbar used in the selected item state.
+     */
+    private final javax.swing.JToolBar select_toolbar;
+
+    /**
+     * The panel with the message line
+     */
+    private final BoardPanelStatus message_panel;
+
+    final ScreenMessages screen_messages;
+
+    private final TestLevel test_level;
+
+
+    private final boolean confirm_cancel;
+
+    private final java.util.ResourceBundle resources;
+    private java.util.Locale locale;
+
+    private final BoardObservers board_observers;
+    private final datastructures.IdNoGenerator item_id_no_generator;
+
+    WindowAbout about_window = null;
+    WindowRouteParameter route_parameter_window = null;
+    WindowAutorouteParameter autoroute_parameter_window = null;
+    WindowSelectParameter select_parameter_window = null;
+    WindowMoveParameter move_parameter_window = null;
+    WindowClearanceMatrix clearance_matrix_window = null;
+    WindowVia via_window = null;
+    WindowEditVias edit_vias_window = null;
+    WindowNetClasses edit_net_rules_window = null;
+    WindowAssignNetClass assign_net_classes_window = null;
+    WindowPadstacks padstacks_window = null;
+    WindowPackages packages_window = null;
+    WindowIncompletes incompletes_window = null;
+    WindowNets net_info_window = null;
+    WindowClearanceViolations clearance_violations_window = null;
+    WindowLengthViolations length_violations_window = null;
+    WindowUnconnectedRoute unconnected_route_window = null;
+    WindowRouteStubs route_stubs_window = null;
+    WindowComponents components_window = null;
+    WindowLayerVisibility layer_visibility_window = null;
+    WindowObjectVisibility object_visibility_window = null;
+    WindowDisplayMisc display_misc_window = null;
+    WindowSnapshot snapshot_window = null;
+    ColorManager color_manager = null;
+
+    BoardSavableSubWindow[] permanent_subwindows = new BoardSavableSubWindow[SUBWINDOW_COUNT];
+
+    java.util.Collection<BoardTemporarySubWindow> temporary_subwindows = new java.util.LinkedList<>();
+
+    DesignFile design_file = null;
+
     /**
      * Creates new form BoardFrame. If p_option = FROM_START_MENU this frame is
      * created from a start menu frame. If p_option = SINGLE_FRAME, this frame
@@ -82,7 +168,6 @@ public class BoardFrame extends javax.swing.JFrame {
                 new board.BoardObserverAdaptor(), new board.ItemIdNoGenerator(),
                 p_locale, p_confirm_cancel);
     }
-
     /**
      * Creates new form BoardFrame. The parameters p_item_observers and
      * p_item_id_no_generator are used for syncronizing purposes, if the frame
@@ -129,14 +214,12 @@ public class BoardFrame extends javax.swing.JFrame {
 
         this.pack();
     }
-
     /**
      * Reads interactive actions from a logfile.
      */
     void read_logfile(java.io.InputStream p_input_stream) {
         board_panel.board_handling.read_logfile(p_input_stream);
     }
-
     /**
      * Reads an existing board design from file. If p_is_import, the design is
      * read from a scpecctra dsn file. Returns false, if the file is invalid.
@@ -232,7 +315,6 @@ public class BoardFrame extends javax.swing.JFrame {
         }
         return true;
     }
-
     /**
      * Saves the interactive settings and the design file to disk. Returns
      * false, if the save failed.
@@ -277,7 +359,6 @@ public class BoardFrame extends javax.swing.JFrame {
         }
         return true;
     }
-
     /**
      * Sets contexts sensitive help for the input component, if the help system
      * is used.
@@ -297,7 +378,6 @@ public class BoardFrame extends javax.swing.JFrame {
 //            }
 //        }
     }
-
     /**
      * Sets the toolbar to the buttons of the selected item state.
      */
@@ -306,7 +386,6 @@ public class BoardFrame extends javax.swing.JFrame {
         getContentPane().add(select_toolbar, java.awt.BorderLayout.NORTH);
         repaint();
     }
-
     /**
      * Sets the toolbar buttons to the select. route and drag menu buttons of
      * the main menu.
@@ -316,7 +395,6 @@ public class BoardFrame extends javax.swing.JFrame {
         getContentPane().add(toolbar_panel, java.awt.BorderLayout.NORTH);
         repaint();
     }
-
     /**
      * Calculates the absolute location of the board frame in his outmost parent
      * frame.
@@ -332,7 +410,6 @@ public class BoardFrame extends javax.swing.JFrame {
         }
         return new java.awt.Point(x, y);
     }
-
     /**
      * Sets the displayed region to the whole board.
      */
@@ -349,7 +426,6 @@ public class BoardFrame extends javax.swing.JFrame {
         board_panel.set_viewport_center(new_vieport_center);
 
     }
-
     /**
      * Actions to be taken when this frame vanishes.
      */
@@ -372,7 +448,6 @@ public class BoardFrame extends javax.swing.JFrame {
         }
         super.dispose();
     }
-
     private void allocate_permanent_subwindows() {
         this.color_manager = new ColorManager(this);
         this.permanent_subwindows[0] = this.color_manager;
@@ -423,7 +498,6 @@ public class BoardFrame extends javax.swing.JFrame {
         this.autoroute_parameter_window = new WindowAutorouteParameter(this);
         this.permanent_subwindows[23] = this.autoroute_parameter_window;
     }
-
     /**
      * Creates the additional frames of the board frame.
      */
@@ -459,21 +533,18 @@ public class BoardFrame extends javax.swing.JFrame {
         this.color_manager.setLocation(0, 600);
         this.about_window.setLocation(200, 200);
     }
-
     /**
      * Returns the currently used locale for the language dependent output.
      */
     public java.util.Locale get_locale() {
         return this.locale;
     }
-
     /**
      * Sets the background of the board panel
      */
     public void set_board_background(java.awt.Color p_color) {
         this.board_panel.setBackground(p_color);
     }
-
     /**
      * Refreshs all displayed coordinates after the user unit has changed.
      */
@@ -484,14 +555,12 @@ public class BoardFrame extends javax.swing.JFrame {
             }
         }
     }
-
     /**
      * Sets the selected button in the menu button button group
      */
     public void hilight_selected_button() {
         this.toolbar_panel.hilight_selected_button();
     }
-
     /**
      * Restore the selected snapshot in the snapshot window.
      */
@@ -500,7 +569,6 @@ public class BoardFrame extends javax.swing.JFrame {
             this.snapshot_window.goto_selected();
         }
     }
-
     /**
      * Selects the snapshot, which is previous to the current selected snapshot.
      * Thecurent selected snapshot will be no more selected.
@@ -510,7 +578,6 @@ public class BoardFrame extends javax.swing.JFrame {
             this.snapshot_window.select_previous_item();
         }
     }
-
     /**
      * Selects the snapshot, which is next to the current selected snapshot.
      * Thecurent selected snapshot will be no more selected.
@@ -520,7 +587,6 @@ public class BoardFrame extends javax.swing.JFrame {
             this.snapshot_window.select_next_item();
         }
     }
-
     /**
      * Used for storing the subwindowfilters in a snapshot.
      */
@@ -533,7 +599,6 @@ public class BoardFrame extends javax.swing.JFrame {
         result.padstacks_selection = this.padstacks_window.get_snapshot_info();
         return result;
     }
-
     /**
      * Used for restoring the subwindowfilters from a snapshot.
      */
@@ -544,7 +609,6 @@ public class BoardFrame extends javax.swing.JFrame {
         this.components_window.set_snapshot_info(p_filters.components_selection);
         this.padstacks_window.set_snapshot_info(p_filters.padstacks_selection);
     }
-
     /**
      * Repaints this board frame and all the subwindows of the board.
      */
@@ -556,96 +620,19 @@ public class BoardFrame extends javax.swing.JFrame {
     }
 
     /**
-     * The scroll pane for the panel of the routing board.
+     * Used for storing the subwindow filters in a snapshot.
      */
-    final javax.swing.JScrollPane scroll_pane;
+    public static class SubwindowSelections implements java.io.Serializable {
 
-    /**
-     * The menubar of this frame
-     */
-    final BoardMenuBar menubar;
-
-    /**
-     * The panel with the graphical representation of the board.
-     */
-    final BoardPanel board_panel;
-
-    /**
-     * The panel with the toolbars
-     */
-    private final BoardToolbar toolbar_panel;
-
-    /**
-     * The toolbar used in the selected item state.
-     */
-    private final javax.swing.JToolBar select_toolbar;
-
-    /**
-     * The panel with the message line
-     */
-    private final BoardPanelStatus message_panel;
-
-    final ScreenMessages screen_messages;
-
-    private final TestLevel test_level;
-
-    /**
-     * true, if the frame is created by an application running under Java Web
-     * Start
-     */
-    static javax.help.HelpSet help_set = null;
-    static javax.help.HelpBroker help_broker = null;
-
-    private final boolean confirm_cancel;
-
-    private final java.util.ResourceBundle resources;
-    private java.util.Locale locale;
-
-    private final BoardObservers board_observers;
-    private final datastructures.IdNoGenerator item_id_no_generator;
-
-    WindowAbout about_window = null;
-    WindowRouteParameter route_parameter_window = null;
-    WindowAutorouteParameter autoroute_parameter_window = null;
-    WindowSelectParameter select_parameter_window = null;
-    WindowMoveParameter move_parameter_window = null;
-    WindowClearanceMatrix clearance_matrix_window = null;
-    WindowVia via_window = null;
-    WindowEditVias edit_vias_window = null;
-    WindowNetClasses edit_net_rules_window = null;
-    WindowAssignNetClass assign_net_classes_window = null;
-    WindowPadstacks padstacks_window = null;
-    WindowPackages packages_window = null;
-    WindowIncompletes incompletes_window = null;
-    WindowNets net_info_window = null;
-    WindowClearanceViolations clearance_violations_window = null;
-    WindowLengthViolations length_violations_window = null;
-    WindowUnconnectedRoute unconnected_route_window = null;
-    WindowRouteStubs route_stubs_window = null;
-    WindowComponents components_window = null;
-    WindowLayerVisibility layer_visibility_window = null;
-    WindowObjectVisibility object_visibility_window = null;
-    WindowDisplayMisc display_misc_window = null;
-    WindowSnapshot snapshot_window = null;
-    ColorManager color_manager = null;
-
-    /**
-     * The windows above stored in an array
-     */
-    static final int SUBWINDOW_COUNT = 24;
-    BoardSavableSubWindow[] permanent_subwindows = new BoardSavableSubWindow[SUBWINDOW_COUNT];
-
-    java.util.Collection<BoardTemporarySubWindow> temporary_subwindows = new java.util.LinkedList<>();
-
-    DesignFile design_file = null;
-
-    static final String[] log_file_extensions = {"log"};
-
-    static final String GUI_DEFAULTS_FILE_NAME = "gui_defaults.par";
-    static final String GUI_DEFAULTS_FILE_BACKUP_NAME = "gui_defaults.par.bak";
-
-    static final FileFilter logfile_filter = new FileFilter(log_file_extensions);
-
+        private WindowObjectListWithFilter.SnapshotInfo incompletes_selection;
+        private WindowObjectListWithFilter.SnapshotInfo packages_selection;
+        private WindowObjectListWithFilter.SnapshotInfo nets_selection;
+        private WindowObjectListWithFilter.SnapshotInfo components_selection;
+        private WindowObjectListWithFilter.SnapshotInfo padstacks_selection;
+    }
+    public enum Option {
+        FROM_START_MENU, SINGLE_FRAME, SESSION_FILE, EXTENDED_TOOL_BAR
+    }
     private class WindowStateListener extends java.awt.event.WindowAdapter {
 
         @Override
@@ -685,17 +672,5 @@ public class BoardFrame extends javax.swing.JFrame {
                 }
             }
         }
-    }
-
-    /**
-     * Used for storing the subwindow filters in a snapshot.
-     */
-    public static class SubwindowSelections implements java.io.Serializable {
-
-        private WindowObjectListWithFilter.SnapshotInfo incompletes_selection;
-        private WindowObjectListWithFilter.SnapshotInfo packages_selection;
-        private WindowObjectListWithFilter.SnapshotInfo nets_selection;
-        private WindowObjectListWithFilter.SnapshotInfo components_selection;
-        private WindowObjectListWithFilter.SnapshotInfo padstacks_selection;
     }
 }

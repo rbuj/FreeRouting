@@ -26,6 +26,7 @@ package gui;
  * @author Alfons Wirtz
  */
 public class BoardSubWindow extends javax.swing.JFrame {
+    private boolean visible_before_iconifying = false;
 
     public void parent_iconified() {
         this.visible_before_iconifying = this.isVisible();
@@ -36,5 +37,4 @@ public class BoardSubWindow extends javax.swing.JFrame {
         this.setVisible(this.visible_before_iconifying);
     }
 
-    private boolean visible_before_iconifying = false;
 }

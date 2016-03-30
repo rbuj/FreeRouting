@@ -32,6 +32,7 @@ import geometry.planar.Point;
  * @author Alfons Wirtz
  */
 public class MakeSpaceState extends DragState {
+    private Route route;
 
     /**
      * Creates a new instance of MakeSpaceState
@@ -107,5 +108,4 @@ public class MakeSpaceState extends DragState {
         }
     }
 
-    private Route route;
 }

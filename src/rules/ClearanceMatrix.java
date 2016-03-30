@@ -37,6 +37,13 @@ public class ClearanceMatrix implements java.io.Serializable {
         result.set_default_value(p_default_value);
         return result;
     }
+    /**
+     * count of clearance classes
+     */
+    private int class_count;
+    private final board.LayerStructure layer_structure;
+    private Row[] row; // vector of class_count rows of the clearance matrix
+    private int[] max_value_on_layer; //  maximum clearance value for each layer
 
     /**
      * Creates a new instance for p_class_count clearance classes on
@@ -325,20 +332,14 @@ public class ClearanceMatrix implements java.io.Serializable {
         return true;
     }
 
-    /**
-     * count of clearance classes
-     */
-    private int class_count;
 
-    private final board.LayerStructure layer_structure;
-    private Row[] row; // vector of class_count rows of the clearance matrix
-    private int[] max_value_on_layer; //  maximum clearance value for each layer
-
-    /**
-     * contains a row of entries of the clearance matrix
-     */
     private class Row implements board.ObjectInfoPanel.Printable, java.io.Serializable {
 
+
+        final String name;
+
+        int[] max_value;
+        final MatrixEntry[] column;
         private Row(String p_name) {
             name = p_name;
             column = new MatrixEntry[class_count];
@@ -347,7 +348,6 @@ public class ClearanceMatrix implements java.io.Serializable {
             }
             max_value = new int[layer_structure.arr.length];
         }
-
         @Override
         public void print_info(board.ObjectInfoPanel p_window, java.util.Locale p_locale) {
             java.util.ResourceBundle resources
@@ -376,17 +376,10 @@ public class ClearanceMatrix implements java.io.Serializable {
                 }
             }
         }
-
-        final String name;
-
-        int[] max_value;
-        final MatrixEntry[] column;
     }
 
-    /**
-     * a single entry of the clearance matrix
-     */
     private class MatrixEntry implements java.io.Serializable {
+        int[] layer;
 
         private MatrixEntry() {
             layer = new int[layer_structure.arr.length];
@@ -419,6 +412,5 @@ public class ClearanceMatrix implements java.io.Serializable {
             }
             return false;
         }
-        int[] layer;
     }
 }

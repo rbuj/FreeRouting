@@ -118,12 +118,6 @@ public abstract class LogfileScope {
                 ASSIGN_CLEARANCE_CLASS, CENTER_DISPLAY, ZOOM_FRAME
             };
 
-    /**
-     * Reads the scope from the input logfile. Returns the active interactive
-     * state after reading the scope.
-     */
-    public abstract InteractiveState read_scope(Logfile p_logfile,
-            InteractiveState p_return_state, BoardHandling p_board_handling);
 
     /**
      * Returns the LogfileScope with name p_name if it exists, else null.
@@ -136,6 +130,7 @@ public abstract class LogfileScope {
         }
         return null;
     }
+    public final String name;
 
     /**
      * prevents creating more instances
@@ -143,6 +138,12 @@ public abstract class LogfileScope {
     private LogfileScope(String p_name) {
         name = p_name;
     }
+    /**
+     * Reads the scope from the input logfile. Returns the active interactive
+     * state after reading the scope.
+     */
+    public abstract InteractiveState read_scope(Logfile p_logfile,
+            InteractiveState p_return_state, BoardHandling p_board_handling);
 
     /**
      * Scopes marking the end of a cornerlist scope.
@@ -151,7 +152,6 @@ public abstract class LogfileScope {
         return this == COMPLETE_SCOPE || this == CANCEL_SCOPE;
     }
 
-    public final String name;
 
     /**
      * A logfile scope containing a list of points.

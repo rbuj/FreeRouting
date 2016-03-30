@@ -33,12 +33,6 @@ import java.util.TreeSet;
  */
 public class Net {
 
-    /**
-     * Creates a new instance of Net
-     */
-    public Net(Id p_net_id) {
-        id = p_net_id;
-    }
 
     public static void write_scope(WriteScopeParameter p_par, rules.Net p_net, Collection<board.Pin> p_pin_list) throws java.io.IOException {
         p_par.file.start_scope();
@@ -83,16 +77,6 @@ public class Net {
 
     }
 
-    public void set_pins(Collection<Pin> p_pin_list) {
-        pin_list = new TreeSet<>();
-        for (Pin curr_pin : p_pin_list) {
-            pin_list.add(curr_pin);
-        }
-    }
-
-    public Set<Pin> get_pins() {
-        return pin_list;
-    }
 
     public final Id id;
 
@@ -100,14 +84,31 @@ public class Net {
      * List of elements of type Pin.
      */
     private Set<Pin> pin_list = null;
+    /**
+     * Creates a new instance of Net
+     */
+    public Net(Id p_net_id) {
+        id = p_net_id;
+    }
+    public void set_pins(Collection<Pin> p_pin_list) {
+        pin_list = new TreeSet<>();
+        for (Pin curr_pin : p_pin_list) {
+            pin_list.add(curr_pin);
+        }
+    }
+    public Set<Pin> get_pins() {
+        return pin_list;
+    }
 
     public static class Id implements Comparable<Id> {
 
+
+        public final String name;
+        public final int subnet_number;
         public Id(String p_name, int p_subnet_number) {
             name = p_name;
             subnet_number = p_subnet_number;
         }
-
         @Override
         public int compareTo(Id p_other) {
             int result = this.name.compareTo(p_other.name);
@@ -116,21 +117,17 @@ public class Net {
             }
             return result;
         }
-
-        public final String name;
-        public final int subnet_number;
     }
 
-    /**
-     * Sorted tuple of component name and pin name.
-     */
     public static class Pin implements Comparable<Pin> {
 
+
+        public final String component_name;
+        public final String pin_name;
         public Pin(String p_component_name, String p_pin_name) {
             component_name = p_component_name;
             pin_name = p_pin_name;
         }
-
         @Override
         public int compareTo(Pin p_other) {
             int result = this.component_name.compareTo(p_other.component_name);
@@ -139,8 +136,5 @@ public class Net {
             }
             return result;
         }
-
-        public final String component_name;
-        public final String pin_name;
     }
 }

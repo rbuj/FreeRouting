@@ -31,6 +31,45 @@ package geometry.planar;
 public class FloatPoint implements java.io.Serializable {
 
     public static final FloatPoint ZERO = new FloatPoint(0, 0);
+    /**
+     * Calculates the smallest IntOctagon containing all the input points
+     */
+    public static IntOctagon bounding_octagon(FloatPoint[] p_point_arr) {
+        double lx = Integer.MAX_VALUE;
+        double ly = Integer.MAX_VALUE;
+        double rx = Integer.MIN_VALUE;
+        double uy = Integer.MIN_VALUE;
+        double ulx = Integer.MAX_VALUE;
+        double lrx = Integer.MIN_VALUE;
+        double llx = Integer.MAX_VALUE;
+        double urx = Integer.MIN_VALUE;
+        for (int i = 0; i < p_point_arr.length; ++i) {
+            FloatPoint curr = p_point_arr[i];
+            lx = Math.min(lx, curr.x);
+            ly = Math.min(ly, curr.y);
+            rx = Math.max(rx, curr.x);
+            uy = Math.max(uy, curr.y);
+            double tmp = curr.x - curr.y;
+            ulx = Math.min(ulx, tmp);
+            lrx = Math.max(lrx, tmp);
+            tmp = curr.x + curr.y;
+            llx = Math.min(llx, tmp);
+            urx = Math.max(urx, tmp);
+        }
+        IntOctagon surrounding_octagon = new IntOctagon((int) Math.floor(lx), (int) Math.floor(ly),
+                (int) Math.ceil(rx), (int) Math.ceil(uy),
+                (int) Math.floor(ulx), (int) Math.ceil(lrx),
+                (int) Math.floor(llx), (int) Math.ceil(urx));
+        return surrounding_octagon;
+    }
+    /**
+     * the x coordinate of this point
+     */
+    public final double x;
+    /**
+     * the y coordinate of this point
+     */
+    public final double y;
 
     /**
      * creates an instance of class FloatPoint from two double's,
@@ -516,45 +555,4 @@ public class FloatPoint implements java.io.Serializable {
         return to_string(java.util.Locale.ENGLISH);
     }
 
-    /**
-     * Calculates the smallest IntOctagon containing all the input points
-     */
-    public static IntOctagon bounding_octagon(FloatPoint[] p_point_arr) {
-        double lx = Integer.MAX_VALUE;
-        double ly = Integer.MAX_VALUE;
-        double rx = Integer.MIN_VALUE;
-        double uy = Integer.MIN_VALUE;
-        double ulx = Integer.MAX_VALUE;
-        double lrx = Integer.MIN_VALUE;
-        double llx = Integer.MAX_VALUE;
-        double urx = Integer.MIN_VALUE;
-        for (int i = 0; i < p_point_arr.length; ++i) {
-            FloatPoint curr = p_point_arr[i];
-            lx = Math.min(lx, curr.x);
-            ly = Math.min(ly, curr.y);
-            rx = Math.max(rx, curr.x);
-            uy = Math.max(uy, curr.y);
-            double tmp = curr.x - curr.y;
-            ulx = Math.min(ulx, tmp);
-            lrx = Math.max(lrx, tmp);
-            tmp = curr.x + curr.y;
-            llx = Math.min(llx, tmp);
-            urx = Math.max(urx, tmp);
-        }
-        IntOctagon surrounding_octagon = new IntOctagon((int) Math.floor(lx), (int) Math.floor(ly),
-                (int) Math.ceil(rx), (int) Math.ceil(uy),
-                (int) Math.floor(ulx), (int) Math.ceil(lrx),
-                (int) Math.floor(llx), (int) Math.ceil(urx));
-        return surrounding_octagon;
-    }
-
-    /**
-     * the x coordinate of this point
-     */
-    public final double x;
-
-    /**
-     * the y coordinate of this point
-     */
-    public final double y;
 }

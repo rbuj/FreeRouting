@@ -24,7 +24,21 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public final class WindowDisplayMisc extends BoardSavableSubWindow {
+public class WindowDisplayMisc extends BoardSavableSubWindow {
+
+    private static final int MAX_SLIDER_VALUE = 100;
+
+    private final BoardPanel panel;
+    private final javax.swing.JRadioButton small_cursor_checkbox;
+    private final javax.swing.JRadioButton big_cursor_checkbox;
+    private final javax.swing.JRadioButton rotation_none_checkbox;
+    private final javax.swing.JRadioButton rotation_90_degree_checkbox;
+    private final javax.swing.JRadioButton rotation_180_degree_checkbox;
+    private final javax.swing.JRadioButton rotation_270_degree_checkbox;
+    private final javax.swing.JRadioButton mirror_none_checkbox;
+    private final javax.swing.JRadioButton vertical_mirror_checkbox;
+    private final javax.swing.JRadioButton horizontal_mirror_checkbox;
+    private final javax.swing.JSlider auto_layer_dim_slider;
 
     /**
      * Creates a new instance of DisplayMiscWindow
@@ -168,7 +182,6 @@ public final class WindowDisplayMisc extends BoardSavableSubWindow {
         this.pack();
         this.setResizable(false);
     }
-
     /**
      * Refreshs the displayed values in this window.
      */
@@ -212,20 +225,6 @@ public final class WindowDisplayMisc extends BoardSavableSubWindow {
                 = (int) Math.round(MAX_SLIDER_VALUE * (1 - panel.board_handling.graphics_context.get_auto_layer_dim_factor()));
         auto_layer_dim_slider.setValue(curr_slider_value);
     }
-
-    private final BoardPanel panel;
-    private final javax.swing.JRadioButton small_cursor_checkbox;
-    private final javax.swing.JRadioButton big_cursor_checkbox;
-    private final javax.swing.JRadioButton rotation_none_checkbox;
-    private final javax.swing.JRadioButton rotation_90_degree_checkbox;
-    private final javax.swing.JRadioButton rotation_180_degree_checkbox;
-    private final javax.swing.JRadioButton rotation_270_degree_checkbox;
-    private final javax.swing.JRadioButton mirror_none_checkbox;
-    private final javax.swing.JRadioButton vertical_mirror_checkbox;
-    private final javax.swing.JRadioButton horizontal_mirror_checkbox;
-    private final javax.swing.JSlider auto_layer_dim_slider;
-
-    private static final int MAX_SLIDER_VALUE = 100;
 
     private class SmallCursorListener implements java.awt.event.ActionListener {
 

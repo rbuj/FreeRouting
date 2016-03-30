@@ -28,7 +28,23 @@ import rules.ViaInfos;
  *
  * @author Alfons Wirtz
  */
-public final class WindowEditVias extends BoardSavableSubWindow {
+public class WindowEditVias extends BoardSavableSubWindow {
+
+    private static final int TEXTFIELD_HEIGHT = 16;
+    private static final int TEXTFIELD_WIDTH = 100;
+
+    private final BoardFrame board_frame;
+
+    private final javax.swing.JPanel main_panel;
+
+    private javax.swing.JScrollPane scroll_pane;
+    private javax.swing.JTable table;
+    private ViaTableModel table_model;
+
+    private final javax.swing.JComboBox<String> cl_class_combo_box;
+    private final javax.swing.JComboBox<String> padstack_combo_box;
+
+    private final java.util.ResourceBundle resources;
 
     /**
      * Creates a new instance of ViaTablePanel
@@ -65,7 +81,6 @@ public final class WindowEditVias extends BoardSavableSubWindow {
         this.add(main_panel);
         this.pack();
     }
-
     /**
      * Recalculates all values displayed in the parent window
      */
@@ -76,7 +91,6 @@ public final class WindowEditVias extends BoardSavableSubWindow {
         this.add_combobox_items();
         this.table_model.set_values();
     }
-
     private void add_table() {
         this.table_model = new ViaTableModel();
         this.table = new javax.swing.JTable(this.table_model);
@@ -91,7 +105,6 @@ public final class WindowEditVias extends BoardSavableSubWindow {
 
         this.table.getColumnModel().getColumn(ColumnName.PADSTACK.ordinal()).setCellEditor(new javax.swing.DefaultCellEditor(padstack_combo_box));
     }
-
     private void add_combobox_items() {
         board.RoutingBoard routing_board = board_frame.board_panel.board_handling.get_routing_board();
         for (int i = 0; i < routing_board.rules.clearance_matrix.get_class_count(); ++i) {
@@ -101,7 +114,6 @@ public final class WindowEditVias extends BoardSavableSubWindow {
             padstack_combo_box.addItem(routing_board.library.get_via_padstack(i).name);
         }
     }
-
     /**
      * Adjusts the displayed window with the via table after the size of the
      * table has been changed.
@@ -114,22 +126,6 @@ public final class WindowEditVias extends BoardSavableSubWindow {
         this.pack();
         this.board_frame.refresh_windows();
     }
-
-    private final BoardFrame board_frame;
-
-    private final javax.swing.JPanel main_panel;
-
-    private javax.swing.JScrollPane scroll_pane;
-    private javax.swing.JTable table;
-    private ViaTableModel table_model;
-
-    private final javax.swing.JComboBox<String> cl_class_combo_box;
-    private final javax.swing.JComboBox<String> padstack_combo_box;
-
-    private final java.util.ResourceBundle resources;
-
-    private static final int TEXTFIELD_HEIGHT = 16;
-    private static final int TEXTFIELD_WIDTH = 100;
 
     private class AddViaListener implements java.awt.event.ActionListener {
 
@@ -191,10 +187,9 @@ public final class WindowEditVias extends BoardSavableSubWindow {
         }
     }
 
-    /**
-     * Table model of the via table.
-     */
     private class ViaTableModel extends javax.swing.table.AbstractTableModel {
+        private Object[][] data = null;
+        private String[] column_names = null;
 
         public ViaTableModel() {
             column_names = new String[ColumnName.values().length];
@@ -315,8 +310,6 @@ public final class WindowEditVias extends BoardSavableSubWindow {
             return getValueAt(0, p_col).getClass();
         }
 
-        private Object[][] data = null;
-        private String[] column_names = null;
     }
 
     private enum ColumnName {

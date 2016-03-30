@@ -24,8 +24,10 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-final class PopupMenuInsertCancel extends javax.swing.JPopupMenu {
+class PopupMenuInsertCancel extends javax.swing.JPopupMenu {
 
+
+    private final BoardPanel board_panel;
     /**
      * Creates a new instance of CompleteCancelPopupMenu
      */
@@ -55,6 +57,4 @@ final class PopupMenuInsertCancel extends javax.swing.JPopupMenu {
 
         this.add(cancel_item);
     }
-
-    private final BoardPanel board_panel;
 }

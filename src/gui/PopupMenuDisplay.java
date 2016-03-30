@@ -29,6 +29,8 @@ package gui;
  */
 public class PopupMenuDisplay extends javax.swing.JPopupMenu {
 
+
+    protected final BoardPanel board_panel;
     /**
      * Creates a new instance of PopupMenuDisplay
      */
@@ -74,6 +76,4 @@ public class PopupMenuDisplay extends javax.swing.JPopupMenu {
 
         this.add(zoom_menu);
     }
-
-    protected final BoardPanel board_panel;
 }

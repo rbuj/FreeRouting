@@ -60,6 +60,10 @@ public class Signum {
         }
         return result;
     }
+    private final String name;
+    private Signum(String p_name) {
+        name = p_name;
+    }
 
     /**
      * Returns the string of this instance
@@ -83,9 +87,4 @@ public class Signum {
         return result;
     }
 
-    private Signum(String p_name) {
-        name = p_name;
-    }
-
-    private final String name;
 }

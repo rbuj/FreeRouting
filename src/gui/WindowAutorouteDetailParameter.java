@@ -24,8 +24,24 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public final class WindowAutorouteDetailParameter extends BoardSavableSubWindow {
+public class WindowAutorouteDetailParameter extends BoardSavableSubWindow {
 
+    private final interactive.BoardHandling board_handling;
+    private final javax.swing.JFormattedTextField via_cost_field;
+    private final javax.swing.JFormattedTextField plane_via_cost_field;
+    private final javax.swing.JFormattedTextField start_ripup_costs;
+    private final javax.swing.JFormattedTextField start_pass_no;
+    private final javax.swing.JComboBox speed_combo_box;
+    private final String speed_fast;
+    private final String speed_slow;
+    private final javax.swing.JLabel[] layer_name_arr;
+    private final javax.swing.JFormattedTextField[] preferred_direction_trace_cost_arr;
+    private final javax.swing.JFormattedTextField[] against_preferred_direction_trace_cost_arr;
+    private boolean via_cost_input_completed = true;
+    private boolean plane_via_cost_input_completed = true;
+    private boolean start_ripup_cost_input_completed = true;
+    private final boolean[] preferred_direction_trace_costs_input_completed;
+    private final boolean[] against_preferred_direction_trace_costs_input_completed;
     /**
      * Creates a new instance of WindowAutorouteDetailParameter
      */
@@ -181,7 +197,6 @@ public final class WindowAutorouteDetailParameter extends BoardSavableSubWindow 
         this.pack();
         this.setResizable(false);
     }
-
     /**
      * Recalculates all displayed values
      */
@@ -200,22 +215,6 @@ public final class WindowAutorouteDetailParameter extends BoardSavableSubWindow 
             this.against_preferred_direction_trace_cost_arr[i].setValue(settings.get_against_preferred_direction_trace_costs(layer_structure.get_layer_no(i)));
         }
     }
-    private final interactive.BoardHandling board_handling;
-    private final javax.swing.JFormattedTextField via_cost_field;
-    private final javax.swing.JFormattedTextField plane_via_cost_field;
-    private final javax.swing.JFormattedTextField start_ripup_costs;
-    private final javax.swing.JFormattedTextField start_pass_no;
-    private final javax.swing.JComboBox speed_combo_box;
-    private final String speed_fast;
-    private final String speed_slow;
-    private final javax.swing.JLabel[] layer_name_arr;
-    private final javax.swing.JFormattedTextField[] preferred_direction_trace_cost_arr;
-    private final javax.swing.JFormattedTextField[] against_preferred_direction_trace_cost_arr;
-    private boolean via_cost_input_completed = true;
-    private boolean plane_via_cost_input_completed = true;
-    private boolean start_ripup_cost_input_completed = true;
-    private final boolean[] preferred_direction_trace_costs_input_completed;
-    private final boolean[] against_preferred_direction_trace_costs_input_completed;
 
     private class ViaCostFieldKeyListener extends java.awt.event.KeyAdapter {
 
@@ -397,6 +396,7 @@ public final class WindowAutorouteDetailParameter extends BoardSavableSubWindow 
     }
 
     private class PreferredDirectionTraceCostKeyListener extends java.awt.event.KeyAdapter {
+        private final int signal_layer_no;
 
         public PreferredDirectionTraceCostKeyListener(int p_layer_no) {
             this.signal_layer_no = p_layer_no;
@@ -425,10 +425,10 @@ public final class WindowAutorouteDetailParameter extends BoardSavableSubWindow 
                 preferred_direction_trace_costs_input_completed[this.signal_layer_no] = false;
             }
         }
-        private final int signal_layer_no;
     }
 
     private class PreferredDirectionTraceCostFocusListener implements java.awt.event.FocusListener {
+        private final int signal_layer_no;
 
         public PreferredDirectionTraceCostFocusListener(int p_layer_no) {
             this.signal_layer_no = p_layer_no;
@@ -445,10 +445,10 @@ public final class WindowAutorouteDetailParameter extends BoardSavableSubWindow 
         @Override
         public void focusGained(java.awt.event.FocusEvent p_evt) {
         }
-        private final int signal_layer_no;
     }
 
     private class AgainstPreferredDirectionTraceCostKeyListener extends java.awt.event.KeyAdapter {
+        private final int signal_layer_no;
 
         public AgainstPreferredDirectionTraceCostKeyListener(int p_layer_no) {
             this.signal_layer_no = p_layer_no;
@@ -477,10 +477,10 @@ public final class WindowAutorouteDetailParameter extends BoardSavableSubWindow 
                 against_preferred_direction_trace_costs_input_completed[this.signal_layer_no] = false;
             }
         }
-        private final int signal_layer_no;
     }
 
     private class AgainstPreferredDirectionTraceCostFocusListener implements java.awt.event.FocusListener {
+        private final int signal_layer_no;
 
         public AgainstPreferredDirectionTraceCostFocusListener(int p_layer_no) {
             this.signal_layer_no = p_layer_no;
@@ -497,6 +497,5 @@ public final class WindowAutorouteDetailParameter extends BoardSavableSubWindow 
         @Override
         public void focusGained(java.awt.event.FocusEvent p_evt) {
         }
-        private final int signal_layer_no;
     }
 }

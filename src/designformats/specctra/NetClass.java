@@ -154,6 +154,19 @@ public class NetClass {
         }
     }
 
+
+    public final String name;
+    public final String trace_clearance_class;
+    public final Collection<String> net_list;
+    public final Collection<Rule> rules;
+    public final Collection<Rule.LayerRule> layer_rules;
+    public final Collection<String> use_via;
+    public final Collection<String> use_layer;
+    public final String via_rule;
+    public final boolean shove_fixed;
+    public final boolean pull_tight;
+    public final double min_trace_length;
+    public final double max_trace_length;
     /**
      * Creates a new instance of NetClass
      */
@@ -175,29 +188,16 @@ public class NetClass {
         max_trace_length = p_max_trace_length;
     }
 
-    public final String name;
-    public final String trace_clearance_class;
-    public final Collection<String> net_list;
-    public final Collection<Rule> rules;
-    public final Collection<Rule.LayerRule> layer_rules;
-    public final Collection<String> use_via;
-    public final Collection<String> use_layer;
-    public final String via_rule;
-    public final boolean shove_fixed;
-    public final boolean pull_tight;
-    public final double min_trace_length;
-    public final double max_trace_length;
-
     public static class ClassClass {
 
+        public final Collection<String> class_names;
+        public final Collection<Rule> rules;
+        public final Collection<Rule.LayerRule> layer_rules;
         public ClassClass(Collection<String> p_class_names, Collection<Rule> p_rules,
                 Collection<Rule.LayerRule> p_layer_rules) {
             class_names = p_class_names;
             rules = p_rules;
             layer_rules = p_layer_rules;
         }
-        public final Collection<String> class_names;
-        public final Collection<Rule> rules;
-        public final Collection<Rule.LayerRule> layer_rules;
     }
 }

@@ -25,6 +25,7 @@ package rules;
  * @author Alfons Wirtz
  */
 public class DefaultItemClearanceClasses implements java.io.Serializable {
+    private final int[] arr = new int[ItemClass.values().length];
 
     /**
      * Creates a new instance of DefaultItemClearancesClasses
@@ -41,13 +42,6 @@ public class DefaultItemClearanceClasses implements java.io.Serializable {
         }
     }
 
-    /**
-     * Used in the function get_default_clearance_class to get the default
-     * claearance classes for item classes.
-     */
-    public enum ItemClass {
-        NONE, TRACE, VIA, PIN, SMD, AREA
-    }
 
     /**
      * Returns the number of the default clearance class for the input item
@@ -74,5 +68,11 @@ public class DefaultItemClearanceClasses implements java.io.Serializable {
         }
     }
 
-    private final int[] arr = new int[ItemClass.values().length];
+    /**
+     * Used in the function get_default_clearance_class to get the default
+     * claearance classes for item classes.
+     */
+    public enum ItemClass {
+        NONE, TRACE, VIA, PIN, SMD, AREA
+    }
 }

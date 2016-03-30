@@ -29,7 +29,8 @@ import java.util.List;
  *
  * @author Alfons Wirtz
  */
-public final class WindowClearanceViolations extends WindowObjectListWithFilter {
+public class WindowClearanceViolations extends WindowObjectListWithFilter {
+    private final java.util.ResourceBundle resources;
 
     /**
      * Creates a new instance of IncompletesWindow
@@ -101,9 +102,10 @@ public final class WindowClearanceViolations extends WindowObjectListWithFilter 
         return result;
     }
 
-    private final java.util.ResourceBundle resources;
 
     private class ViolationInfo implements Comparable<ViolationInfo>, WindowObjectInfo.Printable {
+        public final ClearanceViolation violation;
+        public final FloatPoint location;
 
         public ViolationInfo(ClearanceViolation p_violation) {
             this.violation = p_violation;
@@ -142,7 +144,5 @@ public final class WindowClearanceViolations extends WindowObjectListWithFilter 
             return this.violation.layer - p_other.violation.layer;
         }
 
-        public final ClearanceViolation violation;
-        public final FloatPoint location;
     }
 }

@@ -35,6 +35,17 @@ import library.Padstack;
  * @author Alfons Wirtz
  */
 public class Via extends DrillItem implements java.io.Serializable {
+    private Padstack padstack;
+    /**
+     * True, if coppersharing of this via with smd pins of the same net is
+     * allowed.
+     */
+    public final boolean attach_allowed;
+    transient private Shape[] precalculated_shapes = null;
+    /**
+     * Temporary data used in the autoroute algorithm.
+     */
+    transient private autoroute.ExpansionDrill autoroute_drill_info = null;
 
     /**
      * Creates a new instance of Via with the input parameters
@@ -231,15 +242,4 @@ public class Via extends DrillItem implements java.io.Serializable {
         }
         return true;
     }
-    private Padstack padstack;
-    /**
-     * True, if coppersharing of this via with smd pins of the same net is
-     * allowed.
-     */
-    public final boolean attach_allowed;
-    transient private Shape[] precalculated_shapes = null;
-    /**
-     * Temporary data used in the autoroute algorithm.
-     */
-    transient private autoroute.ExpansionDrill autoroute_drill_info = null;
 }

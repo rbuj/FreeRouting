@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public final class BoardMenuDisplay extends javax.swing.JMenu {
+public class BoardMenuDisplay extends javax.swing.JMenu {
 
     /**
      * Returns a new display menu for the board frame.
@@ -83,6 +83,9 @@ public final class BoardMenuDisplay extends javax.swing.JMenu {
         return display_menu;
     }
 
+
+    private final BoardFrame board_frame;
+    private final java.util.ResourceBundle resources;
     /**
      * Creates a new instance of BoardDisplayMenu
      */
@@ -90,7 +93,4 @@ public final class BoardMenuDisplay extends javax.swing.JMenu {
         board_frame = p_board_frame;
         resources = java.util.ResourceBundle.getBundle("gui.resources.BoardMenuDisplay", p_board_frame.get_locale());
     }
-
-    private final BoardFrame board_frame;
-    private final java.util.ResourceBundle resources;
 }

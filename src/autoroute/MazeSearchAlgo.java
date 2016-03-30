@@ -49,6 +49,7 @@ import java.util.TreeSet;
  * @author Alfons Wirtz
  */
 public class MazeSearchAlgo {
+    private static final int ALREADY_RIPPED_COSTS = 1;
 
     /**
      * Initializes a new instance of MazeSearchAlgo for secrching a connection
@@ -66,6 +67,122 @@ public class MazeSearchAlgo {
         }
         return result;
     }
+    /**
+     * Looks for pins with more than 1 nets and reduces shapes of thraces of
+     * foreign nets, which are already connected to such a pin, so that the pin
+     * center is not blocked for connection.
+     */
+    private static void reduce_trace_shapes_at_tie_pins(Collection<Item> p_item_list, int p_own_net_no, ShapeSearchTree p_autoroute_tree) {
+        for (Item curr_item : p_item_list) {
+            if ((curr_item instanceof board.Pin) && curr_item.net_count() > 1) {
+                Collection<Item> pin_contacts = curr_item.get_normal_contacts();
+                board.Pin curr_tie_pin = (board.Pin) curr_item;
+                for (Item curr_contact : pin_contacts) {
+                    if (!(curr_contact instanceof board.PolylineTrace) || curr_contact.contains_net(p_own_net_no)) {
+                        continue;
+                    }
+                    p_autoroute_tree.reduce_trace_shape_at_tie_pin(curr_tie_pin, (board.PolylineTrace) curr_contact);
+                }
+            }
+        }
+    }
+    /**
+     * Return the addditional cost factor for ripping the trace, if it is
+     * connected to a fanout via or 1, if no fanout via was found.
+     */
+    private static double calc_fanout_via_ripup_cost_factor(board.Trace p_trace) {
+        final double FANOUT_COST_CONST = 20000;
+        Collection<Item> curr_end_contacts;
+        for (int i = 0; i < 2; ++i) {
+            if (i == 0) {
+                curr_end_contacts = p_trace.get_start_contacts();
+            } else {
+                curr_end_contacts = p_trace.get_end_contacts();
+            }
+            if (curr_end_contacts.size() != 1) {
+                continue;
+            }
+            Item curr_trace_contact = curr_end_contacts.iterator().next();
+            boolean protect_fanout_via = false;
+            if (curr_trace_contact instanceof board.Pin && curr_trace_contact.first_layer() == curr_trace_contact.last_layer()) {
+                protect_fanout_via = true;
+            } else if (curr_trace_contact instanceof PolylineTrace && curr_trace_contact.get_fixed_state() == board.FixedState.SHOVE_FIXED) {
+                // look for shove fixed exit traces of SMD-pins
+                PolylineTrace contact_trace = (PolylineTrace) curr_trace_contact;
+                if (contact_trace.corner_count() == 2) {
+                    protect_fanout_via = true;
+                }
+            }
+            
+            if (protect_fanout_via) {
+                double fanout_via_cost_factor = p_trace.get_half_width() / p_trace.get_length();
+                fanout_via_cost_factor *= fanout_via_cost_factor;
+                fanout_via_cost_factor *= FANOUT_COST_CONST;
+                fanout_via_cost_factor = Math.max(fanout_via_cost_factor, 1);
+                return fanout_via_cost_factor;
+            }
+        }
+        return 1;
+    }
+    /**
+     * Returns the perpendicular projection of p_from_segment onto p_to_segment.
+     * Returns null, if the projection is empty.
+     */
+    private static FloatLine segment_projection(FloatLine p_from_segment, FloatLine p_to_segment) {
+        FloatLine check_segment = p_from_segment.adjust_direction(p_to_segment);
+        FloatLine first_projection = p_to_segment.segment_projection(check_segment);
+        FloatLine second_projection = p_to_segment.segment_projection_2(check_segment);
+        FloatLine result;
+        if (first_projection != null && second_projection != null) {
+            FloatPoint result_a;
+            if (first_projection.a == p_to_segment.a || second_projection.a == p_to_segment.a) {
+                result_a = p_to_segment.a;
+            } else if (first_projection.a.distance_square(p_to_segment.a) <= second_projection.a.distance_square(p_to_segment.a)) {
+                result_a = first_projection.a;
+            } else {
+                result_a = second_projection.a;
+            }
+            FloatPoint result_b;
+            if (first_projection.b == p_to_segment.b || second_projection.b == p_to_segment.b) {
+                result_b = p_to_segment.b;
+            } else if (first_projection.b.distance_square(p_to_segment.b) <= second_projection.b.distance_square(p_to_segment.b)) {
+                result_b = first_projection.b;
+            } else {
+                result_b = second_projection.b;
+            }
+            result = new FloatLine(result_a, result_b);
+        } else if (first_projection != null) {
+            result = first_projection;
+        } else {
+            result = second_projection;
+        }
+        return result;
+    }
+    /**
+     * The autoroute engine of this expansion algorithm.
+     */
+    public final AutorouteEngine autoroute_engine;
+    final AutorouteControl ctrl;
+    /**
+     * The seach tree for expanding. It is the tree compensated for the current
+     * net.
+     */
+    private final ShapeSearchTree search_tree;
+    /**
+     * The queue of of expanded elements used in this search algorithm.
+     */
+    final java.util.SortedSet<MazeListElement> maze_expansion_list;
+    /**
+     * Used for calculating of a good lower bound for the distance between a new
+     * MazeExpansionElement and the destination set of the expansion.
+     */
+    final DestinationDistance destination_distance;
+    /**
+     * The destination door found by the expanding algorithm.
+     */
+    private ExpandableObject destination_door = null;
+    private int section_no_of_destination_door = 0;
+    private final java.util.Random random_generator = new java.util.Random();
 
     /**
      * Creates a new instance of MazeSearchAlgo
@@ -826,25 +943,6 @@ public class MazeSearchAlgo {
         return start_ok;
     }
 
-    /**
-     * Looks for pins with more than 1 nets and reduces shapes of thraces of
-     * foreign nets, which are already connected to such a pin, so that the pin
-     * center is not blocked for connection.
-     */
-    private static void reduce_trace_shapes_at_tie_pins(Collection<Item> p_item_list, int p_own_net_no, ShapeSearchTree p_autoroute_tree) {
-        for (Item curr_item : p_item_list) {
-            if ((curr_item instanceof board.Pin) && curr_item.net_count() > 1) {
-                Collection<Item> pin_contacts = curr_item.get_normal_contacts();
-                board.Pin curr_tie_pin = (board.Pin) curr_item;
-                for (Item curr_contact : pin_contacts) {
-                    if (!(curr_contact instanceof board.PolylineTrace) || curr_contact.contains_net(p_own_net_no)) {
-                        continue;
-                    }
-                    p_autoroute_tree.reduce_trace_shape_at_tie_pin(curr_tie_pin, (board.PolylineTrace) curr_contact);
-                }
-            }
-        }
-    }
 
     private boolean room_shape_is_thick(ObstacleExpansionRoom p_obstacle_room) {
         Item obstacle_item = p_obstacle_room.get_item();
@@ -955,44 +1053,6 @@ public class MazeSearchAlgo {
         return Math.min(result, MAX_RIPUP_COSTS);
     }
 
-    /**
-     * Return the addditional cost factor for ripping the trace, if it is
-     * connected to a fanout via or 1, if no fanout via was found.
-     */
-    private static double calc_fanout_via_ripup_cost_factor(board.Trace p_trace) {
-        final double FANOUT_COST_CONST = 20000;
-        Collection<Item> curr_end_contacts;
-        for (int i = 0; i < 2; ++i) {
-            if (i == 0) {
-                curr_end_contacts = p_trace.get_start_contacts();
-            } else {
-                curr_end_contacts = p_trace.get_end_contacts();
-            }
-            if (curr_end_contacts.size() != 1) {
-                continue;
-            }
-            Item curr_trace_contact = curr_end_contacts.iterator().next();
-            boolean protect_fanout_via = false;
-            if (curr_trace_contact instanceof board.Pin && curr_trace_contact.first_layer() == curr_trace_contact.last_layer()) {
-                protect_fanout_via = true;
-            } else if (curr_trace_contact instanceof PolylineTrace && curr_trace_contact.get_fixed_state() == board.FixedState.SHOVE_FIXED) {
-                // look for shove fixed exit traces of SMD-pins
-                PolylineTrace contact_trace = (PolylineTrace) curr_trace_contact;
-                if (contact_trace.corner_count() == 2) {
-                    protect_fanout_via = true;
-                }
-            }
-
-            if (protect_fanout_via) {
-                double fanout_via_cost_factor = p_trace.get_half_width() / p_trace.get_length();
-                fanout_via_cost_factor *= fanout_via_cost_factor;
-                fanout_via_cost_factor *= FANOUT_COST_CONST;
-                fanout_via_cost_factor = Math.max(fanout_via_cost_factor, 1);
-                return fanout_via_cost_factor;
-            }
-        }
-        return 1;
-    }
 
     /**
      * Shoves a trace room and expands the corresponding doors. Return false, if
@@ -1068,40 +1128,6 @@ public class MazeSearchAlgo {
         return 0;
     }
 
-    /**
-     * Returns the perpendicular projection of p_from_segment onto p_to_segment.
-     * Returns null, if the projection is empty.
-     */
-    private static FloatLine segment_projection(FloatLine p_from_segment, FloatLine p_to_segment) {
-        FloatLine check_segment = p_from_segment.adjust_direction(p_to_segment);
-        FloatLine first_projection = p_to_segment.segment_projection(check_segment);
-        FloatLine second_projection = p_to_segment.segment_projection_2(check_segment);
-        FloatLine result;
-        if (first_projection != null && second_projection != null) {
-            FloatPoint result_a;
-            if (first_projection.a == p_to_segment.a || second_projection.a == p_to_segment.a) {
-                result_a = p_to_segment.a;
-            } else if (first_projection.a.distance_square(p_to_segment.a) <= second_projection.a.distance_square(p_to_segment.a)) {
-                result_a = first_projection.a;
-            } else {
-                result_a = second_projection.a;
-            }
-            FloatPoint result_b;
-            if (first_projection.b == p_to_segment.b || second_projection.b == p_to_segment.b) {
-                result_b = p_to_segment.b;
-            } else if (first_projection.b.distance_square(p_to_segment.b) <= second_projection.b.distance_square(p_to_segment.b)) {
-                result_b = first_projection.b;
-            } else {
-                result_b = second_projection.b;
-            }
-            result = new FloatLine(result_a, result_b);
-        } else if (first_projection != null) {
-            result = first_projection;
-        } else {
-            result = second_projection;
-        }
-        return result;
-    }
 
     /**
      * Checks, if the next room can be entered if the door of p_list_element is
@@ -1184,44 +1210,15 @@ public class MazeSearchAlgo {
         }
         return enter_through_small_door(p_list_element, curr_item);
     }
-    /**
-     * The autoroute engine of this expansion algorithm.
-     */
-    public final AutorouteEngine autoroute_engine;
-    final AutorouteControl ctrl;
-    /**
-     * The seach tree for expanding. It is the tree compensated for the current
-     * net.
-     */
-    private final ShapeSearchTree search_tree;
-    /**
-     * The queue of of expanded elements used in this search algorithm.
-     */
-    final java.util.SortedSet<MazeListElement> maze_expansion_list;
-    /**
-     * Used for calculating of a good lower bound for the distance between a new
-     * MazeExpansionElement and the destination set of the expansion.
-     */
-    final DestinationDistance destination_distance;
-    /**
-     * The destination door found by the expanding algorithm.
-     */
-    private ExpandableObject destination_door = null;
-    private int section_no_of_destination_door = 0;
-    private final java.util.Random random_generator = new java.util.Random();
-    private static final int ALREADY_RIPPED_COSTS = 1;
 
-    /**
-     * The result type of MazeSearchAlgo.find_connection
-     */
     public static class Result {
 
+        public final ExpandableObject destination_door;
+        public final int section_no_of_door;
         Result(ExpandableObject p_destination_door, int p_section_no_of_door) {
             destination_door = p_destination_door;
             section_no_of_door = p_section_no_of_door;
         }
-        public final ExpandableObject destination_door;
-        public final int section_no_of_door;
     }
 
     /**

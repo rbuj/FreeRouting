@@ -28,6 +28,27 @@ import geometry.planar.FloatPoint;
  * @author Alfons Wirtz
  */
 public class CoordinateTransform implements java.io.Serializable {
+    /**
+     * The unit used for user coordinates
+     */
+    public final Unit user_unit;
+    /**
+     * The factor of the user unit
+     */
+    public final double user_unit_factor;
+    /**
+     * The unit used for board coordinates
+     */
+    public final Unit board_unit;
+    /**
+     * The factor of the board unit
+     */
+    public final double board_unit_factor;
+    /**
+     * The factor used for transforming coordinates between user coordinate
+     * space and board coordinate space
+     */
+    private final double scale_factor;
 
     /**
      * Creates a new instance of CoordinateTransform
@@ -105,30 +126,5 @@ public class CoordinateTransform implements java.io.Serializable {
         return new PrintableShape.Polygon(transformed_corners, p_locale);
     }
 
-    /**
-     * The unit used for user coordinates
-     */
-    public final Unit user_unit;
-
-    /**
-     * The factor of the user unit
-     */
-    public final double user_unit_factor;
-
-    /**
-     * The unit used for board coordinates
-     */
-    public final Unit board_unit;
-
-    /**
-     * The factor of the board unit
-     */
-    public final double board_unit_factor;
-
-    /**
-     * The factor used for transforming coordinates between user coordinate
-     * space and board coordinate space
-     */
-    private final double scale_factor;
 
 }

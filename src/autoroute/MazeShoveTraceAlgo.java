@@ -316,14 +316,14 @@ public class MazeShoveTraceAlgo {
 
     public static class DoorSection {
 
+        final ExpansionDoor door;
+        final int section_no;
+        final FloatLine section_line;
         DoorSection(ExpansionDoor p_door, int p_section_no, FloatLine p_section_line) {
             door = p_door;
             section_no = p_section_no;
             section_line = p_section_line;
 
         }
-        final ExpansionDoor door;
-        final int section_no;
-        final FloatLine section_line;
     }
 }

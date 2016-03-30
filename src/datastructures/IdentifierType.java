@@ -28,6 +28,8 @@ import java.io.OutputStreamWriter;
  * @author alfons
  */
 public class IdentifierType {
+    private final String string_quote;
+    private final String[] reserved_chars;
 
     /**
      * Defines the reserved characters and the string for quoting identifiers
@@ -76,6 +78,4 @@ public class IdentifierType {
     private String quote(String p_string) {
         return string_quote + p_string + string_quote;
     }
-    private final String string_quote;
-    private final String[] reserved_chars;
 }

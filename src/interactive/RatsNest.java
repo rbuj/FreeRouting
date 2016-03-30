@@ -38,6 +38,10 @@ import rules.Net;
  * @author Alfons Wirtz
  */
 public class RatsNest {
+    private final NetIncompletes[] net_incompletes;
+    private final boolean[] is_filtered;
+    public boolean hidden = false;
+    private final java.util.Locale locale;
 
     /**
      * Creates a new instance of RatsNest
@@ -195,16 +199,16 @@ public class RatsNest {
         }
 
     }
-    private final NetIncompletes[] net_incompletes;
-    private final boolean[] is_filtered;
-    public boolean hidden = false;
-    private final java.util.Locale locale;
 
-    /**
-     * Describes a single incomplete connection of the ratsnest.
-     */
     public static class AirLine implements Comparable<AirLine>, board.ObjectInfoPanel.Printable {
 
+
+        public final Net net;
+        public final Item from_item;
+        public final FloatPoint from_corner;
+        public final Item to_item;
+        public final FloatPoint to_corner;
+        private final java.util.Locale locale;
         AirLine(Net p_net, Item p_from_item, FloatPoint p_from_corner, Item p_to_item,
                 FloatPoint p_to_corner, java.util.Locale p_locale) {
             net = p_net;
@@ -214,19 +218,16 @@ public class RatsNest {
             to_corner = p_to_corner;
             this.locale = p_locale;
         }
-
         @Override
         public int compareTo(AirLine p_other) {
             return this.net.name.compareTo(p_other.net.name);
         }
-
         @Override
         public String toString() {
 
             String result = this.net.name + ": " + item_info(from_item) + " - " + item_info(to_item);
             return result;
         }
-
         private String item_info(Item p_item) {
             java.util.ResourceBundle resources
                     = java.util.ResourceBundle.getBundle("interactive.resources.RatsNest", this.locale);
@@ -245,7 +246,6 @@ public class RatsNest {
             }
             return result;
         }
-
         @Override
         public void print_info(board.ObjectInfoPanel p_window, java.util.Locale p_locale) {
             java.util.ResourceBundle resources
@@ -259,12 +259,5 @@ public class RatsNest {
             p_window.append(to_corner);
             p_window.newline();
         }
-
-        public final Net net;
-        public final Item from_item;
-        public final FloatPoint from_corner;
-        public final Item to_item;
-        public final FloatPoint to_corner;
-        private final java.util.Locale locale;
     }
 }

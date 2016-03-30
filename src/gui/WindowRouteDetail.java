@@ -26,8 +26,15 @@ import board.BoardOutline;
  *
  * @author Alfons Wirtz
  */
-public final class WindowRouteDetail extends BoardSavableSubWindow {
+public class WindowRouteDetail extends BoardSavableSubWindow {
 
+    private static final int c_max_slider_value = 100;
+    private static final int c_accuracy_scale_factor = 20;
+    private final interactive.BoardHandling board_handling;
+    private final javax.swing.JSlider accuracy_slider;
+    private final javax.swing.JRadioButton on_button;
+    private final javax.swing.JRadioButton off_button;
+    private final javax.swing.JCheckBox outline_keepout_check_box;
     /**
      * Creates a new instance of RouteDetailWindow
      */
@@ -110,7 +117,6 @@ public final class WindowRouteDetail extends BoardSavableSubWindow {
         this.pack();
         this.setResizable(false);
     }
-
     /**
      * Recalculates all displayed values
      */
@@ -128,13 +134,6 @@ public final class WindowRouteDetail extends BoardSavableSubWindow {
         int accuracy_slider_value = c_max_slider_value - this.board_handling.settings.get_trace_pull_tight_accuracy() / c_accuracy_scale_factor + 1;
         accuracy_slider.setValue(accuracy_slider_value);
     }
-    private final interactive.BoardHandling board_handling;
-    private final javax.swing.JSlider accuracy_slider;
-    private final javax.swing.JRadioButton on_button;
-    private final javax.swing.JRadioButton off_button;
-    private final javax.swing.JCheckBox outline_keepout_check_box;
-    private static final int c_max_slider_value = 100;
-    private static final int c_accuracy_scale_factor = 20;
 
     private class CompensationOnListener implements java.awt.event.ActionListener {
 

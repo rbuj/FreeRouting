@@ -25,6 +25,39 @@ package designformats.specctra;
  * @author alfons
  */
 public class Plane extends ScopeKeyword {
+    public static void write_scope(WriteScopeParameter p_par, board.ConductionArea p_conduction) throws java.io.IOException {
+        int net_count = p_conduction.net_count();
+        if (net_count <= 0 || net_count > 1) {
+            System.out.println("Plane.write_scope: unexpected net count");
+            return;
+        }
+        String net_name = p_par.board.rules.nets.get(p_conduction.get_net_no(0)).name;
+        geometry.planar.Area curr_area = p_conduction.get_area();
+        int layer_no = p_conduction.get_layer();
+        board.Layer board_layer = p_par.board.layer_structure.arr[layer_no];
+        Layer plane_layer = new Layer(board_layer.name, layer_no, board_layer.is_signal);
+        geometry.planar.Shape boundary_shape;
+        geometry.planar.Shape[] holes;
+        if (curr_area instanceof geometry.planar.Shape) {
+            boundary_shape = (geometry.planar.Shape) curr_area;
+            holes = new geometry.planar.Shape[0];
+        } else {
+            boundary_shape = curr_area.get_border();
+            holes = curr_area.get_holes();
+        }
+        p_par.file.start_scope();
+        p_par.file.write("plane ");
+        p_par.identifier_type.write(net_name, p_par.file);
+        Shape dsn_shape = p_par.coordinate_transform.board_to_dsn(boundary_shape, plane_layer);
+        if (dsn_shape != null) {
+            dsn_shape.write_scope(p_par.file, p_par.identifier_type);
+        }
+        for (int i = 0; i < holes.length; ++i) {
+            Shape dsn_hole = p_par.coordinate_transform.board_to_dsn(holes[i], plane_layer);
+            dsn_hole.write_hole_scope(p_par.file, p_par.identifier_type);
+        }
+        p_par.file.end_scope();
+    }
 
     /**
      * Creates a new instance of Plane
@@ -59,37 +92,4 @@ public class Plane extends ScopeKeyword {
         return true;
     }
 
-    public static void write_scope(WriteScopeParameter p_par, board.ConductionArea p_conduction) throws java.io.IOException {
-        int net_count = p_conduction.net_count();
-        if (net_count <= 0 || net_count > 1) {
-            System.out.println("Plane.write_scope: unexpected net count");
-            return;
-        }
-        String net_name = p_par.board.rules.nets.get(p_conduction.get_net_no(0)).name;
-        geometry.planar.Area curr_area = p_conduction.get_area();
-        int layer_no = p_conduction.get_layer();
-        board.Layer board_layer = p_par.board.layer_structure.arr[layer_no];
-        Layer plane_layer = new Layer(board_layer.name, layer_no, board_layer.is_signal);
-        geometry.planar.Shape boundary_shape;
-        geometry.planar.Shape[] holes;
-        if (curr_area instanceof geometry.planar.Shape) {
-            boundary_shape = (geometry.planar.Shape) curr_area;
-            holes = new geometry.planar.Shape[0];
-        } else {
-            boundary_shape = curr_area.get_border();
-            holes = curr_area.get_holes();
-        }
-        p_par.file.start_scope();
-        p_par.file.write("plane ");
-        p_par.identifier_type.write(net_name, p_par.file);
-        Shape dsn_shape = p_par.coordinate_transform.board_to_dsn(boundary_shape, plane_layer);
-        if (dsn_shape != null) {
-            dsn_shape.write_scope(p_par.file, p_par.identifier_type);
-        }
-        for (int i = 0; i < holes.length; ++i) {
-            Shape dsn_hole = p_par.coordinate_transform.board_to_dsn(holes[i], plane_layer);
-            dsn_hole.write_hole_scope(p_par.file, p_par.identifier_type);
-        }
-        p_par.file.end_scope();
-    }
 }

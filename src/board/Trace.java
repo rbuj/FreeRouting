@@ -31,6 +31,8 @@ import java.util.TreeSet;
  * @author Alfons Wirtz
  */
 public abstract class Trace extends Item implements Connectable, java.io.Serializable {
+    private final int half_width; // half width of the trace pen
+    private int layer; // board layer of the trace
 
     Trace(int p_layer, int p_half_width, int[] p_net_no_arr, int p_clearance_type,
             int p_id_no, int p_group_no, FixedState p_fixed_state, BasicBoard p_board) {
@@ -472,6 +474,4 @@ public abstract class Trace extends Item implements Connectable, java.io.Seriali
      */
     public abstract boolean pull_tight(PullTightAlgo p_pull_tight_algo);
 
-    private final int half_width; // half width of the trace pen
-    private int layer; // board layer of the trace
 }

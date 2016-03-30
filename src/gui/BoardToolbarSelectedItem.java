@@ -27,6 +27,9 @@ package gui;
  */
 class BoardToolbarSelectedItem extends javax.swing.JToolBar {
 
+
+    private final BoardFrame board_frame;
+    private final java.util.ResourceBundle resources;
     /**
      * Creates a new instance of BoardSelectedItemToolbar. If p_extended, some
      * additional buttons are generated.
@@ -291,7 +294,6 @@ class BoardToolbarSelectedItem extends javax.swing.JToolBar {
 
         this.add(display_region_button);
     }
-
     private void assign_clearance_class() {
         if (board_frame.board_panel.board_handling.is_board_read_only()) {
             return;
@@ -313,7 +315,4 @@ class BoardToolbarSelectedItem extends javax.swing.JToolBar {
         }
         board_frame.board_panel.board_handling.assign_clearance_classs_to_selected_items(class_index);
     }
-
-    private final BoardFrame board_frame;
-    private final java.util.ResourceBundle resources;
 }

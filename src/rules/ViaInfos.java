@@ -29,6 +29,7 @@ import java.util.List;
  * @author Alfons Wirtz
  */
 public class ViaInfos implements java.io.Serializable, board.ObjectInfoPanel.Printable {
+    private List<ViaInfo> list = new LinkedList<>();
 
     /**
      * Adds a via info consisting of padstack, clearance class and
@@ -113,5 +114,4 @@ public class ViaInfos implements java.io.Serializable, board.ObjectInfoPanel.Pri
             counter = (counter + 1) % max_vias_per_row;
         }
     }
-    private List<ViaInfo> list = new LinkedList<>();
 }

@@ -30,6 +30,22 @@ import geometry.planar.IntOctagon;
  * @author alfons
  */
 public class Padstack implements Comparable<Padstack>, board.ObjectInfoPanel.Printable, java.io.Serializable {
+    private final ConvexShape[] shapes;
+    public final String name;
+    public final int no;
+    /**
+     * true, if vias of the own net are allowed to overlap with this padstack
+     */
+    public final boolean attach_allowed;
+    /**
+     * If false, the layers of the padstack are mirrored, if it is placed on the
+     * back side. The default is false.
+     */
+    public final boolean placed_absolute;
+    /**
+     * Pointer to the pacdstack list containing this padstack
+     */
+    private final Padstacks padstack_list;
 
     /**
      * Creates a new Padstack with shape p_shapes[i] on layer i (0 <= i <
@@ -157,23 +173,4 @@ public class Padstack implements Comparable<Padstack>, board.ObjectInfoPanel.Pri
         p_window.newline();
     }
 
-    private final ConvexShape[] shapes;
-    public final String name;
-    public final int no;
-
-    /**
-     * true, if vias of the own net are allowed to overlap with this padstack
-     */
-    public final boolean attach_allowed;
-
-    /**
-     * If false, the layers of the padstack are mirrored, if it is placed on the
-     * back side. The default is false.
-     */
-    public final boolean placed_absolute;
-
-    /**
-     * Pointer to the pacdstack list containing this padstack
-     */
-    private final Padstacks padstack_list;
 }

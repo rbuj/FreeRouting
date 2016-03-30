@@ -26,12 +26,6 @@ package designformats.specctra;
  */
 public class Placement extends ScopeKeyword {
 
-    /**
-     * Creates a new instance of Placemet
-     */
-    public Placement() {
-        super("placement");
-    }
 
     public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
         p_par.file.start_scope();
@@ -44,5 +38,11 @@ public class Placement extends ScopeKeyword {
             Package.write_placement_scope(p_par, p_par.board.library.packages.get(i));
         }
         p_par.file.end_scope();
+    }
+    /**
+     * Creates a new instance of Placemet
+     */
+    public Placement() {
+        super("placement");
     }
 }

@@ -37,6 +37,7 @@ import java.util.TreeSet;
  * @author Alfons Wirtz
  */
 public class MinAreaTree extends ShapeTree {
+    protected ArrayStack<TreeNode> node_stack = new ArrayStack<>(10000);
 
     /**
      * Constructor with a fixed set of directions defining the keys and and the
@@ -202,5 +203,4 @@ public class MinAreaTree extends ShapeTree {
         }
     }
 
-    protected ArrayStack<TreeNode> node_stack = new ArrayStack<>(10000);
 }

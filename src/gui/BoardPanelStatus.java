@@ -25,8 +25,13 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-final class BoardPanelStatus extends javax.swing.JPanel {
+class BoardPanelStatus extends javax.swing.JPanel {
 
+
+    final javax.swing.JLabel status_message;
+    final javax.swing.JLabel add_message;
+    final javax.swing.JLabel current_layer;
+    final javax.swing.JLabel mouse_position;
     /**
      * Creates a new instance of BoardStatusPanel
      */
@@ -87,9 +92,4 @@ final class BoardPanelStatus extends javax.swing.JPanel {
 
         this.add(right_message_panel, java.awt.BorderLayout.EAST);
     }
-
-    final javax.swing.JLabel status_message;
-    final javax.swing.JLabel add_message;
-    final javax.swing.JLabel current_layer;
-    final javax.swing.JLabel mouse_position;
 }

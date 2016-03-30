@@ -36,6 +36,52 @@ import java.util.Set;
  */
 public class BatchOptRoute {
 
+    private static int MAX_AUTOROUTE_PASSES = 6;
+    private static int ADDITIONAL_RIPUP_COST_FACTOR_AT_START = 10;
+
+    static boolean contains_only_unfixed_traces(Collection<Item> p_item_list) {
+        for (Item curr_item : p_item_list) {
+            if (curr_item.is_user_fixed() || !(curr_item instanceof Trace)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Calculates the cumulative trace lengths multiplied by the trace radius of
+     * all traces on the board, which are not shove_fixed.
+     */
+    private static double calc_weighted_trace_length(RoutingBoard p_board) {
+        double result = 0;
+        int default_clearance_class = rules.BoardRules.default_clearance_class();
+        Iterator<UndoableObjects.UndoableObjectNode> it = p_board.item_list.start_read_object();
+        for (;;) {
+            UndoableObjects.Storable curr_item = p_board.item_list.read_object(it);
+            if (curr_item == null) {
+                break;
+            }
+            if (curr_item instanceof Trace) {
+                Trace curr_trace = (Trace) curr_item;
+                FixedState fixed_state = curr_trace.get_fixed_state();
+                if (fixed_state == FixedState.UNFIXED || fixed_state == FixedState.SHOVE_FIXED) {
+                    double weighted_trace_length = curr_trace.get_length() * (curr_trace.get_half_width() + p_board.clearance_value(curr_trace.clearance_class_no(), default_clearance_class, curr_trace.get_layer()));
+                    if (fixed_state == FixedState.SHOVE_FIXED) {
+                        // to produce less violations with pin exit directions.
+                        weighted_trace_length /= 2;
+                    }
+                    result += weighted_trace_length;
+                }
+            }
+        }
+        return result;
+    }
+
+    private final InteractiveActionThread thread;
+    private final RoutingBoard routing_board;
+    private ReadSortedRouteItems sorted_route_items;
+    private boolean use_increased_ripup_costs; // in the first passes the ripup costs are icreased for better performance.
+    private double min_cumulative_trace_length_before = 0;
     /**
      * To optimize the route on the board after the autoroute task is finished.
      */
@@ -44,7 +90,6 @@ public class BatchOptRoute {
         this.routing_board = p_thread.hdlg.get_routing_board();
         this.sorted_route_items = null;
     }
-
     /**
      * Optimize the route on the board.
      */
@@ -62,7 +107,6 @@ public class BatchOptRoute {
             route_improved = opt_route_pass(curr_pass_no, with_prefered_directions);
         }
     }
-
     /**
      * Pass to reduce the number of vias an to shorten the trace lengthon a
      * completely routed board. Returns true, if the route was improved.
@@ -93,7 +137,6 @@ public class BatchOptRoute {
         }
         return route_improved;
     }
-
     /**
      * Trie to improve the route by retouting the connections containing p_item.
      */
@@ -169,45 +212,6 @@ public class BatchOptRoute {
         }
         return route_improved;
     }
-
-    static boolean contains_only_unfixed_traces(Collection<Item> p_item_list) {
-        for (Item curr_item : p_item_list) {
-            if (curr_item.is_user_fixed() || !(curr_item instanceof Trace)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Calculates the cumulative trace lengths multiplied by the trace radius of
-     * all traces on the board, which are not shove_fixed.
-     */
-    private static double calc_weighted_trace_length(RoutingBoard p_board) {
-        double result = 0;
-        int default_clearance_class = rules.BoardRules.default_clearance_class();
-        Iterator<UndoableObjects.UndoableObjectNode> it = p_board.item_list.start_read_object();
-        for (;;) {
-            UndoableObjects.Storable curr_item = p_board.item_list.read_object(it);
-            if (curr_item == null) {
-                break;
-            }
-            if (curr_item instanceof Trace) {
-                Trace curr_trace = (Trace) curr_item;
-                FixedState fixed_state = curr_trace.get_fixed_state();
-                if (fixed_state == FixedState.UNFIXED || fixed_state == FixedState.SHOVE_FIXED) {
-                    double weighted_trace_length = curr_trace.get_length() * (curr_trace.get_half_width() + p_board.clearance_value(curr_trace.clearance_class_no(), default_clearance_class, curr_trace.get_layer()));
-                    if (fixed_state == FixedState.SHOVE_FIXED) {
-                        // to produce less violations with pin exit directions.
-                        weighted_trace_length /= 2;
-                    }
-                    result += weighted_trace_length;
-                }
-            }
-        }
-        return result;
-    }
-
     /**
      * Returns the current position of the item, which will be rerouted or null,
      * if the optimizer is not active.
@@ -218,20 +222,10 @@ public class BatchOptRoute {
         }
         return sorted_route_items.get_current_position();
     }
-    private final InteractiveActionThread thread;
-    private final RoutingBoard routing_board;
-    private ReadSortedRouteItems sorted_route_items;
-    private boolean use_increased_ripup_costs; // in the first passes the ripup costs are icreased for better performance.
-    private double min_cumulative_trace_length_before = 0;
-    private static int MAX_AUTOROUTE_PASSES = 6;
-    private static int ADDITIONAL_RIPUP_COST_FACTOR_AT_START = 10;
 
-    /**
-     * Reads the vias and traces on the board in ascending x order. Because the
-     * vias and traces on the board change while optimizing the item list of the
-     * board is read from scratch each time the next route item is returned.
-     */
     private class ReadSortedRouteItems {
+        private FloatPoint min_item_coor;
+        private int min_item_layer;
 
         ReadSortedRouteItems() {
             min_item_coor = new FloatPoint(Integer.MIN_VALUE, Integer.MIN_VALUE);
@@ -315,7 +309,5 @@ public class BatchOptRoute {
         FloatPoint get_current_position() {
             return min_item_coor;
         }
-        private FloatPoint min_item_coor;
-        private int min_item_layer;
     }
 }

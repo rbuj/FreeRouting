@@ -27,6 +27,10 @@ import java.util.Vector;
  * @author Alfons Wirtz
  */
 public class LogicalParts implements java.io.Serializable {
+    /**
+     * The array of logical parts
+     */
+    private Vector<LogicalPart> part_arr = new Vector<>();
 
     /**
      * Adds a logical part to the database.
@@ -70,8 +74,4 @@ public class LogicalParts implements java.io.Serializable {
         return part_arr.size();
     }
 
-    /**
-     * The array of logical parts
-     */
-    private Vector<LogicalPart> part_arr = new Vector<>();
 }

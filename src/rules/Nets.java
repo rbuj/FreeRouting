@@ -28,6 +28,26 @@ import java.util.Vector;
  * @author alfons
  */
 public class Nets implements java.io.Serializable {
+    /**
+     * The maximum legal net number for nets.
+     */
+    public static final int max_legal_net_no = 9999999;
+    /**
+     * auxiliary net number for internal use
+     */
+    public static final int hidden_net_no = 10000001;
+    /**
+     * Returns false, if p_net_no belongs to a net internally used for special
+     * purposes.
+     */
+    public static boolean is_normal_net_no(int p_net_no) {
+        return (p_net_no > 0 && p_net_no <= max_legal_net_no);
+    }
+    /**
+     * The list of electrical nets on the board
+     */
+    private Vector<Net> net_arr;
+    private board.BasicBoard board;
 
     /**
      * Creates a new empty net list
@@ -107,13 +127,6 @@ public class Nets implements java.io.Serializable {
         return new_net;
     }
 
-    /**
-     * Returns false, if p_net_no belongs to a net internally used for special
-     * purposes.
-     */
-    public static boolean is_normal_net_no(int p_net_no) {
-        return (p_net_no > 0 && p_net_no <= max_legal_net_no);
-    }
 
     /**
      * Sets the Board of this net list. Used for example to get access to the
@@ -131,17 +144,4 @@ public class Nets implements java.io.Serializable {
         return this.board;
     }
 
-    /**
-     * The maximum legal net number for nets.
-     */
-    public static final int max_legal_net_no = 9999999;
-    /**
-     * auxiliary net number for internal use
-     */
-    public static final int hidden_net_no = 10000001;
-    /**
-     * The list of electrical nets on the board
-     */
-    private Vector<Net> net_arr;
-    private board.BasicBoard board;
 }

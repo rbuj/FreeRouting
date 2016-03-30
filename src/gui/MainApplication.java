@@ -34,7 +34,12 @@ import java.util.Locale;
  *
  * @author Alfons Wirtz
  */
-public final class MainApplication extends javax.swing.JFrame {
+public class MainApplication extends javax.swing.JFrame {
+    private static final TestLevel DEBUG_LEVEL = TestLevel.CRITICAL_DEBUGGING_OUTPUT;
+    /**
+     * Change this string when creating a new version
+     */
+    static final String VERSION_NUMBER_STRING = "1.2.43";
 
     /**
      * Main function of the Application
@@ -140,92 +145,6 @@ public final class MainApplication extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * Creates new form MainApplication It takes the directory of the board
-     * designs as optional argument.
-     */
-    public MainApplication(String p_design_dir, boolean p_is_test_version,
-            java.util.Locale p_current_locale) {
-        this.design_dir_name = p_design_dir;
-        this.is_test_version = p_is_test_version;
-        this.locale = p_current_locale;
-        this.resources
-                = java.util.ResourceBundle.getBundle("gui.resources.MainApplication", p_current_locale);
-        main_panel = new javax.swing.JPanel();
-        getContentPane().add(main_panel);
-        java.awt.GridBagLayout gridbag = new java.awt.GridBagLayout();
-        main_panel.setLayout(gridbag);
-
-        java.awt.GridBagConstraints gridbag_constraints = new java.awt.GridBagConstraints();
-        gridbag_constraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        gridbag_constraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-
-        open_board_button = new javax.swing.JButton();
-        message_field = new javax.swing.JTextField();
-        message_field.setText("");
-
-        setTitle(resources.getString("title"));
-        boolean add_buttons = true;
-
-        open_board_button.setText(resources.getString("open_own_design"));
-        open_board_button.setToolTipText(resources.getString("open_own_design_tooltip"));
-        open_board_button.addActionListener(new java.awt.event.ActionListener() {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                open_board_design_action(evt);
-            }
-        });
-
-        gridbag.setConstraints(open_board_button, gridbag_constraints);
-        if (add_buttons) {
-            main_panel.add(open_board_button, gridbag_constraints);
-        }
-
-        message_field.setPreferredSize(new java.awt.Dimension(230, 20));
-        message_field.setRequestFocusEnabled(false);
-        gridbag.setConstraints(message_field, gridbag_constraints);
-        main_panel.add(message_field, gridbag_constraints);
-
-        this.addWindowListener(new WindowStateListener());
-        pack();
-    }
-
-    /**
-     * opens a board design from a binary file or a specctra dsn file.
-     */
-    private void open_board_design_action(java.awt.event.ActionEvent evt) {
-
-        DesignFile design_file = DesignFile.open_dialog(this.design_dir_name);
-
-        if (design_file == null) {
-            message_field.setText(resources.getString("message_3"));
-            return;
-        }
-
-        BoardFrame.Option option;
-        option = BoardFrame.Option.FROM_START_MENU;
-        String message = resources.getString("loading_design") + " " + design_file.get_name();
-        message_field.setText(message);
-        WindowMessage welcome_window = WindowMessage.show(message);
-        welcome_window.setTitle(message);
-        BoardFrame new_frame
-                = create_board_frame(design_file, message_field, option, this.is_test_version, this.locale);
-        welcome_window.dispose();
-        if (new_frame == null) {
-            return;
-        }
-        message_field.setText(resources.getString("message_4") + " " + design_file.get_name() + " " + resources.getString("message_5"));
-        board_frames.add(new_frame);
-        new_frame.addWindowListener(new BoardFrameWindowListener(new_frame));
-    }
-
-    /**
-     * Exit the Application
-     */
-    private void exitForm(java.awt.event.WindowEvent evt) {
-        System.exit(0);
-    }
 
     /**
      * Creates a new board frame containing the data of the input design file.
@@ -281,9 +200,93 @@ public final class MainApplication extends javax.swing.JFrame {
     private String design_dir_name = null;
     private final boolean is_test_version;
     private final java.util.Locale locale;
-    private static final TestLevel DEBUG_LEVEL = TestLevel.CRITICAL_DEBUGGING_OUTPUT;
+    /**
+     * Creates new form MainApplication It takes the directory of the board
+     * designs as optional argument.
+     */
+    public MainApplication(String p_design_dir, boolean p_is_test_version,
+            java.util.Locale p_current_locale) {
+        this.design_dir_name = p_design_dir;
+        this.is_test_version = p_is_test_version;
+        this.locale = p_current_locale;
+        this.resources
+                = java.util.ResourceBundle.getBundle("gui.resources.MainApplication", p_current_locale);
+        main_panel = new javax.swing.JPanel();
+        getContentPane().add(main_panel);
+        java.awt.GridBagLayout gridbag = new java.awt.GridBagLayout();
+        main_panel.setLayout(gridbag);
+
+        java.awt.GridBagConstraints gridbag_constraints = new java.awt.GridBagConstraints();
+        gridbag_constraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        gridbag_constraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+
+        open_board_button = new javax.swing.JButton();
+        message_field = new javax.swing.JTextField();
+        message_field.setText("");
+
+        setTitle(resources.getString("title"));
+        boolean add_buttons = true;
+
+        open_board_button.setText(resources.getString("open_own_design"));
+        open_board_button.setToolTipText(resources.getString("open_own_design_tooltip"));
+        open_board_button.addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                open_board_design_action(evt);
+            }
+        });
+
+        gridbag.setConstraints(open_board_button, gridbag_constraints);
+        if (add_buttons) {
+            main_panel.add(open_board_button, gridbag_constraints);
+        }
+
+        message_field.setPreferredSize(new java.awt.Dimension(230, 20));
+        message_field.setRequestFocusEnabled(false);
+        gridbag.setConstraints(message_field, gridbag_constraints);
+        main_panel.add(message_field, gridbag_constraints);
+
+        this.addWindowListener(new WindowStateListener());
+        pack();
+    }
+    /**
+     * opens a board design from a binary file or a specctra dsn file.
+     */
+    private void open_board_design_action(java.awt.event.ActionEvent evt) {
+
+        DesignFile design_file = DesignFile.open_dialog(this.design_dir_name);
+
+        if (design_file == null) {
+            message_field.setText(resources.getString("message_3"));
+            return;
+        }
+
+        BoardFrame.Option option;
+        option = BoardFrame.Option.FROM_START_MENU;
+        String message = resources.getString("loading_design") + " " + design_file.get_name();
+        message_field.setText(message);
+        WindowMessage welcome_window = WindowMessage.show(message);
+        welcome_window.setTitle(message);
+        BoardFrame new_frame
+                = create_board_frame(design_file, message_field, option, this.is_test_version, this.locale);
+        welcome_window.dispose();
+        if (new_frame == null) {
+            return;
+        }
+        message_field.setText(resources.getString("message_4") + " " + design_file.get_name() + " " + resources.getString("message_5"));
+        board_frames.add(new_frame);
+        new_frame.addWindowListener(new BoardFrameWindowListener(new_frame));
+    }
+    /**
+     * Exit the Application
+     */
+    private void exitForm(java.awt.event.WindowEvent evt) {
+        System.exit(0);
+    }
 
     private class BoardFrameWindowListener extends java.awt.event.WindowAdapter {
+        private BoardFrame board_frame;
 
         public BoardFrameWindowListener(BoardFrame p_board_frame) {
             this.board_frame = p_board_frame;
@@ -298,7 +301,6 @@ public final class MainApplication extends javax.swing.JFrame {
                 board_frame = null;
             }
         }
-        private BoardFrame board_frame;
     }
 
     private class WindowStateListener extends java.awt.event.WindowAdapter {
@@ -322,8 +324,4 @@ public final class MainApplication extends javax.swing.JFrame {
 
     }
 
-    /**
-     * Change this string when creating a new version
-     */
-    static final String VERSION_NUMBER_STRING = "1.2.43";
 }

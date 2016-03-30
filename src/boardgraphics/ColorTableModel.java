@@ -27,6 +27,8 @@ import javax.swing.table.AbstractTableModel;
  * @author Alfons Wirtz
  */
 public abstract class ColorTableModel extends AbstractTableModel {
+    protected final Object[][] data;
+    protected final java.util.Locale locale;
 
     protected ColorTableModel(int p_row_count, java.util.Locale p_locale) {
         this.data = new Object[p_row_count][];
@@ -71,6 +73,4 @@ public abstract class ColorTableModel extends AbstractTableModel {
         p_stream.writeObject(this.locale);
     }
 
-    protected final Object[][] data;
-    protected final java.util.Locale locale;
 }

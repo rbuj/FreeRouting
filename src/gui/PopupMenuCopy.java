@@ -24,7 +24,8 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public final class PopupMenuCopy extends PopupMenuDisplay {
+public class PopupMenuCopy extends PopupMenuDisplay {
+    private final PopupMenuChangeLayer change_layer_menu;
 
     /**
      * Creates a new instance of CopyPopupMenu
@@ -76,5 +77,4 @@ public final class PopupMenuCopy extends PopupMenuDisplay {
         }
     }
 
-    private final PopupMenuChangeLayer change_layer_menu;
 }

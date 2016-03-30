@@ -31,7 +31,8 @@ import rules.Nets;
  *
  * @author Alfons Wirtz
  */
-public final class WindowLengthViolations extends WindowObjectListWithFilter {
+public class WindowLengthViolations extends WindowObjectListWithFilter {
+    private final java.util.ResourceBundle resources;
 
     /**
      * Creates a new instance of WindowLengthViolations
@@ -79,9 +80,10 @@ public final class WindowLengthViolations extends WindowObjectListWithFilter {
         board_handling.zoom_selection();
     }
 
-    private final java.util.ResourceBundle resources;
 
     private class LengthViolation implements Comparable<LengthViolation> {
+        final Net net;
+        final double violation_length;
 
         LengthViolation(Net p_net, double p_violation_length) {
             net = p_net;
@@ -112,7 +114,5 @@ public final class WindowLengthViolations extends WindowObjectListWithFilter {
             return result;
         }
 
-        final Net net;
-        final double violation_length;
     }
 }

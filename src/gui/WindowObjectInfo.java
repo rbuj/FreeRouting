@@ -27,7 +27,9 @@ import java.util.Collection;
  *
  * @author Alfons Wirtz
  */
-public final class WindowObjectInfo extends BoardTemporarySubWindow implements board.ObjectInfoPanel {
+public class WindowObjectInfo extends BoardTemporarySubWindow implements board.ObjectInfoPanel {
+    private static final int MAX_WINDOW_HEIGHT = 500;
+    private static final int SCROLLBAR_ADD = 30;
 
     /**
      * Displays a new ObjectInfoWindow with information about the items in
@@ -123,6 +125,15 @@ public final class WindowObjectInfo extends BoardTemporarySubWindow implements b
         new_window.setVisible(true);
         return new_window;
     }
+    private final javax.swing.JTextPane text_pane;
+    private final board.CoordinateTransform coordinate_transform;
+    private final java.util.ResourceBundle resources;
+    private final java.text.NumberFormat number_format;
+    /**
+     * The new created windows by pushing buttons inside this window. Used when
+     * closing this window to close also all subwindows.
+     */
+    private Collection<WindowObjectInfo> subwindows = new java.util.LinkedList<>();
 
     /**
      * Creates a new instance of ItemInfoWindow
@@ -326,38 +337,10 @@ public final class WindowObjectInfo extends BoardTemporarySubWindow implements b
         super.dispose();
     }
 
-    private final javax.swing.JTextPane text_pane;
-    private final board.CoordinateTransform coordinate_transform;
-
-    private final java.util.ResourceBundle resources;
-    private final java.text.NumberFormat number_format;
-
-    /**
-     * The new created windows by pushing buttons inside this window. Used when
-     * closing this window to close also all subwindows.
-     */
-    private Collection<WindowObjectInfo> subwindows = new java.util.LinkedList<>();
-
-    private static final int MAX_WINDOW_HEIGHT = 500;
-    private static final int SCROLLBAR_ADD = 30;
 
     private class InfoButtonListener implements java.awt.event.ActionListener {
 
-        public InfoButtonListener(String p_title, java.util.Collection<Printable> p_objects) {
-            this.title = p_title;
-            this.objects = p_objects;
-        }
-
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
-            WindowObjectInfo new_window = display(this.title, this.objects, board_frame, coordinate_transform);
-
-            java.awt.Point loc = getLocation();
-            java.awt.Point new_window_location
-                    = new java.awt.Point((int) (loc.getX() + WINDOW_OFFSET), (int) (loc.getY() + WINDOW_OFFSET));
-            new_window.setLocation(new_window_location);
-            subwindows.add(new_window);
-        }
+        private static final int WINDOW_OFFSET = 30;
 
         /**
          * The title of this window
@@ -369,6 +352,19 @@ public final class WindowObjectInfo extends BoardTemporarySubWindow implements b
          */
         private final Collection<Printable> objects;
 
-        private static final int WINDOW_OFFSET = 30;
+        public InfoButtonListener(String p_title, java.util.Collection<Printable> p_objects) {
+            this.title = p_title;
+            this.objects = p_objects;
+        }
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
+            WindowObjectInfo new_window = display(this.title, this.objects, board_frame, coordinate_transform);
+
+            java.awt.Point loc = getLocation();
+            java.awt.Point new_window_location
+                    = new java.awt.Point((int) (loc.getX() + WINDOW_OFFSET), (int) (loc.getY() + WINDOW_OFFSET));
+            new_window.setLocation(new_window_location);
+            subwindows.add(new_window);
+        }
     }
 }

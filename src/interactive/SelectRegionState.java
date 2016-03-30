@@ -27,6 +27,8 @@ import geometry.planar.FloatPoint;
  * @author Alfons Wirtz
  */
 public class SelectRegionState extends InteractiveState {
+    protected FloatPoint corner1 = null;
+    protected FloatPoint corner2 = null;
 
     /**
      * Creates a new instance of SelectRegionState
@@ -64,6 +66,4 @@ public class SelectRegionState extends InteractiveState {
         hdlg.graphics_context.draw_rectangle(corner1, corner2, 1, java.awt.Color.white, p_graphics, 1);
     }
 
-    protected FloatPoint corner1 = null;
-    protected FloatPoint corner2 = null;
 }

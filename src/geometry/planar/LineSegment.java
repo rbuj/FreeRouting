@@ -26,6 +26,11 @@ import datastructures.Signum;
  * @author Alfons Wirtz
  */
 public class LineSegment implements java.io.Serializable {
+    private final Line start;
+    private final Line middle;
+    private final Line end;
+    transient private Point precalculated_start_point = null;
+    transient private Point precalculated_end_point = null;
 
     /**
      * Creates a line segment from the 3 input lines. It starts at the
@@ -726,9 +731,4 @@ public class LineSegment implements java.io.Serializable {
 
         return result;
     }
-    private final Line start;
-    private final Line middle;
-    private final Line end;
-    transient private Point precalculated_start_point = null;
-    transient private Point precalculated_end_point = null;
 }

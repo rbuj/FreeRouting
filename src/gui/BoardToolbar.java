@@ -24,8 +24,15 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-final class BoardToolbar extends javax.swing.JPanel {
+class BoardToolbar extends javax.swing.JPanel {
 
+
+    private final BoardFrame board_frame;
+    private final javax.swing.JToggleButton select_button;
+    private final javax.swing.JToggleButton route_button;
+    private final javax.swing.JToggleButton drag_button;
+    final javax.swing.JFormattedTextField unit_factor_field;
+    final javax.swing.JComboBox<board.Unit> unit_combo_box;
     /**
      * Creates a new instance of BoardToolbarPanel
      */
@@ -263,7 +270,6 @@ final class BoardToolbar extends javax.swing.JPanel {
 
         this.add(right_toolbar, java.awt.BorderLayout.EAST);
     }
-
     /**
      * Sets the selected button in the menu button button group
      */
@@ -277,11 +283,4 @@ final class BoardToolbar extends javax.swing.JPanel {
             this.select_button.setSelected(true);
         }
     }
-
-    private final BoardFrame board_frame;
-    private final javax.swing.JToggleButton select_button;
-    private final javax.swing.JToggleButton route_button;
-    private final javax.swing.JToggleButton drag_button;
-    final javax.swing.JFormattedTextField unit_factor_field;
-    final javax.swing.JComboBox<board.Unit> unit_combo_box;
 }

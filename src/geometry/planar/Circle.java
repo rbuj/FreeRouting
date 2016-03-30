@@ -25,6 +25,11 @@ package geometry.planar;
  * @author Alfons Wirtz
  */
 public class Circle implements ConvexShape, java.io.Serializable {
+    public final IntPoint center;
+    public final int radius;
+    
+    // private TileShape precalculated_bounding_tile = null;
+    // private static final int c_max_approximation_segment_length = 10000;
 
     /**
      * Creates a new instance of Circle
@@ -356,9 +361,4 @@ public class Circle implements ConvexShape, java.io.Serializable {
         return result;
     }
 
-    public final IntPoint center;
-    public final int radius;
-
-    // private TileShape precalculated_bounding_tile = null;
-    // private static final int c_max_approximation_segment_length = 10000;
 }

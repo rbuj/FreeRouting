@@ -29,6 +29,14 @@ import java.util.Vector;
  * @author alfons
  */
 public class Padstacks implements java.io.Serializable {
+    /**
+     * The array of Padstacks in this object
+     */
+    private Vector<Padstack> padstack_arr;
+    /**
+     * The layer structure of each padstack.
+     */
+    public final board.LayerStructure board_layer_structure;
 
     /**
      * Creates a new instance of Padstacks
@@ -116,13 +124,4 @@ public class Padstacks implements java.io.Serializable {
         return add(shape_arr);
     }
 
-    /**
-     * The array of Padstacks in this object
-     */
-    private Vector<Padstack> padstack_arr;
-
-    /**
-     * The layer structure of each padstack.
-     */
-    public final board.LayerStructure board_layer_structure;
 }

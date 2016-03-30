@@ -29,7 +29,23 @@ import rules.ViaRule;
  *
  * @author Alfons Wirtz
  */
-public final class WindowVia extends BoardSavableSubWindow {
+public class WindowVia extends BoardSavableSubWindow {
+
+    private static final int WINDOW_OFFSET = 30;
+
+    private final BoardFrame board_frame;
+
+    private final java.util.ResourceBundle resources;
+
+    private final javax.swing.JList<ViaRule> rule_list;
+    private final javax.swing.DefaultListModel<ViaRule> rule_list_model;
+
+    private final javax.swing.JPanel main_panel;
+
+    /**
+     * The subwindows with information about selected object
+     */
+    private final java.util.Collection<javax.swing.JFrame> subwindows = new java.util.LinkedList<>();
 
     /**
      * Creates a new instance of ViaWindow
@@ -159,7 +175,6 @@ public final class WindowVia extends BoardSavableSubWindow {
         this.pack();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
-
     @Override
     public void refresh() {
         // reinsert the elements in the rule list
@@ -180,7 +195,6 @@ public final class WindowVia extends BoardSavableSubWindow {
             it.remove();
         }
     }
-
     @Override
     public void dispose() {
         for (javax.swing.JFrame curr_subwindow : this.subwindows) {
@@ -193,22 +207,6 @@ public final class WindowVia extends BoardSavableSubWindow {
         }
         super.dispose();
     }
-
-    private final BoardFrame board_frame;
-
-    private final java.util.ResourceBundle resources;
-
-    private final javax.swing.JList<ViaRule> rule_list;
-    private final javax.swing.DefaultListModel<ViaRule> rule_list_model;
-
-    private final javax.swing.JPanel main_panel;
-
-    /**
-     * The subwindows with information about selected object
-     */
-    private final java.util.Collection<javax.swing.JFrame> subwindows = new java.util.LinkedList<>();
-
-    private static final int WINDOW_OFFSET = 30;
 
     private class ShowPadstacksListener implements java.awt.event.ActionListener {
 
@@ -330,11 +328,11 @@ public final class WindowVia extends BoardSavableSubWindow {
         }
     }
 
-    /**
-     * Internal class used in AddPadstackListener
-     */
     private class PadstackInputPanel extends javax.swing.JPanel {
 
+
+        private final javax.swing.JLabel[] layer_names;
+        private final javax.swing.JFormattedTextField[] circle_radius;
         PadstackInputPanel(Layer p_from_layer, Layer p_to_layer, Double p_default_radius) {
             java.awt.GridBagLayout gridbag = new java.awt.GridBagLayout();
             this.setLayout(gridbag);
@@ -362,9 +360,6 @@ public final class WindowVia extends BoardSavableSubWindow {
                 this.add(circle_radius[i], gridbag_constraints);
             }
         }
-
-        private final javax.swing.JLabel[] layer_names;
-        private final javax.swing.JFormattedTextField[] circle_radius;
     }
 
     private class RemovePadstackListener implements java.awt.event.ActionListener {

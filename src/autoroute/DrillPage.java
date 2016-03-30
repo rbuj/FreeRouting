@@ -37,6 +37,37 @@ import java.util.LinkedList;
  * @author Alfons Wirtz
  */
 class DrillPage implements ExpandableObject {
+    /**
+     * Looks if p_drill_shape contains the center of a drillable Pin on p_layer.
+     * Returns null, if no such Pin was found.
+     */
+    private static Point calc_pin_center_in_drill(TileShape p_drill_shape, int p_layer, RoutingBoard p_board) {
+        Collection<Item> overlapping_items = p_board.overlapping_items(p_drill_shape, p_layer);
+        Point result = null;
+        for (Item curr_item : overlapping_items) {
+            if (curr_item instanceof board.Pin) {
+                board.Pin curr_pin = (board.Pin) curr_item;
+                if (curr_pin.drill_allowed() && p_drill_shape.contains_inside(curr_pin.get_center())) {
+                    result = curr_pin.get_center();
+                }
+            }
+        }
+        return result;
+    }
+    private final MazeSearchElement[] maze_search_info_arr;
+    /**
+     * The shape of the page
+     */
+    final IntBox shape;
+    /**
+     * The list of expansion drills on this page. Null, if not yet calculated.
+     */
+    private Collection<ExpansionDrill> drills = null;
+    private final RoutingBoard board;
+    /**
+     * The number of the net, for which the drills are calculated
+     */
+    private int net_no = -1;
 
     /**
      * Creates a new instance of DrillPage
@@ -184,40 +215,4 @@ class DrillPage implements ExpandableObject {
         return null;
     }
 
-    /**
-     * Looks if p_drill_shape contains the center of a drillable Pin on p_layer.
-     * Returns null, if no such Pin was found.
-     */
-    private static Point calc_pin_center_in_drill(TileShape p_drill_shape, int p_layer, RoutingBoard p_board) {
-        Collection<Item> overlapping_items = p_board.overlapping_items(p_drill_shape, p_layer);
-        Point result = null;
-        for (Item curr_item : overlapping_items) {
-            if (curr_item instanceof board.Pin) {
-                board.Pin curr_pin = (board.Pin) curr_item;
-                if (curr_pin.drill_allowed() && p_drill_shape.contains_inside(curr_pin.get_center())) {
-                    result = curr_pin.get_center();
-                }
-            }
-        }
-        return result;
-    }
-
-    private final MazeSearchElement[] maze_search_info_arr;
-
-    /**
-     * The shape of the page
-     */
-    final IntBox shape;
-
-    /**
-     * The list of expansion drills on this page. Null, if not yet calculated.
-     */
-    private Collection<ExpansionDrill> drills = null;
-
-    private final RoutingBoard board;
-
-    /**
-     * The number of the net, for which the drills are calculated
-     */
-    private int net_no = -1;
 }

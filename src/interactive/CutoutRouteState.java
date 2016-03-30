@@ -67,6 +67,7 @@ public class CutoutRouteState extends SelectRegionState {
         new_instance.hdlg.screen_messages.set_status_message(new_instance.resources.getString("drag_left_mouse_button_to_select_cutout_rectangle"));
         return new_instance;
     }
+    private final Collection<PolylineTrace> trace_list;
 
     /**
      * Creates a new instance of CutoutRouteState
@@ -133,5 +134,4 @@ public class CutoutRouteState extends SelectRegionState {
         super.draw(p_graphics);
     }
 
-    private final Collection<PolylineTrace> trace_list;
 }

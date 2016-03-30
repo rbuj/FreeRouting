@@ -25,6 +25,10 @@ package datastructures;
  * @author alfons
  */
 public class IndentFileWriter extends java.io.OutputStreamWriter {
+    private static final String INDENT_STRING = "  ";
+    private static final String BEGIN_SCOPE = "(";
+    private static final String END_SCOPE = ")";
+    private int current_indent_level = 0;
 
     /**
      * Creates a new instance of IndentFileWriter
@@ -73,9 +77,4 @@ public class IndentFileWriter extends java.io.OutputStreamWriter {
         }
     }
 
-    private int current_indent_level = 0;
-
-    private static final String INDENT_STRING = "  ";
-    private static final String BEGIN_SCOPE = "(";
-    private static final String END_SCOPE = ")";
 }

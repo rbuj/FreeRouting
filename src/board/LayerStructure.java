@@ -25,6 +25,7 @@ package board;
  * @author alfons
  */
 public class LayerStructure implements java.io.Serializable {
+    public final Layer[] arr;
 
     /**
      * Creates a new instance of LayerStructure
@@ -113,5 +114,4 @@ public class LayerStructure implements java.io.Serializable {
         return get_no(curr_signal_layer);
     }
 
-    public final Layer[] arr;
 }

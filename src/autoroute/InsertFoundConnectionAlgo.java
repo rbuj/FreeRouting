@@ -83,6 +83,10 @@ public class InsertFoundConnectionAlgo {
         p_board.normalize_traces(p_ctrl.net_no);
         return new_instance;
     }
+    private final RoutingBoard board;
+    private final AutorouteControl ctrl;
+    private IntPoint last_corner = null;
+    private IntPoint first_corner = null;
 
     /**
      * Creates a new instance of InsertFoundConnectionAlgo
@@ -340,8 +344,4 @@ public class InsertFoundConnectionAlgo {
         }
         return true;
     }
-    private final RoutingBoard board;
-    private final AutorouteControl ctrl;
-    private IntPoint last_corner = null;
-    private IntPoint first_corner = null;
 }

@@ -28,6 +28,8 @@ import geometry.planar.IntOctagon;
  * @author Alfons Wirtz
  */
 class ChangedArea {
+    final int layer_count;
+    MutableOctagon[] arr;
 
     public ChangedArea(int p_layer_count) {
         layer_count = p_layer_count;
@@ -104,8 +106,6 @@ class ChangedArea {
         arr[p_layer].set_empty();
     }
 
-    final int layer_count;
-    MutableOctagon[] arr;
 
     /**
      * mutable octagon with double coordinates (see geometry.planar.IntOctagon)

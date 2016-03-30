@@ -28,6 +28,8 @@ package datastructures;
  * @author Alfons Wirtz
  */
 public class ArrayStack<p_element_type> {
+    private int level = -1;
+    private p_element_type[] node_arr;
 
     /**
      * Creates a new instance of ArrayStack with an initial maximal capacity for
@@ -77,7 +79,4 @@ public class ArrayStack<p_element_type> {
         this.node_arr = new_arr;
     }
 
-    private int level = -1;
-
-    private p_element_type[] node_arr;
 }

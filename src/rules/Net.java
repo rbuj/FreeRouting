@@ -29,6 +29,31 @@ import datastructures.UndoableObjects;
  * @author Alfons Wirtz
  */
 public class Net implements Comparable<Net>, board.ObjectInfoPanel.Printable, java.io.Serializable {
+    /**
+     * The name of the net
+     */
+    public final String name;
+    /**
+     * Used only if a net is divided internally because of fromto rules for
+     * example For normal nets it is always 1.
+     */
+    public final int subnet_number;
+    /**
+     * The unique strict positive number of the net
+     */
+    public final int net_number;
+    /**
+     * Indicates, if this net contains a power plane
+     */
+    private boolean contains_plane;
+    /**
+     * The routing rule of this net
+     */
+    private NetClass net_class;
+    /**
+     * The net list, where this net belongs to.
+     */
+    public final Nets net_list;
 
     /**
      * Creates a new instance of Net. p_net_list is the net list, where this net
@@ -201,29 +226,4 @@ public class Net implements Comparable<Net>, board.ObjectInfoPanel.Printable, ja
         p_window.newline();
 
     }
-    /**
-     * The name of the net
-     */
-    public final String name;
-    /**
-     * Used only if a net is divided internally because of fromto rules for
-     * example For normal nets it is always 1.
-     */
-    public final int subnet_number;
-    /**
-     * The unique strict positive number of the net
-     */
-    public final int net_number;
-    /**
-     * Indicates, if this net contains a power plane
-     */
-    private boolean contains_plane;
-    /**
-     * The routing rule of this net
-     */
-    private NetClass net_class;
-    /**
-     * The net list, where this net belongs to.
-     */
-    public final Nets net_list;
 }

@@ -31,6 +31,9 @@ import java.math.BigInteger;
  * @author Alfons Wirtz
  */
 public class RationalVector extends Vector implements java.io.Serializable {
+    public final BigInteger x;
+    public final BigInteger y;
+    public final BigInteger z;
 
     /**
      * creates a RetionalVector from 3 BigIntegers p_x, p_y and p_z. They
@@ -311,7 +314,4 @@ public class RationalVector extends Vector implements java.io.Serializable {
         return Side.of(signum);
     }
 
-    public final BigInteger x;
-    public final BigInteger y;
-    public final BigInteger z;
 }

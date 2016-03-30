@@ -35,6 +35,24 @@ import java.awt.Color;
  * @author Alfons Wirtz
  */
 public class ObstacleArea extends Item implements java.io.Serializable {
+    /**
+     * For debugging the division into tree shapes
+     */
+    private static final boolean display_tree_shapes = false;
+    /**
+     * The name of this ObstacleArea, which is null, if the ObstacleArea doos
+     * not belong to a component.
+     */
+    public final String name;
+    /**
+     * the layer of this relative_area
+     */
+    private int layer;
+    private Area relative_area;
+    private transient Area precalculated_absolute_area = null;
+    private Vector translation;
+    private double rotation_in_degree;
+    private boolean side_changed;
 
     /**
      * Creates a new relative_area item which may belong to several nets. p_name
@@ -325,29 +343,4 @@ public class ObstacleArea extends Item implements java.io.Serializable {
         return true;
     }
 
-    /**
-     * The name of this ObstacleArea, which is null, if the ObstacleArea doos
-     * not belong to a component.
-     */
-    public final String name;
-
-    /**
-     * the layer of this relative_area
-     */
-    private int layer;
-
-    private Area relative_area;
-
-    private transient Area precalculated_absolute_area = null;
-
-    private Vector translation;
-
-    private double rotation_in_degree;
-
-    private boolean side_changed;
-
-    /**
-     * For debugging the division into tree shapes
-     */
-    private static final boolean display_tree_shapes = false;
 }

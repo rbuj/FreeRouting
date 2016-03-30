@@ -73,28 +73,6 @@ class GUIDefaultsScanner {
             + "\1\117\1\3\1\120\1\121\1\3\1\122\2\3\1\123"
             + "\5\3\1\124";
 
-    private static int[] zzUnpackAction() {
-        int[] result = new int[796];
-        int offset = 0;
-        offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
-        return result;
-    }
-
-    private static int zzUnpackAction(String packed, int offset, int[] result) {
-        int i = 0;
-        /* index in packed string  */
-        int j = offset;
-        /* index in unpacked array */
-        int l = packed.length();
-        while (i < l) {
-            int count = packed.charAt(i++);
-            int value = packed.charAt(i++);
-            do {
-                result[j++] = value;
-            } while (--count > 0);
-        }
-        return j;
-    }
 
     /**
      * Translates a state to a row index in the transition table
@@ -203,25 +181,6 @@ class GUIDefaultsScanner {
             + "\0\303\0\u6c03\0\303\0\u6c2a\0\u6c51\0\303\0\u6c78\0\u6c9f"
             + "\0\u6cc6\0\u6ced\0\u6d14\0\303";
 
-    private static int[] zzUnpackRowMap() {
-        int[] result = new int[796];
-        int offset = 0;
-        offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
-        return result;
-    }
-
-    private static int zzUnpackRowMap(String packed, int offset, int[] result) {
-        int i = 0;
-        /* index in packed string  */
-        int j = offset;
-        /* index in unpacked array */
-        int l = packed.length();
-        while (i < l) {
-            int high = packed.charAt(i++) << 16;
-            result[j++] = high | packed.charAt(i++);
-        }
-        return j;
-    }
 
     /**
      * The transition table of the DFA
@@ -944,29 +903,6 @@ class GUIDefaultsScanner {
             + "\11\0\2\7\1\0\1\7\1\0\6\7\1\u031c\22\7"
             + "\2\0";
 
-    private static int[] zzUnpackTrans() {
-        int[] result = new int[27963];
-        int offset = 0;
-        offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
-        return result;
-    }
-
-    private static int zzUnpackTrans(String packed, int offset, int[] result) {
-        int i = 0;
-        /* index in packed string  */
-        int j = offset;
-        /* index in unpacked array */
-        int l = packed.length();
-        while (i < l) {
-            int count = packed.charAt(i++);
-            int value = packed.charAt(i++);
-            value--;
-            do {
-                result[j++] = value;
-            } while (--count > 0);
-        }
-        return j;
-    }
 
 
     /* error codes */
@@ -989,6 +925,67 @@ class GUIDefaultsScanner {
     private static final String ZZ_ATTRIBUTE_PACKED_0
             = "\1\0\1\11\1\1\1\11\33\1\2\11\4\0\55\1"
             + "\2\0\2\1\1\0\1\11\65\1\1\0\u028e\1";
+    private static int[] zzUnpackAction() {
+        int[] result = new int[796];
+        int offset = 0;
+        offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
+        return result;
+    }
+    private static int zzUnpackAction(String packed, int offset, int[] result) {
+        int i = 0;
+        /* index in packed string  */
+        int j = offset;
+        /* index in unpacked array */
+        int l = packed.length();
+        while (i < l) {
+            int count = packed.charAt(i++);
+            int value = packed.charAt(i++);
+            do {
+                result[j++] = value;
+            } while (--count > 0);
+        }
+        return j;
+    }
+    private static int[] zzUnpackRowMap() {
+        int[] result = new int[796];
+        int offset = 0;
+        offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
+        return result;
+    }
+    private static int zzUnpackRowMap(String packed, int offset, int[] result) {
+        int i = 0;
+        /* index in packed string  */
+        int j = offset;
+        /* index in unpacked array */
+        int l = packed.length();
+        while (i < l) {
+            int high = packed.charAt(i++) << 16;
+            result[j++] = high | packed.charAt(i++);
+        }
+        return j;
+    }
+    private static int[] zzUnpackTrans() {
+        int[] result = new int[27963];
+        int offset = 0;
+        offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
+        return result;
+    }
+    private static int zzUnpackTrans(String packed, int offset, int[] result) {
+        int i = 0;
+        /* index in packed string  */
+        int j = offset;
+        /* index in unpacked array */
+        int l = packed.length();
+        while (i < l) {
+            int count = packed.charAt(i++);
+            int value = packed.charAt(i++);
+            value--;
+            do {
+                result[j++] = value;
+            } while (--count > 0);
+        }
+        return j;
+    }
 
     private static int[] zzUnpackAttribute() {
         int[] result = new int[796];
@@ -1011,6 +1008,27 @@ class GUIDefaultsScanner {
             } while (--count > 0);
         }
         return j;
+    }
+    /**
+     * Unpacks the compressed character translation table.
+     *
+     * @param packed the packed character translation table
+     * @return the unpacked character translation table
+     */
+    private static char[] zzUnpackCMap(String packed) {
+        char[] map = new char[0x10000];
+        int i = 0;
+        /* index in packed string  */
+        int j = 0;
+        /* index in unpacked array */
+        while (i < 156) {
+            int count = packed.charAt(i++);
+            char value = packed.charAt(i++);
+            do {
+                map[j++] = value;
+            } while (--count > 0);
+        }
+        return map;
     }
 
     /**
@@ -1106,27 +1124,6 @@ class GUIDefaultsScanner {
         this(new java.io.InputStreamReader(in));
     }
 
-    /**
-     * Unpacks the compressed character translation table.
-     *
-     * @param packed the packed character translation table
-     * @return the unpacked character translation table
-     */
-    private static char[] zzUnpackCMap(String packed) {
-        char[] map = new char[0x10000];
-        int i = 0;
-        /* index in packed string  */
-        int j = 0;
-        /* index in unpacked array */
-        while (i < 156) {
-            int count = packed.charAt(i++);
-            char value = packed.charAt(i++);
-            do {
-                map[j++] = value;
-            } while (--count > 0);
-        }
-        return map;
-    }
 
     /**
      * Refills the input buffer.

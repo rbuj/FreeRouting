@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-final class PopupMenuMain extends PopupMenuDisplay {
+class PopupMenuMain extends PopupMenuDisplay {
 
     /**
      * Creates a new instance of MainPopupMenu

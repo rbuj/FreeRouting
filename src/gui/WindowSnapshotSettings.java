@@ -25,8 +25,26 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public final class WindowSnapshotSettings extends BoardSavableSubWindow {
+public class WindowSnapshotSettings extends BoardSavableSubWindow {
 
+
+    private final interactive.BoardHandling board_handling;
+
+    final javax.swing.JCheckBox object_color_check_box;
+    final javax.swing.JCheckBox object_visibility_check_box;
+    final javax.swing.JCheckBox layer_visibility_check_box;
+    final javax.swing.JCheckBox display_region_check_box;
+    final javax.swing.JCheckBox interactive_state_check_box;
+    final javax.swing.JCheckBox selection_layers_check_box;
+    final javax.swing.JCheckBox selectable_items_check_box;
+    final javax.swing.JCheckBox current_layer_check_box;
+    final javax.swing.JCheckBox rule_selection_check_box;
+    final javax.swing.JCheckBox manual_rule_settings_check_box;
+    final javax.swing.JCheckBox push_and_shove_enabled_check_box;
+    final javax.swing.JCheckBox drag_components_enabled_check_box;
+    final javax.swing.JCheckBox pull_tight_region_check_box;
+    final javax.swing.JCheckBox component_grid_check_box;
+    final javax.swing.JCheckBox info_list_filter_check_box;
     /**
      * Creates a new instance of WindowSnapshotSettings
      */
@@ -163,7 +181,6 @@ public final class WindowSnapshotSettings extends BoardSavableSubWindow {
         this.pack();
         this.setResizable(false);
     }
-
     /**
      * Recalculates all displayed values
      */
@@ -186,24 +203,6 @@ public final class WindowSnapshotSettings extends BoardSavableSubWindow {
         this.component_grid_check_box.setSelected(attributes.component_grid);
         info_list_filter_check_box.setSelected(attributes.info_list_selections);
     }
-
-    private final interactive.BoardHandling board_handling;
-
-    final javax.swing.JCheckBox object_color_check_box;
-    final javax.swing.JCheckBox object_visibility_check_box;
-    final javax.swing.JCheckBox layer_visibility_check_box;
-    final javax.swing.JCheckBox display_region_check_box;
-    final javax.swing.JCheckBox interactive_state_check_box;
-    final javax.swing.JCheckBox selection_layers_check_box;
-    final javax.swing.JCheckBox selectable_items_check_box;
-    final javax.swing.JCheckBox current_layer_check_box;
-    final javax.swing.JCheckBox rule_selection_check_box;
-    final javax.swing.JCheckBox manual_rule_settings_check_box;
-    final javax.swing.JCheckBox push_and_shove_enabled_check_box;
-    final javax.swing.JCheckBox drag_components_enabled_check_box;
-    final javax.swing.JCheckBox pull_tight_region_check_box;
-    final javax.swing.JCheckBox component_grid_check_box;
-    final javax.swing.JCheckBox info_list_filter_check_box;
 
     private class ObjectColorListener implements java.awt.event.ActionListener {
 

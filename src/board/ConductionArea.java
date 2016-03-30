@@ -34,6 +34,7 @@ import java.util.TreeSet;
  * @author Alfons Wirtz
  */
 public class ConductionArea extends ObstacleArea implements Connectable {
+    private boolean is_obstacle;
 
     /**
      * Creates a new instance of ConductionArea
@@ -172,5 +173,4 @@ public class ConductionArea extends ObstacleArea implements Connectable {
         p_window.newline();
     }
 
-    private boolean is_obstacle;
 }

@@ -29,6 +29,11 @@ public class FortyfiveDegreeBoundingDirections implements ShapeBoundingDirection
      * the one and only instantiation
      */
     public static final FortyfiveDegreeBoundingDirections INSTANCE = new FortyfiveDegreeBoundingDirections();
+    /**
+     * prevent instantiation
+     */
+    private FortyfiveDegreeBoundingDirections() {
+    }
 
     @Override
     public int count() {
@@ -65,9 +70,4 @@ public class FortyfiveDegreeBoundingDirections implements ShapeBoundingDirection
         return p_polygon.bounding_octagon();
     }
 
-    /**
-     * prevent instantiation
-     */
-    private FortyfiveDegreeBoundingDirections() {
-    }
 }

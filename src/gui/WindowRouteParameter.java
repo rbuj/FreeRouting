@@ -26,7 +26,37 @@ import java.util.Collection;
  *
  * @author Alfons Wirtz
  */
-public final class WindowRouteParameter extends BoardSavableSubWindow {
+public class WindowRouteParameter extends BoardSavableSubWindow {
+
+    private static final int c_max_slider_value = 999;
+    private static final int c_region_scale_factor = 200;
+
+    private final interactive.BoardHandling board_handling;
+    private final java.util.Locale current_locale;
+    final WindowManualRules manual_rule_window;
+    final WindowRouteDetail detail_window;
+    private final javax.swing.JSlider region_slider;
+    private final javax.swing.JFormattedTextField region_width_field;
+    private final javax.swing.JFormattedTextField edge_to_turn_dist_field;
+
+    private final javax.swing.JRadioButton snap_angle_90_button;
+    private final javax.swing.JRadioButton snap_angle_45_button;
+    private final javax.swing.JRadioButton snap_angle_none_button;
+    private final javax.swing.JRadioButton dynamic_button;
+    private final javax.swing.JRadioButton stitch_button;
+    private final javax.swing.JRadioButton automatic_button;
+    private final javax.swing.JRadioButton manual_button;
+    private final javax.swing.JCheckBox shove_check_box;
+    private final javax.swing.JCheckBox drag_component_check_box;
+    private final javax.swing.JCheckBox ignore_conduction_check_box;
+    private final javax.swing.JCheckBox via_snap_to_smd_center_check_box;
+    private final javax.swing.JCheckBox hilight_routing_obstacle_check_box;
+    private final javax.swing.JCheckBox neckdown_check_box;
+    private final javax.swing.JCheckBox restrict_pin_exit_directions_check_box;
+
+    private final DetailListener detail_listener;
+    private final ManualTraceWidthListener manual_trace_width_listener;
+    private boolean key_input_completed = true;
 
     /**
      * Creates a new instance of RouteParameterWindow
@@ -260,14 +290,12 @@ public final class WindowRouteParameter extends BoardSavableSubWindow {
         this.pack();
         this.setResizable(false);
     }
-
     @Override
     public void dispose() {
         detail_window.dispose();
         manual_rule_window.dispose();
         super.dispose();
     }
-
     /**
      * Reads the data of this frame from disk. Returns false, if the reading
      * failed.
@@ -293,7 +321,6 @@ public final class WindowRouteParameter extends BoardSavableSubWindow {
         return true;
 
     }
-
     /**
      * Saves this frame to disk.
      */
@@ -303,7 +330,6 @@ public final class WindowRouteParameter extends BoardSavableSubWindow {
         manual_rule_window.save(p_object_stream);
         detail_window.save(p_object_stream);
     }
-
     /**
      * Recalculates all displayed values
      */
@@ -358,21 +384,18 @@ public final class WindowRouteParameter extends BoardSavableSubWindow {
             this.detail_window.refresh();
         }
     }
-
     @Override
     public void parent_iconified() {
         manual_rule_window.parent_iconified();
         detail_window.parent_iconified();
         super.parent_iconified();
     }
-
     @Override
     public void parent_deiconified() {
         manual_rule_window.parent_deiconified();
         detail_window.parent_deiconified();
         super.parent_deiconified();
     }
-
     private void set_pull_tight_region_width(int p_slider_value) {
         int slider_value = Math.max(p_slider_value, 0);
         slider_value = Math.min(p_slider_value, c_max_slider_value);
@@ -387,36 +410,6 @@ public final class WindowRouteParameter extends BoardSavableSubWindow {
         region_width_field.setValue(slider_value);
         board_handling.settings.set_current_pull_tight_region_width(new_tidy_width);
     }
-
-    private final interactive.BoardHandling board_handling;
-    private final java.util.Locale current_locale;
-    final WindowManualRules manual_rule_window;
-    final WindowRouteDetail detail_window;
-    private final javax.swing.JSlider region_slider;
-    private final javax.swing.JFormattedTextField region_width_field;
-    private final javax.swing.JFormattedTextField edge_to_turn_dist_field;
-
-    private final javax.swing.JRadioButton snap_angle_90_button;
-    private final javax.swing.JRadioButton snap_angle_45_button;
-    private final javax.swing.JRadioButton snap_angle_none_button;
-    private final javax.swing.JRadioButton dynamic_button;
-    private final javax.swing.JRadioButton stitch_button;
-    private final javax.swing.JRadioButton automatic_button;
-    private final javax.swing.JRadioButton manual_button;
-    private final javax.swing.JCheckBox shove_check_box;
-    private final javax.swing.JCheckBox drag_component_check_box;
-    private final javax.swing.JCheckBox ignore_conduction_check_box;
-    private final javax.swing.JCheckBox via_snap_to_smd_center_check_box;
-    private final javax.swing.JCheckBox hilight_routing_obstacle_check_box;
-    private final javax.swing.JCheckBox neckdown_check_box;
-    private final javax.swing.JCheckBox restrict_pin_exit_directions_check_box;
-
-    private final DetailListener detail_listener;
-    private final ManualTraceWidthListener manual_trace_width_listener;
-    private boolean key_input_completed = true;
-
-    private static final int c_max_slider_value = 999;
-    private static final int c_region_scale_factor = 200;
 
     private class SnapAngle90Listener implements java.awt.event.ActionListener {
 
@@ -504,6 +497,7 @@ public final class WindowRouteParameter extends BoardSavableSubWindow {
 
     private class DetailListener implements java.awt.event.ActionListener {
 
+        private boolean first_time = true;
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             if (first_time) {
@@ -513,7 +507,6 @@ public final class WindowRouteParameter extends BoardSavableSubWindow {
             }
             detail_window.setVisible(true);
         }
-        private boolean first_time = true;
     }
 
     private class AutomaticTraceWidthListener implements java.awt.event.ActionListener {
@@ -527,6 +520,8 @@ public final class WindowRouteParameter extends BoardSavableSubWindow {
 
     private class ManualTraceWidthListener implements java.awt.event.ActionListener {
 
+
+        boolean first_time = true;
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             if (first_time) {
@@ -537,8 +532,6 @@ public final class WindowRouteParameter extends BoardSavableSubWindow {
             manual_rule_window.setVisible(true);
             board_handling.settings.set_manual_tracewidth_selection(true);
         }
-
-        boolean first_time = true;
     }
 
     private class ShoveListener implements java.awt.event.ActionListener {

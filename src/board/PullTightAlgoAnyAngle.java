@@ -36,6 +36,7 @@ import geometry.planar.TileShape;
  * @author Alfons Wirtz
  */
 class PullTightAlgoAnyAngle extends PullTightAlgo {
+    private static double SKIP_LENGTH = 10.0;
 
     PullTightAlgoAnyAngle(RoutingBoard p_board, int[] p_only_net_no_arr, Stoppable p_stoppable_thread, int p_time_limit,
             Point p_keep_point, int p_keep_point_layer) {
@@ -1023,5 +1024,4 @@ class PullTightAlgoAnyAngle extends PullTightAlgo {
         return null;
     }
 
-    private static double SKIP_LENGTH = 10.0;
 }

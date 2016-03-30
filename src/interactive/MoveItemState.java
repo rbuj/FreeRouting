@@ -140,6 +140,17 @@ public class MoveItemState extends InteractiveState {
         return new MoveItemState(p_location, item_list, component_list, grid_snap_component,
                 p_parent_state.return_state, p_board_handling, p_logfile);
     }
+    private final Set<Item> item_list;
+    private final Set<Component> component_list;
+    /**
+     * In case of a component grid the first component is aligned to this grid.
+     */
+    private final Component grid_snap_component;
+    private IntPoint current_position;
+    private IntPoint previous_position;
+    private Collection<ClearanceViolation> clearance_violations;
+    private final Collection<NetItems> net_items_list;
+    private boolean observers_activated = false;
 
     /**
      * Creates a new instance of MoveComponentState
@@ -488,30 +499,14 @@ public class MoveItemState extends InteractiveState {
         }
     }
 
-    private final Set<Item> item_list;
-    private final Set<Component> component_list;
-
-    /**
-     * In case of a component grid the first component is aligned to this grid.
-     */
-    private final Component grid_snap_component;
-
-    private IntPoint current_position;
-    private IntPoint previous_position;
-
-    private Collection<ClearanceViolation> clearance_violations;
-
-    private final Collection<NetItems> net_items_list;
-
-    private boolean observers_activated = false;
 
     private static class NetItems {
 
+        final int net_no;
+        final Collection<Item> items;
         NetItems(int p_net_no, Collection<Item> p_items) {
             net_no = p_net_no;
             items = p_items;
         }
-        final int net_no;
-        final Collection<Item> items;
     }
 }

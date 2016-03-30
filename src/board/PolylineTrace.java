@@ -44,6 +44,8 @@ import java.util.LinkedList;
  * @author Alfons Wirtz
  */
 public class PolylineTrace extends Trace implements java.io.Serializable {
+    // primary data
+    private Polyline lines;
 
     /**
      * creates a new instance of a PolylineTrace with the input data
@@ -1159,6 +1161,4 @@ public class PolylineTrace extends Trace implements java.io.Serializable {
         this.combine();
         return true;
     }
-    // primary data
-    private Polyline lines;
 }

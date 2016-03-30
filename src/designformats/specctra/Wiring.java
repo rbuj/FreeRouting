@@ -46,52 +46,6 @@ import java.util.LinkedList;
  */
 class Wiring extends ScopeKeyword {
 
-    /**
-     * Creates a new instance of Wiring
-     */
-    public Wiring() {
-        super("wiring");
-    }
-
-    @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
-        Object next_token = null;
-        for (;;) {
-            Object prev_token = next_token;
-            try {
-                next_token = p_par.scanner.next_token();
-            } catch (java.io.IOException e) {
-                System.out.println("Wiring.read_scope: IO error scanning file");
-                return false;
-            }
-            if (next_token == null) {
-                System.out.println("Wiring.read_scope: unexpected end of file");
-                return false;
-            }
-            if (next_token == CLOSED_BRACKET) {
-                // end of scope
-                break;
-            }
-            boolean read_ok = true;
-            if (prev_token == OPEN_BRACKET) {
-                if (next_token == Keyword.WIRE) {
-                    read_wire_scope(p_par);
-                } else if (next_token == Keyword.VIA) {
-                    read_ok = read_via_scope(p_par);
-                } else {
-                    skip_scope(p_par.scanner);
-                }
-            }
-            if (!read_ok) {
-                return false;
-            }
-        }
-        RoutingBoard board = p_par.board_handling.get_routing_board();
-        for (int i = 1; i <= board.rules.nets.max_net_no(); ++i) {
-            board.normalize_traces(i);
-        }
-        return true;
-    }
 
     public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
         p_par.file.start_scope();
@@ -260,6 +214,135 @@ class Wiring extends ScopeKeyword {
         }
     }
 
+
+    private static Collection<rules.Net> get_subnets(Net.Id p_net_id, rules.BoardRules p_rules) {
+        Collection<rules.Net> found_nets = new LinkedList<>();
+        if (p_net_id != null) {
+            if (p_net_id.subnet_number > 0) {
+                rules.Net found_net = p_rules.nets.get(p_net_id.name, p_net_id.subnet_number);
+                if (found_net != null) {
+                    found_nets.add(found_net);
+                }
+            } else {
+                found_nets = p_rules.nets.get(p_net_id.name);
+            }
+        }
+        return found_nets;
+    }
+
+
+    private static boolean via_exists(IntPoint p_location, library.Padstack p_padstack,
+            int[] p_net_no_arr, board.BasicBoard p_board) {
+        ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.VIAS);
+        int from_layer = p_padstack.from_layer();
+        int to_layer = p_padstack.to_layer();
+        Collection<Item> picked_items = p_board.pick_items(p_location, p_padstack.from_layer(), filter);
+        for (Item curr_item : picked_items) {
+            Via curr_via = (Via) curr_item;
+            if (curr_via.nets_equal(p_net_no_arr) && curr_via.get_center().equals(p_location)
+                    && curr_via.first_layer() == from_layer && curr_via.last_layer() == to_layer) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static board.FixedState calc_fixed(Scanner p_scanner) {
+        try {
+            board.FixedState result = board.FixedState.UNFIXED;
+            Object next_token = p_scanner.next_token();
+            if (next_token == Keyword.SHOVE_FIXED) {
+                result = board.FixedState.SHOVE_FIXED;
+            } else if (next_token == Keyword.FIX) {
+                result = board.FixedState.SYSTEM_FIXED;
+            } else if (next_token != Keyword.NORMAL) {
+                result = board.FixedState.USER_FIXED;
+            }
+            next_token = p_scanner.next_token();
+            if (next_token != Keyword.CLOSED_BRACKET) {
+                System.out.println("Wiring.is_fixed: ) expected");
+                return board.FixedState.UNFIXED;
+            }
+            return result;
+        } catch (java.io.IOException e) {
+            System.out.println("Wiring.is_fixed: IO error scanning file");
+            return board.FixedState.UNFIXED;
+        }
+    }
+
+    /**
+     * Reads a net_id. The subnet_number of the net_id will be 0, if no
+     * subneet_number was found.
+     */
+    private static Net.Id read_net_id(Scanner p_scanner) {
+        try {
+            int subnet_number = 0;
+            p_scanner.yybegin(SpecctraFileScanner.NAME);
+            Object next_token = p_scanner.next_token();
+            if (!(next_token instanceof String)) {
+                System.out.println("Wiring:read_net_id: String expected");
+                return null;
+            }
+            String net_name = (String) next_token;
+            next_token = p_scanner.next_token();
+            if (next_token instanceof Integer) {
+                subnet_number = (Integer) next_token;
+                next_token = p_scanner.next_token();
+            }
+            if (next_token != Keyword.CLOSED_BRACKET) {
+                System.out.println("Wiring.read_net_id: closing bracket expected");
+            }
+            return new Net.Id(net_name, subnet_number);
+        } catch (java.io.IOException e) {
+            System.out.println("DsnFile.read_string_scope: IO error scanning file");
+            return null;
+        }
+    }
+    /**
+     * Creates a new instance of Wiring
+     */
+    public Wiring() {
+        super("wiring");
+    }
+    @Override
+    public boolean read_scope(ReadScopeParameter p_par) {
+        Object next_token = null;
+        for (;;) {
+            Object prev_token = next_token;
+            try {
+                next_token = p_par.scanner.next_token();
+            } catch (java.io.IOException e) {
+                System.out.println("Wiring.read_scope: IO error scanning file");
+                return false;
+            }
+            if (next_token == null) {
+                System.out.println("Wiring.read_scope: unexpected end of file");
+                return false;
+            }
+            if (next_token == CLOSED_BRACKET) {
+                // end of scope
+                break;
+            }
+            boolean read_ok = true;
+            if (prev_token == OPEN_BRACKET) {
+                if (next_token == Keyword.WIRE) {
+                    read_wire_scope(p_par);
+                } else if (next_token == Keyword.VIA) {
+                    read_ok = read_via_scope(p_par);
+                } else {
+                    skip_scope(p_par.scanner);
+                }
+            }
+            if (!read_ok) {
+                return false;
+            }
+        }
+        RoutingBoard board = p_par.board_handling.get_routing_board();
+        for (int i = 1; i <= board.rules.nets.max_net_no(); ++i) {
+            board.normalize_traces(i);
+        }
+        return true;
+    }
     private Item read_wire_scope(ReadScopeParameter p_par) {
         Net.Id net_id = null;
         String clearance_class_name = null;
@@ -423,7 +506,6 @@ class Wiring extends ScopeKeyword {
         }
         return result;
     }
-
     /**
      * Maybe trace of type turret without net in Mentor design. Try to assig the
      * net by calculating the overlaps.
@@ -446,22 +528,6 @@ class Wiring extends ScopeKeyword {
             p_item.assign_net_no(corrected_net_no);
         }
     }
-
-    private static Collection<rules.Net> get_subnets(Net.Id p_net_id, rules.BoardRules p_rules) {
-        Collection<rules.Net> found_nets = new LinkedList<>();
-        if (p_net_id != null) {
-            if (p_net_id.subnet_number > 0) {
-                rules.Net found_net = p_rules.nets.get(p_net_id.name, p_net_id.subnet_number);
-                if (found_net != null) {
-                    found_nets.add(found_net);
-                }
-            } else {
-                found_nets = p_rules.nets.get(p_net_id.name);
-            }
-        }
-        return found_nets;
-    }
-
     private boolean read_via_scope(ReadScopeParameter p_par) {
         try {
             board.FixedState fixed = board.FixedState.UNFIXED;
@@ -548,74 +614,6 @@ class Wiring extends ScopeKeyword {
         } catch (java.io.IOException e) {
             System.out.println("Wiring.read_via_scope: IO error scanning file");
             return false;
-        }
-    }
-
-    private static boolean via_exists(IntPoint p_location, library.Padstack p_padstack,
-            int[] p_net_no_arr, board.BasicBoard p_board) {
-        ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.VIAS);
-        int from_layer = p_padstack.from_layer();
-        int to_layer = p_padstack.to_layer();
-        Collection<Item> picked_items = p_board.pick_items(p_location, p_padstack.from_layer(), filter);
-        for (Item curr_item : picked_items) {
-            Via curr_via = (Via) curr_item;
-            if (curr_via.nets_equal(p_net_no_arr) && curr_via.get_center().equals(p_location)
-                    && curr_via.first_layer() == from_layer && curr_via.last_layer() == to_layer) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    static board.FixedState calc_fixed(Scanner p_scanner) {
-        try {
-            board.FixedState result = board.FixedState.UNFIXED;
-            Object next_token = p_scanner.next_token();
-            if (next_token == Keyword.SHOVE_FIXED) {
-                result = board.FixedState.SHOVE_FIXED;
-            } else if (next_token == Keyword.FIX) {
-                result = board.FixedState.SYSTEM_FIXED;
-            } else if (next_token != Keyword.NORMAL) {
-                result = board.FixedState.USER_FIXED;
-            }
-            next_token = p_scanner.next_token();
-            if (next_token != Keyword.CLOSED_BRACKET) {
-                System.out.println("Wiring.is_fixed: ) expected");
-                return board.FixedState.UNFIXED;
-            }
-            return result;
-        } catch (java.io.IOException e) {
-            System.out.println("Wiring.is_fixed: IO error scanning file");
-            return board.FixedState.UNFIXED;
-        }
-    }
-
-    /**
-     * Reads a net_id. The subnet_number of the net_id will be 0, if no
-     * subneet_number was found.
-     */
-    private static Net.Id read_net_id(Scanner p_scanner) {
-        try {
-            int subnet_number = 0;
-            p_scanner.yybegin(SpecctraFileScanner.NAME);
-            Object next_token = p_scanner.next_token();
-            if (!(next_token instanceof String)) {
-                System.out.println("Wiring:read_net_id: String expected");
-                return null;
-            }
-            String net_name = (String) next_token;
-            next_token = p_scanner.next_token();
-            if (next_token instanceof Integer) {
-                subnet_number = (Integer) next_token;
-                next_token = p_scanner.next_token();
-            }
-            if (next_token != Keyword.CLOSED_BRACKET) {
-                System.out.println("Wiring.read_net_id: closing bracket expected");
-            }
-            return new Net.Id(net_name, subnet_number);
-        } catch (java.io.IOException e) {
-            System.out.println("DsnFile.read_string_scope: IO error scanning file");
-            return null;
         }
     }
 }

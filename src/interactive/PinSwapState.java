@@ -39,6 +39,9 @@ public class PinSwapState extends InteractiveState {
         new_state.hdlg.screen_messages.set_status_message(new_state.resources.getString("please_click_second_pin_with_the_left_mouse_button"));
         return new_state;
     }
+    private final Pin from_pin;
+    private Pin to_pin = null;
+    private java.util.Set<Pin> swappable_pins;
 
     /**
      * Creates a new instance of PinSwapState
@@ -122,7 +125,4 @@ public class PinSwapState extends InteractiveState {
         }
     }
 
-    private final Pin from_pin;
-    private Pin to_pin = null;
-    private java.util.Set<Pin> swappable_pins;
 }

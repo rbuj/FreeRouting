@@ -36,6 +36,15 @@ import java.util.LinkedList;
  */
 public class MoveComponent {
 
+    private static int PULL_TIGHT_TIME_LIMIT = 1000;
+    private static int CHECK_TIME_LIMIT = 3000;
+    private final Vector translate_vector;
+    private final int max_recursion_depth;
+    private final int max_via_recursion_depth;
+    private final RoutingBoard board;
+    private boolean all_items_movable = true;
+    private SortedItem[] item_group_arr;
+    private Component component = null;
     /**
      * Creates a new instance of MoveItemGroup
      */
@@ -99,7 +108,6 @@ public class MoveComponent {
         // the items in front come first.
         java.util.Arrays.sort(item_group_arr);
     }
-
     /**
      * Checks, if all items in the group can be moved by shoving obstacle trace
      * aside without creating clearance violations.
@@ -131,7 +139,6 @@ public class MoveComponent {
         }
         return true;
     }
-
     /**
      * Moves all items in the group by this.translate_vector and shoves aside
      * obstacle traces. Returns false, if that was not possible without creating
@@ -166,32 +173,18 @@ public class MoveComponent {
         }
         return true;
     }
-    private final Vector translate_vector;
-    private final int max_recursion_depth;
-    private final int max_via_recursion_depth;
-    private final RoutingBoard board;
-    private boolean all_items_movable = true;
-    private SortedItem[] item_group_arr;
-    private Component component = null;
-    private static int PULL_TIGHT_TIME_LIMIT = 1000;
-    private static int CHECK_TIME_LIMIT = 3000;
 
-    /**
-     * used to sort the group items in the direction of translate_vector, so
-     * that the front items can be moved first.
-     */
     private static class SortedItem implements Comparable<SortedItem> {
 
+        final Item item;
+        final double projection;
         SortedItem(Item p_item, double p_projection) {
             item = p_item;
             projection = p_projection;
         }
-
         @Override
         public int compareTo(SortedItem p_other) {
             return Signum.as_int(this.projection - p_other.projection);
         }
-        final Item item;
-        final double projection;
     }
 }

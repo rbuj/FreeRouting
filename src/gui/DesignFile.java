@@ -33,6 +33,7 @@ public class DesignFile {
     public static final String[] all_file_extensions  = new String[]{"bin", "dsn"};
     public static final String[] text_file_extensions = new String[]{"dsn"};
     public static final String binary_file_extension = "bin";
+    private static final String RULES_FILE_EXTENSION = ".rules";
 
     public static DesignFile get_instance(String p_design_file_name) {
         if (p_design_file_name == null) {
@@ -58,6 +59,39 @@ public class DesignFile {
         result = new DesignFile(curr_design_file, file_chooser);
         return result;
     }
+    public static boolean read_rules_file(String p_design_name, String p_parent_name,
+            interactive.BoardHandling p_board_handling, String p_confirm_message) {
+        
+        boolean result = true;
+        String rule_file_name = p_design_name + ".rules";
+        boolean dsn_file_generated_by_host = p_board_handling.get_routing_board().communication.specctra_parser_info.dsn_file_generated_by_host;
+        try {
+            java.io.File rules_file = new java.io.File(p_parent_name, rule_file_name);
+            java.io.InputStream input_stream = new java.io.FileInputStream(rules_file);
+            if (input_stream != null && dsn_file_generated_by_host && WindowMessage.confirm(p_confirm_message)) {
+                result = designformats.specctra.RulesFile.read(input_stream, p_design_name, p_board_handling);
+            } else {
+                result = false;
+            }
+            try {
+                if (input_stream != null) {
+                    input_stream.close();
+                }
+                rules_file.delete();
+            } catch (java.io.IOException e) {
+                result = false;
+            }
+        } catch (java.io.FileNotFoundException e) {
+            result = false;
+        }
+        return result;
+    }
+    /**
+     * Used, if the application is run without Java Web Start.
+     */
+    private java.io.File output_file;
+    private final java.io.File input_file;
+    private javax.swing.JFileChooser file_chooser;
 
     /**
      * Creates a new instance of DesignFile. If p_is_webstart, the application
@@ -207,33 +241,6 @@ public class DesignFile {
         return true;
     }
 
-    public static boolean read_rules_file(String p_design_name, String p_parent_name,
-            interactive.BoardHandling p_board_handling, String p_confirm_message) {
-
-        boolean result = true;
-        String rule_file_name = p_design_name + ".rules";
-        boolean dsn_file_generated_by_host = p_board_handling.get_routing_board().communication.specctra_parser_info.dsn_file_generated_by_host;
-            try {
-                java.io.File rules_file = new java.io.File(p_parent_name, rule_file_name);
-                java.io.InputStream input_stream = new java.io.FileInputStream(rules_file);
-                if (input_stream != null && dsn_file_generated_by_host && WindowMessage.confirm(p_confirm_message)) {
-                    result = designformats.specctra.RulesFile.read(input_stream, p_design_name, p_board_handling);
-                } else {
-                    result = false;
-                }
-                try {
-                    if (input_stream != null) {
-                        input_stream.close();
-                    }
-                    rules_file.delete();
-                } catch (java.io.IOException e) {
-                    result = false;
-                }
-            } catch (java.io.FileNotFoundException e) {
-                result = false;
-            }
-        return result;
-    }
 
     public void update_eagle(BoardFrame p_board_frame) {
         final java.util.ResourceBundle resources
@@ -296,11 +303,4 @@ public class DesignFile {
         return this.input_file != this.output_file;
     }
 
-    /**
-     * Used, if the application is run without Java Web Start.
-     */
-    private java.io.File output_file;
-    private final java.io.File input_file;
-    private javax.swing.JFileChooser file_chooser;
-    private static final String RULES_FILE_EXTENSION = ".rules";
 }

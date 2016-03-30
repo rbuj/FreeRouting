@@ -94,28 +94,6 @@ class SpecctraFileScanner implements Scanner {
             + "\2\4\1\162\3\4\1\163\3\4\1\164\5\4\1\165"
             + "\6\4\1\166\20\4\1\167\7\4\1\170";
 
-    private static int[] zzUnpackAction() {
-        int[] result = new int[712];
-        int offset = 0;
-        offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
-        return result;
-    }
-
-    private static int zzUnpackAction(String packed, int offset, int[] result) {
-        int i = 0;
-        /* index in packed string  */
-        int j = offset;
-        /* index in unpacked array */
-        int l = packed.length();
-        while (i < l) {
-            int count = packed.charAt(i++);
-            int value = packed.charAt(i++);
-            do {
-                result[j++] = value;
-            } while (--count > 0);
-        }
-        return j;
-    }
 
     /**
      * Translates a state to a row index in the transition table
@@ -213,25 +191,6 @@ class SpecctraFileScanner implements Scanner {
             + "\0\u68c4\0\u68f1\0\u691e\0\u694b\0\u6978\0\u69a5\0\u69d2\0\u01ef"
             + "\0\u69ff\0\u6a2c\0\u6a59\0\u6a86\0\u6ab3\0\u6ae0\0\u6b0d\0\u01ef";
 
-    private static int[] zzUnpackRowMap() {
-        int[] result = new int[712];
-        int offset = 0;
-        offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
-        return result;
-    }
-
-    private static int zzUnpackRowMap(String packed, int offset, int[] result) {
-        int i = 0;
-        /* index in packed string  */
-        int j = offset;
-        /* index in unpacked array */
-        int l = packed.length();
-        while (i < l) {
-            int high = packed.charAt(i++) << 16;
-            result[j++] = high | packed.charAt(i++);
-        }
-        return j;
-    }
 
     /**
      * The transition table of the DFA
@@ -570,29 +529,6 @@ class SpecctraFileScanner implements Scanner {
             + "\1\u02c6\25\15\6\0\25\15\1\u02c7\21\15\6\0\21\15"
             + "\1\u02c8\25\15\2\0";
 
-    private static int[] zzUnpackTrans() {
-        int[] result = new int[27450];
-        int offset = 0;
-        offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
-        return result;
-    }
-
-    private static int zzUnpackTrans(String packed, int offset, int[] result) {
-        int i = 0;
-        /* index in packed string  */
-        int j = offset;
-        /* index in unpacked array */
-        int l = packed.length();
-        while (i < l) {
-            int count = packed.charAt(i++);
-            int value = packed.charAt(i++);
-            value--;
-            do {
-                result[j++] = value;
-            } while (--count > 0);
-        }
-        return j;
-    }
 
 
     /* error codes */
@@ -617,6 +553,67 @@ class SpecctraFileScanner implements Scanner {
             + "\2\11\1\1\2\11\2\1\2\11\3\1\1\11\1\1"
             + "\3\0\67\1\1\0\3\1\1\0\1\11\105\1\1\0"
             + "\u020f\1";
+    private static int[] zzUnpackAction() {
+        int[] result = new int[712];
+        int offset = 0;
+        offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
+        return result;
+    }
+    private static int zzUnpackAction(String packed, int offset, int[] result) {
+        int i = 0;
+        /* index in packed string  */
+        int j = offset;
+        /* index in unpacked array */
+        int l = packed.length();
+        while (i < l) {
+            int count = packed.charAt(i++);
+            int value = packed.charAt(i++);
+            do {
+                result[j++] = value;
+            } while (--count > 0);
+        }
+        return j;
+    }
+    private static int[] zzUnpackRowMap() {
+        int[] result = new int[712];
+        int offset = 0;
+        offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
+        return result;
+    }
+    private static int zzUnpackRowMap(String packed, int offset, int[] result) {
+        int i = 0;
+        /* index in packed string  */
+        int j = offset;
+        /* index in unpacked array */
+        int l = packed.length();
+        while (i < l) {
+            int high = packed.charAt(i++) << 16;
+            result[j++] = high | packed.charAt(i++);
+        }
+        return j;
+    }
+    private static int[] zzUnpackTrans() {
+        int[] result = new int[27450];
+        int offset = 0;
+        offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
+        return result;
+    }
+    private static int zzUnpackTrans(String packed, int offset, int[] result) {
+        int i = 0;
+        /* index in packed string  */
+        int j = offset;
+        /* index in unpacked array */
+        int l = packed.length();
+        while (i < l) {
+            int count = packed.charAt(i++);
+            int value = packed.charAt(i++);
+            value--;
+            do {
+                result[j++] = value;
+            } while (--count > 0);
+        }
+        return j;
+    }
 
     private static int[] zzUnpackAttribute() {
         int[] result = new int[712];
@@ -639,6 +636,27 @@ class SpecctraFileScanner implements Scanner {
             } while (--count > 0);
         }
         return j;
+    }
+    /**
+     * Unpacks the compressed character translation table.
+     *
+     * @param packed the packed character translation table
+     * @return the unpacked character translation table
+     */
+    private static char[] zzUnpackCMap(String packed) {
+        char[] map = new char[0x10000];
+        int i = 0;
+        /* index in packed string  */
+        int j = 0;
+        /* index in unpacked array */
+        while (i < 274) {
+            int count = packed.charAt(i++);
+            char value = packed.charAt(i++);
+            do {
+                map[j++] = value;
+            } while (--count > 0);
+        }
+        return map;
     }
 
     /**
@@ -737,27 +755,6 @@ class SpecctraFileScanner implements Scanner {
         this(new java.io.InputStreamReader(in));
     }
 
-    /**
-     * Unpacks the compressed character translation table.
-     *
-     * @param packed the packed character translation table
-     * @return the unpacked character translation table
-     */
-    private static char[] zzUnpackCMap(String packed) {
-        char[] map = new char[0x10000];
-        int i = 0;
-        /* index in packed string  */
-        int j = 0;
-        /* index in unpacked array */
-        while (i < 274) {
-            int count = packed.charAt(i++);
-            char value = packed.charAt(i++);
-            do {
-                map[j++] = value;
-            } while (--count > 0);
-        }
-        return map;
-    }
 
     /**
      * Refills the input buffer.

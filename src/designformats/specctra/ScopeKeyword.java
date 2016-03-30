@@ -28,9 +28,6 @@ package designformats.specctra;
  */
 public class ScopeKeyword extends Keyword {
 
-    public ScopeKeyword(String p_name) {
-        super(p_name);
-    }
 
     /**
      * Scips the current scope while reading a dsn file. Returns false, if no
@@ -58,6 +55,9 @@ public class ScopeKeyword extends Keyword {
             }
         }
         return true;
+    }
+    public ScopeKeyword(String p_name) {
+        super(p_name);
     }
 
     /**

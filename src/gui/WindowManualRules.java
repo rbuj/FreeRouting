@@ -26,8 +26,15 @@ import rules.ViaRule;
  *
  * @author Alfons Wirtz
  */
-public final class WindowManualRules extends BoardSavableSubWindow {
+public class WindowManualRules extends BoardSavableSubWindow {
 
+
+    private final interactive.BoardHandling board_handling;
+    private final ComboBoxLayer layer_combo_box;
+    private final ComboBoxClearance clearance_combo_box;
+    private final javax.swing.JComboBox<ViaRule> via_rule_combo_box;
+    private final javax.swing.JFormattedTextField trace_width_field;
+    private boolean key_input_completed = true;
     /**
      * Creates a new instance of TraceWidthWindow
      */
@@ -111,7 +118,6 @@ public final class WindowManualRules extends BoardSavableSubWindow {
         this.pack();
         this.setResizable(false);
     }
-
     /**
      * Recalculates the values in the trace width fields.
      */
@@ -132,7 +138,6 @@ public final class WindowManualRules extends BoardSavableSubWindow {
         this.set_selected_layer(this.layer_combo_box.get_selected_layer());
         this.repaint();
     }
-
     public void set_trace_width_field(int p_half_width) {
         if (p_half_width < 0) {
             this.trace_width_field.setText("");
@@ -141,7 +146,6 @@ public final class WindowManualRules extends BoardSavableSubWindow {
             this.trace_width_field.setValue(trace_width);
         }
     }
-
     /**
      * Sets the selected layer to p_layer.
      */
@@ -188,13 +192,6 @@ public final class WindowManualRules extends BoardSavableSubWindow {
         }
         set_trace_width_field(curr_half_width);
     }
-
-    private final interactive.BoardHandling board_handling;
-    private final ComboBoxLayer layer_combo_box;
-    private final ComboBoxClearance clearance_combo_box;
-    private final javax.swing.JComboBox<ViaRule> via_rule_combo_box;
-    private final javax.swing.JFormattedTextField trace_width_field;
-    private boolean key_input_completed = true;
 
     private class LayerComboBoxListener implements java.awt.event.ActionListener {
 

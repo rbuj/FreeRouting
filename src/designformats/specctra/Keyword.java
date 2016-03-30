@@ -137,13 +137,6 @@ public class Keyword {
     public static final ScopeKeyword WIRING_SCOPE = new Wiring();
     public static final Keyword WRITE_RESOLUTION = new Keyword("write_resolution");
 
-    /**
-     * Returns the name string of this Keyword. The name is used for debugging
-     * purposes.
-     */
-    public String get_name() {
-        return name;
-    }
     private final String name;
 
     /**
@@ -151,5 +144,12 @@ public class Keyword {
      */
     protected Keyword(String p_name) {
         name = p_name;
+    }
+    /**
+     * Returns the name string of this Keyword. The name is used for debugging
+     * purposes.
+     */
+    public String get_name() {
+        return name;
     }
 }

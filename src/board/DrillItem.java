@@ -38,6 +38,25 @@ import library.Padstack;
  * @author Alfons Wirtz
  */
 public abstract class DrillItem extends Item implements Connectable, java.io.Serializable {
+    /**
+     * The center point of the drillitem
+     */
+    private Point center;
+    /**
+     * Contains the precalculated mininal width of the shapes of this DrillItem
+     * on all layers. If {@literal <} 0, the value is not yet calculated
+     */
+    private double precalculated_min_width = -1;
+    /**
+     * Contains the precalculated first layer, where this DrillItem contains a
+     * pad shape. If {@literal <} 0, the value is not yet calculated
+     */
+    private int precalculated_first_layer = -1;
+    /**
+     * Contains the precalculated last layer, where this DrillItem contains a
+     * pad shape. If {@literal <} 0, the value is not yet calculated
+     */
+    private int precalculated_last_layer = -1;
 
     public DrillItem(Point p_center, int[] p_net_no_arr, int p_clearance_type, int p_id_no,
             int p_group_no, FixedState p_fixed_state, BasicBoard p_board) {
@@ -405,40 +424,18 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         }
     }
 
-    /**
-     * The center point of the drillitem
-     */
-    private Point center;
 
-    /**
-     * Contains the precalculated mininal width of the shapes of this DrillItem
-     * on all layers. If {@literal <} 0, the value is not yet calculated
-     */
-    private double precalculated_min_width = -1;
-
-    /**
-     * Contains the precalculated first layer, where this DrillItem contains a
-     * pad shape. If {@literal <} 0, the value is not yet calculated
-     */
-    private int precalculated_first_layer = -1;
-
-    /**
-     * Contains the precalculated last layer, where this DrillItem contains a
-     * pad shape. If {@literal <} 0, the value is not yet calculated
-     */
-    private int precalculated_last_layer = -1;
-
-    /**
-     * Auxiliary class used in the method move_by
-     */
     private static class TraceInfo implements Comparable<TraceInfo> {
 
+
+        int layer;
+        int half_width;
+        int clearance_type;
         TraceInfo(int p_layer, int p_half_width, int p_clearance_type) {
             layer = p_layer;
             half_width = p_half_width;
             clearance_type = p_clearance_type;
         }
-
         /**
          * Implements the comparable interface.
          */
@@ -446,9 +443,5 @@ public abstract class DrillItem extends Item implements Connectable, java.io.Ser
         public int compareTo(TraceInfo p_other) {
             return p_other.layer - this.layer;
         }
-
-        int layer;
-        int half_width;
-        int clearance_type;
     }
 }

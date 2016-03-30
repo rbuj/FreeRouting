@@ -55,6 +55,40 @@ public class CopyItemState extends InteractiveState {
         p_board_handling.remove_ratsnest(); // copying an item may change the connectivity.
         return new CopyItemState(p_location, p_item_list, p_parent_state, p_board_handling, p_logfile);
     }
+    /**
+     * Creates a new padstack from p_old_pastack with a layer range starting at
+     * p_new_layer.
+     */
+    private static Padstack change_padstack_layers(Padstack p_old_padstack, int p_new_layer,
+            RoutingBoard p_board, Map<Padstack, Padstack> p_padstack_pairs) {
+        Padstack new_padstack;
+        int old_layer = p_old_padstack.from_layer();
+        if (old_layer == p_new_layer) {
+            new_padstack = p_old_padstack;
+        } else if (p_padstack_pairs.containsKey(p_old_padstack)) {
+            // New padstack already created, assign it to the via.
+            new_padstack = p_padstack_pairs.get(p_old_padstack);
+        } else {
+            // Create a new padstack.
+            ConvexShape[] new_shapes = new ConvexShape[p_board.get_layer_count()];
+            int layer_diff = old_layer - p_new_layer;
+            for (int i = 0; i < new_shapes.length; ++i) {
+                int new_layer_no = i + layer_diff;
+                if (new_layer_no >= 0 && new_layer_no < new_shapes.length) {
+                    new_shapes[i] = p_old_padstack.get_shape(i + layer_diff);
+                }
+            }
+            new_padstack = p_board.library.padstacks.add(new_shapes);
+            p_padstack_pairs.put(p_old_padstack, new_padstack);
+        }
+        return new_padstack;
+    }
+    private Collection<Item> item_list;
+    private Point start_position;
+    private Point current_position;
+    private int current_layer;
+    private boolean layer_changed;
+    private Point previous_position;
 
     /**
      * Creates a new instance of CopyItemState
@@ -263,39 +297,4 @@ public class CopyItemState extends InteractiveState {
         return hdlg.get_panel().popup_menu_copy;
     }
 
-    /**
-     * Creates a new padstack from p_old_pastack with a layer range starting at
-     * p_new_layer.
-     */
-    private static Padstack change_padstack_layers(Padstack p_old_padstack, int p_new_layer,
-            RoutingBoard p_board, Map<Padstack, Padstack> p_padstack_pairs) {
-        Padstack new_padstack;
-        int old_layer = p_old_padstack.from_layer();
-        if (old_layer == p_new_layer) {
-            new_padstack = p_old_padstack;
-        } else if (p_padstack_pairs.containsKey(p_old_padstack)) {
-            // New padstack already created, assign it to the via.
-            new_padstack = p_padstack_pairs.get(p_old_padstack);
-        } else {
-            // Create a new padstack.
-            ConvexShape[] new_shapes = new ConvexShape[p_board.get_layer_count()];
-            int layer_diff = old_layer - p_new_layer;
-            for (int i = 0; i < new_shapes.length; ++i) {
-                int new_layer_no = i + layer_diff;
-                if (new_layer_no >= 0 && new_layer_no < new_shapes.length) {
-                    new_shapes[i] = p_old_padstack.get_shape(i + layer_diff);
-                }
-            }
-            new_padstack = p_board.library.padstacks.add(new_shapes);
-            p_padstack_pairs.put(p_old_padstack, new_padstack);
-        }
-        return new_padstack;
-    }
-
-    private Collection<Item> item_list;
-    private Point start_position;
-    private Point current_position;
-    private int current_layer;
-    private boolean layer_changed;
-    private Point previous_position;
 }

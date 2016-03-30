@@ -34,6 +34,87 @@ import java.util.LinkedList;
  * @author Alfons Wirtz
  */
 public class Polyline implements java.io.Serializable {
+    private static final boolean USE_BOUNDING_OCTAGON_FOR_OFFSET_SHAPES = true;
+    private static Line[] remove_consecutive_parallel_lines(Line[] p_line_arr) {
+        if (p_line_arr.length < 3) {
+            // polyline must have at least 3 lines
+            return p_line_arr;
+        }
+        Line[] tmp_arr = new Line[p_line_arr.length];
+        int new_length = 0;
+        tmp_arr[0] = p_line_arr[0];
+        for (int i = 1; i < p_line_arr.length; ++i) {
+            // skip multiple lines
+            if (!tmp_arr[new_length].is_parallel(p_line_arr[i])) {
+                ++new_length;
+                tmp_arr[new_length] = p_line_arr[i];
+            }
+        }
+        ++new_length;
+        if (new_length == p_line_arr.length) {
+            // nothing skipped
+            return p_line_arr;
+        }
+        // at least 1 line is skipped, adjust the array
+        if (new_length < 3) {
+            return new Line[0];
+        }
+        Line[] result = new Line[new_length];
+        System.arraycopy(tmp_arr, 0, result, 0, new_length);
+        return result;
+    }
+    /**
+     * checks if previous and next line are equal or opposite and removes the
+     * resulting overlap
+     */
+    private static Line[] remove_overlaps(Line[] p_line_arr) {
+        if (p_line_arr.length < 4) {
+            return p_line_arr;
+        }
+        int new_length = 0;
+        Line[] tmp_arr = new Line[p_line_arr.length];
+        tmp_arr[0] = p_line_arr[0];
+        if (!p_line_arr[0].is_equal_or_opposite(p_line_arr[2])) {
+            ++new_length;
+        }
+        // else  skip the first line
+        tmp_arr[new_length] = p_line_arr[1];
+        ++new_length;
+        for (int i = 2; i < p_line_arr.length - 2; ++i) {
+            if (tmp_arr[new_length - 1].is_equal_or_opposite(p_line_arr[i + 1])) {
+                // skip 2 lines
+                --new_length;
+            } else {
+                tmp_arr[new_length] = p_line_arr[i];
+                ++new_length;
+            }
+        }
+        tmp_arr[new_length] = p_line_arr[p_line_arr.length - 2];
+        ++new_length;
+        if (!p_line_arr[p_line_arr.length - 1].is_equal_or_opposite(tmp_arr[new_length - 2])) {
+            tmp_arr[new_length] = p_line_arr[p_line_arr.length - 1];
+            ++new_length;
+        }
+        // else skip the last line
+        if (new_length == p_line_arr.length) {
+            // nothing skipped
+            return p_line_arr;
+        }
+        // at least 1 line is skipped, adjust the array
+        if (new_length < 3) {
+            return new Line[0];
+        }
+        Line[] result = new Line[new_length];
+        System.arraycopy(tmp_arr, 0, result, 0, new_length);
+        return result;
+    }
+    /**
+     * the array of lines of this Polyline.
+     */
+    public final Line[] arr;
+    transient private FloatPoint[] precalculated_float_corners = null;
+    transient private Point[] precalculated_corners = null;
+    transient private IntBox precalculated_bounding_box = null;
 
     /**
      * creates a polyline of length p_polygon.corner_count + 1 from p_polygon,
@@ -901,88 +982,4 @@ public class Polyline implements java.io.Serializable {
         return new Polyline(new_lines);
     }
 
-    private static Line[] remove_consecutive_parallel_lines(Line[] p_line_arr) {
-        if (p_line_arr.length < 3) {
-            // polyline must have at least 3 lines
-            return p_line_arr;
-        }
-        Line[] tmp_arr = new Line[p_line_arr.length];
-        int new_length = 0;
-        tmp_arr[0] = p_line_arr[0];
-        for (int i = 1; i < p_line_arr.length; ++i) {
-            // skip multiple lines
-            if (!tmp_arr[new_length].is_parallel(p_line_arr[i])) {
-                ++new_length;
-                tmp_arr[new_length] = p_line_arr[i];
-            }
-        }
-        ++new_length;
-        if (new_length == p_line_arr.length) {
-            // nothing skipped
-            return p_line_arr;
-        }
-        // at least 1 line is skipped, adjust the array
-        if (new_length < 3) {
-            return new Line[0];
-        }
-        Line[] result = new Line[new_length];
-        System.arraycopy(tmp_arr, 0, result, 0, new_length);
-        return result;
-    }
-
-    /**
-     * checks if previous and next line are equal or opposite and removes the
-     * resulting overlap
-     */
-    private static Line[] remove_overlaps(Line[] p_line_arr) {
-        if (p_line_arr.length < 4) {
-            return p_line_arr;
-        }
-        int new_length = 0;
-        Line[] tmp_arr = new Line[p_line_arr.length];
-        tmp_arr[0] = p_line_arr[0];
-        if (!p_line_arr[0].is_equal_or_opposite(p_line_arr[2])) {
-            ++new_length;
-        }
-        // else  skip the first line
-        tmp_arr[new_length] = p_line_arr[1];
-        ++new_length;
-        for (int i = 2; i < p_line_arr.length - 2; ++i) {
-            if (tmp_arr[new_length - 1].is_equal_or_opposite(p_line_arr[i + 1])) {
-                // skip 2 lines
-                --new_length;
-            } else {
-                tmp_arr[new_length] = p_line_arr[i];
-                ++new_length;
-            }
-        }
-        tmp_arr[new_length] = p_line_arr[p_line_arr.length - 2];
-        ++new_length;
-        if (!p_line_arr[p_line_arr.length - 1].is_equal_or_opposite(tmp_arr[new_length - 2])) {
-            tmp_arr[new_length] = p_line_arr[p_line_arr.length - 1];
-            ++new_length;
-        }
-        // else skip the last line
-        if (new_length == p_line_arr.length) {
-            // nothing skipped
-            return p_line_arr;
-        }
-        // at least 1 line is skipped, adjust the array
-        if (new_length < 3) {
-            return new Line[0];
-        }
-        Line[] result = new Line[new_length];
-        System.arraycopy(tmp_arr, 0, result, 0, new_length);
-        return result;
-    }
-
-    /**
-     * the array of lines of this Polyline.
-     */
-    public final Line[] arr;
-
-    transient private FloatPoint[] precalculated_float_corners = null;
-    transient private Point[] precalculated_corners = null;
-    transient private IntBox precalculated_bounding_box = null;
-    private static final boolean USE_BOUNDING_OCTAGON_FOR_OFFSET_SHAPES = true;
 }

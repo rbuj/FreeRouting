@@ -28,6 +28,10 @@ import java.util.Collection;
  * @author Alfons Wirtz
  */
 public class IncompleteFreeSpaceExpansionRoom extends FreeSpaceExpansionRoom {
+    /**
+     * A shape which should be contained in the completed shape.
+     */
+    private TileShape contained_shape;
 
     /**
      * Creates a new instance of IncompleteFreeSpaceExpansionRoom. If p_shape ==
@@ -50,8 +54,4 @@ public class IncompleteFreeSpaceExpansionRoom extends FreeSpaceExpansionRoom {
         return new java.util.LinkedList<>();
     }
 
-    /**
-     * A shape which should be contained in the completed shape.
-     */
-    private TileShape contained_shape;
 }

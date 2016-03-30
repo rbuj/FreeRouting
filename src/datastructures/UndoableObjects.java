@@ -33,6 +33,21 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * @author Alfons Wirtz
  */
 public class UndoableObjects implements java.io.Serializable {
+    /**
+     * The entries of this map are of type UnduableObject, the keys of type
+     * UndoableObjects.Storable.
+     */
+    private ConcurrentMap<Storable, UndoableObjectNode> objects;
+    /**
+     * the current undo level
+     */
+    private int stack_level;
+    /**
+     * the lists of deleted objects on each undo level, which where already
+     * existing before the previous snapshot.
+     */
+    private Vector<Collection<UndoableObjectNode>> deleted_objects_stack;
+    private boolean redo_possible = false;
 
     /**
      * Creates a new instance of UndoableObjectsList
@@ -305,21 +320,24 @@ public class UndoableObjects implements java.io.Serializable {
             }
         }
     }
-    /**
-     * The entries of this map are of type UnduableObject, the keys of type
-     * UndoableObjects.Storable.
-     */
-    private ConcurrentMap<Storable, UndoableObjectNode> objects;
-    /**
-     * the current undo level
-     */
-    private int stack_level;
-    /**
-     * the lists of deleted objects on each undo level, which where already
-     * existing before the previous snapshot.
-     */
-    private Vector<Collection<UndoableObjectNode>> deleted_objects_stack;
-    private boolean redo_possible = false;
+
+    public static class UndoableObjectNode implements java.io.Serializable {
+
+        final Storable object; // the object in the node
+        int level; // the level in the Undo stack, where this node was inserted
+        UndoableObjectNode undo_object; // the object to restore in an undo or null.
+        UndoableObjectNode redo_object; // the object to restore in a redo or null.
+
+        /**
+         * Creates a new instance of UndoableObjectNode
+         */
+        UndoableObjectNode(Storable p_object, int p_level) {
+            object = p_object;
+            level = p_level;
+            undo_object = null;
+            redo_object = null;
+        }
+    }
 
     /**
      * Conditiom for an Object to be stored in an UndoableObjects database. An
@@ -334,25 +352,4 @@ public class UndoableObjects implements java.io.Serializable {
         Object clone();
     }
 
-    /**
-     * Stores informations for correct restoring or cancelling an object in an
-     * undo or redo operation. p_level is the level in the Undo stack, where
-     * this object was inserted.
-     */
-    public static class UndoableObjectNode implements java.io.Serializable {
-
-        /**
-         * Creates a new instance of UndoableObjectNode
-         */
-        UndoableObjectNode(Storable p_object, int p_level) {
-            object = p_object;
-            level = p_level;
-            undo_object = null;
-            redo_object = null;
-        }
-        final Storable object; // the object in the node
-        int level; // the level in the Undo stack, where this node was inserted
-        UndoableObjectNode undo_object; // the object to restore in an undo or null.
-        UndoableObjectNode redo_object; // the object to restore in a redo or null.
-    }
 }

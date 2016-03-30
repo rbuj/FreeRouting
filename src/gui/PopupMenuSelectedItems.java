@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-final class PopupMenuSelectedItems extends PopupMenuDisplay {
+class PopupMenuSelectedItems extends PopupMenuDisplay {
 
     /**
      * Creates a new instance of SelectedItemPopupMenu

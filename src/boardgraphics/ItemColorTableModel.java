@@ -28,6 +28,8 @@ import java.awt.Color;
  * @author Alfons Wirtz
  */
 public class ItemColorTableModel extends ColorTableModel implements java.io.Serializable {
+    private transient boolean item_colors_precalculated = false;
+    private transient Color[][] precalculated_item_colors = null;
 
     public ItemColorTableModel(board.LayerStructure p_layer_structure, java.util.Locale p_locale) {
         super(p_layer_structure.arr.length, p_locale);
@@ -264,9 +266,6 @@ public class ItemColorTableModel extends ColorTableModel implements java.io.Seri
         this.item_colors_precalculated = true;
     }
 
-    private transient boolean item_colors_precalculated = false;
-
-    private transient Color[][] precalculated_item_colors = null;
 
     private enum ColumnNames {
         LAYER, TRACES, FIXED_TRACES, VIAS, FIXED_VIAS, PINS, CONDUCTION_AREAS, KEEPOUTS, VIA_KEEPOUTS, PLACE_KEEPOUTS

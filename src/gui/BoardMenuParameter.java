@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public final class BoardMenuParameter extends javax.swing.JMenu {
+public class BoardMenuParameter extends javax.swing.JMenu {
 
     /**
      * Returns a new windows menu for the board frame.
@@ -81,6 +81,9 @@ public final class BoardMenuParameter extends javax.swing.JMenu {
         return parameter_menu;
     }
 
+
+    private final BoardFrame board_frame;
+    private final java.util.ResourceBundle resources;
     /**
      * Creates a new instance of BoardSelectMenu
      */
@@ -88,7 +91,4 @@ public final class BoardMenuParameter extends javax.swing.JMenu {
         board_frame = p_board_frame;
         resources = java.util.ResourceBundle.getBundle("gui.resources.BoardMenuParameter", p_board_frame.get_locale());
     }
-
-    private final BoardFrame board_frame;
-    private final java.util.ResourceBundle resources;
 }

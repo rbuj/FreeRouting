@@ -36,6 +36,7 @@ import java.util.TreeSet;
  * @author Alfons Wirtz
  */
 public class DragItemState extends DragState {
+    private Item item_to_move = null;
 
     /**
      * Creates a new instance of MoveItemState
@@ -154,5 +155,4 @@ public class DragItemState extends DragState {
         return this.return_state;
     }
 
-    private Item item_to_move = null;
 }

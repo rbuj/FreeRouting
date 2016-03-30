@@ -31,6 +31,42 @@ public class IntOctagon extends RegularTileShape implements java.io.Serializable
             = new IntOctagon(Limits.CRIT_INT, Limits.CRIT_INT, -Limits.CRIT_INT,
                     -Limits.CRIT_INT, Limits.CRIT_INT, -Limits.CRIT_INT,
                     Limits.CRIT_INT, -Limits.CRIT_INT);
+    /**
+     * x coordinate of the left border line
+     */
+    public final int lx;
+    /**
+     * y coordinate of the lower border line
+     */
+    public final int ly;
+    /**
+     * x coordinate of the right border line
+     */
+    public final int rx;
+    /**
+     * y coordinate of the upper border line
+     */
+    public final int uy;
+    /**
+     * x axis intersection of the upper left border line
+     */
+    public final int ulx;
+    /**
+     * x axis intersection of the lower right border line
+     */
+    public final int lrx;
+    /**
+     * x axis intersection of the lower left border line
+     */
+    public final int llx;
+    /**
+     * x axis intersection of the upper right border line
+     */
+    public final int urx;
+    /**
+     * Result of to_simplex() memorized for performance reasons.
+     */
+    private Simplex precalculated_to_simplex = null;
 
     /**
      * Creates an IntOctagon from 8 integer values. p_lx is the smallest x value
@@ -1532,49 +1568,5 @@ public class IntOctagon extends RegularTileShape implements java.io.Serializable
         return this.to_Simplex().cutout_from(p_simplex);
     }
 
-    /**
-     * x coordinate of the left border line
-     */
-    public final int lx;
-
-    /**
-     * y coordinate of the lower border line
-     */
-    public final int ly;
-
-    /**
-     * x coordinate of the right border line
-     */
-    public final int rx;
-
-    /**
-     * y coordinate of the upper border line
-     */
-    public final int uy;
-
-    /**
-     * x axis intersection of the upper left border line
-     */
-    public final int ulx;
-
-    /**
-     * x axis intersection of the lower right border line
-     */
-    public final int lrx;
-
-    /**
-     * x axis intersection of the lower left border line
-     */
-    public final int llx;
-
-    /**
-     * x axis intersection of the upper right border line
-     */
-    public final int urx;
-
-    /**
-     * Result of to_simplex() memorized for performance reasons.
-     */
-    private Simplex precalculated_to_simplex = null;
 
 }

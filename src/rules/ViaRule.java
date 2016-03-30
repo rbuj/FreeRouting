@@ -34,6 +34,8 @@ public class ViaRule implements java.io.Serializable, board.ObjectInfoPanel.Prin
      * Empty via rule. Must nott be changed.
      */
     public static final ViaRule EMPTY = new ViaRule("empty");
+    public final String name;
+    private List<ViaInfo> list = new LinkedList<>();
 
     public ViaRule(String p_name) {
         name = p_name;
@@ -145,6 +147,4 @@ public class ViaRule implements java.io.Serializable, board.ObjectInfoPanel.Prin
         }
     }
 
-    public final String name;
-    private List<ViaInfo> list = new LinkedList<>();
 }

@@ -28,6 +28,11 @@ import library.Padstack;
  * @author Alfons Wirtz
  */
 public class ViaInfo implements Comparable<ViaInfo>, board.ObjectInfoPanel.Printable, java.io.Serializable {
+    private String name;
+    private Padstack padstack;
+    private int clearance_class;
+    private boolean attach_smd_allowed;
+    private final BoardRules board_rules;
 
     /**
      * Creates a new instance of ViaRule
@@ -104,9 +109,4 @@ public class ViaInfo implements Comparable<ViaInfo>, board.ObjectInfoPanel.Print
         p_window.newline();
     }
 
-    private String name;
-    private Padstack padstack;
-    private int clearance_class;
-    private boolean attach_smd_allowed;
-    private final BoardRules board_rules;
 }

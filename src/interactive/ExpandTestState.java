@@ -47,6 +47,11 @@ public class ExpandTestState extends InteractiveState {
         ExpandTestState result = new ExpandTestState(p_location, p_return_state, p_board_handling);
         return result;
     }
+    private boolean in_autoroute = false;
+    private MazeSearchAlgo maze_search_algo = null;
+    private LocateFoundConnectionAlgo autoroute_result = null;
+    private AutorouteControl control_settings;
+    private AutorouteEngine autoroute_engine;
 
     /**
      * Creates a new instance of ExpandTestState
@@ -220,9 +225,4 @@ public class ExpandTestState extends InteractiveState {
         Collection<CompleteFreeSpaceExpansionRoom> completed_rooms = autoroute_engine.complete_expansion_room(p_incomplete_room);
         return (completed_rooms.size() > 0);
     }
-    private boolean in_autoroute = false;
-    private MazeSearchAlgo maze_search_algo = null;
-    private LocateFoundConnectionAlgo autoroute_result = null;
-    private AutorouteControl control_settings;
-    private AutorouteEngine autoroute_engine;
 }

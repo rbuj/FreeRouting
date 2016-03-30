@@ -36,6 +36,17 @@ import java.util.LinkedList;
  * @author Alfons Wirtz
  */
 public class CompleteFreeSpaceExpansionRoom extends FreeSpaceExpansionRoom implements CompleteExpansionRoom, SearchTreeObject {
+    /**
+     * The array of entries in the SearchTree. Consists of just one element
+     */
+    private ShapeTree.Leaf[] tree_entries = null;
+    //** identification number for implementong the Comparable interfacw */
+    private final int id_no;
+    /**
+     * The list of doors to items of the own net
+     */
+    private Collection<TargetItemExpansionDoor> target_doors;
+    private boolean room_is_net_dependent = false;
 
     /**
      * Creates a new instance of CompleteFreeSpaceExpansionRoom
@@ -225,18 +236,4 @@ public class CompleteFreeSpaceExpansionRoom extends FreeSpaceExpansionRoom imple
         }
     }
 
-    /**
-     * The array of entries in the SearchTree. Consists of just one element
-     */
-    private ShapeTree.Leaf[] tree_entries = null;
-
-    //** identification number for implementong the Comparable interfacw */
-    private final int id_no;
-
-    /**
-     * The list of doors to items of the own net
-     */
-    private Collection<TargetItemExpansionDoor> target_doors;
-
-    private boolean room_is_net_dependent = false;
 }

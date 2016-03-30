@@ -27,7 +27,22 @@ import rules.NetClass;
  *
  * @author Alfons Wirtz
  */
-public final class WindowAssignNetClass extends BoardSavableSubWindow {
+public class WindowAssignNetClass extends BoardSavableSubWindow {
+
+    private static final int TEXTFIELD_HEIGHT = 16;
+    private static final int TEXTFIELD_WIDTH = 100;
+
+    private final BoardFrame board_frame;
+
+    private final javax.swing.JPanel main_panel;
+
+    private javax.swing.JScrollPane scroll_pane;
+    private AssignRuleTable table;
+    private AssignRuleTableModel table_model;
+
+    private javax.swing.JComboBox<NetClass> net_rule_combo_box;
+
+    private final java.util.ResourceBundle resources;
 
     /**
      * Creates a new instance of AssignNetRulesWindow
@@ -56,7 +71,6 @@ public final class WindowAssignNetClass extends BoardSavableSubWindow {
         this.add(main_panel);
         this.pack();
     }
-
     private void add_net_class_combo_box() {
         this.net_rule_combo_box = new javax.swing.JComboBox<>();
         board.RoutingBoard routing_board = board_frame.board_panel.board_handling.get_routing_board();
@@ -65,7 +79,6 @@ public final class WindowAssignNetClass extends BoardSavableSubWindow {
         }
         this.table.getColumnModel().getColumn(1).setCellEditor(new javax.swing.DefaultCellEditor(net_rule_combo_box));
     }
-
     @Override
     public void refresh() {
         // Reinsert the net class column.
@@ -77,22 +90,11 @@ public final class WindowAssignNetClass extends BoardSavableSubWindow {
         add_net_class_combo_box();
     }
 
-    private final BoardFrame board_frame;
-
-    private final javax.swing.JPanel main_panel;
-
-    private javax.swing.JScrollPane scroll_pane;
-    private AssignRuleTable table;
-    private AssignRuleTableModel table_model;
-
-    private javax.swing.JComboBox<NetClass> net_rule_combo_box;
-
-    private final java.util.ResourceBundle resources;
-
-    private static final int TEXTFIELD_HEIGHT = 16;
-    private static final int TEXTFIELD_WIDTH = 100;
-
     private class AssignRuleTable extends javax.swing.JTable {
+        private final String[] column_tool_tips
+                = {
+                    resources.getString("net_name_tooltip"), resources.getString("class_name_tooltip")
+                };
 
         public AssignRuleTable(AssignRuleTableModel p_table_model) {
             super(p_table_model);
@@ -112,16 +114,11 @@ public final class WindowAssignNetClass extends BoardSavableSubWindow {
             };
         }
 
-        private final String[] column_tool_tips
-                = {
-                    resources.getString("net_name_tooltip"), resources.getString("class_name_tooltip")
-                };
     }
 
-    /**
-     * Table model of the net rule table.
-     */
     private class AssignRuleTableModel extends javax.swing.table.AbstractTableModel {
+        private Object[][] data = null;
+        private String[] column_names = null;
 
         public AssignRuleTableModel() {
             column_names = new String[2];
@@ -196,7 +193,5 @@ public final class WindowAssignNetClass extends BoardSavableSubWindow {
             fireTableCellUpdated(p_row, p_col);
         }
 
-        private Object[][] data = null;
-        private String[] column_names = null;
     }
 }

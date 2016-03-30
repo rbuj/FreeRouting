@@ -31,7 +31,9 @@ import java.util.SortedSet;
  *
  * @author Alfons Wirtz
  */
-public final class WindowUnconnectedRoute extends WindowObjectListWithFilter {
+public class WindowUnconnectedRoute extends WindowObjectListWithFilter {
+    private final java.util.ResourceBundle resources;
+    private int max_unconnected_route_info_id_no = 0;
 
     /**
      * Creates a new instance of WindowUnconnectedRoute
@@ -105,14 +107,15 @@ public final class WindowUnconnectedRoute extends WindowObjectListWithFilter {
         board_handling.zoom_selection();
     }
 
-    private final java.util.ResourceBundle resources;
-    private int max_unconnected_route_info_id_no = 0;
 
-    /**
-     * Describes information of a connected set of unconnected traces and vias.
-     */
     private class UnconnectedRouteInfo implements Comparable<UnconnectedRouteInfo> {
 
+
+        private final rules.Net net;
+        private final Collection<Item> item_list;
+        private final int id_no;
+        private final Integer trace_count;
+        private final Integer via_count;
         public UnconnectedRouteInfo(rules.Net p_net, Collection<Item> p_item_list) {
             this.net = p_net;
             this.item_list = p_item_list;
@@ -130,7 +133,6 @@ public final class WindowUnconnectedRoute extends WindowObjectListWithFilter {
             this.trace_count = curr_trace_count;
             this.via_count = curr_via_count;
         }
-
         @Override
         public String toString() {
 
@@ -140,7 +142,6 @@ public final class WindowUnconnectedRoute extends WindowObjectListWithFilter {
 
             return result;
         }
-
         @Override
         public int compareTo(UnconnectedRouteInfo p_other) {
             int result = this.net.name.compareTo(p_other.net.name);
@@ -149,11 +150,5 @@ public final class WindowUnconnectedRoute extends WindowObjectListWithFilter {
             }
             return result;
         }
-
-        private final rules.Net net;
-        private final Collection<Item> item_list;
-        private final int id_no;
-        private final Integer trace_count;
-        private final Integer via_count;
     }
 }

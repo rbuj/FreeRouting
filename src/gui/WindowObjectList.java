@@ -31,6 +31,27 @@ import java.util.List;
  */
 public abstract class WindowObjectList extends BoardSavableSubWindow {
 
+    protected static final int DEFAULT_TABLE_SIZE = 20;
+
+    protected final BoardFrame board_frame;
+
+    private final javax.swing.JPanel main_panel;
+
+    private javax.swing.JScrollPane list_scroll_pane = null;
+    protected javax.swing.JLabel list_empty_message;
+
+    private javax.swing.DefaultListModel list_model = null;
+    protected javax.swing.JList list;
+
+    protected final javax.swing.JPanel south_panel;
+
+    /**
+     * The subwindows with information about selected object
+     */
+    protected final java.util.Collection<WindowObjectInfo> subwindows = new java.util.LinkedList<>();
+
+    private final java.util.ResourceBundle resources;
+
     /**
      * Creates a new instance of ObjectListWindow
      */
@@ -94,7 +115,6 @@ public abstract class WindowObjectList extends BoardSavableSubWindow {
             }
         });
     }
-
     @Override
     public void setVisible(boolean p_value) {
         if (p_value == true) {
@@ -102,7 +122,6 @@ public abstract class WindowObjectList extends BoardSavableSubWindow {
         }
         super.setVisible(p_value);
     }
-
     protected void recalculate() {
         if (this.list_scroll_pane != null) {
             main_panel.remove(this.list_scroll_pane);
@@ -130,7 +149,6 @@ public abstract class WindowObjectList extends BoardSavableSubWindow {
             }
         });
     }
-
     @Override
     public void dispose() {
         for (WindowObjectInfo curr_subwindow : this.subwindows) {
@@ -140,44 +158,52 @@ public abstract class WindowObjectList extends BoardSavableSubWindow {
         }
         super.dispose();
     }
-
     protected void add_to_list(Object p_object) {
         this.list_model.addElement(p_object);
     }
-
     /**
      * Fills the list with the objects to display.
      */
     abstract protected void fill_list();
-
     abstract protected void select_instances();
-
-    protected final BoardFrame board_frame;
-
-    private final javax.swing.JPanel main_panel;
-
-    private javax.swing.JScrollPane list_scroll_pane = null;
-    protected javax.swing.JLabel list_empty_message;
-
-    private javax.swing.DefaultListModel list_model = null;
-    protected javax.swing.JList list;
-
-    protected final javax.swing.JPanel south_panel;
-
     /**
-     * The subwindows with information about selected object
+     * Saves also the filter string to disk.
      */
-    protected final java.util.Collection<WindowObjectInfo> subwindows = new java.util.LinkedList<>();
+    @Override
+    public void save(java.io.ObjectOutputStream p_object_stream) {
+        int[] selected_indices;
+        if (this.list != null) {
+            selected_indices = this.list.getSelectedIndices();
+        } else {
+            selected_indices = new int[0];
+        }
+        try {
+            p_object_stream.writeObject(selected_indices);
+        } catch (java.io.IOException e) {
+            System.out.println("WindowObjectList.save: save failed");
+        }
+        super.save(p_object_stream);
+    }
+    @Override
+    public boolean read(java.io.ObjectInputStream p_object_stream) {
+        int[] saved_selected_indices = null;
+        try {
+            saved_selected_indices = (int[]) p_object_stream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("WindowObjectListWithFilter.read: read failed");
+            return false;
+        }
+        boolean result = super.read(p_object_stream);
+        if (this.list != null && saved_selected_indices.length > 0) {
+            this.list.setSelectedIndices(saved_selected_indices);
+        }
+        return result;
+    }
 
-    private final java.util.ResourceBundle resources;
-
-    protected static final int DEFAULT_TABLE_SIZE = 20;
-
-    /**
-     * Listens to the button for showing the selected padstacks
-     */
     private class ShowListener implements java.awt.event.ActionListener {
 
+
+        private static final int WINDOW_OFFSET = 30;
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             List<?> selected_objects = list.getSelectedValuesList();
@@ -198,8 +224,6 @@ public abstract class WindowObjectList extends BoardSavableSubWindow {
             new_window.setLocation(new_window_location);
             subwindows.add(new_window);
         }
-
-        private static final int WINDOW_OFFSET = 30;
     }
 
     /**
@@ -235,40 +259,6 @@ public abstract class WindowObjectList extends BoardSavableSubWindow {
         }
     }
 
-    /**
-     * Saves also the filter string to disk.
-     */
-    @Override
-    public void save(java.io.ObjectOutputStream p_object_stream) {
-        int[] selected_indices;
-        if (this.list != null) {
-            selected_indices = this.list.getSelectedIndices();
-        } else {
-            selected_indices = new int[0];
-        }
-        try {
-            p_object_stream.writeObject(selected_indices);
-        } catch (java.io.IOException e) {
-            System.out.println("WindowObjectList.save: save failed");
-        }
-        super.save(p_object_stream);
-    }
-
-    @Override
-    public boolean read(java.io.ObjectInputStream p_object_stream) {
-        int[] saved_selected_indices = null;
-        try {
-            saved_selected_indices = (int[]) p_object_stream.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("WindowObjectListWithFilter.read: read failed");
-            return false;
-        }
-        boolean result = super.read(p_object_stream);
-        if (this.list != null && saved_selected_indices.length > 0) {
-            this.list.setSelectedIndices(saved_selected_indices);
-        }
-        return result;
-    }
 
     /**
      * Listens to the button for recalculating the content of the window

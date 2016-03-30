@@ -32,6 +32,9 @@ import geometry.planar.Vector;
  * @author Alfons Wirtz
  */
 public class CoordinateTransform implements java.io.Serializable {
+    private final double scale_factor;
+    private final double base_x;
+    private final double base_y;
 
     /**
      * Creates a new instance of CoordinateTransform. The base point of the dsn
@@ -226,7 +229,4 @@ public class CoordinateTransform implements java.io.Serializable {
         return result;
     }
 
-    private final double scale_factor;
-    private final double base_x;
-    private final double base_y;
 }

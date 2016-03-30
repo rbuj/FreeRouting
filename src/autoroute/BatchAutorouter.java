@@ -37,6 +37,7 @@ import java.util.TreeSet;
  * @author Alfons Wirtz
  */
 public class BatchAutorouter {
+    private static final int TIME_LIMIT_TO_PREVENT_ENDLESS_LOOP = 1000;
 
     /**
      * Autoroutes ripup passes until the board is completed or the autorouter is
@@ -66,6 +67,20 @@ public class BatchAutorouter {
         }
         return curr_pass_no;
     }
+
+    private final InteractiveActionThread thread;
+    private final BoardHandling hdlg;
+    private final RoutingBoard routing_board;
+    private boolean is_interrupted = false;
+    private final boolean remove_unconnected_vias;
+    private final AutorouteControl.ExpansionCostFactor[] trace_cost_arr;
+    private final boolean retain_autoroute_database;
+    private final int start_ripup_costs;
+
+    /**
+     * Used to draw the airline of the current routed incomplete.
+     */
+    private FloatLine air_line = null;
 
     /**
      * Creates a new batch autorouter.
@@ -310,17 +325,4 @@ public class BatchAutorouter {
         }
         this.air_line = new FloatLine(from_corner, to_corner);
     }
-    private final InteractiveActionThread thread;
-    private final BoardHandling hdlg;
-    private final RoutingBoard routing_board;
-    private boolean is_interrupted = false;
-    private final boolean remove_unconnected_vias;
-    private final AutorouteControl.ExpansionCostFactor[] trace_cost_arr;
-    private final boolean retain_autoroute_database;
-    private final int start_ripup_costs;
-    /**
-     * Used to draw the airline of the current routed incomplete.
-     */
-    private FloatLine air_line = null;
-    private static final int TIME_LIMIT_TO_PREVENT_ENDLESS_LOOP = 1000;
 }

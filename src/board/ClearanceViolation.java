@@ -28,6 +28,23 @@ import geometry.planar.ConvexShape;
  */
 public class ClearanceViolation implements ObjectInfoPanel.Printable {
 
+
+    /**
+     * The first item of the clearance violation
+     */
+    public final Item first_item;
+    /**
+     * The second item of the clearance violation
+     */
+    public final Item second_item;
+    /**
+     * The shape of the clearance violation
+     */
+    public final ConvexShape shape;
+    /**
+     * The layer of the clearance violation
+     */
+    public final int layer;
     /**
      * Creates a new instance of ClearanceViolation
      */
@@ -37,7 +54,6 @@ public class ClearanceViolation implements ObjectInfoPanel.Printable {
         shape = p_shape;
         layer = p_layer;
     }
-
     @Override
     public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale) {
         java.util.ResourceBundle resources
@@ -56,21 +72,4 @@ public class ClearanceViolation implements ObjectInfoPanel.Printable {
         p_window.indent();
         second_item.print_info(p_window, p_locale);
     }
-
-    /**
-     * The first item of the clearance violation
-     */
-    public final Item first_item;
-    /**
-     * The second item of the clearance violation
-     */
-    public final Item second_item;
-    /**
-     * The shape of the clearance violation
-     */
-    public final ConvexShape shape;
-    /**
-     * The layer of the clearance violation
-     */
-    public final int layer;
 }

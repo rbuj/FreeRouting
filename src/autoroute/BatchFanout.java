@@ -29,6 +29,10 @@ import java.util.SortedSet;
  */
 public class BatchFanout {
 
+    private final InteractiveActionThread thread;
+    private final RoutingBoard routing_board;
+    private final SortedSet<Component> sorted_components;
+
     public static void fanout_board(InteractiveActionThread p_thread) {
         BatchFanout fanout_instance = new BatchFanout(p_thread);
         final int MAX_PASS_COUNT = 20;
@@ -53,7 +57,6 @@ public class BatchFanout {
             }
         }
     }
-
     /**
      * Routes a fanout pass and returns the number of new fanouted SMD-pins in
      * this pass.
@@ -103,10 +106,15 @@ public class BatchFanout {
         return routed_count;
     }
 
-    private final InteractiveActionThread thread;
-    private final RoutingBoard routing_board;
-
     private static class Component implements Comparable<Component> {
+
+        final board.Component board_component;
+        final int smd_pin_count;
+        final SortedSet<Pin> smd_pins;
+        /**
+         * The center of gravity of all SMD pins of this component.
+         */
+        final FloatPoint gravity_center_of_smd_pins;
 
         Component(board.Component p_board_component, Collection<board.Pin> p_board_smd_pin_list) {
             this.board_component = p_board_component;
@@ -156,15 +164,11 @@ public class BatchFanout {
             }
             return result;
         }
-        final board.Component board_component;
-        final int smd_pin_count;
-        final SortedSet<Pin> smd_pins;
-        /**
-         * The center of gravity of all SMD pins of this component.
-         */
-        final FloatPoint gravity_center_of_smd_pins;
 
         class Pin implements Comparable<Pin> {
+
+            final board.Pin board_pin;
+            final double distance_to_component_center;
 
             Pin(board.Pin p_board_pin) {
                 this.board_pin = p_board_pin;
@@ -185,9 +189,6 @@ public class BatchFanout {
                 }
                 return result;
             }
-            final board.Pin board_pin;
-            final double distance_to_component_center;
         }
     }
-    private final SortedSet<Component> sorted_components;
 }

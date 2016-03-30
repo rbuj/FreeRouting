@@ -29,6 +29,18 @@ import board.RoutingBoard;
  * @author Alfons Wirtz
  */
 public class AutorouteSettings implements java.io.Serializable {
+    private boolean with_fanout;
+    private boolean with_autoroute;
+    private boolean with_postroute;
+    private boolean vias_allowed;
+    private int via_costs;
+    private int plane_via_costs;
+    private int start_ripup_costs;
+    private int start_pass_no;
+    private final boolean[] layer_active_arr;
+    private final boolean[] preferred_direction_is_horizontal_arr;
+    private final double[] preferred_direction_trace_cost_arr;
+    private final double[] against_preferred_direction_trace_cost_arr;
 
     /**
      * Creates a new instance of AutorouteSettings
@@ -283,16 +295,4 @@ public class AutorouteSettings implements java.io.Serializable {
         return result;
     }
 
-    private boolean with_fanout;
-    private boolean with_autoroute;
-    private boolean with_postroute;
-    private boolean vias_allowed;
-    private int via_costs;
-    private int plane_via_costs;
-    private int start_ripup_costs;
-    private int start_pass_no;
-    private final boolean[] layer_active_arr;
-    private final boolean[] preferred_direction_is_horizontal_arr;
-    private final double[] preferred_direction_trace_cost_arr;
-    private final double[] against_preferred_direction_trace_cost_arr;
 }

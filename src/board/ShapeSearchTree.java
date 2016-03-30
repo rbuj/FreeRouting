@@ -52,6 +52,17 @@ import rules.ClearanceMatrix;
  * @author Alfons Wirtz
  */
 public class ShapeSearchTree extends datastructures.MinAreaTree {
+    /**
+     * used in objects of class EntrySortedByClearance
+     */
+    static private int last_generated_id_no = 0;
+    /**
+     * The clearance class number for which the shapes of this tree is
+     * compensated. If compensated_clearance_class_no = 0, the shapes are not
+     * compensated.
+     */
+    public final int compensated_clearance_class_no;
+    protected final BasicBoard board;
 
     /**
      * Creates a new ShapeSearchTree. p_compensated_clearance_class_no is the
@@ -971,24 +982,12 @@ public class ShapeSearchTree extends datastructures.MinAreaTree {
         }
         return true;
     }
-    /**
-     * The clearance class number for which the shapes of this tree is
-     * compensated. If compensated_clearance_class_no = 0, the shapes are not
-     * compensated.
-     */
-    public final int compensated_clearance_class_no;
-    protected final BasicBoard board;
-    /**
-     * used in objects of class EntrySortedByClearance
-     */
-    static private int last_generated_id_no = 0;
 
-    /**
-     * created for sorting Items according to their clearance to p_cl_type on
-     * layer p_layer
-     */
     static private class EntrySortedByClearance implements Comparable<EntrySortedByClearance> {
 
+        Leaf leaf;
+        int clearance;
+        private final int entry_id_no;
         EntrySortedByClearance(Leaf p_leaf, int p_clearance) {
             leaf = p_leaf;
             clearance = p_clearance;
@@ -1000,7 +999,6 @@ public class ShapeSearchTree extends datastructures.MinAreaTree {
             entry_id_no = last_generated_id_no;
 
         }
-
         @Override
         public int compareTo(EntrySortedByClearance p_other) {
             if (clearance != p_other.clearance) {
@@ -1008,8 +1006,5 @@ public class ShapeSearchTree extends datastructures.MinAreaTree {
             }
             return entry_id_no - p_other.entry_id_no;
         }
-        Leaf leaf;
-        int clearance;
-        private final int entry_id_no;
     }
 }

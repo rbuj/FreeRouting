@@ -37,7 +37,28 @@ import javax.swing.event.TableModelListener;
  *
  * @author Alfons Wirtz
  */
-public final class BoardPanel extends javax.swing.JPanel {
+public class BoardPanel extends javax.swing.JPanel {
+    private static final double c_zoom_factor = 2.0;
+    public javax.swing.JPopupMenu popup_menu_insert_cancel;
+    public PopupMenuCopy popup_menu_copy;
+    public PopupMenuMove popup_menu_move;
+    public javax.swing.JPopupMenu popup_menu_corneritem_construction;
+    public javax.swing.JPopupMenu popup_menu_main;
+    public PopupMenuDynamicRoute popup_menu_dynamic_route;
+    public PopupMenuStitchRoute popup_menu_stitch_route;
+    public javax.swing.JPopupMenu popup_menu_select;
+    public final ScreenMessages screen_messages;
+    public final BoardFrame board_frame;
+    BoardHandling board_handling = null;
+    private final JScrollPane scroll_pane;
+    Point2D right_button_click_location = null;
+    private java.awt.Robot robot;
+    private java.awt.Point middle_drag_position = null;
+    /**
+     * Defines the appearance of the custom custom_cursor in the board panel.
+     * Null, if the standard custom_cursor is used.
+     */
+    private Cursor custom_cursor = null;
 
     /**
      * Creates a new BoardPanel in an Application
@@ -392,32 +413,6 @@ public final class BoardPanel extends javax.swing.JPanel {
         return this.custom_cursor != null;
     }
 
-    public javax.swing.JPopupMenu popup_menu_insert_cancel;
-    public PopupMenuCopy popup_menu_copy;
-    public PopupMenuMove popup_menu_move;
-    public javax.swing.JPopupMenu popup_menu_corneritem_construction;
-    public javax.swing.JPopupMenu popup_menu_main;
-    public PopupMenuDynamicRoute popup_menu_dynamic_route;
-    public PopupMenuStitchRoute popup_menu_stitch_route;
-    public javax.swing.JPopupMenu popup_menu_select;
-
-    public final ScreenMessages screen_messages;
-
-    public final BoardFrame board_frame;
-
-    BoardHandling board_handling = null;
-
-    private final JScrollPane scroll_pane;
-    Point2D right_button_click_location = null;
-    private static final double c_zoom_factor = 2.0;
-    private java.awt.Robot robot;
-    private java.awt.Point middle_drag_position = null;
-
-    /**
-     * Defines the appearance of the custom custom_cursor in the board panel.
-     * Null, if the standard custom_cursor is used.
-     */
-    private Cursor custom_cursor = null;
 
     private class ColorTableListener implements TableModelListener {
 

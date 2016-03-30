@@ -24,7 +24,7 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-public final class BoardMenuRules extends javax.swing.JMenu {
+public class BoardMenuRules extends javax.swing.JMenu {
 
     /**
      * Returns a new windows menu for the board frame.
@@ -78,6 +78,9 @@ public final class BoardMenuRules extends javax.swing.JMenu {
         return rules_menu;
     }
 
+
+    private final BoardFrame board_frame;
+    private final java.util.ResourceBundle resources;
     /**
      * Creates a new instance of BoardRulesMenu
      */
@@ -85,7 +88,4 @@ public final class BoardMenuRules extends javax.swing.JMenu {
         board_frame = p_board_frame;
         resources = java.util.ResourceBundle.getBundle("gui.resources.BoardMenuRules", p_board_frame.get_locale());
     }
-
-    private final BoardFrame board_frame;
-    private final java.util.ResourceBundle resources;
 }

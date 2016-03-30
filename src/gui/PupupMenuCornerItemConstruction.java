@@ -24,8 +24,10 @@ package gui;
  *
  * @author Alfons Wirtz
  */
-final class PupupMenuCornerItemConstruction extends javax.swing.JPopupMenu {
+class PupupMenuCornerItemConstruction extends javax.swing.JPopupMenu {
 
+
+    private final BoardPanel board_panel;
     /**
      * Creates a new instance of CornerItemConstructionPopupMenu
      */
@@ -69,6 +71,4 @@ final class PupupMenuCornerItemConstruction extends javax.swing.JPopupMenu {
 
         this.add(cancel_item);
     }
-
-    private final BoardPanel board_panel;
 }

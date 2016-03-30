@@ -29,18 +29,6 @@ import java.util.LinkedList;
  */
 public class ReadScopeParameter {
 
-    /**
-     * Creates a new instance of ReadScopeParameter
-     */
-    ReadScopeParameter(Scanner p_scanner, interactive.BoardHandling p_board_handling,
-            board.BoardObservers p_observers,
-            datastructures.IdNoGenerator p_item_id_no_generator, board.TestLevel p_test_level) {
-        scanner = p_scanner;
-        board_handling = p_board_handling;
-        observers = p_observers;
-        item_id_no_generator = p_item_id_no_generator;
-        test_level = p_test_level;
-    }
 
     final Scanner scanner;
     final interactive.BoardHandling board_handling;
@@ -102,18 +90,27 @@ public class ReadScopeParameter {
 
     board.Unit unit = board.Unit.MIL;
     int resolution = 100; // default resulution
-
     /**
-     * Information for inserting a plane
+     * Creates a new instance of ReadScopeParameter
      */
+    ReadScopeParameter(Scanner p_scanner, interactive.BoardHandling p_board_handling,
+            board.BoardObservers p_observers,
+            datastructures.IdNoGenerator p_item_id_no_generator, board.TestLevel p_test_level) {
+        scanner = p_scanner;
+        board_handling = p_board_handling;
+        observers = p_observers;
+        item_id_no_generator = p_item_id_no_generator;
+        test_level = p_test_level;
+    }
+
     static class PlaneInfo {
 
+
+        final Shape.ReadAreaScopeResult area;
+        final String net_name;
         PlaneInfo(Shape.ReadAreaScopeResult p_area, String p_net_name) {
             area = p_area;
             net_name = p_net_name;
         }
-
-        final Shape.ReadAreaScopeResult area;
-        final String net_name;
     }
 }

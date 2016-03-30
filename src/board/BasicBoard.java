@@ -48,6 +48,61 @@ import rules.BoardRules;
  * @author Alfons Wirtz
  */
 public class BasicBoard implements java.io.Serializable {
+    /**
+     * List of items inserted into this board
+     */
+    public final UndoableObjects item_list;
+    /**
+     * List of placed components on the board.
+     */
+    public final Components components;
+    /**
+     * Class defining the rules for items to be inserted into this board.
+     * Contains for example the clearance matrix.
+     */
+    public final BoardRules rules;
+    /**
+     * The library containing pastack masks, packagages and other templates used
+     * on the board.
+     */
+    public final BoardLibrary library;
+    /**
+     * The layer structure of this board.
+     */
+    public final LayerStructure layer_structure;
+    /**
+     * Handels the search trees pointing into the items of this board
+     */
+    public transient SearchTreeManager search_tree_manager;
+    /**
+     * For communication with a host system or host design file formats.
+     */
+    public final Communication communication;
+    /**
+     * bounding orthogonal rectangle of this board
+     */
+    public final IntBox bounding_box;
+    /**
+     * If test_level != RELEASE_VERSION, some features may be used, which are
+     * still in experimental state. Also warnings for debugging may be printed
+     * depending on the size of test_level.
+     */
+    transient private TestLevel test_level;
+    /**
+     * the rectangle, where the graphics may be not uptodate
+     */
+    transient private IntBox update_box = IntBox.EMPTY;
+    /**
+     * the biggest half width of all traces on the board
+     */
+    private int max_trace_half_width = 1000;
+    /**
+     * the smallest half width of all traces on the board
+     */
+    private int min_trace_half_width = 10000;
+    /**
+     * Limits the maximum width of a shape in the search tree.
+     */
 
     /**
      * Creates a new instance of a routing Board with surrrounding box
@@ -1278,59 +1333,5 @@ public class BasicBoard implements java.io.Serializable {
             search_tree_manager.insert(curr_item);
         }
     }
-    /**
-     * List of items inserted into this board
-     */
-    public final UndoableObjects item_list;
-    /**
-     * List of placed components on the board.
-     */
-    public final Components components;
-    /**
-     * Class defining the rules for items to be inserted into this board.
-     * Contains for example the clearance matrix.
-     */
-    public final BoardRules rules;
-    /**
-     * The library containing pastack masks, packagages and other templates used
-     * on the board.
-     */
-    public final BoardLibrary library;
-    /**
-     * The layer structure of this board.
-     */
-    public final LayerStructure layer_structure;
-    /**
-     * Handels the search trees pointing into the items of this board
-     */
-    public transient SearchTreeManager search_tree_manager;
-    /**
-     * For communication with a host system or host design file formats.
-     */
-    public final Communication communication;
-    /**
-     * bounding orthogonal rectangle of this board
-     */
-    public final IntBox bounding_box;
-    /**
-     * If test_level != RELEASE_VERSION, some features may be used, which are
-     * still in experimental state. Also warnings for debugging may be printed
-     * depending on the size of test_level.
-     */
-    transient private TestLevel test_level;
-    /**
-     * the rectangle, where the graphics may be not uptodate
-     */
-    transient private IntBox update_box = IntBox.EMPTY;
-    /**
-     * the biggest half width of all traces on the board
-     */
-    private int max_trace_half_width = 1000;
-    /**
-     * the smallest half width of all traces on the board
-     */
-    private int min_trace_half_width = 10000;
-    /**
-     * Limits the maximum width of a shape in the search tree.
-     */
+
 }

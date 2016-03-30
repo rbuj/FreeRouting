@@ -33,6 +33,10 @@ import java.util.LinkedList;
  * @author alfons
  */
 public class ClearanceViolations {
+    /**
+     * The list of clearance violations.
+     */
+    public final Collection<ClearanceViolation> list;
 
     /**
      * Creates a new instance of ClearanceViolations
@@ -60,8 +64,4 @@ public class ClearanceViolations {
         }
     }
 
-    /**
-     * The list of clearance violations.
-     */
-    public final Collection<ClearanceViolation> list;
 }

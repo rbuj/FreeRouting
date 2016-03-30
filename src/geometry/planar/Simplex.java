@@ -49,6 +49,22 @@ public class Simplex extends TileShape implements java.io.Serializable {
         Simplex result = curr_simplex.remove_redundant_lines();
         return result;
     }
+    private final Line[] arr;
+    /**
+     * the following fields are for storing precalculated data
+     */
+    transient private Point[] precalculated_corners = null;
+    transient private FloatPoint[] precalculated_float_corners = null;
+    transient private IntBox precalculated_bounding_box = null;
+    transient private IntOctagon precalculated_bounding_octagon = null;
+    /**
+     * Constructs a Simplex from the directed lines in p_line_arr. The simplex
+     * will not be normalized. To get a normalised simplex use
+     * TileShape.get_instance
+     */
+    public Simplex(Line[] p_line_arr) {
+        arr = p_line_arr;
+    }
 
     /**
      * Return true, if this simplex is empty
@@ -688,14 +704,6 @@ public class Simplex extends TileShape implements java.io.Serializable {
         return new Simplex(new_arr);
     }
 
-    /**
-     * Constructs a Simplex from the directed lines in p_line_arr. The simplex
-     * will not be normalized. To get a normalised simplex use
-     * TileShape.get_instance
-     */
-    public Simplex(Line[] p_line_arr) {
-        arr = p_line_arr;
-    }
 
     @Override
     public Simplex to_Simplex() {
@@ -1181,14 +1189,5 @@ public class Simplex extends TileShape implements java.io.Serializable {
         return result;
     }
 
-    private final Line[] arr;
-
-    /**
-     * the following fields are for storing precalculated data
-     */
-    transient private Point[] precalculated_corners = null;
-    transient private FloatPoint[] precalculated_float_corners = null;
-    transient private IntBox precalculated_bounding_box = null;
-    transient private IntOctagon precalculated_bounding_octagon = null;
 
 }

@@ -28,6 +28,7 @@ import geometry.planar.FloatPoint;
  * @author Alfons Wirtz
  */
 public abstract class PrintableShape {
+    protected final java.util.Locale locale;
 
     protected PrintableShape(java.util.Locale p_locale) {
         this.locale = p_locale;
@@ -39,10 +40,12 @@ public abstract class PrintableShape {
     @Override
     public abstract String toString();
 
-    protected final java.util.Locale locale;
 
     static class Circle extends PrintableShape {
 
+
+        public final FloatPoint center;
+        public final double radius;
         /**
          * Creates a Circle from the input coordinates.
          */
@@ -51,7 +54,6 @@ public abstract class PrintableShape {
             center = p_center;
             radius = p_radius;
         }
-
         @Override
         public String toString() {
             java.util.ResourceBundle resources
@@ -67,22 +69,18 @@ public abstract class PrintableShape {
             sb.append(radius_string);
             return sb.toString();
         }
-
-        public final FloatPoint center;
-        public final double radius;
     }
 
-    /**
-     * Creates a Polygon from the input coordinates.
-     */
     static class Rectangle extends PrintableShape {
 
+
+        public final FloatPoint lower_left;
+        public final FloatPoint upper_right;
         public Rectangle(FloatPoint p_lower_left, FloatPoint p_upper_right, java.util.Locale p_locale) {
             super(p_locale);
             lower_left = p_lower_left;
             upper_right = p_upper_right;
         }
-
         @Override
         public String toString() {
             java.util.ResourceBundle resources
@@ -91,12 +89,10 @@ public abstract class PrintableShape {
             sb.append(resources.getString("rectangle")).append(": ").append(resources.getString("lower_left")).append(" = ").append(lower_left.to_string(this.locale)).append(", ").append(resources.getString("upper_right")).append(" = ").append(upper_right.to_string(this.locale));
             return sb.toString();
         }
-
-        public final FloatPoint lower_left;
-        public final FloatPoint upper_right;
     }
 
     static class Polygon extends PrintableShape {
+        public final FloatPoint[] corner_arr;
 
         public Polygon(FloatPoint[] p_corners, java.util.Locale p_locale) {
             super(p_locale);
@@ -118,6 +114,5 @@ public abstract class PrintableShape {
             return sb.toString();
         }
 
-        public final FloatPoint[] corner_arr;
     }
 }

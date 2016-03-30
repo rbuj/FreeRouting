@@ -45,6 +45,49 @@ import java.util.TreeSet;
  * @author Alfons Wirtz
  */
 public class AutorouteEngine {
+    static final int TRACE_WIDTH_TOLERANCE = 2;
+    /**
+     * The current search tree used in autorouting. It depends on the trac
+     * clearance class used in the autoroute algorithm.
+     */
+    public final ShapeSearchTree autoroute_search_tree;
+    /**
+     * If maintain_database, the autorouter database is maintained after a
+     * connection is completed for performance reasons.
+     */
+    public final boolean maintain_database;
+    /**
+     * The net number used for routing in this autoroute algorithm.
+     */
+    private int net_no;
+    /**
+     * The 2-dimensional array of rectangular pages of ExpansionDrills
+     */
+    final DrillPageArray drill_page_array;
+    /**
+     * To be able to stop the expansion algorithm.
+     */
+    Stoppable stoppable_thread;
+    /**
+     * To stop the expansion algorithm after a time limit is exceeded.
+     */
+    private TimeLimit time_limit;
+    /**
+     * The PCB-board of this autoroute algorithm.
+     */
+    final RoutingBoard board;
+    /**
+     * The list of incomplete expansion rooms on the routing board
+     */
+    private List<IncompleteFreeSpaceExpansionRoom> incomplete_expansion_rooms = null;
+    /**
+     * The list of complete expansion rooms on the routing board
+     */
+    private List<CompleteFreeSpaceExpansionRoom> complete_expansion_rooms = null;
+    /**
+     * The count of expansion rooms created so far
+     */
+    private int expansion_room_instance_count = 0;
 
     /**
      * Creates a new instance of BoardAoutorouteEngine If p_maintain_database,
@@ -524,49 +567,6 @@ public class AutorouteEngine {
         ++expansion_room_instance_count;
         return expansion_room_instance_count;
     }
-    /**
-     * The current search tree used in autorouting. It depends on the trac
-     * clearance class used in the autoroute algorithm.
-     */
-    public final ShapeSearchTree autoroute_search_tree;
-    /**
-     * If maintain_database, the autorouter database is maintained after a
-     * connection is completed for performance reasons.
-     */
-    public final boolean maintain_database;
-    static final int TRACE_WIDTH_TOLERANCE = 2;
-    /**
-     * The net number used for routing in this autoroute algorithm.
-     */
-    private int net_no;
-    /**
-     * The 2-dimensional array of rectangular pages of ExpansionDrills
-     */
-    final DrillPageArray drill_page_array;
-    /**
-     * To be able to stop the expansion algorithm.
-     */
-    Stoppable stoppable_thread;
-    /**
-     * To stop the expansion algorithm after a time limit is exceeded.
-     */
-    private TimeLimit time_limit;
-    /**
-     * The PCB-board of this autoroute algorithm.
-     */
-    final RoutingBoard board;
-    /**
-     * The list of incomplete expansion rooms on the routing board
-     */
-    private List<IncompleteFreeSpaceExpansionRoom> incomplete_expansion_rooms = null;
-    /**
-     * The list of complete expansion rooms on the routing board
-     */
-    private List<CompleteFreeSpaceExpansionRoom> complete_expansion_rooms = null;
-    /**
-     * The count of expansion rooms created so far
-     */
-    private int expansion_room_instance_count = 0;
 
     /**
      * The pussible results of autorouting a connection

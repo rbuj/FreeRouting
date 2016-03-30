@@ -26,6 +26,7 @@ package boardgraphics;
  * @author alfons
  */
 public class ColorIntensityTable implements java.io.Serializable {
+    private final double[] arr;
 
     /**
      * Creates a new instance of ColorIntensityTable. The elements of
@@ -72,7 +73,6 @@ public class ColorIntensityTable implements java.io.Serializable {
         arr[p_no] = p_value;
     }
 
-    private final double[] arr;
 
     public enum ObjectNames {
         TRACES, VIAS, PINS, CONDUCTION_AREAS, KEEPOUTS, VIA_KEEPOUTS, PLACE_KEEPOUTS, COMPONENT_OUTLINES,

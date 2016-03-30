@@ -27,6 +27,7 @@ import java.util.LinkedList;
  * @author Alfons Wirtz#
  */
 public class Polygon implements java.io.Serializable {
+    private final Collection<Point> corners;
 
     /**
      * Creates a polygon from p_point_arr. Multiple points and points, which are
@@ -148,5 +149,4 @@ public class Polygon implements java.io.Serializable {
         return (int) Math.round(angle_sum);
     }
 
-    private final Collection<Point> corners;
 }

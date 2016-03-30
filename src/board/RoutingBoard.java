@@ -48,6 +48,20 @@ import rules.ViaInfo;
  * @author Alfons Wirtz
  */
 public class RoutingBoard extends BasicBoard implements java.io.Serializable {
+    /**
+     * The time limit in milliseconds for the pull tight algorithm
+     */
+    private static final int PULL_TIGHT_TIME_LIMIT = 2000;
+    /**
+     * Contains the database for the autorouzte algorithm.
+     */
+    private transient AutorouteEngine autoroute_engine = null;
+    /**
+     * the area marked for optimizing the route
+     */
+    transient ChangedArea changed_area;
+    private transient Item shove_failing_obstacle = null;
+    private transient int shove_failing_layer = -1;
 
     /**
      * Creates a new instance of a routing Board with surrrounding box
@@ -1154,18 +1168,4 @@ public class RoutingBoard extends BasicBoard implements java.io.Serializable {
     boolean is_maintaining_autoroute_database() {
         return this.autoroute_engine != null;
     }
-    /**
-     * Contains the database for the autorouzte algorithm.
-     */
-    private transient AutorouteEngine autoroute_engine = null;
-    /**
-     * the area marked for optimizing the route
-     */
-    transient ChangedArea changed_area;
-    private transient Item shove_failing_obstacle = null;
-    private transient int shove_failing_layer = -1;
-    /**
-     * The time limit in milliseconds for the pull tight algorithm
-     */
-    private static final int PULL_TIGHT_TIME_LIMIT = 2000;
 }

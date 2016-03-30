@@ -27,6 +27,8 @@ package geometry.planar;
  * @author Alfons Wirtz
  */
 public class FloatLine {
+    public final FloatPoint a;
+    public final FloatPoint b;
 
     /**
      * Creates a line from two FloatPoints.
@@ -297,6 +299,4 @@ public class FloatLine {
         return result;
     }
 
-    public final FloatPoint a;
-    public final FloatPoint b;
 }

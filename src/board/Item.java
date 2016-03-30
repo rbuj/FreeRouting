@@ -42,6 +42,56 @@ import rules.Nets;
  * @author Alfons Wirtz
  */
 public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPanel.Printable, UndoableObjects.Storable, Serializable {
+    private static double PROTECT_FANOUT_LENGTH = 400;
+    /**
+     * the index in the clearance matrix describing the required spacing to
+     * other items
+     */
+    private int clearance_class;
+    /**
+     * The board this Itewm is on
+     */
+    transient public BasicBoard board;
+    /**
+     * The nets, to which this item belongs
+     */
+    int[] net_no_arr;
+    /**
+     * points to the entries of this item in the ShapeSearchTrees
+     */
+    transient private ItemSearchTreesInfo search_trees_info = null;
+    private FixedState fixed_state;
+    /**
+     * not 0, if this item belongs to a component
+     */
+    private int component_no = 0;
+    private final int id_no;
+    /**
+     * Folse, if the item is deleted or not inserted into the board
+     */
+    private boolean on_the_board = false;
+    /**
+     * Temporary data used in the autoroute algorithm.
+     */
+    transient private autoroute.ItemAutorouteInfo autoroute_info = null;
+    Item(int[] p_net_no_arr, int p_clearance_type, int p_id_no,
+            int p_component_no, FixedState p_fixed_state, BasicBoard p_board) {
+        if (p_net_no_arr == null) {
+            net_no_arr = new int[0];
+        } else {
+            net_no_arr = new int[p_net_no_arr.length];
+            System.arraycopy(p_net_no_arr, 0, net_no_arr, 0, p_net_no_arr.length);
+        }
+        clearance_class = p_clearance_type;
+        component_no = p_component_no;
+        fixed_state = p_fixed_state;
+        board = p_board;
+        if (p_id_no <= 0) {
+            id_no = board.communication.id_no_generator.new_no();
+        } else {
+            id_no = p_id_no;
+        }
+    }
 
     /**
      * Implements the comparable interface.
@@ -756,24 +806,6 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
     @Override
     public abstract int shape_layer(int p_index);
 
-    Item(int[] p_net_no_arr, int p_clearance_type, int p_id_no,
-            int p_component_no, FixedState p_fixed_state, BasicBoard p_board) {
-        if (p_net_no_arr == null) {
-            net_no_arr = new int[0];
-        } else {
-            net_no_arr = new int[p_net_no_arr.length];
-            System.arraycopy(p_net_no_arr, 0, net_no_arr, 0, p_net_no_arr.length);
-        }
-        clearance_class = p_clearance_type;
-        component_no = p_component_no;
-        fixed_state = p_fixed_state;
-        board = p_board;
-        if (p_id_no <= 0) {
-            id_no = board.communication.id_no_generator.new_no();
-        } else {
-            id_no = p_id_no;
-        }
-    }
 
     /**
      * Returns true, if it is not allowed to change this item except evtl.
@@ -1238,38 +1270,6 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
         }
         return false;
     }
-    /**
-     * the index in the clearance matrix describing the required spacing to
-     * other items
-     */
-    private int clearance_class;
-    /**
-     * The board this Itewm is on
-     */
-    transient public BasicBoard board;
-    /**
-     * The nets, to which this item belongs
-     */
-    int[] net_no_arr;
-    /**
-     * points to the entries of this item in the ShapeSearchTrees
-     */
-    transient private ItemSearchTreesInfo search_trees_info = null;
-    private FixedState fixed_state;
-    /**
-     * not 0, if this item belongs to a component
-     */
-    private int component_no = 0;
-    private final int id_no;
-    /**
-     * Folse, if the item is deleted or not inserted into the board
-     */
-    private boolean on_the_board = false;
-    /**
-     * Temporary data used in the autoroute algorithm.
-     */
-    transient private autoroute.ItemAutorouteInfo autoroute_info = null;
-    private static double PROTECT_FANOUT_LENGTH = 400;
 
     /**
      * Used as parameter of get_connection to control, that the connection stops

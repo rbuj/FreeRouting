@@ -30,6 +30,16 @@ import datastructures.Signum;
  * @author Alfons Wirtz
  */
 public class IntDirection extends Direction implements java.io.Serializable {
+    public final int x;
+    public final int y;
+    IntDirection(int p_x, int p_y) {
+        x = p_x;
+        y = p_y;
+    }
+    IntDirection(IntVector p_vector) {
+        x = p_vector.x;
+        y = p_vector.y;
+    }
 
     @Override
     public boolean is_orthogonal() {
@@ -46,15 +56,6 @@ public class IntDirection extends Direction implements java.io.Serializable {
         return new IntVector(x, y);
     }
 
-    IntDirection(int p_x, int p_y) {
-        x = p_x;
-        y = p_y;
-    }
-
-    IntDirection(IntVector p_vector) {
-        x = p_vector.x;
-        y = p_vector.y;
-    }
 
     @Override
     int compareTo(IntDirection p_other) {
@@ -162,10 +163,8 @@ public class IntDirection extends Direction implements java.io.Serializable {
         return -(p_other.compareTo(this));
     }
 
-    final double determinant(IntDirection p_other) {
+    double determinant(IntDirection p_other) {
         return (double) x * p_other.y - (double) y * p_other.x;
     }
 
-    public final int x;
-    public final int y;
 }

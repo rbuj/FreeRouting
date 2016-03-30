@@ -32,6 +32,10 @@ import java.util.TreeMap;
  * @author alfons
  */
 public class NetList {
+    /**
+     * The entries of this map are of type Net, the keys are the net_ids.
+     */
+    private final Map<Net.Id, Net> nets = new TreeMap<>();
 
     /**
      * Returns true, if the netlist contains a net with the input name.
@@ -83,9 +87,5 @@ public class NetList {
         return result;
     }
 
-    /**
-     * The entries of this map are of type Net, the keys are the net_ids.
-     */
-    private final Map<Net.Id, Net> nets = new TreeMap<>();
 
 }

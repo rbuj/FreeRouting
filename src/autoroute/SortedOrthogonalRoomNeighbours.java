@@ -194,6 +194,52 @@ public class SortedOrthogonalRoomNeighbours {
         return result;
     }
 
+
+    private static IntBox remove_border_line(IntBox p_room_box, int p_remove_edge_no) {
+        IntBox result;
+        switch (p_remove_edge_no) {
+            case 0:
+                result = new IntBox(p_room_box.ll.x, -Limits.CRIT_INT, p_room_box.ur.x, p_room_box.ur.y);
+                break;
+            case 1:
+                result = new IntBox(p_room_box.ll.x, p_room_box.ll.y, Limits.CRIT_INT, p_room_box.ur.y);
+                break;
+            case 2:
+                result = new IntBox(p_room_box.ll.x, p_room_box.ll.y, p_room_box.ur.x, Limits.CRIT_INT);
+                break;
+            case 3:
+                result = new IntBox(-Limits.CRIT_INT, p_room_box.ll.y, p_room_box.ur.x, p_room_box.ur.y);
+                break;
+            default:
+                System.out.println("SortedOrthogonalRoomNeighbours.remove_border_line: illegal p_remove_edge_no");
+                result = null;
+                break;
+        }
+        return result;
+    }
+
+
+    public final CompleteExpansionRoom completed_room;
+    public final SortedSet<SortedRoomNeighbour> sorted_neighbours;
+    private final ExpansionRoom from_room;
+    private final boolean is_obstacle_expansion_room;
+    private final IntBox room_shape;
+
+    private final boolean[] edge_interiour_touches_obstacle;
+    /**
+     * Creates a new instance of SortedOrthogonalRoomNeighbours
+     */
+    private SortedOrthogonalRoomNeighbours(ExpansionRoom p_from_room, CompleteExpansionRoom p_completed_room) {
+        from_room = p_from_room;
+        completed_room = p_completed_room;
+        is_obstacle_expansion_room = p_from_room instanceof ObstacleExpansionRoom;
+        room_shape = (IntBox) p_completed_room.get_shape();
+        sorted_neighbours = new TreeSet<>();
+        edge_interiour_touches_obstacle = new boolean[4];
+        for (int i = 0; i < 4; ++i) {
+            edge_interiour_touches_obstacle[i] = false;
+        }
+    }
     private void calculate_new_incomplete_rooms(AutorouteEngine p_autoroute_engine) {
         IntBox board_bounds = p_autoroute_engine.board.bounding_box;
         SortedRoomNeighbour prev_neighbour = this.sorted_neighbours.last();
@@ -303,7 +349,6 @@ public class SortedOrthogonalRoomNeighbours {
             prev_neighbour = next_neighbour;
         }
     }
-
     private void insert_incomplete_room(AutorouteEngine p_autoroute_engine, int p_ll_x, int p_ll_y, int p_ur_x, int p_ur_y) {
         IntBox new_incomplete_room_shape = new IntBox(p_ll_x, p_ll_y, p_ur_x, p_ur_y);
         if (new_incomplete_room_shape.dimension() == 2) {
@@ -320,22 +365,6 @@ public class SortedOrthogonalRoomNeighbours {
             }
         }
     }
-
-    /**
-     * Creates a new instance of SortedOrthogonalRoomNeighbours
-     */
-    private SortedOrthogonalRoomNeighbours(ExpansionRoom p_from_room, CompleteExpansionRoom p_completed_room) {
-        from_room = p_from_room;
-        completed_room = p_completed_room;
-        is_obstacle_expansion_room = p_from_room instanceof ObstacleExpansionRoom;
-        room_shape = (IntBox) p_completed_room.get_shape();
-        sorted_neighbours = new TreeSet<>();
-        edge_interiour_touches_obstacle = new boolean[4];
-        for (int i = 0; i < 4; ++i) {
-            edge_interiour_touches_obstacle[i] = false;
-        }
-    }
-
     /**
      * Check, that each side of the romm shape has at least one touching
      * neighbour. Otherwise the room shape will be improved the by enlarging.
@@ -404,49 +433,33 @@ public class SortedOrthogonalRoomNeighbours {
         }
         return false;
     }
-
-    private static IntBox remove_border_line(IntBox p_room_box, int p_remove_edge_no) {
-        IntBox result;
-        switch (p_remove_edge_no) {
-            case 0:
-                result = new IntBox(p_room_box.ll.x, -Limits.CRIT_INT, p_room_box.ur.x, p_room_box.ur.y);
-                break;
-            case 1:
-                result = new IntBox(p_room_box.ll.x, p_room_box.ll.y, Limits.CRIT_INT, p_room_box.ur.y);
-                break;
-            case 2:
-                result = new IntBox(p_room_box.ll.x, p_room_box.ll.y, p_room_box.ur.x, Limits.CRIT_INT);
-                break;
-            case 3:
-                result = new IntBox(-Limits.CRIT_INT, p_room_box.ll.y, p_room_box.ur.x, p_room_box.ur.y);
-                break;
-            default:
-                System.out.println("SortedOrthogonalRoomNeighbours.remove_border_line: illegal p_remove_edge_no");
-                result = null;
-                break;
-        }
-        return result;
-    }
-
     private void add_sorted_neighbour(IntBox p_neighbour_shape, IntBox p_intersection) {
         SortedRoomNeighbour new_neighbour = new SortedRoomNeighbour(p_neighbour_shape, p_intersection);
         sorted_neighbours.add(new_neighbour);
     }
 
-    public final CompleteExpansionRoom completed_room;
-    public final SortedSet<SortedRoomNeighbour> sorted_neighbours;
-    private final ExpansionRoom from_room;
-    private final boolean is_obstacle_expansion_room;
-    private final IntBox room_shape;
-
-    private final boolean[] edge_interiour_touches_obstacle;
-
-    /**
-     * Helper class to sort the doors of an expansion room counterclockwise
-     * arount the border of the room shape.
-     */
     private class SortedRoomNeighbour implements Comparable<SortedRoomNeighbour> {
 
+
+        /**
+         * The shape of the neighbour room
+         */
+        public final IntBox shape;
+
+        /**
+         * The intersection of tnis ExpansionRoom shape with the neighbour_shape
+         */
+        public final IntBox intersection;
+
+        /**
+         * The first side of the room shape, where the neighbour_shape touches
+         */
+        public final int first_touching_side;
+
+        /**
+         * The last side of the room shape, where the neighbour_shape touches
+         */
+        public final int last_touching_side;
         public SortedRoomNeighbour(IntBox p_neighbour_shape, IntBox p_intersection) {
             shape = p_neighbour_shape;
             intersection = p_intersection;
@@ -494,7 +507,6 @@ public class SortedOrthogonalRoomNeighbours {
                 this.last_touching_side = -1;
             }
         }
-
         /**
          * Compare function for or sorting the neighbours in counterclock sense
          * around the border of the room shape in ascending order.
@@ -563,25 +575,5 @@ public class SortedOrthogonalRoomNeighbours {
             }
             return cmp_value;
         }
-
-        /**
-         * The shape of the neighbour room
-         */
-        public final IntBox shape;
-
-        /**
-         * The intersection of tnis ExpansionRoom shape with the neighbour_shape
-         */
-        public final IntBox intersection;
-
-        /**
-         * The first side of the room shape, where the neighbour_shape touches
-         */
-        public final int first_touching_side;
-
-        /**
-         * The last side of the room shape, where the neighbour_shape touches
-         */
-        public final int last_touching_side;
     }
 }

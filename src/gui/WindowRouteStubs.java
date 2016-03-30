@@ -33,7 +33,8 @@ import java.util.SortedSet;
  *
  * @author Alfons Wirtz
  */
-public final class WindowRouteStubs extends WindowObjectListWithFilter {
+public class WindowRouteStubs extends WindowObjectListWithFilter {
+    private final java.util.ResourceBundle resources;
 
     /**
      * Creates a new instance of WindowRouteStubs
@@ -129,13 +130,14 @@ public final class WindowRouteStubs extends WindowObjectListWithFilter {
         board_handling.zoom_selection();
     }
 
-    private final java.util.ResourceBundle resources;
 
-    /**
-     * Describes information of a route stub in the list.
-     */
     private class RouteStubInfo implements Comparable<RouteStubInfo> {
 
+
+        private final Item stub_item;
+        private final rules.Net net;
+        private final FloatPoint location;
+        private final int layer_no;
         public RouteStubInfo(Item p_stub, FloatPoint p_location, int p_layer_no) {
             interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;
             this.stub_item = p_stub;
@@ -144,7 +146,6 @@ public final class WindowRouteStubs extends WindowObjectListWithFilter {
             int net_no = p_stub.get_net_no(0);
             this.net = board_handling.get_routing_board().rules.nets.get(net_no);
         }
-
         @Override
         public String toString() {
             String item_string;
@@ -159,7 +160,6 @@ public final class WindowRouteStubs extends WindowObjectListWithFilter {
                     + resources.getString("on_layer") + " " + layer_name;
             return result;
         }
-
         @Override
         public int compareTo(RouteStubInfo p_other) {
             int result = this.net.name.compareTo(p_other.net.name);
@@ -174,10 +174,5 @@ public final class WindowRouteStubs extends WindowObjectListWithFilter {
             }
             return result;
         }
-
-        private final Item stub_item;
-        private final rules.Net net;
-        private final FloatPoint location;
-        private final int layer_no;
     }
 }

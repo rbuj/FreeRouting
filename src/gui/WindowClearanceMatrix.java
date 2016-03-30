@@ -27,7 +27,18 @@ import rules.ClearanceMatrix;
  *
  * @author Alfons Wirtz
  */
-public final class WindowClearanceMatrix extends BoardSavableSubWindow {
+public class WindowClearanceMatrix extends BoardSavableSubWindow {
+    /**
+     * Characters, which are not allowed in the name of a clearance class.
+     */
+    private static final String[] reserved_name_chars = {"(", ")", " ", "_"};
+    private final BoardFrame board_frame;
+    private final javax.swing.JPanel main_panel;
+    private javax.swing.JPanel center_panel;
+    private final ComboBoxLayer layer_combo_box;
+    private javax.swing.JTable clearance_table;
+    private ClearanceTableModel clearance_table_model;
+    private final java.util.ResourceBundle resources;
 
     /**
      * Creates a new instance of ClearanceMatrixWindow
@@ -263,18 +274,6 @@ public final class WindowClearanceMatrix extends BoardSavableSubWindow {
         }
     }
 
-    private final BoardFrame board_frame;
-    private final javax.swing.JPanel main_panel;
-    private javax.swing.JPanel center_panel;
-    private final ComboBoxLayer layer_combo_box;
-    private javax.swing.JTable clearance_table;
-    private ClearanceTableModel clearance_table_model;
-    private final java.util.ResourceBundle resources;
-
-    /**
-     * Characters, which are not allowed in the name of a clearance class.
-     */
-    private static final String[] reserved_name_chars = {"(", ")", " ", "_"};
 
     private class AddClassListener implements java.awt.event.ActionListener {
 
@@ -292,10 +291,9 @@ public final class WindowClearanceMatrix extends BoardSavableSubWindow {
         }
     }
 
-    /**
-     * Table model of the clearance matrix.
-     */
     private class ClearanceTableModel extends javax.swing.table.AbstractTableModel implements java.io.Serializable {
+        private Object[][] data = null;
+        private String[] column_names = null;
 
         public ClearanceTableModel(interactive.BoardHandling p_board_handling) {
             rules.ClearanceMatrix clearance_matrix = p_board_handling.get_routing_board().rules.clearance_matrix;
@@ -478,7 +476,5 @@ public final class WindowClearanceMatrix extends BoardSavableSubWindow {
             }
         }
 
-        private Object[][] data = null;
-        private String[] column_names = null;
     }
 }

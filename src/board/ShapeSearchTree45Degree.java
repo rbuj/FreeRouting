@@ -39,6 +39,72 @@ import java.util.LinkedList;
  * @author Alfons Wirtz
  */
 public class ShapeSearchTree45Degree extends ShapeSearchTree {
+    /**
+     * Checks, if the border line segment with index p_obstacle_border_line_no
+     * intersects with the inside of p_room_shape.
+     */
+    private static boolean obstacle_segment_touches_inside(IntOctagon p_obstacle_shape,
+            int p_obstacle_border_line_no, IntOctagon p_room_shape) {
+        int curr_border_line_no = p_obstacle_border_line_no;
+        int curr_obstacle_corner_x = p_obstacle_shape.corner_x(p_obstacle_border_line_no);
+        int curr_obstacle_corner_y = p_obstacle_shape.corner_y(p_obstacle_border_line_no);
+        for (int j = 0; j < 5; ++j) {
+            
+            if (p_room_shape.side_of_border_line(curr_obstacle_corner_x, curr_obstacle_corner_y,
+                    curr_border_line_no) != Side.ON_THE_LEFT) {
+                return false;
+            }
+            curr_border_line_no = (curr_border_line_no + 1) % 8;
+        }
+        
+        int next_obstacle_border_line_no = (p_obstacle_border_line_no + 1) % 8;
+        int next_obstacle_corner_x = p_obstacle_shape.corner_x(next_obstacle_border_line_no);
+        int next_obstacle_corner_y = p_obstacle_shape.corner_y(next_obstacle_border_line_no);
+        curr_border_line_no = (p_obstacle_border_line_no + 5) % 8;
+        for (int j = 0; j < 3; ++j) {
+            if (p_room_shape.side_of_border_line(next_obstacle_corner_x, next_obstacle_corner_y,
+                    curr_border_line_no) != Side.ON_THE_LEFT) {
+                return false;
+            }
+            curr_border_line_no = (curr_border_line_no + 1) % 8;
+        }
+        return true;
+    }
+    private static double signed_line_distance(IntOctagon p_obstacle_shape, int p_obstacle_line_no, IntOctagon p_contained_shape) {
+        double result;
+        switch (p_obstacle_line_no) {
+            case 0:
+                result = p_obstacle_shape.ly - p_contained_shape.uy;
+                break;
+            case 2:
+                result = p_contained_shape.lx - p_obstacle_shape.rx;
+                break;
+            case 4:
+                result = p_contained_shape.ly - p_obstacle_shape.uy;
+                break;
+                // factor 0.5 used instead to 1 / sqrt(2) to prefer orthogonal lines slightly to diagonal restraining lines.
+            case 6:
+                result = p_obstacle_shape.lx - p_contained_shape.rx;
+                break;
+            case 1:
+                result = 0.5 * (p_contained_shape.ulx - p_obstacle_shape.lrx);
+                break;
+            case 3:
+                result = 0.5 * (p_contained_shape.llx - p_obstacle_shape.urx);
+                break;
+            case 5:
+                result = 0.5 * (p_obstacle_shape.ulx - p_contained_shape.lrx);
+                break;
+            case 7:
+                result = 0.5 * (p_obstacle_shape.llx - p_contained_shape.urx);
+                break;
+            default:
+                System.out.println("ShapeSearchTree45Degree.signed_line_distance: p_obstacle_line_no out of range");
+                result = 0;
+                break;
+        }
+        return result;
+    }
 
     /**
      * Creates a new instance of ShapeSearchTree45Degree
@@ -165,37 +231,6 @@ public class ShapeSearchTree45Degree extends ShapeSearchTree {
         return result;
     }
 
-    /**
-     * Checks, if the border line segment with index p_obstacle_border_line_no
-     * intersects with the inside of p_room_shape.
-     */
-    private static boolean obstacle_segment_touches_inside(IntOctagon p_obstacle_shape,
-            int p_obstacle_border_line_no, IntOctagon p_room_shape) {
-        int curr_border_line_no = p_obstacle_border_line_no;
-        int curr_obstacle_corner_x = p_obstacle_shape.corner_x(p_obstacle_border_line_no);
-        int curr_obstacle_corner_y = p_obstacle_shape.corner_y(p_obstacle_border_line_no);
-        for (int j = 0; j < 5; ++j) {
-
-            if (p_room_shape.side_of_border_line(curr_obstacle_corner_x, curr_obstacle_corner_y,
-                    curr_border_line_no) != Side.ON_THE_LEFT) {
-                return false;
-            }
-            curr_border_line_no = (curr_border_line_no + 1) % 8;
-        }
-
-        int next_obstacle_border_line_no = (p_obstacle_border_line_no + 1) % 8;
-        int next_obstacle_corner_x = p_obstacle_shape.corner_x(next_obstacle_border_line_no);
-        int next_obstacle_corner_y = p_obstacle_shape.corner_y(next_obstacle_border_line_no);
-        curr_border_line_no = (p_obstacle_border_line_no + 5) % 8;
-        for (int j = 0; j < 3; ++j) {
-            if (p_room_shape.side_of_border_line(next_obstacle_corner_x, next_obstacle_corner_y,
-                    curr_border_line_no) != Side.ON_THE_LEFT) {
-                return false;
-            }
-            curr_border_line_no = (curr_border_line_no + 1) % 8;
-        }
-        return true;
-    }
 
     /**
      * Restrains the shape of p_incomplete_room to a octagon shape, which does
@@ -284,41 +319,6 @@ public class ShapeSearchTree45Degree extends ShapeSearchTree {
         return result;
     }
 
-    private static double signed_line_distance(IntOctagon p_obstacle_shape, int p_obstacle_line_no, IntOctagon p_contained_shape) {
-        double result;
-        switch (p_obstacle_line_no) {
-            case 0:
-                result = p_obstacle_shape.ly - p_contained_shape.uy;
-                break;
-            case 2:
-                result = p_contained_shape.lx - p_obstacle_shape.rx;
-                break;
-            case 4:
-                result = p_contained_shape.ly - p_obstacle_shape.uy;
-                break;
-            // factor 0.5 used instead to 1 / sqrt(2) to prefer orthogonal lines slightly to diagonal restraining lines.
-            case 6:
-                result = p_obstacle_shape.lx - p_contained_shape.rx;
-                break;
-            case 1:
-                result = 0.5 * (p_contained_shape.ulx - p_obstacle_shape.lrx);
-                break;
-            case 3:
-                result = 0.5 * (p_contained_shape.llx - p_obstacle_shape.urx);
-                break;
-            case 5:
-                result = 0.5 * (p_obstacle_shape.ulx - p_contained_shape.lrx);
-                break;
-            case 7:
-                result = 0.5 * (p_obstacle_shape.llx - p_contained_shape.urx);
-                break;
-            default:
-                System.out.println("ShapeSearchTree45Degree.signed_line_distance: p_obstacle_line_no out of range");
-                result = 0;
-                break;
-        }
-        return result;
-    }
 
     /**
      * Intersects p_room_shape with the half plane defined by the outside of the

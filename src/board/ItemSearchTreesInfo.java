@@ -32,6 +32,7 @@ import java.util.LinkedList;
  * @author Alfons Wirtz
  */
 class ItemSearchTreesInfo {
+    private final Collection<SearchTreeInfo> tree_list;
 
     /**
      * Creates a new instance of ItemSearchTreeEntries
@@ -111,18 +112,17 @@ class ItemSearchTreesInfo {
         }
     }
 
-    private final Collection<SearchTreeInfo> tree_list;
 
     private static class SearchTreeInfo {
 
+
+        final ShapeTree tree;
+        ShapeTree.Leaf[] entry_arr;
+        TileShape[] precalculated_tree_shapes;
         SearchTreeInfo(ShapeTree p_tree) {
             tree = p_tree;
             entry_arr = null;
             precalculated_tree_shapes = null;
         }
-
-        final ShapeTree tree;
-        ShapeTree.Leaf[] entry_arr;
-        TileShape[] precalculated_tree_shapes;
     }
 }

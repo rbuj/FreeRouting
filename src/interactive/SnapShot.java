@@ -38,6 +38,29 @@ public class SnapShot implements java.io.Serializable {
         return new SnapShot(p_name, p_board_handling);
     }
 
+
+    /**
+     * Create a number for writing an interactive state to disk. Only MenuStates
+     * are saved. The default is SelectState.
+     */
+    private static int get_no(InteractiveState p_interactive_state) {
+        int result;
+        if (p_interactive_state instanceof RouteMenuState) {
+            result = 1;
+        } else if (p_interactive_state instanceof DragMenuState) {
+            result = 2;
+        } else {
+            result = 0;
+        }
+        return result;
+    }
+
+    private final String name;
+    public final Settings settings;
+    private final int interactive_state_no;
+    public final boardgraphics.GraphicsContext graphics_context;
+    private final java.awt.Point viewport_position;
+    public final gui.BoardFrame.SubwindowSelections subwindow_filters;
     /**
      * Creates a SnapShot of the display region and the interactive settings
      */
@@ -49,19 +72,16 @@ public class SnapShot implements java.io.Serializable {
         this.viewport_position = new java.awt.Point(p_board_handling.get_panel().get_viewport_position());
         this.subwindow_filters = p_board_handling.get_panel().board_frame.get_snapshot_subwindow_selections();
     }
-
     @Override
     public String toString() {
         return this.name;
     }
-
     public java.awt.Point copy_viewport_position() {
         if (this.viewport_position == null) {
             return null;
         }
         return new java.awt.Point(this.viewport_position);
     }
-
     /**
      * Goes to this shnapshot in interactive board etiting.
      */
@@ -115,7 +135,6 @@ public class SnapShot implements java.io.Serializable {
             p_board_handling.get_panel().board_frame.set_snapshot_subwindow_selections(this.subwindow_filters);
         }
     }
-
     /**
      * Returns a new InterativeState from the data of this instance.
      */
@@ -135,34 +154,24 @@ public class SnapShot implements java.io.Serializable {
         return result;
     }
 
-    /**
-     * Create a number for writing an interactive state to disk. Only MenuStates
-     * are saved. The default is SelectState.
-     */
-    private static int get_no(InteractiveState p_interactive_state) {
-        int result;
-        if (p_interactive_state instanceof RouteMenuState) {
-            result = 1;
-        } else if (p_interactive_state instanceof DragMenuState) {
-            result = 2;
-        } else {
-            result = 0;
-        }
-        return result;
-    }
-
-    private final String name;
-    public final Settings settings;
-    private final int interactive_state_no;
-    public final boardgraphics.GraphicsContext graphics_context;
-    private final java.awt.Point viewport_position;
-    public final gui.BoardFrame.SubwindowSelections subwindow_filters;
-
-    /**
-     * Defines the data of the snapshot selected for restoring.
-     */
     public static class Attributes implements java.io.Serializable {
 
+
+        public boolean object_colors;
+        public boolean object_visibility;
+        public boolean layer_visibility;
+        public boolean display_region;
+        public boolean interactive_state;
+        public boolean selection_layers;
+        public boolean selectable_items;
+        public boolean current_layer;
+        public boolean rule_selection;
+        public boolean manual_rule_settings;
+        public boolean push_and_shove_enabled;
+        public boolean drag_components_enabled;
+        public boolean pull_tight_region;
+        public boolean component_grid;
+        public boolean info_list_selections;
         Attributes() {
             object_colors = true;
             object_visibility = true;
@@ -180,7 +189,6 @@ public class SnapShot implements java.io.Serializable {
             component_grid = true;
             info_list_selections = true;
         }
-
         /**
          * Copy constructor
          */
@@ -201,21 +209,5 @@ public class SnapShot implements java.io.Serializable {
             component_grid = p_attributes.component_grid;
             info_list_selections = p_attributes.info_list_selections;
         }
-
-        public boolean object_colors;
-        public boolean object_visibility;
-        public boolean layer_visibility;
-        public boolean display_region;
-        public boolean interactive_state;
-        public boolean selection_layers;
-        public boolean selectable_items;
-        public boolean current_layer;
-        public boolean rule_selection;
-        public boolean manual_rule_settings;
-        public boolean push_and_shove_enabled;
-        public boolean drag_components_enabled;
-        public boolean pull_tight_region;
-        public boolean component_grid;
-        public boolean info_list_selections;
     }
 }

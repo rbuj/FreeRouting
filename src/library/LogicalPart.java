@@ -26,6 +26,9 @@ package library;
  * @author Alfons Wirtz
  */
 public class LogicalPart implements board.ObjectInfoPanel.Printable, java.io.Serializable {
+    public final String name;
+    public final int no;
+    private final PartPin[] part_pin_arr;
 
     /**
      * Creates a new instance of LogicalPart. The part pins are sorted by
@@ -80,26 +83,9 @@ public class LogicalPart implements board.ObjectInfoPanel.Printable, java.io.Ser
         p_window.newline();
     }
 
-    public final String name;
-    public final int no;
-    private final PartPin[] part_pin_arr;
 
     public static class PartPin implements Comparable<PartPin>, java.io.Serializable {
 
-        public PartPin(int p_pin_no, String p_pin_name, String p_gate_name, int p_gate_swap_code,
-                String p_gate_pin_name, int p_gate_pin_swap_code) {
-            pin_no = p_pin_no;
-            pin_name = p_pin_name;
-            gate_name = p_gate_name;
-            gate_swap_code = p_gate_swap_code;
-            gate_pin_name = p_gate_pin_name;
-            gate_pin_swap_code = p_gate_pin_swap_code;
-        }
-
-        @Override
-        public int compareTo(PartPin p_other) {
-            return this.pin_no - p_other.pin_no;
-        }
 
         /**
          * The number of the part pin. Must be the same number as in the
@@ -135,5 +121,18 @@ public class LogicalPart implements board.ObjectInfoPanel.Printable, java.io.Ser
          * swappable.
          */
         public final int gate_pin_swap_code;
+        public PartPin(int p_pin_no, String p_pin_name, String p_gate_name, int p_gate_swap_code,
+                String p_gate_pin_name, int p_gate_pin_swap_code) {
+            pin_no = p_pin_no;
+            pin_name = p_pin_name;
+            gate_name = p_gate_name;
+            gate_swap_code = p_gate_swap_code;
+            gate_pin_name = p_gate_pin_name;
+            gate_pin_swap_code = p_gate_pin_swap_code;
+        }
+        @Override
+        public int compareTo(PartPin p_other) {
+            return this.pin_no - p_other.pin_no;
+        }
     }
 }
