@@ -134,20 +134,18 @@ public class BatchAutorouter {
                 }
                 if (curr_ob instanceof Connectable && curr_ob instanceof Item) {
                     Item curr_item = (Item) curr_ob;
-                    if (!curr_item.is_route()) {
-                        if (!handeled_items.contains(curr_item)) {
-                            for (int i = 0; i < curr_item.net_count(); ++i) {
-                                int curr_net_no = curr_item.get_net_no(i);
-                                Set<Item> connected_set = curr_item.get_connected_set(curr_net_no);
-                                for (Item curr_connected_item : connected_set) {
-                                    if (curr_connected_item.net_count() <= 1) {
-                                        handeled_items.add(curr_connected_item);
-                                    }
+                    if (!curr_item.is_route() && !handeled_items.contains(curr_item)) {
+                        for (int i = 0; i < curr_item.net_count(); ++i) {
+                            int curr_net_no = curr_item.get_net_no(i);
+                            Set<Item> connected_set = curr_item.get_connected_set(curr_net_no);
+                            for (Item curr_connected_item : connected_set) {
+                                if (curr_connected_item.net_count() <= 1) {
+                                    handeled_items.add(curr_connected_item);
                                 }
-                                int net_item_count = routing_board.connectable_item_count(curr_net_no);
-                                if (connected_set.size() < net_item_count) {
-                                    autoroute_item_list.add(curr_item);
-                                }
+                            }
+                            int net_item_count = routing_board.connectable_item_count(curr_net_no);
+                            if (connected_set.size() < net_item_count) {
+                                autoroute_item_list.add(curr_item);
                             }
                         }
                     }

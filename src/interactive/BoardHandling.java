@@ -478,10 +478,8 @@ public final class BoardHandling {
 
     public void recalculate_length_violations() {
         if (this.ratsnest != null) {
-            if (this.ratsnest.recalculate_length_violations()) {
-                if (!this.ratsnest.is_hidden()) {
-                    this.repaint();
-                }
+            if (this.ratsnest.recalculate_length_violations() && !this.ratsnest.is_hidden()) {
+                this.repaint();
             }
         }
     }

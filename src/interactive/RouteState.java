@@ -293,11 +293,9 @@ public class RouteState extends InteractiveState {
         if (this.logfile != null) {
             this.logfile.add_corner(p_location);
         }
-        if (route_completed) {
-            if (this.observers_activated) {
-                hdlg.get_routing_board().end_notify_observers();
-                this.observers_activated = false;
-            }
+        if (route_completed && this.observers_activated) {
+            hdlg.get_routing_board().end_notify_observers();
+            this.observers_activated = false;
         }
         InteractiveState result;
         if (route_completed) {

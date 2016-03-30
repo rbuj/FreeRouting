@@ -1013,20 +1013,18 @@ public class Simplex extends TileShape implements java.io.Serializable {
             }
         }
 
-        if (new_length == 2) {
-            if (line_arr[0].is_parallel(line_arr[1])) {
-                if (line_arr[0].direction().equals(line_arr[1].direction())) // one of the two remaining lines is redundant
-                {
-                    if (line_arr[1].side_of(line_arr[0].a) == Side.ON_THE_LEFT) {
-                        line_arr[0] = line_arr[1];
-                    }
-                    --new_length;
-                } else // the two remaining lines have opposite direction
+        if (new_length == 2 && line_arr[0].is_parallel(line_arr[1])) {
+            if (line_arr[0].direction().equals(line_arr[1].direction())) // one of the two remaining lines is redundant
+            {
+                if (line_arr[1].side_of(line_arr[0].a) == Side.ON_THE_LEFT) {
+                    line_arr[0] = line_arr[1];
+                }
+                --new_length;
+            } else // the two remaining lines have opposite direction
                 // the simplex may be empty
-                 if (line_arr[1].side_of(line_arr[0].a) == Side.ON_THE_LEFT) {
-                        new_length = 0;
-                    }
-            }
+                if (line_arr[1].side_of(line_arr[0].a) == Side.ON_THE_LEFT) {
+                    new_length = 0;
+                }
         }
         if (new_length == arr.length) {
             return this; // nothing removed

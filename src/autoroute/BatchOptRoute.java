@@ -253,14 +253,13 @@ public class BatchOptRoute {
                     if (!curr_via.is_user_fixed()) {
                         FloatPoint curr_via_center = curr_via.get_center().to_float();
                         int curr_via_min_layer = curr_via.first_layer();
-                        if (curr_via_center.x > min_item_coor.x
-                                || curr_via_center.x == min_item_coor.x && (curr_via_center.y > min_item_coor.y || curr_via_center.y == min_item_coor.y && curr_via_min_layer > min_item_layer)) {
-                            if (curr_via_center.x < curr_min_coor.x || curr_via_center.x == curr_min_coor.x && (curr_via_center.y < curr_min_coor.y
-                                    || curr_via_center.y == curr_min_coor.y && curr_via_min_layer < curr_min_layer)) {
-                                curr_min_coor = curr_via_center;
-                                curr_min_layer = curr_via_min_layer;
-                                result = curr_via;
-                            }
+                        if ((curr_via_center.x > min_item_coor.x
+                                || curr_via_center.x == min_item_coor.x && (curr_via_center.y > min_item_coor.y || curr_via_center.y == min_item_coor.y && curr_via_min_layer > min_item_layer))
+                                && (curr_via_center.x < curr_min_coor.x || curr_via_center.x == curr_min_coor.x && (curr_via_center.y < curr_min_coor.y
+                                || curr_via_center.y == curr_min_coor.y && curr_via_min_layer < curr_min_layer))) {
+                            curr_min_coor = curr_via_center;
+                            curr_min_layer = curr_via_min_layer;
+                            result = curr_via;
                         }
                     }
                 }

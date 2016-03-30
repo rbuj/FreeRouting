@@ -51,13 +51,11 @@ public class PlaceControl extends ScopeKeyword {
             if (next_token == null) {
                 System.out.println("PlaceControl.read_scope: unexpected end of file");
                 return false;
-            }
-            if (next_token == CLOSED_BRACKET) {
+            } else if (next_token == CLOSED_BRACKET) {
                 // end of scope
                 break;
-            }
-            if (prev_token == OPEN_BRACKET) {
-                if (next_token == Keyword.FLIP_STYLE) {
+            } else if (next_token == Keyword.FLIP_STYLE) {
+                if (prev_token == OPEN_BRACKET) {
                     flip_style_rotate_first = read_flip_style_rotate_first(p_par.scanner);
                 }
             }

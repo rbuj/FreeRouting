@@ -658,13 +658,11 @@ public abstract class TileShape extends PolylineShape implements ConvexShape, ja
 
         for (int i = 0; i < max_ind; ++i) {
             int compare = dir2.compareTo(dir1);
-            if (compare == 0) {
-                if (this.border_line(side_no_1).is_equal_or_opposite(p_other.border_line(side_no_2))) {
-                    int[] result = new int[2];
-                    result[0] = side_no_1;
-                    result[1] = side_no_2;
-                    return result;
-                }
+            if (compare == 0 && this.border_line(side_no_1).is_equal_or_opposite(p_other.border_line(side_no_2))) {
+                int[] result = new int[2];
+                result[0] = side_no_1;
+                result[1] = side_no_2;
+                return result;
             }
             if (compare >= 0) // dir2 is bigger than dir1
             {

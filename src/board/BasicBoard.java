@@ -85,18 +85,19 @@ public class BasicBoard implements java.io.Serializable {
         if (p_polyline.corner_count() < 2) {
             return null;
         }
+
         PolylineTrace new_trace = new PolylineTrace(p_polyline, p_layer, p_half_width, p_net_no_arr,
                 p_clearance_class, 0, 0, p_fixed_state, this);
-        if (new_trace.first_corner().equals(new_trace.last_corner())) {
-            if (p_fixed_state.ordinal() < FixedState.USER_FIXED.ordinal()) {
-                return null;
-            }
+
+        if (new_trace.first_corner().equals(new_trace.last_corner()) && p_fixed_state.ordinal() < FixedState.USER_FIXED.ordinal()) {
+            return null;
         }
         insert_item(new_trace);
         if (new_trace.nets_normal()) {
             max_trace_half_width = Math.max(max_trace_half_width, p_half_width);
             min_trace_half_width = Math.min(min_trace_half_width, p_half_width);
         }
+
         return new_trace;
     }
 

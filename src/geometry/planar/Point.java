@@ -108,12 +108,10 @@ public abstract class Point implements java.io.Serializable {
             p_y = p_y.divide(p_z);
             p_z = BigInteger.ONE;
         }
-        if (p_z.equals(BigInteger.ONE)) {
-            if ((p_x.abs()).compareTo(Limits.CRIT_INT_BIG) <= 0
-                    && (p_y.abs()).compareTo(Limits.CRIT_INT_BIG) <= 0) {
-                // the Point fits into an IntPoint
-                return new IntPoint(p_x.intValue(), p_y.intValue());
-            }
+        if (p_z.equals(BigInteger.ONE) && ((p_x.abs()).compareTo(Limits.CRIT_INT_BIG) <= 0
+                && (p_y.abs()).compareTo(Limits.CRIT_INT_BIG) <= 0)) {
+            // the Point fits into an IntPoint
+            return new IntPoint(p_x.intValue(), p_y.intValue());
         }
         return new RationalPoint(p_x, p_y, p_z);
     }

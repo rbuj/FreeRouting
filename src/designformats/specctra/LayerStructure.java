@@ -85,12 +85,9 @@ public class LayerStructure {
      * Returns, if the net with name p_net_name contains a powwer plane.
      */
     public boolean contains_plane(String p_net_name) {
-
         for (Layer curr_layer : arr) {
-            if (!curr_layer.is_signal) {
-                if (curr_layer.net_names.contains(p_net_name)) {
-                    return true;
-                }
+            if (!curr_layer.is_signal && curr_layer.net_names.contains(p_net_name)) {
+                return true;
             }
         }
         return false;

@@ -299,12 +299,11 @@ public abstract class LocateFoundConnectionAlgo {
             } else {
                 curr_next_room = curr_backtrack_door.other_room(curr_next_room);
             }
+
             curr_maze_search_element = curr_backtrack_door.get_maze_search_element(curr_section_no);
             curr_backtrack_element = new BacktrackElement(curr_backtrack_door, curr_section_no, curr_next_room);
-            if (curr_maze_search_element.room_ripped) {
-                if (curr_next_room instanceof ObstacleExpansionRoom) {
-                    p_ripped_item_list.add(((ObstacleExpansionRoom) curr_next_room).get_item());
-                }
+            if (curr_maze_search_element.room_ripped && curr_next_room instanceof ObstacleExpansionRoom) {
+                p_ripped_item_list.add(((ObstacleExpansionRoom) curr_next_room).get_item());
             }
         }
         return result;

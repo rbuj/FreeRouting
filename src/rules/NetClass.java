@@ -277,10 +277,8 @@ public class NetClass implements java.io.Serializable, board.ObjectInfoPanel.Pri
     public boolean trace_width_is_layer_dependent() {
         int compare_value = trace_half_width_arr[0];
         for (int i = 1; i < trace_half_width_arr.length; ++i) {
-            if (this.board_layer_structure.arr[i].is_signal) {
-                if (trace_half_width_arr[i] != compare_value) {
-                    return true;
-                }
+            if (this.board_layer_structure.arr[i].is_signal && trace_half_width_arr[i] != compare_value) {
+                return true;
             }
         }
         return false;
@@ -304,10 +302,8 @@ public class NetClass implements java.io.Serializable, board.ObjectInfoPanel.Pri
         }
         int compare_width = trace_half_width_arr[first_inner_layer_no];
         for (int i = first_inner_layer_no + 1; i < trace_half_width_arr.length - 1; ++i) {
-            if (this.board_layer_structure.arr[i].is_signal) {
-                if (trace_half_width_arr[i] != compare_width) {
-                    return true;
-                }
+            if (this.board_layer_structure.arr[i].is_signal && trace_half_width_arr[i] != compare_width) {
+                return true;
             }
         }
         return false;

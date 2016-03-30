@@ -45,11 +45,9 @@ public class PolygonShape extends PolylineShape {
         Point[] curr_corners = curr_polygon.corner_array();
         int last_corner_no = curr_corners.length - 1;
 
-        if (last_corner_no > 0) {
-            if (curr_corners[0].equals(curr_corners[last_corner_no])) {
-                // skip last point
-                --last_corner_no;
-            }
+        if (last_corner_no > 0 && curr_corners[0].equals(curr_corners[last_corner_no])) {
+            // skip last point
+            --last_corner_no;
         }
 
         boolean last_point_collinear = false;

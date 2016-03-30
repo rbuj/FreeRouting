@@ -565,14 +565,10 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
             Item curr_contact = it.next();
             if (curr_contact == p_come_from_item) {
                 continue;
-            }
-            if (curr_contact == p_search_item) {
+            } else if (curr_contact == p_search_item) {
                 return true;
-            }
-            if (p_visited_items.add(curr_contact)) {
-                if (curr_contact.is_cycle_recu(p_visited_items, p_search_item, this, p_ignore_areas)) {
-                    return true;
-                }
+            } else if (p_visited_items.add(curr_contact) && curr_contact.is_cycle_recu(p_visited_items, p_search_item, this, p_ignore_areas)) {
+                return true;
             }
         }
         return false;

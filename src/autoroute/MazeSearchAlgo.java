@@ -179,10 +179,8 @@ public class MazeSearchAlgo {
         int layer_no = p_list_element.next_room.get_layer();
 
         boolean layer_active = ctrl.layer_active[layer_no];
-        if (!layer_active) {
-            if (autoroute_engine.board.layer_structure.arr[layer_no].is_signal) {
-                return true;
-            }
+        if (!layer_active && autoroute_engine.board.layer_structure.arr[layer_no].is_signal) {
+            return true;
         }
 
         double half_width = ctrl.compensated_trace_half_width[layer_no];
@@ -262,18 +260,15 @@ public class MazeSearchAlgo {
         int ripup_costs = 0;
 
         if (p_list_element.next_room instanceof FreeSpaceExpansionRoom) {
-            if (!p_list_element.already_checked) {
-                if (curr_door_is_small) {
-                    boolean enter_through_small_door = false;
-                    if (next_room_is_thick) {
-                        // check to enter the thick room from a ripped item through a small door (after ripup)
-                        enter_through_small_door = check_leaving_ripped_item(p_list_element);
-                    }
-                    if (!enter_through_small_door) {
-                        return something_expanded;
-                    }
+            if (!p_list_element.already_checked && curr_door_is_small) {
+                boolean enter_through_small_door = false;
+                if (next_room_is_thick) {
+                    // check to enter the thick room from a ripped item through a small door (after ripup)
+                    enter_through_small_door = check_leaving_ripped_item(p_list_element);
                 }
-
+                if (!enter_through_small_door) {
+                    return something_expanded;
+                }
             }
         } else if (p_list_element.next_room instanceof ObstacleExpansionRoom) {
             ObstacleExpansionRoom obstacle_room = (ObstacleExpansionRoom) p_list_element.next_room;
@@ -512,11 +507,9 @@ public class MazeSearchAlgo {
         boolean room_shape_is_thin
                 = p_from_element.next_room.get_shape().min_width() < 2 * trace_half_width;
 
-        if (room_shape_is_thin) {
-            // expand only drills intersecting the backtrack door
-            if (p_from_element.backtrack_door == null || !p_drill.get_shape().intersects(p_from_element.backtrack_door.get_shape())) {
-                return;
-            }
+        // expand only drills intersecting the backtrack door
+        if (room_shape_is_thin && (p_from_element.backtrack_door == null || !p_drill.get_shape().intersects(p_from_element.backtrack_door.get_shape()))) {
+            return;
         }
 
         double via_radius = ctrl.via_radius_arr[layer];

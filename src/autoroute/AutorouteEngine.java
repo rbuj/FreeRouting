@@ -63,26 +63,24 @@ public class AutorouteEngine {
     }
 
     public void init_connection(int p_net_no, Stoppable p_stoppable_thread, TimeLimit p_time_limit) {
-        if (this.maintain_database) {
-            if (p_net_no != this.net_no) {
-                if (this.complete_expansion_rooms != null) {
-                    // invalidate the net dependent complete free space expansion rooms.
-                    Collection<CompleteFreeSpaceExpansionRoom> rooms_to_remove = new LinkedList<>();
-                    for (CompleteFreeSpaceExpansionRoom curr_room : complete_expansion_rooms) {
-                        if (curr_room.is_net_dependent()) {
-                            rooms_to_remove.add(curr_room);
-                        }
-                    }
-                    for (CompleteFreeSpaceExpansionRoom curr_room : rooms_to_remove) {
-                        this.remove_complete_expansion_room(curr_room);
+        if (this.maintain_database && p_net_no != this.net_no) {
+            if (this.complete_expansion_rooms != null) {
+                // invalidate the net dependent complete free space expansion rooms.
+                Collection<CompleteFreeSpaceExpansionRoom> rooms_to_remove = new LinkedList<>();
+                for (CompleteFreeSpaceExpansionRoom curr_room : complete_expansion_rooms) {
+                    if (curr_room.is_net_dependent()) {
+                        rooms_to_remove.add(curr_room);
                     }
                 }
-                // invalidate the neighbour rooms of the items of p_net_no
-                Collection<Item> item_list = this.board.get_items();
-                for (Item curr_item : item_list) {
-                    if (curr_item.contains_net(p_net_no)) {
-                        this.board.additional_update_after_change(curr_item);
-                    }
+                for (CompleteFreeSpaceExpansionRoom curr_room : rooms_to_remove) {
+                    this.remove_complete_expansion_room(curr_room);
+                }
+            }
+            // invalidate the neighbour rooms of the items of p_net_no
+            Collection<Item> item_list = this.board.get_items();
+            for (Item curr_item : item_list) {
+                if (curr_item.contains_net(p_net_no)) {
+                    this.board.additional_update_after_change(curr_item);
                 }
             }
         }

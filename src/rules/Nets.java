@@ -49,10 +49,8 @@ public class Nets implements java.io.Serializable {
      */
     public Net get(String p_name, int p_subnet_number) {
         for (Net curr_net : net_arr) {
-            if (curr_net != null && curr_net.name.compareToIgnoreCase(p_name) == 0) {
-                if (curr_net.subnet_number == p_subnet_number) {
-                    return curr_net;
-                }
+            if (curr_net.name.compareToIgnoreCase(p_name) == 0 && curr_net.subnet_number == p_subnet_number) {
+                return curr_net;
             }
         }
         return null;

@@ -111,10 +111,8 @@ public abstract class DragState extends InteractiveState {
                 hdlg.update_ratsnest(changed_net);
             }
         }
-        if (this.something_dragged) {
-            if (logfile != null) {
-                logfile.add_corner(p_point);
-            }
+        if (this.something_dragged && logfile != null) {
+            logfile.add_corner(p_point);
         }
         return result;
     }
