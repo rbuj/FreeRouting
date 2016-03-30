@@ -34,7 +34,7 @@ public class DesignFile {
     public static final String[] text_file_extensions = new String[]{"dsn"};
     public static final String binary_file_extension = "bin";
 
-    public static DesignFile get_instance(String p_design_file_name, boolean p_is_webstart) {
+    public static DesignFile get_instance(String p_design_file_name) {
         if (p_design_file_name == null) {
             return null;
         }

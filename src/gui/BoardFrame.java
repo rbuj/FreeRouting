@@ -42,7 +42,7 @@ public class BoardFrame extends javax.swing.JFrame {
      */
     public static BoardFrame get_embedded_instance(String p_design_file_path_name,
             BoardObservers p_observers, IdNoGenerator p_id_no_generator, java.util.Locale p_locale) {
-        final gui.DesignFile design_file = gui.DesignFile.get_instance(p_design_file_path_name, false);
+        final gui.DesignFile design_file = gui.DesignFile.get_instance(p_design_file_path_name);
         if (design_file == null) {
             WindowMessage.show("designfile not found");
             return null;
@@ -219,13 +219,13 @@ public class BoardFrame extends javax.swing.JFrame {
             // Read the default gui settings, if gui default file exists.
             java.io.InputStream input_stream = null;
             boolean defaults_file_found;
-                File defaults_file = new File(this.design_file.get_parent(), GUI_DEFAULTS_FILE_NAME);
-                defaults_file_found = true;
-                try {
-                    input_stream = new java.io.FileInputStream(defaults_file);
-                } catch (java.io.FileNotFoundException e) {
-                    defaults_file_found = false;
-                }
+            File defaults_file = new File(this.design_file.get_parent(), GUI_DEFAULTS_FILE_NAME);
+            defaults_file_found = true;
+            try {
+                input_stream = new java.io.FileInputStream(defaults_file);
+            } catch (java.io.FileNotFoundException e) {
+                defaults_file_found = false;
+            }
             if (defaults_file_found) {
                 boolean read_ok = gui.GUIDefaultsFile.read(this, board_panel.board_handling, input_stream);
                 if (!read_ok) {

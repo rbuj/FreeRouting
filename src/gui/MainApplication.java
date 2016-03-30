@@ -110,7 +110,7 @@ public final class MainApplication extends javax.swing.JFrame {
                 } else {
                     board_option = BoardFrame.Option.SINGLE_FRAME;
                 }
-                DesignFile design_file = DesignFile.get_instance(design_file_name, false);
+                DesignFile design_file = DesignFile.get_instance(design_file_name);
                 if (design_file == null) {
                     System.out.print(resources.getString("message_6") + " ");
                     System.out.print(design_file_name);
