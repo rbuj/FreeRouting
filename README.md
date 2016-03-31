@@ -56,18 +56,16 @@ For optional parameters of the Freerouting outfile check the usage of the variab
 Here are some instructions how to build the Freerouting project from a Terminal.
 ==================================================================================
 
-1) Go to the Java SE download web page of Oracle to download and install JDK & JRE 8. https://www.java.com/en/download/
+1) Install Apache Maven https://maven.apache.org/
 
-2) Install Apache Ant (Java opensource build system). http://ant.apache.org
+2) Open a terminal, and run the following command:
 
-4) Open a terminal, and run the following command:
-
-Fedora: java-1.8.0-openjdk-devel, ant, svn
+Fedora: java-1.8.0-openjdk-devel, maven
 ```bash
-ant -Dnb.internal.action.name=build jar
+mvn install
 ```
 
-OS X: Go to the Java SE download web page of Oracle to download and install JDK & JRE 8. https://www.java.com/en/download/ . Install Apache Ant (Java opensource build system). http://ant.apache.org . 
+OS X: Go to the Java SE download web page of Oracle to download and install JDK & JRE 8. https://www.java.com/en/download/ . Install Apache Maven https://maven.apache.org/ . 
 ```bash
-ant -Dnb.internal.action.name=build jar
+mvn install
 ```
