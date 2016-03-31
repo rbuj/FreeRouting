@@ -1,0 +1,100 @@
+<html><head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>Cap&iacute;tol 1. Interactive States</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="FreeRouting"><link rel="up" href="index.html" title="FreeRouting"><link rel="prev" href="pr01.html" title="Using the IDE Help System"><link rel="next" href="ch01s02.html" title="The Selected Item State"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter"><div class="titlepage"><div><div><h2 class="title"><a name="d0e23"></a>Cap&iacute;tol 1. Interactive States</h2></div></div></div><div class="toc"><p><b>Sumari</b></p><dl class="toc"><dt><span class="section"><a href="ch01.html#d0e26">The Menu States</a></span></dt><dd><dl><dt><span class="section"><a href="ch01.html#d0e143">
+                                        The Select Menu State
+                                    </a></span></dt><dt><span class="section"><a href="ch01.html#d0e148">
+                                        The Route Menu State
+                                    </a></span></dt><dt><span class="section"><a href="ch01.html#d0e153">
+                                        The Drag Menu State
+                                    </a></span></dt></dl></dd><dt><span class="section"><a href="ch01s02.html">The Selected Item State</a></span></dt><dd><dl><dt><span class="section"><a href="ch01s02.html#d0e326">The Move State</a></span></dt></dl></dd><dt><span class="section"><a href="ch01s03.html">The Route States</a></span></dt><dd><dl><dt><span class="section"><a href="ch01s03.html#d0e394">
+                                        The Dynamic Route State
+                                    </a></span></dt></dl></dd></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e26"></a>The Menu States</h2></div></div></div><p>
+                    The program contains the following three Menu States: Select, Route and Drag. By selecting one of the three buttons on the upper left side of the tool bar you can switch between this states. In the beginning the program will be in the Select Menu State.
+                </p><p>
+                    The three states have a common tool bar and a common popup menu under the right mouse button.
+                </p><div class="variablelist"><p class="title"><b>
+                            Further Entries in the Tool Bar:
+                        </b></p><dl class="variablelist"><dt><span class="term">
+                                <code class="filename">
+                                    Autorouter
+                                </code>
+                            </span></dt><dd><p>
+                                To start the batch autorouter on the whole board.
+                            </p></dd><dt><span class="term">
+                                <code class="filename">
+                                    Undo
+                                </code>
+                                <code class="filename">
+                                    Redo
+                                </code>
+                            </span></dt><dd><p>
+                                The program has unlimited Undo Redo capability. In the offline version the Undo stack does not get lost even after saving the design and restarting the program. Shortcuts are u for Undo and b for Redo.
+                            </p></dd><dt><span class="term">
+                                <code class="filename">
+                                    Incompletes
+                                </code>
+                            </span></dt><dd><p>
+                                Here you can switch on or off displaying the open connections as air lines. If the airlines were switched off before, they will be switched on and vice versa. Shortcut is g.
+                            </p></dd><dt><span class="term">
+                                <code class="filename">
+                                    Violations
+                                </code>
+                            </span></dt><dd><p>
+                                Here you can switch on or off displaying the clearance violations. If the violations were switched off before, they will be switched on and vice versa. Shortcut is v.
+                            </p></dd><dt><span class="term">
+                                <code class="filename">
+                                    Zoom All
+                                </code>
+                            </span></dt><dd><p>
+                                To display the whole board. Shortcut is a.
+                            </p></dd><dt><span class="term">
+                                <code class="filename">
+                                    Zoom Region
+                                </code>
+                            </span></dt><dd><p>
+                                After selecting this button you can choose a display rectangle by dragging the mouse with the left button pressed. Shortcut is f. You can also zoom by turning the mouse wheel and pan by dragging the mouse with the mouse wheel pressed.
+                            </p></dd></dl></div><div class="variablelist"><p class="title"><b>
+                            The Entries in the Popup Menu:
+                        </b></p><dl class="variablelist"><dt><span class="term">
+                                <code class="filename">
+                                    select item
+                                </code>
+                            </span></dt><dd><p>
+                                To select the items under the cursor. Only items switched on in the Select Parameter window can be selected. After selecting some items the current interactive state will change to the Selected Item State. In the Select Menu State you can select items also with the left mouse button.
+                            </p></dd><dt><span class="term">
+                                <code class="filename">
+                                    start route
+                                </code>
+                            </span></dt><dd><p>
+                                A new trace will be started beginning at the item under the cursor. For the selection of the start item the settings in the Select Parameter window are evaluated . If a suitable item was found the interactive state will change to the Route State. In the Route Menu State you can do this also by clicking the left mouse button.
+                            </p></dd><dt><span class="term">
+                                <code class="filename">
+                                    create keepout
+                                </code>
+                            </span></dt><dd><p>
+                                To create a keepout on the current layer. You can create a circle, a polygons or a hole into an existing polygonal keepout.
+                            </p></dd><dt><span class="term">
+                                <code class="filename">
+                                    swap pin
+                                </code>
+                            </span></dt><dd><p>
+                                This menu entry appears only if the board contains swappable pins. If the pin under the cursor is swappable, you can change the net of this pin with a suitable other pin.
+                            </p></dd><dt></dt><dd><p>
+                                The letters in brackets behind the Popup Menu entries describe the shortcuts for the corresponding actions.
+                            </p></dd></dl></div><div class="variablelist"><p class="title"><b>
+                            The Function of the Mouse Wheel:
+                        </b></p><dl class="variablelist"><dt></dt><dd><p>
+                                By rotating the mouse wheel you can zoom in or out and by dragging the mouse with the mouse wheel pressed you can change the displayed section of the board.
+                            </p></dd></dl></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e143"></a>
+                                    The Select Menu State
+                                </h3></div></div></div><p>
+                        If on the upper left side in the tool bar the button Select is selected, the program will be in the Select Menu State. Here you can use the left mouse button as a shortcut for the action select item in the popup menu. You also can select all items in a rectangle by dragging the mouse with the left button pressed.
+                    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e148"></a>
+                                    The Route Menu State
+                                </h3></div></div></div><p>
+                        If on the upper left side in the tool bar the button Route is selected, the program will be in the Route Menu State. Here you can use the left mouse button as a shortcut for the action start route in the popup menu.
+                    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e153"></a>
+                                    The Drag Menu State
+                                </h3></div></div></div><p>
+                        If on the upper left side in the tool bar the button Drag is selected, the program will be in the Drag Menu State Here you can drag vias or components with the left button pressed. The connected traces will be adjusted automatically. You can also out of the empty space shove traces aside with the left button pressed This way you can for example make space for inserting another component. This action will be performed on the current layer, which can be set in the Select Parameter window.
+                    </p></div></div></div></body></html>

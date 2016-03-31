@@ -1,10 +1,7 @@
 .DS_Store
 /nbproject/private/
-/build/
-/dist/
-/lib/
-/src/helpset/
-/src/help/lib/
-/src/help/docbook/
-/src/help/docbook-xml-*/
+/target/
+/help/lib/
+/help/docbook/
+/help/docbook-xml-*/
 /ext/
