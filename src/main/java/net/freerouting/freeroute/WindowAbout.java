@@ -44,18 +44,18 @@ public class WindowAbout extends BoardSavableSubWindow {
         this.setSize(520, 200);
         final JFXPanel jfxPanel = new JFXPanel();
         this.add(jfxPanel, BorderLayout.CENTER);
+        this.setResizable(false);
         Platform.runLater(() -> initFX(jfxPanel, p_locale));
     }
 
     private void initFX(JFXPanel jfxPanel, Locale p_locale) {
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/net/freerouting/freeroute/fxml/WindowAbout.fxml"));
             java.util.ResourceBundle rb
                     = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowAbout", p_locale);
             loader.setResources(rb);
             Parent root = (Parent) loader.load();
-            Scene scene = new Scene(root, 500, 200);
+            Scene scene = new Scene(root);
             jfxPanel.setScene(scene);
         }
         catch (IOException exc) {

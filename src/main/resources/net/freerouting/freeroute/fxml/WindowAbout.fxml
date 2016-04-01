@@ -6,42 +6,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="180.0" prefWidth="500.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.freerouting.freeroute.WindowAboutController">
+<AnchorPane id="AnchorPane" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.freerouting.freeroute.WindowAboutController">
     <stylesheets>
         <URL value="@/styles/windowabout.css" />
     </stylesheets>
    <children>
-      <VBox layoutX="136.0" layoutY="29.0" prefHeight="400.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="0.0" layoutY="0.0" spacing="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="%description">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
+            <Label alignment="CENTER" text="%description">
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
+               </padding>
             </Label>
-            <Label text="%version">
-               <opaqueInsets>
-                  <Insets left="20.0" top="20.0" />
-               </opaqueInsets>
+            <Label alignment="CENTER" text="%version">
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+               </padding>
             </Label>
-            <Label text="%homepage">
-               <opaqueInsets>
-                  <Insets left="20.0" top="20.0" />
-               </opaqueInsets>
+            <Label alignment="CENTER" text="%homepage">
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+               </padding>
             </Label>
-            <Label text="%warranty">
-               <opaqueInsets>
-                  <Insets left="20.0" top="20.0" />
-               </opaqueInsets>
+            <Label alignment="CENTER" text="%warranty">
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+               </padding>
             </Label>
-            <Label text="%support">
-               <opaqueInsets>
-                  <Insets left="20.0" top="20.0" />
-               </opaqueInsets>
+            <Label alignment="CENTER" text="%support">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
             </Label>
          </children>
-         <padding>
-            <Insets left="20.0" top="20.0" />
-         </padding>
       </VBox>
    </children>
 </AnchorPane>
