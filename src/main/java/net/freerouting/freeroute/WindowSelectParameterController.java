@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
+ * Copyright (C) 2016 Robert Antoni Buj Gelonch {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ import javafx.fxml.Initializable;
 /**
  * FXML Controller class
  *
- * @author Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
+ * @author Robert Antoni Buj Gelonch {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  */
 public class WindowSelectParameterController implements Initializable {
 
