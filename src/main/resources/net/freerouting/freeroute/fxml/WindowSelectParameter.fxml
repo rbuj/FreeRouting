@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="287.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.freerouting.freeroute.WindowSelectParameterController">
+    <stylesheets>
+        <URL value="@/styles/windowselectparameter.css" />
+    </stylesheets>
+    <children>
+        <Accordion AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <panes>
+                <TitledPane animated="false" text="%selection_layers">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0">
+                            <children>
+                                <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <fx:define>
+                                            <ToggleGroup fx:id="selectionLayersGroup" />
+                                        </fx:define>
+                                        <RadioButton accessibleText="%all_visible_tooltip" text="%all_visible" toggleGroup="$selectionLayersGroup" />
+                                        <RadioButton accessibleText="%current_only_tooltip" text="%current_only" toggleGroup="$selectionLayersGroup" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+                <TitledPane animated="false" text="%selectable_items">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <CheckBox mnemonicParsing="false" text="%TRACES" />
+                                        <CheckBox mnemonicParsing="false" text="%VIAS" />
+                                        <CheckBox mnemonicParsing="false" text="%PINS" />
+                                        <CheckBox mnemonicParsing="false" text="%CONDUCTION" />
+                                        <CheckBox mnemonicParsing="false" text="%KEEPOUT" />
+                                        <CheckBox mnemonicParsing="false" text="%VIA_KEEPOUT" />
+                                        <CheckBox mnemonicParsing="false" text="%COMPONENT_KEEPOUT" />
+                                        <CheckBox mnemonicParsing="false" text="%BOARD_OUTLINE" />
+                                        <CheckBox mnemonicParsing="false" text="%FIXED" />
+                                        <CheckBox mnemonicParsing="false" text="%UNFIXED" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+                <TitledPane animated="false" text="%current_layer">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <fx:define>
+                                        <ToggleGroup fx:id="selectLayersGroup" />
+                                    </fx:define>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+            </panes>
+        </Accordion>
+    </children>
+</AnchorPane>
