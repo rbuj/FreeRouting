@@ -16,9 +16,16 @@
  */
 package net.freerouting.freeroute;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -27,12 +34,21 @@ import javafx.fxml.Initializable;
  */
 public class WindowAboutController implements Initializable {
 
+    @FXML
+    private Label version;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+        try (InputStream in = MainApp.class.getClass().getResourceAsStream("/net/freerouting/freeroute/VERSION"); BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+            String line = reader.readLine();
+            version.setText(new StringBuilder().append(rb.getString("version")).append(" ").append(line).toString());
+        }
+        catch (Exception ex) {
+            Logger.getLogger(WindowAboutController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

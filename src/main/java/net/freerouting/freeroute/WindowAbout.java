@@ -55,6 +55,8 @@ public class WindowAbout extends BoardSavableSubWindow {
                     = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowAbout", p_locale);
             loader.setResources(rb);
             Parent root = (Parent) loader.load();
+            WindowAboutController controller = loader.getController();
+            controller.initialize(null, rb);
             Scene scene = new Scene(root);
             jfxPanel.setScene(scene);
         }
