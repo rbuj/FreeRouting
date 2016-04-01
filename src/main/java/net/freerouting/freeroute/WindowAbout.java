@@ -20,6 +20,15 @@
  */
 package net.freerouting.freeroute;
 
+import java.awt.BorderLayout;
+import java.io.IOException;
+import java.util.Locale;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+
 /**
  * Displays general information about the freeroute software.
  *
@@ -27,43 +36,31 @@ package net.freerouting.freeroute;
  */
 public class WindowAbout extends BoardSavableSubWindow {
 
-    public WindowAbout(java.util.Locale p_locale) {
+    public WindowAbout(Locale p_locale) {
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowAbout", p_locale);
         this.setTitle(resources.getString("title"));
+        this.setLayout(new BorderLayout());
+        this.setSize(520, 200);
+        final JFXPanel jfxPanel = new JFXPanel();
+        this.add(jfxPanel, BorderLayout.CENTER);
+        Platform.runLater(() -> initFX(jfxPanel, p_locale));
+    }
 
-        final javax.swing.JPanel window_panel = new javax.swing.JPanel();
-        this.add(window_panel);
+    private void initFX(JFXPanel jfxPanel, Locale p_locale) {
+        try {
 
-        // Initialize gridbag layout.
-        java.awt.GridBagLayout gridbag = new java.awt.GridBagLayout();
-        window_panel.setLayout(gridbag);
-        java.awt.GridBagConstraints gridbag_constraints = new java.awt.GridBagConstraints();
-        gridbag_constraints.insets = new java.awt.Insets(5, 10, 5, 10);
-        gridbag_constraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-
-        javax.swing.JLabel description_label = new javax.swing.JLabel(resources.getString("description"));
-        gridbag.setConstraints(description_label, gridbag_constraints);
-        window_panel.add(description_label, gridbag_constraints);
-
-        String version_string = resources.getString("version") + " " + MainApp.VERSION_NUMBER_STRING;
-        javax.swing.JLabel version_label = new javax.swing.JLabel(version_string);
-        gridbag.setConstraints(version_label, gridbag_constraints);
-        window_panel.add(version_label, gridbag_constraints);
-
-        javax.swing.JLabel warrenty_label = new javax.swing.JLabel(resources.getString("warranty"));
-        gridbag.setConstraints(warrenty_label, gridbag_constraints);
-        window_panel.add(warrenty_label, gridbag_constraints);
-
-        javax.swing.JLabel homepage_label = new javax.swing.JLabel(resources.getString("homepage"));
-        gridbag.setConstraints(homepage_label, gridbag_constraints);
-        window_panel.add(homepage_label, gridbag_constraints);
-
-        javax.swing.JLabel support_label = new javax.swing.JLabel(resources.getString("support"));
-        gridbag.setConstraints(support_label, gridbag_constraints);
-        window_panel.add(support_label, gridbag_constraints);
-
-        this.add(window_panel);
-        this.pack();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/net/freerouting/freeroute/fxml/WindowAbout.fxml"));
+            java.util.ResourceBundle rb
+                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowAbout", p_locale);
+            loader.setResources(rb);
+            Parent root = (Parent) loader.load();
+            Scene scene = new Scene(root, 500, 200);
+            jfxPanel.setScene(scene);
+        }
+        catch (IOException exc) {
+            exc.printStackTrace();
+            System.exit(1);
+        }
     }
 }

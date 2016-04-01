@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="180.0" prefWidth="500.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.freerouting.freeroute.WindowAboutController">
+    <stylesheets>
+        <URL value="@/styles/windowabout.css" />
+    </stylesheets>
+   <children>
+      <VBox layoutX="136.0" layoutY="29.0" prefHeight="400.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="%description">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label text="%version">
+               <opaqueInsets>
+                  <Insets left="20.0" top="20.0" />
+               </opaqueInsets>
+            </Label>
+            <Label text="%homepage">
+               <opaqueInsets>
+                  <Insets left="20.0" top="20.0" />
+               </opaqueInsets>
+            </Label>
+            <Label text="%warranty">
+               <opaqueInsets>
+                  <Insets left="20.0" top="20.0" />
+               </opaqueInsets>
+            </Label>
+            <Label text="%support">
+               <opaqueInsets>
+                  <Insets left="20.0" top="20.0" />
+               </opaqueInsets>
+            </Label>
+         </children>
+         <padding>
+            <Insets left="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
