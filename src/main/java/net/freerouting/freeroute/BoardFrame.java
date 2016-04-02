@@ -182,10 +182,8 @@ public class BoardFrame extends javax.swing.JFrame {
         this.item_id_no_generator = p_item_id_no_generator;
         this.locale = p_locale;
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardFrame", p_locale);
-        BoardMenuBar curr_menubar;
         boolean session_file_option = (p_option == Option.SESSION_FILE);
-        curr_menubar = BoardMenuBar.get_instance(this, session_file_option);
-        this.menubar = curr_menubar;
+        this.menubar = BoardMenuBar.get_instance(this, session_file_option);
         setJMenuBar(this.menubar);
 
         this.toolbar_panel = new BoardToolbar(this);

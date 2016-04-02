@@ -42,6 +42,8 @@ public class MainApp extends javax.swing.JFrame {
      */
     static final String VERSION_NUMBER_STRING = "1.2.43";
 
+    static DesignFile design_file = null;
+
     /**
      * Main function of the Application
      */
@@ -116,7 +118,7 @@ public class MainApp extends javax.swing.JFrame {
                 } else {
                     board_option = BoardFrame.Option.SINGLE_FRAME;
                 }
-                DesignFile design_file = DesignFile.get_instance(design_file_name);
+                design_file = DesignFile.get_instance(design_file_name);
                 if (design_file == null) {
                     System.out.print(resources.getString("message_6") + " ");
                     System.out.print(design_file_name);
@@ -127,6 +129,7 @@ public class MainApp extends javax.swing.JFrame {
                 WindowMessage welcome_window = WindowMessage.show(message);
                 final BoardFrame new_frame
                         = create_board_frame(design_file, null, board_option, test_version_option, current_locale);
+                design_file.finalize();
                 welcome_window.dispose();
                 if (new_frame == null) {
                     Runtime.getRuntime().exit(1);
@@ -279,6 +282,7 @@ public class MainApp extends javax.swing.JFrame {
         message_field.setText(resources.getString("message_4") + " " + design_file.get_name() + " " + resources.getString("message_5"));
         board_frames.add(new_frame);
         new_frame.addWindowListener(new BoardFrameWindowListener(new_frame));
+        design_file.finalize();
     }
 
     /**

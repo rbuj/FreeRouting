@@ -20,6 +20,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.datastructures.FileFilter;
 
 /**
@@ -34,13 +36,13 @@ public class DesignFile {
     public static final String[] text_file_extensions = new String[]{"dsn"};
     public static final String binary_file_extension = "bin";
     private static final String RULES_FILE_EXTENSION = ".rules";
+    private static final FileFilter file_filter = new FileFilter(all_file_extensions);
 
     public static DesignFile get_instance(String p_design_file_name) {
         if (p_design_file_name == null) {
             return null;
         }
-        DesignFile result = new DesignFile(new java.io.File(p_design_file_name), null);
-        return result;
+        return new DesignFile(new java.io.File(p_design_file_name), null);
     }
 
     /**
@@ -49,15 +51,13 @@ public class DesignFile {
     public static DesignFile open_dialog(String p_design_dir_name) {
         DesignFile result;
         javax.swing.JFileChooser file_chooser = new javax.swing.JFileChooser(p_design_dir_name);
-        FileFilter file_filter = new FileFilter(all_file_extensions);
         file_chooser.setFileFilter(file_filter);
         file_chooser.showOpenDialog(null);
         java.io.File curr_design_file = file_chooser.getSelectedFile();
         if (curr_design_file == null) {
             return null;
         }
-        result = new DesignFile(curr_design_file, file_chooser);
-        return result;
+        return new DesignFile(curr_design_file, file_chooser);
     }
 
     public static boolean read_rules_file(String p_design_name, String p_parent_name,
@@ -156,7 +156,6 @@ public class DesignFile {
                 design_dir_name = this.output_file.getParent();
             }
             this.file_chooser = new javax.swing.JFileChooser(design_dir_name);
-            FileFilter file_filter = new FileFilter(all_file_extensions);
             this.file_chooser.setFileFilter(file_filter);
         }
 
@@ -303,4 +302,19 @@ public class DesignFile {
         return this.input_file != this.output_file;
     }
 
+    public void dispose() {
+    }
+
+    @Override
+    protected void finalize() {
+        try {
+            dispose();
+        } finally {
+            try {
+                super.finalize();
+            } catch (Throwable ex) {
+                Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }
