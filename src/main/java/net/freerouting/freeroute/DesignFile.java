@@ -20,6 +20,7 @@
  */
 package net.freerouting.freeroute;
 
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.freerouting.freeroute.datastructures.FileFilter;
@@ -37,27 +38,28 @@ public class DesignFile {
     public static final String binary_file_extension = "bin";
     private static final String RULES_FILE_EXTENSION = ".rules";
     private static final FileFilter file_filter = new FileFilter(all_file_extensions);
+    private java.io.File output_file;
+    private final java.io.File input_file;
+    private javax.swing.JFileChooser file_chooser;
+
+    DesignFile(File p_design_file) {
+        this.input_file = p_design_file;
+        this.output_file = p_design_file;
+        if (p_design_file != null) {
+            String file_name = p_design_file.getName();
+            String[] name_parts = file_name.split("\\.");
+            if (name_parts[name_parts.length - 1].compareToIgnoreCase(binary_file_extension) != 0) {
+                String binfile_name = name_parts[0] + "." + binary_file_extension;
+                this.output_file = new java.io.File(p_design_file.getParent(), binfile_name);
+            }
+        }
+    }
 
     public static DesignFile get_instance(String p_design_file_name) {
         if (p_design_file_name == null) {
             return null;
         }
-        return new DesignFile(new java.io.File(p_design_file_name), null);
-    }
-
-    /**
-     * Shows a file chooser for opening a design file.
-     */
-    public static DesignFile open_dialog(String p_design_dir_name) {
-        DesignFile result;
-        javax.swing.JFileChooser file_chooser = new javax.swing.JFileChooser(p_design_dir_name);
-        file_chooser.setFileFilter(file_filter);
-        file_chooser.showOpenDialog(null);
-        java.io.File curr_design_file = file_chooser.getSelectedFile();
-        if (curr_design_file == null) {
-            return null;
-        }
-        return new DesignFile(curr_design_file, file_chooser);
+        return new DesignFile(new java.io.File(p_design_file_name));
     }
 
     public static boolean read_rules_file(String p_design_name, String p_parent_name,
@@ -86,30 +88,6 @@ public class DesignFile {
             result = false;
         }
         return result;
-    }
-    /**
-     * Used, if the application is run without Java Web Start.
-     */
-    private java.io.File output_file;
-    private final java.io.File input_file;
-    private javax.swing.JFileChooser file_chooser;
-
-    /**
-     * Creates a new instance of DesignFile. If p_is_webstart, the application
-     * was opened with Java Web Start.
-     */
-    private DesignFile(java.io.File p_design_file, javax.swing.JFileChooser p_file_chooser) {
-        this.file_chooser = p_file_chooser;
-        this.input_file = p_design_file;
-        this.output_file = p_design_file;
-        if (p_design_file != null) {
-            String file_name = p_design_file.getName();
-            String[] name_parts = file_name.split("\\.");
-            if (name_parts[name_parts.length - 1].compareToIgnoreCase(binary_file_extension) != 0) {
-                String binfile_name = name_parts[0] + "." + binary_file_extension;
-                this.output_file = new java.io.File(p_design_file.getParent(), binfile_name);
-            }
-        }
     }
 
     /**

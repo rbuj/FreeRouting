@@ -17,6 +17,8 @@ package net.freerouting.freeroute;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import javafx.scene.control.TextField;
 import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.TestLevel;
 import net.freerouting.freeroute.datastructures.FileFilter;
@@ -223,7 +225,7 @@ public class BoardFrame extends javax.swing.JFrame {
      * Reads an existing board design from file. If p_is_import, the design is
      * read from a scpecctra dsn file. Returns false, if the file is invalid.
      */
-    boolean read(java.io.InputStream p_input_stream, boolean p_is_import, javax.swing.JTextField p_message_field) {
+    boolean read(java.io.InputStream p_input_stream, boolean p_is_import, TextField p_message_field) {
         java.awt.Point viewport_position = null;
         if (p_is_import) {
             DsnFile.ReadResult read_result = board_panel.board_handling.import_design(p_input_stream, this.board_observers,
