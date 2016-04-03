@@ -14,7 +14,7 @@
     <children>
       <VBox alignment="CENTER" layoutX="320.0" prefHeight="376.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="message_field" editable="false" prefHeight="105.0" prefWidth="353.0">
+            <TextField fx:id="message_field" alignment="TOP_LEFT" editable="false" prefHeight="105.0" prefWidth="353.0">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>

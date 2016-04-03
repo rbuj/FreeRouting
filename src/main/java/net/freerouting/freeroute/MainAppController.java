@@ -20,6 +20,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,11 +47,14 @@ public class MainAppController implements Initializable {
     private MainApp application = null;
     private static final Logger logger = Logger.getLogger(MainAppController.class.getName());
 
+    public static SimpleStringProperty sp_message_field;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.sp_message_field = new SimpleStringProperty();
+        message_field.textProperty().bind(this.sp_message_field);
     }
 
     public final void setStage(Stage stage) {
@@ -93,7 +97,7 @@ public class MainAppController implements Initializable {
                             application.is_test_version_option());
             if (new_frame.read(design_file.get_input_stream(),
                     design_file.is_created_from_text_file(),
-                    message_field)) {
+                    this.sp_message_field)) {
                 // read_ok
                 new_frame.menubar.add_design_dependent_items();
                 if (design_file.is_created_from_text_file()) {
