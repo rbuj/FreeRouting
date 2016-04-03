@@ -24,10 +24,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -48,6 +51,7 @@ public class MainAppController implements Initializable {
     private static final Logger logger = Logger.getLogger(MainAppController.class.getName());
 
     public static SimpleStringProperty sp_message_field;
+
     /**
      * Initializes the controller class.
      */
@@ -87,7 +91,24 @@ public class MainAppController implements Initializable {
 
     private void create_board_frame(BoardFrame.Option board_option, File selectedFile) {
         if (selectedFile != null) {
-            // create board
+            java.util.ResourceBundle resources
+                    = java.util.ResourceBundle.getBundle(
+                            "net.freerouting.freeroute.resources.MainApp",
+                            application.get_locale());
+            /**
+             * Show loading dialog
+             */
+            Alert dialog = new Alert(AlertType.INFORMATION);
+            dialog.initOwner(mainStage);
+            dialog.setTitle("Loading");
+            dialog.setHeaderText("Loading...");
+            dialog.setContentText(resources.getString("loading_design") + " " + application.get_design_file_name());
+            dialog.setResizable(false);
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.show();
+            /**
+             * create board
+             */
             DesignFile design_file = new DesignFile(selectedFile);
             BoardFrame new_frame
                     = new BoardFrame(design_file,
@@ -104,10 +125,6 @@ public class MainAppController implements Initializable {
                     // Read the file  with the saved rules, if it is existing.
                     String file_name = design_file.get_name();
                     String[] name_parts = file_name.split("\\.");
-                    java.util.ResourceBundle resources
-                            = java.util.ResourceBundle.getBundle(
-                                    "net.freerouting.freeroute.resources.MainApp",
-                                    application.get_locale());
                     DesignFile.read_rules_file(name_parts[0], design_file.get_parent(),
                             new_frame.board_panel.board_handling,
                             resources.getString("confirm_import_rules"));
@@ -117,6 +134,13 @@ public class MainAppController implements Initializable {
             } else {
                 // read fail
                 new_frame.dispose();
+            }
+            /**
+             * close loading dialog
+             */
+            try {
+                dialog.close();
+            } catch (Exception exc) {
             }
         }
     }
