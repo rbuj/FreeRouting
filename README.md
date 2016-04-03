@@ -81,8 +81,14 @@ Download and install Oracle's JDK & JRE 8. https://www.java.com/en/download/
 
 Install Apache Maven. https://maven.apache.org/
 
-Build
+Download freeroute source
 ```bash
+git clone https://github.com/rbuj/FreeRouting.git
+```
+
+Build jar
+```bash
+cd FreeRouting
 mvn install
 ```
 
