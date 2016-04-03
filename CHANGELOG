@@ -1,0 +1,33 @@
+ToDo
+        * Bump version to 1.4
+	* Migrate all GUI from swing to JavaFX
+	* Write all documentation in docbook format
+
+????-??-??
+
+	* DesignFile.java: Open FileChooser in MainAppController.java
+        * MainApp.java: Migrate GUI from swing to JavaFX using the MVC
+	  software pattern:
+		* MainApp.java: Model
+		* MainAppController.java: Controller
+		* MainApp.fxml: View
+	* WindowAbout.java: Migrate GUI from swing to JavaFX using the MVC
+	  software pattern.
+                * WindowAbout.java: Model
+                * WindowAbout.java: Controller
+                * WindowAbout.fxml: View
+	* Use Apache Maven instead of Apache Ivy, and restructure project's
+	  directory tree (groupId=net.freerouting, artifactId=freeroute)
+
+2016-03 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
+
+	* Bump version to 1.3
+	* Remove Java Web Start support
+	* l10n: Add Catalan & Spanish languages
+	* i18n: Generate javahelp helpset files from docbook xml files
+	* i18n: Convert Java property files (.properties) to/from Gettext PO.
+	* Fetch junit and javahelp dependencies using Apache Ivy
+	* Generate javadoc by using JDK 1.8
+	* Enable assertions (-source 1.4) and also compile classes to be
+          compatible with JVM 1.4 (-target 1.4)
+	* Create Java project with existing sources
