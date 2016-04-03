@@ -27,7 +27,12 @@ ToDo
 	* i18n: Generate javahelp helpset files from docbook xml files
 	* i18n: Convert Java property files (.properties) to/from Gettext PO.
 	* Fetch junit and javahelp dependencies using Apache Ivy
-	* Generate javadoc by using JDK 1.8
-	* Enable assertions (-source 1.4) and also compile classes to be
-          compatible with JVM 1.4 (-target 1.4)
+	* Generate javadoc by using JDK 8
+	* Enable assertions (-source 1.8) and also compile classes to be
+          compatible with JVM 8 (-target 1.8)
 	* Create Java project with existing sources
+
+2016-03-05 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
+
+	* Fork FreeRouting from latest commit 265f040 on 14 May 2014,
+	  https://github.com/nikropht/FreeRouting.git
