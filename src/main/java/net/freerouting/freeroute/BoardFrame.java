@@ -17,7 +17,6 @@ package net.freerouting.freeroute;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import javafx.scene.control.TextField;
 import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.TestLevel;

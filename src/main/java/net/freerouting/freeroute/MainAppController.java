@@ -72,22 +72,35 @@ public class MainAppController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(mainStage);
         if (selectedFile != null) {
             DesignFile design_file = new DesignFile(selectedFile);
-            BoardFrame new_frame = new BoardFrame(design_file, BoardFrame.Option.FROM_START_MENU, TestLevel.RELEASE_VERSION, application.get_locale(), application.is_test_version_option());
-            boolean read_ok = new_frame.read(design_file.get_input_stream(), design_file.is_created_from_text_file(), message_field);
-            new_frame.menubar.add_design_dependent_items();
-            if (design_file.is_created_from_text_file()) {
-                // Read the file  with the saved rules, if it is existing.
-                String file_name = design_file.get_name();
-                String[] name_parts = file_name.split("\\.");
-                java.util.ResourceBundle resources
-                        = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.MainApp", application.get_locale());
-                String confirm_import_rules_message = resources.getString("confirm_import_rules");
-                DesignFile.read_rules_file(name_parts[0], design_file.get_parent(),
-                        new_frame.board_panel.board_handling,
-                        confirm_import_rules_message);
-                new_frame.refresh_windows();
+            BoardFrame new_frame
+                    = new BoardFrame(design_file,
+                            BoardFrame.Option.FROM_START_MENU,
+                            application.get_test_level(),
+                            application.get_locale(),
+                            application.is_test_version_option());
+            if (new_frame.read(design_file.get_input_stream(),
+                    design_file.is_created_from_text_file(),
+                    message_field)) {
+                // read_ok
+                new_frame.menubar.add_design_dependent_items();
+                if (design_file.is_created_from_text_file()) {
+                    // Read the file  with the saved rules, if it is existing.
+                    String file_name = design_file.get_name();
+                    String[] name_parts = file_name.split("\\.");
+                    java.util.ResourceBundle resources
+                            = java.util.ResourceBundle.getBundle(
+                                    "net.freerouting.freeroute.resources.MainApp",
+                                    application.get_locale());
+                    DesignFile.read_rules_file(name_parts[0], design_file.get_parent(),
+                            new_frame.board_panel.board_handling,
+                            resources.getString("confirm_import_rules"));
+                    new_frame.refresh_windows();
+                }
+                new_frame.setVisible(true);
+            } else {
+                // read fail
+                new_frame.dispose();
             }
-            new_frame.setVisible(true);
         }
     }
 
@@ -98,11 +111,16 @@ public class MainAppController implements Initializable {
         } else {
             board_option = BoardFrame.Option.SINGLE_FRAME;
         }
-        DesignFile design_file = new DesignFile(new File(application.get_design_file_name()));
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.MainApp", application.get_locale());
+                = java.util.ResourceBundle.getBundle(
+                        "net.freerouting.freeroute.resources.MainApp",
+                        application.get_locale());
+        DesignFile design_file = new DesignFile(new File(application.get_design_file_name()));
         if (design_file == null) {
-            logger.log(Level.SEVERE, "{0} {1} {2}", new Object[]{resources.getString("message_6"), application.get_design_file_name(), resources.getString("message_7")});
+            logger.log(Level.SEVERE, "{0} {1} {2}", new Object[]{
+                resources.getString("message_6"),
+                application.get_design_file_name(),
+                resources.getString("message_7")});
             throw new IllegalArgumentException();
         }
 //        String message = resources.getString("loading_design") + " " + application.get_design_file_name();
@@ -118,7 +136,9 @@ public class MainAppController implements Initializable {
 
     public BoardFrame create_board_frame(BoardFrame.Option board_option, DesignFile design_file) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.MainApp", application.get_locale());
+                = java.util.ResourceBundle.getBundle(
+                        "net.freerouting.freeroute.resources.MainApp",
+                        application.get_locale());
         java.io.InputStream input_stream = design_file.get_input_stream();
         if (input_stream == null) {
             if (message_field != null) {
@@ -127,28 +147,21 @@ public class MainAppController implements Initializable {
             return null;
         }
 
-        TestLevel test_level;
-        if (application.is_test_version_option()) {
-            test_level = application.get_debug_level();
-        } else {
-            test_level = TestLevel.RELEASE_VERSION;
-        }
-
-        BoardFrame new_frame = new BoardFrame(design_file, board_option, test_level, application.get_locale(), !application.is_test_version_option());
-        boolean read_ok = new_frame.read(input_stream, design_file.is_created_from_text_file(), message_field);
+        BoardFrame new_frame = new BoardFrame(design_file, board_option, application.get_test_level(), application.get_locale(), !application.is_test_version_option());
+        boolean read_ok= new_frame.read(input_stream, design_file.is_created_from_text_file(), message_field);
         if (!read_ok) {
             return null;
         }
+
         new_frame.menubar.add_design_dependent_items();
         if (design_file.is_created_from_text_file()) {
             // Read the file  with the saved rules, if it is existing.
-
             String file_name = design_file.get_name();
             String[] name_parts = file_name.split("\\.");
-            String confirm_import_rules_message = resources.getString("confirm_import_rules");
-            DesignFile.read_rules_file(name_parts[0], design_file.get_parent(),
+            DesignFile.read_rules_file(name_parts[0],
+                    design_file.get_parent(),
                     new_frame.board_panel.board_handling,
-                    confirm_import_rules_message);
+                    resources.getString("confirm_import_rules"));
             new_frame.refresh_windows();
         }
         return new_frame;

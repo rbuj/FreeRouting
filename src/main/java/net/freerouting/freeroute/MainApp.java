@@ -63,6 +63,7 @@ public class MainApp extends Application {
     private static String design_dir_name = null;
     private static boolean is_test_version;
     private static Locale locale = null;
+    private static TestLevel test_level;
     private static final Logger logger = Logger.getLogger(MainAppController.class.getName());
     private Stage mainStage;
 
@@ -179,6 +180,14 @@ public class MainApp extends Application {
             logger.log(Level.SEVERE, exc.toString(), exc);
         }
         /**
+         * Set data fiels
+         */
+        if (test_version_option) {
+            test_level = DEBUG_LEVEL;
+        } else {
+            test_level = TestLevel.RELEASE_VERSION;
+        }
+        /**
          * call start
          */
         launch(args);
@@ -208,7 +217,7 @@ public class MainApp extends Application {
         return design_dir_name;
     }
 
-    public TestLevel get_debug_level() {
-        return DEBUG_LEVEL;
+    public TestLevel get_test_level() {
+        return test_level;
     }
 }
