@@ -29,27 +29,20 @@ If you have further questions or want some feedback, please sent an Email to sup
 Additional steps for users of CadSoft-Eagle:
 ============================================
 
-1) Download the latest Eagle2freerouter ulp file
-
-2) Start Eagle and open in the control panel of Eagle for example the design my_design.brd.
-
-3) Choose in the Files pulldown-menu of Eagle the item "execute ULP" and select the Eagle2freerouter ulp file. A file with name my_design.dsn is generated.
-
-4) Start the router, push the "Open Your Own Design" button and select my_design.dsn in the file chooser.
-
-5) After making some changes to the design with the router select "export Eagle session script" in the Files pulldown-menu. A file with name my_design.scr is generated.
-
-6) Choose in the Files pulldown-menu of Eagle the item "execute Script" and select my_design.scr.
+1. Download the latest Eagle2freerouter ulp file
+2. Start Eagle and open in the control panel of Eagle for example the design my_design.brd.
+3. Choose in the Files pulldown-menu of Eagle the item "execute ULP" and select the Eagle2freerouter ulp file. A file with name my_design.dsn is generated.
+4. Start the router, push the "Open Your Own Design" button and select my_design.dsn in the file chooser.
+5. After making some changes to the design with the router select "export Eagle session script" in the Files pulldown-menu. A file with name my_design.scr is generated.
+6. Choose in the Files pulldown-menu of Eagle the item "execute Script" and select my_design.scr.
 
 
 Here are some instructions how to run the Freerouting project in the NetBeans IDE.
 ==================================================================================
 
-1) Go to the Java SE download web page of Oracle to download and install JDK 8 with NetBeans 8.0. https://netbeans.org/downloads/
-
-2) Start the NetBeans IDE and select File | Open Project in the pull down menu and select freeroute project.
-
-3) Build the project. The router should run now.
+1. Go to the Java SE download web page of Oracle to download and install JDK 8 with NetBeans 8.0. https://netbeans.org/downloads/
+2. Start the NetBeans IDE and select File | Open Project in the pull down menu and select freeroute project.
+3. Build the project. The router should run now.
 
 For optional parameters of the Freerouting outfile check the usage of the variable p_args in the source file gui/MainApplication.java.
 
@@ -57,46 +50,42 @@ Here are some instructions how to build the Freerouting project from a Terminal.
 ==================================================================================
 
 1. Install Apache Maven https://maven.apache.org/
-
 2. Install Oracle JDK & JRE http://www.oracle.com/technetwork/java/javase/downloads/index.html
-
 3. Open a terminal, and run the following command:
-
   * Fedora
-     3.1. Install maven
+    * Install maven
 ```bash
 sudo dnf install maven
 ```
-     3.2. Install Oracle JDK & JRE
+    * Install Oracle JDK & JRE
 ```bash
 sudo rpm -ivh jdk-8u77-linux-x64.rpm
 sudo rpm -ivh jre-8u77-linux-x64.rpm 
 sudo  alternatives --config java
 sudo  alternatives --config javac
 ```
-     3.3. Download freeroute source
+    * Download freeroute source
 ```bash
 git clone https://github.com/rbuj/FreeRouting.git
 ```
-     3.4. Build jar
+    * Build jar
 ```bash
 cd FreeRouting
 mvn install
 ```
-     3.5. Run freeroute
+    * Run freeroute
 ```bash
 cd target
 java -jar freeroute-1.4.jar
 ```
-
   * OS X
-     3.1. Go to the Java SE download web page of Oracle to download and install JDK & JRE 8. https://www.java.com/en/download/
-     3.2. Install Apache Maven https://maven.apache.org/
-     3.3. Build jar
+    * Go to the Java SE download web page of Oracle to download and install JDK & JRE 8. https://www.java.com/en/download/
+    * Install Apache Maven https://maven.apache.org/
+    * Build jar
 ```bash
 mvn install
 ```
-     3.4. Run freeroute
+    * Run freeroute
 ```bash
 cd target
 java -jar freeroute-1.4.jar
