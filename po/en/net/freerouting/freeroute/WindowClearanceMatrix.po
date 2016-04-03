@@ -1,0 +1,78 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/resources/WindowClearanceMatrix_en.properties, en/net/freerouting/freeroute/WindowClearanceMatrix-en.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the class WindowClearanceClass
+#: title
+msgid "Clearance Matrix"
+msgstr "Clearance Matrix"
+
+#: layer
+msgid "Layer: "
+msgstr "Layer: "
+
+#: layer_tooltip
+msgid "Set the layer, where the clearance matrix can be changed"
+msgstr "Set the layer, where the clearance matrix can be changed"
+
+#: add_class
+msgid "Add Class"
+msgstr "Add Class"
+
+#: add_class_tooltip
+msgid "Append a new clearance class"
+msgstr "Append a new clearance class"
+
+#: prune
+msgid "Trim"
+msgstr "Trim"
+
+#: prune_tooltip
+msgid "Remove redundant classes"
+msgstr "Remove redundant classes"
+
+#: new_name
+msgid "Please enter the name of the new class"
+msgstr "Please enter the name of the new class"
+
+#: confirm_remove
+msgid "Please confirm removing class"
+msgstr "Please confirm removing class"
+
+#: class
+msgid "class"
+msgstr "class"
+
+#: the_class
+msgid "the class"
+msgstr "the class"
+
+#: the_classes
+msgid "the classes"
+msgstr "the classes"
+
+#: and
+msgid "and"
+msgstr "and"
+
+#: already_assigned
+msgid "Items already assigned to"
+msgstr "Items already assigned to"
+
+#: change_anyway
+msgid ""
+"!\n"
+"Change clearance anyway?"
+msgstr ""
+"!\n"
+"Change clearance anyway?"

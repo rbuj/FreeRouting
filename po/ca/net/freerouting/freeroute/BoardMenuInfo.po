@@ -1,0 +1,50 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/resources/BoardMenuInfo_en.properties, ca/net/freerouting/freeroute/BoardMenuInfo-ca.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # Catalan version of language dependent text of the class BoardMenuInfo
+#: info
+msgid "Info"
+msgstr "Info"
+
+#: incompletes
+msgid "Incompletes"
+msgstr "Incompletes"
+
+#: length_violations
+msgid "Length Violations"
+msgstr "Violacions de llargada"
+
+#: clearance_violations
+msgid "Clearance Violations"
+msgstr "Violacions del marge de seguretat"
+
+#: library_packages
+msgid "Library Packages"
+msgstr "Paquets de biblioteques"
+
+#: library_padstacks
+msgid "Library Padstacks"
+msgstr "Library Padstacks"
+
+#: board_components
+msgid "Placed Components"
+msgstr "Components posicionats"
+
+#: unconnected_route
+msgid "Unconnected Route"
+msgstr "Unconnected Route"
+
+#: route_stubs
+msgid "Route Stubs"
+msgstr "Route Stubs"

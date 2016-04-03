@@ -1,5 +1,5 @@
-interactive
-rules
-gui
-board
-boardgraphics
+net/freerouting/freeroute
+net/freerouting/freeroute/interactive
+net/freerouting/freeroute/rules
+net/freerouting/freeroute/board
+net/freerouting/freeroute/boardgraphics

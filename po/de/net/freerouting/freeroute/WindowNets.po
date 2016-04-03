@@ -1,0 +1,42 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/resources/WindowNets_en.properties, de/net/freerouting/freeroute/WindowNets-de.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # German version of language dependent text of the class WindowNets
+#: title
+msgid "Nets"
+msgstr "Netze"
+
+#: assign_class
+msgid "Assign Class"
+msgstr "Klasse zuweisen"
+
+#: assign_class_tooltip
+msgid "Assign class to selected nets"
+msgstr "den ausgew�hlten Netzen eine Klasse zuweisen"
+
+#: filter_incompletes
+msgid "Filter Incompletes"
+msgstr "Incompletes filtern"
+
+#: filter_incompletes_tooltip
+msgid "Display only the incompletes of the selected nets"
+msgstr "Nur die Luftlinien der ausgew�hlten Netze abbilden"
+
+#: message_1
+msgid "Select net class"
+msgstr "W�hle Netzklasse"
+
+#: message_2
+msgid "Net Class Selection"
+msgstr "Netzklasse zuweisen"

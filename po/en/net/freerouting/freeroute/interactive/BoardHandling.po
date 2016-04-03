@@ -1,0 +1,62 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/interactive/resources/BoardHandling_en.properties, en/net/freerouting/freeroute/interactive/BoardHandling-en.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the class BoardHandling
+#: clearance_violations_found
+msgid "clearance violations found"
+msgstr "clearance violations found"
+
+#: incomplete_connections_to_route
+msgid "incomplete connections to route"
+msgstr "incomplete connections to route"
+
+#: incompletes
+msgid "incompletes,"
+msgstr "incompletes,"
+
+#: length_violations
+msgid "length violations"
+msgstr "length violations"
+
+#: undo
+msgid "undo"
+msgstr "undo"
+
+#: no_more_undo_possible
+msgid "no more undo possible"
+msgstr "no more undo possible"
+
+#: redo
+msgid "redo"
+msgstr "redo"
+
+#: no_more_redo_possible
+msgid "no more redo possible"
+msgstr "no more redo possible"
+
+#: select_menu
+msgid "select menu: use button 1 to select item"
+msgstr "select menu: use button 1 to select item"
+
+#: route_menu
+msgid "route menu: use button 1 to start route"
+msgstr "route menu: use button 1 to start route"
+
+#: drag_menu
+msgid "press button 1 to drag items or to push traces from behind"
+msgstr "press button 1 to drag items or to push traces from behind"
+
+#: save_error
+msgid "unable to write board to file"
+msgstr "unable to write board to file"

@@ -1,0 +1,62 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/resources/CleanupWindows_en.properties, en/net/freerouting/freeroute/CleanupWindows-en.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the cleanup windows in the info menu
+#: at
+msgid "at"
+msgstr "at"
+
+#: net
+msgid "Net"
+msgstr "Net"
+
+#: no_route_stubs_found
+msgid "no route stubs found"
+msgstr "no route stubs found"
+
+#: no_unconnected_route_found
+msgid "no unconnected traces or vias found"
+msgstr "no unconnected traces or vias found"
+
+#: on_layer
+msgid "on layer"
+msgstr "on layer"
+
+#: route_stubs
+msgid "Route Stubs"
+msgstr "Route Stubs"
+
+#: stub_net
+msgid "stub net"
+msgstr "stub net"
+
+#: trace
+msgid "Trace"
+msgstr "Trace"
+
+#: trace_count
+msgid "trace count"
+msgstr "trace count"
+
+#: unconnected_route
+msgid "Unconnected Route"
+msgstr "Unconnected Route"
+
+#: via
+msgid "Via"
+msgstr "Via"
+
+#: via_count
+msgid "via count"
+msgstr "via count"

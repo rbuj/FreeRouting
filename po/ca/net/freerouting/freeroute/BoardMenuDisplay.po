@@ -1,0 +1,46 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/resources/BoardMenuDisplay_en.properties, ca/net/freerouting/freeroute/BoardMenuDisplay-ca.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # Catalan version of language dependent text of the class BoardMenuDisplay
+#: display
+msgid "Display"
+msgstr "Visualització"
+
+#: object_visibility
+msgid "Object Visibility"
+msgstr "Object Visibility"
+
+#: object_visibility_tooltip
+msgid "to change the drawing intensity of an object"
+msgstr "per a canviar la intensitat del traçat d'un objecte"
+
+#: layer_visibility
+msgid "Layer Visibility"
+msgstr "Layer Visibility"
+
+#: layer_visibility_tooltip
+msgid "to change the visibility of individual layers"
+msgstr "per a canviar individualent la intensitat de les capes"
+
+#: colors
+msgid "Colors"
+msgstr "Colors"
+
+#: colors_tooltip
+msgid "to change the colors of the board objects on the screen"
+msgstr "per a canviar els colors dels objectes de la placa en pantalla"
+
+#: miscellaneous
+msgid "Miscellaneous"
+msgstr "Miscel·lànea"

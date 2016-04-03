@@ -1,0 +1,112 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/resources/MainApp_en.properties, en/net/freerouting/freeroute/MainApp-en.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # English version of language dependent text of the class MainApplication
+#: title
+msgid "Freerouter"
+msgstr "Freerouter"
+
+#: confirm_cancel
+msgid "Please confirm exit"
+msgstr "Please confirm exit"
+
+#: loading_design
+msgid "Loading design"
+msgstr "Loading design"
+
+#: router_demonstrations
+msgid "Router Demonstrations"
+msgstr "Router Demonstrations"
+
+#: router_demonstrations_tooltip
+msgid "replay demonstration examples of the router"
+msgstr "replay demonstration examples of the router"
+
+#: sample_designs
+msgid "Sample Designs"
+msgstr "Sample Designs"
+
+#: sample_designs_tooltip
+msgid "open example board designs in the net"
+msgstr "open example board designs in the net"
+
+#: open_own_design
+msgid "Open Your Own Design"
+msgstr "Open Your Own Design"
+
+#: open_own_design_tooltip
+msgid "open a board design in the Specctra .dsn format on your own local disc"
+msgstr "open a board design in the Specctra .dsn format on your own local disc"
+
+#: restore_defaults
+msgid "Restore System Defaults"
+msgstr "Restore System Defaults"
+
+#: restore_defaults_tooltip
+msgid ""
+"deletes the settings stored by the user and restores the system defaults"
+msgstr ""
+"deletes the settings stored by the user and restores the system defaults"
+
+#: defaults_restored
+msgid "system default settings restored"
+msgstr "system default settings restored"
+
+#: nothing_to_restore
+msgid "nothing to restore"
+msgstr "nothing to restore"
+
+#: confirm_delete
+msgid "Please confirm deleting your stored settings"
+msgstr "Please confirm deleting your stored settings"
+
+#: confirm_import_rules
+msgid ""
+"Please confirm importing stored rules\n"
+"Beware that rules imported from the the host system may be overwritten"
+msgstr ""
+"Please confirm importing stored rules\n"
+"Beware that rules imported from the the host system may be overwritten"
+
+#: message_3
+msgid "unable to open board design"
+msgstr "unable to open board design"
+
+#: message_4
+msgid "design file"
+msgstr "design file"
+
+#: message_5
+msgid "opened"
+msgstr "opened"
+
+#: message_6
+msgid "File with name"
+msgstr "File with name"
+
+#: message_7
+msgid "not found"
+msgstr "not found"
+
+#: message_8
+msgid "unable to read design file!"
+msgstr "unable to read design file!"
+
+#: user_online_message_1
+msgid "Internet connection required to start the Freerouter application!"
+msgstr "Internet connection required to start the Freerouter application!"
+
+#: user_online_message_2
+msgid "After that you can switch the connection off again!"
+msgstr "After that you can switch the connection off again!"

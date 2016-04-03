@@ -3,7 +3,7 @@ locale=$1
 if [ "$locale" == "en" ]; then exit 0; fi
 while read resource
 do
-  for filename in ../$resource/resources/*_en.properties; do
+  for filename in ../src/main/resources/$resource/resources/*_en.properties; do
     file=`basename $filename`
     po2prop --progress=none -t $filename $locale/$resource/${file/_en.properties/.po} ${filename/_en.properties/_$locale.properties}
     case $locale in

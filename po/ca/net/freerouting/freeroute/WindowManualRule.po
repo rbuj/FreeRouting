@@ -1,0 +1,34 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/resources/WindowManualRule_en.properties, ca/net/freerouting/freeroute/WindowManualRule-ca.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # Catalan version of language dependent text of the class WindowManualRule
+#: title
+msgid "Manual Rules"
+msgstr "Manual Rules"
+
+#: via_rule
+msgid "via rule:"
+msgstr "regla de via:"
+
+#: trace_clearance_class
+msgid "trace clearance class:"
+msgstr "classe de marge de seguretat del traç:"
+
+#: trace_width
+msgid "trace width:"
+msgstr "amplada del traç:"
+
+#: on_layer
+msgid "on layer:"
+msgstr "on layer:"

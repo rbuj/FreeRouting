@@ -1,0 +1,144 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/resources/WindowVia_en.properties, de/net/freerouting/freeroute/WindowVia-de.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # German version of language dependent text of the class WindowVia
+#: title
+msgctxt "title"
+msgid "Via Rules"
+msgstr "Via-Regeln"
+
+#: available_via_padstacks
+msgid "Available Via Padstacks"
+msgstr "Verf�gbare Via-Padstacks"
+
+#: info
+msgid "Info"
+msgstr "Info"
+
+#: info_tooltip
+msgid "shows the available via padstacks"
+msgstr "zeigt die zur Verf�gung stehenden Via-Padstacks"
+
+#: info_tooltip_2
+msgid "shows the vias, which can be used in a via rule"
+msgstr "zeigt die Vias, die in eiiner Via-Regel verwendet werden k�nnen"
+
+#: info_tooltip_3
+msgid "shows information about the selected via rule"
+msgstr "zeigt Informationen �ber die ausgew�hlte  Via-Regel"
+
+#: create
+msgid "Create"
+msgstr "Neu"
+
+#: create_tooltip
+msgid "to create a new via padstack"
+msgstr "einen neuen Via-Padstack definieren"
+
+#: create_tooltip_2
+msgid "to create a new empty via rule"
+msgstr "eine neue leere Via-Regel erzeugen"
+
+#: remove
+msgid "Remove"
+msgstr "L�schen"
+
+#: remove_tooltip
+msgid "to remove an existing via padstack"
+msgstr "einen vorhandenen Via-Padstack l�schen"
+
+#: remove_tooltip_2
+msgid "to remove the selected via rule"
+msgstr "die ausgew�hlte Via-Regel l�schen"
+
+#: available_vias
+msgid "Available Vias"
+msgstr "Verf�gbare Vias"
+
+#: edit
+msgid "Edit"
+msgstr "Editieren"
+
+#: edit_tooltip
+msgid "to edits the vias, which can be used in a via rule"
+msgstr "die Vias editieren, die in einer Via-Regel verwendet werden k�nnen"
+
+#: edit_tooltip_2
+msgid "to edit the selected via rule"
+msgstr "die ausgew�hlte Via-Regel editieren"
+
+#: via_rules
+msgctxt "via_rules"
+msgid "Via Rules"
+msgstr "Via-Regeln"
+
+#: select_start_layer
+msgid "Select start layer"
+msgstr "bitte die erste Lage w�hlen"
+
+#: start_layer_selection
+msgid "Start Layer Selection"
+msgstr "Auswahl der ersten Lage"
+
+#: select_end_layer
+msgid "Select end layer"
+msgstr "bitte die letzte Lage w�hlen"
+
+#: end_layer_selection
+msgid "End Layer Selection"
+msgstr "Auswahl der letzten Lage"
+
+#: adjust_circles
+msgid "Adjust Circles"
+msgstr "Kreise anpassen"
+
+#: radius_on_layer
+msgid "radius on layer"
+msgstr "Radius auf Lage"
+
+#: choose_padstack_to_remove
+msgid "Choose padstack to remove"
+msgstr "bitte zu l�schenden Padstach ausw�hlen"
+
+#: remove_via_padstack
+msgid "Remove Via Padstack"
+msgstr "Via-Padstack l�schen"
+
+#: selected_rule
+msgid "Selected Rule"
+msgstr "ausgew�hlte Regel"
+
+#: remove_via_rule
+msgid "Remove via rule"
+msgstr "Via-Regel l�schen"
+
+#: message_1
+msgid "Please enter the name of the new padstack"
+msgstr "Bitte den Namen des neuen Via-Padstacks eingeben"
+
+#: message_2
+msgid "Name exists already, please adjust"
+msgstr "Name existiert bereits, bitte anpassen"
+
+#: message_3
+msgid "Please enter the default radius"
+msgstr "Bitte den Default-Radius eingeben"
+
+#: message_4
+msgid "Via padstack not removed because it is used in via"
+msgstr "Via-Padstack nicht gel�scht, weil er noch verwendet wird in Via"
+
+#: message_5
+msgid "Please enter the name of the new via rule"
+msgstr "Bitte den Namen der neuen Via-Regel eingeben"

@@ -1,0 +1,66 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/resources/WindowClearanceViolations_en.properties, ca/net/freerouting/freeroute/WindowClearanceViolations-ca.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # Catalan version of language dependent text of the class WindowClearanceViolations
+#: title
+msgid "Clearance Violations"
+msgstr "Clearance Violations"
+
+#: list_empty_message
+msgid "no violations found"
+msgstr "no s'ha trobat cap violació"
+
+#: at
+msgid "at"
+msgstr "at"
+
+#: on_layer
+msgid "on layer"
+msgstr "on layer"
+
+#: pin
+msgid "pin"
+msgstr "pin"
+
+#: via
+msgid "via"
+msgstr "via"
+
+#: trace
+msgid "trace"
+msgstr "trace"
+
+#: conduction_area
+msgid "conduction area"
+msgstr "càrea de conducció"
+
+#: keepout
+msgid "keepout"
+msgstr "prohibit el pas"
+
+#: via_keepout
+msgid "via keepout"
+msgstr "prohibit el pas a les vies"
+
+#: component_keepout
+msgid "component keepout"
+msgstr "rohibit el pas als components"
+
+#: board_outline
+msgid "board outline"
+msgstr "delimitació de la placa"
+
+#: unknown
+msgid "unknown"
+msgstr "desconegut"

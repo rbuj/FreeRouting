@@ -1,5 +1,4 @@
-FILE=../LOCALES
-LOCALES=$(shell cat ../LOCALES)
+LOCALES=$(shell cat ../src/main/resources/LOCALES)
 RESOURCES=$(shell cat RESOURCES)
 LOC_IMP=$(addsuffix .i,$(LOCALES))
 LOC_EXP=$(addsuffix .e,$(LOCALES))

@@ -1,0 +1,64 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/interactive/resources/BoardHandling_en.properties, de/net/freerouting/freeroute/interactive/BoardHandling-de.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # German version of language dependent text of the class BoardHandling
+#: clearance_violations_found
+msgid "clearance violations found"
+msgstr "Abstandsverletzungen gefunden"
+
+#: incomplete_connections_to_route
+msgid "incomplete connections to route"
+msgstr "offene Verbindungen"
+
+#: incompletes
+msgid "incompletes,"
+msgstr "offene Verbindungen,"
+
+#: length_violations
+msgid "length violations"
+msgstr "L�ngenverletzungen"
+
+#: undo
+msgid "undo"
+msgstr "undo"
+
+#: no_more_undo_possible
+msgid "no more undo possible"
+msgstr "kein undo mehr m�glich"
+
+#: redo
+msgid "redo"
+msgstr "redo"
+
+#: no_more_redo_possible
+msgid "no more redo possible"
+msgstr "kein redo mehr m�glich"
+
+#: select_menu
+msgid "select menu: use button 1 to select item"
+msgstr "Auswahl-Men�: Linke Maustaste zum Selektieren von Objekten verwenden"
+
+#: route_menu
+msgid "route menu: use button 1 to start route"
+msgstr "Route-Men�: mit linker  Maustaste neue Bahn beginnen "
+
+#: drag_menu
+msgid "press button 1 to drag items or to push traces from behind"
+msgstr ""
+"linke Maustaste dr�cken um Objekte zu  ziehen oder Bahnen von hinten zu "
+"schieben"
+
+#: save_error
+msgid "unable to write board to file"
+msgstr "Schreiben des Designs auf Datei ist fehlgeschlagen"

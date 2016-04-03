@@ -1,0 +1,66 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/resources/WindowObjectVisibility_en.properties, ca/net/freerouting/freeroute/WindowObjectVisibility-ca.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # Catalan version of language dependent text of the class WindowObjectVisibility
+#: title
+msgid "Object Visibility"
+msgstr "Object Visibility"
+
+#: header_message
+msgid "Use slider to modify the visibility of"
+msgstr "Use slider to modify the visibility of"
+
+#: TRACES
+msgid "traces"
+msgstr "traces"
+
+#: VIAS
+msgid "vias "
+msgstr "vias "
+
+#: PINS
+msgid "pins"
+msgstr "pins"
+
+#: CONDUCTION_AREAS
+msgid "conduction areas"
+msgstr "conduction areas"
+
+#: KEEPOUTS
+msgid "keepouts"
+msgstr "keepouts"
+
+#: VIA_KEEPOUTS
+msgid "via keepouts "
+msgstr "via keepouts "
+
+#: PLACE_KEEPOUTS
+msgid "place keepouts "
+msgstr "place keepouts "
+
+#: COMPONENT_OUTLINES
+msgid "component outlines"
+msgstr "component outlines"
+
+#: HILIGHT
+msgid "hilight"
+msgstr "hilight"
+
+#: INCOMPLETES
+msgid "incompletes"
+msgstr "incompletes"
+
+#: LENGTH_MATCHING_AREAS
+msgid "length matching areas"
+msgstr "length matching areas"

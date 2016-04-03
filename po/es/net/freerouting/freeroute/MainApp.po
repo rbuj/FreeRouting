@@ -1,0 +1,114 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/resources/MainApp_en.properties, es/net/freerouting/freeroute/MainApp-es.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # Spanish version of language dependent text of the class MainApplication
+#: title
+msgid "Freerouter"
+msgstr "Freerouter"
+
+#: confirm_cancel
+msgid "Please confirm exit"
+msgstr "Confirmar salida"
+
+#: loading_design
+msgid "Loading design"
+msgstr "Cargando el diseño"
+
+#: router_demonstrations
+msgid "Router Demonstrations"
+msgstr "Demos de encaminamiento"
+
+#: router_demonstrations_tooltip
+msgid "replay demonstration examples of the router"
+msgstr "reproduzca los ejemplos de la demos del encaminador"
+
+#: sample_designs
+msgid "Sample Designs"
+msgstr "Diseños simples"
+
+#: sample_designs_tooltip
+msgid "open example board designs in the net"
+msgstr "obre diseños de ejemplo de placas de la red"
+
+#: open_own_design
+msgid "Open Your Own Design"
+msgstr "Abra su diseño"
+
+#: open_own_design_tooltip
+msgid "open a board design in the Specctra .dsn format on your own local disc"
+msgstr "abre un fichero de diseño en formato Specctra .dsn de su disco"
+
+#: restore_defaults
+msgid "Restore System Defaults"
+msgstr "Restablecer a los valores por defecto del sistema"
+
+#: restore_defaults_tooltip
+msgid ""
+"deletes the settings stored by the user and restores the system defaults"
+msgstr ""
+"elimina los ajustes almacenados por el usuario i restablece los del sistema"
+
+#: defaults_restored
+msgid "system default settings restored"
+msgstr "se han restaurado los ajustes predeterminados del sistema"
+
+#: nothing_to_restore
+msgid "nothing to restore"
+msgstr "no hay nada que restaurar"
+
+#: confirm_delete
+msgid "Please confirm deleting your stored settings"
+msgstr "Confirmar eliminación de sus ajustes almacenados"
+
+#: confirm_import_rules
+msgid ""
+"Please confirm importing stored rules\n"
+"Beware that rules imported from the the host system may be overwritten"
+msgstr ""
+"Confirmar importación de las reglas almacenada\n"
+"Tenga en cuenta que las reglas importadas desde el sistema host se pueden "
+"sobrescribir"
+
+#: message_3
+msgid "unable to open board design"
+msgstr "no se puede abrir el fichero de la placa"
+
+#: message_4
+msgid "design file"
+msgstr "Fichero de diseño:"
+
+#: message_5
+msgid "opened"
+msgstr "(abierto)"
+
+#: message_6
+msgid "File with name"
+msgstr "El fichero con nombre"
+
+#: message_7
+msgid "not found"
+msgstr "no se encontró"
+
+#: message_8
+msgid "unable to read design file!"
+msgstr "no se puede leer el fichero del diseño!"
+
+#: user_online_message_1
+msgid "Internet connection required to start the Freerouter application!"
+msgstr ""
+"Se requiere una conexión a Internet para iniciar la aplicación Freerouter!"
+
+#: user_online_message_2
+msgid "After that you can switch the connection off again!"
+msgstr "Después puede desconectarse de nuevo!"

@@ -1,0 +1,142 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/resources/Default_en.properties, es/net/freerouting/freeroute/Default-es.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # Spanish version of the default file with language dependent text
+#: add_corner
+msgid "add corner (left button)"
+msgstr "añadir esquina (botón izquierdo)"
+
+#: all
+msgid "all"
+msgstr "todo"
+
+#: cancel
+msgid "cancel (Esc)"
+msgstr "cancelar (Esc)"
+
+#: cancel_route
+msgid "cancel route (Esc)"
+msgstr "cancelar encaminamiento (Esc)"
+
+#: center_display
+msgid "center display (c)"
+msgstr "centrar pantalla (c)"
+
+#: change_layer
+msgid "change layer"
+msgstr "cambiar la capa"
+
+#: change_layer_tooltip
+msgid "also possible with number key or '+' '-' "
+msgstr "también posible con el teclado numérico o con '+' '-' "
+
+#: close
+msgid "close"
+msgstr "cerrar"
+
+#: color_manager
+msgid "Color Manager"
+msgstr "Gestor de colores"
+
+#: components
+msgid "Components"
+msgstr "Componentes"
+
+#: copy
+msgid "copy"
+msgstr "copiar"
+
+#: done
+msgid "done (Space)"
+msgstr "done (Espacio)"
+
+#: end_route
+msgid "end route (left button)"
+msgstr "finalizar encaminamiento (botón izquierdo)"
+
+#: generate_snapshot
+msgid "generate snapshot (s)"
+msgstr "generar instantánea (s)"
+
+#: incompletes
+msgid "Incompletes"
+msgstr "Incompleciones"
+
+#: inner
+msgid "inner"
+msgstr "interno"
+
+#: insert
+msgid "insert (left button)"
+msgstr "insertar (botón izquierdo)"
+
+#: layer_changed_to
+msgid "layer changed to"
+msgstr "capa cambiada a"
+
+#: layer_visibility
+msgid "Layer Visibility"
+msgstr "Visibilidad de la capa"
+
+#: layer_visibility_header
+msgid "Use slider to modify the visibility on layer "
+msgstr "Utilizar el desplazador para modificar la visibilidad en la capa "
+
+#: maximum_all
+msgid "Maximum All"
+msgstr "Maximizar todo"
+
+#: maximum_all_tooltip
+msgid "pushs all sliders to the right"
+msgstr "empuja todos los desplazadores a la derecha"
+
+#: minimum_all
+msgid "Minimum All"
+msgstr "Minimizar todo"
+
+#: minimum_all_tooltip
+msgid "pushs all sliders to the left"
+msgstr "empuja todos los desplazadores a la izquierda"
+
+#: move
+msgid "move (m)"
+msgstr "mover (m)"
+
+#: packages
+msgid "Packages"
+msgstr "Paquetes"
+
+#: padstacks
+msgid "Padstacks"
+msgstr "Pila de pads"
+
+#: pick_a_color
+msgid "Pick a Color"
+msgstr "Escoger un color"
+
+#: route_completed
+msgid "route completed"
+msgstr "encaminamiento completado"
+
+#: zoom
+msgid "zoom"
+msgstr "zoom"
+
+#: zoom_in
+msgid "in (z)"
+msgstr "ampliar (z)"
+
+#: zoom_out
+msgid "out (o)"
+msgstr "reducir (o)"

@@ -1,0 +1,318 @@
+#. extracted from ../src/main/resources/net/freerouting/freeroute/board/resources/ObjectInfoPanel_en.properties, de/net/freerouting/freeroute/board/ObjectInfoPanel-de.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#. # German version of language dependent text written into an ObjectInfoPanel
+#: at
+msgid "at"
+msgstr "bei"
+
+#: attach_smd
+msgid "attach smd"
+msgstr "SMD-�berlappung"
+
+#: back
+msgid "back"
+msgstr "R�ckseite"
+
+#: between
+msgid "between"
+msgstr "zwischen"
+
+#: board_outline
+msgid "Board Outline"
+msgstr "Platinenrand"
+
+#: center
+msgid "center"
+msgstr "Mitte"
+
+#: circle
+msgid "Circle"
+msgstr "Kreis"
+
+#: class
+msgid "class"
+msgstr "Klasse"
+
+#: clearance_class
+msgid "clearance class"
+msgstr "Clearance-Klasse"
+
+#: clearance_class_2
+msgid "Clearance Class"
+msgstr "Clearance-Klasse"
+
+#: clearance_info
+msgid "Clearance Info"
+msgstr "Clearance-Klassen-Info"
+
+#: clearance_violation
+msgid "clearance violation"
+msgstr "Clearance-Verletzung"
+
+#: clearance_violation_2
+msgid "Clearance violation"
+msgstr "Clearance-Verletzung"
+
+#: clearance_violations
+msgid "clearance violations"
+msgstr "Clearance-Verletzungen"
+
+#: component
+msgid "Component"
+msgstr "Bauteil"
+
+#: component_2
+msgid "component"
+msgstr "Bauteil"
+
+#: component_info
+msgid "Component Info"
+msgstr "Bauteil-Info"
+
+#: component_keepout
+msgid "Component Keepout"
+msgstr "Bauteil-Sperrfl�che"
+
+#: conduction_area
+msgid "Conduction Area"
+msgstr "Leitungsfl�che"
+
+#: contact_info
+msgid "Contact Info"
+msgstr "Kontakt-Info"
+
+#: contacts
+msgid "contacts"
+msgstr "Kontakte"
+
+#: from
+msgid "from"
+msgstr "von"
+
+#: front
+msgid "front"
+msgstr "Vorderseite"
+
+#: gate
+msgid "gate"
+msgstr "Gatter"
+
+#: gate_pin
+msgid "gate pin"
+msgstr "Gatter-Pin"
+
+#: hole
+msgid "hole"
+msgstr "Loch"
+
+#: holes
+msgid "holes"
+msgstr "L�chern"
+
+#: keepout
+msgid "Keepout"
+msgstr "Sperrfl�che"
+
+#: layer
+msgid "layer"
+msgstr "Lage"
+
+#: length
+msgid "length"
+msgstr "L�nge"
+
+#: logical_part
+msgid "logical part"
+msgstr "logical-Part"
+
+#: logical_part_2
+msgid "Logical Part"
+msgstr "logical-Part"
+
+#: logical_part_info
+msgid "Logical Part Info"
+msgstr "Logical-Part-Info"
+
+#: lower_left
+msgid "lower left"
+msgstr "links unten"
+
+#: net
+msgid "Net"
+msgstr "Netz"
+
+#: net_class
+msgid "Net Class"
+msgstr "Netz-Klasse"
+
+#: net_class_2
+msgid "Net class"
+msgstr "Netz-Klasse"
+
+#: net_info
+msgid "Net Info"
+msgstr "Netz-Info"
+
+#: not_yet_placed
+msgid "not yet placed"
+msgstr "noch nicht plaziert"
+
+#: of_component
+msgid "of component"
+msgstr "von Bauteil"
+
+#: off
+msgid "off"
+msgstr "aus"
+
+#: on
+msgid "on"
+msgstr "an"
+
+#: on_layer
+msgid "on layer"
+msgstr "auf Lage"
+
+#: package
+msgid "Package"
+msgstr "Package"
+
+#: package_info
+msgid "Package Info"
+msgstr "Package-Info"
+
+#: padstack
+msgid "padstack"
+msgstr "Padstack"
+
+#: padstack_info
+msgid "Padstack Info"
+msgstr "Padstack-Info"
+
+#: pin
+msgid "Pin"
+msgstr "Pin"
+
+#: pin_2
+msgid "pin"
+msgstr "Pin"
+
+#: polygon
+msgid "Polygon"
+msgstr "Polygon"
+
+#: radius
+msgid "radius"
+msgstr "Radius"
+
+#: rectangle
+msgid "Rectangle"
+msgstr "Rechteck"
+
+#: rotation
+msgid "rotation"
+msgstr "Rotation"
+
+#: shove_fixed
+msgid "shove fixed"
+msgstr "verschiebe-fixiert"
+
+#: spacing_from_clearance_class
+msgid "Spacing from clearance class "
+msgstr "Clearance-Regeln von Klasse "
+
+#: swap_code
+msgid "swap code"
+msgstr "Tausch-Code"
+
+#: terminal_items
+msgid "terminal items"
+msgstr "Zielobjekte"
+
+#: terminal_items_2
+msgid "Terminal Items"
+msgstr "Zielobjekte"
+
+#: to
+msgid "to"
+msgstr "nach"
+
+#: to_class
+msgid "to class"
+msgstr "zu Klasse"
+
+#: trace
+msgid "Trace"
+msgstr "Bahn"
+
+#: trace_clearance_class
+msgid "trace clearance class"
+msgstr "Clearance-Klasse f�r Bahnen"
+
+#: trace_clearance_class_2
+msgid "Trace Clearance Class"
+msgstr "Clearance-Klasse f�r Bahnen"
+
+#: trace_length
+msgid "trace length"
+msgstr "Bahnl�nge"
+
+#: trace_width
+msgid "trace width"
+msgstr "Bahnbreite"
+
+#: upper_right
+msgid "upper right"
+msgstr "rechts oben"
+
+#: via
+msgid "Via"
+msgstr "Via"
+
+#: via_count
+msgid "via count"
+msgstr "Via-Anzahl"
+
+#: via_info
+msgid "Via Info"
+msgstr "Via-Info"
+
+#: via_keepout
+msgid "Via Keepout"
+msgstr "Via-Sperrfl�che"
+
+#: via_rule
+msgid "via rule"
+msgstr "Via-Regel"
+
+#: via_rule_2
+msgid "Via Rule"
+msgstr "Via-Regel"
+
+#: vias
+msgid "Vias"
+msgstr "Vias"
+
+#: violation_info
+msgid "Violation Info"
+msgstr "Clearance-Verletzungs-Info"
+
+#: with
+msgid "with"
+msgstr "mit"
+
+#: width
+msgid "width"
+msgstr "Breite"
