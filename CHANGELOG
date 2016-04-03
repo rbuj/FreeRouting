@@ -17,7 +17,8 @@ ToDo
                 * WindowAbout.java: Controller
                 * WindowAbout.fxml: View
 	* Use Apache Maven instead of Apache Ivy, and restructure project's
-	  directory tree (groupId=net.freerouting, artifactId=freeroute)
+	  directory tree (groupId=net.freerouting, artifactId=freeroute).
+	  Modifies NetBeans Java project.
 
 2016-03 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
 
@@ -30,7 +31,7 @@ ToDo
 	* Generate javadoc by using JDK 8
 	* Enable assertions (-source 1.8) and also compile classes to be
           compatible with JVM 8 (-target 1.8)
-	* Create Java project with existing sources
+	* Create NetBeans Java project with existing sources
 
 2016-03-05 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
 
