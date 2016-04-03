@@ -54,7 +54,7 @@ public class MainApp extends Application {
     /**
      * Change this string when creating a new version
      */
-    private static final String VERSION_NUMBER_STRING = "1.2.43";
+    public static final String VERSION_NUMBER_STRING = "1.4-alpha";
     private static DesignFile design_file = null;
     private static boolean single_design_option = false;
     private static boolean test_version_option = false;
