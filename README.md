@@ -54,38 +54,51 @@ Here are some instructions how to build the Freerouting project from a Terminal.
 3. Open a terminal, and run the following command:
   * Fedora
     * Install maven
+
 ```bash
 sudo dnf install maven
 ```
+
     * Install Oracle JDK & JRE
+
 ```bash
 sudo rpm -ivh jdk-8u77-linux-x64.rpm
 sudo rpm -ivh jre-8u77-linux-x64.rpm 
 sudo  alternatives --config java
 sudo  alternatives --config javac
 ```
+
     * Download freeroute source
+
 ```bash
 git clone https://github.com/rbuj/FreeRouting.git
 ```
+
     * Build jar
+
 ```bash
 cd FreeRouting
 mvn install
 ```
+
     * Run freeroute
+
 ```bash
 cd target
 java -jar freeroute-1.4.jar
 ```
+
   * OS X
     * Go to the Java SE download web page of Oracle to download and install JDK & JRE 8. https://www.java.com/en/download/
     * Install Apache Maven https://maven.apache.org/
     * Build jar
+
 ```bash
 mvn install
 ```
+
     * Run freeroute
+
 ```bash
 cd target
 java -jar freeroute-1.4.jar
