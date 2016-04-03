@@ -19,7 +19,6 @@ package net.freerouting.freeroute;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,7 +28,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import net.freerouting.freeroute.board.TestLevel;
 
 /**
  * FXML Controller class
@@ -70,11 +68,26 @@ public class MainAppController implements Initializable {
         fileChooser.getExtensionFilters().add(
                 new ExtensionFilter("All Design Files", "*.dsn", "*.bin"));
         File selectedFile = fileChooser.showOpenDialog(mainStage);
+        create_board_frame(BoardFrame.Option.FROM_START_MENU, selectedFile);
+    }
+
+    void create_board_frame() {
+        BoardFrame.Option board_option;
+        if (application.is_session_file_option()) {
+            board_option = BoardFrame.Option.SESSION_FILE;
+        } else {
+            board_option = BoardFrame.Option.SINGLE_FRAME;
+        }
+        create_board_frame(board_option, new File(application.get_design_file_name()));
+    }
+
+    private void create_board_frame(BoardFrame.Option board_option, File selectedFile) {
         if (selectedFile != null) {
+            // create board
             DesignFile design_file = new DesignFile(selectedFile);
             BoardFrame new_frame
                     = new BoardFrame(design_file,
-                            BoardFrame.Option.FROM_START_MENU,
+                            board_option,
                             application.get_test_level(),
                             application.get_locale(),
                             application.is_test_version_option());
@@ -102,68 +115,5 @@ public class MainAppController implements Initializable {
                 new_frame.dispose();
             }
         }
-    }
-
-    void create_board_frame() {
-        BoardFrame.Option board_option;
-        if (application.is_session_file_option()) {
-            board_option = BoardFrame.Option.SESSION_FILE;
-        } else {
-            board_option = BoardFrame.Option.SINGLE_FRAME;
-        }
-        java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle(
-                        "net.freerouting.freeroute.resources.MainApp",
-                        application.get_locale());
-        DesignFile design_file = new DesignFile(new File(application.get_design_file_name()));
-        if (design_file == null) {
-            logger.log(Level.SEVERE, "{0} {1} {2}", new Object[]{
-                resources.getString("message_6"),
-                application.get_design_file_name(),
-                resources.getString("message_7")});
-            throw new IllegalArgumentException();
-        }
-//        String message = resources.getString("loading_design") + " " + application.get_design_file_name();
-//        WindowMessage welcome_window = WindowMessage.show(message);
-        final BoardFrame new_frame
-                = create_board_frame(board_option, design_file);
-        design_file.finalize();
-//        welcome_window.dispose();
-        if (new_frame == null) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public BoardFrame create_board_frame(BoardFrame.Option board_option, DesignFile design_file) {
-        java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle(
-                        "net.freerouting.freeroute.resources.MainApp",
-                        application.get_locale());
-        java.io.InputStream input_stream = design_file.get_input_stream();
-        if (input_stream == null) {
-            if (message_field != null) {
-                message_field.setText(resources.getString("message_8") + " " + design_file.get_name());
-            }
-            return null;
-        }
-
-        BoardFrame new_frame = new BoardFrame(design_file, board_option, application.get_test_level(), application.get_locale(), !application.is_test_version_option());
-        boolean read_ok= new_frame.read(input_stream, design_file.is_created_from_text_file(), message_field);
-        if (!read_ok) {
-            return null;
-        }
-
-        new_frame.menubar.add_design_dependent_items();
-        if (design_file.is_created_from_text_file()) {
-            // Read the file  with the saved rules, if it is existing.
-            String file_name = design_file.get_name();
-            String[] name_parts = file_name.split("\\.");
-            DesignFile.read_rules_file(name_parts[0],
-                    design_file.get_parent(),
-                    new_frame.board_panel.board_handling,
-                    resources.getString("confirm_import_rules"));
-            new_frame.refresh_windows();
-        }
-        return new_frame;
     }
 }
