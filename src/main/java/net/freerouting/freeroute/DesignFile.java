@@ -90,11 +90,16 @@ public class DesignFile {
      * Gets an InputStream from the file. Returns null, if the algorithm failed.
      */
     public InputStream get_input_stream() {
-        try (InputStream result = new FileInputStream(this.input_file)) {
-            return result;
-        } catch (Exception e) {
+        InputStream result;
+        if (this.input_file == null) {
             return null;
         }
+        try {
+            result = new java.io.FileInputStream(this.input_file);
+        } catch (Exception e) {
+            result = null;
+        }
+        return result;
     }
 
     /**
