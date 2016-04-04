@@ -1035,7 +1035,7 @@ public class BoardHandling {
             p_object_stream.writeObject(settings);
             p_object_stream.writeObject(coordinate_transform);
             p_object_stream.writeObject(graphics_context);
-        } catch (Exception e) {
+        } catch (IOException e) {
             screen_messages.set_status_message(resources.getString("save_error"));
             result = false;
         }

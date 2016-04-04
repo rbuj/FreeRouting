@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import java.io.IOException;
+
 /**
  *
  * @author alfons
@@ -39,7 +41,7 @@ public class ScopeKeyword extends Keyword {
             Object curr_token;
             try {
                 curr_token = p_scanner.next_token();
-            } catch (Exception e) {
+            } catch (IOException e) {
                 System.out.println("ScopeKeyword.skip_scope: Error while scanning file");
                 System.out.println(e);
                 return false;

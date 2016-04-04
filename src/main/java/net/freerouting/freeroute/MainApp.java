@@ -21,6 +21,7 @@
 package net.freerouting.freeroute;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -178,7 +179,7 @@ public class MainApp extends Application {
                     locale = new Locale("en", "");
                 }
             }
-        } catch (Exception exc) {
+        } catch (IOException | IllegalArgumentException exc) {
             logger.log(Level.SEVERE, exc.toString(), exc);
         }
         /**

@@ -563,7 +563,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
 
                     try {
                         curr_value = Float.parseFloat((String) p_value);
-                    } catch (Exception e) {
+                    } catch (NumberFormatException e) {
                         curr_value = 0f;
                     }
                     p_value = curr_value.toString();
@@ -585,7 +585,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
 
                     try {
                         curr_value = Float.parseFloat((String) p_value);
-                    } catch (Exception e) {
+                    } catch (NumberFormatException e) {
                         curr_value = 0f;
                     }
                     p_value = curr_value.toString();
@@ -621,7 +621,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
 
                     try {
                         curr_value = Float.parseFloat((String) p_value);
-                    } catch (Exception e) {
+                    } catch (NumberFormatException e) {
                         curr_value = 0f;
                     }
                 }

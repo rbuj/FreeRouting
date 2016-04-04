@@ -345,7 +345,7 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow {
                 }
                 try {
                     number_value = Float.parseFloat((String) p_value);
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                     return;
                 }
             }

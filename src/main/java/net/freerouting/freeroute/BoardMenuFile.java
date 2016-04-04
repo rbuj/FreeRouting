@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.io.FileNotFoundException;
+
 /**
  * Creates the file menu of a board frame.
  *
@@ -251,7 +253,7 @@ public class BoardMenuFile extends javax.swing.JMenu {
         }
         try {
             output_stream = new java.io.FileOutputStream(defaults_file);
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
             output_stream = null;
         }
         boolean write_ok;

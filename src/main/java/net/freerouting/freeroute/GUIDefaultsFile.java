@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute;
 
+import java.io.IOException;
 import net.freerouting.freeroute.board.ItemSelectionFilter;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 
@@ -89,7 +90,7 @@ public class GUIDefaultsFile {
             Object curr_token = null;
             try {
                 curr_token = p_scanner.next_token();
-            } catch (Exception e) {
+            } catch (IOException e) {
                 System.out.println("GUIDefaultsFile.skip_scope: Error while scanning file");
                 System.out.println(e);
                 return false;
