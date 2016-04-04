@@ -1,7 +1,7 @@
 /**
  * Contains  rules and restrictions for the items on a printed circuit board.
  *
- * @(#)package.html 1.60 98/01/27
+ * {@literal @}({@literal #})package.html 1.60 98/01/27
  * 
  * Copyright 1993-1997 Sun Microsystems, Inc. 901 San Antonio Road, 
  * Palo Alto, California, 94303, U.S.A.  All Rights Reserved.
