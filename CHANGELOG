@@ -5,6 +5,15 @@ ToDo
 
 ????-??-??
 
+        * jflex-maven-plugin (generate java classes from flex spec files)
+                new java classes in src/main/java/net/freerouting/freeroute:
+                      * designformats/specctra/SpecctraFileScanner.java
+                      * interactive/LogfileScanner.java
+                      * GUIDefaultsScanner.java
+                flex files in src/main/jflex/net/freerouting/freeroute:
+                      * designformats/specctra/SpecctraFileDescription.flex
+                      * interactive/LogfileDescription.flex
+                      * GUIDefaultsDescription.flex
 	* DesignFile.java: Open FileChooser in MainAppController.java
         * MainApp.java: Migrate GUI from swing to JavaFX using the MVC
 	  software pattern:
