@@ -6,5 +6,5 @@
 /help/docbook-xml-*/
 /src/main/java/net/freerouting/freeroute/designformats/specctra/SpecctraFileScanner.java
 /src/main/java/net/freerouting/freeroute/interactive/LogfileScanner.java
-/src/main/java/net/freerouting/freeroute/GUIDefaultsFile.java
+/src/main/java/net/freerouting/freeroute/GUIDefaultsScanner.java
 *~
