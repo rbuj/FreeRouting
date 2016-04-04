@@ -5,6 +5,7 @@ ToDo
 
 ????-??-??
 
+        * Javadoc: use package-info.java instead of package.html
         * jflex-maven-plugin (generate java classes from flex spec files)
                 new java classes in src/main/java/net/freerouting/freeroute:
                       * designformats/specctra/SpecctraFileScanner.java
