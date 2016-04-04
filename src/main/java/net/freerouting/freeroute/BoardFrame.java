@@ -16,7 +16,16 @@
 package net.freerouting.freeroute;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.TestLevel;
@@ -66,7 +75,7 @@ public class BoardFrame extends javax.swing.JFrame {
             WindowMessage.show("board_frame is null");
             return null;
         }
-        java.io.InputStream input_stream = design_file.get_input_stream();
+        InputStream input_stream = design_file.get_input_stream();
         boolean read_ok = board_frame.read(input_stream, true, null);
         if (!read_ok) {
             String error_message = "Unable to read design file with pathname " + p_design_file_path_name;
@@ -216,7 +225,7 @@ public class BoardFrame extends javax.swing.JFrame {
     /**
      * Reads interactive actions from a logfile.
      */
-    void read_logfile(java.io.InputStream p_input_stream) {
+    void read_logfile(InputStream p_input_stream) {
         board_panel.board_handling.read_logfile(p_input_stream);
     }
 
@@ -224,7 +233,7 @@ public class BoardFrame extends javax.swing.JFrame {
      * Reads an existing board design from file. If p_is_import, the design is
      * read from a scpecctra dsn file. Returns false, if the file is invalid.
      */
-    boolean read(java.io.InputStream p_input_stream, boolean p_is_import, SimpleStringProperty p_message_field) {
+    boolean read(InputStream p_input_stream, boolean p_is_import, SimpleStringProperty p_message_field) {
         java.awt.Point viewport_position = null;
         if (p_is_import) {
             DsnFile.ReadResult read_result = board_panel.board_handling.import_design(p_input_stream, this.board_observers,
@@ -242,38 +251,32 @@ public class BoardFrame extends javax.swing.JFrame {
             viewport_position = new java.awt.Point(0, 0);
             initialize_windows();
         } else {
-            java.io.ObjectInputStream object_stream = null;
-            try {
-                object_stream = new java.io.ObjectInputStream(p_input_stream);
-            } catch (java.io.IOException e) {
-                return false;
-            }
-            boolean read_ok = board_panel.board_handling.read_design(object_stream, this.test_level);
-            if (!read_ok) {
-                return false;
-            }
-            java.awt.Point frame_location;
-            java.awt.Rectangle frame_bounds;
-            try {
-                viewport_position = (java.awt.Point) object_stream.readObject();
-                frame_location = (java.awt.Point) object_stream.readObject();
-                frame_bounds = (java.awt.Rectangle) object_stream.readObject();
-            } catch (IOException | ClassNotFoundException e) {
-                return false;
-            }
-            this.setLocation(frame_location);
-            this.setBounds(frame_bounds);
+            try (ObjectInputStream object_stream = new ObjectInputStream(p_input_stream)) {
+                boolean read_ok = board_panel.board_handling.read_design(object_stream, this.test_level);
+                if (!read_ok) {
+                    return false;
+                }
+                java.awt.Point frame_location;
+                java.awt.Rectangle frame_bounds;
+                try {
+                    viewport_position = (java.awt.Point) object_stream.readObject();
+                    frame_location = (java.awt.Point) object_stream.readObject();
+                    frame_bounds = (java.awt.Rectangle) object_stream.readObject();
+                } catch (IOException | ClassNotFoundException e) {
+                    return false;
+                }
+                this.setLocation(frame_location);
+                this.setBounds(frame_bounds);
 
-            allocate_permanent_subwindows();
+                allocate_permanent_subwindows();
 
-            for (int i = 0; i < this.permanent_subwindows.length; ++i) {
-                this.permanent_subwindows[i].read(object_stream);
+                for (int i = 0; i < this.permanent_subwindows.length; ++i) {
+                    this.permanent_subwindows[i].read(object_stream);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
             }
-        }
-        try {
-            p_input_stream.close();
-        } catch (java.io.IOException e) {
-            return false;
         }
 
         java.awt.Dimension panel_size = board_panel.board_handling.graphics_context.get_panel_size();
@@ -291,25 +294,16 @@ public class BoardFrame extends javax.swing.JFrame {
         this.setVisible(true);
         if (p_is_import) {
             // Read the default gui settings, if gui default file exists.
-            java.io.InputStream input_stream = null;
-            boolean defaults_file_found;
             File defaults_file = new File(this.design_file.get_parent(), GUI_DEFAULTS_FILE_NAME);
-            defaults_file_found = true;
-            try {
-                input_stream = new java.io.FileInputStream(defaults_file);
-            } catch (java.io.FileNotFoundException e) {
-                defaults_file_found = false;
-            }
-            if (defaults_file_found) {
+            try (InputStream input_stream = new FileInputStream(defaults_file)) {
                 boolean read_ok = net.freerouting.freeroute.GUIDefaultsFile.read(this, board_panel.board_handling, input_stream);
                 if (!read_ok) {
                     screen_messages.set_status_message(resources.getString("error_1"));
                 }
-                try {
-                    input_stream.close();
-                } catch (java.io.IOException e) {
-                    return false;
-                }
+            } catch (FileNotFoundException ex) {
+                return false;
+            } catch (IOException ex) {
+                return false;
             }
             this.zoom_all();
         }
@@ -324,41 +318,26 @@ public class BoardFrame extends javax.swing.JFrame {
         if (this.design_file == null) {
             return false;
         }
-        java.io.OutputStream output_stream = null;
-        java.io.ObjectOutputStream object_stream = null;
-        try {
-            output_stream = new java.io.FileOutputStream(this.design_file.get_output_file());
-            object_stream = new java.io.ObjectOutputStream(output_stream);
-        } catch (java.io.IOException e) {
+        try (OutputStream output_stream = new FileOutputStream(this.design_file.get_output_file());
+                ObjectOutputStream object_stream = new ObjectOutputStream(output_stream);) {
+            boolean save_ok = board_panel.board_handling.save_design_file(object_stream);
+            if (!save_ok) {
+                return false;
+            }
+            object_stream.writeObject(board_panel.get_viewport_position());
+            object_stream.writeObject(this.getLocation());
+            object_stream.writeObject(this.getBounds());
+            for (int i = 0; i < this.permanent_subwindows.length; ++i) {
+                this.permanent_subwindows[i].save(object_stream);
+            }
+            return true;
+        } catch (IOException e) {
             screen_messages.set_status_message(resources.getString("error_2"));
             return false;
         } catch (java.security.AccessControlException e) {
             screen_messages.set_status_message(resources.getString("error_3"));
             return false;
         }
-        boolean save_ok = board_panel.board_handling.save_design_file(object_stream);
-        if (!save_ok) {
-            return false;
-        }
-        try {
-            object_stream.writeObject(board_panel.get_viewport_position());
-            object_stream.writeObject(this.getLocation());
-            object_stream.writeObject(this.getBounds());
-        } catch (java.io.IOException e) {
-            screen_messages.set_status_message(resources.getString("error_4"));
-            return false;
-        }
-        for (int i = 0; i < this.permanent_subwindows.length; ++i) {
-            this.permanent_subwindows[i].save(object_stream);
-        }
-        try {
-            object_stream.flush();
-            output_stream.close();
-        } catch (java.io.IOException e) {
-            screen_messages.set_status_message(resources.getString("error_5"));
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -453,6 +432,7 @@ public class BoardFrame extends javax.swing.JFrame {
             board_panel.board_handling.dispose();
             board_panel.board_handling = null;
         }
+        design_file = null;
         super.dispose();
     }
 
