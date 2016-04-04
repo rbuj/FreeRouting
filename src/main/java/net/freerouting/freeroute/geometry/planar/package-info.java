@@ -195,20 +195,20 @@
  * lines are described. No two consecutive lines in that list may be parallel.
  * Therefore a Polyline of n lines with integer coordinates is equivalent to a
  * polygon of n – 1 RationalPoints, where the k-th RationalPoint is the
- * intersection of the k-th and the k+1-th line for 0 @{literal <}@{literal =} k
- * @{literal <} n –1 (if we disregard the possibility of integer overflow). We
- * will use the class Polyline especially to describe Traces on a Printed
- * Circuit Board. That enables us to implement a numerical stable any-angle
- * pushing algorithm for traces. The reason is similar as for Simplexes. We do
- * not use intersection points of lines to create the geometry of new trace
- * objects in the pushing algorithm. Instead we use lines, which already exist,
- * for that purpose. That concept is also advantageous when we want to smoothen
- * traces by cutting of corners. If this is done with polygons represented by
- * corners, the intersection of lines has to be calculated and used as primary
- * data. If integer points are used, these intersection points are not exact.
- * Neighbour lines change slightly and a small clearance violation may occur. If
- * rational points are used, the algorithm gets very slow. With Polylines these
- * problems do not exist, because intersection points of lines never become
- * primary data.</p>
+ * intersection of the k-th and the k+1-th line for 0 &lt;= k &lt; n –1 (if we
+ * disregard the possibility of integer overflow). We will use the class
+ * Polyline especially to describe Traces on a Printed Circuit Board. That
+ * enables us to implement a numerical stable any-angle pushing algorithm for
+ * traces. The reason is similar as for Simplexes. We do not use intersection
+ * points of lines to create the geometry of new trace objects in the pushing
+ * algorithm. Instead we use lines, which already exist, for that purpose. That
+ * concept is also advantageous when we want to smoothen traces by cutting of
+ * corners. If this is done with polygons represented by corners, the
+ * intersection of lines has to be calculated and used as primary data. If
+ * integer points are used, these intersection points are not exact. Neighbour
+ * lines change slightly and a small clearance violation may occur. If rational
+ * points are used, the algorithm gets very slow. With Polylines these problems
+ * do not exist, because intersection points of lines never become primary
+ * data.</p>
  */
 package net.freerouting.freeroute.geometry.planar;
