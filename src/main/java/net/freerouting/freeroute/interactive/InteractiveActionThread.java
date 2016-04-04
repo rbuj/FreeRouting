@@ -166,19 +166,14 @@ public abstract class InteractiveActionThread extends Thread implements net.free
                     done = true; // end of logfile
                 }
                 if (!done) {
-                    try {
-                        InteractiveState new_state
-                                = logfile_scope.read_scope(hdlg.logfile, hdlg.interactive_state, hdlg);
-                        if (new_state == null) {
-                            System.out.println("BoardHandling:read_logfile: inconsistent logfile scope");
-                            new_state = previous_state;
-                        }
-                        hdlg.repaint();
-                        hdlg.set_interactive_state(new_state);
-                    } catch (Exception e) {
-                        done = true;
+                    InteractiveState new_state
+                            = logfile_scope.read_scope(hdlg.logfile, hdlg.interactive_state, hdlg);
+                    if (new_state == null) {
+                        System.out.println("BoardHandling:read_logfile: inconsistent logfile scope");
+                        new_state = previous_state;
                     }
-
+                    hdlg.repaint();
+                    hdlg.set_interactive_state(new_state);
                 }
             }
             hdlg.paint_immediately = false;

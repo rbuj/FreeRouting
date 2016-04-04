@@ -227,7 +227,6 @@ public class BatchAutorouter {
     }
 
     private boolean autoroute_item(Item p_item, int p_route_net_no, SortedSet<Item> p_ripped_item_list, int p_ripup_pass_no) {
-        try {
             boolean contains_plane = false;
             net.freerouting.freeroute.rules.Net route_net = routing_board.rules.nets.get(p_route_net_no);
             if (route_net != null) {
@@ -283,9 +282,6 @@ public class BatchAutorouter {
             // tests.Validate.check("Autoroute  ", hdlg.get_routing_board());
             boolean result = autoroute_result == AutorouteEngine.AutorouteResult.ROUTED || autoroute_result == AutorouteEngine.AutorouteResult.ALREADY_CONNECTED;
             return result;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
     /**

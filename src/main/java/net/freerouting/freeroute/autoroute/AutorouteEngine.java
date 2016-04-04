@@ -156,13 +156,9 @@ public class AutorouteEngine {
         }
         LocateFoundConnectionAlgo autoroute_result = null;
         if (search_result != null) {
-            try {
-                autoroute_result
-                        = LocateFoundConnectionAlgo.get_instance(search_result, p_ctrl, this.autoroute_search_tree,
-                                board.rules.get_trace_angle_restriction(), p_ripped_item_list, board.get_test_level());
-            } catch (Exception e) {
-                System.out.println("AutorouteEngine.autoroute_connection: Exception in LocateFoundConnectionAlgo.get_instance");
-            }
+            autoroute_result
+                    = LocateFoundConnectionAlgo.get_instance(search_result, p_ctrl, this.autoroute_search_tree,
+                            board.rules.get_trace_angle_restriction(), p_ripped_item_list, board.get_test_level());
         }
         if (!this.maintain_database) {
             this.clear();

@@ -50,65 +50,61 @@ public class BatchAutorouterThread extends InteractiveActionThread {
 
     @Override
     protected void thread_action() {
-        try {
-            java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.InteractiveState", hdlg.get_locale());
-            boolean saved_board_read_only = hdlg.is_board_read_only();
-            hdlg.set_board_read_only(true);
-            boolean ratsnest_hidden_before = hdlg.get_ratsnest().is_hidden();
-            if (!ratsnest_hidden_before) {
-                hdlg.get_ratsnest().hide();
-            }
-            String start_message = resources.getString("batch_autorouter") + " " + resources.getString("stop_message");
-            hdlg.screen_messages.set_status_message(start_message);
-            boolean fanout_first
-                    = hdlg.settings.autoroute_settings.get_with_fanout()
-                    && hdlg.settings.autoroute_settings.get_pass_no() <= 1;
-            if (fanout_first) {
-                BatchFanout.fanout_board(this);
-            }
-            if (hdlg.settings.autoroute_settings.get_with_autoroute() && !this.is_stop_requested()) {
-                batch_autorouter.autoroute_passes();
-            }
-            hdlg.get_routing_board().finish_autoroute();
-            if (hdlg.settings.autoroute_settings.get_with_postroute() && !this.is_stop_requested()) {
-                String opt_message = resources.getString("batch_optimizer") + " " + resources.getString("stop_message");
-                hdlg.screen_messages.set_status_message(opt_message);
-                this.batch_opt_route.optimize_board();
-                String curr_message;
-                if (this.is_stop_requested()) {
-                    curr_message = resources.getString("interrupted");
-                } else {
-                    curr_message = resources.getString("completed");
-                }
-                String end_message = resources.getString("postroute") + " " + curr_message;
-                hdlg.screen_messages.set_status_message(end_message);
+        java.util.ResourceBundle resources
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.InteractiveState", hdlg.get_locale());
+        boolean saved_board_read_only = hdlg.is_board_read_only();
+        hdlg.set_board_read_only(true);
+        boolean ratsnest_hidden_before = hdlg.get_ratsnest().is_hidden();
+        if (!ratsnest_hidden_before) {
+            hdlg.get_ratsnest().hide();
+        }
+        String start_message = resources.getString("batch_autorouter") + " " + resources.getString("stop_message");
+        hdlg.screen_messages.set_status_message(start_message);
+        boolean fanout_first
+                = hdlg.settings.autoroute_settings.get_with_fanout()
+                && hdlg.settings.autoroute_settings.get_pass_no() <= 1;
+        if (fanout_first) {
+            BatchFanout.fanout_board(this);
+        }
+        if (hdlg.settings.autoroute_settings.get_with_autoroute() && !this.is_stop_requested()) {
+            batch_autorouter.autoroute_passes();
+        }
+        hdlg.get_routing_board().finish_autoroute();
+        if (hdlg.settings.autoroute_settings.get_with_postroute() && !this.is_stop_requested()) {
+            String opt_message = resources.getString("batch_optimizer") + " " + resources.getString("stop_message");
+            hdlg.screen_messages.set_status_message(opt_message);
+            this.batch_opt_route.optimize_board();
+            String curr_message;
+            if (this.is_stop_requested()) {
+                curr_message = resources.getString("interrupted");
             } else {
-                hdlg.screen_messages.clear();
-                String curr_message;
-                if (this.is_stop_requested()) {
-                    curr_message = resources.getString("interrupted");
-                } else {
-                    curr_message = resources.getString("completed");
-                }
-                Integer incomplete_count = hdlg.get_ratsnest().incomplete_count();
-                String end_message = resources.getString("autoroute") + " " + curr_message + ", " + incomplete_count.toString()
-                        + " " + resources.getString("connections_not_found");
-                hdlg.screen_messages.set_status_message(end_message);
+                curr_message = resources.getString("completed");
             }
-
-            hdlg.set_board_read_only(saved_board_read_only);
-            hdlg.update_ratsnest();
-            if (!ratsnest_hidden_before) {
-                hdlg.get_ratsnest().show();
+            String end_message = resources.getString("postroute") + " " + curr_message;
+            hdlg.screen_messages.set_status_message(end_message);
+        } else {
+            hdlg.screen_messages.clear();
+            String curr_message;
+            if (this.is_stop_requested()) {
+                curr_message = resources.getString("interrupted");
+            } else {
+                curr_message = resources.getString("completed");
             }
+            Integer incomplete_count = hdlg.get_ratsnest().incomplete_count();
+            String end_message = resources.getString("autoroute") + " " + curr_message + ", " + incomplete_count.toString()
+                    + " " + resources.getString("connections_not_found");
+            hdlg.screen_messages.set_status_message(end_message);
+        }
 
-            hdlg.get_panel().board_frame.refresh_windows();
-            if (hdlg.get_routing_board().rules.get_trace_angle_restriction() == net.freerouting.freeroute.board.AngleRestriction.FORTYFIVE_DEGREE && hdlg.get_routing_board().get_test_level() != net.freerouting.freeroute.board.TestLevel.RELEASE_VERSION) {
-                net.freerouting.freeroute.tests.Validate.multiple_of_45_degree("after autoroute: ", hdlg.get_routing_board());
-            }
-        } catch (Exception e) {
+        hdlg.set_board_read_only(saved_board_read_only);
+        hdlg.update_ratsnest();
+        if (!ratsnest_hidden_before) {
+            hdlg.get_ratsnest().show();
+        }
 
+        hdlg.get_panel().board_frame.refresh_windows();
+        if (hdlg.get_routing_board().rules.get_trace_angle_restriction() == net.freerouting.freeroute.board.AngleRestriction.FORTYFIVE_DEGREE && hdlg.get_routing_board().get_test_level() != net.freerouting.freeroute.board.TestLevel.RELEASE_VERSION) {
+            net.freerouting.freeroute.tests.Validate.multiple_of_45_degree("after autoroute: ", hdlg.get_routing_board());
         }
     }
 
