@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import java.io.InputStreamReader;
+
 /**
  * Transformes a Specctra session file into an Eagle script file.
  *
@@ -33,7 +35,7 @@ public class SessionToEagle extends javax.swing.JFrame {
         }
 
         // create a scanner for reading the session_file.
-        Scanner scanner = new SpecctraFileScanner(p_session);
+        Scanner scanner = new SpecctraFileScanner(new InputStreamReader(p_session));
 
         // create a file_writer for the eagle script file.
         java.io.OutputStreamWriter file_writer = new java.io.OutputStreamWriter(p_output_stream);

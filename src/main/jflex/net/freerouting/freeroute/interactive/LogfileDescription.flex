@@ -1,4 +1,4 @@
-package interactive;
+package net.freerouting.freeroute.interactive;
 @SuppressWarnings("all")
 %%
 

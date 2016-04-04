@@ -1,4 +1,4 @@
-package designformats.specctra;
+package net.freerouting.freeroute.designformats.specctra;
 @SuppressWarnings("all")
 %%
 

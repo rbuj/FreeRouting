@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import java.io.InputStreamReader;
 import net.freerouting.freeroute.board.BasicBoard;
 import net.freerouting.freeroute.board.TestLevel;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
@@ -39,7 +40,7 @@ public class DsnFile {
      */
     public static ReadResult read(java.io.InputStream p_input_stream, net.freerouting.freeroute.interactive.BoardHandling p_board_handling,
             net.freerouting.freeroute.board.BoardObservers p_observers, net.freerouting.freeroute.datastructures.IdNoGenerator p_item_id_no_generator, TestLevel p_test_level) {
-        Scanner scanner = new SpecctraFileScanner(p_input_stream);
+        Scanner scanner = new SpecctraFileScanner(new InputStreamReader(p_input_stream));
         Object curr_token;
         for (int i = 0; i < 3; ++i) {
             try {

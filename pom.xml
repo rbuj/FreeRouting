@@ -4,7 +4,7 @@
 
     <groupId>net.freerouting</groupId>
     <artifactId>freeroute</artifactId>
-    <version>1.4</version>
+    <version>1.4-alpha</version>
     <packaging>jar</packaging>
 
     <name>freeroute</name>
@@ -80,9 +80,7 @@
                         </configuration>
                     </execution>
                 </executions>
-                
             </plugin>
-            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -114,6 +112,23 @@
                     <finalName>${project.build.finalName}.src.jar</finalName>
                     <attach>false</attach>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>de.jflex</groupId>
+                <artifactId>jflex-maven-plugin</artifactId>
+                <version>1.6.1</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <outputDirectory>src/main/java</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

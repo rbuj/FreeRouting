@@ -1,4 +1,4 @@
-package gui;
+package net.freerouting.freeroute;
 @SuppressWarnings("all")
 %%
 
