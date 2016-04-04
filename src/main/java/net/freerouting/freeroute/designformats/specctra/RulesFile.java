@@ -20,7 +20,6 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
-import java.io.InputStreamReader;
 import net.freerouting.freeroute.board.BasicBoard;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 
@@ -54,7 +53,7 @@ public class RulesFile {
     public static boolean read(java.io.InputStream p_input_stream, String p_design_name,
             net.freerouting.freeroute.interactive.BoardHandling p_board_handling) {
         BasicBoard routing_board = p_board_handling.get_routing_board();
-        Scanner scanner = new SpecctraFileScanner(new InputStreamReader(p_input_stream));
+        Scanner scanner = new SpecctraFileScanner(p_input_stream);
         try {
             Object curr_token = scanner.next_token();
             if (curr_token != Keyword.OPEN_BRACKET) {

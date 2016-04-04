@@ -124,6 +124,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <inputStreamCtor>true</inputStreamCtor>
                             <verbose>true</verbose>
                             <outputDirectory>src/main/java</outputDirectory>
                         </configuration>

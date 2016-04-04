@@ -20,7 +20,6 @@
 package net.freerouting.freeroute;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
 import net.freerouting.freeroute.board.ItemSelectionFilter;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 
@@ -70,7 +69,7 @@ public class GUIDefaultsFile {
         if (p_input_stream == null) {
             return false;
         }
-        GUIDefaultsScanner scanner = new GUIDefaultsScanner(new InputStreamReader(p_input_stream));
+        GUIDefaultsScanner scanner = new GUIDefaultsScanner(p_input_stream);
         GUIDefaultsFile new_instance = new GUIDefaultsFile(p_board_frame, p_board_handling, scanner, null);
         boolean result = true;
         try {
