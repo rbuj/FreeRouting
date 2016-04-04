@@ -50,7 +50,7 @@ public class MainAppController implements Initializable {
     private MainApp application = null;
     private static final Logger logger = Logger.getLogger(MainAppController.class.getName());
 
-    public static SimpleStringProperty sp_message_field;
+    protected static SimpleStringProperty sp_message_field;
 
     /**
      * Initializes the controller class.

@@ -41,8 +41,8 @@ import net.freerouting.freeroute.datastructures.FileFilter;
  */
 public class DesignFile {
 
-    public static final String[] all_file_extensions = new String[]{"bin", "dsn"};
-    public static final String[] text_file_extensions = new String[]{"dsn"};
+    protected static final String[] all_file_extensions = new String[]{"bin", "dsn"};
+    protected static final String[] text_file_extensions = new String[]{"dsn"};
     public static final String binary_file_extension = "bin";
     private static final String RULES_FILE_EXTENSION = ".rules";
     private static final FileFilter file_filter = new FileFilter(all_file_extensions);
