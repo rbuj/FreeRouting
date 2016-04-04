@@ -131,6 +131,126 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.agilejava.docbkx</groupId>
+                <artifactId>docbkx-maven-plugin</artifactId>
+                <version>2.0.16</version>
+                <executions>
+                    <execution>
+                        <id>ca</id>
+                        <goals>
+                            <goal>generate-javahelp</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <includes>*.xml</includes>
+                            <sourceDirectory>help/manual/ca</sourceDirectory>
+                            <targetDirectory>src/main/resources/helpset/ca</targetDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>de</id>
+                        <goals>
+                            <goal>generate-javahelp</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <includes>*.xml</includes>
+                            <sourceDirectory>help/manual/de</sourceDirectory>
+                            <targetDirectory>src/main/resources/helpset/de</targetDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>en</id>
+                        <goals>
+                            <goal>generate-javahelp</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <includes>*.xml</includes>
+                            <sourceDirectory>help/manual/en</sourceDirectory>
+                            <targetDirectory>src/main/resources/helpset/en</targetDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>es</id>
+                        <goals>
+                            <goal>generate-javahelp</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <includes>*.xml</includes>
+                            <sourceDirectory>help/manual/es</sourceDirectory>
+                            <targetDirectory>src/main/resources/helpset/es</targetDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>jh-index</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target description="JavaHelpSearch from JavaHelp">
+                                <echo message="JavaHelpSearch: ca"/>
+                                <java classname="com.sun.java.help.search.Indexer"
+                                      classpath="${javax.help:javahelp:jar}"
+                                      fork="true" failonerror="true">
+                                    <arg value="-locale"/>
+                                    <arg value="ca"/>
+                                    <arg value="-db"/>
+                                    <arg value="${project.basedir}/src/main/resources/helpset/ca/JavaHelpSearch"/>
+                                    <arg value="${project.basedir}/src/main/resources/helpset/ca"/>
+                                </java>
+                                <echo message="JavaHelpSearch: de"/>
+                                <java classname="com.sun.java.help.search.Indexer"
+                                      classpath="${javax.help:javahelp:jar}"
+                                      fork="true" failonerror="true">
+                                    <arg value="-locale"/>
+                                    <arg value="de"/>
+                                    <arg value="-db"/>
+                                    <arg value="${project.basedir}/src/main/resources/helpset/de/JavaHelpSearch"/>
+                                    <arg value="${project.basedir}/src/main/resources/helpset/de"/>
+                                </java>
+                                <echo message="JavaHelpSearch: en"/>
+                                <java classname="com.sun.java.help.search.Indexer"
+                                      classpath="${javax.help:javahelp:jar}"
+                                      fork="true" failonerror="true">
+                                    <arg value="-locale"/>
+                                    <arg value="en"/>
+                                    <arg value="-db"/>
+                                    <arg value="${project.basedir}/src/main/resources/helpset/en/JavaHelpSearch"/>
+                                    <arg value="${project.basedir}/src/main/resources/helpset/en"/>
+                                </java>
+                                <echo message="JavaHelpSearch: es"/>
+                                <java classname="com.sun.java.help.search.Indexer"
+                                      classpath="${javax.help:javahelp:jar}"
+                                      fork="true" failonerror="true">
+                                    <arg value="-locale"/>
+                                    <arg value="es"/>
+                                    <arg value="-db"/>
+                                    <arg value="${project.basedir}/src/main/resources/helpset/es/JavaHelpSearch"/>
+                                    <arg value="${project.basedir}/src/main/resources/helpset/es"/>
+                                </java>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>javax.help</groupId>
+                        <artifactId>javahelp</artifactId>
+                        <version>2.0.05</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
