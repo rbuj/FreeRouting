@@ -88,7 +88,7 @@ public class MainApp extends Application {
         }
 
         controller.init_variables(
-                new DesignFile(new File(design_file_name), design_dir_name),
+                new DesignFile((design_file_name.isEmpty() ? null : new File(design_file_name)), design_dir_name),
                 test_level,
                 board_option,
                 mainStage);
