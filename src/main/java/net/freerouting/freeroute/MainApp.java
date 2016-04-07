@@ -82,7 +82,6 @@ public class MainApp extends Application {
         if (single_design_option) {
             if (session_file_option) {
                 board_option = BoardFrame.Option.SESSION_FILE;
-
             } else {
                 board_option = BoardFrame.Option.SINGLE_FRAME;
             }
@@ -116,24 +115,16 @@ public class MainApp extends Application {
          */
         try {
             for (int i = 0; i < args.length; ++i) {
-                if (args[i].startsWith("-de")) // the design file is provided
+                if (args[i].equals("-de")) // the design file is provided
                 {
-                    if (!args[i + 1].startsWith("-")) {
-                        single_design_option = true;
-                        design_file_name = args[i + 1];
-                        ++i;
-                    } else {
-                        throw new IllegalArgumentException("Argument: " + args[i] + " [not recognized]");
-                    }
-                } else if (args[i].startsWith("-di")) // the design directory is provided
+                    single_design_option = true;
+                    design_file_name = args[i + 1];
+                    ++i;
+                } else if (args[i].equals("-di")) // the design directory is provided
                 {
-                    if (!args[i + 1].startsWith("-")) {
-                        design_dir_name = args[i + 1];
-                        ++i;
-                    } else {
-                        throw new IllegalArgumentException("Argument: " + args[i] + " [not recognized]");
-                    }
-                } else if (args[i].startsWith("-l")) // the locale is provided
+                    design_dir_name = args[i + 1];
+                    ++i;
+                } else if (args[i].equals("-l")) // the locale is provided
                 {
                     List<String> locale_list;
                     try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
@@ -149,9 +140,9 @@ public class MainApp extends Application {
                         locale = new Locale(new_locale, "");
                         ++i;
                     }
-                } else if (args[i].startsWith("-s")) {
+                } else if (args[i].equals("-s")) {
                     session_file_option = true;
-                } else if (args[i].startsWith("-test")) {
+                } else if (args[i].equals("-test")) {
                     test_version_option = true;
                 } else {
                     throw new IllegalArgumentException("Argument: " + args[i] + " [not recognized]");
@@ -174,20 +165,20 @@ public class MainApp extends Application {
                     locale = new Locale("en", "");
                 }
             }
+            /**
+             * Set data fiels
+             */
+            if (test_version_option) {
+                test_level = DEBUG_LEVEL;
+            } else {
+                test_level = TestLevel.RELEASE_VERSION;
+            }
+            /**
+             * call start
+             */
+            launch(args);
         } catch (IOException | IllegalArgumentException exc) {
             LOGGER.log(Level.SEVERE, exc.toString(), exc);
         }
-        /**
-         * Set data fiels
-         */
-        if (test_version_option) {
-            test_level = DEBUG_LEVEL;
-        } else {
-            test_level = TestLevel.RELEASE_VERSION;
-        }
-        /**
-         * call start
-         */
-        launch(args);
     }
 }
