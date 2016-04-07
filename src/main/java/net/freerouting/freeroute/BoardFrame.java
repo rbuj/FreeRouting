@@ -28,6 +28,8 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import net.freerouting.freeroute.board.BoardObserverAdaptor;
 import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.ItemIdNoGenerator;
@@ -219,9 +221,13 @@ public class BoardFrame extends javax.swing.JFrame {
             if (read_result != DsnFile.ReadResult.OK) {
                 if (p_message_field != null) {
                     if (read_result == DsnFile.ReadResult.OUTLINE_MISSING) {
-                        p_message_field.set(resources.getString("error_7"));
+                        Alert alert = new Alert(AlertType.ERROR, resources.getString("error_7"));
+                        alert.showAndWait();
+                        Runtime.getRuntime().exit(1);
                     } else {
-                        p_message_field.set(resources.getString("error_6"));
+                        Alert alert = new Alert(AlertType.ERROR, resources.getString("error_6"));
+                        alert.showAndWait();
+                        Runtime.getRuntime().exit(1);
                     }
                 }
                 return false;
@@ -277,6 +283,8 @@ public class BoardFrame extends javax.swing.JFrame {
                 boolean read_ok = GUIDefaultsFile.read(this, board_panel.board_handling, input_stream);
                 if (!read_ok) {
                     screen_messages.set_status_message(resources.getString("error_1"));
+                    Alert alert = new Alert(AlertType.ERROR, resources.getString("error_1"));
+                    alert.showAndWait();
                 }
             } catch (FileNotFoundException ex) {
                 return false;
@@ -311,9 +319,13 @@ public class BoardFrame extends javax.swing.JFrame {
             return true;
         } catch (IOException e) {
             screen_messages.set_status_message(resources.getString("error_2"));
+            Alert alert = new Alert(AlertType.ERROR, resources.getString("error_2"));
+            alert.showAndWait();
             return false;
         } catch (java.security.AccessControlException e) {
             screen_messages.set_status_message(resources.getString("error_3"));
+            Alert alert = new Alert(AlertType.ERROR, resources.getString("error_3"));
+            alert.showAndWait();
             return false;
         }
     }
