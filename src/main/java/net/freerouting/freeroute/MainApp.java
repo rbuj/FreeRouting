@@ -126,20 +126,21 @@ public class MainApp extends Application {
                     ++i;
                 } else if (args[i].equals("-l")) // the locale is provided
                 {
-                    List<String> locale_list;
+                    String new_locale = args[i + 1].substring(0, 2);
                     try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-                        locale_list = new ArrayList<>();
                         String line = reader.readLine();
                         while (line != null) {
-                            locale_list.add(line);
+                            if (line.equals(new_locale)) {
+                                locale = new Locale(new_locale, "");
+                                break;
+                            }
                             line = reader.readLine();
                         }
                     }
-                    String new_locale = args[i + 1].substring(0, 2);
-                    if (locale_list.contains(new_locale)) {
-                        locale = new Locale(new_locale, "");
-                        ++i;
+                    if (locale == null) {
+                        locale = new Locale("en", "");
                     }
+                    ++i;
                 } else if (args[i].equals("-s")) {
                     session_file_option = true;
                 } else if (args[i].equals("-test")) {
@@ -149,19 +150,18 @@ public class MainApp extends Application {
                 }
             }
             if (locale == null) {
-                List<String> locale_list;
+                String new_locale = java.util.Locale.getDefault().getLanguage();
                 try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-                    locale_list = new ArrayList<>();
                     String line = reader.readLine();
                     while (line != null) {
-                        locale_list.add(line);
+                        if (line.equals(new_locale)) {
+                            locale = new Locale(new_locale, "");
+                            break;
+                        }
                         line = reader.readLine();
                     }
                 }
-                String new_locale = java.util.Locale.getDefault().getLanguage();
-                if (locale_list.contains(new_locale)) {
-                    locale = new Locale(new_locale, "");
-                } else {
+                if (locale == null) {
                     locale = new Locale("en", "");
                 }
             }
