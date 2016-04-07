@@ -106,7 +106,7 @@ public class MainAppController implements Initializable {
             if (designFile == null) {
                 DesignFile designFile = new DesignFile(selectedFile);
             } else {
-                designFile.initialitze(selectedFile);
+                designFile.initialize(selectedFile);
             }
             BoardFrame new_frame
                     = new BoardFrame(designFile,
