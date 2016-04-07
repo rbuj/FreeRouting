@@ -54,20 +54,7 @@ public class DesignFile {
     private javax.swing.JFileChooser file_chooser;
 
     DesignFile(File p_design_file, String p_design_dir_name) {
-        if (p_design_file != null) {
-            input_file = p_design_file;
-            String file_name = p_design_file.getName();
-            String[] name_parts = file_name.split("\\.");
-            if (name_parts[name_parts.length - 1].compareToIgnoreCase(binary_file_extension) != 0) {
-                String binfile_name = name_parts[0] + "." + binary_file_extension;
-                output_file = new File(p_design_file.getParent(), binfile_name);
-            } else {
-                output_file = null;
-            }
-        } else {
-            input_file = null;
-            output_file = null;
-        }
+        this(p_design_file);
         if (p_design_dir_name != null) {
             design_dir_name = p_design_dir_name;
         } else if (input_file != null) {
@@ -78,23 +65,37 @@ public class DesignFile {
     }
 
     DesignFile(File p_design_file) {
-        this.input_file = p_design_file;
-        this.output_file = p_design_file;
         if (p_design_file != null) {
+            input_file = p_design_file;
             String file_name = p_design_file.getName();
             String[] name_parts = file_name.split("\\.");
             if (name_parts[name_parts.length - 1].compareToIgnoreCase(binary_file_extension) != 0) {
                 String binfile_name = name_parts[0] + "." + binary_file_extension;
-                this.output_file = new File(p_design_file.getParent(), binfile_name);
+                output_file = new File(p_design_file.getParent(), binfile_name);
+            } else {
+                output_file = p_design_file;
             }
+        } else {
+            input_file = null;
+            output_file = null;
         }
     }
 
-    public static DesignFile get_instance(String p_design_file_name) {
-        if (p_design_file_name == null) {
-            return null;
+    void initialitze(File p_design_file) {
+        if (p_design_file != null) {
+            input_file = p_design_file;
+            String file_name = p_design_file.getName();
+            String[] name_parts = file_name.split("\\.");
+            if (name_parts[name_parts.length - 1].compareToIgnoreCase(binary_file_extension) != 0) {
+                String binfile_name = name_parts[0] + "." + binary_file_extension;
+                output_file = new File(p_design_file.getParent(), binfile_name);
+            } else {
+                output_file = p_design_file;
+            }
+        } else {
+            input_file = null;
+            output_file = null;
         }
-        return new DesignFile(new File(p_design_file_name));
     }
 
     public static boolean read_rules_file(String p_design_name, String p_parent_name,

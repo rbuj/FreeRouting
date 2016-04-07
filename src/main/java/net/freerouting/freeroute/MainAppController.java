@@ -58,8 +58,8 @@ public class MainAppController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         resourceBundle = rb;
-        this.sp_message_field = new SimpleStringProperty();
-        message_field.textProperty().bind(this.sp_message_field);
+        sp_message_field = new SimpleStringProperty();
+        message_field.textProperty().bind(sp_message_field);
     }
 
     void init_variables(DesignFile p_designFile, TestLevel p_test_level, BoardFrame.Option p_board_option, Stage p_mainStage) {
@@ -103,21 +103,25 @@ public class MainAppController implements Initializable {
             /**
              * create board
              */
-            DesignFile design_file = new DesignFile(selectedFile);
+            if (designFile == null) {
+                DesignFile designFile = new DesignFile(selectedFile);
+            } else {
+                designFile.initialitze(selectedFile);
+            }
             BoardFrame new_frame
-                    = new BoardFrame(design_file,
+                    = new BoardFrame(designFile,
                             board_option,
                             test_level,
                             resourceBundle.getLocale(),
                             test_level == null); // true, if it's a test_version
-            if (new_frame.read(this.sp_message_field)) {
+            if (new_frame.read(sp_message_field)) {
                 // read_ok
                 new_frame.menubar.add_design_dependent_items();
-                if (design_file.is_created_from_text_file()) {
+                if (designFile.is_created_from_text_file()) {
                     // Read the file  with the saved rules, if it is existing.
-                    String file_name = design_file.get_name();
+                    String file_name = designFile.get_name();
                     String[] name_parts = file_name.split("\\.");
-                    DesignFile.read_rules_file(name_parts[0], design_file.get_parent(),
+                    DesignFile.read_rules_file(name_parts[0], designFile.get_parent(),
                             new_frame.board_panel.board_handling,
                             resources.getString("confirm_import_rules"));
                     new_frame.refresh_windows();
