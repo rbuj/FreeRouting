@@ -63,20 +63,19 @@ public class BoardFrame extends javax.swing.JFrame {
      */
     public static BoardFrame get_embedded_instance(String p_design_file_path_name,
             BoardObservers p_observers, IdNoGenerator p_id_no_generator, java.util.Locale p_locale) {
-        final net.freerouting.freeroute.DesignFile design_file = net.freerouting.freeroute.DesignFile.get_instance(p_design_file_path_name);
+        final DesignFile design_file = DesignFile.get_instance(p_design_file_path_name);
         if (design_file == null) {
             WindowMessage.show("designfile not found");
             return null;
         }
-        net.freerouting.freeroute.BoardFrame board_frame = new net.freerouting.freeroute.BoardFrame(design_file, net.freerouting.freeroute.BoardFrame.Option.SINGLE_FRAME,
+        BoardFrame board_frame = new BoardFrame(design_file, BoardFrame.Option.SINGLE_FRAME,
                 TestLevel.RELEASE_VERSION, p_observers, p_id_no_generator, p_locale, false);
 
         if (board_frame == null) {
             WindowMessage.show("board_frame is null");
             return null;
         }
-        InputStream input_stream = design_file.get_input_stream();
-        boolean read_ok = board_frame.read(input_stream, true, null);
+        boolean read_ok = board_frame.read(null);
         if (!read_ok) {
             String error_message = "Unable to read design file with pathname " + p_design_file_path_name;
             board_frame.setVisible(true); // to be able to display the status message
@@ -233,11 +232,14 @@ public class BoardFrame extends javax.swing.JFrame {
      * Reads an existing board design from file. If p_is_import, the design is
      * read from a scpecctra dsn file. Returns false, if the file is invalid.
      */
-    boolean read(InputStream p_input_stream, boolean p_is_import, SimpleStringProperty p_message_field) {
+    boolean read(SimpleStringProperty p_message_field) {
         java.awt.Point viewport_position = null;
-        if (p_is_import) {
-            DsnFile.ReadResult read_result = board_panel.board_handling.import_design(p_input_stream, this.board_observers,
-                    this.item_id_no_generator, this.test_level);
+        if (design_file.is_created_from_text_file()) {
+            DsnFile.ReadResult read_result = board_panel.board_handling.import_design(
+                    design_file.get_input_stream(),
+                    this.board_observers,
+                    this.item_id_no_generator,
+                    this.test_level);
             if (read_result != DsnFile.ReadResult.OK) {
                 if (p_message_field != null) {
                     if (read_result == DsnFile.ReadResult.OUTLINE_MISSING) {
@@ -251,7 +253,7 @@ public class BoardFrame extends javax.swing.JFrame {
             viewport_position = new java.awt.Point(0, 0);
             initialize_windows();
         } else {
-            try (ObjectInputStream object_stream = new ObjectInputStream(p_input_stream)) {
+            try (ObjectInputStream object_stream = new ObjectInputStream(design_file.get_input_stream())) {
                 boolean read_ok = board_panel.board_handling.read_design(object_stream, this.test_level);
                 if (!read_ok) {
                     return false;
@@ -292,7 +294,7 @@ public class BoardFrame extends javax.swing.JFrame {
         this.toolbar_panel.unit_factor_field.setValue(board_panel.board_handling.coordinate_transform.user_unit_factor);
         this.toolbar_panel.unit_combo_box.setSelectedItem(board_panel.board_handling.coordinate_transform.user_unit);
         this.setVisible(true);
-        if (p_is_import) {
+        if (design_file.is_created_from_text_file()) {
             // Read the default gui settings, if gui default file exists.
             File defaults_file = new File(this.design_file.get_parent(), GUI_DEFAULTS_FILE_NAME);
             try (InputStream input_stream = new FileInputStream(defaults_file)) {

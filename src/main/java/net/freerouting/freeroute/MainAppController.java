@@ -110,9 +110,7 @@ public class MainAppController implements Initializable {
                             test_level,
                             resourceBundle.getLocale(),
                             test_level == null); // true, if it's a test_version
-            if (new_frame.read(design_file.get_input_stream(),
-                    design_file.is_created_from_text_file(),
-                    this.sp_message_field)) {
+            if (new_frame.read(this.sp_message_field)) {
                 // read_ok
                 new_frame.menubar.add_design_dependent_items();
                 if (design_file.is_created_from_text_file()) {
