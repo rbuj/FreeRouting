@@ -52,7 +52,6 @@ public class DesignFile {
     private String design_dir_name;
 
     private static final FileFilter file_filter = new FileFilter(all_file_extensions);
-    private javax.swing.JFileChooser file_chooser;
 
     DesignFile(File p_design_file, String p_design_dir_name) {
         this(p_design_file);
