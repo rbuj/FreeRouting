@@ -90,19 +90,11 @@ public class MainApp extends Application {
             board_option = BoardFrame.Option.FROM_START_MENU;
         }
 
-        if (design_file_name.isEmpty()) {
-            controller.init_variables(
-                    new DesignFile(null, design_dir_name),
-                    test_level,
-                    board_option,
-                    mainStage);
-        } else {
-            controller.init_variables(
-                    new DesignFile(new File(design_file_name), design_dir_name),
-                    test_level,
-                    board_option,
-                    mainStage);
-        }
+        controller.init_variables(
+                new DesignFile(new File(design_file_name), design_dir_name),
+                test_level,
+                board_option,
+                mainStage);
 
         if (single_design_option) {
             controller.create_board_frame();
