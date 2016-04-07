@@ -121,11 +121,11 @@ public class DesignFile {
      */
     public InputStream get_input_stream() {
         InputStream result;
-        if (this.input_file == null) {
+        if (input_file == null) {
             return null;
         }
         try {
-            result = new java.io.FileInputStream(this.input_file);
+            result = new FileInputStream(input_file);
         } catch (FileNotFoundException e) {
             result = null;
         }
@@ -153,7 +153,7 @@ public class DesignFile {
         String found_file_extension = new_name_parts[new_name_parts.length - 1];
         if (found_file_extension.compareToIgnoreCase(binary_file_extension) == 0) {
             p_board_frame.screen_messages.set_status_message(resources.getString("message_2") + " " + new_file.getName());
-            this.output_file = new_file;
+            output_file = new_file;
             p_board_frame.save();
         } else {
             if (found_file_extension.compareToIgnoreCase("dsn") != 0) {
@@ -179,7 +179,7 @@ public class DesignFile {
     public boolean write_specctra_session_file(BoardFrame p_board_frame) {
         final java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuFile", p_board_frame.get_locale());
-        String design_file_name = this.get_name();
+        String design_file_name = get_name();
         String[] file_name_parts = design_file_name.split("\\.", 2);
         String design_name = file_name_parts[0];
         String output_file_name = design_name + ".ses";
@@ -208,7 +208,7 @@ public class DesignFile {
      */
     private boolean write_rules_file(String p_design_name, net.freerouting.freeroute.interactive.BoardHandling p_board_handling) {
         String rules_file_name = p_design_name + RULES_FILE_EXTENSION;
-        File rules_file = new File(this.get_parent(), rules_file_name);
+        File rules_file = new File(get_parent(), rules_file_name);
         try (OutputStream output_stream = new FileOutputStream(rules_file)) {
             net.freerouting.freeroute.designformats.specctra.RulesFile.write(p_board_handling, output_stream, p_design_name);
         } catch (IOException ex) {
@@ -250,11 +250,11 @@ public class DesignFile {
      * available because the application is run with Java Web Start.
      */
     public File get_output_file() {
-        return this.output_file;
+        return output_file;
     }
 
     public File get_input_file() {
-        return this.input_file;
+        return input_file;
     }
 
     public String get_parent() {
@@ -272,7 +272,7 @@ public class DesignFile {
     }
 
     public boolean is_created_from_text_file() {
-        return this.input_file != this.output_file;
+        return input_file != output_file;
     }
 
     public void dispose() {
