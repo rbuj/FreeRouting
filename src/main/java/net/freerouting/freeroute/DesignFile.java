@@ -56,7 +56,7 @@ public class DesignFile {
 
     DesignFile(File p_design_file, String p_design_dir_name) {
         this(p_design_file);
-        if (p_design_dir_name != null) {
+        if (!p_design_dir_name.isEmpty()) {
             design_dir_name = p_design_dir_name;
         } else if (input_file != null) {
             design_dir_name = input_file.getParent();
