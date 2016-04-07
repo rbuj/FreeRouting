@@ -80,9 +80,12 @@ public class MainApp extends Application {
 
         Option board_option;
         if (single_design_option) {
-            board_option = BoardFrame.Option.SESSION_FILE;
-        } else if (session_file_option) {
-            board_option = BoardFrame.Option.SINGLE_FRAME;
+            if (session_file_option) {
+                board_option = BoardFrame.Option.SESSION_FILE;
+
+            } else {
+                board_option = BoardFrame.Option.SINGLE_FRAME;
+            }
         } else {
             board_option = BoardFrame.Option.FROM_START_MENU;
         }
