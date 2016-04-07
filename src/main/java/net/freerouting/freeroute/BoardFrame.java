@@ -24,10 +24,13 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
+import net.freerouting.freeroute.board.BoardObserverAdaptor;
 import net.freerouting.freeroute.board.BoardObservers;
+import net.freerouting.freeroute.board.ItemIdNoGenerator;
 import net.freerouting.freeroute.board.TestLevel;
 import net.freerouting.freeroute.datastructures.FileFilter;
 import net.freerouting.freeroute.datastructures.IdNoGenerator;
@@ -56,33 +59,6 @@ public class BoardFrame extends javax.swing.JFrame {
     static final String GUI_DEFAULTS_FILE_NAME = "gui_defaults.par";
     static final String GUI_DEFAULTS_FILE_BACKUP_NAME = "gui_defaults.par.bak";
     static final FileFilter logfile_filter = new FileFilter(log_file_extensions);
-
-    /**
-     * Creates a new board frame with the input design file imbedded into a host
-     * cad software.
-     */
-    public static BoardFrame get_embedded_instance(String p_design_file_path_name,
-            BoardObservers p_observers, IdNoGenerator p_id_no_generator, java.util.Locale p_locale) {
-        final DesignFile design_file = DesignFile.get_instance(p_design_file_path_name);
-        if (design_file == null) {
-            WindowMessage.show("designfile not found");
-            return null;
-        }
-        BoardFrame board_frame = new BoardFrame(design_file, BoardFrame.Option.SINGLE_FRAME,
-                TestLevel.RELEASE_VERSION, p_observers, p_id_no_generator, p_locale, false);
-
-        if (board_frame == null) {
-            WindowMessage.show("board_frame is null");
-            return null;
-        }
-        boolean read_ok = board_frame.read(null);
-        if (!read_ok) {
-            String error_message = "Unable to read design file with pathname " + p_design_file_path_name;
-            board_frame.setVisible(true); // to be able to display the status message
-            board_frame.screen_messages.set_status_message(error_message);
-        }
-        return board_frame;
-    }
 
     /**
      * The scroll pane for the panel of the routing board.
@@ -124,7 +100,7 @@ public class BoardFrame extends javax.swing.JFrame {
     private java.util.Locale locale;
 
     private final BoardObservers board_observers;
-    private final net.freerouting.freeroute.datastructures.IdNoGenerator item_id_no_generator;
+    private final IdNoGenerator item_id_no_generator;
 
     WindowAbout about_window = null;
     WindowRouteParameter route_parameter_window = null;
@@ -172,7 +148,7 @@ public class BoardFrame extends javax.swing.JFrame {
     public BoardFrame(DesignFile p_design, Option p_option, TestLevel p_test_level,
             java.util.Locale p_locale, boolean p_confirm_cancel) {
         this(p_design, p_option, p_test_level,
-                new net.freerouting.freeroute.board.BoardObserverAdaptor(), new net.freerouting.freeroute.board.ItemIdNoGenerator(),
+                new BoardObserverAdaptor(), new ItemIdNoGenerator(),
                 p_locale, p_confirm_cancel);
     }
 
@@ -182,7 +158,7 @@ public class BoardFrame extends javax.swing.JFrame {
      * is embedded into a host system,
      */
     BoardFrame(DesignFile p_design, Option p_option, TestLevel p_test_level, BoardObservers p_observers,
-            net.freerouting.freeroute.datastructures.IdNoGenerator p_item_id_no_generator, java.util.Locale p_locale, boolean p_confirm_cancel) {
+            IdNoGenerator p_item_id_no_generator, Locale p_locale, boolean p_confirm_cancel) {
         this.design_file = p_design;
         this.test_level = p_test_level;
 
@@ -298,7 +274,7 @@ public class BoardFrame extends javax.swing.JFrame {
             // Read the default gui settings, if gui default file exists.
             File defaults_file = new File(this.design_file.get_parent(), GUI_DEFAULTS_FILE_NAME);
             try (InputStream input_stream = new FileInputStream(defaults_file)) {
-                boolean read_ok = net.freerouting.freeroute.GUIDefaultsFile.read(this, board_panel.board_handling, input_stream);
+                boolean read_ok = GUIDefaultsFile.read(this, board_panel.board_handling, input_stream);
                 if (!read_ok) {
                     screen_messages.set_status_message(resources.getString("error_1"));
                 }
