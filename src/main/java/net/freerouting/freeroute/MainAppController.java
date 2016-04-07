@@ -26,12 +26,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import net.freerouting.freeroute.board.TestLevel;
 
 /**
  * FXML Controller class
@@ -43,30 +43,30 @@ public class MainAppController implements Initializable {
     @FXML
     private TextField message_field;
 
-    @FXML
-    private Button open_board_button;
-
-    private Stage mainStage = null;
-    private MainApp application = null;
+    private Stage mainStage;
     private static final Logger logger = Logger.getLogger(MainAppController.class.getName());
 
     protected static SimpleStringProperty sp_message_field;
+    private ResourceBundle resourceBundle;
+    private DesignFile designFile;
+    private TestLevel test_level = null;
+    private BoardFrame.Option board_option;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        resourceBundle = rb;
         this.sp_message_field = new SimpleStringProperty();
         message_field.textProperty().bind(this.sp_message_field);
     }
 
-    public final void setStage(Stage stage) {
-        this.mainStage = stage;
-    }
-
-    public final void setApp(MainApp application) {
-        this.application = application;
+    void init_variables(DesignFile p_designFile, TestLevel p_test_level, BoardFrame.Option p_board_option, Stage p_mainStage) {
+        designFile = p_designFile;
+        test_level = p_test_level;
+        board_option = p_board_option;
+        mainStage = p_mainStage;
     }
 
     @FXML
@@ -76,25 +76,19 @@ public class MainAppController implements Initializable {
         fileChooser.getExtensionFilters().add(
                 new ExtensionFilter("All Design Files", "*.dsn", "*.bin"));
         File selectedFile = fileChooser.showOpenDialog(mainStage);
-        create_board_frame(BoardFrame.Option.FROM_START_MENU, selectedFile);
+        create_board_frame(selectedFile);
     }
 
     void create_board_frame() {
-        BoardFrame.Option board_option;
-        if (application.is_session_file_option()) {
-            board_option = BoardFrame.Option.SESSION_FILE;
-        } else {
-            board_option = BoardFrame.Option.SINGLE_FRAME;
-        }
-        create_board_frame(board_option, new File(application.get_design_file_name()));
+        create_board_frame(designFile.get_input_file());
     }
 
-    private void create_board_frame(BoardFrame.Option board_option, File selectedFile) {
+    private void create_board_frame(File selectedFile) {
         if (selectedFile != null) {
             java.util.ResourceBundle resources
                     = java.util.ResourceBundle.getBundle(
                             "net.freerouting.freeroute.resources.MainApp",
-                            application.get_locale());
+                            resourceBundle.getLocale());
             /**
              * Show loading dialog
              */
@@ -102,7 +96,7 @@ public class MainAppController implements Initializable {
             dialog.initOwner(mainStage);
             dialog.setTitle("Loading");
             dialog.setHeaderText("Loading...");
-            dialog.setContentText(resources.getString("loading_design") + " " + application.get_design_file_name());
+            dialog.setContentText(resources.getString("loading_design") + " " + selectedFile.toString());
             dialog.setResizable(false);
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.show();
@@ -113,9 +107,9 @@ public class MainAppController implements Initializable {
             BoardFrame new_frame
                     = new BoardFrame(design_file,
                             board_option,
-                            application.get_test_level(),
-                            application.get_locale(),
-                            application.is_test_version_option());
+                            test_level,
+                            resourceBundle.getLocale(),
+                            test_level == null); // true, if it's a test_version
             if (new_frame.read(design_file.get_input_stream(),
                     design_file.is_created_from_text_file(),
                     this.sp_message_field)) {

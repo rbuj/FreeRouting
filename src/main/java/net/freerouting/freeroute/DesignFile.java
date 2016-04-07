@@ -43,12 +43,39 @@ public class DesignFile {
 
     protected static final String[] all_file_extensions = new String[]{"bin", "dsn"};
     protected static final String[] text_file_extensions = new String[]{"dsn"};
-    public static final String binary_file_extension = "bin";
-    private static final String RULES_FILE_EXTENSION = ".rules";
-    private static final FileFilter file_filter = new FileFilter(all_file_extensions);
+    protected static final String binary_file_extension = "bin";
+    protected static final String RULES_FILE_EXTENSION = ".rules";
+
     private File output_file;
-    private final File input_file;
+    private File input_file;
+    private String design_dir_name;
+
+    private static final FileFilter file_filter = new FileFilter(all_file_extensions);
     private javax.swing.JFileChooser file_chooser;
+
+    DesignFile(File p_design_file, String p_design_dir_name) {
+        if (p_design_file != null) {
+            input_file = p_design_file;
+            String file_name = p_design_file.getName();
+            String[] name_parts = file_name.split("\\.");
+            if (name_parts[name_parts.length - 1].compareToIgnoreCase(binary_file_extension) != 0) {
+                String binfile_name = name_parts[0] + "." + binary_file_extension;
+                output_file = new File(p_design_file.getParent(), binfile_name);
+            } else {
+                output_file = null;
+            }
+        } else {
+            input_file = null;
+            output_file = null;
+        }
+        if (p_design_dir_name != null) {
+            design_dir_name = p_design_dir_name;
+        } else if (input_file != null) {
+            design_dir_name = input_file.getParent();
+        } else {
+            design_dir_name = null;
+        }
+    }
 
     DesignFile(File p_design_file) {
         this.input_file = p_design_file;

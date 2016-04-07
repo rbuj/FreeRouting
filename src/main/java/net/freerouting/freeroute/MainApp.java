@@ -21,26 +21,24 @@
 package net.freerouting.freeroute;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import net.freerouting.freeroute.BoardFrame.Option;
 import net.freerouting.freeroute.board.TestLevel;
 
 /**
@@ -51,64 +49,65 @@ import net.freerouting.freeroute.board.TestLevel;
  */
 public class MainApp extends Application {
 
-    private static final TestLevel DEBUG_LEVEL = TestLevel.CRITICAL_DEBUGGING_OUTPUT;
     /**
      * Change this string when creating a new version
      */
-    public static final String VERSION_NUMBER_STRING = "1.4-alpha";
-    private static DesignFile design_file = null;
+    protected static final String VERSION_NUMBER_STRING = "1.4-alpha";
+    private static final Logger LOGGER = Logger.getLogger(MainAppController.class.getName());
+    private static final TestLevel DEBUG_LEVEL = TestLevel.CRITICAL_DEBUGGING_OUTPUT;
     private static boolean single_design_option = false;
-    private static boolean test_version_option = false;
     private static boolean session_file_option = false;
-    private static String design_file_name = null;
-    private static String design_dir_name = null;
-    private static boolean is_test_version;
+    private static String design_file_name = "";
+    private static String design_dir_name = "";
     private static Locale locale = null;
+    private static Stage mainStage;
     private static TestLevel test_level;
-    private static final Logger logger = Logger.getLogger(MainAppController.class.getName());
-    private Stage mainStage;
 
     @Override
     public void start(Stage stage) throws Exception {
-        this.mainStage = stage;
+        mainStage = stage;
         ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.MainApp", locale);
-        stage.setTitle(resources.getString("title"));
-        stage.setResizable(false);
+        mainStage.setTitle(resources.getString("title"));
+        mainStage.setResizable(false);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/net/freerouting/freeroute/fxml/MainApp.fxml"));
         fxmlLoader.setResources(resources);
         Parent root = fxmlLoader.load();
         MainAppController controller = fxmlLoader.getController();
-        controller.setStage(stage);
-        controller.setApp(this);
         Scene scene = new Scene(root);
-        stage.setScene(scene);
+        mainStage.setScene(scene);
+        mainStage.centerOnScreen();
+
+        Option board_option;
+        if (single_design_option) {
+            board_option = BoardFrame.Option.SESSION_FILE;
+        } else if (session_file_option) {
+            board_option = BoardFrame.Option.SINGLE_FRAME;
+        } else {
+            board_option = BoardFrame.Option.FROM_START_MENU;
+        }
+
+        if (design_file_name.isEmpty()) {
+            controller.init_variables(
+                    new DesignFile(null, design_dir_name),
+                    test_level,
+                    board_option,
+                    mainStage);
+        } else {
+            controller.init_variables(
+                    new DesignFile(new File(design_file_name), design_dir_name),
+                    test_level,
+                    board_option,
+                    mainStage);
+        }
+
         if (single_design_option) {
             controller.create_board_frame();
         }
-        stage.show();
-        this.mainStage.setOnCloseRequest((WindowEvent we) -> {
-            Alert closeConfirmation = new Alert(
-                    Alert.AlertType.CONFIRMATION,
-                    "Are you sure you want to exit?"
-            );
-            Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(
-                    ButtonType.OK
-            );
-            exitButton.setText("Exit");
-            closeConfirmation.setHeaderText("Confirm Exit");
-            closeConfirmation.initModality(Modality.APPLICATION_MODAL);
-            closeConfirmation.initOwner(mainStage);
 
-            closeConfirmation.setX(mainStage.getX());
-            closeConfirmation.setY(mainStage.getY());
-
-            Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
-            if (!ButtonType.OK.equals(closeResponse.get())) {
-                we.consume();
-            } else {
-                Runtime.getRuntime().exit(0);
-            }
+        mainStage.show();
+        mainStage.setOnCloseRequest((WindowEvent we) -> {
+            Runtime.getRuntime().exit(0);
         });
     }
 
@@ -116,6 +115,7 @@ public class MainApp extends Application {
      * Main function of the Application
      */
     public static void main(String[] args) {
+        boolean test_version_option = false;
         /**
          * Parse arguments
          */
@@ -180,7 +180,7 @@ public class MainApp extends Application {
                 }
             }
         } catch (IOException | IllegalArgumentException exc) {
-            logger.log(Level.SEVERE, exc.toString(), exc);
+            LOGGER.log(Level.SEVERE, exc.toString(), exc);
         }
         /**
          * Set data fiels
@@ -194,33 +194,5 @@ public class MainApp extends Application {
          * call start
          */
         launch(args);
-    }
-
-    public boolean is_single_design_option() {
-        return single_design_option;
-    }
-
-    public boolean is_session_file_option() {
-        return session_file_option;
-    }
-
-    public boolean is_test_version_option() {
-        return test_version_option;
-    }
-
-    public String get_design_file_name() {
-        return design_file_name;
-    }
-
-    public Locale get_locale() {
-        return locale;
-    }
-
-    public String get_design_dir_name() {
-        return design_dir_name;
-    }
-
-    public TestLevel get_test_level() {
-        return test_level;
     }
 }
