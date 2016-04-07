@@ -19,7 +19,11 @@
  */
 package net.freerouting.freeroute;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ResourceBundle;
+import static net.freerouting.freeroute.DesignFile.all_file_extensions;
+import net.freerouting.freeroute.datastructures.FileFilter;
 
 /**
  * Creates the file menu of a board frame.
@@ -200,8 +204,25 @@ public class BoardMenuFile extends javax.swing.JMenu {
     }
 
     private void save_as_action() {
-        if (this.board_frame.design_file != null) {
-            this.board_frame.design_file.save_as_dialog(this, this.board_frame);
+        if (board_frame.design_file != null) {
+            final ResourceBundle resources
+                    = ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuFile", board_frame.get_locale());
+            String[] file_name_parts = board_frame.design_file.get_name().split("\\.", 2);
+            String design_name = file_name_parts[0];
+
+            String design_dir_name;
+            if (board_frame.design_file.get_output_file() == null) {
+                design_dir_name = null;
+            } else {
+                design_dir_name = board_frame.design_file.get_output_file().getParent();
+            }
+            javax.swing.JFileChooser file_chooser = new javax.swing.JFileChooser(design_dir_name);
+            file_chooser.setFileFilter(new FileFilter(all_file_extensions));
+
+            file_chooser.showSaveDialog(this);
+            File new_file = file_chooser.getSelectedFile();
+
+            board_frame.design_file.save_as(design_name, new_file, resources, board_frame);
         }
     }
 

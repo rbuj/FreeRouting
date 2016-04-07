@@ -29,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.freerouting.freeroute.datastructures.FileFilter;
@@ -135,35 +136,14 @@ public class DesignFile {
      * Gets the file name as a String. Returns null on failure.
      */
     public String get_name() {
-
-        String result;
-        if (this.input_file != null) {
-            result = this.input_file.getName();
+        if (input_file != null) {
+            return input_file.getName();
         } else {
-            result = null;
+            return null;
         }
-        return result;
     }
 
-    public void save_as_dialog(java.awt.Component p_parent, BoardFrame p_board_frame) {
-        final java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuFile", p_board_frame.get_locale());
-        String[] file_name_parts = this.get_name().split("\\.", 2);
-        String design_name = file_name_parts[0];
-
-        if (this.file_chooser == null) {
-            String design_dir_name;
-            if (this.output_file == null) {
-                design_dir_name = null;
-            } else {
-                design_dir_name = this.output_file.getParent();
-            }
-            this.file_chooser = new javax.swing.JFileChooser(design_dir_name);
-            this.file_chooser.setFileFilter(file_filter);
-        }
-
-        this.file_chooser.showSaveDialog(p_parent);
-        File new_file = file_chooser.getSelectedFile();
+    void save_as(String design_name, File new_file, ResourceBundle resources, BoardFrame p_board_frame) {
         if (new_file == null) {
             p_board_frame.screen_messages.set_status_message(resources.getString("message_1"));
             return;
