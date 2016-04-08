@@ -21,7 +21,8 @@ ToDo
                       * designformats/specctra/SpecctraFileDescription.flex
                       * interactive/LogfileDescription.flex
                       * GUIDefaultsDescription.flex
-	* DesignFile.java: Open FileChooser in MainAppController.java
+	* DesignFile.java: Open FileChooser in MainAppController.java, and
+          open JFileChooser in BoardMenuFile.java
         * MainApp.java: Migrate GUI from swing to JavaFX using the MVC
 	  software pattern:
 		* MainApp.java: Model
