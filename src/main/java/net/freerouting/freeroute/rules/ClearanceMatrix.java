@@ -25,6 +25,8 @@ package net.freerouting.freeroute.rules;
  */
 public class ClearanceMatrix implements java.io.Serializable {
 
+    private static final long serialVersionUID = -784243513580299224L;
+
     /**
      * Creates a new instance with the 2 clearance classes "none"and "default"
      * ans initializes it with p_default_value.
@@ -379,6 +381,8 @@ public class ClearanceMatrix implements java.io.Serializable {
     }
 
     private class MatrixEntry implements java.io.Serializable {
+
+        private static final long serialVersionUID = -6263352634908514855L;
 
         int[] layer;
 
