@@ -101,19 +101,29 @@ public class DesignFile {
     }
 
     public static boolean read_rules_file(String p_design_name, String p_parent_name,
-            net.freerouting.freeroute.interactive.BoardHandling p_board_handling, String p_confirm_message) throws DsnFileException, FileNotFoundException {
+            net.freerouting.freeroute.interactive.BoardHandling p_board_handling, String p_confirm_message) throws DsnFileException {
         boolean result = false;
         String rule_file_name = p_design_name + ".rules";
         boolean dsn_file_generated_by_host = p_board_handling.get_routing_board().communication.specctra_parser_info.dsn_file_generated_by_host;
         if (dsn_file_generated_by_host) {
-            File rules_file = new File(p_parent_name, rule_file_name);
-            try (InputStream input_stream = new FileInputStream(rules_file)) {
+            InputStream input_stream = null;
+            try {
+                File rules_file = new File(p_parent_name, rule_file_name);
+                input_stream = new FileInputStream(rules_file);
                 if (WindowMessage.confirm(p_confirm_message)) {
                     result = net.freerouting.freeroute.designformats.specctra.RulesFile.read(input_stream, p_design_name, p_board_handling);
                     rules_file.delete();
                 }
-            } catch (IOException ex) {
-                Logger.getLogger(DesignFile.class.getName()).log(Level.INFO, null, ex);
+            } catch (FileNotFoundException ex) {
+                throw new DsnFileException("no rules files", ex);
+            } finally {
+                try {
+                    if (input_stream != null) {
+                        input_stream.close();
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(DesignFile.class.getName()).log(Level.INFO, null, ex);
+                }
             }
         }
         return result;

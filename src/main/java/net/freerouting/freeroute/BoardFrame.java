@@ -165,7 +165,7 @@ public class BoardFrame extends javax.swing.JFrame {
                 DesignFile.read_rules_file(name_parts[0], design_file.get_parent(),
                         board_panel.board_handling,
                         rb.getString("confirm_import_rules"));
-            } catch (FileNotFoundException ex) {
+            } catch (DsnFileException ex) {
                 Logger.getLogger(DesignFile.class.getName()).log(Level.INFO, "no rules file");
             }
             refresh_windows();
