@@ -27,6 +27,7 @@ import java.io.OutputStream;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import net.freerouting.freeroute.board.BoardObserverAdaptor;
@@ -243,17 +244,21 @@ public class BoardFrame extends javax.swing.JFrame {
                 initialize_windows();
             } catch (BoardHandlingException exc) {
                 Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, exc);
-                Alert alert = new Alert(AlertType.ERROR, exc.toString());
-                alert.showAndWait();
-                Runtime.getRuntime().exit(1);
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(AlertType.ERROR, exc.toString());
+                    alert.showAndWait();
+                    Runtime.getRuntime().exit(1);
+                });
             }
         } else {
             try (ObjectInputStream object_stream = new ObjectInputStream(design_file.get_input_stream())) {
                 boolean read_ok = board_panel.board_handling.read_design(object_stream, test_level);
                 if (!read_ok) {
-                    Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
-                    alert.showAndWait();
-                    Runtime.getRuntime().exit(1);
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
+                        alert.showAndWait();
+                        Runtime.getRuntime().exit(1);
+                    });
                 }
                 java.awt.Point frame_location;
                 java.awt.Rectangle frame_bounds;
@@ -272,15 +277,19 @@ public class BoardFrame extends javax.swing.JFrame {
                     }
                 } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
-                    Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
-                    alert.showAndWait();
-                    Runtime.getRuntime().exit(1);
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
+                        alert.showAndWait();
+                        Runtime.getRuntime().exit(1);
+                    });
                 }
             } catch (IOException ex) {
                 Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
-                Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
-                alert.showAndWait();
-                Runtime.getRuntime().exit(1);
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
+                    alert.showAndWait();
+                    Runtime.getRuntime().exit(1);
+                });
             }
         }
 
@@ -305,8 +314,10 @@ public class BoardFrame extends javax.swing.JFrame {
                     boolean read_ok = GUIDefaultsFile.read(this, board_panel.board_handling, input_stream);
                     if (!read_ok) {
                         screen_messages.set_status_message(resources.getString("error_1"));
-                        Alert alert = new Alert(AlertType.ERROR, resources.getString("error_1"));
-                        alert.showAndWait();
+                        Platform.runLater(() -> {
+                            Alert alert = new Alert(AlertType.ERROR, resources.getString("error_1"));
+                            alert.showAndWait();
+                        });
                     }
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -342,14 +353,18 @@ public class BoardFrame extends javax.swing.JFrame {
         } catch (IOException e) {
             Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, e);
             screen_messages.set_status_message(resources.getString("error_2"));
-            Alert alert = new Alert(AlertType.ERROR, resources.getString("error_2"));
-            alert.showAndWait();
+            Platform.runLater(() -> {
+                Alert alert = new Alert(AlertType.ERROR, resources.getString("error_2"));
+                alert.showAndWait();
+            });
             return false;
         } catch (java.security.AccessControlException e) {
             Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, e);
             screen_messages.set_status_message(resources.getString("error_3"));
-            Alert alert = new Alert(AlertType.ERROR, resources.getString("error_3"));
-            alert.showAndWait();
+            Platform.runLater(() -> {
+                Alert alert = new Alert(AlertType.ERROR, resources.getString("error_3"));
+                alert.showAndWait();
+            });
             return false;
         }
     }
