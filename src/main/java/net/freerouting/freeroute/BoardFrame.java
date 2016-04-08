@@ -25,6 +25,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import net.freerouting.freeroute.board.BoardObserverAdaptor;
@@ -152,16 +154,20 @@ public class BoardFrame extends javax.swing.JFrame {
         read();
         menubar.add_design_dependent_items();
         if (design_file.is_created_from_text_file()) {
-            // Read the file  with the saved rules, if it is existing.
-            String file_name = design_file.get_name();
-            String[] name_parts = file_name.split("\\.");
-            java.util.ResourceBundle rb
-                    = java.util.ResourceBundle.getBundle(
-                            "net.freerouting.freeroute.resources.MainApp",
-                            resources.getLocale());
-            DesignFile.read_rules_file(name_parts[0], design_file.get_parent(),
-                    board_panel.board_handling,
-                    rb.getString("confirm_import_rules"));
+            try {
+                // Read the file  with the saved rules, if it is existing.
+                String file_name = design_file.get_name();
+                String[] name_parts = file_name.split("\\.");
+                java.util.ResourceBundle rb
+                        = java.util.ResourceBundle.getBundle(
+                                "net.freerouting.freeroute.resources.MainApp",
+                                resources.getLocale());
+                DesignFile.read_rules_file(name_parts[0], design_file.get_parent(),
+                        board_panel.board_handling,
+                        rb.getString("confirm_import_rules"));
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(DesignFile.class.getName()).log(Level.INFO, "no rules file");
+            }
             refresh_windows();
         }
     }
@@ -235,6 +241,7 @@ public class BoardFrame extends javax.swing.JFrame {
                 viewport_position = new java.awt.Point(0, 0);
                 initialize_windows();
             } catch (BoardHandlingException exc) {
+                Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, exc);
                 Alert alert = new Alert(AlertType.ERROR, exc.toString());
                 alert.showAndWait();
                 Runtime.getRuntime().exit(1);
@@ -262,12 +269,14 @@ public class BoardFrame extends javax.swing.JFrame {
                     for (int i = 0; i < permanent_subwindows.length; ++i) {
                         permanent_subwindows[i].read(object_stream);
                     }
-                } catch (IOException | ClassNotFoundException e) {
+                } catch (IOException | ClassNotFoundException ex) {
+                    Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
                     Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
                     alert.showAndWait();
                     Runtime.getRuntime().exit(1);
                 }
             } catch (IOException ex) {
+                Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
                 Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
                 alert.showAndWait();
                 Runtime.getRuntime().exit(1);
@@ -298,10 +307,12 @@ public class BoardFrame extends javax.swing.JFrame {
                     alert.showAndWait();
                 }
             } catch (FileNotFoundException ex) {
+                Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
                 Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
                 alert.showAndWait();
                 Runtime.getRuntime().exit(1);
             } catch (IOException ex) {
+                Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
                 Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
                 alert.showAndWait();
                 Runtime.getRuntime().exit(1);
@@ -332,11 +343,13 @@ public class BoardFrame extends javax.swing.JFrame {
             }
             return true;
         } catch (IOException e) {
+            Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, e);
             screen_messages.set_status_message(resources.getString("error_2"));
             Alert alert = new Alert(AlertType.ERROR, resources.getString("error_2"));
             alert.showAndWait();
             return false;
         } catch (java.security.AccessControlException e) {
+            Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, e);
             screen_messages.set_status_message(resources.getString("error_3"));
             Alert alert = new Alert(AlertType.ERROR, resources.getString("error_3"));
             alert.showAndWait();

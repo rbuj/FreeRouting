@@ -76,7 +76,9 @@ public class MainAppController implements Initializable {
     @FXML
     private void open_board_design_action(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(inputFile);
+        if (!design_dir_name.isEmpty()) {
+            fileChooser.setInitialDirectory(new File(design_dir_name));
+        }
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().add(
                 new ExtensionFilter("All Design Files", "*.dsn", "*.bin"));
@@ -88,24 +90,17 @@ public class MainAppController implements Initializable {
         if (inputFile != null) {
             try {
                 design_dir_name = inputFile.getParent();
-                java.util.ResourceBundle resources
-                        = java.util.ResourceBundle.getBundle(
-                                "net.freerouting.freeroute.resources.MainApp",
-                                resourceBundle.getLocale());
                 /**
                  * create board
                  */
-                BoardFrame new_frame;
-                new_frame = new BoardFrame(
+                BoardFrame new_frame = new BoardFrame(
                         new DesignFile(inputFile, design_dir_name),
                         board_option,
                         test_level,
                         resourceBundle.getLocale(),
                         test_level == null); // true, if it's a test_version
                 new_frame.setVisible(true);
-            } catch (BoardFrameException ex) {
-                Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (DsnFileException ex) {
+            } catch (BoardFrameException | DsnFileException ex) {
                 Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

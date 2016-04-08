@@ -101,18 +101,20 @@ public class DesignFile {
     }
 
     public static boolean read_rules_file(String p_design_name, String p_parent_name,
-            net.freerouting.freeroute.interactive.BoardHandling p_board_handling, String p_confirm_message) throws DsnFileException {
-        boolean result = true;
+            net.freerouting.freeroute.interactive.BoardHandling p_board_handling, String p_confirm_message) throws DsnFileException, FileNotFoundException {
+        boolean result = false;
         String rule_file_name = p_design_name + ".rules";
         boolean dsn_file_generated_by_host = p_board_handling.get_routing_board().communication.specctra_parser_info.dsn_file_generated_by_host;
-        File rules_file = new File(p_parent_name, rule_file_name);
-        try (InputStream input_stream = new FileInputStream(rules_file)) {
-            if (input_stream != null && dsn_file_generated_by_host && WindowMessage.confirm(p_confirm_message)) {
-                result = net.freerouting.freeroute.designformats.specctra.RulesFile.read(input_stream, p_design_name, p_board_handling);
-                rules_file.delete();
+        if (dsn_file_generated_by_host) {
+            File rules_file = new File(p_parent_name, rule_file_name);
+            try (InputStream input_stream = new FileInputStream(rules_file)) {
+                if (WindowMessage.confirm(p_confirm_message)) {
+                    result = net.freerouting.freeroute.designformats.specctra.RulesFile.read(input_stream, p_design_name, p_board_handling);
+                    rules_file.delete();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(DesignFile.class.getName()).log(Level.INFO, null, ex);
             }
-        } catch (IOException e) {
-            result = false;
         }
         return result;
     }
@@ -128,6 +130,7 @@ public class DesignFile {
         try {
             result = new FileInputStream(input_file);
         } catch (FileNotFoundException e) {
+            Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, e);
             result = null;
         }
         return result;
@@ -163,9 +166,7 @@ public class DesignFile {
             }
             try (OutputStream output_stream = new FileOutputStream(new_file)) {
                 p_board_frame.board_panel.board_handling.export_to_dsn_file(output_stream, design_name, false);
-            } catch (IOException ex) {
-                Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (BoardHandlingException ex) {
+            } catch (IOException | BoardHandlingException ex) {
                 Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
