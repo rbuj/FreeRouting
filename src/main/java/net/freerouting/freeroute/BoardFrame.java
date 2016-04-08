@@ -298,8 +298,10 @@ public class BoardFrame extends javax.swing.JFrame {
         setVisible(true);
         if (design_file.is_created_from_text_file()) {
             // Read the default gui settings, if gui default file exists.
-            File defaults_file = new File(design_file.get_parent(), GUI_DEFAULTS_FILE_NAME);
-            try (InputStream input_stream = new FileInputStream(defaults_file)) {
+            InputStream input_stream = null;
+            try {
+                File defaults_file = new File(design_file.get_parent(), GUI_DEFAULTS_FILE_NAME);
+                input_stream = new FileInputStream(defaults_file);
                 boolean read_ok = GUIDefaultsFile.read(this, board_panel.board_handling, input_stream);
                 if (!read_ok) {
                     screen_messages.set_status_message(resources.getString("error_1"));
@@ -307,18 +309,18 @@ public class BoardFrame extends javax.swing.JFrame {
                     alert.showAndWait();
                 }
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
-                Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
-                alert.showAndWait();
-                Runtime.getRuntime().exit(1);
-            } catch (IOException ex) {
-                Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
-                Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
-                alert.showAndWait();
-                Runtime.getRuntime().exit(1);
+                Logger.getLogger(BoardFrame.class.getName()).log(Level.INFO, "File not found: " + GUI_DEFAULTS_FILE_NAME);
+            } finally {
+                try {
+                    if (input_stream != null) {
+                        input_stream.close();
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            zoom_all();
         }
+        zoom_all();
     }
 
     /**
