@@ -167,7 +167,7 @@ public class BoardFrame extends javax.swing.JFrame {
                         board_panel.board_handling,
                         rb.getString("confirm_import_rules"));
             } catch (DsnFileException ex) {
-                Logger.getLogger(DesignFile.class.getName()).log(Level.INFO, "no rules file");
+                Logger.getLogger(BoardFrame.class.getName()).log(Level.INFO, "no rules file");
             }
             refresh_windows();
             setVisible(true);
@@ -243,7 +243,7 @@ public class BoardFrame extends javax.swing.JFrame {
                 viewport_position = new java.awt.Point(0, 0);
                 initialize_windows();
             } catch (BoardHandlingException exc) {
-                Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, exc);
+                Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, exc);
                 Platform.runLater(() -> {
                     Alert alert = new Alert(AlertType.ERROR, exc.toString());
                     alert.showAndWait();
@@ -276,7 +276,7 @@ public class BoardFrame extends javax.swing.JFrame {
                         permanent_subwindows[i].read(object_stream);
                     }
                 } catch (IOException | ClassNotFoundException ex) {
-                    Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, ex);
                     Platform.runLater(() -> {
                         Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
                         alert.showAndWait();
@@ -284,7 +284,7 @@ public class BoardFrame extends javax.swing.JFrame {
                     });
                 }
             } catch (IOException ex) {
-                Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, ex);
                 Platform.runLater(() -> {
                     Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
                     alert.showAndWait();
@@ -351,7 +351,7 @@ public class BoardFrame extends javax.swing.JFrame {
             }
             return true;
         } catch (IOException e) {
-            Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, e);
             screen_messages.set_status_message(resources.getString("error_2"));
             Platform.runLater(() -> {
                 Alert alert = new Alert(AlertType.ERROR, resources.getString("error_2"));
@@ -359,7 +359,7 @@ public class BoardFrame extends javax.swing.JFrame {
             });
             return false;
         } catch (java.security.AccessControlException e) {
-            Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, e);
             screen_messages.set_status_message(resources.getString("error_3"));
             Platform.runLater(() -> {
                 Alert alert = new Alert(AlertType.ERROR, resources.getString("error_3"));
