@@ -5,6 +5,12 @@ ToDo
 
 ????-??-??
 
+        * New custom exceptions:
+                * BoardFrameException.java
+                * designformats/specctra/DsnFileException.java
+                * interactive/BoardHandlingException.java
+        * The designs stored with bin format using previous versions are not
+          supported because the classpath was changed.
         * Javadoc: use package-info.java instead of package.html
         * jflex-maven-plugin (generate java classes from flex spec files)
                 new java classes in src/main/java/net/freerouting/freeroute:
