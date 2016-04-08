@@ -29,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javax.swing.SwingUtilities;
 import net.freerouting.freeroute.board.TestLevel;
 import net.freerouting.freeroute.designformats.specctra.DsnFileException;
 
@@ -87,22 +88,25 @@ public class MainAppController implements Initializable {
     }
 
     protected void create_board_frame() {
-        if (inputFile != null) {
-            try {
-                design_dir_name = inputFile.getParent();
-                /**
-                 * create board
-                 */
-                BoardFrame new_frame = new BoardFrame(
-                        new DesignFile(inputFile, design_dir_name),
-                        board_option,
-                        test_level,
-                        resourceBundle.getLocale(),
-                        test_level == null); // true, if it's a test_version
-                new_frame.setVisible(true);
-            } catch (BoardFrameException | DsnFileException ex) {
-                Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                if (inputFile != null) {
+                    try {
+                        design_dir_name = inputFile.getParent();
+                        /**
+                         * create board
+                         */
+                        BoardFrame new_frame = new BoardFrame(
+                                new DesignFile(inputFile, design_dir_name),
+                                board_option,
+                                test_level,
+                                resourceBundle.getLocale(),
+                                test_level == null); // true, if it's a test_version
+                    } catch (BoardFrameException | DsnFileException ex) {
+                        Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
-        }
+        });
     }
 }
