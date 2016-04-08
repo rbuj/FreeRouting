@@ -19,6 +19,9 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Handels the placement bata of a library component.
  *
@@ -29,7 +32,7 @@ public class Component extends ScopeKeyword {
     /**
      * Used also when reading a session file.
      */
-    public static ComponentPlacement read_scope(Scanner p_scanner) throws java.io.IOException {
+    public static ComponentPlacement read_scope(Scanner p_scanner) throws java.io.IOException, DsnFileException {
         Object next_token = p_scanner.next_token();
         if (!(next_token instanceof String)) {
             System.out.println("Component.read_scope: component name expected");
@@ -172,7 +175,7 @@ public class Component extends ScopeKeyword {
         return null;
     }
 
-    private static ComponentPlacement.ComponentLocation read_place_scope(Scanner p_scanner) {
+    private static ComponentPlacement.ComponentLocation read_place_scope(Scanner p_scanner) throws DsnFileException {
         try {
             java.util.Map<String, ComponentPlacement.ItemClearanceInfo> pin_infos
                     = new java.util.TreeMap<>();
@@ -271,7 +274,7 @@ public class Component extends ScopeKeyword {
         }
     }
 
-    private static ComponentPlacement.ItemClearanceInfo read_item_clearance_info(Scanner p_scanner) throws java.io.IOException {
+    private static ComponentPlacement.ItemClearanceInfo read_item_clearance_info(Scanner p_scanner) throws java.io.IOException, DsnFileException {
         p_scanner.yybegin(SpecctraFileScanner.NAME);
         Object next_token = p_scanner.next_token();
         if (!(next_token instanceof String)) {
@@ -334,7 +337,10 @@ public class Component extends ScopeKeyword {
             }
             p_par.placement_list.add(component_placement);
         } catch (java.io.IOException e) {
-            System.out.println("Component.read_scope: IO error scanning file");
+            Logger.getLogger(Component.class.getName()).log(Level.SEVERE, "Component.read_scope: IO error scanning file");
+            return false;
+        } catch (DsnFileException ex) {
+            Logger.getLogger(Component.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
         return true;

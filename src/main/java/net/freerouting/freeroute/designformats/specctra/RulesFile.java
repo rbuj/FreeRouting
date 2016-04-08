@@ -51,7 +51,7 @@ public class RulesFile {
     }
 
     public static boolean read(java.io.InputStream p_input_stream, String p_design_name,
-            net.freerouting.freeroute.interactive.BoardHandling p_board_handling) {
+            net.freerouting.freeroute.interactive.BoardHandling p_board_handling) throws DsnFileException {
         BasicBoard routing_board = p_board_handling.get_routing_board();
         Scanner scanner = new SpecctraFileScanner(p_input_stream);
         try {
@@ -236,7 +236,7 @@ public class RulesFile {
         return true;
     }
 
-    private static boolean read_net_class(Scanner p_scanner, LayerStructure p_layer_structure, BasicBoard p_board) {
+    private static boolean read_net_class(Scanner p_scanner, LayerStructure p_layer_structure, BasicBoard p_board) throws DsnFileException {
         NetClass curr_class = NetClass.read_scope(p_scanner);
         if (curr_class == null) {
             return false;

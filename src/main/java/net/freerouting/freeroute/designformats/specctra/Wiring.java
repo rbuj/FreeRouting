@@ -22,6 +22,8 @@ package net.freerouting.freeroute.designformats.specctra;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.FixedState;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.ItemSelectionFilter;
@@ -325,9 +327,19 @@ class Wiring extends ScopeKeyword {
             boolean read_ok = true;
             if (prev_token == OPEN_BRACKET) {
                 if (next_token == Keyword.WIRE) {
-                    read_wire_scope(p_par);
+                    try {
+                        read_wire_scope(p_par);
+                    } catch (DsnFileException ex) {
+                        Logger.getLogger(Wiring.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                    }
                 } else if (next_token == Keyword.VIA) {
-                    read_ok = read_via_scope(p_par);
+                    try {
+                        read_ok = read_via_scope(p_par);
+                    } catch (DsnFileException ex) {
+                        Logger.getLogger(Wiring.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                    }
                 } else {
                     skip_scope(p_par.scanner);
                 }
@@ -343,7 +355,7 @@ class Wiring extends ScopeKeyword {
         return true;
     }
 
-    private Item read_wire_scope(ReadScopeParameter p_par) {
+    private Item read_wire_scope(ReadScopeParameter p_par) throws DsnFileException {
         Net.Id net_id = null;
         String clearance_class_name = null;
         net.freerouting.freeroute.board.FixedState fixed = net.freerouting.freeroute.board.FixedState.UNFIXED;
@@ -530,7 +542,7 @@ class Wiring extends ScopeKeyword {
         }
     }
 
-    private boolean read_via_scope(ReadScopeParameter p_par) {
+    private boolean read_via_scope(ReadScopeParameter p_par) throws DsnFileException {
         try {
             net.freerouting.freeroute.board.FixedState fixed = net.freerouting.freeroute.board.FixedState.UNFIXED;
             // read the padstack name

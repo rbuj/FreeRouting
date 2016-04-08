@@ -19,9 +19,14 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import net.freerouting.freeroute.board.BasicBoard;
+import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.TestLevel;
+import net.freerouting.freeroute.datastructures.IdNoGenerator;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
+import net.freerouting.freeroute.interactive.BoardHandling;
 
 /**
  * Class for reading and writing dsn-files.
@@ -37,17 +42,16 @@ public class DsnFile {
      * p_item_observers and p_item_id_no_generator are used, in case the board
      * is embedded into a host system. Returns false, if an error occured.
      */
-    public static ReadResult read(java.io.InputStream p_input_stream, net.freerouting.freeroute.interactive.BoardHandling p_board_handling,
-            net.freerouting.freeroute.board.BoardObservers p_observers, net.freerouting.freeroute.datastructures.IdNoGenerator p_item_id_no_generator, TestLevel p_test_level) {
+    public static void read(InputStream p_input_stream, BoardHandling p_board_handling,
+            BoardObservers p_observers, IdNoGenerator p_item_id_no_generator,
+            TestLevel p_test_level) throws DsnFileException {
         Scanner scanner = new SpecctraFileScanner(p_input_stream);
         Object curr_token;
         for (int i = 0; i < 3; ++i) {
             try {
                 curr_token = scanner.next_token();
-            } catch (java.io.IOException e) {
-                System.out.println("DsnFile.read: IO error scanning file");
-                System.out.println(e);
-                return ReadResult.ERROR;
+            } catch (java.io.IOException exc) {
+                throw new DsnFileException("DsnFile.read: IO error scanning file", exc);
             }
             boolean keyword_ok = true;
             if (i == 0) {
@@ -57,8 +61,7 @@ public class DsnFile {
                 scanner.yybegin(SpecctraFileScanner.NAME); // to overread the name of the pcb for i = 2
             }
             if (!keyword_ok) {
-                System.out.println("DsnFile.read: specctra dsn file format expected");
-                return ReadResult.ERROR;
+                throw new DsnFileException("DsnFile.read: specctra dsn file format expected");
             }
         }
         ReadScopeParameter read_scope_par
@@ -77,7 +80,6 @@ public class DsnFile {
             result = ReadResult.ERROR;
         }
         //tests.Validate.check("after reading dsn", read_scope_par.board_handling.get_routing_board());
-        return result;
     }
 
     /**
@@ -181,27 +183,23 @@ public class DsnFile {
      * dsn scopes are written, so that any host system with an specctra
      * interface can read them.
      */
-    public static boolean write(net.freerouting.freeroute.interactive.BoardHandling p_board_handling, java.io.OutputStream p_file, String p_design_name, boolean p_compat_mode) {
+    public static void write(BoardHandling p_board_handling, OutputStream p_file,
+            String p_design_name, boolean p_compat_mode)  throws DsnFileException {
         //tests.Validate.check("before writing dsn", p_board);
         IndentFileWriter output_file = new IndentFileWriter(p_file);
         if (output_file == null) {
-            System.out.println("unable to write dsn file");
-            return false;
+            throw new DsnFileException("unable to write dsn file");
         }
-
         try {
             write_pcb_scope(p_board_handling, output_file, p_design_name, p_compat_mode);
-        } catch (java.io.IOException e) {
-            System.out.println("unable to write dsn file");
-            return false;
+        } catch (java.io.IOException exc) {
+            throw new DsnFileException("unable to write dsn file", exc);
         }
         try {
             output_file.close();
-        } catch (java.io.IOException e) {
-            System.out.println("unable to close dsn file");
-            return false;
+        } catch (java.io.IOException exc) {
+            throw new DsnFileException("unable to close dsn file", exc);
         }
-        return true;
     }
 
     private static void write_pcb_scope(net.freerouting.freeroute.interactive.BoardHandling p_board_handling, IndentFileWriter p_file, String p_design_name, boolean p_compat_mode)
@@ -227,46 +225,43 @@ public class DsnFile {
         p_file.end_scope();
     }
 
-    static boolean read_on_off_scope(Scanner p_scanner) {
+    static boolean read_on_off_scope(Scanner p_scanner) throws DsnFileException {
         try {
             Object next_token = p_scanner.next_token();
             boolean result = false;
             if (next_token == Keyword.ON) {
                 result = true;
             } else if (next_token != Keyword.OFF) {
-                System.out.println("DsnFile.read_boolean: Keyword.OFF expected");
+                throw new DsnFileException("DsnFile.read_boolean: Keyword.OFF expected");
             }
             ScopeKeyword.skip_scope(p_scanner);
             return result;
-        } catch (java.io.IOException e) {
-            System.out.println("DsnFile.read_boolean: IO error scanning file");
-            return false;
+        } catch (java.io.IOException exc) {
+            throw new DsnFileException("DsnFile.read_boolean: IO error scanning file", exc);
         }
     }
 
-    static int read_integer_scope(Scanner p_scanner) {
+    static int read_integer_scope(Scanner p_scanner) throws DsnFileException {
         try {
             int value;
             Object next_token = p_scanner.next_token();
             if (next_token instanceof Integer) {
                 value = (int) next_token;
             } else {
-                System.out.println("DsnFile.read_integer_scope: number expected");
-                return 0;
+                throw new DsnFileException("DsnFile.read_integer_scope: number expected");
             }
             next_token = p_scanner.next_token();
             if (next_token != Keyword.CLOSED_BRACKET) {
                 System.out.println("DsnFile.read_integer_scope: closing bracket expected");
-                return 0;
+                throw new DsnFileException("DsnFile.read_integer_scope: closing bracket expected");
             }
             return value;
-        } catch (java.io.IOException e) {
-            System.out.println("DsnFile.read_integer_scope: IO error scanning file");
-            return 0;
+        } catch (java.io.IOException exc) {
+            throw new DsnFileException("DsnFile.read_integer_scope: IO error scanning file", exc);
         }
     }
 
-    static double read_float_scope(Scanner p_scanner) {
+    static double read_float_scope(Scanner p_scanner) throws DsnFileException {
         try {
             double value;
             Object next_token = p_scanner.next_token();
@@ -275,28 +270,24 @@ public class DsnFile {
             } else if (next_token instanceof Integer) {
                 value = (int) next_token;
             } else {
-                System.out.println("DsnFile.read_float_scope: number expected");
-                return 0;
+                throw new DsnFileException("DsnFile.read_float_scope: number expected");
             }
             next_token = p_scanner.next_token();
             if (next_token != Keyword.CLOSED_BRACKET) {
-                System.out.println("DsnFile.read_float_scope: closing bracket expected");
-                return 0;
+                throw new DsnFileException("DsnFile.read_float_scope: closing bracket expected");
             }
             return value;
-        } catch (java.io.IOException e) {
-            System.out.println("DsnFile.read_float_scope: IO error scanning file");
-            return 0;
+        } catch (java.io.IOException exc) {
+            throw new DsnFileException("DsnFile.read_float_scope: IO error scanning file", exc);
         }
     }
 
-    public static String read_string_scope(Scanner p_scanner) {
+    public static String read_string_scope(Scanner p_scanner) throws DsnFileException {
         try {
             p_scanner.yybegin(SpecctraFileScanner.NAME);
             Object next_token = p_scanner.next_token();
             if (!(next_token instanceof String)) {
-                System.out.println("DsnFile:read_string_scope: String expected");
-                return null;
+                throw new DsnFileException("DsnFile:read_string_scope: String expected");
             }
             String result = (String) next_token;
             next_token = p_scanner.next_token();
@@ -304,13 +295,13 @@ public class DsnFile {
                 System.out.println("DsnFile.read_string_scope: closing bracket expected");
             }
             return result;
-        } catch (java.io.IOException e) {
-            System.out.println("DsnFile.read_string_scope: IO error scanning file");
-            return null;
+        } catch (java.io.IOException exc) {
+            throw new DsnFileException("DsnFile.read_string_scope: IO error scanning file", exc);
         }
     }
 
-    public static java.util.Collection<String> read_string_list_scope(Scanner p_scanner) {
+    public static java.util.Collection<String> read_string_list_scope(Scanner p_scanner)
+            throws DsnFileException {
         java.util.Collection<String> result = new java.util.LinkedList<>();
         try {
             for (;;) {
@@ -320,19 +311,17 @@ public class DsnFile {
                     break;
                 }
                 if (!(next_token instanceof String)) {
-                    System.out.println("DsnFileread_string_list_scope: string expected");
-                    return null;
+                    throw new DsnFileException("DsnFileread_string_list_scope: string expected");
                 }
                 result.add((String) next_token);
             }
-        } catch (java.io.IOException e) {
-            System.out.println("DsnFile.read_string_list_scope: IO error scanning file");
+        } catch (java.io.IOException exc) {
+            throw new DsnFileException("DsnFile.read_string_list_scope: IO error scanning file", exc);
         }
         return result;
     }
 
     public enum ReadResult {
-
         OK, OUTLINE_MISSING, ERROR
     }
 }

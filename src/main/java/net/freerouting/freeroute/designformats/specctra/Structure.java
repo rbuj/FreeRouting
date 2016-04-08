@@ -22,6 +22,8 @@ package net.freerouting.freeroute.designformats.specctra;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.FixedState;
 import net.freerouting.freeroute.board.TestLevel;
 import net.freerouting.freeroute.datastructures.IdentifierType;
@@ -219,7 +221,7 @@ class Structure extends ScopeKeyword {
         p_par.file.end_scope();
     }
 
-    private static boolean read_boundary_scope(Scanner p_scanner, BoardConstructionInfo p_board_construction_info) {
+    private static boolean read_boundary_scope(Scanner p_scanner, BoardConstructionInfo p_board_construction_info) throws DsnFileException {
         Shape curr_shape = Shape.read_scope(p_scanner, null);
         // overread the closing bracket.
         try {
@@ -360,7 +362,7 @@ class Structure extends ScopeKeyword {
         }
     }
 
-    private static boolean read_control_scope(ReadScopeParameter p_par) {
+    private static boolean read_control_scope(ReadScopeParameter p_par) throws DsnFileException {
         Object next_token = null;
         for (;;) {
             Object prev_token = next_token;
@@ -793,7 +795,12 @@ class Structure extends ScopeKeyword {
             boolean read_ok = true;
             if (prev_token == OPEN_BRACKET) {
                 if (next_token == Keyword.BOUNDARY) {
-                    read_boundary_scope(p_par.scanner, board_construction_info);
+                    try {
+                        read_boundary_scope(p_par.scanner, board_construction_info);
+                    } catch (DsnFileException ex) {
+                        Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                    }
                 } else if (next_token == Keyword.LAYER) {
                     read_ok = read_layer_scope(p_par.scanner, board_construction_info, p_par.string_quote);
                     if (p_par.layer_structure != null) {
@@ -808,17 +815,32 @@ class Structure extends ScopeKeyword {
                     if (p_par.layer_structure == null) {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
-                    keepout_list.add(Shape.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                    try {
+                        keepout_list.add(Shape.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                    } catch (DsnFileException ex) {
+                        Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                    }
                 } else if (next_token == Keyword.VIA_KEEPOUT) {
                     if (p_par.layer_structure == null) {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
-                    via_keepout_list.add(Shape.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                    try {
+                        via_keepout_list.add(Shape.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                    } catch (DsnFileException ex) {
+                        Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                    }
                 } else if (next_token == Keyword.PLACE_KEEPOUT) {
                     if (p_par.layer_structure == null) {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
-                    place_keepout_list.add(Shape.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                    try {
+                        place_keepout_list.add(Shape.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                    } catch (DsnFileException ex) {
+                        Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                    }
                 } else if (next_token == Keyword.PLANE_SCOPE) {
                     if (p_par.layer_structure == null) {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
@@ -827,10 +849,20 @@ class Structure extends ScopeKeyword {
                 } else if (next_token == Keyword.AUTOROUTE_SETTINGS) {
                     if (p_par.layer_structure == null) {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
-                        p_par.autoroute_settings = AutorouteSettings.read_scope(p_par.scanner, p_par.layer_structure);
+                        try {
+                            p_par.autoroute_settings = AutorouteSettings.read_scope(p_par.scanner, p_par.layer_structure);
+                        } catch (DsnFileException ex) {
+                            Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
+                            return false;
+                        }
                     }
                 } else if (next_token == Keyword.CONTROL) {
-                    read_ok = read_control_scope(p_par);
+                    try {
+                        read_ok = read_control_scope(p_par);
+                    } catch (DsnFileException ex) {
+                        Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                    }
                 } else if (next_token == Keyword.FLIP_STYLE) {
                     flip_style_rotate_first = PlaceControl.read_flip_style_rotate_first(p_par.scanner);
                 } else if (next_token == Keyword.SNAP_ANGLE) {

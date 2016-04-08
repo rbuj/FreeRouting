@@ -33,6 +33,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.freerouting.freeroute.datastructures.FileFilter;
+import net.freerouting.freeroute.designformats.specctra.DsnFileException;
+import net.freerouting.freeroute.interactive.BoardHandlingException;
 
 /**
  * File functionality with security restrictions used, when the application is
@@ -99,7 +101,7 @@ public class DesignFile {
     }
 
     public static boolean read_rules_file(String p_design_name, String p_parent_name,
-            net.freerouting.freeroute.interactive.BoardHandling p_board_handling, String p_confirm_message) {
+            net.freerouting.freeroute.interactive.BoardHandling p_board_handling, String p_confirm_message) throws DsnFileException {
         boolean result = true;
         String rule_file_name = p_design_name + ".rules";
         boolean dsn_file_generated_by_host = p_board_handling.get_routing_board().communication.specctra_parser_info.dsn_file_generated_by_host;
@@ -160,12 +162,10 @@ public class DesignFile {
                 return;
             }
             try (OutputStream output_stream = new FileOutputStream(new_file)) {
-                if (p_board_frame.board_panel.board_handling.export_to_dsn_file(output_stream, design_name, false)) {
-                    p_board_frame.screen_messages.set_status_message(resources.getString("message_4") + " " + new_file_name + " " + resources.getString("message_5"));
-                } else {
-                    p_board_frame.screen_messages.set_status_message(resources.getString("message_6") + " " + new_file_name + " " + resources.getString("message_7"));
-                }
+                p_board_frame.board_panel.board_handling.export_to_dsn_file(output_stream, design_name, false);
             } catch (IOException ex) {
+                Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (BoardHandlingException ex) {
                 Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

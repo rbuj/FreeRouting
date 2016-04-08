@@ -22,6 +22,8 @@ package net.freerouting.freeroute.designformats.specctra;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.geometry.planar.IntVector;
 import net.freerouting.freeroute.geometry.planar.PolygonShape;
 import net.freerouting.freeroute.geometry.planar.Simplex;
@@ -95,7 +97,7 @@ public class Library extends ScopeKeyword {
     }
 
     static boolean read_padstack_scope(Scanner p_scanner, LayerStructure p_layer_structure,
-            CoordinateTransform p_coordinate_transform, net.freerouting.freeroute.library.Padstacks p_board_padstacks) {
+            CoordinateTransform p_coordinate_transform, net.freerouting.freeroute.library.Padstacks p_board_padstacks) throws DsnFileException {
         String padstack_name = null;
         boolean is_drilllable = true;
         boolean placed_absolute = false;
@@ -234,16 +236,27 @@ public class Library extends ScopeKeyword {
             }
             if (prev_token == OPEN_BRACKET) {
                 if (next_token == Keyword.PADSTACK) {
-                    if (!read_padstack_scope(p_par.scanner, p_par.layer_structure,
-                            p_par.coordinate_transform, board.library.padstacks)) {
+                    try {
+                        if (!read_padstack_scope(p_par.scanner, p_par.layer_structure,
+                                p_par.coordinate_transform, board.library.padstacks)) {
+                            return false;
+                        }
+                    } catch (DsnFileException ex) {
+                        Logger.getLogger(Library.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
+
                     }
                 } else if (next_token == Keyword.IMAGE) {
-                    Package curr_package = Package.read_scope(p_par.scanner, p_par.layer_structure);
-                    if (curr_package == null) {
+                    try {
+                        Package curr_package = Package.read_scope(p_par.scanner, p_par.layer_structure);
+                        if (curr_package == null) {
+                            return false;
+                        }
+                        package_list.add(curr_package);
+                    } catch (DsnFileException ex) {
+                        Logger.getLogger(Library.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
-                    package_list.add(curr_package);
                 } else {
                     skip_scope(p_par.scanner);
                 }

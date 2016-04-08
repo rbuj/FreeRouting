@@ -19,19 +19,18 @@ package net.freerouting.freeroute;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import net.freerouting.freeroute.board.TestLevel;
+import net.freerouting.freeroute.designformats.specctra.DsnFileException;
 
 /**
  * FXML Controller class
@@ -48,9 +47,11 @@ public class MainAppController implements Initializable {
 
     protected static SimpleStringProperty sp_message_field;
     private ResourceBundle resourceBundle;
-    private DesignFile designFile;
     private TestLevel test_level = null;
     private BoardFrame.Option board_option;
+
+    private File inputFile;
+    private String design_dir_name;
 
     /**
      * Initializes the controller class.
@@ -62,8 +63,11 @@ public class MainAppController implements Initializable {
         message_field.textProperty().bind(sp_message_field);
     }
 
-    void init_variables(DesignFile p_designFile, TestLevel p_test_level, BoardFrame.Option p_board_option, Stage p_mainStage) {
-        designFile = p_designFile;
+    void init_variables(String p_design_dir_name, File p_inputFile, TestLevel p_test_level,
+            BoardFrame.Option p_board_option, Stage p_mainStage) {
+        design_dir_name = !p_design_dir_name.isEmpty()
+                ? p_design_dir_name : (p_inputFile != null) ? p_inputFile.getParent() : "";
+        inputFile = p_inputFile;
         test_level = p_test_level;
         board_option = p_board_option;
         mainStage = p_mainStage;
@@ -72,71 +76,37 @@ public class MainAppController implements Initializable {
     @FXML
     private void open_board_design_action(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(inputFile);
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().add(
                 new ExtensionFilter("All Design Files", "*.dsn", "*.bin"));
-        File selectedFile = fileChooser.showOpenDialog(mainStage);
-        create_board_frame(selectedFile);
+        inputFile = fileChooser.showOpenDialog(mainStage);
+        create_board_frame();
     }
 
-    void create_board_frame() {
-        create_board_frame(designFile.get_input_file());
-    }
-
-    private void create_board_frame(File selectedFile) {
-        if (selectedFile != null) {
-            java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle(
-                            "net.freerouting.freeroute.resources.MainApp",
-                            resourceBundle.getLocale());
-            /**
-             * Show loading dialog
-             */
-            Alert dialog = new Alert(AlertType.INFORMATION);
-            dialog.initOwner(mainStage);
-            dialog.setTitle("Loading");
-            dialog.setHeaderText("Loading...");
-            dialog.setContentText(resources.getString("loading_design") + " " + selectedFile.toString());
-            dialog.setResizable(false);
-            dialog.initModality(Modality.APPLICATION_MODAL);
-            dialog.show();
-            /**
-             * create board
-             */
-            if (designFile == null) {
-                DesignFile designFile = new DesignFile(selectedFile);
-            } else {
-                designFile.initialize(selectedFile);
-            }
-            BoardFrame new_frame
-                    = new BoardFrame(designFile,
-                            board_option,
-                            test_level,
-                            resourceBundle.getLocale(),
-                            test_level == null); // true, if it's a test_version
-            if (new_frame.read(sp_message_field)) {
-                // read_ok
-                new_frame.menubar.add_design_dependent_items();
-                if (designFile.is_created_from_text_file()) {
-                    // Read the file  with the saved rules, if it is existing.
-                    String file_name = designFile.get_name();
-                    String[] name_parts = file_name.split("\\.");
-                    DesignFile.read_rules_file(name_parts[0], designFile.get_parent(),
-                            new_frame.board_panel.board_handling,
-                            resources.getString("confirm_import_rules"));
-                    new_frame.refresh_windows();
-                }
-                new_frame.setVisible(true);
-            } else {
-                // read fail
-                new_frame.dispose();
-            }
-            /**
-             * close loading dialog
-             */
+    protected void create_board_frame() {
+        if (inputFile != null) {
             try {
-                dialog.close();
-            } catch (Exception exc) {
+                design_dir_name = inputFile.getParent();
+                java.util.ResourceBundle resources
+                        = java.util.ResourceBundle.getBundle(
+                                "net.freerouting.freeroute.resources.MainApp",
+                                resourceBundle.getLocale());
+                /**
+                 * create board
+                 */
+                BoardFrame new_frame;
+                new_frame = new BoardFrame(
+                        new DesignFile(inputFile, design_dir_name),
+                        board_option,
+                        test_level,
+                        resourceBundle.getLocale(),
+                        test_level == null); // true, if it's a test_version
+                new_frame.setVisible(true);
+            } catch (BoardFrameException ex) {
+                Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DsnFileException ex) {
+                Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

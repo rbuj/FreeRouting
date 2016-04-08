@@ -23,6 +23,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.RoutingBoard;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
@@ -1064,17 +1066,27 @@ public class Network extends ScopeKeyword {
                     }
                     via_rules.add(curr_via_rule);
                 } else if (next_token == Keyword.CLASS) {
-                    NetClass curr_class = NetClass.read_scope(p_par.scanner);
-                    if (curr_class == null) {
+                    try {
+                        NetClass curr_class = NetClass.read_scope(p_par.scanner);
+                        if (curr_class == null) {
+                            return false;
+                        }
+                        classes.add(curr_class);
+                    } catch (DsnFileException ex) {
+                        Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
-                    classes.add(curr_class);
                 } else if (next_token == Keyword.CLASS_CLASS) {
-                    NetClass.ClassClass curr_class_class = NetClass.read_class_class_scope(p_par.scanner);
-                    if (curr_class_class == null) {
+                    try {
+                        NetClass.ClassClass curr_class_class = NetClass.read_class_class_scope(p_par.scanner);
+                        if (curr_class_class == null) {
+                            return false;
+                        }
+                        class_class_list.add(curr_class_class);
+                    } catch (DsnFileException ex) {
+                        Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
-                    class_class_list.add(curr_class_class);
                 } else {
                     skip_scope(p_par.scanner);
                 }

@@ -29,7 +29,7 @@ import net.freerouting.freeroute.datastructures.IndentFileWriter;
  */
 public class AutorouteSettings {
 
-    static net.freerouting.freeroute.interactive.AutorouteSettings read_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+    static net.freerouting.freeroute.interactive.AutorouteSettings read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws DsnFileException {
         net.freerouting.freeroute.interactive.AutorouteSettings result = new net.freerouting.freeroute.interactive.AutorouteSettings(p_layer_structure.arr.length);
         boolean with_fanout = false;
         boolean with_autoroute = true;
@@ -85,7 +85,7 @@ public class AutorouteSettings {
     }
 
     static net.freerouting.freeroute.interactive.AutorouteSettings read_layer_rule(Scanner p_scanner, LayerStructure p_layer_structure,
-            net.freerouting.freeroute.interactive.AutorouteSettings p_settings) {
+            net.freerouting.freeroute.interactive.AutorouteSettings p_settings) throws DsnFileException {
         p_scanner.yybegin(SpecctraFileScanner.NAME);
         Object next_token;
         try {

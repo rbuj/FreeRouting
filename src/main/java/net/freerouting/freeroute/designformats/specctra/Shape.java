@@ -150,7 +150,7 @@ public abstract class Shape {
      * The other shapes in the shape_list are holes (windows).
      */
     public static final ReadAreaScopeResult read_area_scope(Scanner p_scanner,
-            LayerStructure p_layer_structure, boolean p_skip_window_scopes) {
+            LayerStructure p_layer_structure, boolean p_skip_window_scopes) throws DsnFileException {
         Collection<Shape> shape_list = new LinkedList<>();
         String clearance_class_name = null;
         String area_name = null;

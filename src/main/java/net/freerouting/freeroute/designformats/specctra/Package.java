@@ -31,7 +31,7 @@ import net.freerouting.freeroute.board.Item;
  */
 public class Package {
 
-    public static Package read_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+    public static Package read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws DsnFileException {
         try {
             boolean is_front = true;
             Collection<Shape> outline = new LinkedList<>();

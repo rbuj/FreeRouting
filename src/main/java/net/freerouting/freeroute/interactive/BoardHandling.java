@@ -27,9 +27,13 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.CoordinateTransform;
 import net.freerouting.freeroute.board.FixedState;
 import net.freerouting.freeroute.board.Item;
@@ -40,7 +44,11 @@ import net.freerouting.freeroute.board.RoutingBoard;
 import net.freerouting.freeroute.board.TestLevel;
 import net.freerouting.freeroute.board.Unit;
 import net.freerouting.freeroute.boardgraphics.GraphicsContext;
+import net.freerouting.freeroute.datastructures.IdNoGenerator;
 import net.freerouting.freeroute.designformats.specctra.DsnFile;
+import net.freerouting.freeroute.designformats.specctra.DsnFileException;
+import net.freerouting.freeroute.designformats.specctra.SessionFile;
+import net.freerouting.freeroute.designformats.specctra.SessionToEagle;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
@@ -957,39 +965,32 @@ public class BoardHandling {
     /**
      * Imports a board design from a Specctra dsn-file. The parameters
      * p_item_observers and p_item_id_no_generator are used, in case the board
-     * is embedded into a host system. Returns false, if the dsn-file is
-     * currupted.
+     * is embedded into a host system. Throws BoardHandlingException, if the
+     * dsn-file is currupted.
      */
-    public DsnFile.ReadResult import_design(java.io.InputStream p_design,
-            net.freerouting.freeroute.board.BoardObservers p_observers,
-            net.freerouting.freeroute.datastructures.IdNoGenerator p_item_id_no_generator, TestLevel p_test_level) {
+    public void import_design(InputStream p_design, BoardObservers p_observers,
+            IdNoGenerator p_item_id_no_generator, TestLevel p_test_level)
+            throws BoardHandlingException {
         if (p_design == null) {
-            return DsnFile.ReadResult.ERROR;
+            throw new BoardHandlingException("the dsn-file is currupted");
         }
-        DsnFile.ReadResult read_result;
         try {
-
-            read_result
-                    = DsnFile.read(p_design, this, p_observers,
-                            p_item_id_no_generator, p_test_level);
-        } catch (Exception e) {
-            read_result = DsnFile.ReadResult.ERROR;
+            DsnFile.read(p_design, this, p_observers, p_item_id_no_generator, p_test_level);
+        } catch (Exception exc) {
+            throw new BoardHandlingException("the dsn-file is currupted", exc);
         }
-        if (read_result == DsnFile.ReadResult.OK) {
-            this.board.reduce_nets_of_route_items();
-            this.set_layer(0);
-            for (int i = 0; i < board.get_layer_count(); ++i) {
-                if (!settings.autoroute_settings.get_layer_active(i)) {
-                    graphics_context.set_layer_visibility(i, 0);
-                }
+        this.board.reduce_nets_of_route_items();
+        this.set_layer(0);
+        for (int i = 0; i < board.get_layer_count(); ++i) {
+            if (!settings.autoroute_settings.get_layer_active(i)) {
+                graphics_context.set_layer_visibility(i, 0);
             }
         }
         try {
             p_design.close();
         } catch (java.io.IOException e) {
-            read_result = DsnFile.ReadResult.ERROR;
+            throw new BoardHandlingException("the dsn-file is currupted");
         }
-        return read_result;
     }
 
     /**
@@ -998,11 +999,16 @@ public class BoardHandling {
      * are written, so that any host system with an specctra interface can read
      * them.
      */
-    public boolean export_to_dsn_file(OutputStream p_output_stream, String p_design_name, boolean p_compat_mode) {
+    public void export_to_dsn_file(OutputStream p_output_stream, String p_design_name,
+            boolean p_compat_mode) throws BoardHandlingException {
         if (board_is_read_only || p_output_stream == null) {
-            return false;
+            throw new BoardHandlingException("board_is_read_only || p_output_stream == null");
         }
-        return net.freerouting.freeroute.designformats.specctra.DsnFile.write(this, p_output_stream, p_design_name, p_compat_mode);
+        try {
+            DsnFile.write(this, p_output_stream, p_design_name, p_compat_mode);
+        } catch (DsnFileException exc) {
+            throw new BoardHandlingException("the dsn-file is currupted", exc);
+        }
     }
 
     /**
@@ -1012,23 +1018,24 @@ public class BoardHandling {
         if (board_is_read_only) {
             return false;
         }
-        return net.freerouting.freeroute.designformats.specctra.SessionToEagle.get_instance(p_input_stream, p_output_stream, this.board);
+        return SessionToEagle.get_instance(p_input_stream, p_output_stream, this.board);
     }
 
     /**
      * Writes a session file ins the Specctra ses-format.
      */
-    public boolean export_specctra_session_file(String p_design_name, OutputStream p_output_stream) {
+    public boolean export_specctra_session_file(String p_design_name,
+            OutputStream p_output_stream) {
         if (board_is_read_only) {
             return false;
         }
-        return net.freerouting.freeroute.designformats.specctra.SessionFile.write(this.get_routing_board(), p_output_stream, p_design_name);
+        return SessionFile.write(this.get_routing_board(), p_output_stream, p_design_name);
     }
 
     /**
      * Saves the currently edited board design to p_design_file.
      */
-    public boolean save_design_file(java.io.ObjectOutputStream p_object_stream) {
+    public boolean save_design_file(ObjectOutputStream p_object_stream) {
         boolean result = true;
         try {
             p_object_stream.writeObject(board);

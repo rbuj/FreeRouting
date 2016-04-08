@@ -29,7 +29,7 @@ import java.util.LinkedList;
  */
 public class NetClass {
 
-    public static NetClass read_scope(Scanner p_scanner) {
+    public static NetClass read_scope(Scanner p_scanner) throws DsnFileException {
 
         try {
             // read the class name
@@ -120,7 +120,7 @@ public class NetClass {
         }
     }
 
-    public static ClassClass read_class_class_scope(Scanner p_scanner) {
+    public static ClassClass read_class_class_scope(Scanner p_scanner) throws DsnFileException {
         try {
             Collection<String> classes = new LinkedList<>();
             Collection<Rule> rules = new LinkedList<>();

@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.Communication.SpecctraParserInfo;
 
 /**
@@ -192,9 +194,19 @@ public class Parser extends ScopeKeyword {
                     }
                     p_par.string_quote = quote_char;
                 } else if (next_token == Keyword.HOST_CAD) {
-                    p_par.host_cad = DsnFile.read_string_scope(p_par.scanner);
+                    try {
+                        p_par.host_cad = DsnFile.read_string_scope(p_par.scanner);
+                    } catch (DsnFileException ex) {
+                        Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                    }
                 } else if (next_token == Keyword.HOST_VERSION) {
-                    p_par.host_version = DsnFile.read_string_scope(p_par.scanner);
+                    try {
+                        p_par.host_version = DsnFile.read_string_scope(p_par.scanner);
+                    } catch (DsnFileException ex) {
+                        Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                    }
                 } else if (next_token == Keyword.CONSTANT) {
                     String[] curr_constant = read_constant(p_par);
                     if (curr_constant != null) {

@@ -19,6 +19,9 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Transformes a Specctra session file into an Eagle script file.
  *
@@ -48,6 +51,9 @@ public class SessionToEagle extends javax.swing.JFrame {
             result = new_instance.process_session_scope();
         } catch (java.io.IOException e) {
             System.out.println("unable to process session scope");
+            result = false;
+        } catch (DsnFileException ex) {
+            Logger.getLogger(SessionToEagle.class.getName()).log(Level.SEVERE, null, ex);
             result = false;
         }
 
@@ -103,7 +109,7 @@ public class SessionToEagle extends javax.swing.JFrame {
      * Processes the outmost scope of the session file. Returns false, if an
      * error occured.
      */
-    private boolean process_session_scope() throws java.io.IOException {
+    private boolean process_session_scope() throws java.io.IOException, DsnFileException {
 
         // read the first line of the session file
         Object next_token = null;
@@ -194,7 +200,7 @@ public class SessionToEagle extends javax.swing.JFrame {
         return true;
     }
 
-    private boolean process_placement_scope() throws java.io.IOException {
+    private boolean process_placement_scope() throws java.io.IOException, DsnFileException {
         // read the component scopes
         Object next_token = null;
         for (;;) {
@@ -226,7 +232,7 @@ public class SessionToEagle extends javax.swing.JFrame {
         return true;
     }
 
-    private boolean process_component_placement() throws java.io.IOException {
+    private boolean process_component_placement() throws java.io.IOException, DsnFileException {
         ComponentPlacement component_placement = Component.read_scope(this.scanner);
         if (component_placement == null) {
             return false;

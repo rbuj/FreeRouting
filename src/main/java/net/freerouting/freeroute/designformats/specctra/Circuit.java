@@ -30,7 +30,7 @@ public class Circuit {
      * Currently only the length matching rule is read from a circuit scope. If
      * the scope does not contain a length matching rule, nulll is returned.
      */
-    public static ReadScopeResult read_scope(Scanner p_scanner) {
+    public static ReadScopeResult read_scope(Scanner p_scanner) throws DsnFileException {
         Object next_token = null;
         double min_trace_length = 0;
         double max_trace_length = 0;

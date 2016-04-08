@@ -25,9 +25,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import net.freerouting.freeroute.board.BoardObserverAdaptor;
@@ -36,7 +33,8 @@ import net.freerouting.freeroute.board.ItemIdNoGenerator;
 import net.freerouting.freeroute.board.TestLevel;
 import net.freerouting.freeroute.datastructures.FileFilter;
 import net.freerouting.freeroute.datastructures.IdNoGenerator;
-import net.freerouting.freeroute.designformats.specctra.DsnFile;
+import net.freerouting.freeroute.designformats.specctra.DsnFileException;
+import net.freerouting.freeroute.interactive.BoardHandlingException;
 import net.freerouting.freeroute.interactive.ScreenMessages;
 
 /**
@@ -148,10 +146,24 @@ public class BoardFrame extends javax.swing.JFrame {
      * output depends on p_test_level.
      */
     public BoardFrame(DesignFile p_design, Option p_option, TestLevel p_test_level,
-            java.util.Locale p_locale, boolean p_confirm_cancel) {
-        this(p_design, p_option, p_test_level,
-                new BoardObserverAdaptor(), new ItemIdNoGenerator(),
-                p_locale, p_confirm_cancel);
+            java.util.Locale p_locale, boolean p_confirm_cancel) throws BoardFrameException, DsnFileException {
+        this(p_design, p_option, p_test_level, new BoardObserverAdaptor(),
+                new ItemIdNoGenerator(), p_locale, p_confirm_cancel);
+        read();
+        menubar.add_design_dependent_items();
+        if (design_file.is_created_from_text_file()) {
+            // Read the file  with the saved rules, if it is existing.
+            String file_name = design_file.get_name();
+            String[] name_parts = file_name.split("\\.");
+            java.util.ResourceBundle rb
+                    = java.util.ResourceBundle.getBundle(
+                            "net.freerouting.freeroute.resources.MainApp",
+                            resources.getLocale());
+            DesignFile.read_rules_file(name_parts[0], design_file.get_parent(),
+                    board_panel.board_handling,
+                    rb.getString("confirm_import_rules"));
+            refresh_windows();
+        }
     }
 
     /**
@@ -161,42 +173,42 @@ public class BoardFrame extends javax.swing.JFrame {
      */
     BoardFrame(DesignFile p_design, Option p_option, TestLevel p_test_level, BoardObservers p_observers,
             IdNoGenerator p_item_id_no_generator, Locale p_locale, boolean p_confirm_cancel) {
-        this.design_file = p_design;
-        this.test_level = p_test_level;
+        design_file = p_design;
+        test_level = p_test_level;
 
-        this.confirm_cancel = p_confirm_cancel;
-        this.board_observers = p_observers;
-        this.item_id_no_generator = p_item_id_no_generator;
-        this.locale = p_locale;
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardFrame", p_locale);
+        confirm_cancel = p_confirm_cancel;
+        board_observers = p_observers;
+        item_id_no_generator = p_item_id_no_generator;
+        locale = p_locale;
+        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardFrame", p_locale);
         boolean session_file_option = (p_option == Option.SESSION_FILE);
-        this.menubar = BoardMenuBar.get_instance(this, session_file_option);
-        setJMenuBar(this.menubar);
+        menubar = BoardMenuBar.get_instance(this, session_file_option);
+        setJMenuBar(menubar);
 
-        this.toolbar_panel = new BoardToolbar(this);
-        this.add(this.toolbar_panel, java.awt.BorderLayout.NORTH);
+        toolbar_panel = new BoardToolbar(this);
+        add(toolbar_panel, java.awt.BorderLayout.NORTH);
 
-        this.message_panel = new BoardPanelStatus(this.locale);
-        this.add(this.message_panel, java.awt.BorderLayout.SOUTH);
+        message_panel = new BoardPanelStatus(locale);
+        add(message_panel, java.awt.BorderLayout.SOUTH);
 
-        this.select_toolbar = new BoardToolbarSelectedItem(this, p_option == Option.EXTENDED_TOOL_BAR);
+        select_toolbar = new BoardToolbarSelectedItem(this, p_option == Option.EXTENDED_TOOL_BAR);
 
-        this.screen_messages
-                = new ScreenMessages(this.message_panel.status_message, this.message_panel.add_message,
-                        this.message_panel.current_layer, this.message_panel.mouse_position, this.locale);
+        screen_messages
+                = new ScreenMessages(message_panel.status_message, message_panel.add_message,
+                        message_panel.current_layer, message_panel.mouse_position, locale);
 
-        this.scroll_pane = new javax.swing.JScrollPane();
-        this.scroll_pane.setPreferredSize(new java.awt.Dimension(1150, 800));
-        this.scroll_pane.setVerifyInputWhenFocusTarget(false);
-        this.add(scroll_pane, java.awt.BorderLayout.CENTER);
+        scroll_pane = new javax.swing.JScrollPane();
+        scroll_pane.setPreferredSize(new java.awt.Dimension(1150, 800));
+        scroll_pane.setVerifyInputWhenFocusTarget(false);
+        add(scroll_pane, java.awt.BorderLayout.CENTER);
 
-        this.board_panel = new BoardPanel(screen_messages, this, p_locale);
-        this.scroll_pane.setViewportView(board_panel);
+        board_panel = new BoardPanel(screen_messages, this, p_locale);
+        scroll_pane.setViewportView(board_panel);
 
-        this.setTitle(resources.getString("title"));
-        this.addWindowListener(new WindowStateListener());
+        setTitle(resources.getString("title"));
+        addWindowListener(new WindowStateListener());
 
-        this.pack();
+        pack();
     }
 
     /**
@@ -208,37 +220,32 @@ public class BoardFrame extends javax.swing.JFrame {
 
     /**
      * Reads an existing board design from file. If p_is_import, the design is
-     * read from a scpecctra dsn file. Returns false, if the file is invalid.
+     * read from a scpecctra dsn file. Throws BoardFrameException, if the file
+     * is invalid.
      */
-    boolean read(SimpleStringProperty p_message_field) {
+    private void read() throws BoardFrameException {
         java.awt.Point viewport_position = null;
         if (design_file.is_created_from_text_file()) {
-            DsnFile.ReadResult read_result = board_panel.board_handling.import_design(
-                    design_file.get_input_stream(),
-                    this.board_observers,
-                    this.item_id_no_generator,
-                    this.test_level);
-            if (read_result != DsnFile.ReadResult.OK) {
-                if (p_message_field != null) {
-                    if (read_result == DsnFile.ReadResult.OUTLINE_MISSING) {
-                        Alert alert = new Alert(AlertType.ERROR, resources.getString("error_7"));
-                        alert.showAndWait();
-                        Runtime.getRuntime().exit(1);
-                    } else {
-                        Alert alert = new Alert(AlertType.ERROR, resources.getString("error_6"));
-                        alert.showAndWait();
-                        Runtime.getRuntime().exit(1);
-                    }
-                }
-                return false;
+            try {
+                board_panel.board_handling.import_design(
+                        design_file.get_input_stream(),
+                        board_observers,
+                        item_id_no_generator,
+                        test_level);
+                viewport_position = new java.awt.Point(0, 0);
+                initialize_windows();
+            } catch (BoardHandlingException exc) {
+                Alert alert = new Alert(AlertType.ERROR, exc.toString());
+                alert.showAndWait();
+                Runtime.getRuntime().exit(1);
             }
-            viewport_position = new java.awt.Point(0, 0);
-            initialize_windows();
         } else {
             try (ObjectInputStream object_stream = new ObjectInputStream(design_file.get_input_stream())) {
-                boolean read_ok = board_panel.board_handling.read_design(object_stream, this.test_level);
+                boolean read_ok = board_panel.board_handling.read_design(object_stream, test_level);
                 if (!read_ok) {
-                    return false;
+                    Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
+                    alert.showAndWait();
+                    Runtime.getRuntime().exit(1);
                 }
                 java.awt.Point frame_location;
                 java.awt.Rectangle frame_bounds;
@@ -246,20 +253,24 @@ public class BoardFrame extends javax.swing.JFrame {
                     viewport_position = (java.awt.Point) object_stream.readObject();
                     frame_location = (java.awt.Point) object_stream.readObject();
                     frame_bounds = (java.awt.Rectangle) object_stream.readObject();
+
+                    setLocation(frame_location);
+                    setBounds(frame_bounds);
+
+                    allocate_permanent_subwindows();
+
+                    for (int i = 0; i < permanent_subwindows.length; ++i) {
+                        permanent_subwindows[i].read(object_stream);
+                    }
                 } catch (IOException | ClassNotFoundException e) {
-                    return false;
-                }
-                this.setLocation(frame_location);
-                this.setBounds(frame_bounds);
-
-                allocate_permanent_subwindows();
-
-                for (int i = 0; i < this.permanent_subwindows.length; ++i) {
-                    this.permanent_subwindows[i].read(object_stream);
+                    Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
+                    alert.showAndWait();
+                    Runtime.getRuntime().exit(1);
                 }
             } catch (IOException ex) {
-                Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
+                Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
+                alert.showAndWait();
+                Runtime.getRuntime().exit(1);
             }
         }
 
@@ -272,13 +283,13 @@ public class BoardFrame extends javax.swing.JFrame {
         board_panel.create_popup_menus();
         board_panel.init_colors();
         board_panel.board_handling.create_ratsnest();
-        this.hilight_selected_button();
-        this.toolbar_panel.unit_factor_field.setValue(board_panel.board_handling.coordinate_transform.user_unit_factor);
-        this.toolbar_panel.unit_combo_box.setSelectedItem(board_panel.board_handling.coordinate_transform.user_unit);
-        this.setVisible(true);
+        hilight_selected_button();
+        toolbar_panel.unit_factor_field.setValue(board_panel.board_handling.coordinate_transform.user_unit_factor);
+        toolbar_panel.unit_combo_box.setSelectedItem(board_panel.board_handling.coordinate_transform.user_unit);
+        setVisible(true);
         if (design_file.is_created_from_text_file()) {
             // Read the default gui settings, if gui default file exists.
-            File defaults_file = new File(this.design_file.get_parent(), GUI_DEFAULTS_FILE_NAME);
+            File defaults_file = new File(design_file.get_parent(), GUI_DEFAULTS_FILE_NAME);
             try (InputStream input_stream = new FileInputStream(defaults_file)) {
                 boolean read_ok = GUIDefaultsFile.read(this, board_panel.board_handling, input_stream);
                 if (!read_ok) {
@@ -287,13 +298,16 @@ public class BoardFrame extends javax.swing.JFrame {
                     alert.showAndWait();
                 }
             } catch (FileNotFoundException ex) {
-                return false;
+                Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
+                alert.showAndWait();
+                Runtime.getRuntime().exit(1);
             } catch (IOException ex) {
-                return false;
+                Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
+                alert.showAndWait();
+                Runtime.getRuntime().exit(1);
             }
-            this.zoom_all();
+            zoom_all();
         }
-        return true;
     }
 
     /**
@@ -301,20 +315,20 @@ public class BoardFrame extends javax.swing.JFrame {
      * false, if the save failed.
      */
     boolean save() {
-        if (this.design_file == null) {
+        if (design_file == null) {
             return false;
         }
-        try (OutputStream output_stream = new FileOutputStream(this.design_file.get_output_file());
+        try (OutputStream output_stream = new FileOutputStream(design_file.get_output_file());
                 ObjectOutputStream object_stream = new ObjectOutputStream(output_stream);) {
             boolean save_ok = board_panel.board_handling.save_design_file(object_stream);
             if (!save_ok) {
                 return false;
             }
             object_stream.writeObject(board_panel.get_viewport_position());
-            object_stream.writeObject(this.getLocation());
-            object_stream.writeObject(this.getBounds());
-            for (int i = 0; i < this.permanent_subwindows.length; ++i) {
-                this.permanent_subwindows[i].save(object_stream);
+            object_stream.writeObject(getLocation());
+            object_stream.writeObject(getBounds());
+            for (int i = 0; i < permanent_subwindows.length; ++i) {
+                permanent_subwindows[i].save(object_stream);
             }
             return true;
         } catch (IOException e) {
@@ -335,7 +349,7 @@ public class BoardFrame extends javax.swing.JFrame {
      * is used.
      */
     public void set_context_sensitive_help(java.awt.Component p_component, String p_help_id) {
-//        if (this.help_system_used) {
+//        if (help_system_used) {
 //            java.awt.Component curr_component;
 //            if (p_component instanceof javax.swing.JFrame) {
 //                curr_component = ((javax.swing.JFrame) p_component).getRootPane();
@@ -344,7 +358,7 @@ public class BoardFrame extends javax.swing.JFrame {
 //            }
 //            String help_id = "html_files." + p_help_id;
 //            javax.help.CSH.setHelpIDString(curr_component, help_id);
-//            if (!this.is_web_start) {
+//            if (!is_web_start) {
 //                help_broker.enableHelpKey(curr_component, help_id, help_set);
 //            }
 //        }
@@ -374,9 +388,9 @@ public class BoardFrame extends javax.swing.JFrame {
      * frame.
      */
     java.awt.Point absolute_panel_location() {
-        int x = this.scroll_pane.getX();
-        int y = this.scroll_pane.getY();
-        java.awt.Container curr_parent = this.scroll_pane.getParent();
+        int x = scroll_pane.getX();
+        int y = scroll_pane.getY();
+        java.awt.Container curr_parent = scroll_pane.getParent();
         while (curr_parent != null) {
             x += curr_parent.getX();
             y += curr_parent.getY();
@@ -407,13 +421,13 @@ public class BoardFrame extends javax.swing.JFrame {
      */
     @Override
     public void dispose() {
-        for (int i = 0; i < this.permanent_subwindows.length; ++i) {
-            if (this.permanent_subwindows[i] != null) {
-                this.permanent_subwindows[i].dispose();
-                this.permanent_subwindows[i] = null;
+        for (int i = 0; i < permanent_subwindows.length; ++i) {
+            if (permanent_subwindows[i] != null) {
+                permanent_subwindows[i].dispose();
+                permanent_subwindows[i] = null;
             }
         }
-        for (BoardTemporarySubWindow curr_subwindow : this.temporary_subwindows) {
+        for (BoardTemporarySubWindow curr_subwindow : temporary_subwindows) {
             if (curr_subwindow != null) {
                 curr_subwindow.board_frame_disposed();
             }
@@ -427,54 +441,54 @@ public class BoardFrame extends javax.swing.JFrame {
     }
 
     private void allocate_permanent_subwindows() {
-        this.color_manager = new ColorManager(this);
-        this.permanent_subwindows[0] = this.color_manager;
-        this.object_visibility_window = WindowObjectVisibility.get_instance(this);
-        this.permanent_subwindows[1] = this.object_visibility_window;
-        this.layer_visibility_window = WindowLayerVisibility.get_instance(this);
-        this.permanent_subwindows[2] = this.layer_visibility_window;
-        this.display_misc_window = new WindowDisplayMisc(this);
-        this.permanent_subwindows[3] = this.display_misc_window;
-        this.snapshot_window = new WindowSnapshot(this);
-        this.permanent_subwindows[4] = this.snapshot_window;
-        this.route_parameter_window = new WindowRouteParameter(this);
-        this.permanent_subwindows[5] = this.route_parameter_window;
-        this.select_parameter_window = new WindowSelectParameter(this);
-        this.permanent_subwindows[6] = this.select_parameter_window;
-        this.clearance_matrix_window = new WindowClearanceMatrix(this);
-        this.permanent_subwindows[7] = this.clearance_matrix_window;
-        this.padstacks_window = new WindowPadstacks(this);
-        this.permanent_subwindows[8] = this.padstacks_window;
-        this.packages_window = new WindowPackages(this);
-        this.permanent_subwindows[9] = this.packages_window;
-        this.components_window = new WindowComponents(this);
-        this.permanent_subwindows[10] = this.components_window;
-        this.incompletes_window = new WindowIncompletes(this);
-        this.permanent_subwindows[11] = this.incompletes_window;
-        this.clearance_violations_window = new WindowClearanceViolations(this);
-        this.permanent_subwindows[12] = this.clearance_violations_window;
-        this.net_info_window = new WindowNets(this);
-        this.permanent_subwindows[13] = this.net_info_window;
-        this.via_window = new WindowVia(this);
-        this.permanent_subwindows[14] = this.via_window;
-        this.edit_vias_window = new WindowEditVias(this);
-        this.permanent_subwindows[15] = this.edit_vias_window;
-        this.edit_net_rules_window = new WindowNetClasses(this);
-        this.permanent_subwindows[16] = this.edit_net_rules_window;
-        this.assign_net_classes_window = new WindowAssignNetClass(this);
-        this.permanent_subwindows[17] = this.assign_net_classes_window;
-        this.length_violations_window = new WindowLengthViolations(this);
-        this.permanent_subwindows[18] = this.length_violations_window;
-        this.about_window = new WindowAbout(this.locale);
-        this.permanent_subwindows[19] = this.about_window;
-        this.move_parameter_window = new WindowMoveParameter(this);
-        this.permanent_subwindows[20] = this.move_parameter_window;
-        this.unconnected_route_window = new WindowUnconnectedRoute(this);
-        this.permanent_subwindows[21] = this.unconnected_route_window;
-        this.route_stubs_window = new WindowRouteStubs(this);
-        this.permanent_subwindows[22] = this.route_stubs_window;
-        this.autoroute_parameter_window = new WindowAutorouteParameter(this);
-        this.permanent_subwindows[23] = this.autoroute_parameter_window;
+        color_manager = new ColorManager(this);
+        permanent_subwindows[0] = color_manager;
+        object_visibility_window = WindowObjectVisibility.get_instance(this);
+        permanent_subwindows[1] = object_visibility_window;
+        layer_visibility_window = WindowLayerVisibility.get_instance(this);
+        permanent_subwindows[2] = layer_visibility_window;
+        display_misc_window = new WindowDisplayMisc(this);
+        permanent_subwindows[3] = display_misc_window;
+        snapshot_window = new WindowSnapshot(this);
+        permanent_subwindows[4] = snapshot_window;
+        route_parameter_window = new WindowRouteParameter(this);
+        permanent_subwindows[5] = route_parameter_window;
+        select_parameter_window = new WindowSelectParameter(this);
+        permanent_subwindows[6] = select_parameter_window;
+        clearance_matrix_window = new WindowClearanceMatrix(this);
+        permanent_subwindows[7] = clearance_matrix_window;
+        padstacks_window = new WindowPadstacks(this);
+        permanent_subwindows[8] = padstacks_window;
+        packages_window = new WindowPackages(this);
+        permanent_subwindows[9] = packages_window;
+        components_window = new WindowComponents(this);
+        permanent_subwindows[10] = components_window;
+        incompletes_window = new WindowIncompletes(this);
+        permanent_subwindows[11] = incompletes_window;
+        clearance_violations_window = new WindowClearanceViolations(this);
+        permanent_subwindows[12] = clearance_violations_window;
+        net_info_window = new WindowNets(this);
+        permanent_subwindows[13] = net_info_window;
+        via_window = new WindowVia(this);
+        permanent_subwindows[14] = via_window;
+        edit_vias_window = new WindowEditVias(this);
+        permanent_subwindows[15] = edit_vias_window;
+        edit_net_rules_window = new WindowNetClasses(this);
+        permanent_subwindows[16] = edit_net_rules_window;
+        assign_net_classes_window = new WindowAssignNetClass(this);
+        permanent_subwindows[17] = assign_net_classes_window;
+        length_violations_window = new WindowLengthViolations(this);
+        permanent_subwindows[18] = length_violations_window;
+        about_window = new WindowAbout(locale);
+        permanent_subwindows[19] = about_window;
+        move_parameter_window = new WindowMoveParameter(this);
+        permanent_subwindows[20] = move_parameter_window;
+        unconnected_route_window = new WindowUnconnectedRoute(this);
+        permanent_subwindows[21] = unconnected_route_window;
+        route_stubs_window = new WindowRouteStubs(this);
+        permanent_subwindows[22] = route_stubs_window;
+        autoroute_parameter_window = new WindowAutorouteParameter(this);
+        permanent_subwindows[23] = autoroute_parameter_window;
     }
 
     /**
@@ -483,55 +497,55 @@ public class BoardFrame extends javax.swing.JFrame {
     private void initialize_windows() {
         allocate_permanent_subwindows();
 
-        this.setLocation(120, 0);
+        setLocation(120, 0);
 
-        this.select_parameter_window.setLocation(0, 0);
-        this.select_parameter_window.setVisible(true);
+        select_parameter_window.setLocation(0, 0);
+        select_parameter_window.setVisible(true);
 
-        this.route_parameter_window.setLocation(0, 100);
-        this.autoroute_parameter_window.setLocation(0, 200);
-        this.move_parameter_window.setLocation(0, 50);
-        this.clearance_matrix_window.setLocation(0, 150);
-        this.via_window.setLocation(50, 150);
-        this.edit_vias_window.setLocation(100, 150);
-        this.edit_net_rules_window.setLocation(100, 200);
-        this.assign_net_classes_window.setLocation(100, 250);
-        this.padstacks_window.setLocation(100, 30);
-        this.packages_window.setLocation(200, 30);
-        this.components_window.setLocation(300, 30);
-        this.incompletes_window.setLocation(400, 30);
-        this.clearance_violations_window.setLocation(500, 30);
-        this.length_violations_window.setLocation(550, 30);
-        this.net_info_window.setLocation(350, 30);
-        this.unconnected_route_window.setLocation(650, 30);
-        this.route_stubs_window.setLocation(600, 30);
-        this.snapshot_window.setLocation(0, 250);
-        this.layer_visibility_window.setLocation(0, 450);
-        this.object_visibility_window.setLocation(0, 550);
-        this.display_misc_window.setLocation(0, 350);
-        this.color_manager.setLocation(0, 600);
-        this.about_window.setLocation(200, 200);
+        route_parameter_window.setLocation(0, 100);
+        autoroute_parameter_window.setLocation(0, 200);
+        move_parameter_window.setLocation(0, 50);
+        clearance_matrix_window.setLocation(0, 150);
+        via_window.setLocation(50, 150);
+        edit_vias_window.setLocation(100, 150);
+        edit_net_rules_window.setLocation(100, 200);
+        assign_net_classes_window.setLocation(100, 250);
+        padstacks_window.setLocation(100, 30);
+        packages_window.setLocation(200, 30);
+        components_window.setLocation(300, 30);
+        incompletes_window.setLocation(400, 30);
+        clearance_violations_window.setLocation(500, 30);
+        length_violations_window.setLocation(550, 30);
+        net_info_window.setLocation(350, 30);
+        unconnected_route_window.setLocation(650, 30);
+        route_stubs_window.setLocation(600, 30);
+        snapshot_window.setLocation(0, 250);
+        layer_visibility_window.setLocation(0, 450);
+        object_visibility_window.setLocation(0, 550);
+        display_misc_window.setLocation(0, 350);
+        color_manager.setLocation(0, 600);
+        about_window.setLocation(200, 200);
     }
 
     /**
      * Returns the currently used locale for the language dependent output.
      */
     public java.util.Locale get_locale() {
-        return this.locale;
+        return locale;
     }
 
     /**
      * Sets the background of the board panel
      */
     public void set_board_background(java.awt.Color p_color) {
-        this.board_panel.setBackground(p_color);
+        board_panel.setBackground(p_color);
     }
 
     /**
      * Refreshs all displayed coordinates after the user unit has changed.
      */
     public void refresh_windows() {
-        for (int i = 0; i < this.permanent_subwindows.length; ++i) {
+        for (int i = 0; i < permanent_subwindows.length; ++i) {
             if (permanent_subwindows[i] != null) {
                 permanent_subwindows[i].refresh();
             }
@@ -542,15 +556,15 @@ public class BoardFrame extends javax.swing.JFrame {
      * Sets the selected button in the menu button button group
      */
     public void hilight_selected_button() {
-        this.toolbar_panel.hilight_selected_button();
+        toolbar_panel.hilight_selected_button();
     }
 
     /**
      * Restore the selected snapshot in the snapshot window.
      */
     public void goto_selected_snapshot() {
-        if (this.snapshot_window != null) {
-            this.snapshot_window.goto_selected();
+        if (snapshot_window != null) {
+            snapshot_window.goto_selected();
         }
     }
 
@@ -559,8 +573,8 @@ public class BoardFrame extends javax.swing.JFrame {
      * Thecurent selected snapshot will be no more selected.
      */
     public void select_previous_snapshot() {
-        if (this.snapshot_window != null) {
-            this.snapshot_window.select_previous_item();
+        if (snapshot_window != null) {
+            snapshot_window.select_previous_item();
         }
     }
 
@@ -569,8 +583,8 @@ public class BoardFrame extends javax.swing.JFrame {
      * Thecurent selected snapshot will be no more selected.
      */
     public void select_next_snapshot() {
-        if (this.snapshot_window != null) {
-            this.snapshot_window.select_next_item();
+        if (snapshot_window != null) {
+            snapshot_window.select_next_item();
         }
     }
 
@@ -579,11 +593,11 @@ public class BoardFrame extends javax.swing.JFrame {
      */
     public SubwindowSelections get_snapshot_subwindow_selections() {
         SubwindowSelections result = new SubwindowSelections();
-        result.incompletes_selection = this.incompletes_window.get_snapshot_info();
-        result.packages_selection = this.packages_window.get_snapshot_info();
-        result.nets_selection = this.net_info_window.get_snapshot_info();
-        result.components_selection = this.components_window.get_snapshot_info();
-        result.padstacks_selection = this.padstacks_window.get_snapshot_info();
+        result.incompletes_selection = incompletes_window.get_snapshot_info();
+        result.packages_selection = packages_window.get_snapshot_info();
+        result.nets_selection = net_info_window.get_snapshot_info();
+        result.components_selection = components_window.get_snapshot_info();
+        result.padstacks_selection = padstacks_window.get_snapshot_info();
         return result;
     }
 
@@ -591,18 +605,18 @@ public class BoardFrame extends javax.swing.JFrame {
      * Used for restoring the subwindowfilters from a snapshot.
      */
     public void set_snapshot_subwindow_selections(SubwindowSelections p_filters) {
-        this.incompletes_window.set_snapshot_info(p_filters.incompletes_selection);
-        this.packages_window.set_snapshot_info(p_filters.packages_selection);
-        this.net_info_window.set_snapshot_info(p_filters.nets_selection);
-        this.components_window.set_snapshot_info(p_filters.components_selection);
-        this.padstacks_window.set_snapshot_info(p_filters.padstacks_selection);
+        incompletes_window.set_snapshot_info(p_filters.incompletes_selection);
+        packages_window.set_snapshot_info(p_filters.packages_selection);
+        net_info_window.set_snapshot_info(p_filters.nets_selection);
+        components_window.set_snapshot_info(p_filters.components_selection);
+        padstacks_window.set_snapshot_info(p_filters.padstacks_selection);
     }
 
     /**
      * Repaints this board frame and all the subwindows of the board.
      */
     public void repaint_all() {
-        this.repaint();
+        repaint();
         for (int i = 0; i < permanent_subwindows.length; ++i) {
             permanent_subwindows[i].repaint();
         }

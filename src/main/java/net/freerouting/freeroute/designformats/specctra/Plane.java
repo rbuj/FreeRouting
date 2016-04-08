@@ -19,6 +19,9 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Class for reading and writing plane scopes from dsn-files.
  *
@@ -83,13 +86,16 @@ public class Plane extends ScopeKeyword {
             }
             net_name = (String) next_token;
             conduction_area = Shape.read_area_scope(p_par.scanner, p_par.layer_structure, skip_window_scopes);
+            ReadScopeParameter.PlaneInfo plane_info = new ReadScopeParameter.PlaneInfo(conduction_area, net_name);
+            p_par.plane_list.add(plane_info);
         } catch (java.io.IOException e) {
             System.out.println("Plane.read_scope: IO error scanning file");
             System.out.println(e);
             return false;
+        } catch (DsnFileException ex) {
+            Logger.getLogger(Plane.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-        ReadScopeParameter.PlaneInfo plane_info = new ReadScopeParameter.PlaneInfo(conduction_area, net_name);
-        p_par.plane_list.add(plane_info);
         return true;
     }
 

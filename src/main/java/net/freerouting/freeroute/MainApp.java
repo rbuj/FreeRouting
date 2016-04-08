@@ -87,8 +87,10 @@ public class MainApp extends Application {
             board_option = BoardFrame.Option.FROM_START_MENU;
         }
 
+//                new DesignFile((design_file_name.isEmpty() ? null : new File(design_file_name)), design_dir_name),
         controller.init_variables(
-                new DesignFile((design_file_name.isEmpty() ? null : new File(design_file_name)), design_dir_name),
+                design_dir_name,
+                design_file_name.isEmpty() ? null : new File(design_file_name),
                 test_level,
                 board_option,
                 mainStage);
