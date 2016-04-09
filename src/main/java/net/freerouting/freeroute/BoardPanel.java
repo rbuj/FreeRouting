@@ -22,7 +22,7 @@ package net.freerouting.freeroute;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
-import javax.swing.JPanel;
+import javafx.embed.swing.JFXPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
@@ -356,7 +356,7 @@ public class BoardPanel extends javafx.embed.swing.JFXPanel {
         final int border_dist = 50;
         java.awt.Rectangle r
                 = new java.awt.Rectangle(p_evt.getX() - border_dist, p_evt.getY() - border_dist, 2 * border_dist, 2 * border_dist);
-        ((JPanel) p_evt.getSource()).scrollRectToVisible(r);
+        ((JFXPanel) p_evt.getSource()).scrollRectToVisible(r);
     }
 
     private void scroll_middle_mouse(java.awt.event.MouseEvent p_evt) {
