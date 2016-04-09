@@ -188,7 +188,7 @@ public class BatchOptRoute {
         }
         if (p_item instanceof Trace) {
             // taking less ripup costs seems to produce better results
-            ripup_costs = (int) Math.round(0.6 * (double) ripup_costs);
+            ripup_costs = (int) Math.round(0.6 * ripup_costs);
         }
         BatchAutorouter.autoroute_passes_for_optimizing_item(this.thread, MAX_AUTOROUTE_PASSES,
                 ripup_costs, p_with_prefered_directions);

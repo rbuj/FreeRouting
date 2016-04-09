@@ -269,12 +269,12 @@ public class IntOctagon extends RegularTileShape implements java.io.Serializable
         // where xi, yi are the coordinates of the i-th corner of this Octagon.
         // Overwrites the same implementation in TileShape for performence
         // reasons to avoid Point allocation.
-        double result = (double) (llx - ly) * (double) (ly - llx + lx);
-        result += (double) (lrx + ly) * (double) (rx - lrx - ly);
-        result += (double) rx * (double) (urx - 2 * rx - ly + uy + lrx);
-        result += (double) (urx - uy) * (double) (uy - urx + rx);
-        result += (double) (ulx + uy) * (double) (lx - ulx - uy);
-        result += (double) lx * (double) (llx - 2 * lx - uy + ly + ulx);
+        double result = (llx - ly) * (double) (ly - llx + lx);
+        result += (lrx + ly) * (double) (rx - lrx - ly);
+        result += rx * (double) (urx - 2 * rx - ly + uy + lrx);
+        result += (urx - uy) * (double) (uy - urx + rx);
+        result += (ulx + uy) * (double) (lx - ulx - uy);
+        result += lx * (double) (llx - 2 * lx - uy + ly + ulx);
 
         return 0.5 * Math.abs(result);
     }

@@ -117,7 +117,7 @@ public class WindowRouteStubs extends WindowObjectListWithFilter {
 
     @Override
     protected void select_instances() {
-        List<?> selected_list_values = (List<?>) list.getSelectedValuesList();
+        List<?> selected_list_values = list.getSelectedValuesList();
         if (selected_list_values.isEmpty()) {
             return;
         }

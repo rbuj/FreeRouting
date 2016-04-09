@@ -151,7 +151,7 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
         @Override
         public void stateChanged(javax.swing.event.ChangeEvent evt) {
             int new_visibility = slider_arr[slider_no].getValue();
-            set_changed_value(slider_no, ((double) new_visibility) / ((double) MAX_SLIDER_VALUE));
+            set_changed_value(slider_no, new_visibility / ((double) MAX_SLIDER_VALUE));
             board_panel.repaint();
         }
 

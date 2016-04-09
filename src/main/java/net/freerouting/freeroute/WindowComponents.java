@@ -60,7 +60,7 @@ public class WindowComponents extends WindowObjectListWithFilter {
 
     @Override
     protected void select_instances() {
-        List<?> selected_components = (List<?>) list.getSelectedValuesList();
+        List<?> selected_components = list.getSelectedValuesList();
         if (selected_components.isEmpty()) {
             return;
         }

@@ -23,6 +23,7 @@ import java.util.LinkedList;
 import net.freerouting.freeroute.boardgraphics.GraphicsContext;
 import net.freerouting.freeroute.datastructures.Signum;
 import net.freerouting.freeroute.datastructures.Stoppable;
+import net.freerouting.freeroute.geometry.planar.ConvexShape;
 import net.freerouting.freeroute.geometry.planar.Direction;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntBox;
@@ -988,7 +989,7 @@ public class PolylineTrace extends Trace implements java.io.Serializable {
         }
         double curr_clearance = board.clearance_value(this.clearance_class_no(), contact_pin.clearance_class_no(), this.get_layer());
         double add_width = Math.max(edge_to_turn_dist, curr_clearance + 1);
-        TileShape offset_pin_shape = (TileShape) ((TileShape) pin_shape).offset(this.get_half_width() + add_width);
+        TileShape offset_pin_shape = (TileShape) ((ConvexShape) pin_shape).offset(this.get_half_width() + add_width);
         if (p_angle_restriction == AngleRestriction.NINETY_DEGREE || offset_pin_shape.is_IntBox()) {
             offset_pin_shape = offset_pin_shape.bounding_box();
         } else if (p_angle_restriction == AngleRestriction.FORTYFIVE_DEGREE) {

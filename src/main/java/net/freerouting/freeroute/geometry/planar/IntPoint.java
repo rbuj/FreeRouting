@@ -203,8 +203,8 @@ public class IntPoint extends Point implements java.io.Serializable {
      * - p_1 and this - p_1
      */
     public double signed_area(IntPoint p_1, IntPoint p_2) {
-        IntVector d21 = (IntVector) p_2.difference_by(p_1);
-        IntVector d01 = (IntVector) this.difference_by(p_1);
+        IntVector d21 = p_2.difference_by(p_1);
+        IntVector d01 = this.difference_by(p_1);
         return d21.determinant(d01);
     }
 
@@ -254,8 +254,8 @@ public class IntPoint extends Point implements java.io.Serializable {
         double[] dist_arr = new double[4];
         dist_arr[0] = Math.abs(dx);
         dist_arr[1] = Math.abs(dy);
-        double diagonal_1 = ((double) dy - (double) dx) / 2;
-        double diagonal_2 = ((double) dy + (double) dx) / 2;
+        double diagonal_1 = (dy - (double) dx) / 2;
+        double diagonal_2 = (dy + (double) dx) / 2;
         dist_arr[2] = Math.abs(diagonal_1);
         dist_arr[3] = Math.abs(diagonal_2);
         double min_dist = dist_arr[0];

@@ -111,11 +111,11 @@ public class DrillPageArray {
 
         IntBox shape_box = p_shape.bounding_box().intersection(this.bounds);
 
-        int min_j = (int) Math.floor(((double) (shape_box.ll.y - bounds.ll.y)) / (double) PAGE_HEIGHT);
-        double max_j = ((double) (shape_box.ur.y - bounds.ll.y)) / (double) PAGE_HEIGHT;
+        int min_j = (int) Math.floor((shape_box.ll.y - bounds.ll.y) / (double) PAGE_HEIGHT);
+        double max_j = (shape_box.ur.y - bounds.ll.y) / (double) PAGE_HEIGHT;
 
-        int min_i = (int) Math.floor(((double) (shape_box.ll.x - bounds.ll.x)) / (double) PAGE_WIDTH);
-        double max_i = ((double) (shape_box.ur.x - bounds.ll.x)) / (double) PAGE_WIDTH;
+        int min_i = (int) Math.floor((shape_box.ll.x - bounds.ll.x) / (double) PAGE_WIDTH);
+        double max_i = (shape_box.ur.x - bounds.ll.x) / (double) PAGE_WIDTH;
 
         for (int j = min_j; j < max_j; ++j) {
             for (int i = min_i; i < max_i; ++i) {

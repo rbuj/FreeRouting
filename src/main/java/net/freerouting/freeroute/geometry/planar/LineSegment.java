@@ -380,13 +380,13 @@ public class LineSegment implements java.io.Serializable {
         int stair_count;
 
         if (function_of_x) {
-            stair_width = (int) Math.round(((p_width * (double) abs_dx) / (double) abs_dy));
+            stair_width = (int) Math.round(((p_width * abs_dx) / abs_dy));
             stair_count = (abs_dx - 1) / stair_width + 1;
             if (end_point.x < start_point.x) {
                 stair_width = -stair_width;
             }
         } else {
-            stair_width = (int) Math.round((p_width * (double) abs_dy) / (double) abs_dx);
+            stair_width = (int) Math.round((p_width * abs_dy) / abs_dx);
             stair_count = (abs_dy - 1) / stair_width + 1;
             if (end_point.y < start_point.y) {
                 stair_width = -stair_width;
@@ -395,7 +395,7 @@ public class LineSegment implements java.io.Serializable {
         IntPoint[] result = new IntPoint[2 * stair_count + 1];
 
         result[0] = start_point;
-        double det = (double) dx * (double) dy;
+        double det = dx * (double) dy;
         boolean change_x_first = p_to_the_right && det > 0 || !p_to_the_right && det < 0;
         int curr_index = 0;
 
@@ -456,17 +456,17 @@ public class LineSegment implements java.io.Serializable {
         IntVector abs_delta = new IntVector(Math.abs(delta.x), Math.abs(delta.y));
         boolean function_of_x = abs_delta.x >= abs_delta.y;
         // use otherwise function of y for better numerical  stability
-        double det = (double) delta.x * (double) delta.y;
+        double det = delta.x * (double) delta.y;
         int stair_width;
         int stair_count;
         if (function_of_x) {
-            stair_width = (int) Math.round((p_width * (double) abs_delta.x) / (double) abs_delta.y);
+            stair_width = (int) Math.round((p_width * abs_delta.x) / abs_delta.y);
             stair_count = (abs_delta.x - 1) / stair_width + 1;
             if (end_point.x < start_point.x) {
                 stair_width = -stair_width;
             }
         } else {
-            stair_width = (int) Math.round((p_width * (double) abs_delta.y) / (double) abs_delta.x);
+            stair_width = (int) Math.round((p_width * abs_delta.y) / abs_delta.x);
             stair_count = (abs_delta.y - 1) / stair_width + 1;
             if (end_point.y < start_point.y) {
                 stair_width = -stair_width;

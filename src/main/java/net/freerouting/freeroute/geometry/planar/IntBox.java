@@ -104,7 +104,7 @@ public class IntBox extends RegularTileShape implements java.io.Serializable {
 
     @Override
     public double area() {
-        return ((double) (ur.x - ll.x)) * ((double) (ur.y - ll.y));
+        return (ur.x - ll.x) * ((double) (ur.y - ll.y));
     }
 
     @Override

@@ -250,7 +250,7 @@ public class Validate {
         while (it.hasNext()) {
             Item curr_ob = it.next();
             if (curr_ob instanceof net.freerouting.freeroute.board.Trace) {
-                if (((net.freerouting.freeroute.board.Trace) curr_ob).contains_net(p_net_no)) {
+                if (curr_ob.contains_net(p_net_no)) {
                     ++found_traces;
                 }
             }

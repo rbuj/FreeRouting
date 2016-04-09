@@ -348,7 +348,7 @@ public class WindowDisplayMisc extends BoardSavableSubWindow {
 
         @Override
         public void stateChanged(javax.swing.event.ChangeEvent evt) {
-            double new_value = 1 - (double) auto_layer_dim_slider.getValue() / (double) MAX_SLIDER_VALUE;
+            double new_value = 1 - auto_layer_dim_slider.getValue() / (double) MAX_SLIDER_VALUE;
             panel.board_handling.graphics_context.set_auto_layer_dim_factor(new_value);
             panel.repaint();
         }

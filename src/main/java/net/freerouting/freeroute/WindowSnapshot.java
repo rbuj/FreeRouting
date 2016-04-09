@@ -185,7 +185,7 @@ public class WindowSnapshot extends BoardSavableSubWindow {
         int index = list.getSelectedIndex();
         if (index >= 0 && list_model.getSize() > index) {
             net.freerouting.freeroute.interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;
-            net.freerouting.freeroute.interactive.SnapShot curr_snapshot = (net.freerouting.freeroute.interactive.SnapShot) list_model.elementAt(index);
+            net.freerouting.freeroute.interactive.SnapShot curr_snapshot = list_model.elementAt(index);
 
             curr_snapshot.go_to(board_handling);
 

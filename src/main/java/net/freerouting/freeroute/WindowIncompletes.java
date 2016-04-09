@@ -58,7 +58,7 @@ public class WindowIncompletes extends WindowObjectListWithFilter {
 
     @Override
     protected void select_instances() {
-        List<?> selected_incompletes = (List<?>) list.getSelectedValuesList();
+        List<?> selected_incompletes = list.getSelectedValuesList();
         if (selected_incompletes.isEmpty()) {
             return;
         }

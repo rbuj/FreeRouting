@@ -60,7 +60,7 @@ public class WindowPackages extends WindowObjectListWithFilter {
 
     @Override
     protected void select_instances() {
-        List<?> selected_packages = (List<?>) list.getSelectedValuesList();
+        List<?> selected_packages = list.getSelectedValuesList();
         if (selected_packages.isEmpty()) {
             return;
         }

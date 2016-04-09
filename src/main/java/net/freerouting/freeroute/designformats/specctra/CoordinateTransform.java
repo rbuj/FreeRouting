@@ -191,7 +191,7 @@ public class CoordinateTransform implements java.io.Serializable {
         if (p_board_shape instanceof IntBox) {
             result = new Rectangle(p_layer, board_to_dsn((IntBox) p_board_shape));
         } else if (p_board_shape instanceof PolylineShape) {
-            FloatPoint[] corners = ((PolylineShape) p_board_shape).corner_approx_arr();
+            FloatPoint[] corners = p_board_shape.corner_approx_arr();
             double[] coors = board_to_dsn(corners);
             result = new Polygon(p_layer, coors);
         } else if (p_board_shape instanceof net.freerouting.freeroute.geometry.planar.Circle) {
@@ -215,7 +215,7 @@ public class CoordinateTransform implements java.io.Serializable {
         if (p_board_shape instanceof IntBox) {
             result = new Rectangle(p_layer, board_to_dsn_rel((IntBox) p_board_shape));
         } else if (p_board_shape instanceof PolylineShape) {
-            FloatPoint[] corners = ((PolylineShape) p_board_shape).corner_approx_arr();
+            FloatPoint[] corners = p_board_shape.corner_approx_arr();
             double[] coors = board_to_dsn_rel(corners);
             result = new Polygon(p_layer, coors);
         } else if (p_board_shape instanceof net.freerouting.freeroute.geometry.planar.Circle) {
