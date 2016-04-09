@@ -21,7 +21,7 @@
 package net.freerouting.freeroute.board;
 
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.ArrayList;
 import net.freerouting.freeroute.datastructures.UndoableObjects;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Point;
@@ -35,7 +35,7 @@ import net.freerouting.freeroute.library.Package;
 public class Components implements java.io.Serializable {
 
     private final UndoableObjects undo_list = new UndoableObjects();
-    private Vector<Component> component_arr = new Vector<>();
+    private ArrayList<Component> component_arr = new ArrayList<>();
     /**
      * If true, components on the back side are rotated before mirroring, else
      * they are mirrored before rotating.
@@ -90,7 +90,7 @@ public class Components implements java.io.Serializable {
      * component exists. Component numbers are from 1 to component count
      */
     public Component get(int p_component_no) {
-        Component result = component_arr.elementAt(p_component_no - 1);
+        Component result = component_arr.get(p_component_no - 1);
         if (result != null && result.no != p_component_no) {
             System.out.println("Components.get: inconsistent component number");
         }
@@ -145,7 +145,7 @@ public class Components implements java.io.Serializable {
             if (curr_component == null) {
                 break;
             }
-            this.component_arr.setElementAt(curr_component, curr_component.no - 1);
+            this.component_arr.set(curr_component.no - 1, curr_component);
             p_observers.notify_moved(curr_component);
         }
     }
