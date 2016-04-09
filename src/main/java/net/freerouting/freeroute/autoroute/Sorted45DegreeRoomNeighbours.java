@@ -21,6 +21,11 @@
 
 package net.freerouting.freeroute.autoroute;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.SearchTreeObject;
 import net.freerouting.freeroute.board.ShapeSearchTree;
@@ -30,11 +35,6 @@ import net.freerouting.freeroute.geometry.planar.IntOctagon;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Limits;
 import net.freerouting.freeroute.geometry.planar.TileShape;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 /**
  *

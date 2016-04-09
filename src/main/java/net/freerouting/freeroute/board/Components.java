@@ -20,8 +20,8 @@
  */
 package net.freerouting.freeroute.board;
 
-import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.Iterator;
 import net.freerouting.freeroute.datastructures.UndoableObjects;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Point;

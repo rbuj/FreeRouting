@@ -31,8 +31,6 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.CoordinateTransform;
 import net.freerouting.freeroute.board.FixedState;
