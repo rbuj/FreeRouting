@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.RoutingBoard;
 import net.freerouting.freeroute.board.SearchTreeObject;
@@ -111,11 +113,9 @@ public class AutorouteEngine {
             if (this.complete_expansion_rooms != null) {
                 // invalidate the net dependent complete free space expansion rooms.
                 Collection<CompleteFreeSpaceExpansionRoom> rooms_to_remove = new LinkedList<>();
-                for (CompleteFreeSpaceExpansionRoom curr_room : complete_expansion_rooms) {
-                    if (curr_room.is_net_dependent()) {
-                        rooms_to_remove.add(curr_room);
-                    }
-                }
+                complete_expansion_rooms.stream().filter((curr_room) -> (curr_room.is_net_dependent())).forEach((curr_room) -> {
+                    rooms_to_remove.add(curr_room);
+                });
                 for (CompleteFreeSpaceExpansionRoom curr_room : rooms_to_remove) {
                     this.remove_complete_expansion_room(curr_room);
                 }
@@ -142,8 +142,7 @@ public class AutorouteEngine {
         try {
             maze_search_algo = MazeSearchAlgo.get_instance(p_start_set, p_dest_set, this, p_ctrl);
         } catch (Exception e) {
-            System.out.println("AutorouteEngine.autoroute_connection: Exception in MazeSearchAlgo.get_instance");
-            System.out.println(e);
+            Logger.getLogger(AutorouteEngine.class.getName()).log(Level.INFO, "AutorouteEngine.autoroute_connection: Exception in MazeSearchAlgo.get_instance", e);
             maze_search_algo = null;
         }
         MazeSearchAlgo.Result search_result = null;
@@ -151,7 +150,7 @@ public class AutorouteEngine {
             try {
                 search_result = maze_search_algo.find_connection();
             } catch (Exception e) {
-                System.out.println("AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection");
+                Logger.getLogger(AutorouteEngine.class.getName()).log(Level.INFO, "AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection", e);
             }
         }
         LocateFoundConnectionAlgo autoroute_result = null;
@@ -170,7 +169,7 @@ public class AutorouteEngine {
         }
         if (autoroute_result.connection_items == null) {
             if (this.board.get_test_level().ordinal() >= TestLevel.CRITICAL_DEBUGGING_OUTPUT.ordinal()) {
-                System.out.println("AutorouteEngine.autoroute_connection: result_items != null expected");
+                Logger.getLogger(AutorouteEngine.class.getName()).log(Level.INFO, "AutorouteEngine.autoroute_connection: result_items != null expected");
             }
             return AutorouteResult.ALREADY_CONNECTED;
         }
@@ -240,9 +239,9 @@ public class AutorouteEngine {
      */
     public void clear() {
         if (complete_expansion_rooms != null) {
-            for (CompleteFreeSpaceExpansionRoom curr_room : complete_expansion_rooms) {
+            complete_expansion_rooms.stream().forEach((curr_room) -> {
                 curr_room.remove_from_tree(this.autoroute_search_tree);
-            }
+            });
         }
         complete_expansion_rooms = null;
         incomplete_expansion_rooms = null;
@@ -257,17 +256,13 @@ public class AutorouteEngine {
         if (complete_expansion_rooms == null) {
             return;
         }
-        for (CompleteFreeSpaceExpansionRoom curr_room : complete_expansion_rooms) {
+        complete_expansion_rooms.stream().forEach((curr_room) -> {
             curr_room.draw(p_graphics, p_graphics_context, p_intensity);
-        }
+        });
         Collection<Item> item_list = this.board.get_items();
-        for (Item curr_item : item_list) {
-            ItemAutorouteInfo autoroute_info = curr_item.get_autoroute_info();
-            if (autoroute_info != null) {
-                autoroute_info.draw(p_graphics, p_graphics_context, p_intensity);
-            }
-        }
-        // this.drill_page_array.draw(p_graphics, p_graphics_context, p_intensity);
+        item_list.stream().map((curr_item) -> curr_item.get_autoroute_info()).filter((autoroute_info) -> (autoroute_info != null)).forEach((autoroute_info) -> {
+            autoroute_info.draw(p_graphics, p_graphics_context, p_intensity);
+        }); // this.drill_page_array.draw(p_graphics, p_graphics_context, p_intensity);
     }
 
     /**
@@ -319,7 +314,7 @@ public class AutorouteEngine {
         TileShape room_shape = p_room.get_shape();
         int room_layer = p_room.get_layer();
         Collection<ExpansionDoor> room_doors = p_room.get_doors();
-        for (ExpansionDoor curr_door : room_doors) {
+        room_doors.stream().forEach((curr_door) -> {
             ExpansionRoom curr_neighbour = curr_door.other_room(p_room);
             if (curr_neighbour != null) {
                 curr_neighbour.remove_door(curr_door);
@@ -338,13 +333,13 @@ public class AutorouteEngine {
                     new_incomplete_room.add_door(new_door);
                 }
             }
-        }
+        });
         this.remove_all_doors(p_room);
         p_room.remove_from_tree(this.autoroute_search_tree);
         if (complete_expansion_rooms != null) {
             complete_expansion_rooms.remove(p_room);
         } else {
-            System.out.println("AutorouteEngine.remove_complete_expansion_room: this.complete_expansion_rooms is null");
+            Logger.getLogger(AutorouteEngine.class.getName()).log(Level.INFO, "AutorouteEngine.remove_complete_expansion_room: this.complete_expansion_rooms is null");
         }
         this.drill_page_array.invalidate(room_shape);
     }
@@ -403,8 +398,7 @@ public class AutorouteEngine {
             }
             return result;
         } catch (Exception e) {
-            System.out.print("AutorouteEngine.complete_expansion_room: ");
-            System.out.println(e);
+            Logger.getLogger(AutorouteEngine.class.getName()).log(Level.INFO, "AutorouteEngine.complete_expansion_room: ", e);
             return new LinkedList<>();
         }
 
@@ -510,15 +504,12 @@ public class AutorouteEngine {
     Set<CompleteFreeSpaceExpansionRoom> get_rooms_with_target_items(Set<Item> p_items) {
         Set<CompleteFreeSpaceExpansionRoom> result = new TreeSet<>();
         if (this.complete_expansion_rooms != null) {
-            for (CompleteFreeSpaceExpansionRoom curr_room : this.complete_expansion_rooms) {
+            this.complete_expansion_rooms.stream().forEach((curr_room) -> {
                 Collection<TargetItemExpansionDoor> target_door_list = curr_room.get_target_doors();
-                for (TargetItemExpansionDoor curr_target_door : target_door_list) {
-                    Item curr_target_item = curr_target_door.item;
-                    if (p_items.contains(curr_target_item)) {
-                        result.add(curr_room);
-                    }
-                }
-            }
+                target_door_list.stream().map((curr_target_door) -> curr_target_door.item).filter((curr_target_item) -> (p_items.contains(curr_target_item))).forEach((_item) -> {
+                    result.add(curr_room);
+                });
+            });
         }
         return result;
     }
@@ -550,13 +541,12 @@ public class AutorouteEngine {
             }
         }
         Collection<Item> item_list = this.board.get_items();
-        for (Item curr_item : item_list) {
-            ItemAutorouteInfo curr_autoroute_info = curr_item.get_autoroute_info_pur();
-            if (curr_autoroute_info != null) {
-                curr_autoroute_info.reset_doors();
-                curr_autoroute_info.set_precalculated_connection(null);
-            }
-        }
+        item_list.stream().map((curr_item) -> curr_item.get_autoroute_info_pur()).filter((curr_autoroute_info) -> (curr_autoroute_info != null)).map((curr_autoroute_info) -> {
+            curr_autoroute_info.reset_doors();
+            return curr_autoroute_info;
+        }).forEach((curr_autoroute_info) -> {
+            curr_autoroute_info.set_precalculated_connection(null);
+        });
         this.drill_page_array.reset();
     }
 

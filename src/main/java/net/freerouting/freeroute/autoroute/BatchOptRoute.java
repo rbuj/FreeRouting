@@ -40,7 +40,8 @@ public class BatchOptRoute {
     private static int ADDITIONAL_RIPUP_COST_FACTOR_AT_START = 10;
 
     static boolean contains_only_unfixed_traces(Collection<Item> p_item_list) {
-        for (Item curr_item : p_item_list) {
+        for (Iterator<Item> it = p_item_list.iterator(); it.hasNext();) {
+            Item curr_item = it.next();
             if (curr_item.is_user_fixed() || !(curr_item instanceof Trace)) {
                 return false;
             }
@@ -167,10 +168,11 @@ public class BatchOptRoute {
             }
         }
         Set<Item> ripped_connections = new java.util.TreeSet<>();
-        for (Item curr_item : ripped_items) {
+        ripped_items.stream().forEach((curr_item) -> {
             ripped_connections.addAll(curr_item.get_connection_items(Item.StopConnectionOption.NONE));
-        }
-        for (Item curr_item : ripped_connections) {
+        });
+        for (Iterator<Item> it = ripped_connections.iterator(); it.hasNext();) {
+            Item curr_item = it.next();
             if (curr_item.is_user_fixed()) {
                 return false;
             }
@@ -222,10 +224,7 @@ public class BatchOptRoute {
      * if the optimizer is not active.
      */
     public FloatPoint get_current_position() {
-        if (sorted_route_items == null) {
-            return null;
-        }
-        return sorted_route_items.get_current_position();
+        return (sorted_route_items == null) ? null : sorted_route_items.get_current_position();
     }
 
     private class ReadSortedRouteItems {
