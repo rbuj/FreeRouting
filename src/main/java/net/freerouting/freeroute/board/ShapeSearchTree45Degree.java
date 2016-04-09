@@ -249,6 +249,9 @@ public class ShapeSearchTree45Degree extends ShapeSearchTree {
         // opposite of this line.
 
         Collection<IncompleteFreeSpaceExpansionRoom> result = new LinkedList<>();
+        if (p_incomplete_room.get_contained_shape() == null) {
+            return result;
+        }
         if (p_incomplete_room.get_contained_shape().is_empty()) {
             if (this.board.get_test_level().ordinal() >= TestLevel.ALL_DEBUGGING_OUTPUT.ordinal()) {
                 System.out.println("ShapeSearchTree45Degree.restrain_shape: p_shape_to_be_contained is empty");
