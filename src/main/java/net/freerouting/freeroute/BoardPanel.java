@@ -37,7 +37,7 @@ import net.freerouting.freeroute.interactive.ScreenMessages;
  *
  * @author Alfons Wirtz
  */
-public class BoardPanel extends javax.swing.JPanel {
+public class BoardPanel extends javafx.embed.swing.JFXPanel {
 
     private static final double c_zoom_factor = 2.0;
     public javax.swing.JPopupMenu popup_menu_insert_cancel;
