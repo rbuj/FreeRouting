@@ -35,8 +35,8 @@ public class BoardFrameException extends Exception {
      *
      * @param msg the detail message.
      */
-    public BoardFrameException(String message) {
-        super(message);
+    public BoardFrameException(String msg) {
+        super(msg);
     }
 
     public BoardFrameException(String message, Throwable cause) {

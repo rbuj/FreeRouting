@@ -35,8 +35,8 @@ public class BoardHandlingException extends Exception {
      *
      * @param msg the detail message.
      */
-    public BoardHandlingException(String message) {
-        super(message);
+    public BoardHandlingException(String msg) {
+        super(msg);
     }
 
     public BoardHandlingException(String message, Throwable cause) {
