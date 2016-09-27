@@ -21,6 +21,8 @@ package net.freerouting.freeroute;
 
 import java.io.IOException;
 
+import java.awt.geom.Rectangle2D;
+
 /**
  * Subwindow of the board frame, whose location and visibility can be saved and
  * read from disc.
@@ -36,7 +38,7 @@ public abstract class BoardSavableSubWindow extends BoardSubWindow {
     public boolean read(java.io.ObjectInputStream p_object_stream) {
         try {
             SavedAttributes saved_attributes = (SavedAttributes) p_object_stream.readObject();
-            this.setBounds(saved_attributes.bounds);
+            this.setBounds(saved_attributes.bounds.getBounds());
             this.setVisible(saved_attributes.is_visible);
             return true;
         } catch (IOException | ClassNotFoundException e) {
@@ -71,10 +73,10 @@ public abstract class BoardSavableSubWindow extends BoardSubWindow {
      */
     static private class SavedAttributes implements java.io.Serializable {
 
-        public final java.awt.Rectangle bounds;
+        public final Rectangle2D bounds;
         public final boolean is_visible;
 
-        public SavedAttributes(java.awt.Rectangle p_bounds, boolean p_is_visible) {
+        public SavedAttributes(Rectangle2D p_bounds, boolean p_is_visible) {
             bounds = p_bounds;
             is_visible = p_is_visible;
         }
