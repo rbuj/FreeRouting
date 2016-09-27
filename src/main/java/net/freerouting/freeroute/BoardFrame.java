@@ -39,6 +39,7 @@ import net.freerouting.freeroute.datastructures.IdNoGenerator;
 import net.freerouting.freeroute.designformats.specctra.DsnFileException;
 import net.freerouting.freeroute.interactive.BoardHandlingException;
 import net.freerouting.freeroute.interactive.ScreenMessages;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
@@ -261,14 +262,14 @@ public class BoardFrame extends javax.swing.JFrame {
                     });
                 }
                 java.awt.Point frame_location;
-                java.awt.Rectangle frame_bounds;
+                Rectangle2D frame_bounds;
                 try {
                     viewport_position = (java.awt.Point) object_stream.readObject();
                     frame_location = (java.awt.Point) object_stream.readObject();
-                    frame_bounds = (java.awt.Rectangle) object_stream.readObject();
+                    frame_bounds = (Rectangle2D) object_stream.readObject();
 
                     setLocation(frame_location);
-                    setBounds(frame_bounds);
+                    setBounds(frame_bounds.getBounds());
 
                     allocate_permanent_subwindows();
 
@@ -429,8 +430,8 @@ public class BoardFrame extends javax.swing.JFrame {
      */
     public void zoom_all() {
         board_panel.board_handling.adjust_design_bounds();
-        java.awt.Rectangle display_rect = board_panel.get_viewport_bounds();
-        java.awt.Rectangle design_bounds = board_panel.board_handling.graphics_context.get_design_bounds();
+        Rectangle2D display_rect = board_panel.get_viewport_bounds().getBounds();
+        Rectangle2D design_bounds = board_panel.board_handling.graphics_context.get_design_bounds().getBounds();
         double width_factor = display_rect.getWidth() / design_bounds.getWidth();
         double height_factor = display_rect.getHeight() / design_bounds.getHeight();
         double zoom_factor = Math.min(width_factor, height_factor);

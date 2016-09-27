@@ -22,7 +22,7 @@ package net.freerouting.freeroute.interactive;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
@@ -631,8 +631,8 @@ public class BoardHandling {
      */
     public void repaint() {
         if (this.paint_immediately) {
-            final Rectangle MAX_RECTAMGLE = new Rectangle(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
-            panel.paintImmediately(MAX_RECTAMGLE);
+            final Rectangle2D MAX_RECTAMGLE = new Rectangle2D.Double(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
+            panel.paintImmediately(MAX_RECTAMGLE.getBounds());
         } else {
             panel.repaint();
         }
@@ -641,11 +641,11 @@ public class BoardHandling {
     /**
      * Repaints a rectangle of board panel on the screen.
      */
-    public void repaint(Rectangle p_rect) {
+    public void repaint(Rectangle2D p_rect) {
         if (this.paint_immediately) {
-            panel.paintImmediately(p_rect);
+            panel.paintImmediately(p_rect.getBounds());
         } else {
-            panel.repaint(p_rect);
+            panel.repaint(p_rect.getBounds());
         }
     }
 
@@ -1468,11 +1468,11 @@ public class BoardHandling {
      * Gets a surrounding rectangle of the area, where an update of the graphics
      * is needed caused by the previous interactive actions.
      */
-    Rectangle get_graphics_update_rectangle() {
-        Rectangle result;
+    Rectangle2D get_graphics_update_rectangle() {
+        Rectangle2D result;
         IntBox update_box = board.get_graphics_update_box();
         if (update_box == null || update_box.is_empty()) {
-            result = new Rectangle(0, 0, 0, 0);
+            result = new Rectangle2D.Double(0, 0, 0, 0);
         } else {
             IntBox offset_box = update_box.offset(board.get_max_trace_half_width());
             result = graphics_context.coordinate_transform.board_to_screen(offset_box);

@@ -22,6 +22,7 @@ package net.freerouting.freeroute;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -250,7 +251,7 @@ public class BoardPanel extends javax.swing.JPanel {
 
         Point2D center_point = new Point2D.Double(center_x, center_y);
 
-        java.awt.Rectangle display_rect = get_viewport_bounds();
+        Rectangle2D display_rect = get_viewport_bounds();
 
         double width_factor = display_rect.getWidth() / width_of_zoom_frame;
         double height_factor = display_rect.getHeight() / height_of_zoom_frame;
@@ -273,7 +274,7 @@ public class BoardPanel extends javax.swing.JPanel {
 
     public java.awt.geom.Point2D get_viewport_center() {
         java.awt.Point pos = get_viewport_position();
-        java.awt.Rectangle display_rect = get_viewport_bounds();
+        Rectangle2D display_rect = get_viewport_bounds();
         return new java.awt.geom.Point2D.Double(pos.getX() + display_rect.getCenterX(), pos.getY() + display_rect.getCenterY());
     }
 
@@ -310,7 +311,7 @@ public class BoardPanel extends javax.swing.JPanel {
     /**
      * Returns the viewport bounds of the scroll pane
      */
-    java.awt.Rectangle get_viewport_bounds() {
+    Rectangle2D get_viewport_bounds() {
         return scroll_pane.getViewportBorderBounds();
     }
 
@@ -319,7 +320,7 @@ public class BoardPanel extends javax.swing.JPanel {
      * near the border of the viewport. Returns the adjustment vector
      */
     java.awt.Point set_viewport_center(java.awt.geom.Point2D p_point) {
-        java.awt.Rectangle display_rect = get_viewport_bounds();
+        Rectangle2D display_rect = get_viewport_bounds();
         double x_corner = p_point.getX() - display_rect.getWidth() / 2;
         double y_corner = p_point.getY() - display_rect.getHeight() / 2;
         Dimension panel_size = getSize();
@@ -354,9 +355,9 @@ public class BoardPanel extends javax.swing.JPanel {
 
     private void scroll_near_border(java.awt.event.MouseEvent p_evt) {
         final int border_dist = 50;
-        java.awt.Rectangle r
-                = new java.awt.Rectangle(p_evt.getX() - border_dist, p_evt.getY() - border_dist, 2 * border_dist, 2 * border_dist);
-        ((JPanel) p_evt.getSource()).scrollRectToVisible(r);
+        Rectangle2D r
+                = new Rectangle2D.Double(p_evt.getX() - border_dist, p_evt.getY() - border_dist, 2 * border_dist, 2 * border_dist);
+        ((JPanel) p_evt.getSource()).scrollRectToVisible(r.getBounds());
     }
 
     private void scroll_middle_mouse(java.awt.event.MouseEvent p_evt) {

@@ -23,6 +23,8 @@ import java.io.IOException;
 import net.freerouting.freeroute.board.ItemSelectionFilter;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 
+import java.awt.geom.Rectangle2D;
+
 /**
  * Description of a text file, where the board independent interactive settings
  * are stored.
@@ -260,7 +262,7 @@ public class GUIDefaultsFile {
             System.out.println("GUIDefaultsFile.read_frame_scope: bounds expected");
             return false;
         }
-        java.awt.Rectangle bounds = read_rectangle();
+        Rectangle2D bounds = read_rectangle();
         if (bounds == null) {
             return false;
         }
@@ -347,16 +349,16 @@ public class GUIDefaultsFile {
         }
         curr_frame.setVisible(is_visible);
         if (p_frame == Keyword.BOARD_FRAME) {
-            curr_frame.setBounds(bounds);
+            curr_frame.setBounds(bounds.getBounds());
         } else {
             // Set only the location.
             // Do not change the size of the frame because it depends on the layer count.
-            curr_frame.setLocation(bounds.getLocation());
+            curr_frame.setLocation(bounds.getBounds().getLocation());
         }
         return true;
     }
 
-    private java.awt.Rectangle read_rectangle() throws java.io.IOException {
+    private Rectangle2D read_rectangle() throws java.io.IOException {
         int[] coor = new int[4];
         for (int i = 0; i < 4; ++i) {
             Object next_token = this.scanner.next_token();
@@ -366,7 +368,7 @@ public class GUIDefaultsFile {
             }
             coor[i] = (Integer) next_token;
         }
-        return new java.awt.Rectangle(coor[0], coor[1], coor[2], coor[3]);
+        return new Rectangle2D.Double(coor[0], coor[1], coor[2], coor[3]);
     }
 
     private void write_frame_scope(javax.swing.JFrame p_frame, String p_frame_name)
@@ -383,7 +385,7 @@ public class GUIDefaultsFile {
         out_file.end_scope();
     }
 
-    private void write_bounds(java.awt.Rectangle p_bounds) throws java.io.IOException {
+    private void write_bounds(Rectangle2D p_bounds) throws java.io.IOException {
         out_file.start_scope();
         out_file.write("bounds");
         out_file.new_line();

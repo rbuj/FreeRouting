@@ -17,6 +17,7 @@ package net.freerouting.freeroute.boardgraphics;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.Limits;
@@ -66,6 +67,7 @@ public class CoordinateTransform implements java.io.Serializable {
 
     /**
      * Copy constructor
+     * @param p_coordinate_transform
      */
     public CoordinateTransform(CoordinateTransform p_coordinate_transform) {
         this.screen_bounds = new Dimension(p_coordinate_transform.screen_bounds);
@@ -154,29 +156,29 @@ public class CoordinateTransform implements java.io.Serializable {
     }
 
     /**
-     * Transform a geometry.planar.IntBox to a java.awt.Rectangle If the
+     * Transform a geometry.planar.IntBox to a Rectangle2D If the
      * internal rotation is not a multiple of Pi/2, a bounding rectangle of the
      * rotated rectangular shape is returned.
      */
-    public java.awt.Rectangle board_to_screen(IntBox p_box) {
+    public Rectangle2D board_to_screen(IntBox p_box) {
         Point2D corner_1 = board_to_screen(p_box.ll.to_float());
         Point2D corner_2 = board_to_screen(p_box.ur.to_float());
         double ll_x = Math.min(corner_1.getX(), corner_2.getX());
         double ll_y = Math.min(corner_1.getY(), corner_2.getY());
         double dx = Math.abs(corner_2.getX() - corner_1.getX());
         double dy = Math.abs(corner_2.getY() - corner_1.getY());
-        java.awt.Rectangle result
-                = new java.awt.Rectangle((int) Math.floor(ll_x), (int) Math.floor(ll_y),
+        Rectangle2D result
+                = new Rectangle2D.Double((int) Math.floor(ll_x), (int) Math.floor(ll_y),
                         (int) Math.ceil(dx), (int) Math.ceil(dy));
         return result;
     }
 
     /**
-     * Transform a java.awt.Rectangle to a geometry.planar.IntBox If the
+     * Transform a Rectangle2D to a geometry.planar.IntBox If the
      * internal rotation is not a multiple of Pi/2, a bounding box of the
      * rotated rectangular shape is returned.
      */
-    public IntBox screen_to_board(java.awt.Rectangle p_rect) {
+    public IntBox screen_to_board(Rectangle2D p_rect) {
         FloatPoint corner_1 = screen_to_board(new Point2D.Double(p_rect.getX(), p_rect.getY()));
         FloatPoint corner_2 = screen_to_board(new Point2D.Double(p_rect.getX() + p_rect.getWidth(),
                 p_rect.getY() + p_rect.getHeight()));
