@@ -137,5 +137,5 @@ Identifier = ({Letter}|{SpecChar})({Letter}|{Digit}|{SpecChar})*
 }
 
 /* error fallback */
-.|\n                             { throw new Error("Illegal character <"+
+[^]                             { throw new Error("Illegal character <"+
                                                     yytext()+">"); }

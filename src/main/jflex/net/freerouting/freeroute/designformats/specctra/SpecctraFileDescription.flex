@@ -33,8 +33,8 @@ QuoteChar2 = '
 
 SpecCharASCII = _|\.|\/|\\|:|#|\$|&|>|<|,|;|=|@|\[|\]||\~|\*|\?|\!|\%|\^
 
-SpecCharANSI1 = €|‚|ƒ|„|…|†|‡|ˆ|‰|Š|‹|Œ|Ž|‘|’|“|”|•|–|—|˜|™|š|›|œ|ž|Ÿ
-SpecCharANSI2 = [¡-ÿ]
+SpecCharANSI1 = â‚¬|â€š|Æ’|â€ž|â€¦|â€ |â€¡|Ë†|â€°|Å |â€¹|Å’|Å½|â€˜|â€™|â€œ|â€|â€¢|â€“|â€”|Ëœ|â„¢|Å¡|â€º|Å“|Å¾|Å¸
+SpecCharANSI2 = [Â¡-Ã¿]
 SpecCharANSI = {SpecCharANSI1}|{SpecCharANSI2}
 
 
@@ -307,5 +307,5 @@ ComponentIdentifier = ({Letter}|{Digit}|{SpecChar4})({Letter}|{Digit}|{SpecChar5
 }
 
 /* error fallback */
-.|\n                             { throw new Error("Illegal character <"+
+[^]                             { throw new Error("Illegal character <"+
                                                     yytext()+">"); }
