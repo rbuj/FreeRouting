@@ -212,8 +212,8 @@ ComponentIdentifier = ({Letter}|{Digit}|{SpecChar4})({Letter}|{Digit}|{SpecChar5
   {QuoteChar2}                    { string.setLength(0); yybegin(STRING2); }
  
   /* literals */
-  {DecIntegerLiteral}            { return new Integer(yytext()); }
-  {DecFloatLiteral}              { return new Double(yytext()); }
+  {DecIntegerLiteral}            { return Integer.valueOf(yytext()); }
+  {DecFloatLiteral}              { return Double.valueOf(yytext()); }
 
   /* comments */
   {Comment}                      { /* ignore */ }

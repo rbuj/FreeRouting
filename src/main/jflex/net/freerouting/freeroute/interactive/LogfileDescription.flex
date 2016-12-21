@@ -36,8 +36,8 @@ Identifier = ({Letter}|{SpecChar})({Letter}|{Digit}|{SpecChar})*
   {Identifier}                   { return yytext(); }
  
   /* literals */
-  {DecIntegerLiteral}            { return new Integer(yytext()); }
-  {DecFloatLiteral}              { return new Double(yytext()); }
+  {DecIntegerLiteral}            { return Integer.valueOf(yytext()); }
+  {DecFloatLiteral}              { return Double.valueOf(yytext()); }
 
   /* comments */
   {Comment}                      { /* ignore */ }
