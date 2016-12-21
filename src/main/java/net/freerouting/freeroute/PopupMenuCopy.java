@@ -45,22 +45,16 @@ public class PopupMenuCopy extends PopupMenuDisplay {
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_board_frame.get_locale());
         javax.swing.JMenuItem insert_item = new javax.swing.JMenuItem();
         insert_item.setText(resources.getString("insert"));
-        insert_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.left_button_clicked(board_panel.right_button_click_location);
-            }
+        insert_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.left_button_clicked(board_panel.right_button_click_location);
         });
 
         this.add(insert_item, 0);
 
         javax.swing.JMenuItem done_item = new javax.swing.JMenuItem();
         done_item.setText(resources.getString("done"));
-        done_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.return_from_state();
-            }
+        done_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.return_from_state();
         });
 
         this.add(done_item, 1);

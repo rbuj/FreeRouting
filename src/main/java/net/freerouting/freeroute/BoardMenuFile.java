@@ -44,15 +44,11 @@ public class BoardMenuFile extends javax.swing.JMenu {
             javax.swing.JMenuItem save_item = new javax.swing.JMenuItem();
             save_item.setText(file_menu.resources.getString("save"));
             save_item.setToolTipText(file_menu.resources.getString("save_tooltip"));
-            save_item.addActionListener(new java.awt.event.ActionListener() {
-
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    boolean save_ok = file_menu.board_frame.save();
-                    file_menu.board_frame.board_panel.board_handling.close_files();
-                    if (save_ok) {
-                        file_menu.board_frame.screen_messages.set_status_message(file_menu.resources.getString("save_message"));
-                    }
+            save_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                boolean save_ok = file_menu.board_frame.save();
+                file_menu.board_frame.board_panel.board_handling.close_files();
+                if (save_ok) {
+                    file_menu.board_frame.screen_messages.set_status_message(file_menu.resources.getString("save_message"));
                 }
             });
 
@@ -62,17 +58,13 @@ public class BoardMenuFile extends javax.swing.JMenu {
         javax.swing.JMenuItem save_and_exit_item = new javax.swing.JMenuItem();
         save_and_exit_item.setText(file_menu.resources.getString("save_and_exit"));
         save_and_exit_item.setToolTipText(file_menu.resources.getString("save_and_exit_tooltip"));
-        save_and_exit_item.addActionListener(new java.awt.event.ActionListener() {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (file_menu.session_file_option) {
-                    file_menu.board_frame.design_file.write_specctra_session_file(file_menu.board_frame);
-                } else {
-                    file_menu.board_frame.save();
-                }
-                file_menu.board_frame.dispose();
+        save_and_exit_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            if (file_menu.session_file_option) {
+                file_menu.board_frame.design_file.write_specctra_session_file(file_menu.board_frame);
+            } else {
+                file_menu.board_frame.save();
             }
+            file_menu.board_frame.dispose();
         });
 
         file_menu.add(save_and_exit_item);
@@ -80,12 +72,8 @@ public class BoardMenuFile extends javax.swing.JMenu {
         javax.swing.JMenuItem cancel_and_exit_item = new javax.swing.JMenuItem();
         cancel_and_exit_item.setText(file_menu.resources.getString("cancel_and_exit"));
         cancel_and_exit_item.setToolTipText(file_menu.resources.getString("cancel_and_exit_tooltip"));
-        cancel_and_exit_item.addActionListener(new java.awt.event.ActionListener() {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                file_menu.board_frame.dispose();
-            }
+        cancel_and_exit_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            file_menu.board_frame.dispose();
         });
 
         file_menu.add(cancel_and_exit_item);
@@ -94,12 +82,8 @@ public class BoardMenuFile extends javax.swing.JMenu {
             javax.swing.JMenuItem save_as_item = new javax.swing.JMenuItem();
             save_as_item.setText(file_menu.resources.getString("save_as"));
             save_as_item.setToolTipText(file_menu.resources.getString("save_as_tooltip"));
-            save_as_item.addActionListener(new java.awt.event.ActionListener() {
-
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    file_menu.save_as_action();
-                }
+            save_as_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                file_menu.save_as_action();
             });
 
             file_menu.add(save_as_item);
@@ -107,12 +91,8 @@ public class BoardMenuFile extends javax.swing.JMenu {
             javax.swing.JMenuItem write_logfile_item = new javax.swing.JMenuItem();
             write_logfile_item.setText(file_menu.resources.getString("generate_logfile"));
             write_logfile_item.setToolTipText(file_menu.resources.getString("generate_logfile_tooltip"));
-            write_logfile_item.addActionListener(new java.awt.event.ActionListener() {
-
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    file_menu.write_logfile_action();
-                }
+            write_logfile_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                file_menu.write_logfile_action();
             });
 
             file_menu.add(write_logfile_item);
@@ -120,12 +100,8 @@ public class BoardMenuFile extends javax.swing.JMenu {
             javax.swing.JMenuItem replay_logfile_item = new javax.swing.JMenuItem();
             replay_logfile_item.setText(file_menu.resources.getString("replay_logfile"));
             replay_logfile_item.setToolTipText(file_menu.resources.getString("replay_logfile_tooltip"));
-            replay_logfile_item.addActionListener(new java.awt.event.ActionListener() {
-
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    file_menu.read_logfile_action();
-                }
+            replay_logfile_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                file_menu.read_logfile_action();
             });
 
             file_menu.add(replay_logfile_item);
@@ -158,12 +134,8 @@ public class BoardMenuFile extends javax.swing.JMenu {
         javax.swing.JMenuItem write_session_file_item = new javax.swing.JMenuItem();
         write_session_file_item.setText(resources.getString("session_file"));
         write_session_file_item.setToolTipText(resources.getString("session_file_tooltip"));
-        write_session_file_item.addActionListener(new java.awt.event.ActionListener() {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_frame.design_file.write_specctra_session_file(board_frame);
-            }
+        write_session_file_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_frame.design_file.write_specctra_session_file(board_frame);
         });
 
         if ((routing_board.get_test_level() != net.freerouting.freeroute.board.TestLevel.RELEASE_VERSION || !host_cad_is_eagle)) {
@@ -173,12 +145,8 @@ public class BoardMenuFile extends javax.swing.JMenu {
         javax.swing.JMenuItem write_eagle_session_script_item = new javax.swing.JMenuItem();
         write_eagle_session_script_item.setText(resources.getString("eagle_script"));
         write_eagle_session_script_item.setToolTipText(resources.getString("eagle_script_tooltip"));
-        write_eagle_session_script_item.addActionListener(new java.awt.event.ActionListener() {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_frame.design_file.update_eagle(board_frame);
-            }
+        write_eagle_session_script_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_frame.design_file.update_eagle(board_frame);
         });
 
         if (routing_board.get_test_level() != net.freerouting.freeroute.board.TestLevel.RELEASE_VERSION || host_cad_is_eagle) {
@@ -193,12 +161,8 @@ public class BoardMenuFile extends javax.swing.JMenu {
         javax.swing.JMenuItem save_settings_item = new javax.swing.JMenuItem();
         save_settings_item.setText(resources.getString("settings"));
         save_settings_item.setToolTipText(resources.getString("settings_tooltip"));
-        save_settings_item.addActionListener(new java.awt.event.ActionListener() {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                save_defaults_action();
-            }
+        save_settings_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            save_defaults_action();
         });
         add(save_settings_item);
     }

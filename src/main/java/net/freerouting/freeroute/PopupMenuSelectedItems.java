@@ -35,11 +35,8 @@ class PopupMenuSelectedItems extends PopupMenuDisplay {
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_board_frame.get_locale());
         javax.swing.JMenuItem copy_item = new javax.swing.JMenuItem();
         copy_item.setText(resources.getString("copy"));
-        copy_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.copy_selected_items(board_panel.right_button_click_location);
-            }
+        copy_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.copy_selected_items(board_panel.right_button_click_location);
         });
 
         if (board_panel.board_handling.get_routing_board().get_test_level() != net.freerouting.freeroute.board.TestLevel.RELEASE_VERSION) {
@@ -48,11 +45,8 @@ class PopupMenuSelectedItems extends PopupMenuDisplay {
 
         javax.swing.JMenuItem move_item = new javax.swing.JMenuItem();
         move_item.setText(resources.getString("move"));
-        move_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.move_selected_items(board_panel.right_button_click_location);
-            }
+        move_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.move_selected_items(board_panel.right_button_click_location);
         });
 
         this.add(move_item, 0);

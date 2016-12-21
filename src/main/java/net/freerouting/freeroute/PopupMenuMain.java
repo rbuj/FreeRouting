@@ -37,11 +37,8 @@ class PopupMenuMain extends PopupMenuDisplay {
         // add the item for selecting items
         javax.swing.JMenuItem select_item_item = new javax.swing.JMenuItem();
         select_item_item.setText(resources.getString("select_item"));
-        select_item_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.select_items(board_panel.right_button_click_location);
-            }
+        select_item_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.select_items(board_panel.right_button_click_location);
         });
 
         this.add(select_item_item, 0);
@@ -49,11 +46,8 @@ class PopupMenuMain extends PopupMenuDisplay {
         // Insert the start route item.
         javax.swing.JMenuItem start_route_item = new javax.swing.JMenuItem();
         start_route_item.setText(resources.getString("start_route"));
-        start_route_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.start_route(board_panel.right_button_click_location);
-            }
+        start_route_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.start_route(board_panel.right_button_click_location);
         });
 
         this.add(start_route_item, 1);
@@ -65,11 +59,8 @@ class PopupMenuMain extends PopupMenuDisplay {
 
         javax.swing.JMenuItem create_tile_item = new javax.swing.JMenuItem();
         create_tile_item.setText(resources.getString("tile"));
-        create_tile_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.start_tile(board_panel.right_button_click_location);
-            }
+        create_tile_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.start_tile(board_panel.right_button_click_location);
         });
 
         if (board_panel.board_handling.get_routing_board().get_test_level() != net.freerouting.freeroute.board.TestLevel.RELEASE_VERSION) {
@@ -78,33 +69,24 @@ class PopupMenuMain extends PopupMenuDisplay {
 
         javax.swing.JMenuItem create_circle_item = new javax.swing.JMenuItem();
         create_circle_item.setText(resources.getString("circle"));
-        create_circle_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.start_circle(board_panel.right_button_click_location);
-            }
+        create_circle_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.start_circle(board_panel.right_button_click_location);
         });
 
         create_obstacle_menu.add(create_circle_item);
 
         javax.swing.JMenuItem create_polygon_item = new javax.swing.JMenuItem();
         create_polygon_item.setText(resources.getString("polygon"));
-        create_polygon_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.start_polygonshape_item(board_panel.right_button_click_location);
-            }
+        create_polygon_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.start_polygonshape_item(board_panel.right_button_click_location);
         });
 
         create_obstacle_menu.add(create_polygon_item);
 
         javax.swing.JMenuItem add_hole_item = new javax.swing.JMenuItem();
         add_hole_item.setText(resources.getString("hole"));
-        add_hole_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.start_adding_hole(board_panel.right_button_click_location);
-            }
+        add_hole_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.start_adding_hole(board_panel.right_button_click_location);
         });
 
         create_obstacle_menu.add(add_hole_item);
@@ -116,11 +98,8 @@ class PopupMenuMain extends PopupMenuDisplay {
             // the board contains swappable gates or pins
             javax.swing.JMenuItem swap_pin_item = new javax.swing.JMenuItem();
             swap_pin_item.setText(resources.getString("swap_pin"));
-            swap_pin_item.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    board_panel.board_handling.swap_pin(board_panel.right_button_click_location);
-                }
+            swap_pin_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                board_panel.board_handling.swap_pin(board_panel.right_button_click_location);
             });
 
             this.add(swap_pin_item, 3);

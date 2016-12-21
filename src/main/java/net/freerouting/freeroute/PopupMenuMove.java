@@ -44,94 +44,67 @@ public class PopupMenuMove extends PopupMenuDisplay {
 
         javax.swing.JMenuItem turn_90_item = new javax.swing.JMenuItem();
         turn_90_item.setText(resources.getString("90_degree"));
-        turn_90_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                turn_45_degree(2);
-            }
+        turn_90_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            turn_45_degree(2);
         });
         rotate_menu.add(turn_90_item);
 
         javax.swing.JMenuItem turn_180_item = new javax.swing.JMenuItem();
         turn_180_item.setText(resources.getString("180_degree"));
-        turn_180_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                turn_45_degree(4);
-            }
+        turn_180_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            turn_45_degree(4);
         });
         rotate_menu.add(turn_180_item);
 
         javax.swing.JMenuItem turn_270_item = new javax.swing.JMenuItem();
         turn_270_item.setText(resources.getString("-90_degree"));
-        turn_270_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                turn_45_degree(6);
-            }
+        turn_270_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            turn_45_degree(6);
         });
         rotate_menu.add(turn_270_item);
 
         javax.swing.JMenuItem turn_45_item = new javax.swing.JMenuItem();
         turn_45_item.setText(resources.getString("45_degree"));
-        turn_45_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                turn_45_degree(1);
-            }
+        turn_45_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            turn_45_degree(1);
         });
         rotate_menu.add(turn_45_item);
 
         javax.swing.JMenuItem turn_135_item = new javax.swing.JMenuItem();
         turn_135_item.setText(resources.getString("135_degree"));
-        turn_135_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                turn_45_degree(3);
-            }
+        turn_135_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            turn_45_degree(3);
         });
         rotate_menu.add(turn_135_item);
 
         javax.swing.JMenuItem turn_225_item = new javax.swing.JMenuItem();
         turn_225_item.setText(resources.getString("-135_degree"));
-        turn_225_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                turn_45_degree(5);
-            }
+        turn_225_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            turn_45_degree(5);
         });
         rotate_menu.add(turn_225_item);
 
         javax.swing.JMenuItem turn_315_item = new javax.swing.JMenuItem();
         turn_315_item.setText(resources.getString("-45_degree"));
-        turn_315_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                turn_45_degree(7);
-            }
+        turn_315_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            turn_45_degree(7);
         });
         rotate_menu.add(turn_315_item);
 
         javax.swing.JMenuItem change_side_item = new javax.swing.JMenuItem();
         change_side_item.setText(resources.getString("change_side"));
-        change_side_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.change_placement_side();
-            }
+        change_side_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.change_placement_side();
         });
 
         this.add(change_side_item, 1);
 
         javax.swing.JMenuItem reset_rotation_item = new javax.swing.JMenuItem();
         reset_rotation_item.setText(resources.getString("reset_rotation"));
-        reset_rotation_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                net.freerouting.freeroute.interactive.InteractiveState interactive_state = board_panel.board_handling.get_interactive_state();
-                if (interactive_state instanceof net.freerouting.freeroute.interactive.MoveItemState) {
-                    ((net.freerouting.freeroute.interactive.MoveItemState) interactive_state).reset_rotation();
-                }
+        reset_rotation_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            net.freerouting.freeroute.interactive.InteractiveState interactive_state = board_panel.board_handling.get_interactive_state();
+            if (interactive_state instanceof net.freerouting.freeroute.interactive.MoveItemState) {
+                ((net.freerouting.freeroute.interactive.MoveItemState) interactive_state).reset_rotation();
             }
         });
 
@@ -139,22 +112,16 @@ public class PopupMenuMove extends PopupMenuDisplay {
 
         javax.swing.JMenuItem insert_item = new javax.swing.JMenuItem();
         insert_item.setText(resources.getString("insert"));
-        insert_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.return_from_state();
-            }
+        insert_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.return_from_state();
         });
 
         this.add(insert_item, 3);
 
         javax.swing.JMenuItem cancel_item = new javax.swing.JMenuItem();
         cancel_item.setText(resources.getString("cancel"));
-        cancel_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.cancel_state();
-            }
+        cancel_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.cancel_state();
         });
 
         this.add(cancel_item, 4);

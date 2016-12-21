@@ -37,22 +37,16 @@ class PopupMenuInsertCancel extends javax.swing.JPopupMenu {
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_board_frame.get_locale());
         javax.swing.JMenuItem insert_item = new javax.swing.JMenuItem();
         insert_item.setText(resources.getString("insert"));
-        insert_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.return_from_state();
-            }
+        insert_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.return_from_state();
         });
 
         this.add(insert_item);
 
         javax.swing.JMenuItem cancel_item = new javax.swing.JMenuItem();
         cancel_item.setText(resources.getString("cancel"));
-        cancel_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.cancel_state();
-            }
+        cancel_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.cancel_state();
         });
 
         this.add(cancel_item);

@@ -40,33 +40,24 @@ public class PopupMenuDynamicRoute extends PopupMenuDisplay {
 
         javax.swing.JMenuItem end_route_item = new javax.swing.JMenuItem();
         end_route_item.setText(resources.getString("end_route"));
-        end_route_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.return_from_state();
-            }
+        end_route_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.return_from_state();
         });
 
         this.add(end_route_item, 0);
 
         javax.swing.JMenuItem cancel_item = new javax.swing.JMenuItem();
         cancel_item.setText(resources.getString("cancel_route"));
-        cancel_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.cancel_state();
-            }
+        cancel_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.cancel_state();
         });
 
         this.add(cancel_item, 1);
 
         javax.swing.JMenuItem snapshot_item = new javax.swing.JMenuItem();
         snapshot_item.setText(resources.getString("generate_snapshot"));
-        snapshot_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.board_handling.generate_snapshot();
-            }
+        snapshot_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.board_handling.generate_snapshot();
         });
 
         this.add(snapshot_item, 2);

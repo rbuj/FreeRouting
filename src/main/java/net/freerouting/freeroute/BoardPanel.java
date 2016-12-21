@@ -120,11 +120,8 @@ public class BoardPanel extends javax.swing.JPanel {
                 middle_drag_position = null;
             }
         });
-        addMouseWheelListener(new java.awt.event.MouseWheelListener() {
-            @Override
-            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
-                board_handling.mouse_wheel_moved(evt.getWheelRotation());
-            }
+        addMouseWheelListener((java.awt.event.MouseWheelEvent evt) -> {
+            board_handling.mouse_wheel_moved(evt.getWheelRotation());
         });
         board_handling = new BoardHandling(this, p_locale);
         setAutoscrolls(true);

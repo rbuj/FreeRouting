@@ -36,42 +36,30 @@ public class BoardMenuRules extends javax.swing.JMenu {
 
         javax.swing.JMenuItem clearance_window = new javax.swing.JMenuItem();
         clearance_window.setText(rules_menu.resources.getString("clearance_matrix"));
-        clearance_window.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rules_menu.board_frame.clearance_matrix_window.setVisible(true);
-            }
+        clearance_window.addActionListener((java.awt.event.ActionEvent evt) -> {
+            rules_menu.board_frame.clearance_matrix_window.setVisible(true);
         });
         rules_menu.add(clearance_window);
 
         javax.swing.JMenuItem via_window = new javax.swing.JMenuItem();
         via_window.setText(rules_menu.resources.getString("vias"));
-        via_window.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rules_menu.board_frame.via_window.setVisible(true);
-            }
+        via_window.addActionListener((java.awt.event.ActionEvent evt) -> {
+            rules_menu.board_frame.via_window.setVisible(true);
         });
         rules_menu.add(via_window);
 
         javax.swing.JMenuItem nets_window = new javax.swing.JMenuItem();
         nets_window.setText(rules_menu.resources.getString("nets"));
-        nets_window.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rules_menu.board_frame.net_info_window.setVisible(true);
-            }
+        nets_window.addActionListener((java.awt.event.ActionEvent evt) -> {
+            rules_menu.board_frame.net_info_window.setVisible(true);
         });
 
         rules_menu.add(nets_window);
 
         javax.swing.JMenuItem net_class_window = new javax.swing.JMenuItem();
         net_class_window.setText(rules_menu.resources.getString("net_classes"));
-        net_class_window.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rules_menu.board_frame.edit_net_rules_window.setVisible(true);
-            }
+        net_class_window.addActionListener((java.awt.event.ActionEvent evt) -> {
+            rules_menu.board_frame.edit_net_rules_window.setVisible(true);
         });
         rules_menu.add(net_class_window);
 

@@ -40,11 +40,8 @@ public class PopupMenuDisplay extends javax.swing.JPopupMenu {
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_board_frame.get_locale());
         javax.swing.JMenuItem center_display_item = new javax.swing.JMenuItem();
         center_display_item.setText(resources.getString("center_display"));
-        center_display_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.center_display(board_panel.right_button_click_location);
-            }
+        center_display_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.center_display(board_panel.right_button_click_location);
         });
 
         this.add(center_display_item);
@@ -54,22 +51,16 @@ public class PopupMenuDisplay extends javax.swing.JPopupMenu {
 
         javax.swing.JMenuItem zoom_in_item = new javax.swing.JMenuItem();
         zoom_in_item.setText(resources.getString("zoom_in"));
-        zoom_in_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.zoom_in(board_panel.right_button_click_location);
-            }
+        zoom_in_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.zoom_in(board_panel.right_button_click_location);
         });
 
         zoom_menu.add(zoom_in_item);
 
         javax.swing.JMenuItem zoom_out_item = new javax.swing.JMenuItem();
         zoom_out_item.setText(resources.getString("zoom_out"));
-        zoom_out_item.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                board_panel.zoom_out(board_panel.right_button_click_location);
-            }
+        zoom_out_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            board_panel.zoom_out(board_panel.right_button_click_location);
         });
 
         zoom_menu.add(zoom_out_item);
