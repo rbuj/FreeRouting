@@ -30,9 +30,9 @@ msgid "This program comes with absolutely no warranty!"
 msgstr "This program comes with absolutely no warranty!"
 
 #: homepage
-msgid "Homepage: http://www.freerouting.net "
-msgstr "Homepage: http://www.freerouting.net "
+msgid "Homepage: https://github.com/rbuj/FreeRouting"
+msgstr "Homepage: https://github.com/rbuj/FreeRouting"
 
 #: support
-msgid "Contact: support@freerouting.net"
-msgstr "Contact: support@freerouting.net"
+msgid "Contact: https://github.com/rbuj/FreeRouting/issues"
+msgstr "Contact: https://github.com/rbuj/FreeRouting/issues"
