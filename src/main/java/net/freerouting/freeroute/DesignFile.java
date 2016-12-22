@@ -114,11 +114,13 @@ public class DesignFile {
                 try (Reader reader = new InputStreamReader(new FileInputStream(rules_file), StandardCharsets.UTF_8)) {
                     if (WindowMessage.confirm(p_confirm_message)) {
                         result = net.freerouting.freeroute.designformats.specctra.RulesFile.read(reader, p_design_name, p_board_handling);
-                        rules_file.delete();
+                        if (rules_file.delete()==false){
+                            throw new DesignFileException("Can't delete rules file");
+                        }
                     }
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
+                } catch (IOException | DesignFileException ex) {
                     Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

@@ -22,9 +22,14 @@ package net.freerouting.freeroute;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static net.freerouting.freeroute.DesignFile.all_file_extensions;
 import net.freerouting.freeroute.datastructures.FileFilter;
 
@@ -219,44 +224,41 @@ public class BoardMenuFile extends javax.swing.JMenu {
         if (filename == null) {
             board_frame.screen_messages.set_status_message(resources.getString("message_10"));
         } else {
-            java.io.Reader reader = null;
-            try {
-                reader = new InputStreamReader(new FileInputStream(filename), StandardCharsets.UTF_8);
-            } catch (java.io.FileNotFoundException e) {
-                return;
+            try (Reader reader = new InputStreamReader(new FileInputStream(filename), StandardCharsets.UTF_8)) {
+                board_frame.read_logfile(reader);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(BoardMenuFile.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(BoardMenuFile.class.getName()).log(Level.SEVERE, null, ex);
             }
-            board_frame.read_logfile(reader);
         }
     }
 
     private void save_defaults_action() {
-        java.io.OutputStream output_stream = null;
         java.io.File defaults_file = new java.io.File(board_frame.design_file.get_parent(), BoardFrame.GUI_DEFAULTS_FILE_NAME);
-        if (defaults_file.exists()) {
-            // Make a backup copy of the old defaulds file.
-            java.io.File defaults_file_backup = new java.io.File(board_frame.design_file.get_parent(), BoardFrame.GUI_DEFAULTS_FILE_BACKUP_NAME);
-            if (defaults_file_backup.exists()) {
-                defaults_file_backup.delete();
+        try (OutputStream output_stream = new java.io.FileOutputStream(defaults_file)) {
+            if (defaults_file.exists()) {
+                // Make a backup copy of the old defaulds file.
+                java.io.File defaults_file_backup = new java.io.File(board_frame.design_file.get_parent(), BoardFrame.GUI_DEFAULTS_FILE_BACKUP_NAME);
+                if (defaults_file_backup.exists()) {
+                    if (defaults_file_backup.delete() == false) {
+                        throw new BoardMenuFileException("Can't delete backup file");
+                    }
+                }
+                if (defaults_file.renameTo(defaults_file_backup) == false) {
+                    throw new BoardMenuFileException("Can't rename backup file");
+                }
             }
-            defaults_file.renameTo(defaults_file_backup);
-        }
-        try {
-            output_stream = new java.io.FileOutputStream(defaults_file);
-        } catch (FileNotFoundException e) {
-            output_stream = null;
-        }
-        boolean write_ok;
-        if (output_stream == null) {
-            write_ok = false;
-        } else {
-            write_ok = net.freerouting.freeroute.GUIDefaultsFile.write(board_frame, board_frame.board_panel.board_handling, output_stream);
-        }
-        if (write_ok) {
+            if (net.freerouting.freeroute.GUIDefaultsFile.write(board_frame, board_frame.board_panel.board_handling, output_stream) == false){
+                throw new BoardMenuFileException("Can't write backup file");
+            }
             board_frame.screen_messages.set_status_message(resources.getString("message_17"));
-        } else {
+        } catch (FileNotFoundException | BoardMenuFileException ex) {
+            Logger.getLogger(BoardMenuFile.class.getName()).log(Level.SEVERE, null, ex);
+            board_frame.screen_messages.set_status_message(resources.getString("message_18"));
+        } catch (IOException ex) {
+            Logger.getLogger(BoardMenuFile.class.getName()).log(Level.SEVERE, null, ex);
             board_frame.screen_messages.set_status_message(resources.getString("message_18"));
         }
-
     }
-
 }
