@@ -44,8 +44,8 @@ public abstract class InteractiveActionThread extends Thread implements net.free
         return new PullTightThread(p_board_handling);
     }
 
-    public static InteractiveActionThread get_read_logfile_instance(BoardHandling p_board_handling, java.io.InputStream p_input_stream) {
-        return new ReadLogfileThread(p_board_handling, p_input_stream);
+    public static InteractiveActionThread get_read_logfile_instance(BoardHandling p_board_handling, java.io.Reader p_reader) {
+        return new ReadLogfileThread(p_board_handling, p_reader);
     }
     private boolean stop_requested = false;
     public final BoardHandling hdlg;
@@ -129,11 +129,11 @@ public abstract class InteractiveActionThread extends Thread implements net.free
 
     private static class ReadLogfileThread extends InteractiveActionThread {
 
-        private final java.io.InputStream input_stream;
+        private final java.io.Reader reader;
 
-        private ReadLogfileThread(BoardHandling p_board_handling, java.io.InputStream p_input_stream) {
+        private ReadLogfileThread(BoardHandling p_board_handling, java.io.Reader p_reader) {
             super(p_board_handling);
-            this.input_stream = p_input_stream;
+            this.reader = p_reader;
         }
 
         @Override
@@ -148,7 +148,7 @@ public abstract class InteractiveActionThread extends Thread implements net.free
             hdlg.screen_messages.set_write_protected(true);
             boolean done = false;
             InteractiveState previous_state = hdlg.interactive_state;
-            if (!hdlg.logfile.start_read(this.input_stream)) {
+            if (!hdlg.logfile.start_read(this.reader)) {
                 done = true;
             }
             boolean interrupted = false;
@@ -178,7 +178,7 @@ public abstract class InteractiveActionThread extends Thread implements net.free
             }
             hdlg.paint_immediately = false;
             try {
-                this.input_stream.close();
+                this.reader.close();
             } catch (java.io.IOException e) {
                 System.out.println("ReadLogfileThread: unable to close input stream");
             }

@@ -26,9 +26,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Reader;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -108,9 +111,9 @@ public class DesignFile {
         if (dsn_file_generated_by_host) {
             File rules_file = new File(p_parent_name, rule_file_name);
             if (rules_file.exists()) {
-                try (FileInputStream input_stream = new FileInputStream(rules_file)) {
+                try (Reader reader = new FileReader(rules_file)) {
                     if (WindowMessage.confirm(p_confirm_message)) {
-                        result = net.freerouting.freeroute.designformats.specctra.RulesFile.read(input_stream, p_design_name, p_board_handling);
+                        result = net.freerouting.freeroute.designformats.specctra.RulesFile.read(reader, p_design_name, p_board_handling);
                         rules_file.delete();
                     }
                 } catch (FileNotFoundException ex) {
@@ -231,12 +234,12 @@ public class DesignFile {
         String output_file_name = design_name + ".scr";
         File curr_output_file = new File(get_parent(), output_file_name);
         try (ByteArrayOutputStream session_output_stream = new ByteArrayOutputStream();
-                InputStream input_stream = new ByteArrayInputStream(session_output_stream.toByteArray());
+                Reader reader = new InputStreamReader(new ByteArrayInputStream(session_output_stream.toByteArray()));
                 OutputStream output_stream = new FileOutputStream(curr_output_file);) {
             if (!p_board_frame.board_panel.board_handling.export_specctra_session_file(design_file_name, session_output_stream)) {
                 return;
             }
-            if (p_board_frame.board_panel.board_handling.export_eagle_session_file(input_stream, output_stream)) {
+            if (p_board_frame.board_panel.board_handling.export_eagle_session_file(reader, output_stream)) {
                 p_board_frame.screen_messages.set_status_message(resources.getString("message_14") + " " + output_file_name + " " + resources.getString("message_15"));
             } else {
                 p_board_frame.screen_messages.set_status_message(resources.getString("message_16") + " " + output_file_name + " " + resources.getString("message_7"));

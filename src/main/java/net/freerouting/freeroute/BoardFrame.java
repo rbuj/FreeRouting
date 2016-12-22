@@ -15,15 +15,16 @@
  */
 package net.freerouting.freeroute;
 
+import java.awt.geom.Rectangle2D;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Reader;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,7 +40,6 @@ import net.freerouting.freeroute.datastructures.IdNoGenerator;
 import net.freerouting.freeroute.designformats.specctra.DsnFileException;
 import net.freerouting.freeroute.interactive.BoardHandlingException;
 import net.freerouting.freeroute.interactive.ScreenMessages;
-import java.awt.geom.Rectangle2D;
 
 /**
  *
@@ -223,8 +223,8 @@ public class BoardFrame extends javax.swing.JFrame {
     /**
      * Reads interactive actions from a logfile.
      */
-    void read_logfile(InputStream p_input_stream) {
-        board_panel.board_handling.read_logfile(p_input_stream);
+    void read_logfile(Reader p_reader) {
+        board_panel.board_handling.read_logfile(p_reader);
     }
 
     /**
@@ -237,7 +237,7 @@ public class BoardFrame extends javax.swing.JFrame {
         if (design_file.is_created_from_text_file()) {
             try {
                 board_panel.board_handling.import_design(
-                        design_file.get_input_stream(),
+                        new java.io.InputStreamReader(design_file.get_input_stream(), java.nio.charset.Charset.forName("UTF-8")),
                         board_observers,
                         item_id_no_generator,
                         test_level);
@@ -311,8 +311,8 @@ public class BoardFrame extends javax.swing.JFrame {
             // Read the default gui settings, if gui default file exists.
             File defaults_file = new File(design_file.get_parent(), GUI_DEFAULTS_FILE_NAME);
             if (defaults_file.exists()) {
-                try (InputStream input_stream = new FileInputStream(defaults_file)) {
-                    boolean read_ok = GUIDefaultsFile.read(this, board_panel.board_handling, input_stream);
+                try (Reader reader = new FileReader(defaults_file)) {
+                    boolean read_ok = GUIDefaultsFile.read(this, board_panel.board_handling, reader);
                     if (!read_ok) {
                         screen_messages.set_status_message(resources.getString("error_1"));
                         Platform.runLater(() -> {

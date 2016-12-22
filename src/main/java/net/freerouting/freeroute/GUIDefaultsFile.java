@@ -19,11 +19,10 @@
  */
 package net.freerouting.freeroute;
 
+import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import net.freerouting.freeroute.board.ItemSelectionFilter;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
-
-import java.awt.geom.Rectangle2D;
 
 /**
  * Description of a text file, where the board independent interactive settings
@@ -67,11 +66,11 @@ public class GUIDefaultsFile {
      * error occured while reading the file.
      */
     public static boolean read(net.freerouting.freeroute.BoardFrame p_board_frame,
-            net.freerouting.freeroute.interactive.BoardHandling p_board_handling, java.io.InputStream p_input_stream) {
-        if (p_input_stream == null) {
+            net.freerouting.freeroute.interactive.BoardHandling p_board_handling, java.io.Reader p_reader) {
+        if (p_reader == null) {
             return false;
         }
-        GUIDefaultsScanner scanner = new GUIDefaultsScanner(p_input_stream);
+        GUIDefaultsScanner scanner = new GUIDefaultsScanner(p_reader);
         GUIDefaultsFile new_instance = new GUIDefaultsFile(p_board_frame, p_board_handling, scanner, null);
         boolean result = true;
         try {

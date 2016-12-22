@@ -19,9 +19,8 @@
  */
 package net.freerouting.freeroute;
 
-import java.io.IOException;
-
 import java.awt.geom.Rectangle2D;
+import java.io.IOException;
 
 /**
  * Subwindow of the board frame, whose location and visibility can be saved and

@@ -18,7 +18,7 @@ package net.freerouting.freeroute.interactive;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.Reader;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 
 /**
@@ -38,8 +38,8 @@ public class Logfile {
     /**
      * opens the logfile for reading
      */
-    public boolean start_read(InputStream p_input_stream) {
-        this.scanner = new LogfileScanner(p_input_stream);
+    public boolean start_read(Reader p_reader) {
+        this.scanner = new LogfileScanner(p_reader);
         return (this.scanner != null);
     }
 

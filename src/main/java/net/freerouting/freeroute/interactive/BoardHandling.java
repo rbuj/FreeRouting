@@ -22,13 +22,13 @@ package net.freerouting.freeroute.interactive;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.geom.Rectangle2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Reader;
 import java.util.Collection;
 import java.util.Set;
 import net.freerouting.freeroute.board.BoardObservers;
@@ -966,7 +966,7 @@ public class BoardHandling {
      * is embedded into a host system. Throws BoardHandlingException, if the
      * dsn-file is currupted.
      */
-    public void import_design(InputStream p_design, BoardObservers p_observers,
+    public void import_design(Reader p_design, BoardObservers p_observers,
             IdNoGenerator p_item_id_no_generator, TestLevel p_test_level)
             throws BoardHandlingException {
         if (p_design == null) {
@@ -1012,11 +1012,11 @@ public class BoardHandling {
     /**
      * Writes a session file ins the Eaglea scr format.
      */
-    public boolean export_eagle_session_file(java.io.InputStream p_input_stream, OutputStream p_output_stream) {
+    public boolean export_eagle_session_file(java.io.Reader p_reader, OutputStream p_output_stream) {
         if (board_is_read_only) {
             return false;
         }
-        return SessionToEagle.get_instance(p_input_stream, p_output_stream, this.board);
+        return SessionToEagle.get_instance(p_reader, p_output_stream, this.board);
     }
 
     /**
@@ -1050,11 +1050,11 @@ public class BoardHandling {
     /**
      * Processes the actions stored in the input logfile.
      */
-    public void read_logfile(InputStream p_input_stream) {
+    public void read_logfile(Reader p_reader) {
         if (board_is_read_only || !(interactive_state instanceof MenuState)) {
             return;
         }
-        this.interactive_action_thread = InteractiveActionThread.get_read_logfile_instance(this, p_input_stream);
+        this.interactive_action_thread = InteractiveActionThread.get_read_logfile_instance(this, p_reader);
         this.interactive_action_thread.start();
     }
 

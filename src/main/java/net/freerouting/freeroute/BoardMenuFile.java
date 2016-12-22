@@ -215,13 +215,13 @@ public class BoardMenuFile extends javax.swing.JMenu {
         if (filename == null) {
             board_frame.screen_messages.set_status_message(resources.getString("message_10"));
         } else {
-            java.io.InputStream input_stream = null;
+            java.io.Reader reader = null;
             try {
-                input_stream = new java.io.FileInputStream(filename);
+                reader = new java.io.FileReader(filename);
             } catch (java.io.FileNotFoundException e) {
                 return;
             }
-            board_frame.read_logfile(input_stream);
+            board_frame.read_logfile(reader);
         }
     }
 

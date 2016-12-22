@@ -50,10 +50,10 @@ public class RulesFile {
         }
     }
 
-    public static boolean read(java.io.InputStream p_input_stream, String p_design_name,
+    public static boolean read(java.io.Reader p_reader, String p_design_name,
             net.freerouting.freeroute.interactive.BoardHandling p_board_handling) throws DsnFileException {
         BasicBoard routing_board = p_board_handling.get_routing_board();
-        Scanner scanner = new SpecctraFileScanner(p_input_stream);
+        Scanner scanner = new SpecctraFileScanner(p_reader);
         try {
             Object curr_token = scanner.next_token();
             if (curr_token != Keyword.OPEN_BRACKET) {

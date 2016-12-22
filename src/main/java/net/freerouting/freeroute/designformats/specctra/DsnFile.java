@@ -19,8 +19,8 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
-import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Reader;
 import net.freerouting.freeroute.board.BasicBoard;
 import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.TestLevel;
@@ -42,10 +42,10 @@ public class DsnFile {
      * p_item_observers and p_item_id_no_generator are used, in case the board
      * is embedded into a host system. Returns false, if an error occured.
      */
-    public static void read(InputStream p_input_stream, BoardHandling p_board_handling,
+    public static void read(Reader p_reader, BoardHandling p_board_handling,
             BoardObservers p_observers, IdNoGenerator p_item_id_no_generator,
             TestLevel p_test_level) throws DsnFileException {
-        Scanner scanner = new SpecctraFileScanner(p_input_stream);
+        Scanner scanner = new SpecctraFileScanner(p_reader);
         Object curr_token;
         for (int i = 0; i < 3; ++i) {
             try {

@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  */
 public class SessionToEagle extends javax.swing.JFrame {
 
-    public static boolean get_instance(java.io.InputStream p_session, java.io.OutputStream p_output_stream,
+    public static boolean get_instance(java.io.Reader p_session, java.io.OutputStream p_output_stream,
             net.freerouting.freeroute.board.BasicBoard p_board) {
         if (p_output_stream == null) {
             return false;
