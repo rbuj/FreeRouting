@@ -40,8 +40,7 @@ public class BatchOptRoute {
     private static int ADDITIONAL_RIPUP_COST_FACTOR_AT_START = 10;
 
     static boolean contains_only_unfixed_traces(Collection<Item> p_item_list) {
-        for (Iterator<Item> it = p_item_list.iterator(); it.hasNext();) {
-            Item curr_item = it.next();
+        for (Item curr_item : p_item_list) {
             if (curr_item.is_user_fixed() || !(curr_item instanceof Trace)) {
                 return false;
             }
@@ -171,8 +170,7 @@ public class BatchOptRoute {
         ripped_items.stream().forEach((curr_item) -> {
             ripped_connections.addAll(curr_item.get_connection_items(Item.StopConnectionOption.NONE));
         });
-        for (Iterator<Item> it = ripped_connections.iterator(); it.hasNext();) {
-            Item curr_item = it.next();
+        for (Item curr_item : ripped_connections) {
             if (curr_item.is_user_fixed()) {
                 return false;
             }
