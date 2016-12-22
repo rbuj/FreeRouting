@@ -468,7 +468,7 @@ public class MazeSearchAlgo {
         if (p_curr_door_is_small) {
             boolean enter_through_small_door = false;
             if (p_list_element.door instanceof ExpansionDoor) {
-                CompleteExpansionRoom from_room = ((ExpansionDoor) p_list_element.door).other_room(p_list_element.next_room);
+                CompleteExpansionRoom from_room = p_list_element.door.other_room(p_list_element.next_room);
                 if (from_room instanceof ObstacleExpansionRoom) {
                     // otherwise entering through the small door may fail, because it was not checked.
                     enter_through_small_door = true;

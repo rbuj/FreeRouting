@@ -209,7 +209,7 @@ public class Package {
             if (next_token instanceof String) {
                 padstack_name = (String) next_token;
             } else if (next_token instanceof Integer) {
-                padstack_name = ((Integer) next_token).toString();
+                padstack_name = next_token.toString();
             } else {
                 System.out.println("Package.read_pin_info: String or Integer expected");
                 return null;
@@ -234,7 +234,7 @@ public class Package {
             if (next_token instanceof String) {
                 pin_name = (String) next_token;
             } else if (next_token instanceof Integer) {
-                pin_name = ((Integer) next_token).toString();
+                pin_name = next_token.toString();
             } else {
                 System.out.println("Package.read_pin_info: String or Integer expected");
                 return null;
