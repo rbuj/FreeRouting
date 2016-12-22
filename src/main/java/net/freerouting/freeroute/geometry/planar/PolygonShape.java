@@ -31,6 +31,7 @@ import java.util.LinkedList;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class PolygonShape extends PolylineShape {
 
     static private int seed = 99;

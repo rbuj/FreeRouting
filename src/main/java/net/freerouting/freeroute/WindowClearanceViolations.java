@@ -29,6 +29,7 @@ import net.freerouting.freeroute.interactive.ClearanceViolations;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowClearanceViolations extends WindowObjectListWithFilter {
 
     private final java.util.ResourceBundle resources;

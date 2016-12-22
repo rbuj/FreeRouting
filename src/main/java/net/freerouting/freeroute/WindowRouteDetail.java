@@ -26,6 +26,7 @@ import net.freerouting.freeroute.board.BoardOutline;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowRouteDetail extends BoardSavableSubWindow {
 
     private static final int c_max_slider_value = 100;

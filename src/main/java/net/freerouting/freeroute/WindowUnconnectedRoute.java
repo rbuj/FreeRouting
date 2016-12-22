@@ -31,6 +31,7 @@ import net.freerouting.freeroute.board.Item;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowUnconnectedRoute extends WindowObjectListWithFilter {
 
     private final java.util.ResourceBundle resources;

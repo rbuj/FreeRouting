@@ -25,6 +25,7 @@ package net.freerouting.freeroute.boardgraphics;
  *
  * @author alfons
  */
+@SuppressWarnings("serial")
 public class ColorIntensityTable implements java.io.Serializable {
 
     private final double[] arr;

@@ -24,6 +24,7 @@ package net.freerouting.freeroute.board;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class ItemIdNoGenerator implements net.freerouting.freeroute.datastructures.IdNoGenerator, java.io.Serializable {
 
     static final private int c_max_id_no = Integer.MAX_VALUE / 2;

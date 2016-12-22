@@ -31,6 +31,7 @@ import net.freerouting.freeroute.library.Package;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class Component implements UndoableObjects.Storable, ObjectInfoPanel.Printable, java.io.Serializable {
 
     /**

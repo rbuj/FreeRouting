@@ -29,6 +29,7 @@ import javax.help.HelpSetException;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class BoardMenuHelp extends BoardMenuHelpReduced {
 
     private static CSH.DisplayHelpFromSource contents_help = null;

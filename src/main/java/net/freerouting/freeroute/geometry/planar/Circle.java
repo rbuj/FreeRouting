@@ -24,6 +24,7 @@ package net.freerouting.freeroute.geometry.planar;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class Circle implements ConvexShape, java.io.Serializable {
 
     public final IntPoint center;

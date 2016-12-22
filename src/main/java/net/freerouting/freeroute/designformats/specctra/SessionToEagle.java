@@ -27,6 +27,7 @@ import java.util.logging.Logger;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class SessionToEagle extends javax.swing.JFrame {
 
     public static boolean get_instance(java.io.Reader p_session, java.io.OutputStream p_output_stream,

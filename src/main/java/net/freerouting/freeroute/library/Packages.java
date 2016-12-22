@@ -28,6 +28,7 @@ import net.freerouting.freeroute.geometry.planar.Shape;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class Packages implements java.io.Serializable {
 
     /**

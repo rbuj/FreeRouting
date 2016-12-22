@@ -25,6 +25,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class BoardTemporarySubWindow extends BoardSubWindow {
 
     protected final BoardFrame board_frame;

@@ -31,6 +31,7 @@ import net.freerouting.freeroute.datastructures.Signum;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public abstract class Direction implements Comparable<Direction>, java.io.Serializable {
 
     public static final IntDirection NULL = new IntDirection(0, 0);

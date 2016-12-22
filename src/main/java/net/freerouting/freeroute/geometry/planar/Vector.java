@@ -28,6 +28,7 @@ import net.freerouting.freeroute.datastructures.Signum;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public abstract class Vector implements java.io.Serializable {
 
     /**

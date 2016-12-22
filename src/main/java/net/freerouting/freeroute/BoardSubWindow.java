@@ -25,6 +25,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class BoardSubWindow extends javax.swing.JFrame {
 
     private boolean visible_before_iconifying = false;

@@ -29,6 +29,7 @@ import java.math.BigInteger;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class BigIntDirection extends Direction implements java.io.Serializable {
 
     final BigInteger x;

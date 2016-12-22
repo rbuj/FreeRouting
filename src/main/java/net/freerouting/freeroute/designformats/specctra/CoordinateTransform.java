@@ -31,6 +31,7 @@ import net.freerouting.freeroute.geometry.planar.Vector;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class CoordinateTransform implements java.io.Serializable {
 
     private final double scale_factor;

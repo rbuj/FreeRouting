@@ -29,6 +29,7 @@ import java.util.LinkedList;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class PolylineArea implements Area, java.io.Serializable {
 
     static private void cutout_hole_piece(TileShape p_divide_piece, TileShape p_hole_piece,

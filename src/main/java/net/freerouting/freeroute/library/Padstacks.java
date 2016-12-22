@@ -28,6 +28,7 @@ import net.freerouting.freeroute.geometry.planar.ConvexShape;
  *
  * @author alfons
  */
+@SuppressWarnings("serial")
 public class Padstacks implements java.io.Serializable {
 
     /**

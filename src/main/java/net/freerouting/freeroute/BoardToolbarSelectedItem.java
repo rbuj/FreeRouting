@@ -25,6 +25,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 class BoardToolbarSelectedItem extends javax.swing.JToolBar {
 
     private final BoardFrame board_frame;

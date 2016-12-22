@@ -26,6 +26,7 @@ import java.math.BigInteger;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public abstract class Point implements java.io.Serializable {
 
     /**

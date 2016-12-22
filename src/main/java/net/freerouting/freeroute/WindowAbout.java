@@ -34,6 +34,7 @@ import javafx.scene.Scene;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowAbout extends BoardSavableSubWindow {
 
     public WindowAbout(Locale p_locale) {

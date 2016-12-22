@@ -27,6 +27,7 @@ import net.freerouting.freeroute.rules.ClearanceMatrix;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowClearanceMatrix extends BoardSavableSubWindow {
 
     /**
@@ -291,6 +292,7 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow {
         }
     }
 
+    @SuppressWarnings("serial")
     private class ClearanceTableModel extends javax.swing.table.AbstractTableModel implements java.io.Serializable {
 
         private Object[][] data = null;

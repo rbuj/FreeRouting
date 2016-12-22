@@ -28,6 +28,7 @@ import net.freerouting.freeroute.datastructures.UndoableObjects;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class Net implements Comparable<Net>, net.freerouting.freeroute.board.ObjectInfoPanel.Printable, java.io.Serializable {
 
     /**

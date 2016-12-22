@@ -29,6 +29,7 @@ import java.util.LinkedList;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public abstract class PolylineShape implements Shape, java.io.Serializable {
 
     /**

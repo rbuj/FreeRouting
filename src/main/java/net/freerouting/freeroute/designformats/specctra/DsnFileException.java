@@ -20,6 +20,7 @@ package net.freerouting.freeroute.designformats.specctra;
  *
  * @author Robert Antoni Buj Gelonch {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  */
+@SuppressWarnings("serial")
 public class DsnFileException extends Exception {
 
     /**

@@ -24,6 +24,7 @@ import net.freerouting.freeroute.datastructures.Signum;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class Line implements Comparable<Line>, java.io.Serializable {
 
     /**

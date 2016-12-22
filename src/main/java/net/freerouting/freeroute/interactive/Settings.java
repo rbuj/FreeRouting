@@ -27,6 +27,7 @@ import net.freerouting.freeroute.board.RoutingBoard;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class Settings implements java.io.Serializable {
 
     /**

@@ -29,6 +29,7 @@ import net.freerouting.freeroute.rules.ViaRule;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowNetClasses extends BoardSavableSubWindow {
 
     private static final int TEXTFIELD_HEIGHT = 16;
@@ -356,6 +357,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
         }
     }
 
+    @SuppressWarnings("serial")
     private class NetClassTable extends javax.swing.JTable {
 
         private final String[] column_tool_tips;
@@ -390,6 +392,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
         }
     }
 
+    @SuppressWarnings("serial")
     private class NetClassTableModel extends javax.swing.table.AbstractTableModel {
 
         private Object[][] data = null;

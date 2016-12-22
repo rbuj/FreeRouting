@@ -24,6 +24,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowDisplayMisc extends BoardSavableSubWindow {
 
     private static final int MAX_SLIDER_VALUE = 100;

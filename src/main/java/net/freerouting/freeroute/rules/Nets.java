@@ -27,6 +27,7 @@ import java.util.Vector;
  *
  * @author alfons
  */
+@SuppressWarnings("serial")
 public class Nets implements java.io.Serializable {
 
     /**

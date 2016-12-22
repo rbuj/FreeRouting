@@ -24,6 +24,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 class PupupMenuCornerItemConstruction extends javax.swing.JPopupMenu {
 
     private final BoardPanel board_panel;

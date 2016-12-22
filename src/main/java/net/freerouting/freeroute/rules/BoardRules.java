@@ -27,6 +27,7 @@ import net.freerouting.freeroute.geometry.planar.ConvexShape;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class BoardRules implements java.io.Serializable {
 
     /**

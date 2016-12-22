@@ -28,6 +28,7 @@ import net.freerouting.freeroute.board.RoutingBoard;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class AutorouteSettings implements java.io.Serializable {
 
     private boolean with_fanout;

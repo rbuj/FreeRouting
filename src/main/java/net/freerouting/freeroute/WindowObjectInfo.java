@@ -27,6 +27,7 @@ import java.util.Collection;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowObjectInfo extends BoardTemporarySubWindow implements net.freerouting.freeroute.board.ObjectInfoPanel {
 
     private static final int MAX_WINDOW_HEIGHT = 500;

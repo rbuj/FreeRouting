@@ -26,6 +26,7 @@ import java.util.LinkedList;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public abstract class TileShape extends PolylineShape implements ConvexShape, java.io.Serializable {
 
     /**

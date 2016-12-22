@@ -26,6 +26,7 @@ package net.freerouting.freeroute.geometry.planar;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class Ellipse implements java.io.Serializable {
 
     public final FloatPoint center;

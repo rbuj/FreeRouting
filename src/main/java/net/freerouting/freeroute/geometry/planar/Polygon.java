@@ -26,6 +26,7 @@ import java.util.LinkedList;
  *
  * @author Alfons Wirtz#
  */
+@SuppressWarnings("serial")
 public class Polygon implements java.io.Serializable {
 
     private final Collection<Point> corners;

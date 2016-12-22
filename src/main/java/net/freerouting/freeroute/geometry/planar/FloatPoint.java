@@ -28,6 +28,7 @@ package net.freerouting.freeroute.geometry.planar;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class FloatPoint implements java.io.Serializable {
 
     public static final FloatPoint ZERO = new FloatPoint(0, 0);

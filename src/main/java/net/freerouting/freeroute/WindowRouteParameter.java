@@ -26,6 +26,7 @@ import java.util.Collection;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowRouteParameter extends BoardSavableSubWindow {
 
     private static final int c_max_slider_value = 999;

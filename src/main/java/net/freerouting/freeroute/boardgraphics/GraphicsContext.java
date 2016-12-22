@@ -43,6 +43,7 @@ import net.freerouting.freeroute.geometry.planar.TileShape;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class GraphicsContext implements java.io.Serializable {
 
     private static final int update_offset = 10000;

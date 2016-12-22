@@ -27,6 +27,7 @@ import net.freerouting.freeroute.designformats.specctra.CoordinateTransform;
  *
  * @author alfons
  */
+@SuppressWarnings("serial")
 public class Communication implements java.io.Serializable {
 
     /**
@@ -95,6 +96,7 @@ public class Communication implements java.io.Serializable {
         observers = new BoardObserverAdaptor();
     }
 
+    @SuppressWarnings("serial")
     public static class SpecctraParserInfo implements java.io.Serializable {
 
         /**
@@ -124,6 +126,7 @@ public class Communication implements java.io.Serializable {
             dsn_file_generated_by_host = p_dsn_file_generated_by_host;
         }
 
+        @SuppressWarnings("serial")
         public static class WriteResolution implements java.io.Serializable {
 
             public final String char_name;

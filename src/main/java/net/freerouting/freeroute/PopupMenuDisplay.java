@@ -27,6 +27,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class PopupMenuDisplay extends javax.swing.JPopupMenu {
 
     protected final BoardPanel board_panel;

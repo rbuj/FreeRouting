@@ -24,6 +24,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class BoardMenuOther extends javax.swing.JMenu {
 
     /**

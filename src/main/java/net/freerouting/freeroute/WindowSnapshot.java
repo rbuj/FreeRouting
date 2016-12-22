@@ -26,6 +26,7 @@ import java.io.IOException;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowSnapshot extends BoardSavableSubWindow {
 
     private final BoardFrame board_frame;
@@ -255,6 +256,7 @@ public class WindowSnapshot extends BoardSavableSubWindow {
         this.list.setSelectedIndex(selected_index + 1);
     }
 
+    @SuppressWarnings("serial")
     private static class SavedAttributes implements java.io.Serializable {
 
         public final javax.swing.DefaultListModel list_model;

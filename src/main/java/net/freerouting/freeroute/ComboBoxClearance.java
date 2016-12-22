@@ -26,6 +26,7 @@ import net.freerouting.freeroute.rules.ClearanceMatrix;
  *
  * @author alfons
  */
+@SuppressWarnings("serial")
 public class ComboBoxClearance extends javax.swing.JComboBox {
 
     private ClearanceClass[] class_arr;

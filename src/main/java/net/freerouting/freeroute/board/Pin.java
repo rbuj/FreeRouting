@@ -38,6 +38,7 @@ import net.freerouting.freeroute.library.Padstack;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class Pin extends DrillItem implements java.io.Serializable {
 
     /**

@@ -32,6 +32,7 @@ import net.freerouting.freeroute.library.Package;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class Components implements java.io.Serializable {
 
     private final UndoableObjects undo_list = new UndoableObjects();

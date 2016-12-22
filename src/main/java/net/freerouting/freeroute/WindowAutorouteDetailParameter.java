@@ -24,6 +24,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowAutorouteDetailParameter extends BoardSavableSubWindow {
 
     private final net.freerouting.freeroute.interactive.BoardHandling board_handling;

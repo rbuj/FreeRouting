@@ -45,6 +45,7 @@ import net.freerouting.freeroute.boardgraphics.GraphicsContext;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class ColorManager extends BoardSavableSubWindow {
 
     /**
@@ -141,6 +142,7 @@ public class ColorManager extends BoardSavableSubWindow {
         this.other_color_table.setModel(p_graphics_context.other_color_table);
     }
 
+    @SuppressWarnings("serial")
     private static class ColorRenderer extends JLabel implements TableCellRenderer {
 
         Border unselectedBorder = null;
@@ -185,6 +187,7 @@ public class ColorManager extends BoardSavableSubWindow {
      * Another approach would be to copy the implementation of TableCellEditor
      * methods from the source code for DefaultCellEditor.
      */
+    @SuppressWarnings("serial")
     private static class ColorEditor extends DefaultCellEditor {
 
         Color currentColor = null;

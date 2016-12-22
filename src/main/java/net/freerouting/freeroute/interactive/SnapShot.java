@@ -24,6 +24,7 @@ package net.freerouting.freeroute.interactive;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class SnapShot implements java.io.Serializable {
 
     /**

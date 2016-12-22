@@ -28,6 +28,7 @@ import net.freerouting.freeroute.library.Packages;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowPackages extends WindowObjectListWithFilter {
 
     /**

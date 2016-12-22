@@ -26,6 +26,7 @@ import net.freerouting.freeroute.board.ItemSelectionFilter;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowSelectParameter extends BoardSavableSubWindow {
 
     private final net.freerouting.freeroute.interactive.BoardHandling board_handling;

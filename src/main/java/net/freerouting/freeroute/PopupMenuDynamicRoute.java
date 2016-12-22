@@ -24,6 +24,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class PopupMenuDynamicRoute extends PopupMenuDisplay {
 
     private final PopupMenuChangeLayer change_layer_menu;

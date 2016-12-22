@@ -25,6 +25,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowMessage extends javax.swing.JFrame {
 
     /**

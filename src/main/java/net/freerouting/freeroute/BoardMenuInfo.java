@@ -23,6 +23,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class BoardMenuInfo extends javax.swing.JMenu {
 
     /**

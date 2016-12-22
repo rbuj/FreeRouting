@@ -27,6 +27,7 @@ import net.freerouting.freeroute.geometry.planar.Vector;
  *
  * @author alfons
  */
+@SuppressWarnings("serial")
 public class ComponentObstacleArea extends ObstacleArea {
 
     /**

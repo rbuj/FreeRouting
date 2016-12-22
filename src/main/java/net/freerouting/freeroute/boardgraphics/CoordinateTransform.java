@@ -22,6 +22,7 @@ import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.Limits;
 
+@SuppressWarnings("serial")
 public class CoordinateTransform implements java.io.Serializable {
 
     final IntBox design_box;

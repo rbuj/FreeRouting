@@ -30,6 +30,7 @@ import net.freerouting.freeroute.geometry.planar.TileShape;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public abstract class Trace extends Item implements Connectable, java.io.Serializable {
 
     private final int half_width; // half width of the trace pen

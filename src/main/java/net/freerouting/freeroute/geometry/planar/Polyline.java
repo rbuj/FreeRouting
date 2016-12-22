@@ -33,6 +33,7 @@ import java.util.LinkedList;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class Polyline implements java.io.Serializable {
 
     private static final boolean USE_BOUNDING_OCTAGON_FOR_OFFSET_SHAPES = true;

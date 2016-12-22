@@ -29,6 +29,7 @@ import net.freerouting.freeroute.board.ObjectInfoPanel;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public abstract class WindowObjectList extends BoardSavableSubWindow {
 
     protected static final int DEFAULT_TABLE_SIZE = 20;

@@ -25,6 +25,7 @@ package net.freerouting.freeroute.library;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class LogicalPart implements net.freerouting.freeroute.board.ObjectInfoPanel.Printable, java.io.Serializable {
 
     public final String name;
@@ -84,6 +85,7 @@ public class LogicalPart implements net.freerouting.freeroute.board.ObjectInfoPa
         p_window.newline();
     }
 
+    @SuppressWarnings("serial")
     public static class PartPin implements Comparable<PartPin>, java.io.Serializable {
 
         /**

@@ -24,6 +24,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class BoardMenuHelpReduced extends javax.swing.JMenu {
 
     protected final BoardFrame board_frame;

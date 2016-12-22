@@ -27,6 +27,7 @@ import net.freerouting.freeroute.rules.NetClass;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowAssignNetClass extends BoardSavableSubWindow {
 
     private static final int TEXTFIELD_HEIGHT = 16;
@@ -92,6 +93,7 @@ public class WindowAssignNetClass extends BoardSavableSubWindow {
         add_net_class_combo_box();
     }
 
+    @SuppressWarnings("serial")
     private class AssignRuleTable extends javax.swing.JTable {
 
         private final String[] column_tool_tips

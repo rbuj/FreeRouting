@@ -41,6 +41,7 @@ import net.freerouting.freeroute.rules.Nets;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPanel.Printable, UndoableObjects.Storable, Serializable {
 
     private static double PROTECT_FANOUT_LENGTH = 400;

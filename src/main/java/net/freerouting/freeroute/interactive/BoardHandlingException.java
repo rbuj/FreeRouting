@@ -20,6 +20,7 @@ package net.freerouting.freeroute.interactive;
  *
  * @author Robert Antoni Buj Gelonch {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  */
+@SuppressWarnings("serial")
 public class BoardHandlingException extends Exception {
 
     /**

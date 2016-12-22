@@ -30,6 +30,7 @@ import net.freerouting.freeroute.rules.ViaRule;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowVia extends BoardSavableSubWindow {
 
     private static final int WINDOW_OFFSET = 30;
@@ -327,6 +328,7 @@ public class WindowVia extends BoardSavableSubWindow {
         }
     }
 
+    @SuppressWarnings("serial")
     private class PadstackInputPanel extends javax.swing.JPanel {
 
         private final javax.swing.JLabel[] layer_names;

@@ -37,6 +37,7 @@ import net.freerouting.freeroute.geometry.planar.Vector;
  *
  * @author alfons
  */
+@SuppressWarnings("serial")
 public class BoardOutline extends Item implements java.io.Serializable {
 
     private static final int HALF_WIDTH = 100;

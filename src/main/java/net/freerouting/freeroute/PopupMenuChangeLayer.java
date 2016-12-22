@@ -24,6 +24,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 class PopupMenuChangeLayer extends javax.swing.JMenu {
 
     private final BoardFrame board_frame;
@@ -67,6 +68,7 @@ class PopupMenuChangeLayer extends javax.swing.JMenu {
         }
     }
 
+    @SuppressWarnings("serial")
     private class LayermenuItem extends javax.swing.JMenuItem {
 
         private final int layer_no;

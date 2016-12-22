@@ -23,6 +23,7 @@ package net.freerouting.freeroute.rules;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class ClearanceMatrix implements java.io.Serializable {
 
     /**
@@ -332,6 +333,7 @@ public class ClearanceMatrix implements java.io.Serializable {
         return true;
     }
 
+    @SuppressWarnings("serial")
     private class Row implements net.freerouting.freeroute.board.ObjectInfoPanel.Printable, java.io.Serializable {
 
         final String name;
@@ -378,6 +380,7 @@ public class ClearanceMatrix implements java.io.Serializable {
         }
     }
 
+    @SuppressWarnings("serial")
     private class MatrixEntry implements java.io.Serializable {
 
         int[] layer;

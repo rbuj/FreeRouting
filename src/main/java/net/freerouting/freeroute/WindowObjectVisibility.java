@@ -26,6 +26,7 @@ import net.freerouting.freeroute.boardgraphics.ColorIntensityTable.ObjectNames;
  *
  * @author alfons
  */
+@SuppressWarnings("serial")
 public class WindowObjectVisibility extends WindowVisibility {
 
     /**

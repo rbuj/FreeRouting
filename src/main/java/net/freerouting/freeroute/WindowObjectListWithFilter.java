@@ -25,6 +25,7 @@ import java.io.IOException;
  * Abstract class for windows displaying a list of objects The object name can
  * be filttered by an alphanumeric input string. * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public abstract class WindowObjectListWithFilter extends WindowObjectList {
 
     private final javax.swing.JTextField filter_string;
@@ -111,6 +112,7 @@ public abstract class WindowObjectListWithFilter extends WindowObjectList {
         return super.read(p_object_stream);
     }
 
+    @SuppressWarnings("serial")
     public static class SnapshotInfo implements java.io.Serializable {
 
         private final String filter;

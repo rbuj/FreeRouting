@@ -33,6 +33,7 @@ import net.freerouting.freeroute.geometry.planar.FloatPoint;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowRouteStubs extends WindowObjectListWithFilter {
 
     private final java.util.ResourceBundle resources;

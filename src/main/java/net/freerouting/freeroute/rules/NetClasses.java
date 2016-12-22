@@ -24,6 +24,7 @@ package net.freerouting.freeroute.rules;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class NetClasses implements java.io.Serializable {
 
     private final java.util.Vector<NetClass> class_arr = new java.util.Vector<>();

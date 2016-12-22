@@ -27,6 +27,7 @@ import java.math.BigInteger;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class IntPoint extends Point implements java.io.Serializable {
 
     /**

@@ -24,6 +24,7 @@ package net.freerouting.freeroute.rules;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class NetClass implements java.io.Serializable, net.freerouting.freeroute.board.ObjectInfoPanel.Printable {
 
     private String name;

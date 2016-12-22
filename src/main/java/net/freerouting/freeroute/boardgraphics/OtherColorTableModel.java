@@ -26,6 +26,7 @@ import java.awt.Color;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class OtherColorTableModel extends ColorTableModel implements java.io.Serializable {
 
     public OtherColorTableModel(java.util.Locale p_locale) {

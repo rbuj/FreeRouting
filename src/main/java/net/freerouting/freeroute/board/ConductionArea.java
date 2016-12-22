@@ -33,6 +33,7 @@ import net.freerouting.freeroute.geometry.planar.Vector;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class ConductionArea extends ObstacleArea implements Connectable {
 
     private boolean is_obstacle;

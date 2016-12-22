@@ -28,6 +28,7 @@ import net.freerouting.freeroute.board.Components;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowComponents extends WindowObjectListWithFilter {
 
     /**

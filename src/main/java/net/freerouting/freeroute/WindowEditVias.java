@@ -28,6 +28,7 @@ import net.freerouting.freeroute.rules.ViaInfos;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class WindowEditVias extends BoardSavableSubWindow {
 
     private static final int TEXTFIELD_HEIGHT = 16;
@@ -191,6 +192,7 @@ public class WindowEditVias extends BoardSavableSubWindow {
         }
     }
 
+    @SuppressWarnings("serial")
     private class ViaTableModel extends javax.swing.table.AbstractTableModel {
 
         private Object[][] data = null;

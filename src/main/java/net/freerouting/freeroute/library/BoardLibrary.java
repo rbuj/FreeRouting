@@ -27,6 +27,7 @@ import java.util.Vector;
  *
  * @author alfons
  */
+@SuppressWarnings("serial")
 public class BoardLibrary implements java.io.Serializable {
 
     public Padstacks padstacks = null;

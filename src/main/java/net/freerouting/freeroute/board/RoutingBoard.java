@@ -47,6 +47,7 @@ import net.freerouting.freeroute.rules.ViaInfo;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class RoutingBoard extends BasicBoard implements java.io.Serializable {
 
     /**

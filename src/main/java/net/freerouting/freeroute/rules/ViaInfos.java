@@ -28,6 +28,7 @@ import java.util.List;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class ViaInfos implements java.io.Serializable, net.freerouting.freeroute.board.ObjectInfoPanel.Printable {
 
     private List<ViaInfo> list = new LinkedList<>();

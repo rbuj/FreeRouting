@@ -25,6 +25,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 class BoardPanelStatus extends javax.swing.JPanel {
 
     final javax.swing.JLabel status_message;

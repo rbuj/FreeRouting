@@ -27,6 +27,7 @@ import net.freerouting.freeroute.geometry.planar.FloatPoint;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class CoordinateTransform implements java.io.Serializable {
 
     /**

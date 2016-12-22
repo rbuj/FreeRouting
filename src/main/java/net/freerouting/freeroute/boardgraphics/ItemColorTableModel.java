@@ -27,6 +27,7 @@ import java.awt.Color;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class ItemColorTableModel extends ColorTableModel implements java.io.Serializable {
 
     private transient boolean item_colors_precalculated = false;

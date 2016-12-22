@@ -25,6 +25,7 @@ import net.freerouting.freeroute.datastructures.Signum;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class LineSegment implements java.io.Serializable {
 
     private final Line start;

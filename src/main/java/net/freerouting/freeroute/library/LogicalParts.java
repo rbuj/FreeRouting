@@ -26,6 +26,7 @@ import java.util.Vector;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class LogicalParts implements java.io.Serializable {
 
     /**

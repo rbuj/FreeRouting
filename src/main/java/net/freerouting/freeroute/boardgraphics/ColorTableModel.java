@@ -26,6 +26,7 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public abstract class ColorTableModel extends AbstractTableModel {
 
     protected final Object[][] data;

@@ -38,6 +38,7 @@ import net.freerouting.freeroute.interactive.ScreenMessages;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class BoardPanel extends javax.swing.JPanel {
 
     private static final double c_zoom_factor = 2.0;

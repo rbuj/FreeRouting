@@ -24,6 +24,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 class PopupMenuInsertCancel extends javax.swing.JPopupMenu {
 
     private final BoardPanel board_panel;

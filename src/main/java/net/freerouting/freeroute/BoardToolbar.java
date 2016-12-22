@@ -24,6 +24,7 @@ package net.freerouting.freeroute;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 class BoardToolbar extends javax.swing.JPanel {
 
     private final BoardFrame board_frame;

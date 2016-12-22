@@ -24,6 +24,7 @@ package net.freerouting.freeroute;
  *
  * @author alfons
  */
+@SuppressWarnings("serial")
 public class WindowLayerVisibility extends WindowVisibility {
 
     /**

@@ -47,6 +47,7 @@ import net.freerouting.freeroute.interactive.ScreenMessages;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class BoardFrame extends javax.swing.JFrame {
 
     /**
@@ -651,6 +652,7 @@ public class BoardFrame extends javax.swing.JFrame {
     /**
      * Used for storing the subwindow filters in a snapshot.
      */
+    @SuppressWarnings("serial")
     public static class SubwindowSelections implements java.io.Serializable {
 
         private WindowObjectListWithFilter.SnapshotInfo incompletes_selection;

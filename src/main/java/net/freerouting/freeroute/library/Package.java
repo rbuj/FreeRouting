@@ -30,6 +30,7 @@ import net.freerouting.freeroute.geometry.planar.Vector;
  *
  * @author alfons
  */
+@SuppressWarnings("serial")
 public class Package implements Comparable<Package>, net.freerouting.freeroute.board.ObjectInfoPanel.Printable, java.io.Serializable {
 
     /**
@@ -150,6 +151,7 @@ public class Package implements Comparable<Package>, net.freerouting.freeroute.b
         p_window.newline();
     }
 
+    @SuppressWarnings("serial")
     public static class Pin implements java.io.Serializable {
 
         /**
@@ -184,6 +186,7 @@ public class Package implements Comparable<Package>, net.freerouting.freeroute.b
         }
     }
 
+    @SuppressWarnings("serial")
     public static class Keepout implements java.io.Serializable {
 
         public final String name;

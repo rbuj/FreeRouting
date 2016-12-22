@@ -27,6 +27,7 @@ import java.util.TreeSet;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class ItemSelectionFilter implements java.io.Serializable {
 
     /**

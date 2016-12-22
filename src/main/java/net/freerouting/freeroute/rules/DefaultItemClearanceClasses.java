@@ -24,6 +24,7 @@ package net.freerouting.freeroute.rules;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class DefaultItemClearanceClasses implements java.io.Serializable {
 
     private final int[] arr = new int[ItemClass.values().length];

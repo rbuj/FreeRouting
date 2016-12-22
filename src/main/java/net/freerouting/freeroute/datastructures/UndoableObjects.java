@@ -32,6 +32,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class UndoableObjects implements java.io.Serializable {
 
     /**
@@ -322,6 +323,7 @@ public class UndoableObjects implements java.io.Serializable {
         }
     }
 
+    @SuppressWarnings("serial")
     public static class UndoableObjectNode implements java.io.Serializable {
 
         final Storable object; // the object in the node

@@ -24,6 +24,7 @@ package net.freerouting.freeroute.board;
  *
  * @author alfons
  */
+@SuppressWarnings("serial")
 public class LayerStructure implements java.io.Serializable {
 
     public final Layer[] arr;

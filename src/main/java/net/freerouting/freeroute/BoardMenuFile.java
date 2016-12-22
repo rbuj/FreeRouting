@@ -30,6 +30,7 @@ import net.freerouting.freeroute.datastructures.FileFilter;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class BoardMenuFile extends javax.swing.JMenu {
 
     /**

@@ -25,6 +25,7 @@ package net.freerouting.freeroute.geometry.planar;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public abstract class RegularTileShape extends TileShape {
 
     /**

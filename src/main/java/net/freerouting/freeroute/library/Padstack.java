@@ -29,6 +29,7 @@ import net.freerouting.freeroute.geometry.planar.IntOctagon;
  *
  * @author alfons
  */
+@SuppressWarnings("serial")
 public class Padstack implements Comparable<Padstack>, net.freerouting.freeroute.board.ObjectInfoPanel.Printable, java.io.Serializable {
 
     private final ConvexShape[] shapes;

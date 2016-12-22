@@ -29,6 +29,7 @@ import net.freerouting.freeroute.datastructures.Signum;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class IntDirection extends Direction implements java.io.Serializable {
 
     public final int x;

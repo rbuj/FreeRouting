@@ -47,6 +47,7 @@ import net.freerouting.freeroute.rules.BoardRules;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class BasicBoard implements java.io.Serializable {
 
     /**

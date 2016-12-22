@@ -27,6 +27,7 @@ import net.freerouting.freeroute.library.Padstack;
  *
  * @author Alfons Wirtz
  */
+@SuppressWarnings("serial")
 public class ViaInfo implements Comparable<ViaInfo>, net.freerouting.freeroute.board.ObjectInfoPanel.Printable, java.io.Serializable {
 
     private String name;
