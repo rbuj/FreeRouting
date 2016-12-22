@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,7 +41,7 @@ public class SessionToEagle extends javax.swing.JFrame {
         Scanner scanner = new SpecctraFileScanner(p_session);
 
         // create a file_writer for the eagle script file.
-        java.io.OutputStreamWriter file_writer = new java.io.OutputStreamWriter(p_output_stream);
+        java.io.OutputStreamWriter file_writer = new java.io.OutputStreamWriter(p_output_stream, StandardCharsets.UTF_8);
 
         boolean result;
 

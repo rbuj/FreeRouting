@@ -17,14 +17,16 @@ package net.freerouting.freeroute;
 
 import java.awt.geom.Rectangle2D;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -312,7 +314,7 @@ public class BoardFrame extends javax.swing.JFrame {
             // Read the default gui settings, if gui default file exists.
             File defaults_file = new File(design_file.get_parent(), GUI_DEFAULTS_FILE_NAME);
             if (defaults_file.exists()) {
-                try (Reader reader = new FileReader(defaults_file)) {
+                try (Reader reader = new InputStreamReader(new FileInputStream(defaults_file), StandardCharsets.UTF_8)) {
                     boolean read_ok = GUIDefaultsFile.read(this, board_panel.board_handling, reader);
                     if (!read_ok) {
                         screen_messages.set_status_message(resources.getString("error_1"));

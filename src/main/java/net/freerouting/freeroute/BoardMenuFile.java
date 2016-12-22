@@ -20,7 +20,10 @@
 package net.freerouting.freeroute;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 import static net.freerouting.freeroute.DesignFile.all_file_extensions;
 import net.freerouting.freeroute.datastructures.FileFilter;
@@ -218,7 +221,7 @@ public class BoardMenuFile extends javax.swing.JMenu {
         } else {
             java.io.Reader reader = null;
             try {
-                reader = new java.io.FileReader(filename);
+                reader = new InputStreamReader(new FileInputStream(filename), StandardCharsets.UTF_8);
             } catch (java.io.FileNotFoundException e) {
                 return;
             }
