@@ -974,7 +974,7 @@ public class BoardHandling {
         }
         try {
             DsnFile.read(p_design, this, p_observers, p_item_id_no_generator, p_test_level);
-        } catch (Exception exc) {
+        } catch (DsnFileException exc) {
             throw new BoardHandlingException("the dsn-file is currupted", exc);
         }
         this.board.reduce_nets_of_route_items();
