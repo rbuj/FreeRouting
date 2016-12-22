@@ -131,7 +131,7 @@ public class MainApp extends Application {
                 // the locale is provided
                     case "-l":
                         String new_locale = args[i + 1].substring(0, 2);
-                        try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in,StandardCharsets.UTF_8))) {
+                        try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
                             String line = reader.readLine();
                             while (line != null) {
                                 if (line.equals(new_locale)) {
@@ -156,7 +156,7 @@ public class MainApp extends Application {
             }
             if (locale == null) {
                 String new_locale = java.util.Locale.getDefault().getLanguage();
-                try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+                try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
                     String line = reader.readLine();
                     while (line != null) {
                         if (line.equals(new_locale)) {
