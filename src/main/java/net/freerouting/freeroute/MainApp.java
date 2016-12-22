@@ -115,38 +115,42 @@ public class MainApp extends Application {
          */
         try {
             for (int i = 0; i < args.length; ++i) {
-                if (args[i].equals("-de")) // the design file is provided
-                {
-                    single_design_option = true;
-                    design_file_name = args[i + 1];
-                    ++i;
-                } else if (args[i].equals("-di")) // the design directory is provided
-                {
-                    design_dir_name = args[i + 1];
-                    ++i;
-                } else if (args[i].equals("-l")) // the locale is provided
-                {
-                    String new_locale = args[i + 1].substring(0, 2);
-                    try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-                        String line = reader.readLine();
-                        while (line != null) {
-                            if (line.equals(new_locale)) {
-                                locale = new Locale(new_locale, "");
-                                break;
+                switch (args[i]) {
+                // the design file is provided
+                    case "-de":
+                        single_design_option = true;
+                        design_file_name = args[i + 1];
+                        ++i;
+                        break;
+                // the design directory is provided
+                    case "-di":
+                        design_dir_name = args[i + 1];
+                        ++i;
+                        break;
+                // the locale is provided
+                    case "-l":
+                        String new_locale = args[i + 1].substring(0, 2);
+                        try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+                            String line = reader.readLine();
+                            while (line != null) {
+                                if (line.equals(new_locale)) {
+                                    locale = new Locale(new_locale, "");
+                                    break;
+                                }
+                                line = reader.readLine();
                             }
-                            line = reader.readLine();
-                        }
-                    }
-                    if (locale == null) {
-                        locale = new Locale("en", "");
-                    }
-                    ++i;
-                } else if (args[i].equals("-s")) {
-                    session_file_option = true;
-                } else if (args[i].equals("-test")) {
-                    test_version_option = true;
-                } else {
-                    throw new IllegalArgumentException("Argument: " + args[i] + " [not recognized]");
+                        }   if (locale == null) {
+                            locale = new Locale("en", "");
+                        }   ++i;
+                        break;
+                    case "-s":
+                        session_file_option = true;
+                        break;
+                    case "-test":
+                        test_version_option = true;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Argument: " + args[i] + " [not recognized]");
                 }
             }
             if (locale == null) {
@@ -166,7 +170,7 @@ public class MainApp extends Application {
                 }
             }
             /**
-             * Set data fiels
+             * Set data fields
              */
             if (test_version_option) {
                 test_level = DEBUG_LEVEL;
