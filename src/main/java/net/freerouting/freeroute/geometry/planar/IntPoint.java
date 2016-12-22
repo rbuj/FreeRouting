@@ -69,6 +69,14 @@ public class IntPoint extends Point implements java.io.Serializable {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 59 * hash + this.x;
+        hash = 59 * hash + this.y;
+        return hash;
+    }
+
+    @Override
     public boolean is_infinite() {
         return false;
     }

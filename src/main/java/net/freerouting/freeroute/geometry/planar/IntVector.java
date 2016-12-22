@@ -67,6 +67,14 @@ public class IntVector extends Vector implements java.io.Serializable {
         return (x == other.x && y == other.y);
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + this.x;
+        hash = 37 * hash + this.y;
+        return hash;
+    }
+
     /**
      * returns true, if both coordinates of this vector are 0
      */

@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.geometry.planar;
 
 import java.math.BigInteger;
+import java.util.Objects;
 import net.freerouting.freeroute.datastructures.BigIntAux;
 
 /**
@@ -108,6 +109,15 @@ public class RationalPoint extends Point implements java.io.Serializable {
         det = BigIntAux.determinant(y, other.y, z, other.z);
 
         return (det.signum() == 0);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 29 * hash + Objects.hashCode(this.x);
+        hash = 29 * hash + Objects.hashCode(this.y);
+        hash = 29 * hash + Objects.hashCode(this.z);
+        return hash;
     }
 
     @Override

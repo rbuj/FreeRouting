@@ -16,6 +16,7 @@
 package net.freerouting.freeroute.geometry.planar;
 
 import java.math.BigInteger;
+import java.util.Objects;
 import net.freerouting.freeroute.datastructures.Signum;
 
 /**
@@ -90,6 +91,15 @@ public class Line implements Comparable<Line>, java.io.Serializable {
             return false;
         }
         return direction().equals(other.direction());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.a);
+        hash = 67 * hash + Objects.hashCode(this.b);
+        hash = 67 * hash + Objects.hashCode(this.dir);
+        return hash;
     }
 
     /**

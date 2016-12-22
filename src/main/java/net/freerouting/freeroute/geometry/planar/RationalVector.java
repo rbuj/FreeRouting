@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.geometry.planar;
 
 import java.math.BigInteger;
+import java.util.Objects;
 import net.freerouting.freeroute.datastructures.BigIntAux;
 import net.freerouting.freeroute.datastructures.Signum;
 
@@ -94,6 +95,15 @@ public class RationalVector extends Vector implements java.io.Serializable {
         det = BigIntAux.determinant(y, other.y, z, other.z);
 
         return (det.signum() == 0);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.x);
+        hash = 59 * hash + Objects.hashCode(this.y);
+        hash = 59 * hash + Objects.hashCode(this.z);
+        return hash;
     }
 
     /**
