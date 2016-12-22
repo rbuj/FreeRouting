@@ -23,7 +23,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import javax.swing.JPanel;
+import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
@@ -354,7 +354,7 @@ public class BoardPanel extends javax.swing.JPanel {
         final int border_dist = 50;
         Rectangle2D r
                 = new Rectangle2D.Double(p_evt.getX() - border_dist, p_evt.getY() - border_dist, 2 * border_dist, 2 * border_dist);
-        ((JPanel) p_evt.getSource()).scrollRectToVisible(r.getBounds());
+        ((JComponent) p_evt.getSource()).scrollRectToVisible(r.getBounds());
     }
 
     private void scroll_middle_mouse(java.awt.event.MouseEvent p_evt) {
