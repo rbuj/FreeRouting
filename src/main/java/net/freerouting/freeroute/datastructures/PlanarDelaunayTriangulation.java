@@ -182,10 +182,6 @@ public class PlanarDelaunayTriangulation {
 
             Triangle[] new_triangles = p_triangle.split_at_inner_point(p_corner);
 
-            if (new_triangles == null) {
-                return false;
-            }
-
             for (Triangle curr_triangle : new_triangles) {
                 this.search_graph.insert(curr_triangle, p_triangle);
             }

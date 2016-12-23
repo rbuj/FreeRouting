@@ -98,9 +98,6 @@ public class NetClass {
                             }
                         } else if (next_token == Keyword.CLEARANCE_CLASS) {
                             trace_clearance_class = DsnFile.read_string_scope(p_scanner);
-                            if (trace_clearance_class == null) {
-                                return null;
-                            }
                         } else if (next_token == Keyword.SHOVE_FIXED) {
                             shove_fixed = DsnFile.read_on_off_scope(p_scanner);
                         } else if (next_token == Keyword.PULL_TIGHT) {

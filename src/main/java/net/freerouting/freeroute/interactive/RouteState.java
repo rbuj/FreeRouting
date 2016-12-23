@@ -149,13 +149,11 @@ public class RouteState extends InteractiveState {
             routing_board.start_notify_observers();
         }
         p_board_handling.repaint();
-        if (new_instance != null) {
-            if (new_instance.logfile != null) {
-                new_instance.logfile.start_scope(LogfileScope.CREATING_TRACE, p_location);
-                p_board_handling.hide_ratsnest();
-            }
-            new_instance.display_default_message();
+        if (new_instance.logfile != null) {
+            new_instance.logfile.start_scope(LogfileScope.CREATING_TRACE, p_location);
+            p_board_handling.hide_ratsnest();
         }
+        new_instance.display_default_message();
         return new_instance;
     }
 

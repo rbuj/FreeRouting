@@ -903,9 +903,6 @@ public class RoutingBoard extends BasicBoard implements java.io.Serializable {
             return false;
         }
         Polyline connection_line = projection_line.to_polyline();
-        if (connection_line == null || connection_line.arr.length != 3) {
-            return false;
-        }
         int trace_layer = p_to_trace.get_layer();
         if (!this.check_polyline_trace(connection_line, trace_layer, p_pen_half_width,
                 p_to_trace.net_no_arr, p_cl_type)) {

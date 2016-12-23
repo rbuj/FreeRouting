@@ -41,9 +41,8 @@ public class Logfile {
     /**
      * opens the logfile for reading
      */
-    public boolean start_read(Reader p_reader) {
+    public void start_read(Reader p_reader) {
         this.scanner = new LogfileScanner(p_reader);
-        return (this.scanner != null);
     }
 
     /**

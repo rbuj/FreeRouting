@@ -146,11 +146,9 @@ public abstract class InteractiveActionThread extends Thread implements net.free
             String start_message = resources.getString("logfile") + " " + resources.getString("stop_message");
             hdlg.screen_messages.set_status_message(start_message);
             hdlg.screen_messages.set_write_protected(true);
-            boolean done = false;
             InteractiveState previous_state = hdlg.interactive_state;
-            if (!hdlg.logfile.start_read(this.reader)) {
-                done = true;
-            }
+            hdlg.logfile.start_read(this.reader);
+            boolean done = true;
             boolean interrupted = false;
             int debug_counter = 0;
             hdlg.get_panel().board_frame.refresh_windows();
