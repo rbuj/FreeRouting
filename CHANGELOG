@@ -6,7 +6,7 @@ ToDo
 ????-??-??
 
         * Use UTF-8 encoding
-        * Change hompepega & support info
+        * Change homepage & support info
         * Replace anonymous classes that implements the ActionListener
           interface with Lambda listener code
         * Use java.awt.geom.Rectangle2D instead of java.awt.Rectangle
