@@ -23,6 +23,8 @@ package net.freerouting.freeroute;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
@@ -60,10 +62,8 @@ public class WindowAbout extends BoardSavableSubWindow {
             controller.initialize(null, rb);
             Scene scene = new Scene(root);
             jfxPanel.setScene(scene);
-        }
-        catch (IOException exc) {
-            exc.printStackTrace();
-            System.exit(1);
+        } catch (IOException ex) {
+            Logger.getLogger(WindowAbout.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
