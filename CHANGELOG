@@ -5,8 +5,15 @@ ToDo
 
 ????-??-??
 
+        * Use UTF-8 encoding
+        * Change hompepega & support info
+        * Replace anonymous classes that implements the ActionListener
+          interface with Lambda listener code
+        * Use java.awt.geom.Rectangle2D instead of java.awt.Rectangle
         * New custom exceptions:
                 * BoardFrameException.java
+                * BoardMenuFileException.java
+                * DesignFileException.java
                 * designformats/specctra/DsnFileException.java
                 * interactive/BoardHandlingException.java
         * The designs stored with bin format using previous versions are not
