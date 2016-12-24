@@ -11,7 +11,7 @@
         </formalpara>
         <formalpara>
             <title>Getting Help for IDE Windows and Interactive States</title>
-            After selecting Help Context in the help menu a question mark appears on the right side of the cursor. In this state push the left button in the graphics area of the main window to open a help topic that is specific to the task you are currrently doing or in an additional window to get help about the contents of that specific window. In the offline version you can use the F1-key as a shortcut for Help Context.
+            After selecting Help Context in the help menu a question mark appears on the right side of the cursor. In this state push the left button in the graphics area of the main window to open a help topic that is specific to the task you are currrently doing or in an additional window to get help about the contents of that specific window. In the offline version you can use the <emphasis>F1-key</emphasis> as a shortcut for Help Context.
         </formalpara>
         <formalpara>
             <title>Searching the Online Help</title>
@@ -25,22 +25,23 @@
 
     <chapter>
         <title>Interactive States</title>
-        <section>
+        <section xml:id='the_menu_states'>
             <title>The Menu States</title>
+            <titleabbrev>Menu States</titleabbrev>
             <para>
-                The program contains the following three Menu States: Select, Route and Drag. By selecting one of the three buttons on the upper left side of the tool bar you can switch between this states. In the beginning the program will be in the Select Menu State.
+                The program contains the following three Menu States: <link linkend='SelectMenuState'>Select</link>, <link linkend='RouteMenuState'>Route</link> and <link linkend='DragMenuState'>Drag</link>. By selecting one of the three buttons on the upper left side of the tool bar you can switch between this states. In the beginning the program will be in the Select Menu State.
             </para>
             <para>
                 The three states have a common tool bar and a common popup menu under the right mouse button.
             </para>
             <variablelist>
-                <title>
-                    Further Entries in the Tool Bar:
-                </title>
+                <title>Further Entries in the Tool Bar:</title>
                 <varlistentry>
                     <term>
                         <filename>
-                            Autorouter
+                            <indexterm>
+                                <primary>autorouter</primary>
+                            </indexterm>Autorouter
                         </filename>
                     </term>
                     <listitem>
@@ -60,7 +61,7 @@
                     </term>
                     <listitem>
                         <para>
-                            The program has unlimited Undo Redo capability. In the offline version the Undo stack does not get lost even after saving the design and restarting the program. Shortcuts are u for Undo and b for Redo.
+                            The program has unlimited Undo Redo capability. In the offline version the Undo stack does not get lost even after saving the design and restarting the program. Shortcuts are <emphasis>u</emphasis> for Undo and <emphasis>b</emphasis> for Redo.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -72,7 +73,7 @@
                     </term>
                     <listitem>
                         <para>
-                            Here you can switch on or off displaying the open connections as air lines. If the airlines were switched off before, they will be switched on and vice versa. Shortcut is g.
+                            Here you can switch on or off displaying the open connections as air lines. If the airlines were switched off before, they will be switched on and vice versa. Shortcut is <emphasis>g</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -84,7 +85,7 @@
                     </term>
                     <listitem>
                         <para>
-                            Here you can switch on or off displaying the clearance violations. If the violations were switched off before, they will be switched on and vice versa. Shortcut is v.
+                            Here you can switch on or off displaying the clearance violations. If the violations were switched off before, they will be switched on and vice versa. Shortcut is <emphasis>v</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -96,7 +97,7 @@
                     </term>
                     <listitem>
                         <para>
-                            To display the whole board. Shortcut is a.
+                            To display the whole board. Shortcut is <emphasis>a</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -108,16 +109,26 @@
                     </term>
                     <listitem>
                         <para>
-                            After selecting this button you can choose a display rectangle by dragging the mouse with the left button pressed. Shortcut is f. You can also zoom by turning the mouse wheel and pan by dragging the mouse with the mouse wheel pressed.
+                            After selecting this button you can choose a display rectangle by dragging the mouse with the left button pressed. Shortcut is <emphasis>f</emphasis>. You can also zoom by turning the mouse wheel and pan by dragging the mouse with the mouse wheel pressed.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Unit
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            To change the Unit or the Unit Factor. Possible choices are <emphasis>mil</emphasis>, <emphasis>inch</emphasis>, <emphasis>mm</emphasis> and <emphasis>um</emphasis>. After selecting for example <emphasis>0.1 mm</emphasis> all coordinates in the IDE are displayed as multiples of 0.1 mm.
                         </para>
                     </listitem>
                 </varlistentry>
             </variablelist>
 
             <variablelist>
-                <title>
-                    The Entries in the Popup Menu:
-                </title>
+                <title>The Entries in the Popup Menu:</title>
                 <varlistentry>
                     <term>
                         <filename>
@@ -126,7 +137,7 @@
                     </term>
                     <listitem>
                         <para>
-                            To select the items under the cursor. Only items switched on in the Select Parameter window can be selected. After selecting some items the current interactive state will change to the Selected Item State. In the Select Menu State you can select items also with the left mouse button.
+                            To select the items under the cursor. Only items switched on in the <link linkend='select_parameter'>Select Parameter</link> window can be selected. After selecting some items the current interactive state will change to the <link linkend='the_selected_item_state'>Selected Item State</link>. In the <link linkend='SelectMenuState'>Select Menu State</link> you can select items also with the left mouse button.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -138,7 +149,7 @@
                     </term>
                     <listitem>
                         <para>
-                            A new trace will be started beginning at the item under the cursor. For the selection of the start item the settings in the Select Parameter window are evaluated . If a suitable item was found the interactive state will change to the Route State. In the Route Menu State you can do this also by clicking the left mouse button.
+                            A new trace will be started beginning at the item under the cursor. For the selection of the start item the settings in the <link linkend='select_parameter'>Select Parameter</link> window are evaluated . If a suitable item was found the interactive state will change to the <link linkend='the_route_states'>Route State</link>. In the <link linkend='RouteMenuState'>Route Menu State</link> you can do this also by clicking the left mouse button.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -176,9 +187,7 @@
             </variablelist>
 
             <variablelist>
-                <title>
-                    The Function of the Mouse Wheel:
-                </title>
+                <title>The Function of the Mouse Wheel:</title>
                 <varlistentry>
                     <listitem>
                         <para>
@@ -188,44 +197,40 @@
                 </varlistentry>
             </variablelist>
 
-            <section>
-                <title>
-                    The Select Menu State
-                </title>
+            <section xml:id='SelectMenuState'>
+                <title>The Select Menu State</title>
+                <titleabbrev>Select Menu State</titleabbrev>
                 <para>
-                    If on the upper left side in the tool bar the button Select is selected, the program will be in the Select Menu State. Here you can use the left mouse button as a shortcut for the action select item in the popup menu. You also can select all items in a rectangle by dragging the mouse with the left button pressed.
+                    If on the upper left side in the tool bar the button <emphasis>Select</emphasis> is selected, the program will be in the <emphasis>Select Menu State</emphasis>. Here you can use the left mouse button as a shortcut for the action <emphasis>select item</emphasis> in the popup menu. You also can select all items in a rectangle by dragging the mouse with the left button pressed.
                 </para>
             </section>
 
-            <section>
-                <title>
-                    The Route Menu State
-                </title>
+            <section xml:id='RouteMenuState'>
+                <title>The Route Menu State</title>
+                <titleabbrev>Route Menu State</titleabbrev>
                 <para>
-                    If on the upper left side in the tool bar the button Route is selected, the program will be in the Route Menu State. Here you can use the left mouse button as a shortcut for the action start route in the popup menu.
+                    If on the upper left side in the tool bar the button <emphasis>Route</emphasis> is selected, the program will be in the <emphasis>Route Menu State</emphasis>. Here you can use the left mouse button as a shortcut for the action <emphasis>start route</emphasis> in the popup menu.
                 </para>
             </section>
 
-            <section>
-                <title>
-                    The Drag Menu State
-                </title>
+            <section xml:id='DragMenuState'>
+                <title>The Drag Menu State</title>
+                <titleabbrev>Drag Menu State</titleabbrev>
                 <para>
-                    If on the upper left side in the tool bar the button Drag is selected, the program will be in the Drag Menu State Here you can drag vias or components with the left button pressed. The connected traces will be adjusted automatically. You can also out of the empty space shove traces aside with the left button pressed This way you can for example make space for inserting another component. This action will be performed on the current layer, which can be set in the Select Parameter window.
+                    If on the upper left side in the tool bar the button <emphasis>Drag</emphasis> is selected, the program will be in the <emphasis>Drag Menu State</emphasis>. Here you can drag vias or components with the left button pressed. The connected traces will be adjusted automatically. You can also out of the empty space shove traces aside with the left button pressed This way you can for example make space for inserting another component. This action will be performed on the <emphasis>current layer</emphasis>, which can be set in the <link linkend='select_parameter'>Select Parameter</link> window.
                 </para>
             </section>
 
         </section>
 
-        <section>
+        <section xml:id='the_selected_item_state'>
             <title>The Selected Item State</title>
+            <titleabbrev>Selected Item State</titleabbrev>
             <para>
-                After you have selected items in a basic state, the IDE will change to the Selected Item State. The selected items get highlighted and a new tool bar appears at the upper border. With the left button you can select more items or deselect already selected items.
+                After you have <link linkend='the_menu_states'>selected items</link> in a basic state, the IDE will change to the Selected Item State. The selected items get highlighted and a new tool bar appears at the upper border. With the left button you can select more items or deselect already selected items.
             </para>
             <variablelist>
-                <title>
-                    The toolbar in the Selected Item State
-                </title>
+                <title>The toolbar in the Selected Item State</title>
                 <varlistentry>
                     <term>
                         <filename>
@@ -234,7 +239,7 @@
                     </term>
                     <listitem>
                         <para>
-                            The IDE returns to the interactive state before selecting. Shortcut is the Esc-key.
+                            The IDE returns to the interactive state before selecting. Shortcut is the <emphasis>Esc-key</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -246,7 +251,7 @@
                     </term>
                     <listitem>
                         <para>
-                            Information about the selected items will be printed to a new window. The blue marked words in this window can be clicked for more information. Shortcut is i.
+                            Information about the selected items will be printed to a new window. The blue marked words in this window can be clicked for more information. Shortcut is <emphasis>i</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -258,7 +263,7 @@
                     </term>
                     <listitem>
                         <para>
-                            The selected items will be deleted, if they are not fixed. Shortcut is the Delete-key.
+                            The selected items will be deleted, if they are not fixed. Shortcut is the <emphasis>Delete-key</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -270,7 +275,7 @@
                     </term>
                     <listitem>
                         <para>
-                            By dragging the mouse with the left button pressed you can select a rectangle, from which the selected trace and vias will be cut out. Shortcut is d.
+                            By dragging the mouse with the left button pressed you can select a rectangle, from which the selected trace and vias will be cut out. Shortcut is <emphasis>d</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -282,7 +287,7 @@
                     </term>
                     <listitem>
                         <para>
-                            To fix the selected items, so that they cannot be pushed or deleted any more. Shortcut is f.
+                            To fix the selected items, so that they cannot be pushed or deleted any more. Shortcut is <emphasis>f</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -294,19 +299,21 @@
                     </term>
                     <listitem>
                         <para>
-                            To unfix the selected items. Shortcut is u.
+                            To unfix the selected items. Shortcut is <emphasis>u</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
                 <varlistentry>
                     <term>
                         <filename>
-                            Autoroute
+                            <indexterm>
+                                <primary>autoroute</primary>
+                            </indexterm>Autoroute
                         </filename>
                     </term>
                     <listitem>
                         <para>
-                            To route the selected items automatically. Shortcut is a.
+                            To route the selected items automatically. Shortcut is <emphasis>a</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -318,7 +325,7 @@
                     </term>
                     <listitem>
                         <para>
-                            To optimize the selected traces by pulling them tight. Shortcut is p.
+                            To optimize the selected traces by pulling them tight. Shortcut is <emphasis>p</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -337,12 +344,14 @@
                 <varlistentry>
                     <term>
                         <filename>
-                            Clearance
+                            <indexterm>
+                                <primary>assign clearance class</primary>
+                            </indexterm>Clearance
                         </filename>
                     </term>
                     <listitem>
                         <para>
-                            To assign a new clearance class to the selected items.
+                            To assign a new <link linkend='the_clearance_matrix'>clearance class</link> to the selected items.
                         </para>
                         <para>
                             Example: If you need in a special area of the board a different spacing, you can select all pins in a rectangle and assign to them a new clearance class.
@@ -357,7 +366,7 @@
                     </term>
                     <listitem>
                         <para>
-                            To extend the selection to all items with the same net as an already selected item. Shortcut is n.
+                            To extend the selection to all items with the same net as an already selected item. Shortcut is <emphasis>n</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -369,7 +378,7 @@
                     </term>
                     <listitem>
                         <para>
-                            To extend the selection to all items, which belong to the same connected set as an already selected item. Shortcut is s.
+                            To extend the selection to all items, which belong to the same connected set as an already selected item. Shortcut is <emphasis>s</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -381,10 +390,10 @@
                     </term>
                     <listitem>
                         <para>
-                            To extend the selection to all traces and vias, which belong to the same connection as an already selected item. Shortcut is e.
+                            To extend the selection to all traces and vias, which belong to the same connection as an already selected item. Shortcut is <emphasis>e</emphasis>.
                         </para>
                         <para>
-                            Example: You want to delete a whole connection. Select a trace of the connection, push the Connections button to extend the selection to the whole connection and push then the Delete button.
+                            Example: You want to delete a whole connection. Select a trace of the connection, push the <emphasis>Connections</emphasis> button to extend the selection to the whole connection and push then the <emphasis>Delete</emphasis> button.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -396,7 +405,7 @@
                     </term>
                     <listitem>
                         <para>
-                            To extend the selection to all items, which belong to the same component as an already selected item. Shortcut is b.
+                            To extend the selection to all items, which belong to the same component as an already selected item. Shortcut is <emphasis>b</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -408,7 +417,7 @@
                     </term>
                     <listitem>
                         <para>
-                            Here you can switch on or off displaying the clearance violations. If the violations were switched off before, they will be switched on and vice versa. Shortcut is v.
+                            Here you can switch on or off displaying the clearance violations. If the violations were switched off before, they will be switched on and vice versa. Shortcut is <emphasis>v</emphasis>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -438,25 +447,26 @@
                     </term>
                     <listitem>
                         <para>
-                            The selected items will be prepared for moving. The pivot for rotating and moving is the current cursor position. Several components can be moved at once. After this action the IDE will be in the Move State.
+                            The selected items will be prepared for moving. The pivot for rotating and moving is the current cursor position. Several components can be moved at once. After this action the IDE will be in the <link linkend='the_move_state'>Move State</link>.
                         </para>
                     </listitem>
                 </varlistentry>
             </variablelist>
 
-            <section>
+            <section xml:id='the_move_state'>
                 <title>The Move State</title>
+                <titleabbrev>Move State</titleabbrev>
                 <para>
-                    You will get into this state after selecting in the popup menu of the Selected Item State the menu entry move. The selected items are now following the cursor.
+                    You will get into this state after selecting in the popup menu of the <link linkend='the_selected_item_state'>Selected Item State</link> the menu entry move. The selected items are now following the cursor.
                 </para>
                 <para>
                     If parts of the moving items are marked red, inserting at the current location would cause a clearance violation.
                 </para>
                 <para>
-                    Several components can be moved at once. The internal route will also change location, if he is completely marked for moving. Components connected to items, which are not marked for moving, will not change location. Such components can eventually be moved in the Drag Menu State by dragging them with the left mouse button. If that does not work, you have to remove the route first.
+                    Several components can be moved at once. The internal route will also change location, if he is completely marked for moving. Components connected to items, which are not marked for moving, will not change location. Such components can eventually be moved in the <link linkend='the_drag_menu_state'>Drag Menu State</link> by dragging them with the left mouse button. If that does not work, you have to remove the route first.
                 </para>
                 <para>
-                    The settings in the Move Parameter window are evaluated while moving components.
+                    The settings in the <link linkend='move_parameter'>Move Parameter</link> window are evaluated while moving components.
                 </para>
                 <variablelist>
                     <title>
@@ -470,19 +480,21 @@
                         </term>
                         <listitem>
                             <para>
-                                Here you can rotate the selected components by multiples of 45 degree around the cursor location. For turning by 90, 180, and -90 degree there are the shortcuts +, * and - on the right of the number key block. If you want to rotate by an angle, which is not a multiple of 45 degree, you can do that with the mouse wheel after first changing in the Move Parameter window the wheel function from zoom to rotate.
+                                Here you can rotate the selected components by multiples of 45 degree around the cursor location. For turning by 90, 180, and -90 degree there are the shortcuts <emphasis>+</emphasis>, <emphasis>*</emphasis> and <emphasis>-</emphasis> on the right of the number key block. If you want to rotate by an angle, which is not a multiple of 45 degree, you can do that with the mouse wheel after first changing in the <link linkend='move_parameter'>Move Parameter</link> window the wheel function from <emphasis>zoom</emphasis> to <emphasis>rotate</emphasis>.
                             </para>
                         </listitem>
                     </varlistentry>
                     <varlistentry>
                         <term>
                             <filename>
-                                change side
+                                <indexterm>
+                                    <primary>change placement side</primary>
+                                </indexterm>change side
                             </filename>
                         </term>
                         <listitem>
                             <para>
-                                Here you can change the placement side of the selected components. Shortcut is /.
+                                Here you can change the placement side of the selected components. Shortcut is <emphasis>/</emphasis>.
                             </para>
                         </listitem>
                     </varlistentry>
@@ -506,7 +518,7 @@
                         </term>
                         <listitem>
                             <para>
-                                To insert the moving components. If there would occur clearance violations, he insertion will be rejected. Shortcut is the left mouse button.
+                                To insert the moving components. If there would occur clearance violations, he insertion will be rejected. Shortcut is the <emphasis>left mouse button</emphasis>.
                             </para>
                         </listitem>
                     </varlistentry>
@@ -518,7 +530,7 @@
                         </term>
                         <listitem>
                             <para>
-                                To cancel the move action. The selected components will spring back to their location before the moving. Shortcut is the Esc-key.
+                                To cancel the move action. The selected components will spring back to their location before the moving. Shortcut is the <emphasis>Esc-key</emphasis>.
                             </para>
                         </listitem>
                     </varlistentry>
@@ -526,22 +538,22 @@
             </section>
         </section>
 
-        <section>
+        <section xml:id='the_route_states'>
             <title>The Route States</title>
+            <titleabbrev>Route States</titleabbrev>
             <para>
-                After you have started a new route in a basic state, the IDE will change to the Dynamic Route State or to the Stitching Route State depending on your selection for the route mode in the Route Parameter window.
+                After you have started a new route in a <emphasis>basic state</emphasis>, the IDE will change to the Dynamic Route State or to the Stitching Route State depending on your selection for the route mode in the Route Parameter window.
             </para>
             <para>
-                If rule selection is set to automatic, the routing rules such as trace width, trace clearance class and via rule are defined by the net class of the current net, if it is set to manual, the routing rules are defined by the settings in the Manual Rules window.
+                If rule selection is set to <emphasis>automatic</emphasis>, the routing rules such as trace width, trace clearance class and via rule are defined by the net class of the current net, if it is set to <emphasis>manual</emphasis>, the routing rules are defined by the settings in the Manual Rules window.
             </para>
             <para>
                 If the new trace gets near to a not yet connected item of the same net on the same layer, the connection will be completed automatically. After completion the IDE will return to the state before routing.
             </para>
 
             <section>
-                <title>
-                    The Dynamic Route State
-                </title>
+                <title>The Dynamic Route State</title>
+                <titleabbrev>Dynamic Route State</titleabbrev>
                 <para>
                     If the IDE is in this route state, at each change of the cursor location a piece of trace will be inserted automatically from the previous cursor location to the current cursor location. The new trace piece will then immediately be optimized depending on the settings for the pull tight region in the Route Parameter window.
                 </para>
@@ -569,7 +581,7 @@
                         </term>
                         <listitem>
                             <para>
-                                The routing will be finished and the IDE changes back to the previous state. Shortcut is the left mouse button.
+                                The routing will be finished and the IDE changes back to the previous state. Shortcut is the <emphasis>left mouse button</emphasis>.
                             </para>
                         </listitem>
                     </varlistentry>
@@ -581,7 +593,7 @@
                         </term>
                         <listitem>
                             <para>
-                                The last routed trace will be discarded and the IDE changes back to the previous state Shortcut is the Esc-key.
+                                The last routed trace will be discarded and the IDE changes back to the previous state Shortcut is the <emphasis>Esc-key</emphasis>.
                             </para>
                         </listitem>
                     </varlistentry>
@@ -598,56 +610,55 @@
                         </listitem>
                     </varlistentry>
                 </variablelist>
+            </section>
 
-                <section>
+            <section>
+                <title>The Stitching Route State</title>
+                <titleabbrev>Stitching Route State</titleabbrev>
+                <para>
+                    In this route state a piece of trace will be inserted from the previous click position to the current cursor position, when you click the left mouse key. The new trace piece will then be optimized depending on the settings for the pull tight region in the Route Parameter window.
+                </para>
+                <variablelist>
                     <title>
-                        Der Stitching Route State
+                        The entries in the popup menu under the left mouse button in the Stitching Route state:
                     </title>
-                    <para>
-                        In this route state a piece of trace will be inserted from the previous click position to the current cursor position, when you click the left mouse key. The new trace piece will then be optimized depending on the settings for the pull tight region in the Route Parameter window.
-                    </para>
-                    <variablelist>
-                        <title>
-                            The entries in the popup menu under the left mouse button in the Stitching Route state:
-                        </title>
-                        <varlistentry>
-                            <term>
-                                <filename>
-                                    insert
-                                </filename>
-                            </term>
-                            <listitem>
-                                <para>
-                                    A trace will be inserted from the previous insert position to the current position and then be optimized depending on the settings for the pull tight region in the Route Parameter window.
-                                </para>
-                            </listitem>
-                        </varlistentry>
-                        <varlistentry>
-                            <term>
-                                <filename>
-                                    done
-                                </filename>
-                            </term>
-                            <listitem>
-                                <para>
-                                    The program returns to the state before routing. Shortcut is the Esc-key.
-                                </para>
-                            </listitem>
-                        </varlistentry>
-                        <varlistentry>
-                            <term>
-                                <filename>
-                                    change layer
-                                </filename>
-                            </term>
-                            <listitem>
-                                <para>
-                                    To change to a different layer. The corresponding via will be selected from the selected via rule in the following way. The vias in the via rules will be tried from top to bottom, if they contain the old and the new layer, and if inserting would be possible without clearance violations. The first via found in this way will be inserted. Shortcuts are the number keys 1-9 and the keys "+" and "-". With "+" you can change to the next bigger layer and with "-" to the next smaller layer.
-                                </para>
-                            </listitem>
-                        </varlistentry>
-                    </variablelist>
-                </section>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                insert
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                A trace will be inserted from the previous insert position to the current position and then be optimized depending on the settings for the pull tight region in the Route Parameter window.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                done
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                The program returns to the state before routing. Shortcut is the <emphasis>Esc-key</emphasis>.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                change layer
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                To change to a different layer. The corresponding via will be selected from the selected via rule in the following way. The vias in the via rules will be tried from top to bottom, if they contain the old and the new layer, and if inserting would be possible without clearance violations. The first via found in this way will be inserted. Shortcuts are the number keys 1-9 and the keys "+" and "-". With "+" you can change to the next bigger layer and with "-" to the next smaller layer.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                </variablelist>
             </section>
         </section>
     </chapter>
@@ -685,7 +696,9 @@
                 <varlistentry>
                     <term>
                         <filename>
-                            Cancel and Exit
+                            <indexterm>
+                                <primary>cancel</primary>
+                            </indexterm>Cancel and Exit
                         </filename>
                     </term>
                     <listitem>
@@ -830,7 +843,7 @@
                             </term>
                             <listitem>
                                 <para>
-                                    Here you can change from the standard small crosshair cursor to a big 45-degree crosshair cursor. Using the big crosshair cursor may slow down the display performance a lot. Shortcut is the comma-key.
+                                    Here you can change from the standard small crosshair cursor to a big 45-degree crosshair cursor. Using the big crosshair cursor may slow down the display performance a lot. Shortcut is the <emphasis>comma-key</emphasis>.
                                 </para>
                             </listitem>
                         </varlistentry>
@@ -861,7 +874,9 @@
                         <varlistentry>
                             <term>
                                 <filename>
-                                    automatic layer dimming
+                                    <indexterm>
+                                        <primary>automatic layer dimming</primary>
+                                    </indexterm>automatic layer dimming
                                 </filename>
                             </term>
                             <listitem>
@@ -876,8 +891,8 @@
         </section>
 
         <section>
-                <title>Parameter</title>
-            <section>
+            <title>Parameter</title>
+            <section xml:id='select_parameter'>
                 <title>Select Parameter</title>
                 <para>
                     Description of the Select Parameter window.
@@ -935,25 +950,818 @@
 
             <section>
                 <title>Route Parameter</title>
-                <para>TODO</para>
+                <para>
+                    Description of the Route Parameter window.
+                </para>
+                <variablelist>
+                    <title>
+                        <indexterm>
+                            <primary>angle restriction</primary>
+                        </indexterm>snap angle:</title>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                90 degree:
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                Only orthogonal traces are created in interactive routing.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                45 Grad:
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                The angles of the traces created in interactive routing are restricted to multiples of 45 degree.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                none:
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                There are no angle restrictions in interactive routing.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                </variablelist>
+                
+                <variablelist>
+                    <title>route mode:</title>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                dynamic:
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                Trace will be inserted when the cursor position changes.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                stitching:
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                Trace will be inserted after clicking the left button.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                </variablelist>
+
+                <variablelist>
+                    <title>rule selection:</title>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                automatic:
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                The routing rules are defined by the net class of the current net.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                manual:
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                The routing rules are defined in the Manual Rules window. The window opens automatically after selecting manual.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                </variablelist>
+                
+                <formalpara>
+                    <title>push and shove enabled</title>
+                    <para>
+                        To define, if foreign traces can be pushed aside in interactive routing.
+                    </para>
+                </formalpara>
+                
+                <formalpara>
+                    <title>drag components enabled</title>
+                    <para>
+                        Here you can define, if components can be dragged with the left button pressed. The already routed connections of the component will be adjusted automatically.
+                    </para>
+                </formalpara>
+                
+                <formalpara>
+                    <title>vias snap to the smd center</title>
+                    <para>
+                        Here you can define, if vias, for which attaching smd pins is allowed, should snap automatically to the pin center in this case.
+                    </para>
+                </formalpara>
+                
+                <formalpara>
+                    <title>highlight routing obstacle</title>
+                    <para>
+                        If selected, the current routing obstacle will be highlighted.
+                    </para>
+                </formalpara>
+                
+                <formalpara>
+                    <title>ignore conduction areas</title>
+                    <para>
+                        If selected, conduction areas of foreign nets will not be treated as obstacles. The host system can for example automatically create gaps for traces overlapping with such a conduction area.
+                    </para>
+                </formalpara>
+                
+                <formalpara>
+                    <title>automatic neckdown</title>
+                    <para>
+                        When starting on pins or connecting to pins smaller than the current routing trace width, the trace width will be automatically reduced to the pin width, if connecting is not possible otherwise.
+                    </para>
+                </formalpara>
+                
+                <formalpara>
+                    <title>restrict pin exit directions</title>
+                    <para>
+                        Here you can define, if connecting to rectangular pins is only allowed on the smaller sides.
+                    </para>
+                </formalpara>
+
+                <formalpara>
+                    <title>pad to turn gap</title>
+                    <para>
+                        To define the minimum distance from the pad border of a pin with exit restriction, where connecting traces are allowed to change direction.
+                    </para>
+                </formalpara>
+                
+                <formalpara>
+                    <title>pull tight region</title>
+                    <para>
+                        To restrict the region around the cursor, where traces are pulled tight while routing. If the value is <emphasis>0</emphasis>, the pull tight algorithm is switched off, if the value is <emphasis>999</emphasis>, the pull tight region is unrestricted. Setting the value to <emphasis>0</emphasis> makes only sense in the stitching route mode.
+                    </para>
+                </formalpara>
             </section>
+
             <section>
                 <title>Autoroute Parameter</title>
-                <para>TODO</para>
+                <para>
+                    Here you can define the layers which may be used by the autorouter, the preferred direction for traces on each layer, and if vias may be inserted by the autorouter.
+                </para>
+                <para>
+                    You can also define, if before autorouting a fanout pass and after autorouting a postroute pass for reducing the via count and the cumulative trace length should run.
+                </para>
+                <para>
+                    The postroute pass may take a very long time and can be stopped by clicking the left mouse button.
+                </para>
+                <para>
+                    In a fanout pass the connections will be routed only till the first via. That may be useful on boards with many layers and ball grid arrrays.
+                </para>
+                <para>
+                    The detail parameter button opens a window, where you can adjust the individual costs used in the autoroute algorithm.
+                </para>
             </section>
-            <section>
+
+            <section xml:id='move_parameter'>
                 <title>Move Parameter</title>
-                <para>TODO</para>
+                <para>
+                    The parameter in this window are used when moving components.
+                </para>
+                <para>
+                    Here you can define a horizontal and vertical component grid. The components will then snap while moving to coordinates, which are multiples of the chosen grid.
+                </para>
+                <para>
+                    You can also change the function of the mouse wheel from zooming to rotating. You will need this functionality, if you want to rotate components by angles, which are not multiples of 90 degree.                </para>
             </section>
         </section>
 
         <section>
             <title>Rules</title>
-            <para>TODO</para>
+            <section xml:id='the_clearance_matrix'>
+                <title>
+                    <indexterm>
+                        <primary>clearance matrix</primary>
+                    </indexterm>The Clearance Matrix</title>
+                <para>
+                    In the window with the Clearance Matrix you can define the spacing rules between the object types. This is done via clearance classes. An Item clearance class is described by the definition of a minimal spacing to items of all existing clearance classes. These values can be looked up and changed in the Clearance Matrix
+                </para>
+                <para>
+                    Predefined are the clearance classes <emphasis>null</emphasis> and <emphasis>default</emphasis>. Items of the clearance class <emphasis>null</emphasis>  have a minimal spacing of 0 to all other items. This value cannot be changed in the Clearance Matrix.
+                </para>
+                <para>
+                    In the Specctra-DSN-Format there exist only the hard coded clearance classes <emphasis>pin</emphasis>, <emphasis>smd</emphasis>, <emphasis>via</emphasis>, <emphasis>wire</emphasis>, <emphasis>area</emphasis> and <emphasis>testpoint</emphasis>. When reading the DSN-file at  the program start the clearance classes of the host system will be taken over. The class <emphasis>wire</emphasis> will be  renamed to <emphasis>default</emphasis>. The rest of the hard coded clearance classes will only be generated, if values for these classes are found in the DSN-file.
+                </para>
+
+                <formalpara>
+                    <title>To add<indexterm>
+                            <primary>add clearance class</primary>
+                        </indexterm> a new clearance class</title>
+                    <para>
+                        Press the button <emphasis>Add Class</emphasis> and enter the name of the new class into the dialog field, which is popping up. The Clearance Matrix will be extended by a row and a column with the values for the new class. Change the predefined values in the new row according to your needs.
+                    </para>
+                </formalpara>
+
+                <formalpara>
+                    <title>To remove redundant clearance classes</title>
+                    <para>
+                        By pushing the <emphasis>Trim</emphasis> Button you can remove classes as redundant, whose entries in the Clearance Matrix are exact equal to the entries of an other class. All items belonging to the deleted clearance class will then be assigned to this other clearance class.
+                    </para>
+                </formalpara>
+
+                <formalpara>
+                    <title>Layer dependent clearance classes</title>
+                    <para>
+                        In the layer field on top of the window you see the layers, for which the entries in the Clearance Matrix are valid. When <emphasis>all</emphasis> is selected in the combo box, the matrix entries are valid on all layers. If in this case layer dependent clearance values are defined for a special field, the value -1 is displayed, because it is not possible to output a value, which is valid on all layers. Analog if <emphasis>inner</emphasis> is selected in the combo box. You can view or edit a layer dependent clearance value after selecting the name of the layer of your choice in the layer combo box.
+                    </para>
+                </formalpara>
+            </section>
+
+            <section>
+                <title>The Via Rules</title>
+                <para>
+                    A via rule consists of a ordered set of  <link linkend="Via">vias</link>, which is used in the routing. If a layer is changed while routing and several vias would contain the previous and the next layer and would cause no clearance violations, vias earlier in the rule will be preferred to vias later on in the rule.
+                </para>
+                <formalpara>
+                    <title>Vias</title>
+                    <para>
+                        A via consists of a name, a via padstack, a clearance class and a switch, if attaching smd-pins of the same net is allowed or not.
+                    </para>
+                </formalpara>
+                <formalpara>
+                    <title>Via Padstacks</title>
+                    <para>
+                        A via padstack consists of a begin layer and an end layer and of a circle shape on each layer between the begin and the end layer.
+                    </para>
+                    <para>
+                        The following  is a description of the window with the via rules.
+                    </para>
+                </formalpara>
+                <formalpara>
+                    <title>Available Via Padstacks</title>
+                    <para>Here you see the three buttons <emphasis>Info</emphasis>, <emphasis>Create</emphasis> and <emphasis>Remove</emphasis></para>
+                </formalpara>
+                <para>
+                    After pushing the <emphasis>Info</emphasis> button a list with all available via padstacks will be displayed.
+                </para>
+                <para>
+                    With the <emphasis>Create</emphasis> button you can create a new via padstack. You you will be asked to provide the name of the new via padstack, the start and the end layer, and the default radius of the circle shape. In the following input window you can adjust this radius on each single layer, if you want the shapes of the new via padstack to be layer dependent.
+                </para>
+                <para>
+                    With the <emphasis>Remove</emphasis> button you can delete an existing via padstack in the database. The deletion will be refused, if the padstack is still used in a via definition or somewhere else.
+                </para>
+                <formalpara>
+                    <title>Available Vias</title>
+                    <para>Description of the buttons:</para>
+                </formalpara>
+                <variablelist>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Info
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                Outputs a list of all vias available for routing.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Edit
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                If you push this button, a window with a table for editing the vias will appear. Here you can adjust the <emphasis>name</emphasis>, the <emphasis>padstack</emphasis>, the <emphasis>clearance class</emphasis> and the <emphasis>attach smd</emphasis> property of the via according to your needs. Below this window are two buttons for adding new vias or removing existing vias.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                </variablelist>
+
+                <formalpara>
+                    <title>Via Rules</title>
+                    <para>
+                        Below the Via Rules label is a window with a list of the names of all existing via rules. The following is a description of the four buttons at the lower border.
+                    </para>
+                </formalpara>
+                <variablelist>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Info
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                After selecting a via rule with the left button, you can output the rule with <emphasis>Info</emphasis> to a new window. In routing the vias earlier in the list in this window are preferred to vias later on in the list.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Create
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                If you push the <emphasis>Create</emphasis> button you will be asks for the name of the new via rule. After you have provided this name, a new empty via rule with the new name will be appended to the list above. Select the new rule with the left button and push the <emphasis>Edit</emphasis> to insert vias into the new rule.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Edit
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                After selecting a via rule with the left mouse button and pushing <emphasis>Edit</emphasis>, a new window appears where you can change the selected via rule. For a detailed description see <link linkend="EditViaRule">Edit Via Rule</link> below.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Remove
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                To delete the selected via rule.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                </variablelist>
+
+                <formalpara>
+                    <title>Edit Via Rule</title>
+                    <para>
+                        After selecting a via rule for editing, a new window appears with a list of all vias contained in the selected rule. In routing the vias earlier in this list are preferred to vias later on in the list. The following is a description of the buttons in this new window.
+                    </para>
+                </formalpara>
+                <variablelist>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Append
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                A window with a combo box with all available vias not yet contained in the rule appears. After you have selected a via and pushed the <emphasis>OK</emphasis> button, the selected via will be appended to the end of the list.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Remove
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                After selecting a via with the left mouse button you can remove it from the via rule by pushing the <emphasis>Remove</emphasis> button.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Move Up
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                After selecting a via with the left mouse button you can exchange its position with the previous via in the list by pushing the <emphasis>Move Up</emphasis> button. That increases the priority of the selected via. In routing vias earlier in the list are preferred to vias later on in the list.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Move Down
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                After selecting a via with the left mouse button you can exchange its position with the next via in the list by pushing the <emphasis>Move Down</emphasis> button. That decreases the priority of the selected via. In routing vias earlier in the list are preferred to vias later on in the list.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                </variablelist>
+            </section>
+
+            <section>
+                <title>Net Classes</title>
+                <para>
+                    A net class consists of a rule set, which is used by default when routing nets of this class. These rules can be edited in the table in the Net Classes window. The following  is a description of the columns of this table.
+                </para>
+
+                <variablelist>
+                    <title>
+                        The  net class table:
+                    </title>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                name
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                Contains the name of the net class, whose rules are described in the corresponding row.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                via rule
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                In this combo box you can select the <link linkend="WindowVia">via rule</link> you want to use when routing a net of this class.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                clearance class
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                Combo box to select the <link linkend="WindowClearanceMatrix">clearance class</link> for routing traces of nets of this class.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                trace width
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                To define the trace width for new routed traces of nets of this class.
+                            </para>
+                            <para>
+                                You can set the value to 0 to disallow traces of this net class in automatic and interactive routing on the layers  defined in the following field.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                on layer
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                In this combo box you can select the layers for which the value in the trace width field is valid. If <emphasis>all</emphasis> is selected, the value is valid on all layers. If you select <emphasis>inner</emphasis>, the value is valid on all inner layers. Otherwise the value in the trace width field is only valid on the layer with the selected name. If the trace width of this net class is layer dependent and <emphasis>all</emphasis> is selected in this combo box, in the trace width field appears the value -1, because it is not possible to output a value which is valid on all layers.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                shove fixed
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                If this field is selected, traces of this net class cannot be shoved or pulled tight while routing.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                cycles with areas
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                Normally closed cycles created while routing will be removed automatically. If this field is selected, that will only happen, if no conduction areas are involved. In that way you can for example connect items several times to a copper area without the redundant connections being removed automatically.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                min. length
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                Here you can define a minimal value for the cumulative trace length of the nets from this class. In interactive routing than appears an ellipse. If  the actual trace length is smaller than allowed,  the cursor will be on the outside of this ellipse. This software however has no good support for routing nets with minimal lengths. We suggest to switch the <link linkend="RoutingMode">route mode</link> in the Route Parameter window to <emphasis>stitching</emphasis>  and  to set the value in the <link linkend="PullTightRegion">pull tight region</link> to 0 .
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                max. length
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                Here you can define a maximal value for the cumulative trace length of the nets from this class. In interactive routing than appears an elliptic ring. If the cursor is outside this ring when connecting a trace, the actual trace length is smaller than allowed.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                </variablelist>
+
+                <variablelist>
+                    <title>
+                        The buttons in the net class window:
+                    </title>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Add
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                When you press the <emphasis>Add</emphasis> button, a new row with default values will be appended to the table. After changing the predefined name of the new class in the first column you can adjust the values in the other columns according to your  needs.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Remove
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                After selecting a row in the table with the left button, you can delete the corresponding net class by pushing the <emphasis>Remove</emphasis> button. The deletion will be refused, if there are still nets assigned to this class.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Assign
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                After pushing this button a window with a table will appear, where you can assign to a each net in the first row a new class with the combo box in the second row.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Select
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                All items of all nets belonging to the selected net class will be highlighted on the board. The IDE then changes to the <link linkend="SelectedItemState.html">Selected Item State</link>.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Show Nets
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                Displays a list with all nets contained in  the selected classes.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>
+                            <filename>
+                                Filter Incompletes
+                            </filename>
+                        </term>
+                        <listitem>
+                            <para>
+                                Only airlines of the open connections belonging to nets of the selected class will be displayed. This possibility is meant as an aid, if you want to route the nets of a certain class first.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+                </variablelist>
+            </section>
         </section>
+
         <section>
             <title>Info</title>
-            <para>TODO</para>
+            <para>
+                Here the windows with the object lists are documented, as they can be found in the <emphasis>Info</emphasis> menu of the menu bar.
+            </para>
+            <para>
+                The objects in such a list can be selected with the left button. If you hold the Ctrl-key pressed you can select several objects at once. With pressed Shift-key you can choose all objects between the first and last selected object.
+            </para>
+            <variablelist>
+                <title>
+                    The buttons in an object list window:
+                </title>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Info
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            Opens a text window with information about the selected objects. By clicking a blue marked word you can get more information about the corresponding object.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Show
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            Displays rectangle on the board containing the selected objects. The selected objects get highlighted and the IDE changes to the <link linkend="SelectedItemState">Selected Item State</link>.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Invert
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            Selected objects will be deselected and vice versa.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Recalculate
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            The object list will be recalculated.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Filter
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            Were you can input a pattern in order to filter the objects in the list. After pushing the <emphasis>Recalculate</emphasis> button only the objects matching this pattern will be displayed.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+            <para>
+                There are object lists for incomplete connections, length violations, clearance violations, library packages, library padstacks, board components and nets. The following contains a short description of these lists.
+            </para>
+
+            <variablelist>
+                <title>
+                    The individual object lists:
+                </title>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Library Packages
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            All packages in the library will be output. After pushing the <emphasis>Show</emphasis> button you will see all components on the board containing the selected packages.                        
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Library Padstacks
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            Outputs all padstacks in the library. After pushing the <emphasis>Show</emphasis> button you will see all  pins and vias on the board using the selected padstack.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Placed Components
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            Outputs all components placed on the board.  After pushing the <emphasis>Show</emphasis> button you will see the selected components on the board.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Incompletes
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            All open connections will be displayed. The entries contain the net name followed by component and pin name of both end items of the incomplete. If there are only a few open connections left on the board, you can find them easily by pushing the <emphasis>Show</emphasis> button.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Length Violations
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            Outputs the routed connections, which are shorter than the minimal allowed length or longer than the maximal allowed length. If the minimum length is violated, at the end points of the connection appears a circle containing a &quot;-&quot;. If the maximum length is violated, at the end points of the connection appears a circle containing a &quot;+&quot;. The size of such a circle corresponds to the size of the length violation.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Clearance Violations
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            Outputs the item pairs where the the minimal allowed spacing is violated. By pushing the <emphasis>Show</emphasis> button you can find the selected violations easily on the board.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Unconnected Route
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            Outputs the sets of electrically connected traces  and vias without contact to a terminal item. By pushing the <emphasis>Show</emphasis> button you can find the selected unconnected items on the board. Then you can remove them by pushing the <emphasis>Delete</emphasis> button in the board toolbar.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Route Stubs
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            Outputs unsufficiantly connected traces and vias. By pushing the <emphasis>Show</emphasis> button you can find the selected  stubs on the board. After that you can remove the whole connections containing the stubs by  pushing  first the <emphasis>Connections</emphasis> button and then the <emphasis>Delete</emphasis> button in the board toolbar.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>
+                        <filename>
+                            Nets
+                        </filename>
+                    </term>
+                    <listitem>
+                        <para>
+                            All nets of the design will be output. This window contains two more buttons. With the <emphasis>Assign Class</emphasis> button you can assign a new net class to the selected nets. After pushing the <emphasis>Filter Incompletes</emphasis> button only the airlines of open connections belonging to a selected net will be displayed.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+
         </section>
         <section>
             <title>Other</title>
@@ -980,17 +1788,23 @@
             <title>Net Classes</title>
             <para>TODO</para>
         </section>
+
         <section>
             <title>Snapshots</title>
             <para>TODO</para>
         </section>
+
         <section>
             <title>The Object Lists</title>
             <para>TODO</para>
         </section>
+
         <section>
             <title>Display Settings</title>
-            <para>TODO</para>
+            <para>
+                Describes the windows with the display parameters
+            </para>
+            TODO
         </section>
     </chapter>
 </article>
