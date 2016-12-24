@@ -3,8 +3,8 @@ all: create xml
 #update all po fles
 update-po: book.pot
 	for po in *.po; do \
-		msgmerge -o $$po.po.tmp $$po.po book.pot ; \
-		mv $$po.tmp $$po.po ; \
+		msgmerge -o $$po.tmp $$po book.pot ; \
+		mv $$po.tmp $$po ; \
 	done
 
 #create all xml files
