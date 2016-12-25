@@ -29,8 +29,8 @@ import net.freerouting.freeroute.board.BoardOutline;
 @SuppressWarnings("serial")
 public class WindowRouteDetail extends BoardSavableSubWindow {
 
-    private static final int c_max_slider_value = 100;
-    private static final int c_accuracy_scale_factor = 20;
+    private static final int C_MAX_SLIDER_VALUE = 100;
+    private static final int C_ACCURACY_SCALE_FACTOR = 20;
     private final net.freerouting.freeroute.interactive.BoardHandling board_handling;
     private final javax.swing.JSlider accuracy_slider;
     private final javax.swing.JRadioButton on_button;
@@ -94,7 +94,7 @@ public class WindowRouteDetail extends BoardSavableSubWindow {
         main_panel.add(pull_tight_accuracy_label);
 
         this.accuracy_slider = new javax.swing.JSlider();
-        accuracy_slider.setMaximum(c_max_slider_value);
+        accuracy_slider.setMaximum(C_MAX_SLIDER_VALUE);
         accuracy_slider.addChangeListener(new SliderChangeListener());
         gridbag.setConstraints(accuracy_slider, gridbag_constraints);
         main_panel.add(accuracy_slider);
@@ -134,7 +134,7 @@ public class WindowRouteDetail extends BoardSavableSubWindow {
         if (outline != null) {
             this.outline_keepout_check_box.setSelected(outline.keepout_outside_outline_generated());
         }
-        int accuracy_slider_value = c_max_slider_value - this.board_handling.settings.get_trace_pull_tight_accuracy() / c_accuracy_scale_factor + 1;
+        int accuracy_slider_value = C_MAX_SLIDER_VALUE - this.board_handling.settings.get_trace_pull_tight_accuracy() / C_ACCURACY_SCALE_FACTOR + 1;
         accuracy_slider.setValue(accuracy_slider_value);
     }
 
@@ -158,7 +158,7 @@ public class WindowRouteDetail extends BoardSavableSubWindow {
 
         @Override
         public void stateChanged(javax.swing.event.ChangeEvent evt) {
-            int new_accurracy = (c_max_slider_value - accuracy_slider.getValue() + 1) * c_accuracy_scale_factor;
+            int new_accurracy = (C_MAX_SLIDER_VALUE - accuracy_slider.getValue() + 1) * C_ACCURACY_SCALE_FACTOR;
             board_handling.settings.set_current_pull_tight_accuracy(new_accurracy);
         }
     }

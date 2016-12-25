@@ -220,8 +220,8 @@ public class ForcedViaAlgo {
             return null;
         }
         // try the diagonal drections
-        double dist = p_dist / Limits.sqrt2;
-        double border_dist = via_box.max_width() / (2 * Limits.sqrt2);
+        double dist = p_dist / Limits.SQRT2;
+        double border_dist = via_box.max_width() / (2 * Limits.SQRT2);
         for (int i = 0; i < 4; ++i) {
             FloatPoint check_point;
             double border_x;

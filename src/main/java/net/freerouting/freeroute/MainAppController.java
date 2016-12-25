@@ -44,7 +44,6 @@ public class MainAppController implements Initializable {
     private TextField message_field;
 
     private Stage mainStage;
-    private static final Logger logger = Logger.getLogger(MainAppController.class.getName());
 
     protected static SimpleStringProperty sp_message_field;
     private ResourceBundle resourceBundle;

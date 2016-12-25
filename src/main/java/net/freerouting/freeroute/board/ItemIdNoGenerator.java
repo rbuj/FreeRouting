@@ -27,7 +27,7 @@ package net.freerouting.freeroute.board;
 @SuppressWarnings("serial")
 public class ItemIdNoGenerator implements net.freerouting.freeroute.datastructures.IdNoGenerator, java.io.Serializable {
 
-    static final private int c_max_id_no = Integer.MAX_VALUE / 2;
+    static final private int C_MAX_ID_MO = Integer.MAX_VALUE / 2;
     private int last_generated_id_no = 0;
 
     /**
@@ -42,7 +42,7 @@ public class ItemIdNoGenerator implements net.freerouting.freeroute.datastructur
      */
     @Override
     public int new_no() {
-        if (last_generated_id_no >= c_max_id_no) {
+        if (last_generated_id_no >= C_MAX_ID_MO) {
             System.out.println("IdNoGenerator: danger of overflow, please regenerate id numbers from scratch!");
         }
         ++last_generated_id_no;

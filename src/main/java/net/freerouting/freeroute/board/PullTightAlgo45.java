@@ -288,7 +288,7 @@ class PullTightAlgo45 extends PullTightAlgo {
         Direction next_dir = p_line_arr[p_no + 1].direction();
         Direction new_line_dir = Direction.get_instance(prev_dir.get_vector().add(next_dir.get_vector()));
         Line translate_line = Line.get_instance(curr_corner.round(), new_line_dir);
-        double translate_dist = (Limits.sqrt2 - 1) * this.curr_half_width;
+        double translate_dist = (Limits.SQRT2 - 1) * this.curr_half_width;
         double prev_dist = Math.abs(translate_line.signed_distance(prev_corner));
         double next_dist = Math.abs(translate_line.signed_distance(next_corner));
         translate_dist = Math.min(translate_dist, prev_dist);
@@ -525,7 +525,7 @@ class PullTightAlgo45 extends PullTightAlgo {
                 new_line_dir = other_trace_line.direction().turn_45_degree(6);
             }
             Line translate_line = Line.get_instance(curr_end_corner.to_float().round(), new_line_dir);
-            double translate_dist = (Limits.sqrt2 - 1) * this.curr_half_width;
+            double translate_dist = (Limits.SQRT2 - 1) * this.curr_half_width;
             double prev_corner_dist = Math.abs(translate_line.signed_distance(curr_prev_end_corner.to_float()));
             double other_dist = Math.abs(translate_line.signed_distance(other_trace_corner_approx));
             translate_dist = Math.min(translate_dist, prev_corner_dist);
@@ -636,7 +636,7 @@ class PullTightAlgo45 extends PullTightAlgo {
                 new_line_dir = other_trace_line.direction().turn_45_degree(2);
             }
             Line translate_line = Line.get_instance(curr_end_corner.to_float().round(), new_line_dir);
-            double translate_dist = (Limits.sqrt2 - 1) * this.curr_half_width;
+            double translate_dist = (Limits.SQRT2 - 1) * this.curr_half_width;
             double prev_corner_dist = Math.abs(translate_line.signed_distance(curr_prev_end_corner.to_float()));
             double other_dist = Math.abs(translate_line.signed_distance(other_trace_corner_approx));
             translate_dist = Math.min(translate_dist, prev_corner_dist);

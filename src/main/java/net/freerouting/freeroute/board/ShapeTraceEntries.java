@@ -31,7 +31,7 @@ import net.freerouting.freeroute.geometry.planar.TileShape;
  */
 public class ShapeTraceEntries {
 
-    private static final double c_offset_add = 1;
+    private static final double C_OFFSET_ADD = 1;
 
     public static void cutout_trace(PolylineTrace p_trace, ConvexShape p_shape, int p_cl_class) {
         if (!p_trace.is_on_the_board()) {
@@ -42,12 +42,12 @@ public class ShapeTraceEntries {
         BasicBoard board = p_trace.board;
         ShapeSearchTree search_tree = board.search_tree_manager.get_default_tree();
         if (search_tree.is_clearance_compensation_used()) {
-            double curr_offset = p_trace.get_compensated_half_width(search_tree) + c_offset_add;
+            double curr_offset = p_trace.get_compensated_half_width(search_tree) + C_OFFSET_ADD;
             offset_shape = p_shape.offset(curr_offset);
         } else {
             // enlarge the shape in 2 steps  for symmetry reasons
             double cl_offset = board.clearance_value(p_trace.clearance_class_no(),
-                    p_cl_class, p_trace.get_layer()) + c_offset_add;
+                    p_cl_class, p_trace.get_layer()) + C_OFFSET_ADD;
             offset_shape = p_shape.offset(p_trace.get_half_width());
             offset_shape = offset_shape.offset(cl_offset);
         }
@@ -212,12 +212,12 @@ public class ShapeTraceEntries {
         TileShape offset_shape;
         ShapeSearchTree search_tree = this.board.search_tree_manager.get_default_tree();
         if (search_tree.is_clearance_compensation_used()) {
-            double curr_offset = curr_trace.get_compensated_half_width(search_tree) + c_offset_add;
+            double curr_offset = curr_trace.get_compensated_half_width(search_tree) + C_OFFSET_ADD;
             offset_shape = (TileShape) shape.offset(curr_offset);
         } else {
             // enlarge the shape in 2 steps  for symmetry reasons
             offset_shape = (TileShape) shape.offset(curr_trace.get_half_width());
-            double cl_offset = board.clearance_value(curr_trace.clearance_class_no(), cl_class, layer) + c_offset_add;
+            double cl_offset = board.clearance_value(curr_trace.clearance_class_no(), cl_class, layer) + C_OFFSET_ADD;
             offset_shape = (TileShape) offset_shape.offset(cl_offset);
         }
         int edge_count = shape.border_line_count();
@@ -304,12 +304,12 @@ public class ShapeTraceEntries {
         ShapeSearchTree search_tree = this.board.search_tree_manager.get_default_tree();
         TileShape offset_shape;
         if (search_tree.is_clearance_compensation_used()) {
-            double curr_offset = p_trace.get_compensated_half_width(search_tree) + c_offset_add;
+            double curr_offset = p_trace.get_compensated_half_width(search_tree) + C_OFFSET_ADD;
             offset_shape = (TileShape) shape.offset(curr_offset);
         } else {
             // enlarge the shape in 2 steps  for symmetry reasons
             double cl_offset = board.clearance_value(p_trace.clearance_class_no(),
-                    this.cl_class, p_trace.get_layer()) + c_offset_add;
+                    this.cl_class, p_trace.get_layer()) + C_OFFSET_ADD;
             offset_shape = (TileShape) shape.offset(p_trace.get_half_width());
             offset_shape = (TileShape) offset_shape.offset(cl_offset);
         }

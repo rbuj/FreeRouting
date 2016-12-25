@@ -42,10 +42,10 @@ import net.freerouting.freeroute.geometry.planar.TileShape;
  */
 public abstract class PullTightAlgo {
 
-    protected static final double c_max_cos_angle = 0.999;
+    protected static final double C_MAX_COS_ANGLE = 0.999;
     // with angles to close to 180 degree the algorithm becomes numerically
     // unstable
-    protected static final double c_min_corner_dist_square = 0.9;
+    protected static final double C_MIN_CORNER_DIST_SQUARE = 0.9;
 
     /**
      * Returns a new instance of PullTightAlgo. If p_only_net_no > 0, only
@@ -346,7 +346,7 @@ public abstract class PullTightAlgo {
                 FloatPoint prev_corner = curr_polyline.corner_approx(i - 1);
                 FloatPoint curr_corner = curr_polyline.corner_approx(i);
                 try_skip = curr_corner.distance_square(prev_corner)
-                        < c_min_corner_dist_square;
+                        < C_MIN_CORNER_DIST_SQUARE;
             }
 
             if (try_skip) {

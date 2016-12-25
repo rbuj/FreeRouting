@@ -30,7 +30,7 @@ public class AngleRestriction {
     public static final AngleRestriction FORTYFIVE_DEGREE = new AngleRestriction("45 degree", 1);
     public static final AngleRestriction NINETY_DEGREE = new AngleRestriction("90 degree", 2);
 
-    public static final AngleRestriction[] arr
+    public static final AngleRestriction[] ARR
             = {
                 NONE, FORTYFIVE_DEGREE, NINETY_DEGREE
             };

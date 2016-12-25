@@ -62,10 +62,10 @@ public class BoardFrame extends javax.swing.JFrame {
      * The windows above stored in an array
      */
     static final int SUBWINDOW_COUNT = 24;
-    static final String[] log_file_extensions = {"log"};
+    static final String[] LOG_FILE_EXTENSIONS = {"log"};
     static final String GUI_DEFAULTS_FILE_NAME = "gui_defaults.par";
     static final String GUI_DEFAULTS_FILE_BACKUP_NAME = "gui_defaults.par.bak";
-    static final FileFilter logfile_filter = new FileFilter(log_file_extensions);
+    static final FileFilter LOGFILE_FILTER = new FileFilter(LOG_FILE_EXTENSIONS);
 
     /**
      * The scroll pane for the panel of the routing board.

@@ -419,7 +419,7 @@ class PullTightAlgoAnyAngle extends PullTightAlgo {
         }
         double cosinus_angle
                 = p_line_arr[p_start_no + 1].cos_angle(p_line_arr[p_start_no + 2]);
-        if (cosinus_angle > c_max_cos_angle) // lines are already nearly parallel, don't divide angle any further
+        if (cosinus_angle > C_MAX_COS_ANGLE) // lines are already nearly parallel, don't divide angle any further
         // because of problems with numerical stability
         {
             return null;
@@ -855,7 +855,7 @@ class PullTightAlgoAnyAngle extends PullTightAlgo {
                 new_line_dir = other_trace_line.direction().turn_45_degree(6);
             }
             Line translate_line = Line.get_instance(curr_end_corner.to_float().round(), new_line_dir);
-            double translate_dist = (Limits.sqrt2 - 1) * this.curr_half_width;
+            double translate_dist = (Limits.SQRT2 - 1) * this.curr_half_width;
             double prev_corner_dist = Math.abs(translate_line.signed_distance(curr_prev_end_corner.to_float()));
             double other_dist = Math.abs(translate_line.signed_distance(other_trace_corner_approx));
             translate_dist = Math.min(translate_dist, prev_corner_dist);
@@ -983,7 +983,7 @@ class PullTightAlgoAnyAngle extends PullTightAlgo {
                 new_line_dir = other_trace_line.direction().turn_45_degree(2);
             }
             Line translate_line = Line.get_instance(curr_end_corner.to_float().round(), new_line_dir);
-            double translate_dist = (Limits.sqrt2 - 1) * this.curr_half_width;
+            double translate_dist = (Limits.SQRT2 - 1) * this.curr_half_width;
             double prev_corner_dist = Math.abs(translate_line.signed_distance(curr_prev_end_corner.to_float()));
             double other_dist = Math.abs(translate_line.signed_distance(other_trace_corner_approx));
             translate_dist = Math.min(translate_dist, prev_corner_dist);

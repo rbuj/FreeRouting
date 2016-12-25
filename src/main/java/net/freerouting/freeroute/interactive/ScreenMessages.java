@@ -28,7 +28,7 @@ import javax.swing.JLabel;
  */
 public class ScreenMessages {
 
-    static private final String empty_string = "            ";
+    static private final String EMPTY_STRING = "            ";
     private final java.util.ResourceBundle resources;
     private final java.util.Locale locale;
     private final String active_layer_string;
@@ -37,7 +37,7 @@ public class ScreenMessages {
     private JLabel status_field;
     private JLabel layer_field;
     private JLabel mouse_position;
-    private String prev_target_layer_name = empty_string;
+    private String prev_target_layer_name = EMPTY_STRING;
     private boolean write_protected = false;
     /**
      * The number format for displaying the trace lengtht
@@ -57,7 +57,7 @@ public class ScreenMessages {
         add_field = p_add_field;
         layer_field = p_layer_field;
         mouse_position = p_mouse_position;
-        add_field.setText(empty_string);
+        add_field.setText(EMPTY_STRING);
 
         this.number_format = java.text.NumberFormat.getInstance(p_locale);
         this.number_format.setMaximumFractionDigits(4);
@@ -139,8 +139,8 @@ public class ScreenMessages {
      */
     public void clear_add_field() {
         if (!this.write_protected) {
-            add_field.setText(empty_string);
-            prev_target_layer_name = empty_string;
+            add_field.setText(EMPTY_STRING);
+            prev_target_layer_name = EMPTY_STRING;
         }
     }
 
@@ -149,9 +149,9 @@ public class ScreenMessages {
      */
     public void clear() {
         if (!this.write_protected) {
-            status_field.setText(empty_string);
+            status_field.setText(EMPTY_STRING);
             clear_add_field();
-            layer_field.setText(empty_string);
+            layer_field.setText(EMPTY_STRING);
         }
     }
 

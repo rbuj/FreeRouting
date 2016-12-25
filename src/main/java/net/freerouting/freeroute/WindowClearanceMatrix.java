@@ -33,7 +33,7 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow {
     /**
      * Characters, which are not allowed in the name of a clearance class.
      */
-    private static final String[] reserved_name_chars = {"(", ")", " ", "_"};
+    private static final String[] RESERVED_NAME_CHARS = {"(", ")", " ", "_"};
     private final BoardFrame board_frame;
     private final javax.swing.JPanel main_panel;
     private javax.swing.JPanel center_panel;
@@ -251,8 +251,8 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow {
         if (p_string.isEmpty()) {
             return false;
         }
-        for (int i = 0; i < reserved_name_chars.length; ++i) {
-            if (p_string.contains(reserved_name_chars[i])) {
+        for (int i = 0; i < RESERVED_NAME_CHARS.length; ++i) {
+            if (p_string.contains(RESERVED_NAME_CHARS[i])) {
                 return false;
             }
         }

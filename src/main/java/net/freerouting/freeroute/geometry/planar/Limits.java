@@ -41,7 +41,7 @@ public class Limits {
 
     public static final BigInteger CRIT_INT_BIG = BigInteger.valueOf(CRIT_INT);
 
-    public static final double sqrt2 = Math.sqrt(2);
+    public static final double SQRT2 = Math.sqrt(2);
 
     private Limits() // disallow instantiation
     {

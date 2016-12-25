@@ -575,7 +575,7 @@ public class SortedRoomNeighbours {
 
     private class SortedRoomNeighbour implements Comparable<SortedRoomNeighbour> {
 
-        static private final double c_dist_tolerance = 1;
+        static private final double C_DIST_TOLERANCE = 1;
 
         /**
          * The shape of the neighbour room
@@ -637,14 +637,14 @@ public class SortedRoomNeighbours {
             double this_distance = this.first_corner().to_float().distance(compare_corner);
             double other_distance = p_other.first_corner().to_float().distance(compare_corner);
             double delta_distance = this_distance - other_distance;
-            if (Math.abs(delta_distance) <= c_dist_tolerance) {
+            if (Math.abs(delta_distance) <= C_DIST_TOLERANCE) {
                 // check corners for equality
                 if (this.first_corner().equals(p_other.first_corner())) {
                     // in this case compare the last corners
                     double this_distance2 = this.last_corner().to_float().distance(compare_corner);
                     double other_distance2 = p_other.last_corner().to_float().distance(compare_corner);
                     delta_distance = this_distance2 - other_distance2;
-                    if (Math.abs(delta_distance) <= c_dist_tolerance) {
+                    if (Math.abs(delta_distance) <= C_DIST_TOLERANCE) {
                         if (this.neighbour_room_touch_is_corner && p_other.neighbour_room_touch_is_corner) // Otherwise there may be a short 1 dim. touch at a link between 2 trace lines.
                         // In this case equality is ok, because the 2 intersection pieces with
                         // the expansion room are identical, so that only 1 obstacle is needed.

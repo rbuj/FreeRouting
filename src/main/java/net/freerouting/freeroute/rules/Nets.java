@@ -33,18 +33,18 @@ public class Nets implements java.io.Serializable {
     /**
      * The maximum legal net number for nets.
      */
-    public static final int max_legal_net_no = 9999999;
+    public static final int MAX_LEGAL_NET_NO = 9999999;
     /**
      * auxiliary net number for internal use
      */
-    public static final int hidden_net_no = 10000001;
+    public static final int HIDDER_NET_NO = 10000001;
 
     /**
      * Returns false, if p_net_no belongs to a net internally used for special
      * purposes.
      */
     public static boolean is_normal_net_no(int p_net_no) {
-        return (p_net_no > 0 && p_net_no <= max_legal_net_no);
+        return (p_net_no > 0 && p_net_no <= MAX_LEGAL_NET_NO);
     }
     /**
      * The list of electrical nets on the board
@@ -122,7 +122,7 @@ public class Nets implements java.io.Serializable {
      */
     public Net add(String p_name, int p_subnet_number, boolean p_contains_plane) {
         int new_net_no = net_arr.size() + 1;
-        if (new_net_no >= max_legal_net_no) {
+        if (new_net_no >= MAX_LEGAL_NET_NO) {
             System.out.println("Nets.add_net: max_net_no out of range");
         }
         Net new_net = new Net(p_name, p_subnet_number, new_net_no, this, p_contains_plane);

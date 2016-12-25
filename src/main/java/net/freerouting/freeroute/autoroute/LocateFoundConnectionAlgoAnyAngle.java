@@ -39,7 +39,7 @@ import net.freerouting.freeroute.geometry.planar.TileShape;
  */
 class LocateFoundConnectionAlgoAnyAngle extends LocateFoundConnectionAlgo {
 
-    static private final double c_tolerance = 1.0;
+    static private final double C_TOLERANCE = 1.0;
 
     /**
      * Calculates the left most corner of the shape of p_to_info.door seen from
@@ -92,7 +92,7 @@ class LocateFoundConnectionAlgoAnyAngle extends LocateFoundConnectionAlgo {
 
         double trace_halfwidth_exact = this.ctrl.compensated_trace_half_width[this.current_trace_layer];
         double trace_halfwidth_max = trace_halfwidth_exact + AutorouteEngine.TRACE_WIDTH_TOLERANCE;
-        double trace_halfwidth_middle = trace_halfwidth_exact + c_tolerance;
+        double trace_halfwidth_middle = trace_halfwidth_exact + C_TOLERANCE;
 
         BacktrackElement curr_to_info = this.backtrack_array[this.current_to_door_index];
         FloatPoint door_left_corner = calc_door_left_corner(curr_to_info);
@@ -327,7 +327,7 @@ class LocateFoundConnectionAlgoAnyAngle extends LocateFoundConnectionAlgo {
             return p_from_corner;
         }
         FloatLine first_line = new FloatLine(p_from_corner, curr_tangential_point);
-        curr_tangential_point = p_to_corner.right_tangential_point(p_next_corner, 2 * p_dist + c_tolerance);
+        curr_tangential_point = p_to_corner.right_tangential_point(p_next_corner, 2 * p_dist + C_TOLERANCE);
         if (curr_tangential_point == null) {
             if (this.test_level.ordinal() >= TestLevel.ALL_DEBUGGING_OUTPUT.ordinal()) {
                 System.out.println("LocateFoundConnectionAlgo.right_turn_next_corner: right tangential point is null");
@@ -356,7 +356,7 @@ class LocateFoundConnectionAlgoAnyAngle extends LocateFoundConnectionAlgo {
             return p_from_corner;
         }
         FloatLine first_line = new FloatLine(p_from_corner, curr_tangential_point);
-        curr_tangential_point = p_to_corner.left_tangential_point(p_next_corner, 2 * p_dist + c_tolerance);
+        curr_tangential_point = p_to_corner.left_tangential_point(p_next_corner, 2 * p_dist + C_TOLERANCE);
         if (curr_tangential_point == null) {
             if (this.test_level.ordinal() >= TestLevel.ALL_DEBUGGING_OUTPUT.ordinal()) {
                 System.out.println("LocateFoundConnectionAlgo.left_turn_next_corner: left tangential point is null");

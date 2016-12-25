@@ -480,7 +480,7 @@ public class BoardRules implements java.io.Serializable {
             throws java.io.IOException, java.lang.ClassNotFoundException {
         p_stream.defaultReadObject();
         int snap_angle_no = p_stream.readInt();
-        this.trace_angle_restriction = net.freerouting.freeroute.board.AngleRestriction.arr[snap_angle_no];
+        this.trace_angle_restriction = net.freerouting.freeroute.board.AngleRestriction.ARR[snap_angle_no];
     }
 
 }

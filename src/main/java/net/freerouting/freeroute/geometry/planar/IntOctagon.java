@@ -373,7 +373,7 @@ public class IntOctagon extends RegularTileShape implements java.io.Serializable
     public double max_width() {
         double width_1 = Math.max(rx - lx, uy - ly);
         double width2 = Math.max(urx - llx, lrx - ulx);
-        double result = Math.max(width_1, width2 / Limits.sqrt2);
+        double result = Math.max(width_1, width2 / Limits.SQRT2);
         return result;
     }
 
@@ -381,7 +381,7 @@ public class IntOctagon extends RegularTileShape implements java.io.Serializable
     public double min_width() {
         double width_1 = Math.min(rx - lx, uy - ly);
         double width2 = Math.min(urx - llx, lrx - ulx);
-        double result = Math.min(width_1, width2 / Limits.sqrt2);
+        double result = Math.min(width_1, width2 / Limits.SQRT2);
         return result;
     }
 
@@ -391,7 +391,7 @@ public class IntOctagon extends RegularTileShape implements java.io.Serializable
         if (width == 0) {
             return this;
         }
-        int dia_width = (int) Math.round(Limits.sqrt2 * p_distance);
+        int dia_width = (int) Math.round(Limits.SQRT2 * p_distance);
         IntOctagon result
                 = new IntOctagon(lx - width, ly - width, rx + width, uy + width,
                         ulx - dia_width, lrx + dia_width,

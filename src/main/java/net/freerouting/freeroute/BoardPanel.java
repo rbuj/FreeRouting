@@ -41,7 +41,7 @@ import net.freerouting.freeroute.interactive.ScreenMessages;
 @SuppressWarnings("serial")
 public class BoardPanel extends javax.swing.JPanel {
 
-    private static final double c_zoom_factor = 2.0;
+    private static final double C_ZOOM_FACTOR = 2.0;
     public javax.swing.JPopupMenu popup_menu_insert_cancel;
     public PopupMenuCopy popup_menu_copy;
     public PopupMenuMove popup_menu_move;
@@ -226,14 +226,14 @@ public class BoardPanel extends javax.swing.JPanel {
      * zooms in at p_position
      */
     public void zoom_in(java.awt.geom.Point2D p_position) {
-        zoom(c_zoom_factor, p_position);
+        zoom(C_ZOOM_FACTOR, p_position);
     }
 
     /**
      * zooms out at p_position
      */
     public void zoom_out(java.awt.geom.Point2D p_position) {
-        double zoom_factor = 1 / c_zoom_factor;
+        double zoom_factor = 1 / C_ZOOM_FACTOR;
         zoom(zoom_factor, p_position);
     }
 

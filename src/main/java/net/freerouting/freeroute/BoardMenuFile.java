@@ -30,8 +30,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static net.freerouting.freeroute.DesignFile.all_file_extensions;
 import net.freerouting.freeroute.datastructures.FileFilter;
+import static net.freerouting.freeroute.DesignFile.ALL_FILE_EXTENSIONS;
 
 /**
  * Creates the file menu of a board frame.
@@ -190,7 +190,7 @@ public class BoardMenuFile extends javax.swing.JMenu {
                 design_dir_name = board_frame.design_file.get_output_file().getParent();
             }
             javax.swing.JFileChooser file_chooser = new javax.swing.JFileChooser(design_dir_name);
-            file_chooser.setFileFilter(new FileFilter(all_file_extensions));
+            file_chooser.setFileFilter(new FileFilter(ALL_FILE_EXTENSIONS));
 
             file_chooser.showSaveDialog(this);
             File new_file = file_chooser.getSelectedFile();
@@ -203,7 +203,7 @@ public class BoardMenuFile extends javax.swing.JMenu {
         javax.swing.JFileChooser file_chooser = new javax.swing.JFileChooser();
         java.io.File logfile_dir = board_frame.design_file.get_parent_file();
         file_chooser.setCurrentDirectory(logfile_dir);
-        file_chooser.setFileFilter(BoardFrame.logfile_filter);
+        file_chooser.setFileFilter(BoardFrame.LOGFILE_FILTER);
         file_chooser.showOpenDialog(this);
         java.io.File filename = file_chooser.getSelectedFile();
         if (filename == null) {
@@ -218,7 +218,7 @@ public class BoardMenuFile extends javax.swing.JMenu {
         javax.swing.JFileChooser file_chooser = new javax.swing.JFileChooser();
         java.io.File logfile_dir = board_frame.design_file.get_parent_file();
         file_chooser.setCurrentDirectory(logfile_dir);
-        file_chooser.setFileFilter(BoardFrame.logfile_filter);
+        file_chooser.setFileFilter(BoardFrame.LOGFILE_FILTER);
         file_chooser.showOpenDialog(this);
         java.io.File filename = file_chooser.getSelectedFile();
         if (filename == null) {

@@ -1010,7 +1010,7 @@ public abstract class LogfileScope {
         @Override
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling) {
             int new_snap_angle_no = p_logfile.read_int();
-            p_board_handling.get_routing_board().rules.set_trace_angle_restriction(net.freerouting.freeroute.board.AngleRestriction.arr[new_snap_angle_no]);
+            p_board_handling.get_routing_board().rules.set_trace_angle_restriction(net.freerouting.freeroute.board.AngleRestriction.ARR[new_snap_angle_no]);
             return p_return_state;
         }
     }

@@ -23,10 +23,10 @@ public class BigIntAux {
     // because we need it public.
 
     /*
-    * trailingZeroTable[i] is the number of trailing zero bits in the binary
+    * TRAILING_ZERO_TABLE[i] is the number of trailing zero bits in the binary
     * representaion of i.
      */
-    final static byte trailingZeroTable[] = {
+    final static byte[] TRAILING_ZERO_TABLE = {
         -25, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
         4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
         5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
@@ -99,7 +99,7 @@ public class BigIntAux {
             a >>>= 8;
             aZeros += 8;
         }
-        int y = trailingZeroTable[x];
+        int y = TRAILING_ZERO_TABLE[x];
         aZeros += y;
         a >>>= y;
 
@@ -108,7 +108,7 @@ public class BigIntAux {
             b >>>= 8;
             bZeros += 8;
         }
-        y = trailingZeroTable[x];
+        y = TRAILING_ZERO_TABLE[x];
         bZeros += y;
         b >>>= y;
 
@@ -121,14 +121,14 @@ public class BigIntAux {
                 while ((x = a & 0xff) == 0) {
                     a >>>= 8;
                 }
-                a >>>= trailingZeroTable[x];
+                a >>>= TRAILING_ZERO_TABLE[x];
             } else {
                 b -= a;
 
                 while ((x = b & 0xff) == 0) {
                     b >>>= 8;
                 }
-                b >>>= trailingZeroTable[x];
+                b >>>= TRAILING_ZERO_TABLE[x];
             }
         }
         return a << t;

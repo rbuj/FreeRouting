@@ -29,8 +29,8 @@ import java.util.Collection;
 @SuppressWarnings("serial")
 public class WindowRouteParameter extends BoardSavableSubWindow {
 
-    private static final int c_max_slider_value = 999;
-    private static final int c_region_scale_factor = 200;
+    private static final int C_MAX_SLIDER_VALUE = 999;
+    private static final int C_REGION_SCALE_FACTOR = 200;
 
     private final net.freerouting.freeroute.interactive.BoardHandling board_handling;
     private final java.util.Locale current_locale;
@@ -268,7 +268,7 @@ public class WindowRouteParameter extends BoardSavableSubWindow {
         region_width_field.addFocusListener(new RegionWidthFieldFocusListener());
 
         this.region_slider = new javax.swing.JSlider();
-        region_slider.setMaximum(c_max_slider_value);
+        region_slider.setMaximum(C_MAX_SLIDER_VALUE);
         region_slider.addChangeListener(new SliderChangeListener());
         gridbag.setConstraints(region_slider, gridbag_constraints);
         main_panel.add(region_slider);
@@ -377,8 +377,8 @@ public class WindowRouteParameter extends BoardSavableSubWindow {
         this.edge_to_turn_dist_field.setValue(edge_to_turn_dist);
         this.restrict_pin_exit_directions_check_box.setSelected(edge_to_turn_dist > 0);
 
-        int region_slider_value = this.board_handling.settings.get_trace_pull_tight_region_width() / c_region_scale_factor;
-        region_slider_value = Math.min(region_slider_value, c_max_slider_value);
+        int region_slider_value = this.board_handling.settings.get_trace_pull_tight_region_width() / C_REGION_SCALE_FACTOR;
+        region_slider_value = Math.min(region_slider_value, C_MAX_SLIDER_VALUE);
         region_slider.setValue(region_slider_value);
         region_width_field.setValue(region_slider_value);
 
@@ -406,13 +406,13 @@ public class WindowRouteParameter extends BoardSavableSubWindow {
 
     private void set_pull_tight_region_width(int p_slider_value) {
         int slider_value = Math.max(p_slider_value, 0);
-        slider_value = Math.min(p_slider_value, c_max_slider_value);
+        slider_value = Math.min(p_slider_value, C_MAX_SLIDER_VALUE);
         int new_tidy_width;
-        if (slider_value >= 0.9 * c_max_slider_value) {
-            p_slider_value = c_max_slider_value;
+        if (slider_value >= 0.9 * C_MAX_SLIDER_VALUE) {
+            p_slider_value = C_MAX_SLIDER_VALUE;
             new_tidy_width = Integer.MAX_VALUE;
         } else {
-            new_tidy_width = slider_value * c_region_scale_factor;
+            new_tidy_width = slider_value * C_REGION_SCALE_FACTOR;
         }
         region_slider.setValue(slider_value);
         region_width_field.setValue(slider_value);

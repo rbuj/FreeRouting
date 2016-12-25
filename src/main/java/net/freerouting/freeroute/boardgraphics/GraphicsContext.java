@@ -46,9 +46,9 @@ import net.freerouting.freeroute.geometry.planar.TileShape;
 @SuppressWarnings("serial")
 public class GraphicsContext implements java.io.Serializable {
 
-    private static final int update_offset = 10000;
-    private static final boolean show_line_segments = false;
-    private static final boolean show_area_division = false;
+    private static final int UPDATE_OFFSET = 10000;
+    private static final boolean SHOW_LINE_SEGMENTS = false;
+    private static final boolean SHOW_AREA_DIVISION = false;
 
     /**
      * initialise some values in p_graphics
@@ -165,13 +165,13 @@ public class GraphicsContext implements java.io.Serializable {
         set_translucency(g2, p_translucency_factor);
 
         GeneralPath draw_path = null;
-        if (!show_line_segments) {
+        if (!SHOW_LINE_SEGMENTS) {
             draw_path = new GeneralPath();
         }
 
         for (int i = 0; i < (p_points.length - 1); i++) {
             if (line_outside_update_box(p_points[i], p_points[i + 1],
-                    p_half_width + update_offset, clip_box)) {
+                    p_half_width + UPDATE_OFFSET, clip_box)) {
                 // this check should be unnessersary here,
                 // the system should do it in the draw(line) function
                 continue;
@@ -180,13 +180,13 @@ public class GraphicsContext implements java.io.Serializable {
             Point2D p2 = coordinate_transform.board_to_screen(p_points[i + 1]);
             Line2D line = new Line2D.Double(p1, p2);
 
-            if (show_line_segments) {
+            if (SHOW_LINE_SEGMENTS) {
                 g2.draw(line);
             } else {
                 draw_path.append(line, false);
             }
         }
-        if (!show_line_segments) {
+        if (!SHOW_LINE_SEGMENTS) {
             g2.draw(draw_path);
         }
     }
@@ -433,7 +433,7 @@ public class GraphicsContext implements java.io.Serializable {
             }
             fill_area(draw_polygons, p_g, p_color, p_translucency_factor);
         }
-        if (show_area_division) {
+        if (SHOW_AREA_DIVISION) {
             TileShape[] tiles = p_area.split_to_convex();
             for (int i = 0; i < tiles.length; ++i) {
                 FloatPoint[] corners = new FloatPoint[tiles[i].border_line_count() + 1];
