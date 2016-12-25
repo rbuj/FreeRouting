@@ -186,7 +186,7 @@ public class MazeSearchAlgo {
      */
     private ExpandableObject destination_door = null;
     private int section_no_of_destination_door = 0;
-    private final java.util.Random random_generator = new java.util.Random();
+    private static final java.util.Random RANDOM_GENERATOR = new java.util.Random();
 
     /**
      * Creates a new instance of MazeSearchAlgo
@@ -194,7 +194,7 @@ public class MazeSearchAlgo {
     MazeSearchAlgo(AutorouteEngine p_autoroute_engine, AutorouteControl p_ctrl) {
         autoroute_engine = p_autoroute_engine;
         ctrl = p_ctrl;
-        random_generator.setSeed(p_ctrl.ripup_costs); // To get reproducable random numbers in the ripup algorithm.
+        RANDOM_GENERATOR.setSeed(p_ctrl.ripup_costs); // To get reproducable random numbers in the ripup algorithm.
         this.search_tree = p_autoroute_engine.autoroute_search_tree;
         maze_expansion_list = new TreeSet<>();
         destination_distance
@@ -1044,7 +1044,7 @@ public class MazeSearchAlgo {
         boolean randomize = this.ctrl.ripup_pass_no >= 4 && this.ctrl.ripup_pass_no % 3 != 0;
         if (randomize) {
             // shuffle the result to avoid repetitive loops
-            double random_number = this.random_generator.nextDouble();
+            double random_number = this.RANDOM_GENERATOR.nextDouble();
             double random_factor = 0.5 + random_number * random_number;
             detour *= random_factor;
         }

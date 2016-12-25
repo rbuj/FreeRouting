@@ -34,8 +34,8 @@ import java.util.LinkedList;
 @SuppressWarnings("serial")
 public class PolygonShape extends PolylineShape {
 
-    static private int seed = 99;
-    static private java.util.Random random_generator = new java.util.Random(seed);
+    private static final int SEED = 99;
+    private static final java.util.Random RANDOM_GENERATOR = new java.util.Random(SEED);
     public final Point[] corners;
     /**
      * the following fields are for storing precalculated data
@@ -543,8 +543,8 @@ public class PolygonShape extends PolylineShape {
     public TileShape[] split_to_convex() {
         if (this.precalculated_convex_pieces == null) // not yet precalculated
         {
-            // use a fixed seed to get reproducable result
-            random_generator.setSeed(seed);
+            // use a fixed SEED to get reproducable result
+            RANDOM_GENERATOR.setSeed(SEED);
             Collection<PolygonShape> convex_pieces = split_to_convex_recu();
             if (convex_pieces == null) {
                 // split failed, maybe the polygon has selfontersections
@@ -566,7 +566,7 @@ public class PolygonShape extends PolylineShape {
      */
     private Collection<PolygonShape> split_to_convex_recu() {
         // start with a hashed corner and search the first concave corner
-        int start_corner_no = random_generator.nextInt(corners.length);
+        int start_corner_no = RANDOM_GENERATOR.nextInt(corners.length);
         Point curr_corner = corners[start_corner_no];
         Point prev_corner;
         if (start_corner_no != 0) {
