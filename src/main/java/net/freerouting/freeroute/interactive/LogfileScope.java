@@ -102,7 +102,7 @@ public abstract class LogfileScope {
      * Initialializing this static array automatically by the program did not
      * work correctly, so the programmer has to keep it uptodate by hand.
      */
-    private static LogfileScope[] arr
+    private static final LogfileScope[] ARR
             = {
                 UNDO, REDO, GENERATE_SNAPSHOT, SET_CLEARANCE_COMPENSATION, SET_LAYER, SET_MANUAL_TRACE_CLEARANCE_CLASS,
                 SET_MANUAL_TRACE_HALF_WIDTH, SET_MANUAL_TRACEWITH_SELECTION, SET_SNAP_ANGLE,
@@ -122,9 +122,9 @@ public abstract class LogfileScope {
      * Returns the LogfileScope with name p_name if it exists, else null.
      */
     public static LogfileScope get_scope(String p_name) {
-        for (int i = 0; i < arr.length; ++i) {
-            if (arr[i].name.compareTo(p_name) == 0) {
-                return arr[i];
+        for (int i = 0; i < ARR.length; ++i) {
+            if (ARR[i].name.compareTo(p_name) == 0) {
+                return ARR[i];
             }
         }
         return null;

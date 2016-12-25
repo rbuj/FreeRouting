@@ -44,7 +44,7 @@ public class BoardOutline extends Item implements java.io.Serializable {
     /**
      * The board shapes inside the outline curves.
      */
-    private List<PolylineShape> shapes;
+    private final List<PolylineShape> shapes;
     /**
      * The board shape outside the outline curves, where a keepout will be
      * generated The outline curves are holes of the keepout_area.

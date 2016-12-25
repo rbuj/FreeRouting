@@ -32,7 +32,7 @@ public class LogicalParts implements java.io.Serializable {
     /**
      * The array of logical parts
      */
-    private Vector<LogicalPart> part_arr = new Vector<>();
+    private final Vector<LogicalPart> part_arr = new Vector<>();
 
     /**
      * Adds a logical part to the database.

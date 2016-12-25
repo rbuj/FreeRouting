@@ -84,7 +84,7 @@ public class CopyItemState extends InteractiveState {
         }
         return new_padstack;
     }
-    private Collection<Item> item_list;
+    private final Collection<Item> item_list;
     private Point start_position;
     private Point current_position;
     private int current_layer;

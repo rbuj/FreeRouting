@@ -36,7 +36,7 @@ import net.freerouting.freeroute.library.Package;
 public class Components implements java.io.Serializable {
 
     private final UndoableObjects undo_list = new UndoableObjects();
-    private ArrayList<Component> component_arr = new ArrayList<>();
+    private final ArrayList<Component> component_arr = new ArrayList<>();
     /**
      * If true, components on the back side are rotated before mirroring, else
      * they are mirrored before rotating.

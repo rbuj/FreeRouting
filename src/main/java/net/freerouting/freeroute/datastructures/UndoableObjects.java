@@ -39,7 +39,7 @@ public class UndoableObjects implements java.io.Serializable {
      * The entries of this map are of type UnduableObject, the keys of type
      * UndoableObjects.Storable.
      */
-    private ConcurrentMap<Storable, UndoableObjectNode> objects;
+    private final ConcurrentMap<Storable, UndoableObjectNode> objects;
     /**
      * the current undo level
      */
@@ -48,7 +48,7 @@ public class UndoableObjects implements java.io.Serializable {
      * the lists of deleted objects on each undo level, which where already
      * existing before the previous snapshot.
      */
-    private Vector<Collection<UndoableObjectNode>> deleted_objects_stack;
+    private final Vector<Collection<UndoableObjectNode>> deleted_objects_stack;
     private boolean redo_possible = false;
 
     /**

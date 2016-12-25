@@ -30,8 +30,8 @@ public class NetClass implements java.io.Serializable, net.freerouting.freeroute
     private String name;
     private ViaRule via_rule;
     private int trace_clearance_class;
-    private int[] trace_half_width_arr;
-    private boolean[] active_routing_layer_arr;
+    private final int[] trace_half_width_arr;
+    private final boolean[] active_routing_layer_arr;
     /**
      * if null, all signal layers may be used for routing
      */

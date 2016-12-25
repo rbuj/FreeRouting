@@ -35,7 +35,7 @@ import net.freerouting.freeroute.geometry.planar.Vector;
 @SuppressWarnings("serial")
 public class ComponentOutline extends Item implements java.io.Serializable {
 
-    private Area relative_area;
+    private final Area relative_area;
     private transient Area precalculated_absolute_area = null;
     private Vector translation;
     private double rotation_in_degree;

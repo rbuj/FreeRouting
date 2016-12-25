@@ -40,8 +40,8 @@ public class WindowNetClasses extends BoardSavableSubWindow {
     private javax.swing.JPanel center_panel;
     private NetClassTable table;
     private NetClassTableModel table_model;
-    private javax.swing.JComboBox<String> cl_class_combo_box;
-    private javax.swing.JComboBox<String> via_rule_combo_box;
+    private final javax.swing.JComboBox<String> cl_class_combo_box;
+    private final javax.swing.JComboBox<String> via_rule_combo_box;
     private final ComboBoxLayer layer_combo_box;
     private final java.util.ResourceBundle resources;
 

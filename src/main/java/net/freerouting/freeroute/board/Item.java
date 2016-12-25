@@ -44,7 +44,7 @@ import net.freerouting.freeroute.rules.Nets;
 @SuppressWarnings("serial")
 public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPanel.Printable, UndoableObjects.Storable, Serializable {
 
-    private static double PROTECT_FANOUT_LENGTH = 400;
+    private static final double PROTECT_FANOUT_LENGTH = 400;
     /**
      * the index in the clearance matrix describing the required spacing to
      * other items

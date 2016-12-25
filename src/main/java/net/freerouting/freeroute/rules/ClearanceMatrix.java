@@ -44,7 +44,7 @@ public class ClearanceMatrix implements java.io.Serializable {
     private int class_count;
     private final net.freerouting.freeroute.board.LayerStructure layer_structure;
     private Row[] row; // vector of class_count rows of the clearance matrix
-    private int[] max_value_on_layer; //  maximum clearance value for each layer
+    private final int[] max_value_on_layer; //  maximum clearance value for each layer
 
     /**
      * Creates a new instance for p_class_count clearance classes on

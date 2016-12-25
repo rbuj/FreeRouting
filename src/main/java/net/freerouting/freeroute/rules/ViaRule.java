@@ -36,7 +36,7 @@ public class ViaRule implements java.io.Serializable, net.freerouting.freeroute.
      */
     public static final ViaRule EMPTY = new ViaRule("empty");
     public final String name;
-    private List<ViaInfo> list = new LinkedList<>();
+    private final List<ViaInfo> list = new LinkedList<>();
 
     public ViaRule(String p_name) {
         name = p_name;

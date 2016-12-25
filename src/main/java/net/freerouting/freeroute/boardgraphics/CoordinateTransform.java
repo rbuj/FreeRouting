@@ -40,7 +40,7 @@ public class CoordinateTransform implements java.io.Serializable {
      */
     private boolean mirror_top_bottom = true;
     private double rotation = 0;
-    private FloatPoint rotation_pole;
+    private final FloatPoint rotation_pole;
 
     public CoordinateTransform(IntBox p_design_box, Dimension p_panel_bounds) {
         this.screen_bounds = p_panel_bounds;

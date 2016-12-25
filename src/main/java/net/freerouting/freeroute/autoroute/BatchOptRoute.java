@@ -36,8 +36,8 @@ import net.freerouting.freeroute.interactive.InteractiveActionThread;
  */
 public class BatchOptRoute {
 
-    private static int MAX_AUTOROUTE_PASSES = 6;
-    private static int ADDITIONAL_RIPUP_COST_FACTOR_AT_START = 10;
+    private static final int MAX_AUTOROUTE_PASSES = 6;
+    private static final int ADDITIONAL_RIPUP_COST_FACTOR_AT_START = 10;
 
     static boolean contains_only_unfixed_traces(Collection<Item> p_item_list) {
         for (Item curr_item : p_item_list) {

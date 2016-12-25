@@ -57,7 +57,7 @@ public class PlanarDelaunayTriangulation {
      * This list contain the edges of the trinangulation, where the start corner
      * and end corner are equal.
      */
-    private Collection<Edge> degenerate_edges;
+    private final Collection<Edge> degenerate_edges;
     /**
      * id numbers are for implementing an ordering on the Edges so that they can
      * be used in a set for example

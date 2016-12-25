@@ -33,10 +33,10 @@ public class ScreenMessages {
     private final java.util.Locale locale;
     private final String active_layer_string;
     private final String target_layer_string;
-    private JLabel add_field;
-    private JLabel status_field;
-    private JLabel layer_field;
-    private JLabel mouse_position;
+    private final JLabel add_field;
+    private final JLabel status_field;
+    private final JLabel layer_field;
+    private final JLabel mouse_position;
     private String prev_target_layer_name = EMPTY_STRING;
     private boolean write_protected = false;
     /**

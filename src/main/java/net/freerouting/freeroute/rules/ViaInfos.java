@@ -31,7 +31,7 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class ViaInfos implements java.io.Serializable, net.freerouting.freeroute.board.ObjectInfoPanel.Printable {
 
-    private List<ViaInfo> list = new LinkedList<>();
+    private final List<ViaInfo> list = new LinkedList<>();
 
     /**
      * Adds a via info consisting of padstack, clearance class and

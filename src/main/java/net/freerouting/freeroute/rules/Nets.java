@@ -49,7 +49,7 @@ public class Nets implements java.io.Serializable {
     /**
      * The list of electrical nets on the board
      */
-    private Vector<Net> net_arr;
+    private final Vector<Net> net_arr;
     private net.freerouting.freeroute.board.BasicBoard board;
 
     /**

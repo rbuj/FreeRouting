@@ -33,7 +33,7 @@ import net.freerouting.freeroute.geometry.planar.Point;
  */
 public class MakeSpaceState extends DragState {
 
-    private Route route;
+    private final Route route;
 
     /**
      * Creates a new instance of MakeSpaceState

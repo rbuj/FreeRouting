@@ -41,7 +41,7 @@ public class PinSwapState extends InteractiveState {
     }
     private final Pin from_pin;
     private Pin to_pin = null;
-    private java.util.Set<Pin> swappable_pins;
+    private final java.util.Set<Pin> swappable_pins;
 
     /**
      * Creates a new instance of PinSwapState

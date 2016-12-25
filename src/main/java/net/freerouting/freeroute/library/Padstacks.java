@@ -34,7 +34,7 @@ public class Padstacks implements java.io.Serializable {
     /**
      * The array of Padstacks in this object
      */
-    private Vector<Padstack> padstack_arr;
+    private final Vector<Padstack> padstack_arr;
     /**
      * The layer structure of each padstack.
      */

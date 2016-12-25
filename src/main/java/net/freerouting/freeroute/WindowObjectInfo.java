@@ -135,7 +135,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements net.fre
      * The new created windows by pushing buttons inside this window. Used when
      * closing this window to close also all subwindows.
      */
-    private Collection<WindowObjectInfo> subwindows = new java.util.LinkedList<>();
+    private final Collection<WindowObjectInfo> subwindows = new java.util.LinkedList<>();
 
     /**
      * Creates a new instance of ItemInfoWindow

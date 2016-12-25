@@ -37,9 +37,9 @@ public class WindowAssignNetClass extends BoardSavableSubWindow {
 
     private final javax.swing.JPanel main_panel;
 
-    private javax.swing.JScrollPane scroll_pane;
-    private AssignRuleTable table;
-    private AssignRuleTableModel table_model;
+    private final javax.swing.JScrollPane scroll_pane;
+    private final AssignRuleTable table;
+    private final AssignRuleTableModel table_model;
 
     private javax.swing.JComboBox<NetClass> net_rule_combo_box;
 
