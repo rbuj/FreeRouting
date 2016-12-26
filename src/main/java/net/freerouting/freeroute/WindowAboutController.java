@@ -37,7 +37,7 @@ public class WindowAboutController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        version.setText(new StringBuilder().append(rb.getString("version")).append(" ").append(MainApp.VERSION_NUMBER_STRING).toString());
+        version.setText(new StringBuilder().append(rb.getString("version")).append(" ").append(MainApp.get_version()).toString());
     }
 
 }
