@@ -59,7 +59,7 @@ public final class MainApp extends Application {
     private static String design_file_name = "";
     private static String design_dir_name = "";
     private static Locale locale = null;
-    private static Stage mainStage;
+    private Stage mainStage;
     private static TestLevel test_level;
 
     @Override
