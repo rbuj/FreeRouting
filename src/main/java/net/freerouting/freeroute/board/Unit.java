@@ -24,7 +24,7 @@ package net.freerouting.freeroute.board;
  *
  * @author Alfons Wirtz
  */
-public enum Unit implements java.io.Serializable {
+public enum Unit {
     MIL {
         @Override
         public String toString() {

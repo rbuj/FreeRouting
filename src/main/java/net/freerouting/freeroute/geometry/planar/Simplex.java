@@ -27,7 +27,7 @@ import java.util.LinkedList;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class Simplex extends TileShape implements java.io.Serializable {
+public class Simplex extends TileShape {
 
     /**
      * Standard implementation for an empty Simplex.

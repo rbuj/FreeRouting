@@ -45,7 +45,7 @@ import net.freerouting.freeroute.geometry.planar.Vector;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class PolylineTrace extends Trace implements java.io.Serializable {
+public class PolylineTrace extends Trace {
 
     // primary data
     private Polyline lines;

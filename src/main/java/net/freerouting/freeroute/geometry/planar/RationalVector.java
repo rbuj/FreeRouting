@@ -32,7 +32,7 @@ import net.freerouting.freeroute.datastructures.Signum;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class RationalVector extends Vector implements java.io.Serializable {
+public class RationalVector extends Vector {
 
     public final BigInteger x;
     public final BigInteger y;

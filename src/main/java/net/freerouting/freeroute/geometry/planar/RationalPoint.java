@@ -38,7 +38,7 @@ import net.freerouting.freeroute.datastructures.BigIntAux;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class RationalPoint extends Point implements java.io.Serializable {
+public class RationalPoint extends Point {
 
     final BigInteger x;
     final BigInteger y;

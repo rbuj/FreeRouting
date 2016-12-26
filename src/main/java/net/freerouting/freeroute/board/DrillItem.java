@@ -38,7 +38,7 @@ import net.freerouting.freeroute.library.Padstack;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public abstract class DrillItem extends Item implements Connectable, java.io.Serializable {
+public abstract class DrillItem extends Item implements Connectable {
 
     /**
      * The center point of the drillitem

@@ -29,7 +29,7 @@ import net.freerouting.freeroute.datastructures.Signum;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class IntVector extends Vector implements java.io.Serializable {
+public class IntVector extends Vector {
 
     /**
      * the x coordinate of this vector

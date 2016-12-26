@@ -48,7 +48,7 @@ import net.freerouting.freeroute.rules.ViaInfo;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class RoutingBoard extends BasicBoard implements java.io.Serializable {
+public class RoutingBoard extends BasicBoard {
 
     /**
      * The time limit in milliseconds for the pull tight algorithm

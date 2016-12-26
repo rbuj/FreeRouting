@@ -23,7 +23,7 @@ package net.freerouting.freeroute.geometry.planar;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class IntOctagon extends RegularTileShape implements java.io.Serializable {
+public class IntOctagon extends RegularTileShape {
 
     /**
      * Reusable instance of an empty octagon.

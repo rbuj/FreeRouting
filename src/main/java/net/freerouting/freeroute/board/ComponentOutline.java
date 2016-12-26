@@ -33,7 +33,7 @@ import net.freerouting.freeroute.geometry.planar.Vector;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class ComponentOutline extends Item implements java.io.Serializable {
+public class ComponentOutline extends Item {
 
     private final Area relative_area;
     private transient Area precalculated_absolute_area = null;

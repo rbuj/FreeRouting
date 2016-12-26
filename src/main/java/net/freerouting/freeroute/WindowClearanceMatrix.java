@@ -293,7 +293,7 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow {
     }
 
     @SuppressWarnings("serial")
-    private class ClearanceTableModel extends javax.swing.table.AbstractTableModel implements java.io.Serializable {
+    private class ClearanceTableModel extends javax.swing.table.AbstractTableModel {
 
         private Object[][] data = null;
         private String[] column_names = null;

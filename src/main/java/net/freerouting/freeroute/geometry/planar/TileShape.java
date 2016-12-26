@@ -27,7 +27,7 @@ import java.util.LinkedList;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public abstract class TileShape extends PolylineShape implements ConvexShape, java.io.Serializable {
+public abstract class TileShape extends PolylineShape implements ConvexShape {
 
     /**
      * creates a Simplex as intersection of the halfplanes defined by an array

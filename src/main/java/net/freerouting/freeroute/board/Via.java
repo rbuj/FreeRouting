@@ -35,7 +35,7 @@ import net.freerouting.freeroute.library.Padstack;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class Via extends DrillItem implements java.io.Serializable {
+public class Via extends DrillItem {
 
     private Padstack padstack;
     /**

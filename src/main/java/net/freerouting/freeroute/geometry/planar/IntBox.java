@@ -28,7 +28,7 @@ package net.freerouting.freeroute.geometry.planar;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class IntBox extends RegularTileShape implements java.io.Serializable {
+public class IntBox extends RegularTileShape {
 
     /**
      * Standard implementataion of an empty box.
