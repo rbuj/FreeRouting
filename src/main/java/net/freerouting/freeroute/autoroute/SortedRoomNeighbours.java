@@ -77,7 +77,7 @@ public class SortedRoomNeighbours {
         // Now calculate the new incomplete rooms together with the doors
         // between this room and the sorted neighbours.
         if (room_neighbours.sorted_neighbours.isEmpty()) {
-            if (result instanceof ObstacleExpansionRoom) {
+            if ((result instanceof ObstacleExpansionRoom) && (p_room instanceof ObstacleExpansionRoom)) {
                 calculate_incomplete_rooms_with_empty_neighbours((ObstacleExpansionRoom) p_room, p_autoroute_engine);
             }
         } else {

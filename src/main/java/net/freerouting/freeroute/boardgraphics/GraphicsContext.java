@@ -149,7 +149,7 @@ public class GraphicsContext implements java.io.Serializable {
      * draws a polygon with corners p_points
      */
     public void draw(FloatPoint[] p_points, double p_half_width, Color p_color, Graphics p_g, double p_translucency_factor) {
-        if (p_color == null) {
+        if ((p_color == null) || !(p_g instanceof Graphics2D)) {
             return;
         }
         Graphics2D g2 = (Graphics2D) p_g;
@@ -196,7 +196,7 @@ public class GraphicsContext implements java.io.Serializable {
      */
     public void draw_circle(FloatPoint p_center, double p_radius, double p_draw_half_width,
             Color p_color, Graphics p_g, double p_translucency_factor) {
-        if (p_color == null) {
+        if ((p_color == null) || !(p_g instanceof Graphics2D)) {
             return;
         }
         Graphics2D g2 = (Graphics2D) p_g;
@@ -217,7 +217,7 @@ public class GraphicsContext implements java.io.Serializable {
      */
     public void draw_rectangle(FloatPoint p_corner1, FloatPoint p_corner2,
             double p_draw_half_width, Color p_color, Graphics p_g, double p_translucency_factor) {
-        if (p_color == null) {
+        if ((p_color == null) || !(p_g instanceof Graphics2D)) {
             return;
         }
         Graphics2D g2 = (Graphics2D) p_g;
@@ -271,7 +271,7 @@ public class GraphicsContext implements java.io.Serializable {
      * Draws the interiour of a circle
      */
     public void fill_circle(Circle p_circle, Graphics p_g, Color p_color, double p_translucency_factor) {
-        if (p_color == null) {
+        if ((p_color == null) || !(p_g instanceof Graphics2D)) {
             return;
         }
         Point2D center = coordinate_transform.board_to_screen(p_circle.center.to_float());
@@ -323,11 +323,13 @@ public class GraphicsContext implements java.io.Serializable {
             java.awt.Shape rotated_ellipse = affine_transform.createTransformedShape(draw_ellipse);
             draw_path.append(rotated_ellipse, false);
         }
-        Graphics2D g2 = (Graphics2D) p_g;
-        g2.setColor(p_color);
-        set_translucency(g2, p_translucency_factor);
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.fill(draw_path);
+        if (p_g instanceof Graphics2D) {
+            Graphics2D g2 = (Graphics2D) p_g;
+            g2.setColor(p_color);
+            set_translucency(g2, p_translucency_factor);
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.fill(draw_path);
+        }
     }
 
     /**
@@ -351,7 +353,7 @@ public class GraphicsContext implements java.io.Serializable {
      * Fill the interior of the polygon shape represented by p_points.
      */
     public void fill_shape(FloatPoint[] p_points, Graphics p_g, Color p_color, double p_translucency_factor) {
-        if (p_color == null) {
+        if ((p_color == null) || !(p_g instanceof Graphics2D)) {
             return;
         }
         Graphics2D g2 = (Graphics2D) p_g;
@@ -386,11 +388,13 @@ public class GraphicsContext implements java.io.Serializable {
             }
             draw_path.append(draw_polygon, false);
         }
-        Graphics2D g2 = (Graphics2D) p_g;
-        g2.setColor(p_color);
-        set_translucency(g2, p_translucency_factor);
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.fill(draw_path);
+        if (p_g instanceof Graphics2D) {
+            Graphics2D g2 = (Graphics2D) p_g;
+            g2.setColor(p_color);
+            set_translucency(g2, p_translucency_factor);
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.fill(draw_path);
+        }
     }
 
     /**

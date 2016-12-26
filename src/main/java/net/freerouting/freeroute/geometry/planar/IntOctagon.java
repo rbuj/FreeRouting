@@ -359,14 +359,17 @@ public class IntOctagon extends RegularTileShape implements java.io.Serializable
         // This function is at the moment only implemented for Vectors
         // with integer coordinates.
         // The general implementation is still missing.
-
         if (p_rel_coor.equals(Vector.ZERO)) {
             return this;
         }
-        IntVector rel_coor = (IntVector) p_rel_coor;
-        return new IntOctagon(lx + rel_coor.x, ly + rel_coor.y, rx + rel_coor.x, uy + rel_coor.y,
-                ulx + rel_coor.x - rel_coor.y, lrx + rel_coor.x - rel_coor.y,
-                llx + rel_coor.x + rel_coor.y, urx + rel_coor.x + rel_coor.y);
+        IntOctagon result = null;
+        if (p_rel_coor instanceof IntVector) {
+            IntVector rel_coor = (IntVector) p_rel_coor;
+            result = new IntOctagon(lx + rel_coor.x, ly + rel_coor.y, rx + rel_coor.x, uy + rel_coor.y,
+                    ulx + rel_coor.x - rel_coor.y, lrx + rel_coor.x - rel_coor.y,
+                    llx + rel_coor.x + rel_coor.y, urx + rel_coor.x + rel_coor.y);
+        }
+        return result;
     }
 
     @Override

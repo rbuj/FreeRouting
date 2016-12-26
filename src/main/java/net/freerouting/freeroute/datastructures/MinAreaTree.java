@@ -119,23 +119,25 @@ public class MinAreaTree extends ShapeTree {
         TreeNode curr_node = p_curr_node;
 
         while (!(curr_node instanceof Leaf)) {
-            InnerNode curr_inner_node = (InnerNode) curr_node;
-            curr_inner_node.bounding_shape = p_leaf_to_insert.bounding_shape.union(curr_inner_node.bounding_shape);
+            if (curr_node instanceof InnerNode) {
+                InnerNode curr_inner_node = (InnerNode) curr_node;
+                curr_inner_node.bounding_shape = p_leaf_to_insert.bounding_shape.union(curr_inner_node.bounding_shape);
 
-            // Choose the the child, so that the area increase of that child after taking the union
-            // with the shape of p_leaf_to_insert is minimal.
-            RegularTileShape first_child_shape = curr_inner_node.first_child.bounding_shape;
-            RegularTileShape union_with_first_child_shape = p_leaf_to_insert.bounding_shape.union(first_child_shape);
-            double first_area_increase = union_with_first_child_shape.area() - first_child_shape.area();
+                // Choose the the child, so that the area increase of that child after taking the union
+                // with the shape of p_leaf_to_insert is minimal.
+                RegularTileShape first_child_shape = curr_inner_node.first_child.bounding_shape;
+                RegularTileShape union_with_first_child_shape = p_leaf_to_insert.bounding_shape.union(first_child_shape);
+                double first_area_increase = union_with_first_child_shape.area() - first_child_shape.area();
 
-            RegularTileShape second_child_shape = curr_inner_node.second_child.bounding_shape;
-            RegularTileShape union_with_second_child_shape = p_leaf_to_insert.bounding_shape.union(second_child_shape);
-            double second_area_increase = union_with_second_child_shape.area() - second_child_shape.area();
+                RegularTileShape second_child_shape = curr_inner_node.second_child.bounding_shape;
+                RegularTileShape union_with_second_child_shape = p_leaf_to_insert.bounding_shape.union(second_child_shape);
+                double second_area_increase = union_with_second_child_shape.area() - second_child_shape.area();
 
-            if (first_area_increase <= second_area_increase) {
-                curr_node = curr_inner_node.first_child;
-            } else {
-                curr_node = curr_inner_node.second_child;
+                if (first_area_increase <= second_area_increase) {
+                    curr_node = curr_inner_node.first_child;
+                } else {
+                    curr_node = curr_inner_node.second_child;
+                }
             }
         }
         return (Leaf) curr_node;

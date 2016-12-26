@@ -106,9 +106,10 @@ public abstract class ShapeTree {
             while (curr_node instanceof InnerNode) {
                 curr_node = ((InnerNode) curr_node).first_child;
             }
-            result[curr_index] = (Leaf) curr_node;
-
-            ++curr_index;
+            if (curr_node instanceof Leaf) {
+                result[curr_index] = (Leaf) curr_node;
+                ++curr_index;
+            }
             // go up until parent.second_child != curr_node, which means we came from first_child
             InnerNode curr_parent = curr_node.parent;
             while (curr_parent != null && curr_parent.second_child == curr_node) {

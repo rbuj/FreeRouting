@@ -74,15 +74,17 @@ public abstract class Cursor {
             if (!location_initialized) {
                 return;
             }
-            Graphics2D g2 = (Graphics2D) p_graphics;
-            init_graphics(g2);
-            GeneralPath draw_path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
-            draw_path.append(VERTICAL_LINE, false);
-            draw_path.append(HORIZONTAL_LINE, false);
-            draw_path.append(RIGHT_DIAGONAL_LINE, false);
-            draw_path.append(LEFT_DIAGONAL_LINE, false);
-            g2.translate(this.x_coor, this.y_coor);
-            g2.draw(draw_path);
+            if (p_graphics instanceof Graphics2D){
+                Graphics2D g2 = (Graphics2D) p_graphics;
+                init_graphics(g2);
+                GeneralPath draw_path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
+                draw_path.append(VERTICAL_LINE, false);
+                draw_path.append(HORIZONTAL_LINE, false);
+                draw_path.append(RIGHT_DIAGONAL_LINE, false);
+                draw_path.append(LEFT_DIAGONAL_LINE, false);
+                g2.translate(this.x_coor, this.y_coor);
+                g2.draw(draw_path);
+            }
         }
     }
 
