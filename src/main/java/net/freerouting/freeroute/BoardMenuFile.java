@@ -30,7 +30,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.freerouting.freeroute.datastructures.FileFilter;
+import net.freerouting.freeroute.datastructures.CustomFileFilter;
 import static net.freerouting.freeroute.DesignFile.ALL_FILE_EXTENSIONS;
 
 /**
@@ -190,7 +190,7 @@ public class BoardMenuFile extends javax.swing.JMenu {
                 design_dir_name = board_frame.design_file.get_output_file().getParent();
             }
             javax.swing.JFileChooser file_chooser = new javax.swing.JFileChooser(design_dir_name);
-            file_chooser.setFileFilter(new FileFilter(ALL_FILE_EXTENSIONS));
+            file_chooser.setFileFilter(new CustomFileFilter(ALL_FILE_EXTENSIONS));
 
             file_chooser.showSaveDialog(this);
             File new_file = file_chooser.getSelectedFile();

@@ -35,7 +35,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.freerouting.freeroute.datastructures.FileFilter;
+import net.freerouting.freeroute.datastructures.CustomFileFilter;
 import net.freerouting.freeroute.designformats.specctra.DsnFileException;
 import net.freerouting.freeroute.interactive.BoardHandlingException;
 
@@ -56,7 +56,7 @@ public class DesignFile {
     private File input_file;
     private String design_dir_name;
 
-    private static final FileFilter FILE_FILTER = new FileFilter(ALL_FILE_EXTENSIONS);
+    private static final CustomFileFilter FILE_FILTER = new CustomFileFilter(ALL_FILE_EXTENSIONS);
 
     DesignFile(File p_design_file, String p_design_dir_name) {
         this(p_design_file);

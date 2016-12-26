@@ -13,7 +13,7 @@
  *   GNU General Public License at <http://www.gnu.org/licenses/> 
  *   for more details.
  *
- * FileFilter.java
+ * CustomFileFilter.java
  *
  * Created on 31. Mai 2004, 09:23
  */
@@ -25,14 +25,14 @@ package net.freerouting.freeroute.datastructures;
  *
  * @author alfons
  */
-public class FileFilter extends javax.swing.filechooser.FileFilter {
+public class CustomFileFilter extends javax.swing.filechooser.FileFilter {
 
     private final String[] extensions;
 
     /**
      * Creates a new FileFilter for the input extension
      */
-    public FileFilter(String[] p_extensions) {
+    public CustomFileFilter(String[] p_extensions) {
         extensions = p_extensions;
     }
 

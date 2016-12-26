@@ -37,7 +37,7 @@ import net.freerouting.freeroute.board.BoardObserverAdaptor;
 import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.ItemIdNoGenerator;
 import net.freerouting.freeroute.board.TestLevel;
-import net.freerouting.freeroute.datastructures.FileFilter;
+import net.freerouting.freeroute.datastructures.CustomFileFilter;
 import net.freerouting.freeroute.datastructures.IdNoGenerator;
 import net.freerouting.freeroute.designformats.specctra.DsnFileException;
 import net.freerouting.freeroute.interactive.BoardHandlingException;
@@ -65,7 +65,7 @@ public class BoardFrame extends javax.swing.JFrame {
     static final String[] LOG_FILE_EXTENSIONS = {"log"};
     static final String GUI_DEFAULTS_FILE_NAME = "gui_defaults.par";
     static final String GUI_DEFAULTS_FILE_BACKUP_NAME = "gui_defaults.par.bak";
-    static final FileFilter LOGFILE_FILTER = new FileFilter(LOG_FILE_EXTENSIONS);
+    static final CustomFileFilter LOGFILE_FILTER = new CustomFileFilter(LOG_FILE_EXTENSIONS);
 
     /**
      * The scroll pane for the panel of the routing board.
