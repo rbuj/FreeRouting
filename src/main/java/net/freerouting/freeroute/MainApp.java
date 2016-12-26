@@ -46,7 +46,7 @@ import net.freerouting.freeroute.board.TestLevel;
  *
  * @author Alfons Wirtz
  */
-public class MainApp extends Application {
+public final class MainApp extends Application {
 
     /**
      * Change this string when creating a new version
