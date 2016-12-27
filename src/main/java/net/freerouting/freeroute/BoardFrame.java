@@ -37,7 +37,6 @@ import net.freerouting.freeroute.board.BoardObserverAdaptor;
 import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.ItemIdNoGenerator;
 import net.freerouting.freeroute.board.TestLevel;
-import net.freerouting.freeroute.datastructures.CustomFileFilter;
 import net.freerouting.freeroute.datastructures.IdNoGenerator;
 import net.freerouting.freeroute.designformats.specctra.DsnFileException;
 import net.freerouting.freeroute.interactive.BoardHandlingException;

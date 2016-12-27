@@ -30,7 +30,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.freerouting.freeroute.datastructures.CustomFileFilter;
 import static net.freerouting.freeroute.DesignFile.ALL_FILE_EXTENSIONS;
 
 /**
