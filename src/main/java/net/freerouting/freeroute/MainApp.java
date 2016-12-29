@@ -37,7 +37,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import net.freerouting.freeroute.BoardFrame.Option;
 import net.freerouting.freeroute.board.TestLevel;
 
 /**
@@ -77,15 +76,15 @@ public final class MainApp extends Application {
         mainStage.setScene(scene);
         mainStage.centerOnScreen();
 
-        Option board_option;
+        LaunchMode launch_mode;
         if (single_design_option) {
             if (session_file_option) {
-                board_option = BoardFrame.Option.SESSION_FILE;
+                launch_mode = LaunchMode.SESSION_FILE;
             } else {
-                board_option = BoardFrame.Option.SINGLE_FRAME;
+                launch_mode = LaunchMode.SINGLE_FRAME;
             }
         } else {
-            board_option = BoardFrame.Option.FROM_START_MENU;
+            launch_mode = LaunchMode.FROM_START_MENU;
         }
 
 //                new DesignFile((design_file_name.isEmpty() ? null : new File(design_file_name)), design_dir_name),
@@ -93,7 +92,7 @@ public final class MainApp extends Application {
                 design_dir_name,
                 design_file_name.isEmpty() ? null : new File(design_file_name),
                 test_level,
-                board_option,
+                launch_mode,
                 mainStage);
 
         if (single_design_option) {

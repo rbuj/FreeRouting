@@ -151,9 +151,9 @@ public class BoardFrame extends javax.swing.JFrame {
      * functionality not yet ready for release is included. Also the warning
      * output depends on p_test_level.
      */
-    public BoardFrame(DesignFile p_design, Option p_option, TestLevel p_test_level,
+    public BoardFrame(DesignFile p_design, LaunchMode p_launch_mode, TestLevel p_test_level,
             java.util.Locale p_locale, boolean p_confirm_cancel) throws BoardFrameException, DsnFileException {
-        this(p_design, p_option, p_test_level, new BoardObserverAdaptor(),
+        this(p_design, p_launch_mode, p_test_level, new BoardObserverAdaptor(),
                 new ItemIdNoGenerator(), p_locale, p_confirm_cancel);
         read();
         menubar.add_design_dependent_items();
@@ -182,7 +182,7 @@ public class BoardFrame extends javax.swing.JFrame {
      * p_item_id_no_generator are used for syncronizing purposes, if the frame
      * is embedded into a host system,
      */
-    BoardFrame(DesignFile p_design, Option p_option, TestLevel p_test_level, BoardObservers p_observers,
+    BoardFrame(DesignFile p_design, LaunchMode p_launch_mode, TestLevel p_test_level, BoardObservers p_observers,
             IdNoGenerator p_item_id_no_generator, Locale p_locale, boolean p_confirm_cancel) {
         design_file = p_design;
         test_level = p_test_level;
@@ -192,7 +192,7 @@ public class BoardFrame extends javax.swing.JFrame {
         item_id_no_generator = p_item_id_no_generator;
         locale = p_locale;
         resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardFrame", p_locale);
-        boolean session_file_option = (p_option == Option.SESSION_FILE);
+        boolean session_file_option = (p_launch_mode == LaunchMode.SESSION_FILE);
         menubar = BoardMenuBar.get_instance(this, session_file_option);
         setJMenuBar(menubar);
 
@@ -202,7 +202,7 @@ public class BoardFrame extends javax.swing.JFrame {
         message_panel = new BoardPanelStatus(locale);
         add(message_panel, java.awt.BorderLayout.SOUTH);
 
-        select_toolbar = new BoardToolbarSelectedItem(this, p_option == Option.EXTENDED_TOOL_BAR);
+        select_toolbar = new BoardToolbarSelectedItem(this, p_launch_mode == LaunchMode.EXTENDED_TOOL_BAR);
 
         screen_messages
                 = new ScreenMessages(message_panel.status_message, message_panel.add_message,
@@ -661,10 +661,6 @@ public class BoardFrame extends javax.swing.JFrame {
         private WindowObjectListWithFilter.SnapshotInfo nets_selection;
         private WindowObjectListWithFilter.SnapshotInfo components_selection;
         private WindowObjectListWithFilter.SnapshotInfo padstacks_selection;
-    }
-
-    public enum Option {
-        FROM_START_MENU, SINGLE_FRAME, SESSION_FILE, EXTENDED_TOOL_BAR
     }
 
     private class WindowStateListener extends java.awt.event.WindowAdapter {

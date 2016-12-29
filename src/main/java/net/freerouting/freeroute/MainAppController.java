@@ -48,7 +48,7 @@ public class MainAppController implements Initializable {
     protected static SimpleStringProperty sp_message_field;
     private ResourceBundle resourceBundle;
     private TestLevel test_level = null;
-    private BoardFrame.Option board_option;
+    private LaunchMode launch_mode;
 
     private File inputFile;
     private String design_dir_name;
@@ -64,12 +64,12 @@ public class MainAppController implements Initializable {
     }
 
     void init_variables(String p_design_dir_name, File p_inputFile, TestLevel p_test_level,
-            BoardFrame.Option p_board_option, Stage p_mainStage) {
+            LaunchMode p_launch_mode, Stage p_mainStage) {
         design_dir_name = !p_design_dir_name.isEmpty()
                 ? p_design_dir_name : (p_inputFile != null) ? p_inputFile.getParent() : "";
         inputFile = p_inputFile;
         test_level = p_test_level;
-        board_option = p_board_option;
+        launch_mode = p_launch_mode;
         mainStage = p_mainStage;
     }
 
@@ -96,7 +96,7 @@ public class MainAppController implements Initializable {
                      */
                     BoardFrame new_frame = new BoardFrame(
                             new DesignFile(inputFile, design_dir_name),
-                            board_option,
+                            launch_mode,
                             test_level,
                             resourceBundle.getLocale(),
                             test_level == null); // true, if it's a test_version
