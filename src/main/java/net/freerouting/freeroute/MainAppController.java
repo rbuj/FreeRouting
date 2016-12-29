@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Your Organisation
+ * Copyright (C) 2016 Robert Antoni Buj Gelonch {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ import net.freerouting.freeroute.designformats.specctra.DsnFileException;
 /**
  * FXML Controller class
  *
- * @author robert
+ * @author Robert Antoni Buj Gelonch {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  */
 public class MainAppController implements Initializable {
 
