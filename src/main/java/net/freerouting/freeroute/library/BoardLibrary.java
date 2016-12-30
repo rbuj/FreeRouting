@@ -20,7 +20,8 @@
 package net.freerouting.freeroute.library;
 
 import java.util.List;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Describes a board library of packages and padstacks.
@@ -64,11 +65,7 @@ public class BoardLibrary implements java.io.Serializable {
      * routing for inserting vias.
      */
     public void set_via_padstacks(Padstack[] p_padstacks) {
-
-        this.via_padstacks = new Vector<>();
-        for (int i = 0; i < p_padstacks.length; ++i) {
-            this.via_padstacks.add(p_padstacks[i]);
-        }
+        this.via_padstacks = new ArrayList<>(Arrays.asList(p_padstacks));
     }
 
     /**
@@ -114,10 +111,7 @@ public class BoardLibrary implements java.io.Serializable {
         if (this.via_padstacks == null) {
             return new Padstack[0];
         }
-        Padstack[] result = new Padstack[via_padstacks.size()];
-        for (int i = 0; i < result.length; ++i) {
-            result[i] = via_padstacks.get(i);
-        }
+        Padstack[] result = via_padstacks.toArray(new Padstack[via_padstacks.size()]);
         return result;
     }
 
@@ -178,8 +172,7 @@ public class BoardLibrary implements java.io.Serializable {
                 }
             }
         }
-        for (int i = 1; i <= this.packages.count(); ++i) {
-            Package curr_package = this.packages.get(i);
+        for (Package curr_package : packages) {
             for (int j = 0; j < curr_package.pin_count(); ++j) {
                 if (curr_package.get_pin(j).padstack_no == p_padstack.no) {
                     return true;

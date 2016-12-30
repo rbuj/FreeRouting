@@ -19,8 +19,10 @@
  */
 package net.freerouting.freeroute.library;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 import net.freerouting.freeroute.geometry.planar.ConvexShape;
 
 /**
@@ -29,12 +31,12 @@ import net.freerouting.freeroute.geometry.planar.ConvexShape;
  * @author alfons
  */
 @SuppressWarnings("serial")
-public class Padstacks implements java.io.Serializable {
+public class Padstacks implements java.io.Serializable, Iterable<Padstack> {
 
     /**
      * The array of Padstacks in this object
      */
-    private final Vector<Padstack> padstack_arr;
+    private final ArrayList<Padstack> padstack_arr;
     /**
      * The layer structure of each padstack.
      */
@@ -45,7 +47,7 @@ public class Padstacks implements java.io.Serializable {
      */
     public Padstacks(net.freerouting.freeroute.board.LayerStructure p_layer_structure) {
         board_layer_structure = p_layer_structure;
-        padstack_arr = new Vector<>();
+        padstack_arr = new ArrayList<>();
     }
 
     /**
@@ -53,9 +55,7 @@ public class Padstacks implements java.io.Serializable {
      * exists.
      */
     public Padstack get(String p_name) {
-        Iterator<Padstack> it = padstack_arr.iterator();
-        while (it.hasNext()) {
-            Padstack curr_padstack = it.next();
+        for (Padstack curr_padstack : padstack_arr) {
             if (curr_padstack != null && curr_padstack.name.compareToIgnoreCase(p_name) == 0) {
                 return curr_padstack;
             }
@@ -80,7 +80,7 @@ public class Padstacks implements java.io.Serializable {
             System.out.println("Padstacks.get: 1 <= p_padstack_no <= " + padstack_count.toString() + " expected");
             return null;
         }
-        Padstack result = padstack_arr.elementAt(p_padstack_no - 1);
+        Padstack result = padstack_arr.get(p_padstack_no - 1);
         if (result != null && result.no != p_padstack_no) {
             System.out.println("Padstacks.get: inconsistent padstack number");
         }
@@ -112,7 +112,7 @@ public class Padstacks implements java.io.Serializable {
     }
 
     /**
-     * Appends a new padstack withe the input shape from p_from_layer to
+     * Appends a new padstack with the input shape from p_from_layer to
      * p_to_layer and null on the other layers. The padatack name is generated
      * internally.
      */
@@ -124,6 +124,21 @@ public class Padstacks implements java.io.Serializable {
             shape_arr[i] = p_shape;
         }
         return add(shape_arr);
+    }
+
+    @Override
+    public Iterator<Padstack> iterator() {
+        return padstack_arr.iterator();
+    }
+
+    @Override
+    public void forEach(Consumer<? super Padstack> action) {
+        Iterable.super.forEach(action); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Spliterator<Padstack> spliterator() {
+        return Iterable.super.spliterator(); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

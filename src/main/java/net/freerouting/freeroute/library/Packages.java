@@ -19,8 +19,10 @@
  */
 package net.freerouting.freeroute.library;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 import net.freerouting.freeroute.geometry.planar.Shape;
 
 /**
@@ -29,12 +31,12 @@ import net.freerouting.freeroute.geometry.planar.Shape;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class Packages implements java.io.Serializable {
+public class Packages implements java.io.Serializable, Iterable<Package> {
 
     /**
      * The array of packages in this object
      */
-    private final Vector<Package> package_arr = new Vector<>();
+    private final ArrayList<Package> package_arr = new ArrayList<>();
     final Padstacks padstack_list;
 
     /**
@@ -50,15 +52,12 @@ public class Packages implements java.io.Serializable {
      * such package exists.
      */
     public Package get(String p_name, boolean p_is_front) {
-        Iterator<Package> it = package_arr.iterator();
         Package other_side_package = null;
-        while (it.hasNext()) {
-            Package curr_package = it.next();
+        for (Package curr_package : package_arr) {
             if (curr_package != null && curr_package.name.compareToIgnoreCase(p_name) == 0) {
                 if (curr_package.is_front == p_is_front) {
                     return curr_package;
                 }
-                other_side_package = curr_package;
             }
         }
         return other_side_package;
@@ -69,7 +68,7 @@ public class Packages implements java.io.Serializable {
      * to package count.
      */
     public Package get(int p_package_no) {
-        Package result = package_arr.elementAt(p_package_no - 1);
+        Package result = package_arr.get(p_package_no - 1);
         if (result != null && result.no != p_package_no) {
             System.out.println("Padstacks.get: inconsistent padstack number");
         }
@@ -104,6 +103,21 @@ public class Packages implements java.io.Serializable {
 
         return add(package_name, p_pin_arr, null, new Package.Keepout[0], new Package.Keepout[0],
                 new Package.Keepout[0], true);
+    }
+
+    @Override
+    public Iterator<Package> iterator() {
+        return package_arr.iterator();
+    }
+
+    @Override
+    public void forEach(Consumer<? super Package> action) {
+        Iterable.super.forEach(action); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Spliterator<Package> spliterator() {
+        return Iterable.super.spliterator(); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

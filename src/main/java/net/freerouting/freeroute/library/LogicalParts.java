@@ -19,7 +19,10 @@
  */
 package net.freerouting.freeroute.library;
 
-import java.util.Vector;
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.ArrayList;
+import java.util.function.Consumer;
 
 /**
  * The logical parts contain information for gate swap and pin swap.
@@ -27,12 +30,12 @@ import java.util.Vector;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class LogicalParts implements java.io.Serializable {
+public class LogicalParts implements java.io.Serializable, Iterable<LogicalPart> {
 
     /**
      * The array of logical parts
      */
-    private final Vector<LogicalPart> part_arr = new Vector<>();
+    private final ArrayList<LogicalPart> part_arr = new ArrayList<>();
 
     /**
      * Adds a logical part to the database.
@@ -62,7 +65,7 @@ public class LogicalParts implements java.io.Serializable {
      * part count.
      */
     public LogicalPart get(int p_part_no) {
-        LogicalPart result = part_arr.elementAt(p_part_no - 1);
+        LogicalPart result = part_arr.get(p_part_no - 1);
         if (result != null && result.no != p_part_no) {
             System.out.println("LogicalParts.get: inconsistent part number");
         }
@@ -74,6 +77,21 @@ public class LogicalParts implements java.io.Serializable {
      */
     public int count() {
         return part_arr.size();
+    }
+
+    @Override
+    public Iterator<LogicalPart> iterator() {
+        return part_arr.iterator();
+    }
+
+    @Override
+    public void forEach(Consumer<? super LogicalPart> action) {
+        Iterable.super.forEach(action); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Spliterator<LogicalPart> spliterator() {
+        return Iterable.super.spliterator(); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
