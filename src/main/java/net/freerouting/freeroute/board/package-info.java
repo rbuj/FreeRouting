@@ -14,7 +14,7 @@
  */
 /**
  * Contains classes describing items on a printed circuit board and the board itself.
- * 
+ *
  * <p>
  * The class LayeredBoard implements elementary functionality for the layout of
  * 2-dimensional items on a board. The board may have several layers. It allows

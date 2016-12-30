@@ -169,7 +169,7 @@ public class LineSegment implements java.io.Serializable {
      * Transforms this LinsSegment into a polyline of lenght 3.
      */
     public Polyline to_polyline() {
-        Line[] lines = { start, middle, end };
+        Line[] lines = {start, middle, end};
         return new Polyline(lines);
     }
 

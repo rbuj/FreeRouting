@@ -321,7 +321,7 @@ public class ShapeTraceEntries {
             int[] entry_tuple = entries[i];
             FloatPoint entry_approx
                     = p_trace.polyline().arr[entry_tuple[0]].
-                    intersection_approx(offset_shape.border_line(entry_tuple[1]));
+                            intersection_approx(offset_shape.border_line(entry_tuple[1]));
             insert_entry_point(p_trace, entry_tuple[0], entry_tuple[1], entry_approx);
         }
 

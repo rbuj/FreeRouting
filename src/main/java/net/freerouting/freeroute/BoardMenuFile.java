@@ -248,7 +248,7 @@ public class BoardMenuFile extends javax.swing.JMenu {
                     throw new BoardMenuFileException("Can't rename backup file");
                 }
             }
-            if (net.freerouting.freeroute.GUIDefaultsFile.write(board_frame, board_frame.board_panel.board_handling, output_stream) == false){
+            if (net.freerouting.freeroute.GUIDefaultsFile.write(board_frame, board_frame.board_panel.board_handling, output_stream) == false) {
                 throw new BoardMenuFileException("Can't write backup file");
             }
             board_frame.screen_messages.set_status_message(resources.getString("message_17"));

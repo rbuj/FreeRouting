@@ -184,7 +184,7 @@ public class DsnFile {
      * interface can read them.
      */
     public static void write(BoardHandling p_board_handling, OutputStream p_file,
-            String p_design_name, boolean p_compat_mode)  throws DsnFileException {
+            String p_design_name, boolean p_compat_mode) throws DsnFileException {
         //tests.Validate.check("before writing dsn", p_board);
         IndentFileWriter output_file = new IndentFileWriter(p_file);
         if (output_file == null) {

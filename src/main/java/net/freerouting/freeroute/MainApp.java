@@ -116,18 +116,18 @@ public final class MainApp extends Application {
         try {
             for (int i = 0; i < args.length; ++i) {
                 switch (args[i]) {
-                // the design file is provided
+                    // the design file is provided
                     case "-de":
                         single_design_option = true;
                         design_file_name = args[i + 1];
                         ++i;
                         break;
-                // the design directory is provided
+                    // the design directory is provided
                     case "-di":
                         design_dir_name = args[i + 1];
                         ++i;
                         break;
-                // the locale is provided
+                    // the locale is provided
                     case "-l":
                         String new_locale = args[i + 1].substring(0, 2);
                         try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
@@ -139,9 +139,11 @@ public final class MainApp extends Application {
                                 }
                                 line = reader.readLine();
                             }
-                        }   if (locale == null) {
+                        }
+                        if (locale == null) {
                             locale = new Locale("en", "");
-                        }   ++i;
+                        }
+                        ++i;
                         break;
                     case "-s":
                         session_file_option = true;

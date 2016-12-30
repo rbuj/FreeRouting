@@ -113,7 +113,7 @@ public class DesignFile {
                 try (Reader reader = new InputStreamReader(new FileInputStream(rules_file), StandardCharsets.UTF_8)) {
                     if (WindowMessage.confirm(p_confirm_message)) {
                         result = net.freerouting.freeroute.designformats.specctra.RulesFile.read(reader, p_design_name, p_board_handling);
-                        if (rules_file.delete()==false){
+                        if (rules_file.delete() == false) {
                             throw new DesignFileException("Can't delete rules file");
                         }
                     }

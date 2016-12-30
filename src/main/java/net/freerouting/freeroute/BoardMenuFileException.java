@@ -18,13 +18,15 @@ package net.freerouting.freeroute;
 
 /**
  *
- * @author Robert Antoni Buj Gelonch {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
+ * @author Robert Antoni Buj Gelonch
+ * {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  */
 @SuppressWarnings("serial")
 public class BoardMenuFileException extends Exception {
+
     /**
-     * Creates a new instance of <code>BoardMenuFileException</code> without detail
-     * message.
+     * Creates a new instance of <code>BoardMenuFileException</code> without
+     * detail message.
      */
     public BoardMenuFileException() {
     }

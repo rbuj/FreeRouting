@@ -227,61 +227,61 @@ public class BatchAutorouter {
     }
 
     private boolean autoroute_item(Item p_item, int p_route_net_no, SortedSet<Item> p_ripped_item_list, int p_ripup_pass_no) {
-            boolean contains_plane = false;
-            net.freerouting.freeroute.rules.Net route_net = routing_board.rules.nets.get(p_route_net_no);
-            if (route_net != null) {
-                contains_plane = route_net.contains_plane();
-            }
-            int curr_via_costs;
+        boolean contains_plane = false;
+        net.freerouting.freeroute.rules.Net route_net = routing_board.rules.nets.get(p_route_net_no);
+        if (route_net != null) {
+            contains_plane = route_net.contains_plane();
+        }
+        int curr_via_costs;
 
-            if (contains_plane) {
-                curr_via_costs = hdlg.settings.autoroute_settings.get_plane_via_costs();
-            } else {
-                curr_via_costs = hdlg.settings.autoroute_settings.get_via_costs();
-            }
-            AutorouteControl autoroute_control = new AutorouteControl(this.routing_board, p_route_net_no, hdlg.settings, curr_via_costs, this.trace_cost_arr);
-            autoroute_control.ripup_allowed = true;
-            autoroute_control.ripup_costs = this.start_ripup_costs * p_ripup_pass_no;
-            autoroute_control.remove_unconnected_vias = this.remove_unconnected_vias;
+        if (contains_plane) {
+            curr_via_costs = hdlg.settings.autoroute_settings.get_plane_via_costs();
+        } else {
+            curr_via_costs = hdlg.settings.autoroute_settings.get_via_costs();
+        }
+        AutorouteControl autoroute_control = new AutorouteControl(this.routing_board, p_route_net_no, hdlg.settings, curr_via_costs, this.trace_cost_arr);
+        autoroute_control.ripup_allowed = true;
+        autoroute_control.ripup_costs = this.start_ripup_costs * p_ripup_pass_no;
+        autoroute_control.remove_unconnected_vias = this.remove_unconnected_vias;
 
-            Set<Item> unconnected_set = p_item.get_unconnected_set(p_route_net_no);
-            if (unconnected_set.isEmpty()) {
-                return true; // p_item is already routed.
+        Set<Item> unconnected_set = p_item.get_unconnected_set(p_route_net_no);
+        if (unconnected_set.isEmpty()) {
+            return true; // p_item is already routed.
 
-            }
-            Set<Item> connected_set = p_item.get_connected_set(p_route_net_no);
-            Set<Item> route_start_set;
-            Set<Item> route_dest_set;
-            if (contains_plane) {
-                for (Item curr_item : connected_set) {
-                    if (curr_item instanceof net.freerouting.freeroute.board.ConductionArea) {
-                        return true; // already connected to plane
+        }
+        Set<Item> connected_set = p_item.get_connected_set(p_route_net_no);
+        Set<Item> route_start_set;
+        Set<Item> route_dest_set;
+        if (contains_plane) {
+            for (Item curr_item : connected_set) {
+                if (curr_item instanceof net.freerouting.freeroute.board.ConductionArea) {
+                    return true; // already connected to plane
 
-                    }
                 }
             }
-            if (contains_plane) {
-                route_start_set = connected_set;
-                route_dest_set = unconnected_set;
-            } else {
-                route_start_set = unconnected_set;
-                route_dest_set = connected_set;
-            }
+        }
+        if (contains_plane) {
+            route_start_set = connected_set;
+            route_dest_set = unconnected_set;
+        } else {
+            route_start_set = unconnected_set;
+            route_dest_set = connected_set;
+        }
 
-            calc_airline(route_start_set, route_dest_set);
-            double max_milliseconds = 100_000 * Math.pow(2, p_ripup_pass_no - 1);
-            max_milliseconds = Math.min(max_milliseconds, Integer.MAX_VALUE);
-            TimeLimit time_limit = new TimeLimit((int) max_milliseconds);
-            AutorouteEngine autoroute_engine = routing_board.init_autoroute(p_route_net_no,
-                    autoroute_control.trace_clearance_class_no, this.thread, time_limit, this.retain_autoroute_database);
-            AutorouteEngine.AutorouteResult autoroute_result = autoroute_engine.autoroute_connection(route_start_set, route_dest_set, autoroute_control,
-                    p_ripped_item_list);
-            if (autoroute_result == AutorouteEngine.AutorouteResult.ROUTED) {
-                routing_board.opt_changed_area(new int[0], null, this.hdlg.settings.get_trace_pull_tight_accuracy(), autoroute_control.trace_costs, this.thread, TIME_LIMIT_TO_PREVENT_ENDLESS_LOOP);
-            }
-            // tests.Validate.check("Autoroute  ", hdlg.get_routing_board());
-            boolean result = autoroute_result == AutorouteEngine.AutorouteResult.ROUTED || autoroute_result == AutorouteEngine.AutorouteResult.ALREADY_CONNECTED;
-            return result;
+        calc_airline(route_start_set, route_dest_set);
+        double max_milliseconds = 100_000 * Math.pow(2, p_ripup_pass_no - 1);
+        max_milliseconds = Math.min(max_milliseconds, Integer.MAX_VALUE);
+        TimeLimit time_limit = new TimeLimit((int) max_milliseconds);
+        AutorouteEngine autoroute_engine = routing_board.init_autoroute(p_route_net_no,
+                autoroute_control.trace_clearance_class_no, this.thread, time_limit, this.retain_autoroute_database);
+        AutorouteEngine.AutorouteResult autoroute_result = autoroute_engine.autoroute_connection(route_start_set, route_dest_set, autoroute_control,
+                p_ripped_item_list);
+        if (autoroute_result == AutorouteEngine.AutorouteResult.ROUTED) {
+            routing_board.opt_changed_area(new int[0], null, this.hdlg.settings.get_trace_pull_tight_accuracy(), autoroute_control.trace_costs, this.thread, TIME_LIMIT_TO_PREVENT_ENDLESS_LOOP);
+        }
+        // tests.Validate.check("Autoroute  ", hdlg.get_routing_board());
+        boolean result = autoroute_result == AutorouteEngine.AutorouteResult.ROUTED || autoroute_result == AutorouteEngine.AutorouteResult.ALREADY_CONNECTED;
+        return result;
     }
 
     /**

@@ -18,7 +18,8 @@ package net.freerouting.freeroute;
 
 /**
  *
- * @author Robert Antoni Buj Gelonch {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
+ * @author Robert Antoni Buj Gelonch
+ * {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  */
 public enum LaunchMode {
     FROM_START_MENU, SINGLE_FRAME, SESSION_FILE, EXTENDED_TOOL_BAR

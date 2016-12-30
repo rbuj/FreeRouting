@@ -18,10 +18,12 @@ package net.freerouting.freeroute;
 
 /**
  *
- * @author Robert Antoni Buj Gelonch {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
+ * @author Robert Antoni Buj Gelonch
+ * {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  */
 @SuppressWarnings("serial")
 public class DesignFileException extends Exception {
+
     /**
      * Creates a new instance of <code>DesignFileException</code> without detail
      * message.

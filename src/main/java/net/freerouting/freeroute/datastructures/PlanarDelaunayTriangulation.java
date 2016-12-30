@@ -45,7 +45,7 @@ public class PlanarDelaunayTriangulation {
 
     /**
      * Randum generatur to shuffle the input corners. A fixed SEED is used to
- make the results reproduceble.
+     * make the results reproduceble.
      */
     private static final int SEED = 99;
     private static final java.util.Random RANDOM_GENERATOR = new java.util.Random(SEED);

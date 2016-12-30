@@ -74,7 +74,7 @@ public abstract class Cursor {
             if (!location_initialized) {
                 return;
             }
-            if (p_graphics instanceof Graphics2D){
+            if (p_graphics instanceof Graphics2D) {
                 Graphics2D g2 = (Graphics2D) p_graphics;
                 init_graphics(g2);
                 GeneralPath draw_path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);

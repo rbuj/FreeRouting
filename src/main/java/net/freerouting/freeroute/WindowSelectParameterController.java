@@ -23,7 +23,8 @@ import javafx.fxml.Initializable;
 /**
  * FXML Controller class
  *
- * @author Robert Antoni Buj Gelonch {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
+ * @author Robert Antoni Buj Gelonch
+ * {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  */
 public class WindowSelectParameterController implements Initializable {
 

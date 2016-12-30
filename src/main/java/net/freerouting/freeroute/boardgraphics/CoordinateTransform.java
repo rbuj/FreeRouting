@@ -68,6 +68,7 @@ public class CoordinateTransform implements java.io.Serializable {
 
     /**
      * Copy constructor
+     *
      * @param p_coordinate_transform
      */
     public CoordinateTransform(CoordinateTransform p_coordinate_transform) {
@@ -157,9 +158,9 @@ public class CoordinateTransform implements java.io.Serializable {
     }
 
     /**
-     * Transform a geometry.planar.IntBox to a Rectangle2D If the
-     * internal rotation is not a multiple of Pi/2, a bounding rectangle of the
-     * rotated rectangular shape is returned.
+     * Transform a geometry.planar.IntBox to a Rectangle2D If the internal
+     * rotation is not a multiple of Pi/2, a bounding rectangle of the rotated
+     * rectangular shape is returned.
      */
     public Rectangle2D board_to_screen(IntBox p_box) {
         Point2D corner_1 = board_to_screen(p_box.ll.to_float());
@@ -175,9 +176,9 @@ public class CoordinateTransform implements java.io.Serializable {
     }
 
     /**
-     * Transform a Rectangle2D to a geometry.planar.IntBox If the
-     * internal rotation is not a multiple of Pi/2, a bounding box of the
-     * rotated rectangular shape is returned.
+     * Transform a Rectangle2D to a geometry.planar.IntBox If the internal
+     * rotation is not a multiple of Pi/2, a bounding box of the rotated
+     * rectangular shape is returned.
      */
     public IntBox screen_to_board(Rectangle2D p_rect) {
         FloatPoint corner_1 = screen_to_board(new Point2D.Double(p_rect.getX(), p_rect.getY()));

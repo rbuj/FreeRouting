@@ -88,7 +88,7 @@ public class Logfile {
      */
     public boolean start_write(File p_file) {
         try {
-            this.file_writer = new OutputStreamWriter(new FileOutputStream(p_file),StandardCharsets.UTF_8);
+            this.file_writer = new OutputStreamWriter(new FileOutputStream(p_file), StandardCharsets.UTF_8);
         } catch (IOException e) {
             System.out.println("unable to create logfile");
             return false;

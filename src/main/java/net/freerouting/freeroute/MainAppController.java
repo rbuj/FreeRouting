@@ -36,7 +36,8 @@ import net.freerouting.freeroute.designformats.specctra.DsnFileException;
 /**
  * FXML Controller class
  *
- * @author Robert Antoni Buj Gelonch {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
+ * @author Robert Antoni Buj Gelonch
+ * {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  */
 public class MainAppController implements Initializable {
 
