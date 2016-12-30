@@ -57,6 +57,8 @@ public class Packages implements java.io.Serializable, Iterable<Package> {
             if (curr_package != null && curr_package.name.compareToIgnoreCase(p_name) == 0) {
                 if (curr_package.is_front == p_is_front) {
                     return curr_package;
+                } else {
+                    other_side_package = curr_package;
                 }
             }
         }
