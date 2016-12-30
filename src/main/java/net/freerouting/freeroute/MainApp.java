@@ -191,4 +191,8 @@ public final class MainApp extends Application {
     public static String get_version() {
         return VERSION_NUMBER_STRING;
     }
+
+    public static Locale get_locale() {
+        return locale;
+    }
 }

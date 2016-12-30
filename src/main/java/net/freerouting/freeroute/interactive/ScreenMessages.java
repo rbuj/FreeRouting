@@ -30,7 +30,6 @@ public class ScreenMessages {
 
     static private final String EMPTY_STRING = "            ";
     private final java.util.ResourceBundle resources;
-    private final java.util.Locale locale;
     private final String active_layer_string;
     private final String target_layer_string;
     private final JLabel add_field;
@@ -50,7 +49,6 @@ public class ScreenMessages {
     public ScreenMessages(JLabel p_status_field, JLabel p_add_field,
             JLabel p_layer_field, JLabel p_mouse_position, java.util.Locale p_locale) {
         resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.ScreenMessages", p_locale);
-        locale = p_locale;
         active_layer_string = resources.getString("current_layer") + " ";
         target_layer_string = resources.getString("target_layer") + " ";
         status_field = p_status_field;
@@ -130,7 +128,7 @@ public class ScreenMessages {
         if (p_pos == null || this.mouse_position == null || this.write_protected) {
             return;
         }
-        this.mouse_position.setText(p_pos.to_string(this.locale));
+        this.mouse_position.setText(p_pos.to_string(this.resources.getLocale()));
     }
 
     /**

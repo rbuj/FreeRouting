@@ -593,7 +593,7 @@ public class BoardHandling {
 
         // create a graphics context for the board
         Dimension panel_size = panel.getPreferredSize();
-        graphics_context = new GraphicsContext(p_bounding_box, panel_size, p_layer_structure, this.locale);
+        graphics_context = new GraphicsContext(p_bounding_box, panel_size, p_layer_structure);
     }
 
     /**

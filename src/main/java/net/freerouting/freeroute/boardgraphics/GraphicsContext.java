@@ -90,10 +90,10 @@ public class GraphicsContext implements java.io.Serializable {
     private int fully_visible_layer = 0;
 
     public GraphicsContext(IntBox p_design_bounds,
-            Dimension p_panel_bounds, net.freerouting.freeroute.board.LayerStructure p_layer_structure, java.util.Locale p_locale) {
+            Dimension p_panel_bounds, net.freerouting.freeroute.board.LayerStructure p_layer_structure) {
         coordinate_transform = new CoordinateTransform(p_design_bounds, p_panel_bounds);
-        item_color_table = new ItemColorTableModel(p_layer_structure, p_locale);
-        other_color_table = new OtherColorTableModel(p_locale);
+        item_color_table = new ItemColorTableModel(p_layer_structure);
+        other_color_table = new OtherColorTableModel();
         color_intensity_table = new ColorIntensityTable();
         layer_visibility_arr = new double[p_layer_structure.arr.length];
         for (int i = 0; i < layer_visibility_arr.length; ++i) {

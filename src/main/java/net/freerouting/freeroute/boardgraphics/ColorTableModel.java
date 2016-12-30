@@ -30,17 +30,14 @@ import javax.swing.table.AbstractTableModel;
 public abstract class ColorTableModel extends AbstractTableModel {
 
     protected final Object[][] data;
-    protected final java.util.Locale locale;
 
-    protected ColorTableModel(int p_row_count, java.util.Locale p_locale) {
+    protected ColorTableModel(int p_row_count) {
         this.data = new Object[p_row_count][];
-        this.locale = p_locale;
     }
 
     protected ColorTableModel(java.io.ObjectInputStream p_stream)
             throws java.io.IOException, java.lang.ClassNotFoundException {
         this.data = (Object[][]) p_stream.readObject();
-        this.locale = (java.util.Locale) p_stream.readObject();
     }
 
     @Override
@@ -72,7 +69,6 @@ public abstract class ColorTableModel extends AbstractTableModel {
     protected void write_object(java.io.ObjectOutputStream p_stream)
             throws java.io.IOException {
         p_stream.writeObject(this.data);
-        p_stream.writeObject(this.locale);
     }
 
 }

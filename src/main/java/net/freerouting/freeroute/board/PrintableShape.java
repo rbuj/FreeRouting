@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute.board;
 
+import java.util.Locale;
+import net.freerouting.freeroute.MainApp;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 
 /**
@@ -29,10 +31,7 @@ import net.freerouting.freeroute.geometry.planar.FloatPoint;
  */
 public abstract class PrintableShape {
 
-    protected final java.util.Locale locale;
-
-    protected PrintableShape(java.util.Locale p_locale) {
-        this.locale = p_locale;
+    protected PrintableShape() {
     }
 
     /**
@@ -50,21 +49,21 @@ public abstract class PrintableShape {
          * Creates a Circle from the input coordinates.
          */
         public Circle(FloatPoint p_center, double p_radius, java.util.Locale p_locale) {
-            super(p_locale);
             center = p_center;
             radius = p_radius;
         }
 
         @Override
         public String toString() {
+            Locale locale = MainApp.get_locale();
             java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", this.locale);
+                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", locale);
             StringBuilder sb = new StringBuilder();
             sb.append(resources.getString("circle")).append(": ");
             if (center.x != 0 || center.y != 0) {
-                sb.append(resources.getString("center")).append(" =").append(center.to_string(this.locale));
+                sb.append(resources.getString("center")).append(" =").append(center.to_string(locale));
             }
-            java.text.NumberFormat nf = java.text.NumberFormat.getInstance(this.locale);
+            java.text.NumberFormat nf = java.text.NumberFormat.getInstance(locale);
             nf.setMaximumFractionDigits(4);
             String radius_string = resources.getString("radius") + " = " + nf.format((float) radius);
             sb.append(radius_string);
@@ -78,17 +77,17 @@ public abstract class PrintableShape {
         public final FloatPoint upper_right;
 
         public Rectangle(FloatPoint p_lower_left, FloatPoint p_upper_right, java.util.Locale p_locale) {
-            super(p_locale);
             lower_left = p_lower_left;
             upper_right = p_upper_right;
         }
 
         @Override
         public String toString() {
+            Locale locale = MainApp.get_locale();
             java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", this.locale);
+                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", locale);
             StringBuilder sb = new StringBuilder();
-            sb.append(resources.getString("rectangle")).append(": ").append(resources.getString("lower_left")).append(" = ").append(lower_left.to_string(this.locale)).append(", ").append(resources.getString("upper_right")).append(" = ").append(upper_right.to_string(this.locale));
+            sb.append(resources.getString("rectangle")).append(": ").append(resources.getString("lower_left")).append(" = ").append(lower_left.to_string(locale)).append(", ").append(resources.getString("upper_right")).append(" = ").append(upper_right.to_string(locale));
             return sb.toString();
         }
     }
@@ -98,21 +97,21 @@ public abstract class PrintableShape {
         public final FloatPoint[] corner_arr;
 
         public Polygon(FloatPoint[] p_corners, java.util.Locale p_locale) {
-            super(p_locale);
             corner_arr = p_corners;
         }
 
         @Override
         public String toString() {
+            Locale locale = MainApp.get_locale();
             java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", this.locale);
+                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", locale);
             StringBuilder sb = new StringBuilder();
             sb.append(resources.getString("polygon")).append(": ");
             for (int i = 0; i < corner_arr.length; ++i) {
                 if (i > 0) {
                     sb.append(", ");
                 }
-                sb.append(corner_arr[i].to_string(this.locale));
+                sb.append(corner_arr[i].to_string(locale));
             }
             return sb.toString();
         }

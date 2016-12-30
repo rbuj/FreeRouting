@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.boardgraphics;
 
 import java.awt.Color;
+import net.freerouting.freeroute.MainApp;
 
 /**
  * Stores the colors used for the background and highlighting.
@@ -29,8 +30,8 @@ import java.awt.Color;
 @SuppressWarnings("serial")
 public class OtherColorTableModel extends ColorTableModel {
 
-    public OtherColorTableModel(java.util.Locale p_locale) {
-        super(1, p_locale);
+    public OtherColorTableModel() {
+        super(1);
         data[0] = new Color[ColumnNames.values().length];
         Object[] curr_row = data[0];
         curr_row[ColumnNames.BACKGROUND.ordinal()] = new Color(70, 70, 70);
@@ -52,7 +53,7 @@ public class OtherColorTableModel extends ColorTableModel {
      * Copy construcror.
      */
     public OtherColorTableModel(OtherColorTableModel p_item_color_model) {
-        super(p_item_color_model.data.length, p_item_color_model.locale);
+        super(p_item_color_model.data.length);
         for (int i = 0; i < this.data.length; ++i) {
             this.data[i] = new Object[p_item_color_model.data[i].length];
             System.arraycopy(p_item_color_model.data[i], 0, this.data[i], 0, this.data[i].length);
@@ -67,7 +68,7 @@ public class OtherColorTableModel extends ColorTableModel {
     @Override
     public String getColumnName(int p_col) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.boardgraphics.resources.ColorTableModel", this.locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.boardgraphics.resources.ColorTableModel", MainApp.get_locale());
         return resources.getString(ColumnNames.values()[p_col].toString());
     }
 

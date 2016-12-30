@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Vector;
+import net.freerouting.freeroute.MainApp;
 import net.freerouting.freeroute.board.BasicBoard;
 import net.freerouting.freeroute.board.Connectable;
 import net.freerouting.freeroute.board.Item;
@@ -42,13 +43,11 @@ public class RatsNest {
     private final NetIncompletes[] net_incompletes;
     private final boolean[] is_filtered;
     public boolean hidden = false;
-    private final java.util.Locale locale;
 
     /**
      * Creates a new instance of RatsNest
      */
     public RatsNest(BasicBoard p_board, java.util.Locale p_locale) {
-        this.locale = p_locale;
         int max_net_no = p_board.rules.nets.max_net_no();
         // Create the net item lists at once for performance reasons.
         Vector<Collection<Item>> net_item_lists = new Vector<>(max_net_no);
@@ -70,7 +69,7 @@ public class RatsNest {
         this.net_incompletes = new NetIncompletes[max_net_no];
         this.is_filtered = new boolean[max_net_no];
         for (int i = 0; i < net_incompletes.length; ++i) {
-            net_incompletes[i] = new NetIncompletes(i + 1, net_item_lists.get(i), p_board, p_locale);
+            net_incompletes[i] = new NetIncompletes(i + 1, net_item_lists.get(i), p_board);
             is_filtered[i] = false;
         }
     }
@@ -81,7 +80,7 @@ public class RatsNest {
     public void recalculate(int p_net_no, BasicBoard p_board) {
         if (p_net_no >= 1 && p_net_no <= net_incompletes.length) {
             Collection<Item> item_list = p_board.get_connectable_items(p_net_no);
-            net_incompletes[p_net_no - 1] = new NetIncompletes(p_net_no, item_list, p_board, locale);
+            net_incompletes[p_net_no - 1] = new NetIncompletes(p_net_no, item_list, p_board);
         }
     }
 
@@ -93,7 +92,7 @@ public class RatsNest {
         if (p_net_no >= 1 && p_net_no <= net_incompletes.length) {
             // copy p_item_list, because it will be changed inside the constructor of NetIncompletes
             Collection<Item> item_list = new LinkedList<>(p_item_list);
-            net_incompletes[p_net_no - 1] = new NetIncompletes(p_net_no, item_list, p_board, locale);
+            net_incompletes[p_net_no - 1] = new NetIncompletes(p_net_no, item_list, p_board);
         }
     }
 
@@ -208,16 +207,14 @@ public class RatsNest {
         public final FloatPoint from_corner;
         public final Item to_item;
         public final FloatPoint to_corner;
-        private final java.util.Locale locale;
 
         AirLine(Net p_net, Item p_from_item, FloatPoint p_from_corner, Item p_to_item,
-                FloatPoint p_to_corner, java.util.Locale p_locale) {
+                FloatPoint p_to_corner) {
             net = p_net;
             from_item = p_from_item;
             from_corner = p_from_corner;
             to_item = p_to_item;
             to_corner = p_to_corner;
-            this.locale = p_locale;
         }
 
         @Override
@@ -234,7 +231,7 @@ public class RatsNest {
 
         private String item_info(Item p_item) {
             java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.RatsNest", this.locale);
+                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.RatsNest", MainApp.get_locale());
             String result;
             if (p_item instanceof net.freerouting.freeroute.board.Pin) {
                 net.freerouting.freeroute.board.Pin curr_pin = (net.freerouting.freeroute.board.Pin) p_item;

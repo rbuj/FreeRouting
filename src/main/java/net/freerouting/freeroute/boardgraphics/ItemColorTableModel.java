@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.boardgraphics;
 
 import java.awt.Color;
+import net.freerouting.freeroute.MainApp;
 
 /**
  * Stores the layer dependent colors used for drawing for the items on the
@@ -33,8 +34,8 @@ public class ItemColorTableModel extends ColorTableModel {
     private transient boolean item_colors_precalculated = false;
     private transient Color[][] precalculated_item_colors = null;
 
-    public ItemColorTableModel(net.freerouting.freeroute.board.LayerStructure p_layer_structure, java.util.Locale p_locale) {
-        super(p_layer_structure.arr.length, p_locale);
+    public ItemColorTableModel(net.freerouting.freeroute.board.LayerStructure p_layer_structure) {
+        super(p_layer_structure.arr.length);
 
         int row_count = p_layer_structure.arr.length;
         final int item_type_count = ColumnNames.values().length - 1;
@@ -110,7 +111,7 @@ public class ItemColorTableModel extends ColorTableModel {
      * Copy construcror.
      */
     public ItemColorTableModel(ItemColorTableModel p_item_color_model) {
-        super(p_item_color_model.data.length, p_item_color_model.locale);
+        super(p_item_color_model.data.length);
         for (int i = 0; i < this.data.length; ++i) {
             this.data[i] = new Object[p_item_color_model.data[i].length];
             System.arraycopy(p_item_color_model.data[i], 0, this.data[i], 0, this.data[i].length);
@@ -130,7 +131,7 @@ public class ItemColorTableModel extends ColorTableModel {
     @Override
     public String getColumnName(int p_col) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.boardgraphics.resources.ColorTableModel", this.locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.boardgraphics.resources.ColorTableModel", MainApp.get_locale());
         return resources.getString(ColumnNames.values()[p_col].toString());
     }
 

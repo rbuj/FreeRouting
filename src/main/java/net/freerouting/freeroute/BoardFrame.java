@@ -103,7 +103,6 @@ public class BoardFrame extends javax.swing.JFrame {
     private final boolean confirm_cancel;
 
     private final java.util.ResourceBundle resources;
-    private java.util.Locale locale;
 
     private final BoardObservers board_observers;
     private final IdNoGenerator item_id_no_generator;
@@ -152,7 +151,7 @@ public class BoardFrame extends javax.swing.JFrame {
      * output depends on p_test_level.
      */
     public BoardFrame(DesignFile p_design, LaunchMode p_launch_mode, TestLevel p_test_level,
-            java.util.Locale p_locale, boolean p_confirm_cancel) throws BoardFrameException, DsnFileException {
+            Locale p_locale, boolean p_confirm_cancel) throws BoardFrameException, DsnFileException {
         this(p_design, p_launch_mode, p_test_level, new BoardObserverAdaptor(),
                 new ItemIdNoGenerator(), p_locale, p_confirm_cancel);
         read();
@@ -190,7 +189,6 @@ public class BoardFrame extends javax.swing.JFrame {
         confirm_cancel = p_confirm_cancel;
         board_observers = p_observers;
         item_id_no_generator = p_item_id_no_generator;
-        locale = p_locale;
         resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardFrame", p_locale);
         boolean session_file_option = (p_launch_mode == LaunchMode.SESSION_FILE);
         menubar = BoardMenuBar.get_instance(this, session_file_option);
@@ -199,14 +197,14 @@ public class BoardFrame extends javax.swing.JFrame {
         toolbar_panel = new BoardToolbar(this);
         add(toolbar_panel, java.awt.BorderLayout.NORTH);
 
-        message_panel = new BoardPanelStatus(locale);
+        message_panel = new BoardPanelStatus(p_locale);
         add(message_panel, java.awt.BorderLayout.SOUTH);
 
         select_toolbar = new BoardToolbarSelectedItem(this, p_launch_mode == LaunchMode.EXTENDED_TOOL_BAR);
 
         screen_messages
                 = new ScreenMessages(message_panel.status_message, message_panel.add_message,
-                        message_panel.current_layer, message_panel.mouse_position, locale);
+                        message_panel.current_layer, message_panel.mouse_position, p_locale);
 
         scroll_pane = new javax.swing.JScrollPane();
         scroll_pane.setPreferredSize(new java.awt.Dimension(1_150, 800));
@@ -507,7 +505,7 @@ public class BoardFrame extends javax.swing.JFrame {
         permanent_subwindows[17] = assign_net_classes_window;
         length_violations_window = new WindowLengthViolations(this);
         permanent_subwindows[18] = length_violations_window;
-        about_window = new WindowAbout(locale);
+        about_window = new WindowAbout(resources.getLocale());
         permanent_subwindows[19] = about_window;
         move_parameter_window = new WindowMoveParameter(this);
         permanent_subwindows[20] = move_parameter_window;
@@ -558,8 +556,8 @@ public class BoardFrame extends javax.swing.JFrame {
     /**
      * Returns the currently used locale for the language dependent output.
      */
-    public java.util.Locale get_locale() {
-        return locale;
+    public Locale get_locale() {
+        return resources.getLocale();
     }
 
     /**
