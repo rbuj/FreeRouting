@@ -46,7 +46,7 @@ import net.freerouting.freeroute.geometry.planar.TileShape;
 @SuppressWarnings("serial")
 public class GraphicsContext implements java.io.Serializable {
 
-    private static final int UPDATE_OFFSET = 10000;
+    private static final int UPDATE_OFFSET = 10_000;
     private static final boolean SHOW_LINE_SEGMENTS = false;
     private static final boolean SHOW_AREA_DIVISION = false;
 

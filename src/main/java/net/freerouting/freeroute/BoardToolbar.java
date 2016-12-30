@@ -53,7 +53,7 @@ class BoardToolbar extends javax.swing.JPanel {
         this.drag_button = new javax.swing.JToggleButton();
         final javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
 
-        left_toolbar.setMaximumSize(new java.awt.Dimension(1200, 23));
+        left_toolbar.setMaximumSize(new java.awt.Dimension(1_200, 23));
         toolbar_button_group.add(select_button);
         select_button.setSelected(true);
         select_button.setText(resources.getString("select_button"));

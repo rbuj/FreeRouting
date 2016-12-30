@@ -114,7 +114,7 @@ public class ColorManager extends BoardSavableSubWindow {
         this.setTitle(resources.getString("color_manager"));
         final JPanel panel = new JPanel();
         final int textfield_height = 17;
-        final int table_width = 1100;
+        final int table_width = 1_100;
         final int item_color_table_height = graphics_context.item_color_table.getRowCount() * textfield_height;
         panel.setPreferredSize(new Dimension(10 + table_width, 70 + item_color_table_height));
 

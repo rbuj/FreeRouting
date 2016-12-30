@@ -209,7 +209,7 @@ public class BoardFrame extends javax.swing.JFrame {
                         message_panel.current_layer, message_panel.mouse_position, locale);
 
         scroll_pane = new javax.swing.JScrollPane();
-        scroll_pane.setPreferredSize(new java.awt.Dimension(1150, 800));
+        scroll_pane.setPreferredSize(new java.awt.Dimension(1_150, 800));
         scroll_pane.setVerifyInputWhenFocusTarget(false);
         add(scroll_pane, java.awt.BorderLayout.CENTER);
 

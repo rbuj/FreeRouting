@@ -94,7 +94,7 @@ public enum Unit {
                         result = p_value / INCH_TO_MM;
                         break;
                     case UM:
-                        result = p_value * 1000;
+                        result = p_value * 1_000;
                         break;
                     // mil
                     default:

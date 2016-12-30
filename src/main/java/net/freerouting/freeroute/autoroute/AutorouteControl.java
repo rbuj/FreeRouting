@@ -188,7 +188,7 @@ public class AutorouteControl {
         via_upper_bound = layer_count;
 
         ripup_allowed = false;
-        ripup_costs = 1000;
+        ripup_costs = 1_000;
         ripup_pass_no = 1;
     }
 

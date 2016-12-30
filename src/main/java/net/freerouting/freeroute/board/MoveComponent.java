@@ -36,8 +36,8 @@ import net.freerouting.freeroute.geometry.planar.Vector;
  */
 public class MoveComponent {
 
-    private static final int PULL_TIGHT_TIME_LIMIT = 1000;
-    private static final int CHECK_TIME_LIMIT = 3000;
+    private static final int PULL_TIGHT_TIME_LIMIT = 1_000;
+    private static final int CHECK_TIME_LIMIT = 3_000;
     private final Vector translate_vector;
     private final int max_recursion_depth;
     private final int max_via_recursion_depth;

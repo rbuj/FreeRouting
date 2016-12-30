@@ -38,7 +38,7 @@ import net.freerouting.freeroute.interactive.InteractiveActionThread;
  */
 public class BatchAutorouter {
 
-    private static final int TIME_LIMIT_TO_PREVENT_ENDLESS_LOOP = 1000;
+    private static final int TIME_LIMIT_TO_PREVENT_ENDLESS_LOOP = 1_000;
 
     /**
      * Autoroutes ripup passes until the board is completed or the autorouter is
@@ -269,7 +269,7 @@ public class BatchAutorouter {
             }
 
             calc_airline(route_start_set, route_dest_set);
-            double max_milliseconds = 100000 * Math.pow(2, p_ripup_pass_no - 1);
+            double max_milliseconds = 100_000 * Math.pow(2, p_ripup_pass_no - 1);
             max_milliseconds = Math.min(max_milliseconds, Integer.MAX_VALUE);
             TimeLimit time_limit = new TimeLimit((int) max_milliseconds);
             AutorouteEngine autoroute_engine = routing_board.init_autoroute(p_route_net_no,

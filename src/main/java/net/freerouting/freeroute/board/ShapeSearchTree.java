@@ -838,7 +838,7 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
         if (convex_shapes == null) {
             return new TileShape[0];
         }
-        double max_tree_shape_width = 50000;
+        double max_tree_shape_width = 50_000;
         if (this.board.communication.host_cad_exists()) {
             max_tree_shape_width = Math.min(500 * this.board.communication.get_resolution(Unit.MIL), max_tree_shape_width);
             // Problem with low resolution on Kicad.

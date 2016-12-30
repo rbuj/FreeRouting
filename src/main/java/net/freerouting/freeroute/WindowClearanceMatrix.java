@@ -134,7 +134,7 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow {
 
         final int scroll_bar_width = 20;
         final int scroll_pane_height = textfield_height * this.clearance_table_model.getRowCount() + scroll_bar_width;
-        final int scroll_pane_width = Math.min(table_width + scroll_bar_width, 1200);
+        final int scroll_pane_width = Math.min(table_width + scroll_bar_width, 1_200);
         scroll_pane.setPreferredSize(new java.awt.Dimension(scroll_pane_width, scroll_pane_height));
         // Change the background color of the header and the first column of the table.
         java.awt.Color header_background_color = new java.awt.Color(220, 220, 255);

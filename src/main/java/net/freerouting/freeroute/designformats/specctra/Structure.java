@@ -1019,7 +1019,7 @@ class Structure extends ScopeKeyword {
         p_par.coordinate_transform = new CoordinateTransform(scale_factor, 0, 0);
 
         IntBox bounds = (IntBox) bounding_box.transform_to_board(p_par.coordinate_transform);
-        bounds = bounds.offset(1000);
+        bounds = bounds.offset(1_000);
 
         Collection<PolylineShape> board_outline_shapes = new LinkedList<>();
         for (Shape curr_shape : p_board_construction_info.outline_shapes) {

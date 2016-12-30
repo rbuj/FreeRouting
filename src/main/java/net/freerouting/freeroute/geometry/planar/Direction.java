@@ -92,7 +92,7 @@ public abstract class Direction implements Comparable<Direction>, java.io.Serial
      * p_angle
      */
     public static Direction get_instance_approx(double p_angle) {
-        final double scale_factor = 10000;
+        final double scale_factor = 10_000;
         int x = (int) Math.round(Math.cos(p_angle) * scale_factor);
         int y = (int) Math.round(Math.sin(p_angle) * scale_factor);
         return get_instance(new IntVector(x, y));
@@ -182,7 +182,7 @@ public abstract class Direction implements Comparable<Direction>, java.io.Serial
         double length2 = v2.size();
         double x = v1.x / length1 + v2.x / length2;
         double y = v1.y / length1 + v2.y / length2;
-        final double scale_factor = 1000;
+        final double scale_factor = 1_000;
         Vector vm = new IntVector((int) Math.round(x * scale_factor),
                 (int) Math.round(y * scale_factor));
         return Direction.get_instance(vm);

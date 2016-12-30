@@ -97,11 +97,11 @@ public class BasicBoard implements java.io.Serializable {
     /**
      * the biggest half width of all traces on the board
      */
-    private int max_trace_half_width = 1000;
+    private int max_trace_half_width = 1_000;
     /**
      * the smallest half width of all traces on the board
      */
-    private int min_trace_half_width = 10000;
+    private int min_trace_half_width = 10_000;
 
     /**
      * Limits the maximum width of a shape in the search tree.

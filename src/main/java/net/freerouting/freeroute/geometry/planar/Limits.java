@@ -31,7 +31,7 @@ public class Limits {
      * value at most CRIT_COOR is contained in the mantissa of a double with
      * some space left for addition.
      */
-    public static final int CRIT_INT = 33554432;
+    public static final int CRIT_INT = 33_554_432;
 
     /**
      * the biggest double value ( 2 ^53) , so that all integers smaller than

@@ -89,7 +89,7 @@ public class BoardRules implements java.io.Serializable {
         nets = new Nets();
         this.trace_angle_restriction = net.freerouting.freeroute.board.AngleRestriction.FORTYFIVE_DEGREE;
 
-        this.min_trace_half_width = 100000;
+        this.min_trace_half_width = 100_000;
         this.max_trace_half_width = 100;
     }
 
@@ -231,7 +231,7 @@ public class BoardRules implements java.io.Serializable {
     public void create_default_net_class() {
         // add the default net rule
         NetClass default_net_class = this.net_classes.append("default", this.layer_structure, this.clearance_matrix);
-        int default_trace_half_width = 1500;
+        int default_trace_half_width = 1_500;
         default_net_class.set_trace_half_width(default_trace_half_width);
         default_net_class.set_trace_clearance_class(1);
     }

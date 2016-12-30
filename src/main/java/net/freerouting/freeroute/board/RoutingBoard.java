@@ -53,7 +53,7 @@ public class RoutingBoard extends BasicBoard {
     /**
      * The time limit in milliseconds for the pull tight algorithm
      */
-    private static final int PULL_TIGHT_TIME_LIMIT = 2000;
+    private static final int PULL_TIGHT_TIME_LIMIT = 2_000;
     /**
      * Contains the database for the autorouzte algorithm.
      */
@@ -829,7 +829,7 @@ public class RoutingBoard extends BasicBoard {
         AutorouteEngine.AutorouteResult result
                 = curr_autoroute_engine.autoroute_connection(route_start_set, route_dest_set, ctrl_settings, ripped_item_list);
         if (result == AutorouteEngine.AutorouteResult.ROUTED) {
-            final int time_limit_to_prevent_endless_loop = 1000;
+            final int time_limit_to_prevent_endless_loop = 1_000;
             opt_changed_area(new int[0], null, p_settings.get_trace_pull_tight_accuracy(), ctrl_settings.trace_costs, p_stoppable_thread, time_limit_to_prevent_endless_loop);
         }
         return result;
@@ -871,7 +871,7 @@ public class RoutingBoard extends BasicBoard {
                 = curr_autoroute_engine.autoroute_connection(pin_connected_set,
                         unconnected_set, ctrl_settings, ripped_item_list);
         if (result == AutorouteEngine.AutorouteResult.ROUTED) {
-            final int time_limit_to_prevent_endless_loop = 1000;
+            final int time_limit_to_prevent_endless_loop = 1_000;
             opt_changed_area(new int[0], null, p_settings.get_trace_pull_tight_accuracy(), ctrl_settings.trace_costs, p_stoppable_thread, time_limit_to_prevent_endless_loop);
         }
         return result;

@@ -94,7 +94,7 @@ public class MazeSearchAlgo {
      * connected to a fanout via or 1, if no fanout via was found.
      */
     private static double calc_fanout_via_ripup_cost_factor(net.freerouting.freeroute.board.Trace p_trace) {
-        final double FANOUT_COST_CONST = 20000;
+        final double FANOUT_COST_CONST = 20_000;
         Collection<Item> curr_end_contacts;
         for (int i = 0; i < 2; ++i) {
             if (i == 0) {

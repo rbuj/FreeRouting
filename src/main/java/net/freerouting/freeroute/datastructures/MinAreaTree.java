@@ -38,7 +38,7 @@ import net.freerouting.freeroute.geometry.planar.ShapeBoundingDirections;
  */
 public class MinAreaTree extends ShapeTree {
 
-    protected ArrayStack<TreeNode> node_stack = new ArrayStack<>(10000);
+    protected ArrayStack<TreeNode> node_stack = new ArrayStack<>(10_000);
 
     /**
      * Constructor with a fixed set of directions defining the keys and and the

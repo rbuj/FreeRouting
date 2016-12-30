@@ -36,7 +36,7 @@ import java.awt.geom.Point2D;
  */
 public abstract class Cursor {
 
-    private static final double MAX_COOR = 1000;
+    private static final double MAX_COOR = 1_000;
 
     private static final Line2D VERTICAL_LINE = new Line2D.Double(0, -MAX_COOR, 0, MAX_COOR);
     private static final Line2D HORIZONTAL_LINE = new Line2D.Double(-MAX_COOR, 0, MAX_COOR, 0);

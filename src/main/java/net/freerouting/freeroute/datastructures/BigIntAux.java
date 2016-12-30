@@ -115,7 +115,7 @@ public class BigIntAux {
         int t = (aZeros < bZeros ? aZeros : bZeros);
 
         while (a != b) {
-            if ((a + 0x80000000) > (b + 0x80000000)) {  // a > b as unsigned
+            if ((a + 0x8000_0000) > (b + 0x8000_0000)) {  // a > b as unsigned
                 a -= b;
 
                 while ((x = a & 0xff) == 0) {

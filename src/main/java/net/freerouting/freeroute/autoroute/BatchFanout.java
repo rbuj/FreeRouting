@@ -71,7 +71,7 @@ public class BatchFanout {
         for (Component curr_component : this.sorted_components) {
             this.thread.hdlg.screen_messages.set_batch_fanout_info(p_pass_no + 1, components_to_go);
             for (Component.Pin curr_pin : curr_component.smd_pins) {
-                double max_milliseconds = 10000 * (p_pass_no + 1);
+                double max_milliseconds = 10_000 * (p_pass_no + 1);
                 TimeLimit time_limit = new TimeLimit((int) max_milliseconds);
                 this.routing_board.start_marking_changed_area();
                 AutorouteEngine.AutorouteResult curr_result

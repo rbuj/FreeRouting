@@ -33,11 +33,11 @@ public class Nets implements java.io.Serializable {
     /**
      * The maximum legal net number for nets.
      */
-    public static final int MAX_LEGAL_NET_NO = 9999999;
+    public static final int MAX_LEGAL_NET_NO = 9_999_999;
     /**
      * auxiliary net number for internal use
      */
-    public static final int HIDDER_NET_NO = 10000001;
+    public static final int HIDDER_NET_NO = 10_000_001;
 
     /**
      * Returns false, if p_net_no belongs to a net internally used for special

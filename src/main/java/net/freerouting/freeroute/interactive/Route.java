@@ -57,11 +57,11 @@ public class Route {
     /**
      * The time limit in milliseconds for the pull tight algorithm
      */
-    private static final int CHECK_FORCED_TRACE_TIME_LIMIT = 3000;
+    private static final int CHECK_FORCED_TRACE_TIME_LIMIT = 3_000;
     /**
      * The time limit in milliseconds for the pull tight algorithm
      */
-    private static final int PULL_TIGHT_TIME_LIMIT = 2000;
+    private static final int PULL_TIGHT_TIME_LIMIT = 2_000;
     /**
      * The net numbers used for routing
      */

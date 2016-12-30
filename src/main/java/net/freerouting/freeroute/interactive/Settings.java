@@ -148,7 +148,7 @@ public class Settings implements java.io.Serializable {
         zoom_with_wheel = true;
         manual_trace_half_width_arr = new int[p_board.get_layer_count()];
         for (int i = 0; i < manual_trace_half_width_arr.length; ++i) {
-            manual_trace_half_width_arr[i] = 1000;
+            manual_trace_half_width_arr[i] = 1_000;
         }
         autoroute_settings = new AutorouteSettings(p_board);
         item_selection_filter = new ItemSelectionFilter();

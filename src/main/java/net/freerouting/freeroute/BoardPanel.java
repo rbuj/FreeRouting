@@ -84,9 +84,9 @@ public class BoardPanel extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         setBackground(new java.awt.Color(0, 0, 0));
-        setMaximumSize(new java.awt.Dimension(30000, 20000));
+        setMaximumSize(new java.awt.Dimension(30_000, 20_000));
         setMinimumSize(new java.awt.Dimension(90, 60));
-        setPreferredSize(new java.awt.Dimension(1200, 900));
+        setPreferredSize(new java.awt.Dimension(1_200, 900));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             @Override
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -281,7 +281,7 @@ public class BoardPanel extends javax.swing.JPanel {
      * cursor location
      */
     public java.awt.geom.Point2D zoom(double p_factor, java.awt.geom.Point2D p_location) {
-        final int max_panel_size = 10000000;
+        final int max_panel_size = 10_000_000;
         Dimension old_size = this.getSize();
         java.awt.geom.Point2D old_center = get_viewport_center();
 

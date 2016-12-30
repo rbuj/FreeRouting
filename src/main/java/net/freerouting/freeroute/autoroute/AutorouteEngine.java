@@ -103,7 +103,7 @@ public class AutorouteEngine {
         this.net_no = -1;
         this.autoroute_search_tree = p_board.search_tree_manager.get_autoroute_tree(p_trace_clearance_class_no);
         int max_drill_page_width = (int) (5 * p_board.rules.get_default_via_diameter());
-        max_drill_page_width = Math.max(max_drill_page_width, 10000);
+        max_drill_page_width = Math.max(max_drill_page_width, 10_000);
         this.drill_page_array = new DrillPageArray(this.board, max_drill_page_width);
         this.stoppable_thread = null;
     }
