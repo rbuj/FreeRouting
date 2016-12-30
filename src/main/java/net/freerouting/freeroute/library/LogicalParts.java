@@ -19,9 +19,9 @@
  */
 package net.freerouting.freeroute.library;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Spliterator;
-import java.util.ArrayList;
 import java.util.function.Consumer;
 
 /**
