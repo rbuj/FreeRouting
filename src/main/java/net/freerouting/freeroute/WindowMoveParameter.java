@@ -20,6 +20,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  * Window with the parameters for moving components.
  *
@@ -38,10 +40,10 @@ public class WindowMoveParameter extends BoardSavableSubWindow {
     /**
      * Creates a new instance of WindowMoveParameter
      */
-    public WindowMoveParameter(BoardFrame p_board_frame) {
+    public WindowMoveParameter(BoardFrame p_board_frame, Locale p_locale) {
         this.board_handling = p_board_frame.board_panel.board_handling;
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowMoveParameter", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowMoveParameter", p_locale);
         this.setTitle(resources.getString("title"));
 
         // create main panel
@@ -59,7 +61,7 @@ public class WindowMoveParameter extends BoardSavableSubWindow {
         gridbag.setConstraints(horizontal_grid_label, gridbag_constraints);
         main_panel.add(horizontal_grid_label);
 
-        java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(p_board_frame.get_locale());
+        java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(p_locale);
         number_format.setMaximumFractionDigits(7);
         this.horizontal_grid_field = new javax.swing.JFormattedTextField(number_format);
         this.horizontal_grid_field.setColumns(5);

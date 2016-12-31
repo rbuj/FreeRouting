@@ -21,6 +21,7 @@ package net.freerouting.freeroute;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import net.freerouting.freeroute.board.Layer;
 import net.freerouting.freeroute.rules.BoardRules;
 import net.freerouting.freeroute.rules.ViaRule;
@@ -48,8 +49,8 @@ public class WindowVia extends BoardSavableSubWindow {
     /**
      * Creates a new instance of ViaWindow
      */
-    public WindowVia(BoardFrame p_board_frame) {
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowVia", p_board_frame.get_locale());
+    public WindowVia(BoardFrame p_board_frame, Locale p_locale) {
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowVia", p_locale);
         this.setTitle(resources.getString("title"));
 
         this.board_frame = p_board_frame;
@@ -287,7 +288,7 @@ public class WindowVia extends BoardSavableSubWindow {
             // ask for the default radius
             javax.swing.JPanel default_radius_input_panel = new javax.swing.JPanel();
             default_radius_input_panel.add(new javax.swing.JLabel(resources.getString("message_3")));
-            java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(board_frame.get_locale());
+            java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(resources.getLocale());
             number_format.setMaximumFractionDigits(7);
             javax.swing.JFormattedTextField default_radius_input_field = new javax.swing.JFormattedTextField(number_format);
             default_radius_input_field.setColumns(7);
@@ -348,7 +349,7 @@ public class WindowVia extends BoardSavableSubWindow {
             for (int i = 0; i < layer_count; ++i) {
                 String label_string = resources.getString("radius_on_layer") + " " + layer_structure.arr[from_layer_no + i].name + ": ";
                 layer_names[i] = new javax.swing.JLabel(label_string);
-                java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(board_frame.get_locale());
+                java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(resources.getLocale());
                 number_format.setMaximumFractionDigits(7);
                 circle_radius[i] = new javax.swing.JFormattedTextField(number_format);
                 circle_radius[i].setColumns(7);
@@ -453,7 +454,7 @@ public class WindowVia extends BoardSavableSubWindow {
                 return;
             }
             net.freerouting.freeroute.rules.BoardRules board_rules = board_frame.board_panel.board_handling.get_routing_board().rules;
-            WindowViaRule new_window = new WindowViaRule((ViaRule) selected_object, board_rules.via_infos, board_frame);
+            WindowViaRule new_window = new WindowViaRule((ViaRule) selected_object, board_rules.via_infos, board_frame, resources.getLocale());
             java.awt.Point loc = getLocation();
             java.awt.Point new_window_location
                     = new java.awt.Point((int) (loc.getX() + WINDOW_OFFSET), (int) (loc.getY() + WINDOW_OFFSET));

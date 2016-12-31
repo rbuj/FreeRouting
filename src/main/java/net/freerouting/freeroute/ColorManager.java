@@ -26,6 +26,7 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
@@ -107,10 +108,10 @@ public class ColorManager extends BoardSavableSubWindow {
     /**
      * Creates a new instance of ColorManager
      */
-    public ColorManager(BoardFrame p_board_frame) {
+    public ColorManager(BoardFrame p_board_frame, Locale p_locale) {
         GraphicsContext graphics_context = p_board_frame.board_panel.board_handling.graphics_context;
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_locale);
         this.setTitle(resources.getString("color_manager"));
         final JPanel panel = new JPanel();
         final int textfield_height = 17;
@@ -120,12 +121,12 @@ public class ColorManager extends BoardSavableSubWindow {
 
         this.item_color_table = new JTable(graphics_context.item_color_table);
         item_color_table.setPreferredScrollableViewportSize(new Dimension(table_width, item_color_table_height));
-        JScrollPane item_scroll_pane = init_color_table(item_color_table, p_board_frame.get_locale());
+        JScrollPane item_scroll_pane = init_color_table(item_color_table, p_locale);
         panel.add(item_scroll_pane, BorderLayout.NORTH);
 
         this.other_color_table = new JTable(graphics_context.other_color_table);
         this.other_color_table.setPreferredScrollableViewportSize(new Dimension(table_width, textfield_height));
-        JScrollPane other_scroll_pane = init_color_table(other_color_table, p_board_frame.get_locale());
+        JScrollPane other_scroll_pane = init_color_table(other_color_table, p_locale);
         panel.add(other_scroll_pane, BorderLayout.SOUTH);
         getContentPane().add(panel, BorderLayout.CENTER);
         p_board_frame.set_context_sensitive_help(this, "WindowDisplay_Colors");

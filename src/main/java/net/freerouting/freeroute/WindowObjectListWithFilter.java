@@ -20,6 +20,7 @@
 package net.freerouting.freeroute;
 
 import java.io.IOException;
+import java.util.Locale;
 
 /**
  * Abstract class for windows displaying a list of objects The object name can
@@ -33,10 +34,10 @@ public abstract class WindowObjectListWithFilter extends WindowObjectList {
     /**
      * Creates a new instance of ObjectListWindowWithFilter
      */
-    public WindowObjectListWithFilter(BoardFrame p_board_frame) {
-        super(p_board_frame);
+    public WindowObjectListWithFilter(BoardFrame p_board_frame, Locale p_locale) {
+        super(p_board_frame, p_locale);
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowObjectList", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowObjectList", p_locale);
         javax.swing.JPanel input_panel = new javax.swing.JPanel();
         this.south_panel.add(input_panel, java.awt.BorderLayout.SOUTH);
 

@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
 import net.freerouting.freeroute.board.ItemSelectionFilter;
 
 /**
@@ -42,11 +43,11 @@ public class WindowSelectParameter extends BoardSavableSubWindow {
     /**
      * Creates a new instance of SelectWindow
      */
-    public WindowSelectParameter(BoardFrame p_board_frame) {
+    public WindowSelectParameter(BoardFrame p_board_frame, Locale p_locale) {
         this.board_handling = p_board_frame.board_panel.board_handling;
 
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowSelectParameter", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowSelectParameter", p_locale);
         this.setTitle(resources.getString("title"));
 
         // create main panel

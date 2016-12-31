@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  * Window for interactive changing of miscellanious display properties.
  *
@@ -44,10 +46,10 @@ public class WindowDisplayMisc extends BoardSavableSubWindow {
     /**
      * Creates a new instance of DisplayMiscWindow
      */
-    public WindowDisplayMisc(BoardFrame p_board_frame) {
+    public WindowDisplayMisc(BoardFrame p_board_frame, Locale p_locale) {
         this.panel = p_board_frame.board_panel;
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.DisplayMisc", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.DisplayMisc", p_locale);
         this.setTitle(resources.getString("title"));
 
         // Create main panel

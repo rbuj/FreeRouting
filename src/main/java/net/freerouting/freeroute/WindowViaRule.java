@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
 import net.freerouting.freeroute.rules.ViaInfo;
 import net.freerouting.freeroute.rules.ViaInfos;
 import net.freerouting.freeroute.rules.ViaRule;
@@ -48,11 +49,11 @@ public class WindowViaRule extends javax.swing.JFrame {
     /**
      * Creates a new instance of ViaRuleWindow
      */
-    public WindowViaRule(ViaRule p_via_rule, ViaInfos p_via_list, BoardFrame p_board_frame) {
+    public WindowViaRule(ViaRule p_via_rule, ViaInfos p_via_list, BoardFrame p_board_frame, Locale p_locale) {
         this.via_rule = p_via_rule;
         this.via_list = p_via_list;
 
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowViaRule", p_board_frame.get_locale());
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowViaRule", p_locale);
         this.setTitle(resources.getString("title") + " " + p_via_rule.name);
 
         this.main_panel = new javax.swing.JPanel();

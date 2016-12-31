@@ -20,6 +20,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  *
  * @author Alfons Wirtz
@@ -27,35 +29,40 @@ package net.freerouting.freeroute;
 @SuppressWarnings("serial")
 public class BoardMenuOther extends javax.swing.JMenu {
 
-    /**
-     * Returns a new other menu for the board frame.
-     */
-    public static BoardMenuOther get_instance(BoardFrame p_board_frame) {
-        final BoardMenuOther other_menu = new BoardMenuOther(p_board_frame);
-
-        other_menu.setText(other_menu.resources.getString("other"));
-
-        javax.swing.JMenuItem snapshots = new javax.swing.JMenuItem();
-        snapshots.setText(other_menu.resources.getString("snapshots"));
-        snapshots.setToolTipText(other_menu.resources.getString("snapshots_tooltip"));
-        snapshots.addActionListener((java.awt.event.ActionEvent evt) -> {
-            other_menu.board_frame.snapshot_window.setVisible(true);
-        });
-
-        other_menu.add(snapshots);
-
-        return other_menu;
-    }
-
+    private static BoardMenuOther other_menu;
     private final BoardFrame board_frame;
     private final java.util.ResourceBundle resources;
 
     /**
      * Creates a new instance of BoardMenuOther
      */
-    private BoardMenuOther(BoardFrame p_board_frame) {
+    private BoardMenuOther(BoardFrame p_board_frame, Locale p_locale) {
         board_frame = p_board_frame;
-        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuOther", p_board_frame.get_locale());
+        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuOther", p_locale);
     }
 
+    /**
+     * Returns a new other menu for the board frame.
+     */
+    public static BoardMenuOther get_instance(BoardFrame p_board_frame, Locale p_locale) {
+        if (other_menu == null) {
+            synchronized (BoardMenuOther.class) {
+                if (other_menu == null) {
+                    other_menu = new BoardMenuOther(p_board_frame, p_locale);
+
+                    other_menu.setText(other_menu.resources.getString("other"));
+
+                    javax.swing.JMenuItem snapshots = new javax.swing.JMenuItem();
+                    snapshots.setText(other_menu.resources.getString("snapshots"));
+                    snapshots.setToolTipText(other_menu.resources.getString("snapshots_tooltip"));
+                    snapshots.addActionListener((java.awt.event.ActionEvent evt) -> {
+                        other_menu.board_frame.snapshot_window.setVisible(true);
+                    });
+
+                    other_menu.add(snapshots);
+                }
+            }
+        }
+        return other_menu;
+    }
 }

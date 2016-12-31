@@ -22,6 +22,7 @@ package net.freerouting.freeroute;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import net.freerouting.freeroute.interactive.RatsNest;
 import net.freerouting.freeroute.rules.Net;
 import net.freerouting.freeroute.rules.NetClass;
@@ -39,9 +40,9 @@ public class WindowLengthViolations extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of WindowLengthViolations
      */
-    public WindowLengthViolations(BoardFrame p_board_frame) {
-        super(p_board_frame);
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowLengthViolations", p_board_frame.get_locale());
+    public WindowLengthViolations(BoardFrame p_board_frame, Locale p_locale) {
+        super(p_board_frame, p_locale);
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowLengthViolations", p_locale);
         this.setTitle(resources.getString("title"));
         this.list_empty_message.setText(resources.getString("list_empty"));
         p_board_frame.set_context_sensitive_help(this, "WindowObjectList_LengthViolations");

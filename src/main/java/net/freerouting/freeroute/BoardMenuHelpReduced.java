@@ -20,6 +20,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  *
  * @author Alfons Wirtz
@@ -35,9 +37,9 @@ public class BoardMenuHelpReduced extends javax.swing.JMenu {
      * BoardMenuHelp to avoid ClassNotFound exception when the library jh.jar is
      * not found, which is only used in the extended help menu.
      */
-    public BoardMenuHelpReduced(BoardFrame p_board_frame) {
+    public BoardMenuHelpReduced(BoardFrame p_board_frame, Locale p_locale) {
         this.board_frame = p_board_frame;
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuHelp", p_board_frame.get_locale());
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuHelp", p_locale);
         this.setText(this.resources.getString("help"));
 
         javax.swing.JMenuItem about_window = new javax.swing.JMenuItem();

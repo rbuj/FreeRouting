@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
 import net.freerouting.freeroute.board.ObjectInfoPanel.Printable;
 import net.freerouting.freeroute.rules.BoardRules;
 import net.freerouting.freeroute.rules.NetClass;
@@ -53,8 +54,8 @@ public class WindowNetClasses extends BoardSavableSubWindow {
     /**
      * Creates a new instance of NetClassesWindow
      */
-    public WindowNetClasses(BoardFrame p_board_frame) {
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowNetClasses", p_board_frame.get_locale());
+    public WindowNetClasses(BoardFrame p_board_frame, Locale p_locale) {
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowNetClasses", p_locale);
         this.setTitle(resources.getString("title"));
 
         this.board_frame = p_board_frame;
@@ -66,7 +67,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
 
         this.cl_class_combo_box = new javax.swing.JComboBox<>();
         this.via_rule_combo_box = new javax.swing.JComboBox<>();
-        this.layer_combo_box = new ComboBoxLayer(routing_board.layer_structure, p_board_frame.get_locale());
+        this.layer_combo_box = new ComboBoxLayer(routing_board.layer_structure, p_locale);
         add_combobox_items();
 
         add_table();
@@ -159,7 +160,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
         this.center_panel.add(scroll_pane, java.awt.BorderLayout.CENTER);
 
         // add message for german localisation bug
-        if (board_frame.get_locale().getLanguage().equalsIgnoreCase("de")) {
+        if (resources.getLocale().getLanguage().equalsIgnoreCase("de")) {
             javax.swing.JLabel bug_label
                     = new javax.swing.JLabel("Wegen eines Java-System-Bugs muss das Dezimalkomma in dieser Tabelle zur Zeit als Punkt eingegeben werden!");
             this.center_panel.add(bug_label, java.awt.BorderLayout.SOUTH);
@@ -199,7 +200,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
 
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
-            board_frame.board_panel.board_handling.get_routing_board().rules.append_net_class(board_frame.get_locale());
+            board_frame.board_panel.board_handling.get_routing_board().rules.append_net_class(resources.getLocale());
             adjust_table();
         }
     }

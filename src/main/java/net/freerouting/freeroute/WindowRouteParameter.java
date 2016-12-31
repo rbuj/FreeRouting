@@ -20,6 +20,7 @@
 package net.freerouting.freeroute;
 
 import java.util.Collection;
+import java.util.Locale;
 
 /**
  * Window handling parameters of the interactive routing.
@@ -62,14 +63,14 @@ public class WindowRouteParameter extends BoardSavableSubWindow {
     /**
      * Creates a new instance of RouteParameterWindow
      */
-    public WindowRouteParameter(BoardFrame p_board_frame) {
+    public WindowRouteParameter(BoardFrame p_board_frame, Locale p_locale) {
         this.board_handling = p_board_frame.board_panel.board_handling;
-        this.current_locale = p_board_frame.get_locale();
-        this.detail_window = new WindowRouteDetail(p_board_frame);
-        this.manual_rule_window = new WindowManualRules(p_board_frame);
+        this.current_locale = p_locale;
+        this.detail_window = new WindowRouteDetail(p_board_frame, p_locale);
+        this.manual_rule_window = new WindowManualRules(p_board_frame, current_locale);
 
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowRouteParameter", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowRouteParameter", current_locale);
         this.setTitle(resources.getString("title"));
 
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -237,7 +238,7 @@ public class WindowRouteParameter extends BoardSavableSubWindow {
         pin_exit_edge_to_turn_label.setToolTipText("pin_pad_to_turn_gap_tooltip");
         gridbag.setConstraints(pin_exit_edge_to_turn_label, gridbag_constraints);
         main_panel.add(pin_exit_edge_to_turn_label);
-        java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(p_board_frame.get_locale());
+        java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(current_locale);
         number_format.setMaximumFractionDigits(7);
         this.edge_to_turn_dist_field = new javax.swing.JFormattedTextField(number_format);
         this.edge_to_turn_dist_field.setColumns(5);

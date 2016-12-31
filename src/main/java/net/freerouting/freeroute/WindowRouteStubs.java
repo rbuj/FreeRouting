@@ -23,6 +23,7 @@ package net.freerouting.freeroute;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.SortedSet;
 import net.freerouting.freeroute.board.Item;
@@ -41,9 +42,9 @@ public class WindowRouteStubs extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of WindowRouteStubs
      */
-    public WindowRouteStubs(BoardFrame p_board_frame) {
-        super(p_board_frame);
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.CleanupWindows", p_board_frame.get_locale());
+    public WindowRouteStubs(BoardFrame p_board_frame, Locale p_locale) {
+        super(p_board_frame, p_locale);
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.CleanupWindows", p_locale);
         this.setTitle(resources.getString("route_stubs"));
         this.list_empty_message.setText(resources.getString("no_route_stubs_found"));
         p_board_frame.set_context_sensitive_help(this, "WindowObjectList_RouteStubs");
@@ -158,7 +159,7 @@ public class WindowRouteStubs extends WindowObjectListWithFilter {
             }
             String layer_name = board_frame.board_panel.board_handling.get_routing_board().layer_structure.arr[layer_no].name;
             String result = item_string + " " + resources.getString("stub_net") + " " + this.net.name + " "
-                    + resources.getString("at") + " " + this.location.to_string(board_frame.get_locale()) + " "
+                    + resources.getString("at") + " " + this.location.to_string(resources.getLocale()) + " "
                     + resources.getString("on_layer") + " " + layer_name;
             return result;
         }

@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
 import net.freerouting.freeroute.rules.ViaRule;
 
 /**
@@ -39,10 +40,10 @@ public class WindowManualRules extends BoardSavableSubWindow {
     /**
      * Creates a new instance of TraceWidthWindow
      */
-    public WindowManualRules(BoardFrame p_board_frame) {
+    public WindowManualRules(BoardFrame p_board_frame, Locale p_locale) {
         this.board_handling = p_board_frame.board_panel.board_handling;
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowManualRule", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowManualRule", p_locale);
         this.setTitle(resources.getString("title"));
 
         // create main panel
@@ -86,7 +87,7 @@ public class WindowManualRules extends BoardSavableSubWindow {
         gridbag_constraints.gridwidth = 2;
         gridbag.setConstraints(width_label, gridbag_constraints);
         main_panel.add(width_label);
-        java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(p_board_frame.get_locale());
+        java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(p_locale);
         number_format.setMaximumFractionDigits(7);
         this.trace_width_field = new javax.swing.JFormattedTextField(number_format);
         this.trace_width_field.setColumns(7);
@@ -104,7 +105,7 @@ public class WindowManualRules extends BoardSavableSubWindow {
         main_panel.add(layer_label);
 
         this.layer_combo_box
-                = new ComboBoxLayer(this.board_handling.get_routing_board().layer_structure, p_board_frame.get_locale());
+                = new ComboBoxLayer(this.board_handling.get_routing_board().layer_structure, p_locale);
         gridbag_constraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridbag.setConstraints(this.layer_combo_box, gridbag_constraints);
         main_panel.add(this.layer_combo_box);

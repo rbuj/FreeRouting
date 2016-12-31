@@ -23,6 +23,7 @@ package net.freerouting.freeroute;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.SortedSet;
 import net.freerouting.freeroute.board.Item;
@@ -40,9 +41,9 @@ public class WindowUnconnectedRoute extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of WindowUnconnectedRoute
      */
-    public WindowUnconnectedRoute(BoardFrame p_board_frame) {
-        super(p_board_frame);
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.CleanupWindows", p_board_frame.get_locale());
+    public WindowUnconnectedRoute(BoardFrame p_board_frame, Locale p_locale) {
+        super(p_board_frame, p_locale);
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.CleanupWindows", p_locale);
         this.setTitle(resources.getString("unconnected_route"));
         this.list_empty_message.setText(resources.getString("no_unconnected_route_found"));
         p_board_frame.set_context_sensitive_help(this, "WindowObjectList_UnconnectedRoute");

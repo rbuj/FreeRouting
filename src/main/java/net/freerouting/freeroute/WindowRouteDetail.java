@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
 import net.freerouting.freeroute.board.BoardOutline;
 
 /**
@@ -40,10 +41,10 @@ public class WindowRouteDetail extends BoardSavableSubWindow {
     /**
      * Creates a new instance of RouteDetailWindow
      */
-    public WindowRouteDetail(BoardFrame p_board_frame) {
+    public WindowRouteDetail(BoardFrame p_board_frame, Locale p_locale) {
         this.board_handling = p_board_frame.board_panel.board_handling;
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowRouteDetail", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowRouteDetail", p_locale);
         this.setTitle(resources.getString("title"));
 
         // create main panel

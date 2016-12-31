@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  * Interactive Frame to adjust the visibility of the individual board layers
  *
@@ -30,10 +32,10 @@ public class WindowLayerVisibility extends WindowVisibility {
     /**
      * Returns a new instance of LayerVisibilityFrame
      */
-    public static WindowLayerVisibility get_instance(BoardFrame p_board_frame) {
+    public static WindowLayerVisibility get_instance(BoardFrame p_board_frame, Locale p_locale) {
         BoardPanel board_panel = p_board_frame.board_panel;
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_locale);
         String title = resources.getString("layer_visibility");
         String header_message = resources.getString("layer_visibility_header");
         net.freerouting.freeroute.board.LayerStructure layer_structure = board_panel.board_handling.get_routing_board().layer_structure;
@@ -41,7 +43,7 @@ public class WindowLayerVisibility extends WindowVisibility {
         for (int i = 0; i < message_arr.length; ++i) {
             message_arr[i] = layer_structure.arr[i].name;
         }
-        WindowLayerVisibility result = new WindowLayerVisibility(p_board_frame, title, header_message, message_arr);
+        WindowLayerVisibility result = new WindowLayerVisibility(p_board_frame, title, header_message, message_arr, p_locale);
         for (int i = 0; i < message_arr.length; ++i) {
             result.set_slider_value(i, board_panel.board_handling.graphics_context.get_raw_layer_visibility(i));
         }
@@ -52,9 +54,8 @@ public class WindowLayerVisibility extends WindowVisibility {
     /**
      * Creates a new instance of LayerVisibilityFrame
      */
-    private WindowLayerVisibility(BoardFrame p_board_frame, String p_title, String p_header_message, String[] p_message_arr) {
-
-        super(p_board_frame, p_title, p_header_message, p_message_arr);
+    private WindowLayerVisibility(BoardFrame p_board_frame, String p_title, String p_header_message, String[] p_message_arr, Locale p_locale) {
+        super(p_board_frame, p_title, p_header_message, p_message_arr, p_locale);
     }
 
     @Override

@@ -21,6 +21,7 @@
 package net.freerouting.freeroute;
 
 import java.net.URL;
+import java.util.Locale;
 import javax.help.CSH;
 import javax.help.HelpSet;
 import javax.help.HelpSetException;
@@ -40,9 +41,9 @@ public class BoardMenuHelp extends BoardMenuHelpReduced {
      * BoardMenuHelpReduced to avoid ClassNotFound exception when the library
      * jh.jar is not found, which is only used in this extended class.
      */
-    public BoardMenuHelp(BoardFrame p_board_frame) {
-        super(p_board_frame);
-        this.initialize_help(p_board_frame.get_locale());
+    public BoardMenuHelp(BoardFrame p_board_frame, Locale p_locale) {
+        super(p_board_frame, p_locale);
+        this.initialize_help(p_locale);
         javax.swing.JMenuItem direct_help_window = new javax.swing.JMenuItem();
         direct_help_window.setText(this.resources.getString("direct_help"));
         if (direct_help != null) {
@@ -57,7 +58,7 @@ public class BoardMenuHelp extends BoardMenuHelpReduced {
         this.add(contents_window, 0);
     }
 
-    private void initialize_help(java.util.Locale p_locale) {
+    private void initialize_help(Locale p_locale) {
         // try to find the helpset and create a HelpBroker object
         if (BoardFrame.help_broker == null) {
             String language = p_locale.getLanguage();

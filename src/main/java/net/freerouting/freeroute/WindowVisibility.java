@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  * Interactive Frame to adjust the visibility of a set of objects
  *
@@ -37,7 +39,7 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
     /**
      * Creates a new instance of VisibilityFrame
      */
-    public WindowVisibility(BoardFrame p_board_frame, String p_title, String p_header_message, String[] p_message_arr) {
+    public WindowVisibility(BoardFrame p_board_frame, String p_title, String p_header_message, String[] p_message_arr, Locale p_locale) {
         this.board_panel = p_board_frame.board_panel;
         this.setTitle(p_title);
 
@@ -75,7 +77,7 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
         main_panel.add(empty_label);
         gridbag_constraints.gridwidth = 2;
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_locale);
         javax.swing.JButton min_all_button = new javax.swing.JButton(resources.getString("minimum_all"));
         min_all_button.setToolTipText(resources.getString("minimum_all_tooltip"));
         min_all_button.addActionListener(new MinAllButtonListener());

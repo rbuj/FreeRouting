@@ -21,6 +21,7 @@ package net.freerouting.freeroute;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import net.freerouting.freeroute.interactive.RatsNest;
 
 /**
@@ -33,10 +34,10 @@ public class WindowIncompletes extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of IncompletesWindow
      */
-    public WindowIncompletes(BoardFrame p_board_frame) {
-        super(p_board_frame);
+    public WindowIncompletes(BoardFrame p_board_frame, Locale p_locale) {
+        super(p_board_frame, p_locale);
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_locale);
         this.setTitle(resources.getString("incompletes"));
         this.list_empty_message.setText(resources.getString("route_completed"));
         p_board_frame.set_context_sensitive_help(this, "WindowObjectList_Incompletes");

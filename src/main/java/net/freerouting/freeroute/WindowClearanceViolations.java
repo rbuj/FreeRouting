@@ -21,6 +21,7 @@ package net.freerouting.freeroute;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import net.freerouting.freeroute.board.ClearanceViolation;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.interactive.ClearanceViolations;
@@ -37,9 +38,9 @@ public class WindowClearanceViolations extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of IncompletesWindow
      */
-    public WindowClearanceViolations(BoardFrame p_board_frame) {
-        super(p_board_frame);
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowClearanceViolations", p_board_frame.get_locale());
+    public WindowClearanceViolations(BoardFrame p_board_frame, Locale p_locale) {
+        super(p_board_frame, p_locale);
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowClearanceViolations", p_locale);
         this.setTitle(resources.getString("title"));
         this.list_empty_message.setText(resources.getString("list_empty_message"));
         p_board_frame.set_context_sensitive_help(this, "WindowObjectList_ClearanceViolations");
@@ -119,7 +120,7 @@ public class WindowClearanceViolations extends WindowObjectListWithFilter {
         public String toString() {
             net.freerouting.freeroute.board.LayerStructure layer_structure = board_frame.board_panel.board_handling.get_routing_board().layer_structure;
             String result = item_info(violation.first_item) + " - " + item_info(violation.second_item)
-                    + " " + resources.getString("at") + " " + location.to_string(board_frame.get_locale()) + " "
+                    + " " + resources.getString("at") + " " + location.to_string(resources.getLocale()) + " "
                     + resources.getString("on_layer") + " " + layer_structure.arr[violation.layer].name;
             return result;
         }
