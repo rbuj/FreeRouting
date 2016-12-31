@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 @SuppressWarnings("serial")
 public class BoardMenuParameter extends javax.swing.JMenu {
 
-    private static BoardMenuParameter parameter_menu;
+    private volatile static BoardMenuParameter parameter_menu = null;
     private final BoardFrame board_frame;
     private final ResourceBundle resources;
 
@@ -48,43 +48,41 @@ public class BoardMenuParameter extends javax.swing.JMenu {
     public static BoardMenuParameter get_instance(BoardFrame p_board_frame, Locale p_locale) {
         if (parameter_menu == null) {
             synchronized (BoardMenuParameter.class) {
-                if (parameter_menu == null) {
-                    parameter_menu = new BoardMenuParameter(p_board_frame, p_locale);
+                parameter_menu = new BoardMenuParameter(p_board_frame, p_locale);
 
-                    parameter_menu.setText(parameter_menu.resources.getString("parameter"));
+                parameter_menu.setText(parameter_menu.resources.getString("parameter"));
 
-                    javax.swing.JMenuItem selectwindow = new javax.swing.JMenuItem();
-                    selectwindow.setText(parameter_menu.resources.getString("select"));
-                    selectwindow.addActionListener((java.awt.event.ActionEvent evt) -> {
-                        parameter_menu.board_frame.select_parameter_window.setVisible(true);
-                    });
+                javax.swing.JMenuItem selectwindow = new javax.swing.JMenuItem();
+                selectwindow.setText(parameter_menu.resources.getString("select"));
+                selectwindow.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    parameter_menu.board_frame.select_parameter_window.setVisible(true);
+                });
 
-                    parameter_menu.add(selectwindow);
+                parameter_menu.add(selectwindow);
 
-                    javax.swing.JMenuItem routewindow = new javax.swing.JMenuItem();
-                    routewindow.setText(parameter_menu.resources.getString("route"));
-                    routewindow.addActionListener((java.awt.event.ActionEvent evt) -> {
-                        parameter_menu.board_frame.route_parameter_window.setVisible(true);
-                    });
+                javax.swing.JMenuItem routewindow = new javax.swing.JMenuItem();
+                routewindow.setText(parameter_menu.resources.getString("route"));
+                routewindow.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    parameter_menu.board_frame.route_parameter_window.setVisible(true);
+                });
 
-                    parameter_menu.add(routewindow);
+                parameter_menu.add(routewindow);
 
-                    javax.swing.JMenuItem autoroutewindow = new javax.swing.JMenuItem();
-                    autoroutewindow.setText(parameter_menu.resources.getString("autoroute"));
-                    autoroutewindow.addActionListener((java.awt.event.ActionEvent evt) -> {
-                        parameter_menu.board_frame.autoroute_parameter_window.setVisible(true);
-                    });
+                javax.swing.JMenuItem autoroutewindow = new javax.swing.JMenuItem();
+                autoroutewindow.setText(parameter_menu.resources.getString("autoroute"));
+                autoroutewindow.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    parameter_menu.board_frame.autoroute_parameter_window.setVisible(true);
+                });
 
-                    parameter_menu.add(autoroutewindow);
+                parameter_menu.add(autoroutewindow);
 
-                    javax.swing.JMenuItem movewindow = new javax.swing.JMenuItem();
-                    movewindow.setText(parameter_menu.resources.getString("move"));
-                    movewindow.addActionListener((java.awt.event.ActionEvent evt) -> {
-                        parameter_menu.board_frame.move_parameter_window.setVisible(true);
-                    });
+                javax.swing.JMenuItem movewindow = new javax.swing.JMenuItem();
+                movewindow.setText(parameter_menu.resources.getString("move"));
+                movewindow.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    parameter_menu.board_frame.move_parameter_window.setVisible(true);
+                });
 
-                    parameter_menu.add(movewindow);
-                }
+                parameter_menu.add(movewindow);
             }
         }
         return parameter_menu;

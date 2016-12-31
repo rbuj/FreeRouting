@@ -57,7 +57,7 @@ public final class MainApp extends Application {
     private static boolean session_file_option = false;
     private static String design_file_name = "";
     private static String design_dir_name = "";
-    private static Locale locale = null;
+    private volatile static Locale locale = null;
     private Stage mainStage;
     private static TestLevel test_level;
 

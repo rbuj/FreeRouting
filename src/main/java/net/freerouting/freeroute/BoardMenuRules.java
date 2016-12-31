@@ -29,7 +29,7 @@ import java.util.Locale;
 @SuppressWarnings("serial")
 public class BoardMenuRules extends javax.swing.JMenu {
 
-    private static BoardMenuRules rules_menu;
+    private volatile static BoardMenuRules rules_menu = null;
     private final BoardFrame board_frame;
     private final java.util.ResourceBundle resources;
 
@@ -47,40 +47,38 @@ public class BoardMenuRules extends javax.swing.JMenu {
     public static BoardMenuRules get_instance(BoardFrame p_board_frame, Locale p_locale) {
         if (rules_menu == null) {
             synchronized (BoardMenuRules.class) {
-                if (rules_menu == null) {
-                    rules_menu = new BoardMenuRules(p_board_frame, p_locale);
+                rules_menu = new BoardMenuRules(p_board_frame, p_locale);
 
-                    rules_menu.setText(rules_menu.resources.getString("rules"));
+                rules_menu.setText(rules_menu.resources.getString("rules"));
 
-                    javax.swing.JMenuItem clearance_window = new javax.swing.JMenuItem();
-                    clearance_window.setText(rules_menu.resources.getString("clearance_matrix"));
-                    clearance_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-                        rules_menu.board_frame.clearance_matrix_window.setVisible(true);
-                    });
-                    rules_menu.add(clearance_window);
+                javax.swing.JMenuItem clearance_window = new javax.swing.JMenuItem();
+                clearance_window.setText(rules_menu.resources.getString("clearance_matrix"));
+                clearance_window.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    rules_menu.board_frame.clearance_matrix_window.setVisible(true);
+                });
+                rules_menu.add(clearance_window);
 
-                    javax.swing.JMenuItem via_window = new javax.swing.JMenuItem();
-                    via_window.setText(rules_menu.resources.getString("vias"));
-                    via_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-                        rules_menu.board_frame.via_window.setVisible(true);
-                    });
-                    rules_menu.add(via_window);
+                javax.swing.JMenuItem via_window = new javax.swing.JMenuItem();
+                via_window.setText(rules_menu.resources.getString("vias"));
+                via_window.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    rules_menu.board_frame.via_window.setVisible(true);
+                });
+                rules_menu.add(via_window);
 
-                    javax.swing.JMenuItem nets_window = new javax.swing.JMenuItem();
-                    nets_window.setText(rules_menu.resources.getString("nets"));
-                    nets_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-                        rules_menu.board_frame.net_info_window.setVisible(true);
-                    });
+                javax.swing.JMenuItem nets_window = new javax.swing.JMenuItem();
+                nets_window.setText(rules_menu.resources.getString("nets"));
+                nets_window.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    rules_menu.board_frame.net_info_window.setVisible(true);
+                });
 
-                    rules_menu.add(nets_window);
+                rules_menu.add(nets_window);
 
-                    javax.swing.JMenuItem net_class_window = new javax.swing.JMenuItem();
-                    net_class_window.setText(rules_menu.resources.getString("net_classes"));
-                    net_class_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-                        rules_menu.board_frame.edit_net_rules_window.setVisible(true);
-                    });
-                    rules_menu.add(net_class_window);
-                }
+                javax.swing.JMenuItem net_class_window = new javax.swing.JMenuItem();
+                net_class_window.setText(rules_menu.resources.getString("net_classes"));
+                net_class_window.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    rules_menu.board_frame.edit_net_rules_window.setVisible(true);
+                });
+                rules_menu.add(net_class_window);
             }
         }
         return rules_menu;
