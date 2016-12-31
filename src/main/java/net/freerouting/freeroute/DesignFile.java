@@ -47,10 +47,10 @@ import net.freerouting.freeroute.interactive.BoardHandlingException;
  */
 public class DesignFile {
 
-    protected static final String[] ALL_FILE_EXTENSIONS = new String[]{"bin", "dsn"};
-    protected static final String[] TEXT_FILE_EXTENSIONS = new String[]{"dsn"};
-    protected static final String BINARY_FILE_EXTENSIONS = "bin";
-    protected static final String RULES_FILE_EXTENSION = ".rules";
+    static final String[] ALL_FILE_EXTENSIONS = new String[]{"bin", "dsn"};
+    static final String[] TEXT_FILE_EXTENSIONS = new String[]{"dsn"};
+    public static final String BINARY_FILE_EXTENSIONS = "bin";
+    public static final String RULES_FILE_EXTENSION = ".rules";
 
     private File output_file;
     private File input_file;
