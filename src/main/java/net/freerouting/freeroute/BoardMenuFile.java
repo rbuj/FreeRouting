@@ -41,7 +41,6 @@ import static net.freerouting.freeroute.DesignFile.ALL_FILE_EXTENSIONS;
 @SuppressWarnings("serial")
 public class BoardMenuFile extends javax.swing.JMenu {
 
-    private volatile static BoardMenuFile file_menu = null;
     private final BoardFrame board_frame;
     private final boolean session_file_option;
     private final ResourceBundle resources;
@@ -59,83 +58,80 @@ public class BoardMenuFile extends javax.swing.JMenu {
      * Returns a new file menu for the board frame.
      */
     public static BoardMenuFile get_instance(BoardFrame p_board_frame, Locale p_locale, boolean p_session_file_option) {
-        if (file_menu == null) {
-            synchronized (BoardMenuFile.class) {
-                file_menu = new BoardMenuFile(p_board_frame, p_locale, p_session_file_option);
+        BoardMenuFile file_menu = new BoardMenuFile(p_board_frame, p_locale, p_session_file_option);
 
-                file_menu.setText(file_menu.resources.getString("file"));
+        file_menu.setText(file_menu.resources.getString("file"));
 
-                // Create the menu items.
-                if (!p_session_file_option) {
-                    javax.swing.JMenuItem save_item = new javax.swing.JMenuItem();
-                    save_item.setText(file_menu.resources.getString("save"));
-                    save_item.setToolTipText(file_menu.resources.getString("save_tooltip"));
-                    save_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-                        boolean save_ok = file_menu.board_frame.save();
-                        file_menu.board_frame.board_panel.board_handling.close_files();
-                        if (save_ok) {
-                            file_menu.board_frame.screen_messages.set_status_message(file_menu.resources.getString("save_message"));
-                        }
-                    });
-
-                    file_menu.add(save_item);
+        // Create the menu items.
+        if (!p_session_file_option) {
+            javax.swing.JMenuItem save_item = new javax.swing.JMenuItem();
+            save_item.setText(file_menu.resources.getString("save"));
+            save_item.setToolTipText(file_menu.resources.getString("save_tooltip"));
+            save_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                boolean save_ok = file_menu.board_frame.save();
+                file_menu.board_frame.board_panel.board_handling.close_files();
+                if (save_ok) {
+                    file_menu.board_frame.screen_messages.set_status_message(file_menu.resources.getString("save_message"));
                 }
+            });
 
-                javax.swing.JMenuItem save_and_exit_item = new javax.swing.JMenuItem();
-                save_and_exit_item.setText(file_menu.resources.getString("save_and_exit"));
-                save_and_exit_item.setToolTipText(file_menu.resources.getString("save_and_exit_tooltip"));
-                save_and_exit_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-                    if (file_menu.session_file_option) {
-                        file_menu.board_frame.design_file.write_specctra_session_file(file_menu.board_frame, p_locale);
-                    } else {
-                        file_menu.board_frame.save();
-                    }
-                    file_menu.board_frame.dispose();
-                });
-
-                file_menu.add(save_and_exit_item);
-
-                javax.swing.JMenuItem cancel_and_exit_item = new javax.swing.JMenuItem();
-                cancel_and_exit_item.setText(file_menu.resources.getString("cancel_and_exit"));
-                cancel_and_exit_item.setToolTipText(file_menu.resources.getString("cancel_and_exit_tooltip"));
-                cancel_and_exit_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-                    file_menu.board_frame.dispose();
-                });
-
-                file_menu.add(cancel_and_exit_item);
-
-                if (!file_menu.session_file_option) {
-                    javax.swing.JMenuItem save_as_item = new javax.swing.JMenuItem();
-                    save_as_item.setText(file_menu.resources.getString("save_as"));
-                    save_as_item.setToolTipText(file_menu.resources.getString("save_as_tooltip"));
-                    save_as_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-                        file_menu.save_as_action();
-                    });
-
-                    file_menu.add(save_as_item);
-
-                    javax.swing.JMenuItem write_logfile_item = new javax.swing.JMenuItem();
-                    write_logfile_item.setText(file_menu.resources.getString("generate_logfile"));
-                    write_logfile_item.setToolTipText(file_menu.resources.getString("generate_logfile_tooltip"));
-                    write_logfile_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-                        file_menu.write_logfile_action();
-                    });
-
-                    file_menu.add(write_logfile_item);
-
-                    javax.swing.JMenuItem replay_logfile_item = new javax.swing.JMenuItem();
-                    replay_logfile_item.setText(file_menu.resources.getString("replay_logfile"));
-                    replay_logfile_item.setToolTipText(file_menu.resources.getString("replay_logfile_tooltip"));
-                    replay_logfile_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-                        file_menu.read_logfile_action();
-                    });
-
-                    file_menu.add(replay_logfile_item);
-                }
-
-                file_menu.add_save_settings_item();
-            }
+            file_menu.add(save_item);
         }
+
+        javax.swing.JMenuItem save_and_exit_item = new javax.swing.JMenuItem();
+        save_and_exit_item.setText(file_menu.resources.getString("save_and_exit"));
+        save_and_exit_item.setToolTipText(file_menu.resources.getString("save_and_exit_tooltip"));
+        save_and_exit_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            if (file_menu.session_file_option) {
+                file_menu.board_frame.design_file.write_specctra_session_file(file_menu.board_frame, p_locale);
+            } else {
+                file_menu.board_frame.save();
+            }
+            file_menu.board_frame.dispose();
+        });
+
+        file_menu.add(save_and_exit_item);
+
+        javax.swing.JMenuItem cancel_and_exit_item = new javax.swing.JMenuItem();
+        cancel_and_exit_item.setText(file_menu.resources.getString("cancel_and_exit"));
+        cancel_and_exit_item.setToolTipText(file_menu.resources.getString("cancel_and_exit_tooltip"));
+        cancel_and_exit_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+            file_menu.board_frame.dispose();
+        });
+
+        file_menu.add(cancel_and_exit_item);
+
+        if (!file_menu.session_file_option) {
+            javax.swing.JMenuItem save_as_item = new javax.swing.JMenuItem();
+            save_as_item.setText(file_menu.resources.getString("save_as"));
+            save_as_item.setToolTipText(file_menu.resources.getString("save_as_tooltip"));
+            save_as_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                file_menu.save_as_action();
+            });
+
+            file_menu.add(save_as_item);
+
+            javax.swing.JMenuItem write_logfile_item = new javax.swing.JMenuItem();
+            write_logfile_item.setText(file_menu.resources.getString("generate_logfile"));
+            write_logfile_item.setToolTipText(file_menu.resources.getString("generate_logfile_tooltip"));
+            write_logfile_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                file_menu.write_logfile_action();
+            });
+
+            file_menu.add(write_logfile_item);
+
+            javax.swing.JMenuItem replay_logfile_item = new javax.swing.JMenuItem();
+            replay_logfile_item.setText(file_menu.resources.getString("replay_logfile"));
+            replay_logfile_item.setToolTipText(file_menu.resources.getString("replay_logfile_tooltip"));
+            replay_logfile_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                file_menu.read_logfile_action();
+            });
+
+            file_menu.add(replay_logfile_item);
+        }
+
+        file_menu.add_save_settings_item();
+
         return file_menu;
     }
 
