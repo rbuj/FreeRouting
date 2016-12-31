@@ -155,7 +155,8 @@ public class BoardFrame extends javax.swing.JFrame {
         this(p_design, p_launch_mode, p_test_level, new BoardObserverAdaptor(),
                 new ItemIdNoGenerator(), p_locale, p_confirm_cancel);
         read();
-        menubar.add_design_dependent_items();
+// FIX-ME: java.lang.NullPointerException
+//        menubar.add_design_dependent_items();
         if (design_file.is_created_from_text_file()) {
             try {
                 // Read the file  with the saved rules, if it is existing.
