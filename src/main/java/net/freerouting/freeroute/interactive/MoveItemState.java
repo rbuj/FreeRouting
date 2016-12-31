@@ -426,7 +426,7 @@ public class MoveItemState extends InteractiveState {
         for (Component curr_component : this.component_list) {
             if (component_to_reset == null) {
                 component_to_reset = curr_component;
-            } else if (component_to_reset.get_rotation_in_degree() != curr_component.get_rotation_in_degree()) {
+            } else if (Math.abs(component_to_reset.get_rotation_in_degree() - curr_component.get_rotation_in_degree()) >= .0000001) {
                 hdlg.screen_messages.set_status_message(resources.getString("unable_to_reset_components_with_different_rotations"));
                 return;
             }

@@ -274,7 +274,7 @@ public class IntPoint extends Point {
             }
         }
         IntPoint result;
-        if (min_dist == dist_arr[0]) {
+        if (Math.abs(min_dist - dist_arr[0]) < .0000001) {
             // projection onto the vertical line through p_other
             result = new IntPoint(p_other.x, this.y);
         } else if (min_dist == dist_arr[1]) {

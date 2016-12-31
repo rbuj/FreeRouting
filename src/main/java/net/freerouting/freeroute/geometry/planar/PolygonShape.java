@@ -708,7 +708,7 @@ public class PolygonShape extends PolylineShape {
             for (int i = 0; i < loop_end; ++i) {
                 Point corner_after_curr_projection = corners[corner_no_after_curr_projection];
                 FloatPoint corner_after_projection_approx = corner_after_curr_projection.to_float();
-                if (corner_before_projection_approx.y != corner_after_projection_approx.y) // try a horizontal division
+                if (Math.abs(corner_before_projection_approx.y - corner_after_projection_approx.y) >= .0000001) // try a horizontal division
                 {
                     double min_y;
                     double max_y;

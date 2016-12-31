@@ -99,7 +99,7 @@ public class Circle implements ConvexShape, java.io.Serializable {
     @Override
     public boolean contains_on_border(Point p_point) {
         FloatPoint fp = p_point.to_float();
-        return fp.distance_square(center.to_float()) == (double) radius * radius;
+        return (Math.abs(fp.distance_square(center.to_float()) - (double) radius * radius) < .0000001);
     }
 
     @Override

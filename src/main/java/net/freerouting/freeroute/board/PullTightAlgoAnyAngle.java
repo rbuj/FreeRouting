@@ -478,7 +478,7 @@ class PullTightAlgoAnyAngle extends PullTightAlgo {
                 delta_dist /= 2;
                 if (check_ok) {
                     result = curr_lines[p_start_no + 2];
-                    if (translate_dist == max_translate_dist) {
+                    if (Math.abs(translate_dist - max_translate_dist) < .0000001) {
                         // biggest possible change
                         break;
                     }
@@ -645,7 +645,7 @@ class PullTightAlgoAnyAngle extends PullTightAlgo {
                 delta_dist /= 2;
                 if (check_ok) {
                     result = curr_lines[p_start_no + 2];
-                    if (translate_dist == max_translate_dist) {
+                    if (Math.abs(translate_dist - max_translate_dist) < .0000001) {
                         // biggest possible change
                         break;
                     }

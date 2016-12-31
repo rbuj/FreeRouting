@@ -208,7 +208,7 @@ public class BoardHandling {
             return;
         }
         double edge_to_turn_dist = this.coordinate_transform.user_to_board(p_value);
-        if (edge_to_turn_dist != board.rules.get_pin_edge_to_turn_dist()) {
+        if (Math.abs(edge_to_turn_dist - board.rules.get_pin_edge_to_turn_dist()) >= .0000001) {
             // unfix the pin exit stubs
             Collection<net.freerouting.freeroute.board.Pin> pin_list = board.get_pins();
             for (net.freerouting.freeroute.board.Pin curr_pin : pin_list) {

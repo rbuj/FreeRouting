@@ -427,7 +427,7 @@ class PullTightAlgo45 extends PullTightAlgo {
                 delta_dist /= 2;
                 if (check_ok) {
                     result = check_lines[1];
-                    if (translate_dist == max_translate_dist) {
+                    if (Math.abs(translate_dist - max_translate_dist) < .0000001) {
                         // biggest possible change
                         break;
                     }
