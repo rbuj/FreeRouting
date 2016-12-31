@@ -35,13 +35,15 @@ class BoardMenuBar extends javax.swing.JMenuBar {
         this.file_menu.add_design_dependent_items();
     }
 
+    BoardMenuBar (BoardFrame p_board_frame, Locale p_locale, boolean p_session_file_option) {
+        file_menu = BoardMenuFile.get_instance(p_board_frame, p_locale, p_session_file_option);
+    }
+
     /**
      * Creates a new BoardMenuBar together with its menus
      */
     public static BoardMenuBar get_instance(BoardFrame p_board_frame, Locale p_locale, boolean p_session_file_option) {
-        BoardMenuBar menubar = new BoardMenuBar();
-
-        menubar.file_menu = BoardMenuFile.get_instance(p_board_frame, p_locale, p_session_file_option);
+        BoardMenuBar menubar = new BoardMenuBar(p_board_frame, p_locale, p_session_file_option);
         menubar.add(menubar.file_menu);
 
         javax.swing.JMenu display_menu = BoardMenuDisplay.get_instance(p_board_frame, p_locale);
