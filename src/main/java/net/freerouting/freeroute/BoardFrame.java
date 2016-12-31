@@ -667,12 +667,10 @@ public class BoardFrame extends javax.swing.JFrame {
         @Override
         public void windowClosing(java.awt.event.WindowEvent evt) {
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            if (confirm_cancel) {
-                int option = javax.swing.JOptionPane.showConfirmDialog(null, resources.getString("confirm_cancel"),
-                        null, javax.swing.JOptionPane.YES_NO_OPTION);
-                if (option == javax.swing.JOptionPane.NO_OPTION) {
-                    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                }
+            int option = javax.swing.JOptionPane.showConfirmDialog(null, resources.getString("confirm_cancel"),
+                    null, javax.swing.JOptionPane.YES_NO_OPTION);
+            if (option == javax.swing.JOptionPane.NO_OPTION) {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
         }
 
