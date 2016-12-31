@@ -46,7 +46,7 @@ public class MainAppController implements Initializable {
 
     private Stage mainStage;
 
-    protected static SimpleStringProperty sp_message_field;
+    protected SimpleStringProperty sp_message_field;
     private ResourceBundle resourceBundle;
     private TestLevel test_level = null;
     private LaunchMode launch_mode;
