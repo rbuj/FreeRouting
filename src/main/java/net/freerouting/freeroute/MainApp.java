@@ -184,7 +184,8 @@ public final class MainApp extends Application {
              */
             launch(args);
         } catch (IOException | IllegalArgumentException exc) {
-            LOGGER.log(Level.SEVERE, exc.toString(), exc);
+            LOGGER.log(Level.SEVERE, exc.toString());
+            System.exit(1);
         }
     }
 
