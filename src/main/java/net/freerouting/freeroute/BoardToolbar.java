@@ -20,6 +20,7 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import javax.swing.SwingConstants;
 
 /**
  * Implements the toolbar panel of the board frame.
@@ -193,7 +194,7 @@ class BoardToolbar extends javax.swing.JPanel {
         unit_label.setPreferredSize(new java.awt.Dimension(30, 21));
         right_toolbar.add(unit_label);
 
-        unit_factor_field.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        unit_factor_field.setHorizontalAlignment(SwingConstants.CENTER);
         unit_factor_field.setValue(1);
         unit_factor_field.setMaximumSize(new java.awt.Dimension(100, 18));
         unit_factor_field.setMinimumSize(new java.awt.Dimension(40, 18));
