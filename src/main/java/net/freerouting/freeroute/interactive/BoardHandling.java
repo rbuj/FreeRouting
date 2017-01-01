@@ -465,7 +465,7 @@ public class BoardHandling {
      * Displays all incomplete connections.
      */
     public void create_ratsnest() {
-        ratsnest = new RatsNest(this.board, this.locale);
+        ratsnest = new RatsNest(this.board);
         Integer incomplete_count = ratsnest.incomplete_count();
         Integer length_violation_count = ratsnest.length_violation_count();
         String curr_message;
@@ -503,7 +503,7 @@ public class BoardHandling {
      */
     void update_ratsnest() {
         if (ratsnest != null) {
-            ratsnest = new RatsNest(this.board, this.locale);
+            ratsnest = new RatsNest(this.board);
         }
     }
 
@@ -539,7 +539,7 @@ public class BoardHandling {
      */
     public RatsNest get_ratsnest() {
         if (ratsnest == null) {
-            ratsnest = new RatsNest(this.board, this.locale);
+            ratsnest = new RatsNest(this.board);
         }
         return this.ratsnest;
     }

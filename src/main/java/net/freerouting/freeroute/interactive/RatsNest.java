@@ -47,7 +47,7 @@ public class RatsNest {
     /**
      * Creates a new instance of RatsNest
      */
-    public RatsNest(BasicBoard p_board, java.util.Locale p_locale) {
+    public RatsNest(BasicBoard p_board) {
         int max_net_no = p_board.rules.nets.max_net_no();
         // Create the net item lists at once for performance reasons.
         Vector<Collection<Item>> net_item_lists = new Vector<>(max_net_no);
