@@ -27,6 +27,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
+import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import net.freerouting.freeroute.geometry.planar.Area;
@@ -306,7 +307,7 @@ public class GraphicsContext implements java.io.Serializable {
         if (p_color == null || p_ellipse_arr.length <= 0) {
             return;
         }
-        GeneralPath draw_path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
+        GeneralPath draw_path = new GeneralPath(Path2D.WIND_EVEN_ODD);
         for (Ellipse curr_ellipse : p_ellipse_arr) {
             Point2D center = coordinate_transform.board_to_screen(curr_ellipse.center);
             double bigger_radius = coordinate_transform.board_to_screen(curr_ellipse.bigger_radius);
@@ -377,7 +378,7 @@ public class GraphicsContext implements java.io.Serializable {
         if (p_color == null) {
             return;
         }
-        GeneralPath draw_path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
+        GeneralPath draw_path = new GeneralPath(Path2D.WIND_EVEN_ODD);
         for (int j = 0; j < p_point_lists.length; ++j) {
             Polygon draw_polygon = new Polygon();
             FloatPoint[] curr_point_list = p_point_lists[j];
