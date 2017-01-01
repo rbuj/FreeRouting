@@ -28,6 +28,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
+import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 
 /**
@@ -77,7 +78,7 @@ public abstract class Cursor {
             if (p_graphics instanceof Graphics2D) {
                 Graphics2D g2 = (Graphics2D) p_graphics;
                 init_graphics(g2);
-                GeneralPath draw_path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
+                GeneralPath draw_path = new GeneralPath(Path2D.WIND_EVEN_ODD);
                 draw_path.append(VERTICAL_LINE, false);
                 draw_path.append(HORIZONTAL_LINE, false);
                 draw_path.append(RIGHT_DIAGONAL_LINE, false);
