@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -62,6 +64,100 @@ public final class MainApp extends Application {
     private static TestLevel test_level;
 
     @Override
+    public void init() throws Exception {
+        /**
+         * Parse commandline arguments
+         */
+        try {
+            boolean test_version_option = false;
+            Parameters parameters = getParameters();
+            List<String> list = parameters.getRaw();
+            Iterator<String> iterator = list.iterator();
+            while (iterator.hasNext()) {
+                String string = iterator.next();
+                switch (string) {
+                    // the design file is provided
+                    case "-de":
+                        if (iterator.hasNext()) {
+                            single_design_option = true;
+                            design_file_name = iterator.next();
+                        } else {
+                            throw new IllegalArgumentException("Argument: " + string + " [missing design_file]");
+                        }
+                        break;
+                    // the design directory is provided
+                    case "-di":
+                        if (iterator.hasNext()) {
+                            design_dir_name = iterator.next();
+                        } else {
+                            throw new IllegalArgumentException("Argument: " + string + " [missing design_dir]");
+                        }
+                        break;
+                    // the locale is provided
+                    case "-l":
+                        if (iterator.hasNext()) {
+                            String new_locale = iterator.next();
+                            try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
+                                String line = reader.readLine();
+                                while (line != null) {
+                                    if (line.equals(new_locale)) {
+                                        locale = new Locale(new_locale, "");
+                                        break;
+                                    }
+                                    line = reader.readLine();
+                                }
+                            }
+                            if (locale == null) {
+                                LOGGER.log(Level.INFO, "locale: " + new_locale + " not found [using default]");
+                                locale = new Locale("en", "");
+                            }
+                        } else {
+                            throw new IllegalArgumentException("Argument: " + string + " [missing locale]");
+                        }
+                        break;
+                    case "-s":
+                        session_file_option = true;
+                        break;
+                    case "-test":
+                        test_version_option = true;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Argument: " + string + " [not recognized]");
+                }
+            }
+
+            if (locale == null) {
+                String new_locale = java.util.Locale.getDefault().getLanguage();
+                try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
+                    String line = reader.readLine();
+                    while (line != null) {
+                        if (line.equals(new_locale)) {
+                            locale = new Locale(new_locale, "");
+                            break;
+                        }
+                        line = reader.readLine();
+                    }
+                }
+                if (locale == null) {
+                    locale = new Locale("en", "");
+                }
+            }
+
+            /**
+             * Set data fields
+             */
+            if (test_version_option) {
+                test_level = DEBUG_LEVEL;
+            } else {
+                test_level = TestLevel.RELEASE_VERSION;
+            }
+        } catch (IOException | IllegalArgumentException exc) {
+            LOGGER.log(Level.SEVERE, exc.toString());
+            System.exit(1);
+        }
+    }
+
+    @Override
     public void start(Stage stage) throws Exception {
         mainStage = stage;
         ResourceBundle resources
@@ -87,7 +183,7 @@ public final class MainApp extends Application {
             launch_mode = LaunchMode.FROM_START_MENU;
         }
 
-//                new DesignFile((design_file_name.isEmpty() ? null : new File(design_file_name)), design_dir_name),
+//      new DesignFile((design_file_name.isEmpty() ? null : new File(design_file_name)), design_dir_name),
         controller.init_variables(
                 design_dir_name,
                 design_file_name.isEmpty() ? null : new File(design_file_name),
@@ -109,84 +205,7 @@ public final class MainApp extends Application {
      * Main function of the Application
      */
     public static void main(String[] args) {
-        boolean test_version_option = false;
-        /**
-         * Parse arguments
-         */
-        try {
-            for (int i = 0; i < args.length; ++i) {
-                switch (args[i]) {
-                    // the design file is provided
-                    case "-de":
-                        single_design_option = true;
-                        design_file_name = args[i + 1];
-                        ++i;
-                        break;
-                    // the design directory is provided
-                    case "-di":
-                        design_dir_name = args[i + 1];
-                        ++i;
-                        break;
-                    // the locale is provided
-                    case "-l":
-                        String new_locale = args[i + 1].substring(0, 2);
-                        try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
-                            String line = reader.readLine();
-                            while (line != null) {
-                                if (line.equals(new_locale)) {
-                                    locale = new Locale(new_locale, "");
-                                    break;
-                                }
-                                line = reader.readLine();
-                            }
-                        }
-                        if (locale == null) {
-                            locale = new Locale("en", "");
-                        }
-                        ++i;
-                        break;
-                    case "-s":
-                        session_file_option = true;
-                        break;
-                    case "-test":
-                        test_version_option = true;
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Argument: " + args[i] + " [not recognized]");
-                }
-            }
-            if (locale == null) {
-                String new_locale = java.util.Locale.getDefault().getLanguage();
-                try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
-                    String line = reader.readLine();
-                    while (line != null) {
-                        if (line.equals(new_locale)) {
-                            locale = new Locale(new_locale, "");
-                            break;
-                        }
-                        line = reader.readLine();
-                    }
-                }
-                if (locale == null) {
-                    locale = new Locale("en", "");
-                }
-            }
-            /**
-             * Set data fields
-             */
-            if (test_version_option) {
-                test_level = DEBUG_LEVEL;
-            } else {
-                test_level = TestLevel.RELEASE_VERSION;
-            }
-            /**
-             * call start
-             */
-            launch(args);
-        } catch (IOException | IllegalArgumentException exc) {
-            LOGGER.log(Level.SEVERE, exc.toString());
-            System.exit(1);
-        }
+        launch(args);
     }
 
     public static String get_version() {
