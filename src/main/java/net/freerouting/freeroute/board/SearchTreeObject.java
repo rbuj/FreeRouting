@@ -42,5 +42,5 @@ public interface SearchTreeObject extends net.freerouting.freeroute.datastructur
     /**
      * returns for this object the layer of the shape with index p_index.
      */
-    abstract int shape_layer(int p_index);
+    int shape_layer(int p_index);
 }
