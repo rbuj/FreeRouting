@@ -52,7 +52,7 @@ public class RatsNest {
         // Create the net item lists at once for performance reasons.
         Vector<Collection<Item>> net_item_lists = new Vector<>(max_net_no);
         for (int i = 0; i < max_net_no; ++i) {
-            net_item_lists.add(new LinkedList<Item>());
+            net_item_lists.add(new LinkedList<>());
         }
         Iterator<UndoableObjects.UndoableObjectNode> it = p_board.item_list.start_read_object();
         for (;;) {
