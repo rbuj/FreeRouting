@@ -33,6 +33,8 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import static net.freerouting.freeroute.Filename.GUI_DEFAULTS_FILE_NAME;
+import static net.freerouting.freeroute.Filename.LOG_FILE_EXTENSIONS;
 import net.freerouting.freeroute.board.BoardObserverAdaptor;
 import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.ItemIdNoGenerator;
@@ -61,9 +63,6 @@ public class BoardFrame extends javax.swing.JFrame {
      * The windows above stored in an array
      */
     static final int SUBWINDOW_COUNT = 24;
-    static final String[] LOG_FILE_EXTENSIONS = {"log"};
-    static final String GUI_DEFAULTS_FILE_NAME = "gui_defaults.par";
-    static final String GUI_DEFAULTS_FILE_BACKUP_NAME = "gui_defaults.par.bak";
     static final CustomFileFilter LOGFILE_FILTER = new CustomFileFilter(LOG_FILE_EXTENSIONS);
 
     /**

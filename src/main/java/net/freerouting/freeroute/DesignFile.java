@@ -36,6 +36,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static net.freerouting.freeroute.Filename.ALL_FILE_EXTENSIONS;
+import static net.freerouting.freeroute.Filename.BINARY_FILE_EXTENSIONS;
+import static net.freerouting.freeroute.Filename.RULES_FILE_EXTENSION;
 import net.freerouting.freeroute.designformats.specctra.DsnFileException;
 import net.freerouting.freeroute.interactive.BoardHandlingException;
 
@@ -46,11 +49,6 @@ import net.freerouting.freeroute.interactive.BoardHandlingException;
  * @author Alfons Wirtz
  */
 public class DesignFile {
-
-    static final String[] ALL_FILE_EXTENSIONS = new String[]{"bin", "dsn"};
-    static final String[] TEXT_FILE_EXTENSIONS = new String[]{"dsn"};
-    public static final String BINARY_FILE_EXTENSIONS = "bin";
-    public static final String RULES_FILE_EXTENSION = ".rules";
 
     private File output_file;
     private File input_file;

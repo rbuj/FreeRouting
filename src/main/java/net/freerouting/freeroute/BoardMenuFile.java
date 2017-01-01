@@ -31,7 +31,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static net.freerouting.freeroute.DesignFile.ALL_FILE_EXTENSIONS;
+import static net.freerouting.freeroute.Filename.ALL_FILE_EXTENSIONS;
+import static net.freerouting.freeroute.Filename.GUI_DEFAULTS_FILE_BACKUP_NAME;
+import static net.freerouting.freeroute.Filename.GUI_DEFAULTS_FILE_NAME;
 
 /**
  * Creates the file menu of a board frame.
@@ -235,11 +237,11 @@ public class BoardMenuFile extends javax.swing.JMenu {
     }
 
     private void save_defaults_action() {
-        java.io.File defaults_file = new java.io.File(board_frame.design_file.get_parent(), BoardFrame.GUI_DEFAULTS_FILE_NAME);
+        java.io.File defaults_file = new java.io.File(board_frame.design_file.get_parent(), GUI_DEFAULTS_FILE_NAME);
         try (OutputStream output_stream = new java.io.FileOutputStream(defaults_file)) {
             if (defaults_file.exists()) {
                 // Make a backup copy of the old defaulds file.
-                java.io.File defaults_file_backup = new java.io.File(board_frame.design_file.get_parent(), BoardFrame.GUI_DEFAULTS_FILE_BACKUP_NAME);
+                java.io.File defaults_file_backup = new java.io.File(board_frame.design_file.get_parent(), GUI_DEFAULTS_FILE_BACKUP_NAME);
                 if (defaults_file_backup.exists()) {
                     if (defaults_file_backup.delete() == false) {
                         throw new BoardMenuFileException("Can't delete backup file");
