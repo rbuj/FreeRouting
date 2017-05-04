@@ -38,7 +38,7 @@ SpecCharANSI2 = [¡-ÿ]
 SpecCharANSI = {SpecCharANSI1}|{SpecCharANSI2}
 
 
-SpecChar1 = {SpecCharASCII}|{SpecCharANSI}
+SpecChar1 = {SpecCharASCII}|{SpecCharANSI}|μ|Ω|θ|α|ε|π|σ|φ
 
 SpecChar2 = {SpecChar1}|-|\+
 
