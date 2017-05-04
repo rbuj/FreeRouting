@@ -16,6 +16,7 @@
 package net.freerouting.freeroute.board;
 
 import java.awt.Color;
+import java.util.Locale;
 import net.freerouting.freeroute.boardgraphics.GraphicsContext;
 import net.freerouting.freeroute.geometry.planar.Area;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
@@ -281,9 +282,9 @@ public class ObstacleArea extends Item {
     }
 
     @Override
-    public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(ObjectInfoPanel p_window) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("keepout"));
         int cmp_no = this.get_component_no();
         if (cmp_no > 0) {
@@ -291,8 +292,8 @@ public class ObstacleArea extends Item {
             Component component = board.components.get(cmp_no);
             p_window.append(component.name, resources.getString("component_info"), component);
         }
-        this.print_shape_info(p_window, p_locale);
-        this.print_item_info(p_window, p_locale);
+        this.print_shape_info(p_window);
+        this.print_item_info(p_window);
         p_window.newline();
     }
 
@@ -300,16 +301,17 @@ public class ObstacleArea extends Item {
      * Used in the implementation of print_info for this class and derived
      * classes.
      */
-    protected final void print_shape_info(ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    protected final void print_shape_info(ObjectInfoPanel p_window) {
+        Locale locale = Locale.getDefault();
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", locale);
         p_window.append(" " + resources.getString("at") + " ");
         net.freerouting.freeroute.geometry.planar.FloatPoint center = this.get_area().get_border().centre_of_gravity();
         p_window.append(center);
         Integer hole_count = this.relative_area.get_holes().length;
         if (hole_count > 0) {
             p_window.append(" " + resources.getString("with") + " ");
-            java.text.NumberFormat nf = java.text.NumberFormat.getInstance(p_locale);
+            java.text.NumberFormat nf = java.text.NumberFormat.getInstance(locale);
             p_window.append(nf.format(hole_count));
             if (hole_count == 1) {
                 p_window.append(" " + resources.getString("hole"));

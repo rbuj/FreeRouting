@@ -37,11 +37,11 @@ class BoardToolbarSelectedItem extends javax.swing.JToolBar {
      * Creates a new instance of BoardSelectedItemToolbar. If p_extended, some
      * additional buttons are generated.
      */
-    BoardToolbarSelectedItem(BoardFrame p_board_frame, Locale p_locale, boolean p_extended) {
+    BoardToolbarSelectedItem(BoardFrame p_board_frame, boolean p_extended) {
         this.board_frame = p_board_frame;
 
         this.resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardToolbarSelectedItem", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardToolbarSelectedItem", Locale.getDefault());
 
         javax.swing.JButton cancel_button = new javax.swing.JButton();
         cancel_button.setText(resources.getString("cancel"));

@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  * Used as submenu in a popup menu for change layer actions.
  *
@@ -40,7 +42,7 @@ class PopupMenuChangeLayer extends javax.swing.JMenu {
         net.freerouting.freeroute.board.LayerStructure layer_structure = board_frame.board_panel.board_handling.get_routing_board().layer_structure;
         this.item_arr = new LayermenuItem[layer_structure.signal_layer_count()];
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
 
         this.setText(resources.getString("change_layer"));
         this.setToolTipText(resources.getString("change_layer_tooltip"));
@@ -76,7 +78,7 @@ class PopupMenuChangeLayer extends javax.swing.JMenu {
 
         LayermenuItem(int p_layer_no) {
             java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", board_frame.get_locale());
+                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
             message1 = resources.getString("layer_changed_to") + " ";
             layer_no = p_layer_no;
             addActionListener((java.awt.event.ActionEvent evt) -> {

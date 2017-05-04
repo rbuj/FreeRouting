@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  * Popup Menu used in the interactive select state.
  *
@@ -33,7 +35,7 @@ class PopupMenuMain extends PopupMenuDisplay {
     PopupMenuMain(BoardFrame p_board_frame) {
         super(p_board_frame);
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.PopupMenuMain", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.PopupMenuMain", Locale.getDefault());
 
         // add the item for selecting items
         javax.swing.JMenuItem select_item_item = new javax.swing.JMenuItem();

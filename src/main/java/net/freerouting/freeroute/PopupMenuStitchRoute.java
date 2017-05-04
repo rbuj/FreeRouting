@@ -20,6 +20,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  *
  * @author Alfons Wirtz
@@ -43,7 +45,7 @@ public class PopupMenuStitchRoute extends PopupMenuDisplay {
             change_layer_menu = null;
         }
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         javax.swing.JMenuItem insert_item = new javax.swing.JMenuItem();
         insert_item.setText(resources.getString("insert"));
         insert_item.addActionListener((java.awt.event.ActionEvent evt) -> {

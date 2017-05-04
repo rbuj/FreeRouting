@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.rules;
 
+import java.util.Locale;
 import net.freerouting.freeroute.library.Padstack;
 
 /**
@@ -91,9 +92,9 @@ public class ViaInfo implements Comparable<ViaInfo>, net.freerouting.freeroute.b
     }
 
     @Override
-    public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("via") + " ");
         p_window.append_bold(this.name);
         p_window.append_bold(": ");

@@ -34,10 +34,10 @@ public abstract class WindowObjectListWithFilter extends WindowObjectList {
     /**
      * Creates a new instance of ObjectListWindowWithFilter
      */
-    public WindowObjectListWithFilter(BoardFrame p_board_frame, Locale p_locale) {
-        super(p_board_frame, p_locale);
+    public WindowObjectListWithFilter(BoardFrame p_board_frame) {
+        super(p_board_frame);
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowObjectList", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowObjectList", Locale.getDefault());
         javax.swing.JPanel input_panel = new javax.swing.JPanel();
         this.south_panel.add(input_panel, java.awt.BorderLayout.SOUTH);
 

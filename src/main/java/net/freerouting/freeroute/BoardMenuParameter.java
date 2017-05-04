@@ -36,16 +36,16 @@ public class BoardMenuParameter extends javax.swing.JMenu {
     /**
      * Creates a new instance of BoardSelectMenu
      */
-    private BoardMenuParameter(BoardFrame p_board_frame, Locale p_locale) {
+    private BoardMenuParameter(BoardFrame p_board_frame) {
         board_frame = p_board_frame;
-        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuParameter", p_locale);
+        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuParameter", Locale.getDefault());
     }
 
     /**
      * Returns a new windows menu for the board frame.
      */
-    public static BoardMenuParameter get_instance(BoardFrame p_board_frame, Locale p_locale) {
-        BoardMenuParameter parameter_menu = new BoardMenuParameter(p_board_frame, p_locale);
+    public static BoardMenuParameter get_instance(BoardFrame p_board_frame) {
+        BoardMenuParameter parameter_menu = new BoardMenuParameter(p_board_frame);
 
         parameter_menu.setText(parameter_menu.resources.getString("parameter"));
 

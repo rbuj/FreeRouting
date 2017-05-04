@@ -17,6 +17,7 @@ package net.freerouting.freeroute.autoroute;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -113,7 +114,7 @@ public class BatchAutorouter {
      */
     public boolean autoroute_passes() {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.InteractiveState", hdlg.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.InteractiveState", Locale.getDefault());
         boolean still_unrouted_items = true;
         while (still_unrouted_items && !this.is_interrupted) {
             if (thread.is_stop_requested()) {

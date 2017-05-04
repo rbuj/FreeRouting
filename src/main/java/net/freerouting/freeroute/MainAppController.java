@@ -99,7 +99,6 @@ public class MainAppController implements Initializable {
                             new DesignFile(inputFile, design_dir_name),
                             launch_mode,
                             test_level,
-                            resourceBundle.getLocale(),
                             test_level == null); // true, if it's a test_version
                 } catch (BoardFrameException | DsnFileException ex) {
                     Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);

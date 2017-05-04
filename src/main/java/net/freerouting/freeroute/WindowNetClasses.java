@@ -54,8 +54,8 @@ public class WindowNetClasses extends BoardSavableSubWindow {
     /**
      * Creates a new instance of NetClassesWindow
      */
-    public WindowNetClasses(BoardFrame p_board_frame, Locale p_locale) {
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowNetClasses", p_locale);
+    public WindowNetClasses(BoardFrame p_board_frame) {
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowNetClasses", Locale.getDefault());
         this.setTitle(resources.getString("title"));
 
         this.board_frame = p_board_frame;
@@ -67,7 +67,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
 
         this.cl_class_combo_box = new javax.swing.JComboBox<>();
         this.via_rule_combo_box = new javax.swing.JComboBox<>();
-        this.layer_combo_box = new ComboBoxLayer(routing_board.layer_structure, p_locale);
+        this.layer_combo_box = new ComboBoxLayer(routing_board.layer_structure);
         add_combobox_items();
 
         add_table();
@@ -200,7 +200,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
 
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
-            board_frame.board_panel.board_handling.get_routing_board().rules.append_net_class(resources.getLocale());
+            board_frame.board_panel.board_handling.get_routing_board().rules.append_net_class();
             adjust_table();
         }
     }

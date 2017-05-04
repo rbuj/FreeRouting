@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.rules;
 
+import java.util.Locale;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.ObjectInfoPanel.Printable;
 import net.freerouting.freeroute.datastructures.UndoableObjects;
@@ -203,7 +204,7 @@ public class Net implements Comparable<Net>, net.freerouting.freeroute.board.Obj
     }
 
     @Override
-    public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window) {
         Integer via_count = this.get_via_count();
         double cumulative_trace_length = this.get_trace_length();
         java.util.Collection<Item> terminal_items = this.get_terminal_items();
@@ -212,7 +213,7 @@ public class Net implements Comparable<Net>, net.freerouting.freeroute.board.Obj
         Integer terminal_item_count = terminals.size();
 
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("net") + " ");
         p_window.append_bold(this.name);
         p_window.append_bold(": ");

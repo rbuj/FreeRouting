@@ -23,6 +23,7 @@ import java.awt.Graphics;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Vector;
 import net.freerouting.freeroute.MainApp;
 import net.freerouting.freeroute.board.BasicBoard;
@@ -231,7 +232,7 @@ public class RatsNest {
 
         private String item_info(Item p_item) {
             java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.RatsNest", MainApp.get_locale());
+                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.RatsNest", Locale.getDefault());
             String result;
             if (p_item instanceof net.freerouting.freeroute.board.Pin) {
                 net.freerouting.freeroute.board.Pin curr_pin = (net.freerouting.freeroute.board.Pin) p_item;
@@ -249,9 +250,9 @@ public class RatsNest {
         }
 
         @Override
-        public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window, java.util.Locale p_locale) {
+        public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window) {
             java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.RatsNest", p_locale);
+                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.RatsNest", Locale.getDefault());
             p_window.append_bold(resources.getString("incomplete"));
             p_window.append(" " + resources.getString("net") + " ");
             p_window.append(net.name);

@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.board;
 
+import java.util.Locale;
 import net.freerouting.freeroute.geometry.planar.Area;
 import net.freerouting.freeroute.geometry.planar.Vector;
 
@@ -78,13 +79,13 @@ public class ViaObstacleArea extends ObstacleArea {
     }
 
     @Override
-    public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(ObjectInfoPanel p_window) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("via_keepout"));
-        this.print_shape_info(p_window, p_locale);
-        this.print_clearance_info(p_window, p_locale);
-        this.print_clearance_violation_info(p_window, p_locale);
+        this.print_shape_info(p_window);
+        this.print_clearance_info(p_window);
+        this.print_clearance_violation_info(p_window);
         p_window.newline();
     }
 

@@ -35,16 +35,16 @@ public class BoardMenuRules extends javax.swing.JMenu {
     /**
      * Creates a new instance of BoardRulesMenu
      */
-    private BoardMenuRules(BoardFrame p_board_frame, Locale p_locale) {
+    private BoardMenuRules(BoardFrame p_board_frame) {
         board_frame = p_board_frame;
-        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuRules", p_locale);
+        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuRules", Locale.getDefault());
     }
 
     /**
      * Returns a new windows menu for the board frame.
      */
-    public static BoardMenuRules get_instance(BoardFrame p_board_frame, Locale p_locale) {
-        BoardMenuRules rules_menu = new BoardMenuRules(p_board_frame, p_locale);
+    public static BoardMenuRules get_instance(BoardFrame p_board_frame) {
+        BoardMenuRules rules_menu = new BoardMenuRules(p_board_frame);
 
         rules_menu.setText(rules_menu.resources.getString("rules"));
 

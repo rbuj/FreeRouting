@@ -36,7 +36,6 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow {
      */
     private static final String[] RESERVED_NAME_CHARS = {"(", ")", " ", "_"};
     private final BoardFrame board_frame;
-    private final Locale locale;
     private final javax.swing.JPanel main_panel;
     private javax.swing.JPanel center_panel;
     private final ComboBoxLayer layer_combo_box;
@@ -47,10 +46,9 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow {
     /**
      * Creates a new instance of ClearanceMatrixWindow
      */
-    public WindowClearanceMatrix(BoardFrame p_board_frame, Locale p_locale) {
+    public WindowClearanceMatrix(BoardFrame p_board_frame) {
         this.board_frame = p_board_frame;
-        this.locale = p_locale;
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowClearanceMatrix", locale);
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowClearanceMatrix", Locale.getDefault());
 
         this.setTitle(resources.getString("title"));
 
@@ -66,7 +64,7 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow {
         north_panel.add(layer_label);
 
         net.freerouting.freeroute.interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;
-        layer_combo_box = new ComboBoxLayer(board_handling.get_routing_board().layer_structure, locale);
+        layer_combo_box = new ComboBoxLayer(board_handling.get_routing_board().layer_structure);
         north_panel.add(this.layer_combo_box);
         this.layer_combo_box.addActionListener(new ComboBoxListener());
 
@@ -155,7 +153,7 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow {
         result.add(scroll_pane, java.awt.BorderLayout.CENTER);
 
         // add message for german localisation bug
-        if (locale.getLanguage().equalsIgnoreCase("de")) {
+        if (Locale.getDefault().getLanguage().equalsIgnoreCase("de")) {
             javax.swing.JLabel bug_label
                     = new javax.swing.JLabel("Wegen eines Java-System-Bugs muss das Dezimalkomma in dieser Tabelle als Punkt eingegeben werden!");
             result.add(bug_label, java.awt.BorderLayout.SOUTH);

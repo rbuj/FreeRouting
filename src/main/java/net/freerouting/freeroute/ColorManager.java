@@ -53,18 +53,18 @@ public class ColorManager extends BoardSavableSubWindow {
      * Initializes p_color_table and return the created scroll_pane of the color
      * table.
      */
-    private static JScrollPane init_color_table(JTable p_color_table, java.util.Locale p_locale) {
+    private static JScrollPane init_color_table(JTable p_color_table) {
         //Create the scroll pane and add the table to it.
         JScrollPane scroll_pane = new JScrollPane(p_color_table);
         //Set up renderer and editor for the Color columns.
         p_color_table.setDefaultRenderer(Color.class, new ColorRenderer(true));
 
-        setUpColorEditor(p_color_table, p_locale);
+        setUpColorEditor(p_color_table);
         return scroll_pane;
     }
 
     //Set up the editor for the Color cells.
-    private static void setUpColorEditor(JTable p_table, java.util.Locale p_locale) {
+    private static void setUpColorEditor(JTable p_table) {
         //First, set up the button that brings up the dialog.
         final JButton button = new JButton("") {
             @Override
@@ -87,7 +87,7 @@ public class ColorManager extends BoardSavableSubWindow {
             colorEditor.currentColor = colorChooser.getColor();
         };
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         final JDialog dialog = JColorChooser.createDialog(button,
                 resources.getString("pick_a_color"), true, colorChooser, okListener, null);
 
@@ -108,10 +108,10 @@ public class ColorManager extends BoardSavableSubWindow {
     /**
      * Creates a new instance of ColorManager
      */
-    public ColorManager(BoardFrame p_board_frame, Locale p_locale) {
+    public ColorManager(BoardFrame p_board_frame) {
         GraphicsContext graphics_context = p_board_frame.board_panel.board_handling.graphics_context;
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         this.setTitle(resources.getString("color_manager"));
         final JPanel panel = new JPanel();
         final int textfield_height = 17;
@@ -121,12 +121,12 @@ public class ColorManager extends BoardSavableSubWindow {
 
         this.item_color_table = new JTable(graphics_context.item_color_table);
         item_color_table.setPreferredScrollableViewportSize(new Dimension(table_width, item_color_table_height));
-        JScrollPane item_scroll_pane = init_color_table(item_color_table, p_locale);
+        JScrollPane item_scroll_pane = init_color_table(item_color_table);
         panel.add(item_scroll_pane, BorderLayout.NORTH);
 
         this.other_color_table = new JTable(graphics_context.other_color_table);
         this.other_color_table.setPreferredScrollableViewportSize(new Dimension(table_width, textfield_height));
-        JScrollPane other_scroll_pane = init_color_table(other_color_table, p_locale);
+        JScrollPane other_scroll_pane = init_color_table(other_color_table);
         panel.add(other_scroll_pane, BorderLayout.SOUTH);
         getContentPane().add(panel, BorderLayout.CENTER);
         p_board_frame.set_context_sensitive_help(this, "WindowDisplay_Colors");

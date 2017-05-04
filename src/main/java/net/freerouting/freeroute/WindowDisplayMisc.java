@@ -46,10 +46,10 @@ public class WindowDisplayMisc extends BoardSavableSubWindow {
     /**
      * Creates a new instance of DisplayMiscWindow
      */
-    public WindowDisplayMisc(BoardFrame p_board_frame, Locale p_locale) {
+    public WindowDisplayMisc(BoardFrame p_board_frame) {
         this.panel = p_board_frame.board_panel;
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.DisplayMisc", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.DisplayMisc", Locale.getDefault());
         this.setTitle(resources.getString("title"));
 
         // Create main panel

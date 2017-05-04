@@ -46,10 +46,10 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow {
     /**
      * Creates a new instance of WindowAutorouteParameter
      */
-    public WindowAutorouteParameter(BoardFrame p_board_frame, Locale p_locale) {
+    public WindowAutorouteParameter(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowAutorouteParameter", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowAutorouteParameter", Locale.getDefault());
         this.setTitle(resources.getString("title"));
 
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -157,7 +157,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow {
         gridbag.setConstraints(separator, gridbag_constraints);
         main_panel.add(separator, gridbag_constraints);
 
-        detail_window = new WindowAutorouteDetailParameter(p_board_frame, p_locale);
+        detail_window = new WindowAutorouteDetailParameter(p_board_frame);
         javax.swing.JButton detail_button = new javax.swing.JButton(resources.getString("detail_parameter"));
         this.detail_listener = new DetailListener();
         detail_button.addActionListener(detail_listener);

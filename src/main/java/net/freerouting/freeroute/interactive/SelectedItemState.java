@@ -190,7 +190,7 @@ public class SelectedItemState extends InteractiveState {
         // make the situation restorable by undo
         board.generate_snapshot();
         boolean items_already_connected = false;
-        Net new_net = board.rules.nets.new_net(hdlg.get_locale());
+        Net new_net = board.rules.nets.new_net();
         java.util.Iterator<Item> it = item_list.iterator();
         while (it.hasNext()) {
             Item curr_item = it.next();

@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  * Popup menu used in the interactive selected item state..
  *
@@ -33,7 +35,7 @@ class PopupMenuSelectedItems extends PopupMenuDisplay {
     PopupMenuSelectedItems(BoardFrame p_board_frame) {
         super(p_board_frame);
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         javax.swing.JMenuItem copy_item = new javax.swing.JMenuItem();
         copy_item.setText(resources.getString("copy"));
         copy_item.addActionListener((java.awt.event.ActionEvent evt) -> {

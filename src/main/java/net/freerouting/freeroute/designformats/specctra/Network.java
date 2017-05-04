@@ -1052,7 +1052,7 @@ public class Network extends ScopeKeyword {
             if (prev_token == OPEN_BRACKET) {
                 if (next_token == Keyword.NET) {
                     read_net_scope(p_par.scanner, p_par.netlist, p_par.board_handling.get_routing_board(),
-                            p_par.coordinate_transform, p_par.layer_structure, p_par.board_handling.get_locale());
+                            p_par.coordinate_transform, p_par.layer_structure);
                 } else if (next_token == Keyword.VIA) {
                     net.freerouting.freeroute.rules.ViaInfo curr_via_info = read_via_info(p_par.scanner, p_par.board_handling.get_routing_board());
                     if (curr_via_info == null) {
@@ -1102,7 +1102,7 @@ public class Network extends ScopeKeyword {
     }
 
     private boolean read_net_scope(Scanner p_scanner, NetList p_net_list, RoutingBoard p_board,
-            CoordinateTransform p_coordinate_transform, LayerStructure p_layer_structure, java.util.Locale p_locale) {
+            CoordinateTransform p_coordinate_transform, LayerStructure p_layer_structure) {
         // read the net name
         Object next_token;
         try {
@@ -1216,7 +1216,7 @@ public class Network extends ScopeKeyword {
                                         default_net_rule.get_via_rule());
                         if (net_rule == null) {
                             // create a new net rule
-                            net_rule = p_board.rules.get_new_net_class(p_locale);
+                            net_rule = p_board.rules.get_new_net_class();
                         }
                         net_rule.set_trace_half_width(trace_halfwidth);
                         board_net.set_class(net_rule);

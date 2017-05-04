@@ -20,6 +20,8 @@
  */
 package net.freerouting.freeroute.interactive;
 
+import java.util.Locale;
+
 /**
  * Used for running an interactive action in a seperate Thread, that can be
  * stopped by the user.
@@ -140,7 +142,7 @@ public abstract class InteractiveActionThread extends Thread implements net.free
         protected void thread_action() {
 
             java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.InteractiveState", hdlg.get_locale());
+                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.InteractiveState", Locale.getDefault());
             boolean saved_board_read_only = hdlg.is_board_read_only();
             hdlg.set_board_read_only(true);
             String start_message = resources.getString("logfile") + " " + resources.getString("stop_message");

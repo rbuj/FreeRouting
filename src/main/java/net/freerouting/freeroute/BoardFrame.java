@@ -150,9 +150,9 @@ public class BoardFrame extends javax.swing.JFrame {
      * output depends on p_test_level.
      */
     public BoardFrame(DesignFile p_design, LaunchMode p_launch_mode, TestLevel p_test_level,
-            Locale p_locale, boolean p_confirm_cancel) throws BoardFrameException, DsnFileException {
+            boolean p_confirm_cancel) throws BoardFrameException, DsnFileException {
         this(p_design, p_launch_mode, p_test_level, new BoardObserverAdaptor(),
-                new ItemIdNoGenerator(), p_locale, p_confirm_cancel);
+                new ItemIdNoGenerator(), p_confirm_cancel);
         read();
         menubar.add_design_dependent_items();
         if (design_file.is_created_from_text_file()) {
@@ -163,7 +163,7 @@ public class BoardFrame extends javax.swing.JFrame {
                 java.util.ResourceBundle rb
                         = java.util.ResourceBundle.getBundle(
                                 "net.freerouting.freeroute.resources.MainApp",
-                                p_locale);
+                                Locale.getDefault());
                 DesignFile.read_rules_file(name_parts[0], design_file.get_parent(),
                         board_panel.board_handling,
                         rb.getString("confirm_import_rules"));
@@ -181,36 +181,36 @@ public class BoardFrame extends javax.swing.JFrame {
      * is embedded into a host system,
      */
     BoardFrame(DesignFile p_design, LaunchMode p_launch_mode, TestLevel p_test_level, BoardObservers p_observers,
-            IdNoGenerator p_item_id_no_generator, Locale p_locale, boolean p_confirm_cancel) {
+            IdNoGenerator p_item_id_no_generator, boolean p_confirm_cancel) {
         design_file = p_design;
         test_level = p_test_level;
 
         confirm_cancel = p_confirm_cancel;
         board_observers = p_observers;
         item_id_no_generator = p_item_id_no_generator;
-        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardFrame", p_locale);
+        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardFrame", Locale.getDefault());
         boolean session_file_option = (p_launch_mode == LaunchMode.SESSION_FILE);
-        menubar = BoardMenuBar.get_instance(this, p_locale, session_file_option);
+        menubar = BoardMenuBar.get_instance(this, session_file_option);
         setJMenuBar(menubar);
 
-        toolbar_panel = new BoardToolbar(this, p_locale);
+        toolbar_panel = new BoardToolbar(this);
         add(toolbar_panel, java.awt.BorderLayout.NORTH);
 
-        message_panel = new BoardPanelStatus(p_locale);
+        message_panel = new BoardPanelStatus();
         add(message_panel, java.awt.BorderLayout.SOUTH);
 
-        select_toolbar = new BoardToolbarSelectedItem(this, p_locale, p_launch_mode == LaunchMode.EXTENDED_TOOL_BAR);
+        select_toolbar = new BoardToolbarSelectedItem(this, p_launch_mode == LaunchMode.EXTENDED_TOOL_BAR);
 
         screen_messages
                 = new ScreenMessages(message_panel.status_message, message_panel.add_message,
-                        message_panel.current_layer, message_panel.mouse_position, p_locale);
+                        message_panel.current_layer, message_panel.mouse_position);
 
         scroll_pane = new javax.swing.JScrollPane();
         scroll_pane.setPreferredSize(new java.awt.Dimension(1_150, 800));
         scroll_pane.setVerifyInputWhenFocusTarget(false);
         add(scroll_pane, java.awt.BorderLayout.CENTER);
 
-        board_panel = new BoardPanel(screen_messages, this, p_locale);
+        board_panel = new BoardPanel(screen_messages, this);
         scroll_pane.setViewportView(board_panel);
 
         setTitle(resources.getString("title"));
@@ -466,54 +466,53 @@ public class BoardFrame extends javax.swing.JFrame {
     }
 
     private void allocate_permanent_subwindows() {
-        Locale locale = resources.getLocale();
-        color_manager = new ColorManager(this, locale);
+        color_manager = new ColorManager(this);
         permanent_subwindows[0] = color_manager;
-        object_visibility_window = WindowObjectVisibility.get_instance(this, locale);
+        object_visibility_window = WindowObjectVisibility.get_instance(this);
         permanent_subwindows[1] = object_visibility_window;
-        layer_visibility_window = WindowLayerVisibility.get_instance(this, locale);
+        layer_visibility_window = WindowLayerVisibility.get_instance(this);
         permanent_subwindows[2] = layer_visibility_window;
-        display_misc_window = new WindowDisplayMisc(this, locale);
+        display_misc_window = new WindowDisplayMisc(this);
         permanent_subwindows[3] = display_misc_window;
-        snapshot_window = new WindowSnapshot(this, locale);
+        snapshot_window = new WindowSnapshot(this);
         permanent_subwindows[4] = snapshot_window;
-        route_parameter_window = new WindowRouteParameter(this, locale);
+        route_parameter_window = new WindowRouteParameter(this);
         permanent_subwindows[5] = route_parameter_window;
-        select_parameter_window = new WindowSelectParameter(this, locale);
+        select_parameter_window = new WindowSelectParameter(this);
         permanent_subwindows[6] = select_parameter_window;
-        clearance_matrix_window = new WindowClearanceMatrix(this, locale);
+        clearance_matrix_window = new WindowClearanceMatrix(this);
         permanent_subwindows[7] = clearance_matrix_window;
-        padstacks_window = new WindowPadstacks(this, locale);
+        padstacks_window = new WindowPadstacks(this);
         permanent_subwindows[8] = padstacks_window;
-        packages_window = new WindowPackages(this, locale);
+        packages_window = new WindowPackages(this);
         permanent_subwindows[9] = packages_window;
-        components_window = new WindowComponents(this, locale);
+        components_window = new WindowComponents(this);
         permanent_subwindows[10] = components_window;
-        incompletes_window = new WindowIncompletes(this, locale);
+        incompletes_window = new WindowIncompletes(this);
         permanent_subwindows[11] = incompletes_window;
-        clearance_violations_window = new WindowClearanceViolations(this, locale);
+        clearance_violations_window = new WindowClearanceViolations(this);
         permanent_subwindows[12] = clearance_violations_window;
-        net_info_window = new WindowNets(this, locale);
+        net_info_window = new WindowNets(this);
         permanent_subwindows[13] = net_info_window;
-        via_window = new WindowVia(this, locale);
+        via_window = new WindowVia(this);
         permanent_subwindows[14] = via_window;
-        edit_vias_window = new WindowEditVias(this, locale);
+        edit_vias_window = new WindowEditVias(this);
         permanent_subwindows[15] = edit_vias_window;
-        edit_net_rules_window = new WindowNetClasses(this, locale);
+        edit_net_rules_window = new WindowNetClasses(this);
         permanent_subwindows[16] = edit_net_rules_window;
-        assign_net_classes_window = new WindowAssignNetClass(this, locale);
+        assign_net_classes_window = new WindowAssignNetClass(this);
         permanent_subwindows[17] = assign_net_classes_window;
-        length_violations_window = new WindowLengthViolations(this, locale);
+        length_violations_window = new WindowLengthViolations(this);
         permanent_subwindows[18] = length_violations_window;
-        about_window = new WindowAbout(locale);
+        about_window = new WindowAbout();
         permanent_subwindows[19] = about_window;
-        move_parameter_window = new WindowMoveParameter(this, locale);
+        move_parameter_window = new WindowMoveParameter(this);
         permanent_subwindows[20] = move_parameter_window;
-        unconnected_route_window = new WindowUnconnectedRoute(this, locale);
+        unconnected_route_window = new WindowUnconnectedRoute(this);
         permanent_subwindows[21] = unconnected_route_window;
-        route_stubs_window = new WindowRouteStubs(this, locale);
+        route_stubs_window = new WindowRouteStubs(this);
         permanent_subwindows[22] = route_stubs_window;
-        autoroute_parameter_window = new WindowAutorouteParameter(this, locale);
+        autoroute_parameter_window = new WindowAutorouteParameter(this);
         permanent_subwindows[23] = autoroute_parameter_window;
     }
 
@@ -551,13 +550,6 @@ public class BoardFrame extends javax.swing.JFrame {
         display_misc_window.setLocation(0, 350);
         color_manager.setLocation(0, 600);
         about_window.setLocation(200, 200);
-    }
-
-    /**
-     * Returns the currently used locale for the language dependent output.
-     */
-    public Locale get_locale() {
-        return resources.getLocale();
     }
 
     /**

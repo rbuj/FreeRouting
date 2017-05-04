@@ -228,7 +228,7 @@ public class ComponentOutline extends Item {
     }
 
     @Override
-    public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(ObjectInfoPanel p_window) {
     }
 
     @Override

@@ -15,6 +15,8 @@
  */
 package net.freerouting.freeroute.rules;
 
+import java.util.Locale;
+
 /**
  *
  * NxN Matrix describing the spacing restrictions between N clearance classes on
@@ -351,9 +353,9 @@ public class ClearanceMatrix implements java.io.Serializable {
         }
 
         @Override
-        public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window, java.util.Locale p_locale) {
+        public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window) {
             java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
             p_window.append_bold(resources.getString("spacing_from_clearance_class") + " ");
             p_window.append_bold(this.name);
             for (int i = 1; i < this.column.length; ++i) {

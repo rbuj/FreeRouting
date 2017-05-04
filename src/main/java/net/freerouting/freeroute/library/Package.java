@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.library;
 
+import java.util.Locale;
 import net.freerouting.freeroute.geometry.planar.Area;
 import net.freerouting.freeroute.geometry.planar.Shape;
 import net.freerouting.freeroute.geometry.planar.Vector;
@@ -129,9 +130,9 @@ public class Package implements Comparable<Package>, net.freerouting.freeroute.b
     }
 
     @Override
-    public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("package") + " ");
         p_window.append_bold(this.name);
         for (int i = 0; i < this.pin_arr.length; ++i) {

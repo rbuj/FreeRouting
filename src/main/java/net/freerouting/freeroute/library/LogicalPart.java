@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute.library;
 
+import java.util.Locale;
+
 /**
  * Contains contain information for gate swap and pin swap for a single
  * component.
@@ -59,9 +61,9 @@ public class LogicalPart implements net.freerouting.freeroute.board.ObjectInfoPa
     }
 
     @Override
-    public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("logical_part_2") + " ");
         p_window.append_bold(this.name);
         for (int i = 0; i < this.part_pin_arr.length; ++i) {

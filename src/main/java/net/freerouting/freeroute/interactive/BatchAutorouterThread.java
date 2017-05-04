@@ -20,6 +20,7 @@
  */
 package net.freerouting.freeroute.interactive;
 
+import java.util.Locale;
 import net.freerouting.freeroute.autoroute.BatchAutorouter;
 import net.freerouting.freeroute.autoroute.BatchFanout;
 import net.freerouting.freeroute.autoroute.BatchOptRoute;
@@ -51,7 +52,7 @@ public class BatchAutorouterThread extends InteractiveActionThread {
     @Override
     protected void thread_action() {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.InteractiveState", hdlg.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.InteractiveState", Locale.getDefault());
         boolean saved_board_read_only = hdlg.is_board_read_only();
         hdlg.set_board_read_only(true);
         boolean ratsnest_hidden_before = hdlg.get_ratsnest().is_hidden();

@@ -35,16 +35,16 @@ public class BoardMenuOther extends javax.swing.JMenu {
     /**
      * Creates a new instance of BoardMenuOther
      */
-    private BoardMenuOther(BoardFrame p_board_frame, Locale p_locale) {
+    private BoardMenuOther(BoardFrame p_board_frame) {
         board_frame = p_board_frame;
-        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuOther", p_locale);
+        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuOther", Locale.getDefault());
     }
 
     /**
      * Returns a new other menu for the board frame.
      */
-    public static BoardMenuOther get_instance(BoardFrame p_board_frame, Locale p_locale) {
-        BoardMenuOther other_menu = new BoardMenuOther(p_board_frame, p_locale);
+    public static BoardMenuOther get_instance(BoardFrame p_board_frame) {
+        BoardMenuOther other_menu = new BoardMenuOther(p_board_frame);
 
         other_menu.setText(other_menu.resources.getString("other"));
 

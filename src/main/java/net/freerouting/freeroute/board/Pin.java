@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.board;
 
+import java.util.Locale;
 import net.freerouting.freeroute.geometry.planar.ConvexShape;
 import net.freerouting.freeroute.geometry.planar.Direction;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
@@ -558,9 +559,9 @@ public class Pin extends DrillItem {
     }
 
     @Override
-    public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(ObjectInfoPanel p_window) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("pin") + ": ");
         p_window.append(resources.getString("component_2") + " ");
         Component component = board.components.get(this.get_component_no());
@@ -572,7 +573,7 @@ public class Pin extends DrillItem {
         p_window.append(padstack.name, resources.getString("padstack_info"), padstack);
         p_window.append(" " + resources.getString("at") + " ");
         p_window.append(this.get_center().to_float());
-        this.print_connectable_item_info(p_window, p_locale);
+        this.print_connectable_item_info(p_window);
         p_window.newline();
     }
 

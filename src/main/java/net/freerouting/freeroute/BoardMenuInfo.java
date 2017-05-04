@@ -34,16 +34,16 @@ public class BoardMenuInfo extends javax.swing.JMenu {
     /**
      * Creates a new instance of BoardLibraryMenu
      */
-    private BoardMenuInfo(BoardFrame p_board_frame, Locale p_locale) {
+    private BoardMenuInfo(BoardFrame p_board_frame) {
         board_frame = p_board_frame;
-        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuInfo", p_locale);
+        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuInfo", Locale.getDefault());
     }
 
     /**
      * Returns a new info menu for the board frame.
      */
-    public static BoardMenuInfo get_instance(BoardFrame p_board_frame, Locale p_locale) {
-        BoardMenuInfo info_menu = new BoardMenuInfo(p_board_frame, p_locale);
+    public static BoardMenuInfo get_instance(BoardFrame p_board_frame) {
+        BoardMenuInfo info_menu = new BoardMenuInfo(p_board_frame);
 
         info_menu.setText(info_menu.resources.getString("info"));
 

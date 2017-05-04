@@ -38,9 +38,9 @@ public class WindowClearanceViolations extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of IncompletesWindow
      */
-    public WindowClearanceViolations(BoardFrame p_board_frame, Locale p_locale) {
-        super(p_board_frame, p_locale);
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowClearanceViolations", p_locale);
+    public WindowClearanceViolations(BoardFrame p_board_frame) {
+        super(p_board_frame);
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowClearanceViolations", Locale.getDefault());
         this.setTitle(resources.getString("title"));
         this.list_empty_message.setText(resources.getString("list_empty_message"));
         p_board_frame.set_context_sensitive_help(this, "WindowObjectList_ClearanceViolations");
@@ -126,8 +126,8 @@ public class WindowClearanceViolations extends WindowObjectListWithFilter {
         }
 
         @Override
-        public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window, java.util.Locale p_locale) {
-            this.violation.print_info(p_window, p_locale);
+        public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window) {
+            this.violation.print_info(p_window);
         }
 
         @Override

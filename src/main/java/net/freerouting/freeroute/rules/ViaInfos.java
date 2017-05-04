@@ -21,6 +21,7 @@ package net.freerouting.freeroute.rules;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Contains the lists of different ViaInfo's, which can be used in interactive
@@ -95,9 +96,9 @@ public class ViaInfos implements java.io.Serializable, net.freerouting.freeroute
     }
 
     @Override
-    public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("vias") + ": ");
         int counter = 0;
         boolean first_time = true;

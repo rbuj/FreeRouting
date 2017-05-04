@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.rules;
 
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Vector;
 
 /**
@@ -109,8 +110,8 @@ public class Nets implements java.io.Serializable {
     /**
      * Generates a new net number.
      */
-    public Net new_net(java.util.Locale p_locale) {
-        java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.rules.resources.Default", p_locale);
+    public Net new_net() {
+        java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.rules.resources.Default", Locale.getDefault());
         String net_name = resources.getString("net#") + Integer.toString(net_arr.size() + 1);
         return add(net_name, 1, false);
     }

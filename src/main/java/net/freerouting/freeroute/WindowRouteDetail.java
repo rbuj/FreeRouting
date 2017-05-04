@@ -41,10 +41,10 @@ public class WindowRouteDetail extends BoardSavableSubWindow {
     /**
      * Creates a new instance of RouteDetailWindow
      */
-    public WindowRouteDetail(BoardFrame p_board_frame, Locale p_locale) {
+    public WindowRouteDetail(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowRouteDetail", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowRouteDetail", Locale.getDefault());
         this.setTitle(resources.getString("title"));
 
         // create main panel

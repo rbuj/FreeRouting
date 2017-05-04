@@ -22,6 +22,7 @@ package net.freerouting.freeroute.board;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Locale;
 import net.freerouting.freeroute.boardgraphics.GraphicsContext;
 import net.freerouting.freeroute.geometry.planar.Area;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
@@ -257,11 +258,11 @@ public class BoardOutline extends Item {
     }
 
     @Override
-    public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(ObjectInfoPanel p_window) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("board_outline"));
-        print_clearance_info(p_window, p_locale);
+        print_clearance_info(p_window);
         p_window.newline();
     }
 

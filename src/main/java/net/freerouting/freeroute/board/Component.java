@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.board;
 
+import java.util.Locale;
 import net.freerouting.freeroute.datastructures.UndoableObjects;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Point;
@@ -224,9 +225,9 @@ public class Component implements UndoableObjects.Storable, ObjectInfoPanel.Prin
     }
 
     @Override
-    public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(ObjectInfoPanel p_window) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("component") + " ");
         p_window.append_bold(this.name);
         if (this.location != null) {

@@ -50,17 +50,17 @@ public class BoardMenuFile extends javax.swing.JMenu {
     /**
      * Creates a new instance of BoardFileMenu
      */
-    private BoardMenuFile(BoardFrame p_board_frame, Locale p_locale, boolean p_session_file_option) {
+    private BoardMenuFile(BoardFrame p_board_frame, boolean p_session_file_option) {
         session_file_option = p_session_file_option;
         board_frame = p_board_frame;
-        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuFile", p_locale);
+        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuFile", Locale.getDefault());
     }
 
     /**
      * Returns a new file menu for the board frame.
      */
-    public static BoardMenuFile get_instance(BoardFrame p_board_frame, Locale p_locale, boolean p_session_file_option) {
-        BoardMenuFile file_menu = new BoardMenuFile(p_board_frame, p_locale, p_session_file_option);
+    public static BoardMenuFile get_instance(BoardFrame p_board_frame, boolean p_session_file_option) {
+        BoardMenuFile file_menu = new BoardMenuFile(p_board_frame, p_session_file_option);
 
         file_menu.setText(file_menu.resources.getString("file"));
 
@@ -85,7 +85,7 @@ public class BoardMenuFile extends javax.swing.JMenu {
         save_and_exit_item.setToolTipText(file_menu.resources.getString("save_and_exit_tooltip"));
         save_and_exit_item.addActionListener((java.awt.event.ActionEvent evt) -> {
             if (file_menu.session_file_option) {
-                file_menu.board_frame.design_file.write_specctra_session_file(file_menu.board_frame, p_locale);
+                file_menu.board_frame.design_file.write_specctra_session_file(file_menu.board_frame);
             } else {
                 file_menu.board_frame.save();
             }
@@ -148,7 +148,7 @@ public class BoardMenuFile extends javax.swing.JMenu {
         write_session_file_item.setText(resources.getString("session_file"));
         write_session_file_item.setToolTipText(resources.getString("session_file_tooltip"));
         write_session_file_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-            board_frame.design_file.write_specctra_session_file(board_frame, resources.getLocale());
+            board_frame.design_file.write_specctra_session_file(board_frame);
         });
 
         if ((routing_board.get_test_level() != net.freerouting.freeroute.board.TestLevel.RELEASE_VERSION || !host_cad_is_eagle)) {
@@ -159,7 +159,7 @@ public class BoardMenuFile extends javax.swing.JMenu {
         write_eagle_session_script_item.setText(resources.getString("eagle_script"));
         write_eagle_session_script_item.setToolTipText(resources.getString("eagle_script_tooltip"));
         write_eagle_session_script_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-            board_frame.design_file.update_eagle(board_frame, resources.getLocale());
+            board_frame.design_file.update_eagle(board_frame);
         });
 
         if (routing_board.get_test_level() != net.freerouting.freeroute.board.TestLevel.RELEASE_VERSION || host_cad_is_eagle) {

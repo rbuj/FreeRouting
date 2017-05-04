@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  * Popup menu used in the interactive route state.
  *
@@ -36,7 +38,7 @@ public class PopupMenuDynamicRoute extends PopupMenuDisplay {
         super(p_board_frame);
 
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         net.freerouting.freeroute.board.LayerStructure layer_structure = board_panel.board_handling.get_routing_board().layer_structure;
 
         javax.swing.JMenuItem end_route_item = new javax.swing.JMenuItem();

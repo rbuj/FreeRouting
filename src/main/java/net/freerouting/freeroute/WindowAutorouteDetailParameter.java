@@ -49,10 +49,11 @@ public class WindowAutorouteDetailParameter extends BoardSavableSubWindow {
     /**
      * Creates a new instance of WindowAutorouteDetailParameter
      */
-    public WindowAutorouteDetailParameter(BoardFrame p_board_frame, Locale p_locale) {
+    public WindowAutorouteDetailParameter(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
+        Locale locale = Locale.getDefault();
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowAutorouteParameter", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowAutorouteParameter", locale);
         this.setTitle(resources.getString("detail_autoroute_parameter"));
 
         // create main panel
@@ -70,7 +71,7 @@ public class WindowAutorouteDetailParameter extends BoardSavableSubWindow {
         gridbag.setConstraints(via_cost_label, gridbag_constraints);
         main_panel.add(via_cost_label);
 
-        java.text.NumberFormat number_format = java.text.NumberFormat.getIntegerInstance(p_locale);
+        java.text.NumberFormat number_format = java.text.NumberFormat.getIntegerInstance(locale);
         this.via_cost_field = new javax.swing.JFormattedTextField(number_format);
         this.via_cost_field.setColumns(3);
         this.via_cost_field.addKeyListener(new ViaCostFieldKeyListener());
@@ -168,7 +169,7 @@ public class WindowAutorouteDetailParameter extends BoardSavableSubWindow {
         against_preferred_direction_trace_cost_arr = new javax.swing.JFormattedTextField[signal_layer_count];
         preferred_direction_trace_costs_input_completed = new boolean[signal_layer_count];
         against_preferred_direction_trace_costs_input_completed = new boolean[signal_layer_count];
-        number_format = java.text.NumberFormat.getInstance(p_locale);
+        number_format = java.text.NumberFormat.getInstance(locale);
         number_format.setMaximumFractionDigits(2);
         final int TEXT_FIELD_LENGTH = 2;
         for (int i = 0; i < signal_layer_count; ++i) {

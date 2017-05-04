@@ -94,14 +94,14 @@ public class CoordinateTransform implements java.io.Serializable {
         return new FloatPoint(user_to_board(p_point.x), user_to_board(p_point.y));
     }
 
-    public PrintableShape board_to_user(net.freerouting.freeroute.geometry.planar.Shape p_shape, java.util.Locale p_locale) {
+    public PrintableShape board_to_user(net.freerouting.freeroute.geometry.planar.Shape p_shape) {
         PrintableShape result;
         if (p_shape instanceof net.freerouting.freeroute.geometry.planar.Circle) {
-            result = board_to_user((net.freerouting.freeroute.geometry.planar.Circle) p_shape, p_locale);
+            result = board_to_user((net.freerouting.freeroute.geometry.planar.Circle) p_shape);
         } else if (p_shape instanceof net.freerouting.freeroute.geometry.planar.IntBox) {
-            result = board_to_user((net.freerouting.freeroute.geometry.planar.IntBox) p_shape, p_locale);
+            result = board_to_user((net.freerouting.freeroute.geometry.planar.IntBox) p_shape);
         } else if (p_shape instanceof net.freerouting.freeroute.geometry.planar.PolylineShape) {
-            result = board_to_user((net.freerouting.freeroute.geometry.planar.PolylineShape) p_shape, p_locale);
+            result = board_to_user((net.freerouting.freeroute.geometry.planar.PolylineShape) p_shape);
         } else {
             System.out.println("CoordinateTransform.board_to_user not yet implemented for p_shape");
             result = null;
@@ -109,17 +109,17 @@ public class CoordinateTransform implements java.io.Serializable {
         return result;
     }
 
-    public PrintableShape.Circle board_to_user(net.freerouting.freeroute.geometry.planar.Circle p_circle, java.util.Locale p_locale) {
+    public PrintableShape.Circle board_to_user(net.freerouting.freeroute.geometry.planar.Circle p_circle) {
         return new PrintableShape.Circle(board_to_user(p_circle.center.to_float()),
                 board_to_user(p_circle.radius));
     }
 
-    public PrintableShape.Rectangle board_to_user(net.freerouting.freeroute.geometry.planar.IntBox p_box, java.util.Locale p_locale) {
+    public PrintableShape.Rectangle board_to_user(net.freerouting.freeroute.geometry.planar.IntBox p_box) {
         return new PrintableShape.Rectangle(board_to_user(p_box.ll.to_float()),
                 board_to_user(p_box.ur.to_float()));
     }
 
-    public PrintableShape.Polygon board_to_user(net.freerouting.freeroute.geometry.planar.PolylineShape p_shape, java.util.Locale p_locale) {
+    public PrintableShape.Polygon board_to_user(net.freerouting.freeroute.geometry.planar.PolylineShape p_shape) {
         FloatPoint[] corners = p_shape.corner_approx_arr();
         FloatPoint[] transformed_corners = new FloatPoint[corners.length];
         for (int i = 0; i < corners.length; ++i) {
@@ -127,5 +127,4 @@ public class CoordinateTransform implements java.io.Serializable {
         }
         return new PrintableShape.Polygon(transformed_corners);
     }
-
 }

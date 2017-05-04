@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.board;
 
+import java.util.Locale;
 import net.freerouting.freeroute.geometry.planar.ConvexShape;
 
 /**
@@ -56,9 +57,9 @@ public class ClearanceViolation implements ObjectInfoPanel.Printable {
     }
 
     @Override
-    public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(ObjectInfoPanel p_window) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources..ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources..ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("clearance_violation_2"));
         p_window.append(" " + resources.getString("at") + " ");
         p_window.append(shape.centre_of_gravity());
@@ -69,8 +70,8 @@ public class ClearanceViolation implements ObjectInfoPanel.Printable {
         p_window.append(", " + resources.getString("between"));
         p_window.newline();
         p_window.indent();
-        first_item.print_info(p_window, p_locale);
+        first_item.print_info(p_window);
         p_window.indent();
-        second_item.print_info(p_window, p_locale);
+        second_item.print_info(p_window);
     }
 }

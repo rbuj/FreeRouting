@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.library;
 
+import java.util.Locale;
 import net.freerouting.freeroute.geometry.planar.ConvexShape;
 import net.freerouting.freeroute.geometry.planar.Direction;
 import net.freerouting.freeroute.geometry.planar.IntBox;
@@ -158,16 +159,16 @@ public class Padstack implements Comparable<Padstack>, net.freerouting.freeroute
     }
 
     @Override
-    public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("padstack") + " ");
         p_window.append_bold(this.name);
         for (int i = 0; i < shapes.length; ++i) {
             if (shapes[i] != null) {
                 p_window.newline();
                 p_window.indent();
-                p_window.append(shapes[i], p_locale);
+                p_window.append(shapes[i]);
                 p_window.append(" " + resources.getString("on_layer") + " ");
                 p_window.append(padstack_list.board_layer_structure.arr[i].name);
             }

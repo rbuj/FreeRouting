@@ -59,7 +59,6 @@ public final class MainApp extends Application {
     private static boolean session_file_option = false;
     private static String design_file_name = "";
     private static String design_dir_name = "";
-    private volatile static Locale locale = null;
     private Stage mainStage;
     private static TestLevel test_level;
 
@@ -70,6 +69,7 @@ public final class MainApp extends Application {
          */
         try {
             boolean test_version_option = false;
+            Locale locale = null;
             Parameters parameters = getParameters();
             List<String> list = parameters.getRaw();
             Iterator<String> iterator = list.iterator();
@@ -111,6 +111,7 @@ public final class MainApp extends Application {
                                 LOGGER.log(Level.INFO, "locale: " + new_locale + " not found [using default]");
                                 locale = new Locale("en", "");
                             }
+                            Locale.setDefault(locale);
                         } else {
                             throw new IllegalArgumentException("Argument: " + string + " [missing locale]");
                         }
@@ -141,6 +142,7 @@ public final class MainApp extends Application {
                 if (locale == null) {
                     locale = new Locale("en", "");
                 }
+                Locale.setDefault(locale);
             }
 
             /**
@@ -161,7 +163,7 @@ public final class MainApp extends Application {
     public void start(Stage stage) throws Exception {
         mainStage = stage;
         ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.MainApp", locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.MainApp", Locale.getDefault());
         mainStage.setTitle(resources.getString("title"));
         mainStage.setResizable(false);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/net/freerouting/freeroute/fxml/MainApp.fxml"));
@@ -212,7 +214,4 @@ public final class MainApp extends Application {
         return VERSION_NUMBER_STRING;
     }
 
-    public static Locale get_locale() {
-        return locale;
-    }
 }

@@ -23,6 +23,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  *
  * @author Alfons Wirtz
@@ -38,7 +40,7 @@ public class PopupMenuDisplay extends javax.swing.JPopupMenu {
     public PopupMenuDisplay(BoardFrame p_board_frame) {
         this.board_panel = p_board_frame.board_panel;
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         javax.swing.JMenuItem center_display_item = new javax.swing.JMenuItem();
         center_display_item.setText(resources.getString("center_display"));
         center_display_item.addActionListener((java.awt.event.ActionEvent evt) -> {

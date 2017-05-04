@@ -55,7 +55,7 @@ public abstract class PrintableShape {
 
         @Override
         public String toString() {
-            Locale locale = MainApp.get_locale();
+            Locale locale = Locale.getDefault();
             java.util.ResourceBundle resources
                     = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", locale);
             StringBuilder sb = new StringBuilder();
@@ -83,7 +83,7 @@ public abstract class PrintableShape {
 
         @Override
         public String toString() {
-            Locale locale = MainApp.get_locale();
+            Locale locale = Locale.getDefault();
             java.util.ResourceBundle resources
                     = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", locale);
             StringBuilder sb = new StringBuilder();
@@ -102,7 +102,7 @@ public abstract class PrintableShape {
 
         @Override
         public String toString() {
-            Locale locale = MainApp.get_locale();
+            Locale locale = Locale.getDefault();
             java.util.ResourceBundle resources
                     = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", locale);
             StringBuilder sb = new StringBuilder();

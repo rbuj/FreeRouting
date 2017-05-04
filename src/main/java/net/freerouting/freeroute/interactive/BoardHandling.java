@@ -30,6 +30,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Reader;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Set;
 import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.CoordinateTransform;
@@ -122,18 +123,16 @@ public class BoardHandling {
      */
     boolean paint_immediately = false;
     private final java.util.ResourceBundle resources;
-    private final java.util.Locale locale;
 
     /**
      * Creates a new BoardHandling
      */
-    public BoardHandling(net.freerouting.freeroute.BoardPanel p_panel, java.util.Locale p_locale) {
-        this.locale = p_locale;
+    public BoardHandling(net.freerouting.freeroute.BoardPanel p_panel) {
         this.panel = p_panel;
         this.screen_messages = p_panel.screen_messages;
         this.logfile = new Logfile();
         this.set_interactive_state(SelectMenuState.get_instance(this, logfile));
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.BoardHandling", p_locale);
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.BoardHandling", Locale.getDefault());
     }
 
     /**
@@ -150,13 +149,6 @@ public class BoardHandling {
      */
     public boolean is_board_read_only() {
         return this.board_is_read_only;
-    }
-
-    /**
-     * Return the current language for the GUI messages.
-     */
-    public java.util.Locale get_locale() {
-        return this.locale;
     }
 
     /**

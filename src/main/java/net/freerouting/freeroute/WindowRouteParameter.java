@@ -34,7 +34,6 @@ public class WindowRouteParameter extends BoardSavableSubWindow {
     private static final int C_REGION_SCALE_FACTOR = 200;
 
     private final net.freerouting.freeroute.interactive.BoardHandling board_handling;
-    private final java.util.Locale current_locale;
     final WindowManualRules manual_rule_window;
     final WindowRouteDetail detail_window;
     private final javax.swing.JSlider region_slider;
@@ -63,14 +62,14 @@ public class WindowRouteParameter extends BoardSavableSubWindow {
     /**
      * Creates a new instance of RouteParameterWindow
      */
-    public WindowRouteParameter(BoardFrame p_board_frame, Locale p_locale) {
+    public WindowRouteParameter(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
-        this.current_locale = p_locale;
-        this.detail_window = new WindowRouteDetail(p_board_frame, p_locale);
-        this.manual_rule_window = new WindowManualRules(p_board_frame, current_locale);
+        this.detail_window = new WindowRouteDetail(p_board_frame);
+        this.manual_rule_window = new WindowManualRules(p_board_frame);
+        Locale locale = Locale.getDefault();
 
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowRouteParameter", current_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowRouteParameter", locale);
         this.setTitle(resources.getString("title"));
 
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -238,7 +237,7 @@ public class WindowRouteParameter extends BoardSavableSubWindow {
         pin_exit_edge_to_turn_label.setToolTipText("pin_pad_to_turn_gap_tooltip");
         gridbag.setConstraints(pin_exit_edge_to_turn_label, gridbag_constraints);
         main_panel.add(pin_exit_edge_to_turn_label);
-        java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(current_locale);
+        java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(locale);
         number_format.setMaximumFractionDigits(7);
         this.edge_to_turn_dist_field = new javax.swing.JFormattedTextField(number_format);
         this.edge_to_turn_dist_field.setColumns(5);
@@ -439,7 +438,7 @@ public class WindowRouteParameter extends BoardSavableSubWindow {
             }
             if (free_angle_traces_found) {
                 java.util.ResourceBundle resources
-                        = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowRouteParameter", current_locale);
+                        = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowRouteParameter", Locale.getDefault());
                 String curr_message = resources.getString("change_snap_angle_90");
                 if (!WindowMessage.confirm(curr_message)) {
                     refresh();
@@ -469,7 +468,7 @@ public class WindowRouteParameter extends BoardSavableSubWindow {
             }
             if (free_angle_traces_found) {
                 java.util.ResourceBundle resources
-                        = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowRouteParameter", current_locale);
+                        = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowRouteParameter", Locale.getDefault());
                 String curr_message = resources.getString("change_snap_angle_45");
                 if (!WindowMessage.confirm(curr_message)) {
                     refresh();

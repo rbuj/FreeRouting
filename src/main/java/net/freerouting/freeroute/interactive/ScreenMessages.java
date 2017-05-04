@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.interactive;
 
+import java.util.Locale;
 import javax.swing.JLabel;
 
 /**
@@ -47,8 +48,9 @@ public class ScreenMessages {
      * Creates a new instance of ScreenMessageFields
      */
     public ScreenMessages(JLabel p_status_field, JLabel p_add_field,
-            JLabel p_layer_field, JLabel p_mouse_position, java.util.Locale p_locale) {
-        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.ScreenMessages", p_locale);
+            JLabel p_layer_field, JLabel p_mouse_position) {
+        Locale locale = Locale.getDefault();
+        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.ScreenMessages", locale);
         active_layer_string = resources.getString("current_layer") + " ";
         target_layer_string = resources.getString("target_layer") + " ";
         status_field = p_status_field;
@@ -57,7 +59,7 @@ public class ScreenMessages {
         mouse_position = p_mouse_position;
         add_field.setText(EMPTY_STRING);
 
-        this.number_format = java.text.NumberFormat.getInstance(p_locale);
+        this.number_format = java.text.NumberFormat.getInstance(locale);
         this.number_format.setMaximumFractionDigits(4);
     }
 

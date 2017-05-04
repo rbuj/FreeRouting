@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
 import net.freerouting.freeroute.board.LayerStructure;
 
 /**
@@ -43,9 +44,9 @@ public class ComboBoxLayer extends javax.swing.JComboBox {
     /**
      * Creates a new instance of LayerComboBox
      */
-    public ComboBoxLayer(LayerStructure p_layer_structure, java.util.Locale p_locale) {
+    public ComboBoxLayer(LayerStructure p_layer_structure) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         int signal_layer_count = p_layer_structure.signal_layer_count();
         int item_count = signal_layer_count + 1;
         boolean add_inner_layer_item = signal_layer_count > 2;

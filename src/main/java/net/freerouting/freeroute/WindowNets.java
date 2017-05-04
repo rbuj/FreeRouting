@@ -37,9 +37,9 @@ public class WindowNets extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of NetsWindow
      */
-    public WindowNets(BoardFrame p_board_frame, Locale p_locale) {
-        super(p_board_frame, p_locale);
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowNets", p_locale);
+    public WindowNets(BoardFrame p_board_frame) {
+        super(p_board_frame);
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowNets", Locale.getDefault());
         this.setTitle(resources.getString("title"));
 
         javax.swing.JPanel curr_button_panel = new javax.swing.JPanel();

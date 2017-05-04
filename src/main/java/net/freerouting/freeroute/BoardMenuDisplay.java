@@ -35,16 +35,16 @@ public class BoardMenuDisplay extends javax.swing.JMenu {
     /**
      * Creates a new instance of BoardDisplayMenu
      */
-    private BoardMenuDisplay(BoardFrame p_board_frame, Locale p_locale) {
+    private BoardMenuDisplay(BoardFrame p_board_frame) {
         board_frame = p_board_frame;
-        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuDisplay", p_locale);
+        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuDisplay", Locale.getDefault());
     }
 
     /**
      * Returns a new display menu for the board frame.
      */
-    public static BoardMenuDisplay get_instance(BoardFrame p_board_frame, Locale p_locale) {
-        BoardMenuDisplay display_menu = new BoardMenuDisplay(p_board_frame, p_locale);
+    public static BoardMenuDisplay get_instance(BoardFrame p_board_frame) {
+        BoardMenuDisplay display_menu = new BoardMenuDisplay(p_board_frame);
         display_menu.setText(display_menu.resources.getString("display"));
 
         javax.swing.JMenuItem itemvisibility = new javax.swing.JMenuItem();

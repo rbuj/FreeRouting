@@ -23,6 +23,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.Locale;
 import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -66,8 +67,7 @@ public class BoardPanel extends javax.swing.JPanel {
     /**
      * Creates a new BoardPanel in an Application
      */
-    public BoardPanel(ScreenMessages p_screen_messages, BoardFrame p_board_frame,
-            java.util.Locale p_locale) {
+    public BoardPanel(ScreenMessages p_screen_messages, BoardFrame p_board_frame) {
         screen_messages = p_screen_messages;
         try {
             // used to be able to change the location of the mouse pointer
@@ -77,10 +77,10 @@ public class BoardPanel extends javax.swing.JPanel {
         }
         board_frame = p_board_frame;
         this.scroll_pane = board_frame.scroll_pane;
-        default_init(p_locale);
+        default_init();
     }
 
-    private void default_init(java.util.Locale p_locale) {
+    private void default_init() {
         setLayout(new java.awt.BorderLayout());
 
         setBackground(new java.awt.Color(0, 0, 0));
@@ -124,7 +124,7 @@ public class BoardPanel extends javax.swing.JPanel {
         addMouseWheelListener((java.awt.event.MouseWheelEvent evt) -> {
             board_handling.mouse_wheel_moved(evt.getWheelRotation());
         });
-        board_handling = new BoardHandling(this, p_locale);
+        board_handling = new BoardHandling(this);
         setAutoscrolls(true);
         this.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
     }

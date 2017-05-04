@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute.rules;
 
+import java.util.Locale;
+
 /**
  * Contains the array of net classes for interactive routing.
  *
@@ -69,9 +71,9 @@ public class NetClasses implements java.io.Serializable {
      * Appends a new empty class to the class array. A name for the class is
      * created internally
      */
-    NetClass append(net.freerouting.freeroute.board.LayerStructure p_layer_structure, ClearanceMatrix p_clearance_matrix, java.util.Locale p_locale) {
+    NetClass append(net.freerouting.freeroute.board.LayerStructure p_layer_structure, ClearanceMatrix p_clearance_matrix) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.rules.resources.Default", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.rules.resources.Default", Locale.getDefault());
         String name_front = resources.getString("class");
         String new_name = null;
         Integer index = 0;

@@ -23,6 +23,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  *
  * @author Alfons Wirtz
@@ -36,7 +38,7 @@ public class PopupMenuMove extends PopupMenuDisplay {
     public PopupMenuMove(BoardFrame p_board_frame) {
         super(p_board_frame);
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.PopupMenuMove", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.PopupMenuMove", Locale.getDefault());
 
         // Add menu for turning the items by a multiple of 90 degree
         javax.swing.JMenuItem rotate_menu = new javax.swing.JMenu();

@@ -41,10 +41,10 @@ public class WindowSnapshot extends BoardSavableSubWindow {
     /**
      * Creates a new instance of SnapshotFrame
      */
-    public WindowSnapshot(BoardFrame p_board_frame, Locale p_locale) {
+    public WindowSnapshot(BoardFrame p_board_frame) {
         this.board_frame = p_board_frame;
-        this.settings_window = new WindowSnapshotSettings(p_board_frame, p_locale);
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowSnapshot", p_locale);
+        this.settings_window = new WindowSnapshotSettings(p_board_frame);
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowSnapshot", Locale.getDefault());
         this.setTitle(resources.getString("title"));
 
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

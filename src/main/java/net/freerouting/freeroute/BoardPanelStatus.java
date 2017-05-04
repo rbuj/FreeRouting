@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  * Panel at the lower border of the board frame containing amongst others the
  * message line and the current layer and cursor position.
@@ -36,9 +38,9 @@ class BoardPanelStatus extends javax.swing.JPanel {
     /**
      * Creates a new instance of BoardStatusPanel
      */
-    BoardPanelStatus(java.util.Locale p_locale) {
+    BoardPanelStatus() {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardPanelStatus", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardPanelStatus", Locale.getDefault());
         this.setLayout(new java.awt.BorderLayout());
         this.setPreferredSize(new java.awt.Dimension(300, 20));
 

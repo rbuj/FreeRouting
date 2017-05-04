@@ -19,8 +19,6 @@
  */
 package net.freerouting.freeroute;
 
-import java.util.Locale;
-
 /**
  * Creates the menu bar of a board frame together with its menu items.
  *
@@ -35,33 +33,33 @@ class BoardMenuBar extends javax.swing.JMenuBar {
         this.file_menu.add_design_dependent_items();
     }
 
-    BoardMenuBar (BoardFrame p_board_frame, Locale p_locale, boolean p_session_file_option) {
-        file_menu = BoardMenuFile.get_instance(p_board_frame, p_locale, p_session_file_option);
+    BoardMenuBar (BoardFrame p_board_frame, boolean p_session_file_option) {
+        file_menu = BoardMenuFile.get_instance(p_board_frame, p_session_file_option);
     }
 
     /**
      * Creates a new BoardMenuBar together with its menus
      */
-    public static BoardMenuBar get_instance(BoardFrame p_board_frame, Locale p_locale, boolean p_session_file_option) {
-        BoardMenuBar menubar = new BoardMenuBar(p_board_frame, p_locale, p_session_file_option);
+    public static BoardMenuBar get_instance(BoardFrame p_board_frame, boolean p_session_file_option) {
+        BoardMenuBar menubar = new BoardMenuBar(p_board_frame, p_session_file_option);
         menubar.add(menubar.file_menu);
 
-        javax.swing.JMenu display_menu = BoardMenuDisplay.get_instance(p_board_frame, p_locale);
+        javax.swing.JMenu display_menu = BoardMenuDisplay.get_instance(p_board_frame);
         menubar.add(display_menu);
 
-        javax.swing.JMenu parameter_menu = BoardMenuParameter.get_instance(p_board_frame, p_locale);
+        javax.swing.JMenu parameter_menu = BoardMenuParameter.get_instance(p_board_frame);
         menubar.add(parameter_menu);
 
-        javax.swing.JMenu rules_menu = BoardMenuRules.get_instance(p_board_frame, p_locale);
+        javax.swing.JMenu rules_menu = BoardMenuRules.get_instance(p_board_frame);
         menubar.add(rules_menu);
 
-        javax.swing.JMenu info_menu = BoardMenuInfo.get_instance(p_board_frame, p_locale);
+        javax.swing.JMenu info_menu = BoardMenuInfo.get_instance(p_board_frame);
         menubar.add(info_menu);
 
-        javax.swing.JMenu other_menu = BoardMenuOther.get_instance(p_board_frame, p_locale);
+        javax.swing.JMenu other_menu = BoardMenuOther.get_instance(p_board_frame);
         menubar.add(other_menu);
 
-        javax.swing.JMenu help_menu = new BoardMenuHelp(p_board_frame, p_locale);
+        javax.swing.JMenu help_menu = new BoardMenuHelp(p_board_frame);
         menubar.add(help_menu);
 
         return menubar;

@@ -40,11 +40,12 @@ class BoardToolbar extends javax.swing.JPanel {
     /**
      * Creates a new instance of BoardToolbarPanel
      */
-    BoardToolbar(BoardFrame p_board_frame, Locale p_locale) {
+    BoardToolbar(BoardFrame p_board_frame) {
+        Locale locale = Locale.getDefault();
         this.board_frame = p_board_frame;
 
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardToolbar", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardToolbar", locale);
 
         this.setLayout(new java.awt.BorderLayout());
 
@@ -182,7 +183,7 @@ class BoardToolbar extends javax.swing.JPanel {
         // create the right toolbar
         final javax.swing.JToolBar right_toolbar = new javax.swing.JToolBar();
         final javax.swing.JLabel unit_label = new javax.swing.JLabel();
-        java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(p_locale);
+        java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(locale);
         number_format.setMaximumFractionDigits(7);
         this.unit_factor_field = new javax.swing.JFormattedTextField(number_format);
         this.unit_combo_box = new javax.swing.JComboBox<>();

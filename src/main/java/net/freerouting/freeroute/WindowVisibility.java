@@ -39,7 +39,7 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
     /**
      * Creates a new instance of VisibilityFrame
      */
-    public WindowVisibility(BoardFrame p_board_frame, String p_title, String p_header_message, String[] p_message_arr, Locale p_locale) {
+    public WindowVisibility(BoardFrame p_board_frame, String p_title, String p_header_message, String[] p_message_arr) {
         this.board_panel = p_board_frame.board_panel;
         this.setTitle(p_title);
 
@@ -77,7 +77,7 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
         main_panel.add(empty_label);
         gridbag_constraints.gridwidth = 2;
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         javax.swing.JButton min_all_button = new javax.swing.JButton(resources.getString("minimum_all"));
         min_all_button.setToolTipText(resources.getString("minimum_all_tooltip"));
         min_all_button.addActionListener(new MinAllButtonListener());

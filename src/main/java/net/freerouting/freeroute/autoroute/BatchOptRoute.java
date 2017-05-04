@@ -17,6 +17,7 @@ package net.freerouting.freeroute.autoroute;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Set;
 import net.freerouting.freeroute.board.FixedState;
 import net.freerouting.freeroute.board.Item;
@@ -146,7 +147,7 @@ public class BatchOptRoute {
      */
     private boolean opt_route_item(Item p_item, int p_pass_no, boolean p_with_prefered_directions) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.InteractiveState", this.thread.hdlg.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.InteractiveState", Locale.getDefault());
         String start_message = resources.getString("batch_optimizer") + " " + resources.getString("stop_message") + "        " + resources.getString("pass") + " " + Integer.toString(p_pass_no) + ": ";
         this.thread.hdlg.screen_messages.set_status_message(start_message);
         this.thread.hdlg.remove_ratsnest();

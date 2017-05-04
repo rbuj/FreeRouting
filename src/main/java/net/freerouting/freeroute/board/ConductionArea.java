@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.board;
 
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 import net.freerouting.freeroute.geometry.planar.Area;
@@ -166,12 +167,12 @@ public class ConductionArea extends ObstacleArea implements Connectable {
     }
 
     @Override
-    public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(ObjectInfoPanel p_window) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("conduction_area"));
-        this.print_shape_info(p_window, p_locale);
-        this.print_connectable_item_info(p_window, p_locale);
+        this.print_shape_info(p_window);
+        this.print_connectable_item_info(p_window);
         p_window.newline();
     }
 

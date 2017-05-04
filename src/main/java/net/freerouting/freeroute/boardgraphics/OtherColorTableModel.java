@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.boardgraphics;
 
 import java.awt.Color;
+import java.util.Locale;
 import net.freerouting.freeroute.MainApp;
 
 /**
@@ -68,7 +69,7 @@ public class OtherColorTableModel extends ColorTableModel {
     @Override
     public String getColumnName(int p_col) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.boardgraphics.resources.ColorTableModel", MainApp.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.boardgraphics.resources.ColorTableModel", Locale.getDefault());
         return resources.getString(ColumnNames.values()[p_col].toString());
     }
 

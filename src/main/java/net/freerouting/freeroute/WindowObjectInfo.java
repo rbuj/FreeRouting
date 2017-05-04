@@ -20,6 +20,7 @@
 package net.freerouting.freeroute;
 
 import java.util.Collection;
+import java.util.Locale;
 
 /**
  * Window displaying text information for a list of objects implementing the
@@ -47,7 +48,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements net.fre
         Integer trace_count = 0;
         double cumulative_trace_length = 0;
         for (WindowObjectInfo.Printable curr_object : p_item_list) {
-            curr_object.print_info(new_instance, p_board_frame.get_locale());
+            curr_object.print_info(new_instance);
             if (curr_object instanceof net.freerouting.freeroute.board.Pin) {
                 ++pin_count;
             } else if (curr_object instanceof net.freerouting.freeroute.board.Via) {
@@ -58,7 +59,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements net.fre
             }
         }
         new_instance.append_bold(new_instance.resources.getString("summary") + " ");
-        java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(p_board_frame.get_locale());
+        java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(Locale.getDefault());
         if (pin_count > 0) {
             new_instance.append(number_format.format(pin_count));
             if (pin_count == 1) {
@@ -115,7 +116,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements net.fre
             new_window.append(new_window.resources.getString("list_empty"));
         }
         for (Printable curr_object : p_object_list) {
-            curr_object.print_info(new_window, p_board_frame.get_locale());
+            curr_object.print_info(new_window);
         }
         new_window.pack();
         java.awt.Dimension size = new_window.getSize();
@@ -143,13 +144,13 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements net.fre
     private WindowObjectInfo(BoardFrame p_board_frame, net.freerouting.freeroute.board.CoordinateTransform p_coordinate_transform) {
         super(p_board_frame);
         this.resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowObjectInfo", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowObjectInfo", Locale.getDefault());
         this.coordinate_transform = p_coordinate_transform;
 
         // create the text pane
         this.text_pane = new javax.swing.JTextPane();
         this.text_pane.setEditable(false);
-        this.number_format = java.text.NumberFormat.getInstance(p_board_frame.get_locale());
+        this.number_format = java.text.NumberFormat.getInstance(Locale.getDefault());
         this.number_format.setMaximumFractionDigits(4);
 
         // set document and text styles
@@ -238,7 +239,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements net.fre
     @Override
     public boolean append(net.freerouting.freeroute.geometry.planar.FloatPoint p_point) {
         net.freerouting.freeroute.geometry.planar.FloatPoint transformed_point = this.coordinate_transform.board_to_user(p_point);
-        return append(transformed_point.to_string(board_frame.get_locale()));
+        return append(transformed_point.to_string(Locale.getDefault()));
     }
 
     /**
@@ -246,8 +247,8 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements net.fre
      * coordinate sytem. Returns false, if that was not possible.
      */
     @Override
-    public boolean append(net.freerouting.freeroute.geometry.planar.Shape p_shape, java.util.Locale p_locale) {
-        net.freerouting.freeroute.board.PrintableShape transformed_shape = this.coordinate_transform.board_to_user(p_shape, p_locale);
+    public boolean append(net.freerouting.freeroute.geometry.planar.Shape p_shape) {
+        net.freerouting.freeroute.board.PrintableShape transformed_shape = this.coordinate_transform.board_to_user(p_shape);
         if (transformed_shape == null) {
             return false;
         }

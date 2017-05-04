@@ -41,9 +41,9 @@ public class BoardMenuHelp extends BoardMenuHelpReduced {
      * BoardMenuHelpReduced to avoid ClassNotFound exception when the library
      * jh.jar is not found, which is only used in this extended class.
      */
-    public BoardMenuHelp(BoardFrame p_board_frame, Locale p_locale) {
-        super(p_board_frame, p_locale);
-        this.initialize_help(p_locale);
+    public BoardMenuHelp(BoardFrame p_board_frame) {
+        super(p_board_frame);
+        this.initialize_help();
         javax.swing.JMenuItem direct_help_window = new javax.swing.JMenuItem();
         direct_help_window.setText(this.resources.getString("direct_help"));
         if (direct_help != null) {
@@ -58,10 +58,10 @@ public class BoardMenuHelp extends BoardMenuHelpReduced {
         this.add(contents_window, 0);
     }
 
-    private void initialize_help(Locale p_locale) {
+    private void initialize_help() {
         // try to find the helpset and create a HelpBroker object
         if (BoardFrame.help_broker == null) {
-            String language = p_locale.getLanguage();
+            String language = Locale.getDefault().getLanguage();
             String helpset_name;
             helpset_name = "helpset/" + language + "/jhelpset.hs";
             try {

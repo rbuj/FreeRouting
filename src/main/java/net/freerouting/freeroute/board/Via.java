@@ -21,6 +21,7 @@ package net.freerouting.freeroute.board;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Locale;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.Shape;
@@ -223,15 +224,15 @@ public class Via extends DrillItem {
     }
 
     @Override
-    public void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(ObjectInfoPanel p_window) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("via"));
         p_window.append(" " + resources.getString("at"));
         p_window.append(this.get_center().to_float());
         p_window.append(", " + resources.getString("padstack"));
         p_window.append(padstack.name, resources.getString("padstack_info"), padstack);
-        this.print_connectable_item_info(p_window, p_locale);
+        this.print_connectable_item_info(p_window);
         p_window.newline();
     }
 

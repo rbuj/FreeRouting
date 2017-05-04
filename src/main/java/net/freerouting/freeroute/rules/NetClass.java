@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute.rules;
 
+import java.util.Locale;
+
 /**
  * Describes routing rules for individual nets.
  *
@@ -263,9 +265,9 @@ public class NetClass implements java.io.Serializable, net.freerouting.freeroute
     }
 
     @Override
-    public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window, java.util.Locale p_locale) {
+    public void print_info(net.freerouting.freeroute.board.ObjectInfoPanel p_window) {
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", Locale.getDefault());
         p_window.append_bold(resources.getString("net_class_2") + " ");
         p_window.append_bold(this.name);
         p_window.append_bold(":");

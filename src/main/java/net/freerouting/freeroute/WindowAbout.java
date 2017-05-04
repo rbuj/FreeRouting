@@ -23,6 +23,7 @@ package net.freerouting.freeroute;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -39,23 +40,21 @@ import javafx.scene.Scene;
 @SuppressWarnings("serial")
 public final class WindowAbout extends BoardSavableSubWindow {
 
-    public WindowAbout(Locale p_locale) {
-        java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowAbout", p_locale);
-        this.setTitle(resources.getString("title"));
+    public WindowAbout() {
+        java.util.ResourceBundle rb
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowAbout", Locale.getDefault());
+        this.setTitle(rb.getString("title"));
         this.setLayout(new BorderLayout());
         this.setSize(520, 200);
         final JFXPanel jfxPanel = new JFXPanel();
         this.add(jfxPanel, BorderLayout.CENTER);
         this.setResizable(false);
-        Platform.runLater(() -> initFX(jfxPanel, p_locale));
+        Platform.runLater(() -> initFX(jfxPanel, rb));
     }
 
-    private void initFX(JFXPanel jfxPanel, Locale p_locale) {
+    private void initFX(JFXPanel jfxPanel, ResourceBundle rb) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/net/freerouting/freeroute/fxml/WindowAbout.fxml"));
-            java.util.ResourceBundle rb
-                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowAbout", p_locale);
             loader.setResources(rb);
             Parent root = (Parent) loader.load();
             WindowAboutController controller = loader.getController();

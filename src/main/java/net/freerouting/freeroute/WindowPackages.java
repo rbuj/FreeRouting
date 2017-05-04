@@ -35,10 +35,10 @@ public class WindowPackages extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of PackagesWindow
      */
-    public WindowPackages(BoardFrame p_board_frame, Locale p_locale) {
-        super(p_board_frame, p_locale);
+    public WindowPackages(BoardFrame p_board_frame) {
+        super(p_board_frame);
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         this.setTitle(resources.getString("packages"));
         p_board_frame.set_context_sensitive_help(this, "WindowObjectList_LibraryPackages");
     }

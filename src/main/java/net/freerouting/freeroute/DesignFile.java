@@ -183,9 +183,9 @@ public class DesignFile {
      * Writes a Specctra Session File to update the design file in the host
      * system. Returns false, if the write failed
      */
-    public boolean write_specctra_session_file(BoardFrame p_board_frame, Locale p_locale) {
+    public boolean write_specctra_session_file(BoardFrame p_board_frame) {
         final java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuFile", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuFile", Locale.getDefault());
         String design_file_name = get_name();
         String[] file_name_parts = design_file_name.split("\\.", 2);
         String design_name = file_name_parts[0];
@@ -225,9 +225,9 @@ public class DesignFile {
         return true;
     }
 
-    public void update_eagle(BoardFrame p_board_frame, Locale p_locale) {
+    public void update_eagle(BoardFrame p_board_frame) {
         final java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuFile", p_locale);
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuFile", Locale.getDefault());
         String design_file_name = get_name();
         String[] file_name_parts = design_file_name.split("\\.", 2);
         String design_name = file_name_parts[0];

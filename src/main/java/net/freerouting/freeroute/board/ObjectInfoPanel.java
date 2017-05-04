@@ -59,7 +59,7 @@ public interface ObjectInfoPanel {
      * Appends p_shape to the window after transforming to the user coordinate
      * sytem. Returns false, if that was not possible.
      */
-    boolean append(net.freerouting.freeroute.geometry.planar.Shape p_shape, java.util.Locale p_locale);
+    boolean append(net.freerouting.freeroute.geometry.planar.Shape p_shape);
 
     /**
      * Begins a new line in the window.
@@ -100,6 +100,6 @@ public interface ObjectInfoPanel {
          * Prints information about an ObjectInfoWindow.Printable object into
          * the input window.
          */
-        void print_info(ObjectInfoPanel p_window, java.util.Locale p_locale);
+        void print_info(ObjectInfoPanel p_window);
     }
 }

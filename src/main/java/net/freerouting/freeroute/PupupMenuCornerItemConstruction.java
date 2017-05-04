@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.Locale;
+
 /**
  * Popup menu used while constructing a cornered shape..
  *
@@ -35,7 +37,7 @@ class PupupMenuCornerItemConstruction extends javax.swing.JPopupMenu {
     PupupMenuCornerItemConstruction(BoardFrame p_board_frame) {
         this.board_panel = p_board_frame.board_panel;
         java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", p_board_frame.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         javax.swing.JMenuItem add_corner_item = new javax.swing.JMenuItem();
         add_corner_item.setText(resources.getString("add_corner"));
         add_corner_item.addActionListener((java.awt.event.ActionEvent evt) -> {

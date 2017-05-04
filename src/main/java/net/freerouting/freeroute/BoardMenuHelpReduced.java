@@ -37,9 +37,9 @@ public class BoardMenuHelpReduced extends javax.swing.JMenu {
      * BoardMenuHelp to avoid ClassNotFound exception when the library jh.jar is
      * not found, which is only used in the extended help menu.
      */
-    public BoardMenuHelpReduced(BoardFrame p_board_frame, Locale p_locale) {
+    public BoardMenuHelpReduced(BoardFrame p_board_frame) {
         this.board_frame = p_board_frame;
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuHelp", p_locale);
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuHelp", Locale.getDefault());
         this.setText(this.resources.getString("help"));
 
         javax.swing.JMenuItem about_window = new javax.swing.JMenuItem();

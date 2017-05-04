@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.interactive;
 
 import java.awt.Graphics;
+import java.util.Locale;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 
 /**
@@ -55,7 +56,7 @@ public class InteractiveState {
         this.hdlg = p_board_handling;
         this.logfile = p_logfile;
         this.resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.InteractiveState", p_board_handling.get_locale());
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.InteractiveState", Locale.getDefault());
     }
 
     /**
