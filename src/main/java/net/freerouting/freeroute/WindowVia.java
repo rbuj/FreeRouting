@@ -454,7 +454,7 @@ public class WindowVia extends BoardSavableSubWindow {
                 return;
             }
             net.freerouting.freeroute.rules.BoardRules board_rules = board_frame.board_panel.board_handling.get_routing_board().rules;
-            WindowViaRule new_window = new WindowViaRule((ViaRule) selected_object, board_rules.via_infos, board_frame, resources.getLocale());
+            WindowViaRule new_window = new WindowViaRule((ViaRule) selected_object, board_rules.via_infos, board_frame);
             java.awt.Point loc = getLocation();
             java.awt.Point new_window_location
                     = new java.awt.Point((int) (loc.getX() + WINDOW_OFFSET), (int) (loc.getY() + WINDOW_OFFSET));

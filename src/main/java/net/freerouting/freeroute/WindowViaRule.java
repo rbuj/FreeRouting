@@ -49,11 +49,11 @@ public class WindowViaRule extends javax.swing.JFrame {
     /**
      * Creates a new instance of ViaRuleWindow
      */
-    public WindowViaRule(ViaRule p_via_rule, ViaInfos p_via_list, BoardFrame p_board_frame, Locale p_locale) {
+    public WindowViaRule(ViaRule p_via_rule, ViaInfos p_via_list, BoardFrame p_board_frame) {
         this.via_rule = p_via_rule;
         this.via_list = p_via_list;
 
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowViaRule", p_locale);
+        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowViaRule", Locale.getDefault());
         this.setTitle(resources.getString("title") + " " + p_via_rule.name);
 
         this.main_panel = new javax.swing.JPanel();

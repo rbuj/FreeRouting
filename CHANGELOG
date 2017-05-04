@@ -4,6 +4,7 @@ ToDo
 	* Write all documentation in docbook format
 
 xxxx-xx-xx
+        * Use the default locale for this instance of the JVM
         * Fixed failure to load files containing Ω, μ, etc.
           Groomblecom <groomblecom@gmail.com>
 
