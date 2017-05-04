@@ -3,6 +3,10 @@ ToDo
 	* Migrate all GUI from swing to JavaFX
 	* Write all documentation in docbook format
 
+xxxx-xx-xx
+        * Fixed failure to load files containing Ω, μ, etc.
+          Groomblecom <groomblecom@gmail.com>
+
 2016-12-23 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
 
         * Bump version to 1.4
