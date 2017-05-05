@@ -19,6 +19,10 @@
  */
 package net.freerouting.freeroute.datastructures;
 
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
+import java.util.Queue;
 import java.util.Set;
 import java.util.TreeSet;
 import net.freerouting.freeroute.geometry.planar.RegularTileShape;
@@ -38,7 +42,7 @@ import net.freerouting.freeroute.geometry.planar.ShapeBoundingDirections;
  */
 public class MinAreaTree extends ShapeTree {
 
-    protected LinkedListStack<TreeNode> node_stack = new LinkedListStack<>();
+    protected Queue<TreeNode> node_stack = Collections.asLifoQueue(new LinkedList<>());
 
     /**
      * Constructor with a fixed set of directions defining the keys and and the
@@ -56,21 +60,22 @@ public class MinAreaTree extends ShapeTree {
         if (this.root == null) {
             return found_overlaps;
         }
-        this.node_stack.reset();
-        this.node_stack.push(this.root);
+        this.node_stack.clear();
+        this.node_stack.add(this.root);
         TreeNode curr_node;
         for (;;) {
-            curr_node = this.node_stack.pop();
-            if (curr_node == null) {
-                break;
-            }
-            if (curr_node.bounding_shape.intersects(p_shape)) {
-                if (curr_node instanceof Leaf) {
-                    found_overlaps.add((Leaf) curr_node);
-                } else {
-                    this.node_stack.push(((InnerNode) curr_node).first_child);
-                    this.node_stack.push(((InnerNode) curr_node).second_child);
+            try {
+                curr_node = this.node_stack.remove();
+                if (curr_node.bounding_shape.intersects(p_shape)) {
+                    if (curr_node instanceof Leaf) {
+                        found_overlaps.add((Leaf) curr_node);
+                    } else {
+                        this.node_stack.add(((InnerNode) curr_node).first_child);
+                        this.node_stack.add(((InnerNode) curr_node).second_child);
+                    }
                 }
+            } catch (NoSuchElementException e) {
+                break;
             }
         }
         return found_overlaps;

@@ -22,6 +22,7 @@ package net.freerouting.freeroute.board;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeSet;
 import net.freerouting.freeroute.autoroute.CompleteFreeSpaceExpansionRoom;
@@ -579,56 +580,57 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
                     p_room.get_layer(), p_room.get_contained_shape());
             result.add(new_room);
         }
-        this.node_stack.reset();
-        this.node_stack.push(this.root);
+        this.node_stack.clear();
+        this.node_stack.add(this.root);
         TreeNode curr_node;
         int room_layer = p_room.get_layer();
 
         for (;;) {
-            curr_node = this.node_stack.pop();
-            if (curr_node == null) {
-                break;
-            }
-            if (curr_node.bounding_shape.intersects(bounding_shape)) {
-                if (curr_node instanceof Leaf) {
-                    Leaf curr_leaf = (Leaf) curr_node;
-                    SearchTreeObject curr_object = (SearchTreeObject) curr_leaf.object;
-                    int shape_index = curr_leaf.shape_index_in_object;
-                    if (curr_object.is_trace_obstacle(p_net_no) && curr_object.shape_layer(shape_index) == room_layer && curr_object != p_ignore_object) {
+            try {
+                curr_node = this.node_stack.remove();
+                if (curr_node.bounding_shape.intersects(bounding_shape)) {
+                    if (curr_node instanceof Leaf) {
+                        Leaf curr_leaf = (Leaf) curr_node;
+                        SearchTreeObject curr_object = (SearchTreeObject) curr_leaf.object;
+                        int shape_index = curr_leaf.shape_index_in_object;
+                        if (curr_object.is_trace_obstacle(p_net_no) && curr_object.shape_layer(shape_index) == room_layer && curr_object != p_ignore_object) {
 
-                        TileShape curr_object_shape = curr_object.get_tree_shape(this, shape_index);
-                        Collection<IncompleteFreeSpaceExpansionRoom> new_result = new LinkedList<>();
-                        RegularTileShape new_bounding_shape = IntOctagon.EMPTY;
+                            TileShape curr_object_shape = curr_object.get_tree_shape(this, shape_index);
+                            Collection<IncompleteFreeSpaceExpansionRoom> new_result = new LinkedList<>();
+                            RegularTileShape new_bounding_shape = IntOctagon.EMPTY;
 
-                        for (IncompleteFreeSpaceExpansionRoom curr_incomplete_room : result) {
-                            boolean something_changed = false;
-                            TileShape intersection = curr_incomplete_room.get_shape().intersection(curr_object_shape);
-                            if (intersection.dimension() == 2) {
-                                boolean ignore_expansion_room
-                                        = curr_object instanceof CompleteFreeSpaceExpansionRoom && p_ignore_shape != null && p_ignore_shape.contains(intersection);
-                                // cannot happen in free angle roouting, because then expansion_rooms
-                                // may not overlap. Therefore that can be removed as soon as special
-                                // function for 45-degree routing is used.
-                                if (!ignore_expansion_room) {
-                                    something_changed = true;
-                                    new_result.addAll(restrain_shape(curr_incomplete_room, curr_object_shape));
-                                    for (IncompleteFreeSpaceExpansionRoom tmp_room : new_result) {
-                                        new_bounding_shape = new_bounding_shape.union(tmp_room.get_shape().bounding_shape(this.bounding_directions));
+                            for (IncompleteFreeSpaceExpansionRoom curr_incomplete_room : result) {
+                                boolean something_changed = false;
+                                TileShape intersection = curr_incomplete_room.get_shape().intersection(curr_object_shape);
+                                if (intersection.dimension() == 2) {
+                                    boolean ignore_expansion_room
+                                            = curr_object instanceof CompleteFreeSpaceExpansionRoom && p_ignore_shape != null && p_ignore_shape.contains(intersection);
+                                    // cannot happen in free angle roouting, because then expansion_rooms
+                                    // may not overlap. Therefore that can be removed as soon as special
+                                    // function for 45-degree routing is used.
+                                    if (!ignore_expansion_room) {
+                                        something_changed = true;
+                                        new_result.addAll(restrain_shape(curr_incomplete_room, curr_object_shape));
+                                        for (IncompleteFreeSpaceExpansionRoom tmp_room : new_result) {
+                                            new_bounding_shape = new_bounding_shape.union(tmp_room.get_shape().bounding_shape(this.bounding_directions));
+                                        }
                                     }
                                 }
+                                if (!something_changed) {
+                                    new_result.add(curr_incomplete_room);
+                                    new_bounding_shape = new_bounding_shape.union(curr_incomplete_room.get_shape().bounding_shape(this.bounding_directions));
+                                }
                             }
-                            if (!something_changed) {
-                                new_result.add(curr_incomplete_room);
-                                new_bounding_shape = new_bounding_shape.union(curr_incomplete_room.get_shape().bounding_shape(this.bounding_directions));
-                            }
+                            result = new_result;
+                            bounding_shape = new_bounding_shape;
                         }
-                        result = new_result;
-                        bounding_shape = new_bounding_shape;
+                    } else {
+                        this.node_stack.add(((InnerNode) curr_node).first_child);
+                        this.node_stack.add(((InnerNode) curr_node).second_child);
                     }
-                } else {
-                    this.node_stack.push(((InnerNode) curr_node).first_child);
-                    this.node_stack.push(((InnerNode) curr_node).second_child);
                 }
+            } catch (NoSuchElementException e) {
+                break;
             }
         }
         result = divide_large_room(result, board.get_bounding_box());
