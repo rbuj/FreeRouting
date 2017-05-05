@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute.board;
 
+import java.util.EnumMap;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -31,76 +33,91 @@ import java.util.TreeSet;
 public class ItemSelectionFilter implements java.io.Serializable {
 
     /**
+     * The possible choices in the filter.
+     */
+    public enum SelectableChoices {
+        TRACES, VIAS, PINS, CONDUCTION, KEEPOUT, VIA_KEEPOUT, COMPONENT_KEEPOUT, BOARD_OUTLINE, FIXED, UNFIXED
+    }
+
+    /**
      * the filter array of the item types
      */
-    private final boolean[] values;
+    private final EnumMap<SelectableChoices, Boolean> values = new EnumMap<>(SelectableChoices.class);
 
     /**
      * Creates a new filter with all item types selected.
      */
     public ItemSelectionFilter() {
-        this.values = new boolean[SelectableChoices.values().length];
-        java.util.Arrays.fill(this.values, true);
-        this.values[SelectableChoices.KEEPOUT.ordinal()] = false;
-        this.values[SelectableChoices.VIA_KEEPOUT.ordinal()] = false;
-        this.values[SelectableChoices.COMPONENT_KEEPOUT.ordinal()] = false;
-        this.values[SelectableChoices.CONDUCTION.ordinal()] = false;
-        this.values[SelectableChoices.BOARD_OUTLINE.ordinal()] = false;
+        for (int i = 0; i < SelectableChoices.values().length; i++) {
+            values.put(SelectableChoices.values()[i], true);
+        }
+        values.put(SelectableChoices.KEEPOUT, false);
+        values.put(SelectableChoices.VIA_KEEPOUT, false);
+        values.put(SelectableChoices.COMPONENT_KEEPOUT, false);
+        values.put(SelectableChoices.CONDUCTION, false);
+        values.put(SelectableChoices.BOARD_OUTLINE, false);
     }
 
     /**
      * Creates a new filter with only p_item_type selected.
      */
     public ItemSelectionFilter(SelectableChoices p_item_type) {
-        this.values = new boolean[SelectableChoices.values().length];
-        java.util.Arrays.fill(this.values, false);
-        values[p_item_type.ordinal()] = true;
-        values[SelectableChoices.FIXED.ordinal()] = true;
-        values[SelectableChoices.UNFIXED.ordinal()] = true;
+        for (int i = 0; i < SelectableChoices.values().length; i++) {
+            values.put(SelectableChoices.values()[i], false);
+        }
+        values.put(p_item_type, true);
+        values.put(SelectableChoices.FIXED, true);
+        values.put(SelectableChoices.UNFIXED, true);
     }
 
     /**
      * Creates a new filter with only p_item_types selected.
      */
     public ItemSelectionFilter(SelectableChoices[] p_item_types) {
-        this.values = new boolean[SelectableChoices.values().length];
-        java.util.Arrays.fill(this.values, false);
-        for (int i = 0; i < p_item_types.length; ++i) {
-            values[p_item_types[i].ordinal()] = true;
+        for (int i = 0; i < SelectableChoices.values().length; i++) {
+            values.put(SelectableChoices.values()[i], false);
         }
-        values[SelectableChoices.FIXED.ordinal()] = true;
-        values[SelectableChoices.UNFIXED.ordinal()] = true;
+        for (int i = 0; i < p_item_types.length; ++i) {
+            values.put(p_item_types[i], true);
+        }
+        values.put(SelectableChoices.FIXED, true);
+        values.put(SelectableChoices.UNFIXED, true);
     }
 
     /**
      * Copy constructor
      */
     public ItemSelectionFilter(ItemSelectionFilter p_item_selection_filter) {
-        this.values = new boolean[SelectableChoices.values().length];
-        for (int i = 0; i < this.values.length; ++i) {
-            this.values[i] = p_item_selection_filter.values[i];
-        }
+        values.putAll(p_item_selection_filter.values);
     }
 
     /**
      * Selects or deselects an item type
      */
     public void set_selected(SelectableChoices p_choice, boolean p_value) {
-        values[p_choice.ordinal()] = p_value;
+        values.put(p_choice, p_value);
     }
 
     /**
      * Selects all item types.
      */
     public void select_all() {
-        java.util.Arrays.fill(values, true);
+        Iterator<SelectableChoices> enumKeySet = values.keySet().iterator();
+        while (enumKeySet.hasNext()) {
+            SelectableChoices selectableChoices = enumKeySet.next();
+            values.put(selectableChoices, true);
+        }
     }
 
     /**
      * Deselects all item types.
      */
     public void deselect_all() {
-        java.util.Arrays.fill(values, false);
+        Iterator<SelectableChoices> enumKeySet = values.keySet().iterator();
+        while (enumKeySet.hasNext()) {
+            SelectableChoices selectableChoices = enumKeySet.next();
+            values.put(selectableChoices, false);
+        }
     }
 
     /**
@@ -120,13 +137,6 @@ public class ItemSelectionFilter implements java.io.Serializable {
      * Looks, if the input item type is selected.
      */
     public boolean is_selected(SelectableChoices p_choice) {
-        return values[p_choice.ordinal()];
-    }
-
-    /**
-     * The possible choices in the filter.
-     */
-    public enum SelectableChoices {
-        TRACES, VIAS, PINS, CONDUCTION, KEEPOUT, VIA_KEEPOUT, COMPONENT_KEEPOUT, BOARD_OUTLINE, FIXED, UNFIXED
+        return values.get(p_choice);
     }
 }
