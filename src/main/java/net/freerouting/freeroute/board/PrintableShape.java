@@ -20,7 +20,6 @@
 package net.freerouting.freeroute.board;
 
 import java.util.Locale;
-import net.freerouting.freeroute.MainApp;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 
 /**

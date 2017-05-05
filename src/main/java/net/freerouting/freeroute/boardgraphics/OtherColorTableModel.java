@@ -21,7 +21,6 @@ package net.freerouting.freeroute.boardgraphics;
 
 import java.awt.Color;
 import java.util.Locale;
-import net.freerouting.freeroute.MainApp;
 
 /**
  * Stores the colors used for the background and highlighting.

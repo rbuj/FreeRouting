@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Vector;
-import net.freerouting.freeroute.MainApp;
 import net.freerouting.freeroute.board.BasicBoard;
 import net.freerouting.freeroute.board.Connectable;
 import net.freerouting.freeroute.board.Item;

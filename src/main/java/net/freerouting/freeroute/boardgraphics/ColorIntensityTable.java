@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute.boardgraphics;
 
+import java.util.EnumMap;
+
 /**
  * The color intensities for each item type. The values are between 0
  * (invisible) and 1 (full intensity).
@@ -28,51 +30,39 @@ package net.freerouting.freeroute.boardgraphics;
 @SuppressWarnings("serial")
 public class ColorIntensityTable implements java.io.Serializable {
 
-    private final double[] arr;
+    private final EnumMap<ObjectNames,Double> arr = new EnumMap<>(ObjectNames.class);
 
     /**
      * Creates a new instance of ColorIntensityTable. The elements of
      * p_intensities are expected between 0 and 1.
      */
     public ColorIntensityTable() {
-        arr = new double[ObjectNames.values().length];
-        arr[ObjectNames.TRACES.ordinal()] = 0.4;
-        arr[ObjectNames.VIAS.ordinal()] = 0.6;
-        arr[ObjectNames.PINS.ordinal()] = 0.6;
-        arr[ObjectNames.CONDUCTION_AREAS.ordinal()] = 0.2;
-        arr[ObjectNames.KEEPOUTS.ordinal()] = 0.2;
-        arr[ObjectNames.VIA_KEEPOUTS.ordinal()] = 0.2;
-        arr[ObjectNames.PLACE_KEEPOUTS.ordinal()] = 0.2;
-        arr[ObjectNames.COMPONENT_OUTLINES.ordinal()] = 1;
-        arr[ObjectNames.HILIGHT.ordinal()] = 0.8;
-        arr[ObjectNames.INCOMPLETES.ordinal()] = 1;
-        arr[ObjectNames.LENGTH_MATCHING_AREAS.ordinal()] = 0.1;
+        arr.put(ObjectNames.TRACES, 0.4);
+        arr.put(ObjectNames.VIAS, 0.6);
+        arr.put(ObjectNames.PINS, 0.6);
+        arr.put(ObjectNames.CONDUCTION_AREAS, 0.2);
+        arr.put(ObjectNames.KEEPOUTS, 0.2);
+        arr.put(ObjectNames.VIA_KEEPOUTS, 0.2);
+        arr.put(ObjectNames.PLACE_KEEPOUTS, 0.2);
+        arr.put(ObjectNames.COMPONENT_OUTLINES, 1.0);
+        arr.put(ObjectNames.HILIGHT, 0.8);
+        arr.put(ObjectNames.INCOMPLETES, 1.0);
+        arr.put(ObjectNames.LENGTH_MATCHING_AREAS, 0.1);
     }
 
     /**
      * Copy constructor.
      */
     public ColorIntensityTable(ColorIntensityTable p_color_intesity_table) {
-        this.arr = new double[p_color_intesity_table.arr.length];
-        for (int i = 0; i < this.arr.length; ++i) {
-            this.arr[i] = p_color_intesity_table.arr[i];
-        }
+        arr.putAll(p_color_intesity_table.arr);
     }
 
-    public double get_value(int p_no) {
-        if (p_no < 0 || p_no >= ObjectNames.values().length) {
-            System.out.println("ColorIntensityTable.get_value: p_no out of range");
-            return 0;
-        }
-        return arr[p_no];
+    public double get_value(ObjectNames o) {
+        return arr.get(o);
     }
 
-    public void set_value(int p_no, double p_value) {
-        if (p_no < 0 || p_no >= ObjectNames.values().length) {
-            System.out.println("ColorIntensityTable.set_value: p_no out of range");
-            return;
-        }
-        arr[p_no] = p_value;
+    public void set_value(ObjectNames o, double p_value) {
+        arr.put(o, p_value);
     }
 
     public enum ObjectNames {
