@@ -4,6 +4,18 @@ ToDo
 	* Write all documentation in docbook format
 
 xxxx-xx-xx
+        * Use Queue<TreeNode> instead of ArrayStack<TreeNode> in
+          MinAreaTree.java. Pop: Use NoSuchElementException when the stack
+          has no elements in:
+                * board/ShapeSearchTree.java
+                * board/ShapeSearchTree45Degree.java
+                * board/ShapeSearchTree90Degree.java
+                * datastructures/MinAreaTree.java
+        * Use java.util.EnumMap:
+                * WindowObjectVisibility.java
+                * boardgraphics/GraphicsContext.java
+                * boardgraphics/ColorIntensityTable.java
+                * board/ItemSelectionFilter.java
         * Use the default locale for this instance of the JVM
         * Fixed failure to load files containing Ω, μ, etc.
           Groomblecom <groomblecom@gmail.com>
