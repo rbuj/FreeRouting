@@ -510,83 +510,83 @@ public class GraphicsContext implements java.io.Serializable {
     }
 
     public double get_trace_color_intensity() {
-        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.TRACES.ordinal());
+        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.TRACES);
     }
 
     public double get_via_color_intensity() {
-        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.VIAS.ordinal());
+        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.VIAS);
     }
 
     public double get_pin_color_intensity() {
-        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.PINS.ordinal());
+        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.PINS);
     }
 
     public double get_conduction_color_intensity() {
-        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.CONDUCTION_AREAS.ordinal());
+        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.CONDUCTION_AREAS);
     }
 
     public double get_obstacle_color_intensity() {
-        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.KEEPOUTS.ordinal());
+        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.KEEPOUTS);
     }
 
     public double get_via_obstacle_color_intensity() {
-        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.VIA_KEEPOUTS.ordinal());
+        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.VIA_KEEPOUTS);
     }
 
     public double get_place_obstacle_color_intensity() {
-        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.PLACE_KEEPOUTS.ordinal());
+        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.PLACE_KEEPOUTS);
     }
 
     public double get_component_outline_color_intensity() {
-        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.COMPONENT_OUTLINES.ordinal());
+        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.COMPONENT_OUTLINES);
     }
 
     public double get_hilight_color_intensity() {
-        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.HILIGHT.ordinal());
+        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.HILIGHT);
     }
 
     public double get_incomplete_color_intensity() {
-        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.INCOMPLETES.ordinal());
+        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.INCOMPLETES);
     }
 
     public double get_length_matching_area_color_intensity() {
-        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.LENGTH_MATCHING_AREAS.ordinal());
+        return color_intensity_table.get_value(ColorIntensityTable.ObjectNames.LENGTH_MATCHING_AREAS);
     }
 
     public void set_trace_color_intensity(double p_value) {
-        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.TRACES.ordinal(), p_value);
+        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.TRACES, p_value);
     }
 
     public void set_via_color_intensity(double p_value) {
-        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.VIAS.ordinal(), p_value);
+        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.VIAS, p_value);
     }
 
     public void set_pin_color_intensity(double p_value) {
-        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.PINS.ordinal(), p_value);
+        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.PINS, p_value);
     }
 
     public void set_conduction_color_intensity(double p_value) {
-        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.CONDUCTION_AREAS.ordinal(), p_value);
+        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.CONDUCTION_AREAS, p_value);
     }
 
     public void set_obstacle_color_intensity(double p_value) {
-        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.KEEPOUTS.ordinal(), p_value);
+        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.KEEPOUTS, p_value);
     }
 
     public void set_via_obstacle_color_intensity(double p_value) {
-        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.VIA_KEEPOUTS.ordinal(), p_value);
+        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.VIA_KEEPOUTS, p_value);
     }
 
     public void set_hilight_color_intensity(double p_value) {
-        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.HILIGHT.ordinal(), p_value);
+        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.HILIGHT, p_value);
     }
 
     public void set_incomplete_color_intensity(double p_value) {
-        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.INCOMPLETES.ordinal(), p_value);
+        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.INCOMPLETES, p_value);
     }
 
     public void set_length_matching_area_color_intensity(double p_value) {
-        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.LENGTH_MATCHING_AREAS.ordinal(), p_value);
+        color_intensity_table.set_value(ColorIntensityTable.ObjectNames.LENGTH_MATCHING_AREAS, p_value);
     }
 
     public java.awt.Dimension get_panel_size() {
