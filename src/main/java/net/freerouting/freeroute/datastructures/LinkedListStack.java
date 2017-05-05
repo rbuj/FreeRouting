@@ -13,71 +13,57 @@
  *   GNU General Public License at <http://www.gnu.org/licenses/> 
  *   for more details.
  *
- * ArrayStack.java
+ * LinkedListStack.java
  *
  * Created on 11. Maerz 2006, 06:52
  *
  */
 package net.freerouting.freeroute.datastructures;
 
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
+
 @SuppressWarnings("unchecked")
 
 /**
- * Implementation of a stack as an array.
+ * Implementation of a LIFO stack.
  *
  * @author Alfons Wirtz
  */
-public class ArrayStack<p_element_type> {
+public class LinkedListStack<T> {
 
-    private int level = -1;
-    private p_element_type[] node_arr;
+    private LinkedList<T> list = new LinkedList<>();
 
     /**
-     * Creates a new instance of ArrayStack with an initial maximal capacity for
-     * p_max_stack_depth elements.
+     * Creates a new instance of ArrayStack.
      */
-    public ArrayStack(int p_max_stack_depth) {
-        node_arr = (p_element_type[]) new Object[p_max_stack_depth];
+    public LinkedListStack() {
     }
 
     /**
      * Sets the stack to empty.
      */
     public void reset() {
-        level = -1;
+        list.clear();
     }
 
     /**
      * Pushed p_element onto the stack.
      */
-    public void push(p_element_type p_element) {
-
-        ++level;
-
-        if (level >= node_arr.length) {
-            reallocate();
-        }
-
-        node_arr[level] = p_element;
+    public void push(T element) {
+        list.addLast(element);
     }
 
     /**
      * Pops the next element from the top of the stack. Returns null, if the
      * stack is exhausted.
      */
-    public p_element_type pop() {
-        if (level < 0) {
-            return null;
+    public T pop() {
+        T result = null;
+        try {
+            result = list.removeLast();
+        } catch (NoSuchElementException e) {
         }
-        p_element_type result = node_arr[level];
-        --level;
         return result;
     }
-
-    private void reallocate() {
-        p_element_type[] new_arr = (p_element_type[]) new Object[4 * this.node_arr.length];
-        System.arraycopy(node_arr, 0, new_arr, 0, node_arr.length);
-        this.node_arr = new_arr;
-    }
-
 }
