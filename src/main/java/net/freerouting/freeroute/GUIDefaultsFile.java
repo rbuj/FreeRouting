@@ -345,16 +345,19 @@ public class GUIDefaultsFile {
                     System.out.println("GUIDefaultsFile.read_frame_scope: unknown frame");
                     return false;
             }
-        }
-        curr_frame.setVisible(is_visible);
-        if (p_frame == Keyword.BOARD_FRAME) {
-            curr_frame.setBounds(bounds.getBounds());
+            curr_frame.setVisible(is_visible);
+            if (p_frame == Keyword.BOARD_FRAME) {
+                curr_frame.setBounds(bounds.getBounds());
+            } else {
+                // Set only the location.
+                // Do not change the size of the frame because it depends on the layer count.
+                curr_frame.setLocation(bounds.getBounds().getLocation());
+            }
+            return true;
         } else {
-            // Set only the location.
-            // Do not change the size of the frame because it depends on the layer count.
-            curr_frame.setLocation(bounds.getBounds().getLocation());
+            System.out.println("GUIDefaultsFile.read_frame_scope: null frame");
+            return false;
         }
-        return true;
     }
 
     private Rectangle2D read_rectangle() throws java.io.IOException {
