@@ -55,12 +55,12 @@ public final class MainApp extends Application {
     private static final String VERSION_NUMBER_STRING = "1.4.1-alpha";
     private static final Logger LOGGER = Logger.getLogger(MainAppController.class.getName());
     private static final TestLevel DEBUG_LEVEL = TestLevel.CRITICAL_DEBUGGING_OUTPUT;
-    private static boolean single_design_option = false;
-    private static boolean session_file_option = false;
-    private static String design_file_name = "";
-    private static String design_dir_name = "";
+    private boolean single_design_option = false;
+    private boolean session_file_option = false;
+    private String design_file_name = "";
+    private String design_dir_name = "";
     private Stage mainStage;
-    private static TestLevel test_level;
+    private TestLevel test_level;
 
     @Override
     public void init() throws Exception {
