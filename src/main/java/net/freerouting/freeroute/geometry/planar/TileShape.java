@@ -643,7 +643,7 @@ public abstract class TileShape extends PolylineShape implements ConvexShape {
         Direction dir2 = null;
         for (int i = 0; i < p_other.border_line_count(); ++i) {
             Direction curr_dir = p_other.border_line(i).direction();
-            if (curr_dir.compareTo(Direction.LEFT) >= 0) {
+            if (curr_dir.compareTo(FortyfiveDegreeDirection.LEFT.get_direction()) >= 0) {
                 side_no_2 = i;
                 dir2 = curr_dir.opposite();
                 break;

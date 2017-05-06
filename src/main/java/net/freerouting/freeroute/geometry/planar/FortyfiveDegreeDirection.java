@@ -29,44 +29,57 @@ package net.freerouting.freeroute.geometry.planar;
  * @author alfons
  */
 public enum FortyfiveDegreeDirection {
-    RIGHT {
-        public IntDirection get_direction() {
-            return Direction.RIGHT;
-        }
-    },
-    RIGHT45 {
-        public IntDirection get_direction() {
-            return Direction.RIGHT45;
-        }
-    },
-    UP {
-        public IntDirection get_direction() {
-            return Direction.UP;
-        }
-    },
-    UP45 {
-        public IntDirection get_direction() {
-            return Direction.UP45;
-        }
-    },
-    LEFT {
-        public IntDirection get_direction() {
-            return Direction.LEFT;
-        }
-    },
-    LEFT45 {
-        public IntDirection get_direction() {
-            return Direction.LEFT45;
-        }
-    },
-    DOWN {
-        public IntDirection get_direction() {
-            return Direction.DOWN;
-        }
-    },
-    DOWN45 {
-        public IntDirection get_direction() {
-            return Direction.DOWN45;
-        }
+    RIGHT(Constants.RIGHT),
+    RIGHT45(Constants.RIGHT45),
+    UP(Constants.UP),
+    UP45(Constants.UP45),
+    LEFT(Constants.LEFT),
+    LEFT45(Constants.LEFT45),
+    DOWN(Constants.DOWN),
+    DOWN45(Constants.DOWN45);
+
+    IntDirection direction;
+
+    FortyfiveDegreeDirection(IntDirection intDirection) {
+        direction = intDirection;
+    }
+
+    public IntDirection get_direction() {
+        return direction;
+    }
+
+    private static class Constants {
+        /**
+         * the direction to the east
+         */
+        public static final IntDirection RIGHT = new IntDirection(1, 0);
+        /**
+         * the direction to the northeast
+         */
+        public static final IntDirection RIGHT45 = new IntDirection(1, 1);
+        /**
+         * the direction to the north
+         */
+        public static final IntDirection UP = new IntDirection(0, 1);
+        /**
+         * the direction to the northwest
+         */
+        public static final IntDirection UP45 = new IntDirection(-1, 1);
+        /**
+         * the direction to the west
+         */
+        public static final IntDirection LEFT = new IntDirection(-1, 0);
+        /**
+         * the direction to the southwest
+         */
+        public static final IntDirection LEFT45 = new IntDirection(-1, -1);
+        /**
+         * the direction to the south
+         */
+        public static final IntDirection DOWN = new IntDirection(0, -1);
+        /**
+         * the direction to the southeast
+         */
+        public static final IntDirection DOWN45 = new IntDirection(1, -1);
     }
 }

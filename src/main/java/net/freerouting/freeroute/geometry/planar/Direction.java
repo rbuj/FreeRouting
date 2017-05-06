@@ -37,39 +37,6 @@ public abstract class Direction implements Comparable<Direction>, java.io.Serial
     public static final IntDirection NULL = new IntDirection(0, 0);
 
     /**
-     * the direction to the east
-     */
-    public static final IntDirection RIGHT = new IntDirection(1, 0);
-    /**
-     * the direction to the northeast
-     */
-    public static final IntDirection RIGHT45 = new IntDirection(1, 1);
-    /**
-     * the direction to the north
-     */
-    public static final IntDirection UP = new IntDirection(0, 1);
-    /**
-     * the direction to the northwest
-     */
-    public static final IntDirection UP45 = new IntDirection(-1, 1);
-    /**
-     * the direction to the west
-     */
-    public static final IntDirection LEFT = new IntDirection(-1, 0);
-    /**
-     * the direction to the southwest
-     */
-    public static final IntDirection LEFT45 = new IntDirection(-1, -1);
-    /**
-     * the direction to the south
-     */
-    public static final IntDirection DOWN = new IntDirection(0, -1);
-    /**
-     * the direction to the southeast
-     */
-    public static final IntDirection DOWN45 = new IntDirection(1, -1);
-
-    /**
      * creates a Direction from the input Vector
      */
     public static Direction get_instance(Vector p_vector) {

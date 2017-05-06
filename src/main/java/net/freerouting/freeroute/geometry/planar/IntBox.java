@@ -640,10 +640,10 @@ public class IntBox extends RegularTileShape {
             line_arr = new Line[0];
         } else {
             line_arr = new Line[4];
-            line_arr[0] = Line.get_instance(ll, IntDirection.RIGHT);
-            line_arr[1] = Line.get_instance(ur, IntDirection.UP);
-            line_arr[2] = Line.get_instance(ur, IntDirection.LEFT);
-            line_arr[3] = Line.get_instance(ll, IntDirection.DOWN);
+            line_arr[0] = Line.get_instance(ll, FortyfiveDegreeDirection.RIGHT.get_direction());
+            line_arr[1] = Line.get_instance(ur, FortyfiveDegreeDirection.UP.get_direction());
+            line_arr[2] = Line.get_instance(ur, FortyfiveDegreeDirection.LEFT.get_direction());
+            line_arr[3] = Line.get_instance(ll, FortyfiveDegreeDirection.DOWN.get_direction());
         }
         return new Simplex(line_arr);
     }

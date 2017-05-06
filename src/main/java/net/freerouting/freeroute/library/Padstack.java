@@ -22,6 +22,7 @@ package net.freerouting.freeroute.library;
 import java.util.Locale;
 import net.freerouting.freeroute.geometry.planar.ConvexShape;
 import net.freerouting.freeroute.geometry.planar.Direction;
+import net.freerouting.freeroute.geometry.planar.FortyfiveDegreeDirection;
 import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.IntOctagon;
 
@@ -148,12 +149,12 @@ public class Padstack implements Comparable<Padstack>, net.freerouting.freeroute
         }
 
         if (all_dirs || curr_box.width() >= curr_box.height()) {
-            result.add(Direction.RIGHT);
-            result.add(Direction.LEFT);
+            result.add(FortyfiveDegreeDirection.RIGHT.get_direction());
+            result.add(FortyfiveDegreeDirection.LEFT.get_direction());
         }
         if (all_dirs || curr_box.width() <= curr_box.height()) {
-            result.add(Direction.UP);
-            result.add(Direction.DOWN);
+            result.add(FortyfiveDegreeDirection.UP.get_direction());
+            result.add(FortyfiveDegreeDirection.DOWN.get_direction());
         }
         return result;
     }

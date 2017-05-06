@@ -23,6 +23,7 @@ import net.freerouting.freeroute.datastructures.Signum;
 import net.freerouting.freeroute.datastructures.Stoppable;
 import net.freerouting.freeroute.geometry.planar.Direction;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
+import net.freerouting.freeroute.geometry.planar.FortyfiveDegreeDirection;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Limits;
 import net.freerouting.freeroute.geometry.planar.Line;
@@ -348,15 +349,15 @@ class PullTightAlgo45 extends PullTightAlgo {
         Direction new_line_dir = null;
         if (new_line_is_vertical) {
             if (prev_corner.y < next_corner.y) {
-                new_line_dir = Direction.UP;
+                new_line_dir = FortyfiveDegreeDirection.UP.get_direction();
             } else {
-                new_line_dir = Direction.DOWN;
+                new_line_dir = FortyfiveDegreeDirection.DOWN.get_direction();
             }
         } else if (new_line_is_horizontal) {
             if (prev_corner.x < next_corner.x) {
-                new_line_dir = Direction.RIGHT;
+                new_line_dir = FortyfiveDegreeDirection.RIGHT.get_direction();
             } else {
-                new_line_dir = Direction.LEFT;
+                new_line_dir = FortyfiveDegreeDirection.LEFT.get_direction();
             }
         } else {
             return null;
