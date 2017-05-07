@@ -763,11 +763,6 @@ public class PlanarDelaunayTriangulation {
         public Triangle[] split_at_inner_point(Corner p_corner) {
             Triangle[] new_triangles = new Triangle[3];
 
-            Edge[] new_edges = new Edge[3];
-            for (int i = 0; i < 3; ++i) {
-                new_edges[i] = new Edge(this.get_corner(i), p_corner);
-            }
-
             // construct the 3 new triangles.
             Edge[] curr_edge_lines = new Edge[3];
 
