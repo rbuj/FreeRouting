@@ -29,7 +29,6 @@ import net.freerouting.freeroute.board.RoutingBoard;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
-import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.PointUtils;
 import net.freerouting.freeroute.geometry.planar.Vector;
 import net.freerouting.freeroute.rules.BoardRules;

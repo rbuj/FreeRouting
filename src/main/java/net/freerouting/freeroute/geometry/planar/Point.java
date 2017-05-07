@@ -19,8 +19,6 @@
  */
 package net.freerouting.freeroute.geometry.planar;
 
-import java.math.BigInteger;
-
 /**
  * Abstract class describing functionality for Points in the plane.
  *

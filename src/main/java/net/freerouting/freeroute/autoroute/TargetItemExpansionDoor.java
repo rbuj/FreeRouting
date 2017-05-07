@@ -21,7 +21,6 @@ package net.freerouting.freeroute.autoroute;
 
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.ShapeSearchTree;
-import net.freerouting.freeroute.geometry.planar.Simplex;
 import net.freerouting.freeroute.geometry.planar.SimplexUtils;
 import net.freerouting.freeroute.geometry.planar.TileShape;
 

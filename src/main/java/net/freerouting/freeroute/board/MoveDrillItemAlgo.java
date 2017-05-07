@@ -27,7 +27,6 @@ import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.IntOctagon;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
-import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.PointUtils;
 import net.freerouting.freeroute.geometry.planar.TileShape;
 import net.freerouting.freeroute.geometry.planar.Vector;
