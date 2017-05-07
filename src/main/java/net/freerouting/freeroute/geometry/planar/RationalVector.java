@@ -32,7 +32,7 @@ import net.freerouting.freeroute.datastructures.Signum;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class RationalVector extends Vector {
+public final class RationalVector implements Vector {
 
     public final BigInteger x;
     public final BigInteger y;
@@ -224,7 +224,7 @@ public class RationalVector extends Vector {
     }
 
     @Override
-    Direction to_normalized_direction() {
+    public Direction to_normalized_direction() {
         BigInteger dx = x;
         BigInteger dy = y;
         BigInteger gcd = dx.gcd(y);
@@ -238,26 +238,26 @@ public class RationalVector extends Vector {
     }
 
     @Override
-    double scalar_product(IntVector p_other) {
+    public double scalar_product(IntVector p_other) {
         Vector other = new RationalVector(p_other);
         return other.scalar_product(this);
     }
 
     @Override
-    double scalar_product(RationalVector p_other) {
+    public double scalar_product(RationalVector p_other) {
         FloatPoint v1 = to_float();
         FloatPoint v2 = p_other.to_float();
         return v1.x * v2.x + v1.y * v2.y;
     }
 
     @Override
-    Signum projection(IntVector p_other) {
+    public Signum projection(IntVector p_other) {
         Vector other = new RationalVector(p_other);
         return other.projection(this);
     }
 
     @Override
-    Signum projection(RationalVector p_other) {
+    public Signum projection(RationalVector p_other) {
         BigInteger tmp1 = x.multiply(p_other.x);
         BigInteger tmp2 = y.multiply(p_other.y);
         BigInteger tmp3 = tmp1.add(tmp2);
@@ -266,13 +266,13 @@ public class RationalVector extends Vector {
     }
 
     @Override
-    final Vector add(IntVector p_other) {
+    public final Vector add(IntVector p_other) {
         RationalVector other = new RationalVector(p_other);
         return add(other);
     }
 
     @Override
-    final Vector add(RationalVector p_other) {
+    public final Vector add(RationalVector p_other) {
         BigInteger v1[] = new BigInteger[3];
         v1[0] = x;
         v1[1] = y;
@@ -287,7 +287,7 @@ public class RationalVector extends Vector {
     }
 
     @Override
-    Point add_to(IntPoint p_point) {
+    public Point add_to(IntPoint p_point) {
         BigInteger new_x = z.multiply(BigInteger.valueOf(p_point.x));
         new_x = new_x.add(x);
         BigInteger new_y = z.multiply(BigInteger.valueOf(p_point.y));
@@ -296,7 +296,7 @@ public class RationalVector extends Vector {
     }
 
     @Override
-    Point add_to(RationalPoint p_point) {
+    public Point add_to(RationalPoint p_point) {
         BigInteger v1[] = new BigInteger[3];
         v1[0] = x;
         v1[1] = y;
@@ -312,13 +312,13 @@ public class RationalVector extends Vector {
     }
 
     @Override
-    Side side_of(IntVector p_other) {
+    public Side side_of(IntVector p_other) {
         RationalVector other = new RationalVector(p_other);
         return side_of(other);
     }
 
     @Override
-    Side side_of(RationalVector p_other) {
+    public Side side_of(RationalVector p_other) {
         BigInteger tmp_1 = y.multiply(p_other.x);
         BigInteger tmp_2 = x.multiply(p_other.y);
         BigInteger determinant = tmp_1.subtract(tmp_2);

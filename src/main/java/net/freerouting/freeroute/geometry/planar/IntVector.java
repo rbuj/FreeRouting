@@ -29,7 +29,7 @@ import net.freerouting.freeroute.datastructures.Signum;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class IntVector extends Vector {
+public final class IntVector implements Vector {
 
     /**
      * the x coordinate of this vector
@@ -163,12 +163,12 @@ public class IntVector extends Vector {
     }
 
     @Override
-    final Vector add(IntVector p_other) {
+    public final Vector add(IntVector p_other) {
         return new IntVector(x + p_other.x, y + p_other.y);
     }
 
     @Override
-    final Vector add(RationalVector p_other) {
+    public final Vector add(RationalVector p_other) {
         return p_other.add(this);
     }
 
@@ -176,12 +176,12 @@ public class IntVector extends Vector {
      * returns the Point, which results from adding this vector to p_point
      */
     @Override
-    final Point add_to(IntPoint p_point) {
+    public final Point add_to(IntPoint p_point) {
         return new IntPoint(p_point.x + x, p_point.y + y);
     }
 
     @Override
-    final Point add_to(RationalPoint p_point) {
+    public final Point add_to(RationalPoint p_point) {
         return p_point.translate_by(this);
     }
 
@@ -198,13 +198,13 @@ public class IntVector extends Vector {
     }
 
     @Override
-    Side side_of(IntVector p_other) {
+    public Side side_of(IntVector p_other) {
         double determinant = (double) p_other.x * y - (double) p_other.y * x;
         return Side.of(determinant);
     }
 
     @Override
-    Side side_of(RationalVector p_other) {
+    public Side side_of(RationalVector p_other) {
         Side tmp = p_other.side_of(this);
         return tmp.negate();
     }
@@ -240,7 +240,7 @@ public class IntVector extends Vector {
     }
 
     @Override
-    Direction to_normalized_direction() {
+    public Direction to_normalized_direction() {
         int dx = x;
         int dy = y;
 
@@ -258,23 +258,23 @@ public class IntVector extends Vector {
      * < 0, and Signum.ZERO, if the scalar product is equal 0.
      */
     @Override
-    Signum projection(IntVector p_other) {
+    public Signum projection(IntVector p_other) {
         double tmp = (double) x * p_other.x + (double) y * p_other.y;
         return Signum.of(tmp);
     }
 
     @Override
-    double scalar_product(IntVector p_other) {
+    public double scalar_product(IntVector p_other) {
         return (double) x * p_other.x + (double) y * p_other.y;
     }
 
     @Override
-    double scalar_product(RationalVector p_other) {
+    public double scalar_product(RationalVector p_other) {
         return p_other.scalar_product(this);
     }
 
     @Override
-    Signum projection(RationalVector p_other) {
+    public Signum projection(RationalVector p_other) {
         return p_other.projection(this);
     }
 
