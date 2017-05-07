@@ -48,8 +48,8 @@ public class ItemSelectionFilter implements java.io.Serializable {
      * Creates a new filter with all item types selected.
      */
     public ItemSelectionFilter() {
-        for (int i = 0; i < SelectableChoices.values().length; i++) {
-            values.put(SelectableChoices.values()[i], true);
+        for (SelectableChoices value : SelectableChoices.values()) {
+            values.put(value, true);
         }
         values.put(SelectableChoices.KEEPOUT, false);
         values.put(SelectableChoices.VIA_KEEPOUT, false);
@@ -62,8 +62,8 @@ public class ItemSelectionFilter implements java.io.Serializable {
      * Creates a new filter with only p_item_type selected.
      */
     public ItemSelectionFilter(SelectableChoices p_item_type) {
-        for (int i = 0; i < SelectableChoices.values().length; i++) {
-            values.put(SelectableChoices.values()[i], false);
+        for (SelectableChoices value : SelectableChoices.values()) {
+            values.put(value, false);
         }
         values.put(p_item_type, true);
         values.put(SelectableChoices.FIXED, true);
@@ -74,8 +74,8 @@ public class ItemSelectionFilter implements java.io.Serializable {
      * Creates a new filter with only p_item_types selected.
      */
     public ItemSelectionFilter(SelectableChoices[] p_item_types) {
-        for (int i = 0; i < SelectableChoices.values().length; i++) {
-            values.put(SelectableChoices.values()[i], false);
+        for (SelectableChoices value : SelectableChoices.values()) {
+            values.put(value, false);
         }
         for (int i = 0; i < p_item_types.length; ++i) {
             values.put(p_item_types[i], true);
