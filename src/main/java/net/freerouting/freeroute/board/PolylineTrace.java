@@ -25,6 +25,7 @@ import net.freerouting.freeroute.datastructures.Signum;
 import net.freerouting.freeroute.datastructures.Stoppable;
 import net.freerouting.freeroute.geometry.planar.ConvexShape;
 import net.freerouting.freeroute.geometry.planar.Direction;
+import net.freerouting.freeroute.geometry.planar.DirectionUtils;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.IntOctagon;
@@ -920,7 +921,7 @@ public class PolylineTrace extends Trace {
             end_corner = this.last_corner();
             prev_end_corner = this.lines.corner(this.lines.corner_count() - 2);
         }
-        Direction trace_end_direction = Direction.get_instance(end_corner, prev_end_corner);
+        Direction trace_end_direction = DirectionUtils.get_instance(end_corner, prev_end_corner);
         if (trace_end_direction == null) {
             return true;
         }

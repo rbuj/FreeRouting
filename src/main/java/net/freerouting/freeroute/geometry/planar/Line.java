@@ -127,7 +127,7 @@ public class Line implements Comparable<Line>, java.io.Serializable {
     public Direction direction() {
         if (dir == null) {
             Vector d = b.difference_by(a);
-            dir = Direction.get_instance(d);
+            dir = DirectionUtils.get_instance(d);
         }
         return dir;
     }
@@ -435,7 +435,7 @@ public class Line implements Comparable<Line>, java.io.Serializable {
      * translates the line by p_vector
      */
     public Line translate_by(Vector p_vector) {
-        if (p_vector.equals(Vector.ZERO)) {
+        if (p_vector.equals(VectorUtils.ZERO)) {
             return this;
         }
         Point new_a = a.translate_by(p_vector);

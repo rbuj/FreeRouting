@@ -22,6 +22,7 @@ package net.freerouting.freeroute.board;
 import java.util.Locale;
 import net.freerouting.freeroute.geometry.planar.ConvexShape;
 import net.freerouting.freeroute.geometry.planar.Direction;
+import net.freerouting.freeroute.geometry.planar.DirectionUtils;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Line;
@@ -313,7 +314,7 @@ public class Pin extends DrillItem {
             } else {
                 double curr_angle_in_radian
                         = Math.toRadians(curr_rotation_in_degree) + curr_padstack_exit_direction.angle_approx();
-                curr_exit_direction = Direction.get_instance_approx(curr_angle_in_radian);
+                curr_exit_direction = DirectionUtils.get_instance_approx(curr_angle_in_radian);
             }
             // calculate the minimum line length from the pin center into curr_exit_direction
             int intersecting_border_line_no = pad_shape.intersecting_border_line_no(pin_center, curr_exit_direction);

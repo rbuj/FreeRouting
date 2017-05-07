@@ -22,6 +22,7 @@ package net.freerouting.freeroute.board;
 import net.freerouting.freeroute.datastructures.Signum;
 import net.freerouting.freeroute.datastructures.Stoppable;
 import net.freerouting.freeroute.geometry.planar.Direction;
+import net.freerouting.freeroute.geometry.planar.DirectionUtils;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.FortyfiveDegreeDirection;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
@@ -287,7 +288,7 @@ class PullTightAlgo45 extends PullTightAlgo {
 
         Direction prev_dir = p_line_arr[p_no].direction();
         Direction next_dir = p_line_arr[p_no + 1].direction();
-        Direction new_line_dir = Direction.get_instance(prev_dir.get_vector().add(next_dir.get_vector()));
+        Direction new_line_dir = DirectionUtils.get_instance(prev_dir.get_vector().add(next_dir.get_vector()));
         Line translate_line = Line.get_instance(curr_corner.round(), new_line_dir);
         double translate_dist = (Limits.SQRT2 - 1) * this.curr_half_width;
         double prev_dist = Math.abs(translate_line.signed_distance(prev_corner));
@@ -379,7 +380,7 @@ class PullTightAlgo45 extends PullTightAlgo {
 
         Direction prev_dir = p_line_arr[p_no].direction();
         Direction next_dir = p_line_arr[p_no + 1].direction();
-        Direction new_line_dir = Direction.get_instance(prev_dir.get_vector().add(next_dir.get_vector()));
+        Direction new_line_dir = DirectionUtils.get_instance(prev_dir.get_vector().add(next_dir.get_vector()));
         Line translate_line = Line.get_instance(curr_corner.round(), new_line_dir);
         double prev_dist = Math.abs(translate_line.signed_distance(prev_corner));
         double next_dist = Math.abs(translate_line.signed_distance(next_corner));

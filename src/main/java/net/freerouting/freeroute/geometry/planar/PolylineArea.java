@@ -138,7 +138,7 @@ public class PolylineArea implements Area, java.io.Serializable {
 
     @Override
     public PolylineArea translate_by(Vector p_vector) {
-        if (p_vector.equals(Vector.ZERO)) {
+        if (p_vector.equals(VectorUtils.ZERO)) {
             return this;
         }
         PolylineShape translated_border = border_shape.translate_by(p_vector);

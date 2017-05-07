@@ -359,7 +359,7 @@ public class IntOctagon extends RegularTileShape {
         // This function is at the moment only implemented for Vectors
         // with integer coordinates.
         // The general implementation is still missing.
-        if (p_rel_coor.equals(Vector.ZERO)) {
+        if (p_rel_coor.equals(VectorUtils.ZERO)) {
             return this;
         }
         IntOctagon result = null;

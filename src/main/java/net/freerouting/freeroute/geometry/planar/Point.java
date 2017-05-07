@@ -136,7 +136,7 @@ public abstract class Point implements java.io.Serializable {
     public Direction perpendicular_direction(Line p_line) {
         Side side = this.side_of(p_line);
         if (side == Side.COLLINEAR) {
-            return Direction.NULL;
+            return DirectionUtils.NULL;
         }
         Direction result;
         if (side == Side.ON_THE_RIGHT) {

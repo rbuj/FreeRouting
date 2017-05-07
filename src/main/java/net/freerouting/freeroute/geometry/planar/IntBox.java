@@ -426,7 +426,7 @@ public class IntBox extends RegularTileShape {
         // with integer coordinates.
         // The general implementation is still missing.
 
-        if (p_rel_coor.equals(Vector.ZERO)) {
+        if (p_rel_coor.equals(VectorUtils.ZERO)) {
             return this;
         }
         IntPoint new_ll = (IntPoint) ll.translate_by(p_rel_coor);

@@ -105,7 +105,7 @@ public class IntPoint extends Point {
      */
     @Override
     public final Point translate_by(Vector p_vector) {
-        if (p_vector.equals(Vector.ZERO)) {
+        if (p_vector.equals(VectorUtils.ZERO)) {
             return this;
         }
         return p_vector.add_to(this);

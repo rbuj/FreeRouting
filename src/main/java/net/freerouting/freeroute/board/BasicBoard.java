@@ -35,6 +35,7 @@ import net.freerouting.freeroute.geometry.planar.Polyline;
 import net.freerouting.freeroute.geometry.planar.PolylineShape;
 import net.freerouting.freeroute.geometry.planar.TileShape;
 import net.freerouting.freeroute.geometry.planar.Vector;
+import net.freerouting.freeroute.geometry.planar.VectorUtils;
 import net.freerouting.freeroute.library.BoardLibrary;
 import net.freerouting.freeroute.library.Padstack;
 import net.freerouting.freeroute.rules.BoardRules;
@@ -235,7 +236,7 @@ public class BasicBoard implements java.io.Serializable {
             System.out.println("BasicBoard.insert_obstacle: p_area is null");
             return null;
         }
-        ObstacleArea obs = new ObstacleArea(p_area, p_layer, Vector.ZERO, 0, false, p_clearance_class, 0, 0, null, p_fixed_state, this);
+        ObstacleArea obs = new ObstacleArea(p_area, p_layer, VectorUtils.ZERO, 0, false, p_clearance_class, 0, 0, null, p_fixed_state, this);
         insert_item(obs);
         return obs;
     }
@@ -266,7 +267,7 @@ public class BasicBoard implements java.io.Serializable {
             System.out.println("BasicBoard.insert_via_obstacle: p_area is null");
             return null;
         }
-        ViaObstacleArea obs = new ViaObstacleArea(p_area, p_layer, Vector.ZERO, 0, false,
+        ViaObstacleArea obs = new ViaObstacleArea(p_area, p_layer, VectorUtils.ZERO, 0, false,
                 p_clearance_class, 0, 0, null, p_fixed_state, this);
         insert_item(obs);
         return obs;
@@ -299,7 +300,7 @@ public class BasicBoard implements java.io.Serializable {
             System.out.println("BasicBoard.insert_component_obstacle: p_area is null");
             return null;
         }
-        ComponentObstacleArea obs = new ComponentObstacleArea(p_area, p_layer, Vector.ZERO, 0, false,
+        ComponentObstacleArea obs = new ComponentObstacleArea(p_area, p_layer, VectorUtils.ZERO, 0, false,
                 p_clearance_class, 0, 0, null, p_fixed_state, this);
         insert_item(obs);
         return obs;
@@ -353,7 +354,7 @@ public class BasicBoard implements java.io.Serializable {
             System.out.println("BasicBoard.insert_conduction_area: p_area is null");
             return null;
         }
-        ConductionArea c = new ConductionArea(p_area, p_layer, Vector.ZERO, 0, false, p_net_no_arr, p_clearance_class,
+        ConductionArea c = new ConductionArea(p_area, p_layer, VectorUtils.ZERO, 0, false, p_net_no_arr, p_clearance_class,
                 0, 0, null, p_is_obstacle, p_fixed_state, this);
         insert_item(c);
         return c;

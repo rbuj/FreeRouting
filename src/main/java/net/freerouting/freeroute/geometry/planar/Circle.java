@@ -179,7 +179,7 @@ public class Circle implements ConvexShape, java.io.Serializable {
             }
             Point curr_a = this.center.translate_by(border_delta);
             Point curr_b = curr_a.turn_90_degree(1, this.center);
-            Direction curr_dir = Direction.get_instance(curr_b.difference_by(this.center));
+            Direction curr_dir = DirectionUtils.get_instance(curr_b.difference_by(this.center));
             Line curr_tangent = new Line(curr_a, curr_dir);
             tangent_line_arr[quadrant_division_count + i] = curr_tangent;
             tangent_line_arr[2 * quadrant_division_count + i] = curr_tangent.turn_90_degree(1, this.center);
@@ -258,7 +258,7 @@ public class Circle implements ConvexShape, java.io.Serializable {
 
     @Override
     public Circle translate_by(Vector p_vector) {
-        if (p_vector.equals(Vector.ZERO)) {
+        if (p_vector.equals(VectorUtils.ZERO)) {
             return this;
         }
         if (!(p_vector instanceof IntVector)) {

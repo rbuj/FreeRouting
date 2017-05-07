@@ -482,7 +482,7 @@ public class Simplex extends TileShape {
      */
     @Override
     public Simplex translate_by(Vector p_vector) {
-        if (p_vector.equals(Vector.ZERO)) {
+        if (p_vector.equals(VectorUtils.ZERO)) {
             return this;
         }
         Line[] new_arr = new Line[arr.length];
@@ -1103,8 +1103,8 @@ public class Simplex extends TileShape {
             result[0] = prev_inner_line;
             return result;
         }
-        IntDirection first_projection_dir = Direction.NULL;
-        IntDirection second_projection_dir = Direction.NULL;
+        IntDirection first_projection_dir = DirectionUtils.NULL;
+        IntDirection second_projection_dir = DirectionUtils.NULL;
         IntDirection prev_inner_dir = (IntDirection) prev_inner_line.direction().opposite();
         IntDirection next_inner_dir = (IntDirection) curr_inner_line.direction();
         int outer_line_no = 0;
@@ -1118,7 +1118,7 @@ public class Simplex extends TileShape {
             Line outer_line = p_outer_simplex.arr[outer_line_no];
             IntDirection curr_projection_dir
                     = (IntDirection) inner_corner.perpendicular_direction(outer_line);
-            if (curr_projection_dir == Direction.NULL) {
+            if (curr_projection_dir == DirectionUtils.NULL) {
                 Line[] result = new Line[1];
                 result[0] = new Line(inner_corner, inner_corner);
                 return result;
@@ -1146,7 +1146,7 @@ public class Simplex extends TileShape {
                                 = (IntDirection) inner_corner.perpendicular_direction(
                                         p_outer_simplex.arr[tmp_outer_line_no]);
 
-                        if (curr_second_projection_dir == Direction.NULL) // inner corner is on outer_line
+                        if (curr_second_projection_dir == DirectionUtils.NULL) // inner corner is on outer_line
                         {
                             Line[] result = new Line[1];
                             result[0] = new Line(inner_corner, inner_corner);

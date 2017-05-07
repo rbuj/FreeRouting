@@ -258,7 +258,7 @@ public class PolygonShape extends PolylineShape {
 
     @Override
     public PolygonShape translate_by(Vector p_vector) {
-        if (p_vector.equals(Vector.ZERO)) {
+        if (p_vector.equals(VectorUtils.ZERO)) {
             return this;
         }
         Point[] new_corners = new Point[corners.length];

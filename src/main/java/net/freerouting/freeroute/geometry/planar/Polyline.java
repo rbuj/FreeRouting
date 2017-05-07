@@ -140,10 +140,10 @@ public class Polyline implements java.io.Serializable {
         // construct perpendicular lines at the start and at the end to represent
         // the first and the last point of point_arr as intersection of lines.
 
-        Direction dir = Direction.get_instance(point_arr[0], point_arr[1]);
+        Direction dir = DirectionUtils.get_instance(point_arr[0], point_arr[1]);
         arr[0] = Line.get_instance(point_arr[0], dir.turn_45_degree(2));
 
-        dir = Direction.get_instance(point_arr[point_arr.length - 1], point_arr[point_arr.length - 2]);
+        dir = DirectionUtils.get_instance(point_arr[point_arr.length - 1], point_arr[point_arr.length - 2]);
         arr[point_arr.length]
                 = Line.get_instance(point_arr[point_arr.length - 1], dir.turn_45_degree(2));
     }
@@ -161,10 +161,10 @@ public class Polyline implements java.io.Serializable {
             return;
         }
         arr = new Line[3];
-        Direction dir = Direction.get_instance(p_from_corner, p_to_corner);
+        Direction dir = DirectionUtils.get_instance(p_from_corner, p_to_corner);
         arr[0] = Line.get_instance(p_from_corner, dir.turn_45_degree(2));
         arr[1] = new Line(p_from_corner, p_to_corner);
-        dir = Direction.get_instance(p_from_corner, p_to_corner);
+        dir = DirectionUtils.get_instance(p_from_corner, p_to_corner);
         arr[2] = Line.get_instance(p_to_corner, dir.turn_45_degree(2));
     }
 
@@ -602,7 +602,7 @@ public class Polyline implements java.io.Serializable {
      * Returns the by p_vector translated polyline
      */
     public Polyline translate_by(Vector p_vector) {
-        if (p_vector.equals(Vector.ZERO)) {
+        if (p_vector.equals(VectorUtils.ZERO)) {
             return this;
         }
         Line[] new_arr = new Line[arr.length];
