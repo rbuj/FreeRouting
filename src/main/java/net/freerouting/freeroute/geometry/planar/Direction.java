@@ -23,7 +23,7 @@ import net.freerouting.freeroute.datastructures.Signum;
 
 /**
  *
- * Abstract class defining functionality of directions in the plane. A Direction
+ * Interface defining functionality of directions in the plane. A Direction
  * is an equivalence class of vectors. Two vectors define the same object of
  * class Direction, if they point into the same direction. We prefer using
  * directions instead of angles, because with angles the arithmetic calculations
@@ -32,45 +32,45 @@ import net.freerouting.freeroute.datastructures.Signum;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public abstract class Direction implements Comparable<Direction>, java.io.Serializable {
+public interface Direction extends Comparable<Direction>, java.io.Serializable {
 
     /**
      * return any Vector pointing into this direction
      */
-    public abstract Vector get_vector();
+    public Vector get_vector();
 
     /**
      * returns true, if the direction is horizontal or vertical
      */
-    public abstract boolean is_orthogonal();
+    public boolean is_orthogonal();
 
     /**
      * returns true, if the direction is diagonal
      */
-    public abstract boolean is_diagonal();
+    public boolean is_diagonal();
 
     /**
      * returns true, if the direction is orthogonal or diagonal
      */
-    public boolean is_multiple_of_45_degree() {
+    default public boolean is_multiple_of_45_degree() {
         return (is_orthogonal() || is_diagonal());
     }
 
     /**
      * turns the direction by p_factor times 45 degree
      */
-    public abstract Direction turn_45_degree(int p_factor);
+    public Direction turn_45_degree(int p_factor);
 
     /**
      * returns the opposite direction of this direction
      */
-    public abstract Direction opposite();
+    public Direction opposite();
 
     /**
      * Returns true, if p_ob is a Direction and this Direction and p_ob point
      * into the same direction
      */
-    public final boolean equals(Direction p_other) {
+    default public boolean equals(Direction p_other) {
         if (this == p_other) {
             return true;
         }
@@ -93,7 +93,7 @@ public abstract class Direction implements Comparable<Direction>, java.io.Serial
      * L Side.ON_THE_RIGHT, if this.get_vector() is on the right of L and
      * Side.COLLINEAR, if this.get_vector() is collinear with L.
      */
-    public Side side_of(Direction p_other) {
+    default public Side side_of(Direction p_other) {
         return this.get_vector().side_of(p_other.get_vector());
     }
 
@@ -103,7 +103,7 @@ public abstract class Direction implements Comparable<Direction>, java.io.Serial
      * {@literal >} 0, Signum.NEGATIVE, if the scalar product is {@literal <} 0,
      * and Signum.ZERO, if the scalar product is equal 0.
      */
-    public Signum projection(Direction p_other) {
+    default public Signum projection(Direction p_other) {
         return this.get_vector().projection(p_other.get_vector());
     }
 
@@ -111,7 +111,7 @@ public abstract class Direction implements Comparable<Direction>, java.io.Serial
      * calculates an approximation of the direction in the middle of this
      * direction and p_other
      */
-    public Direction middle_approx(Direction p_other) {
+    default public Direction middle_approx(Direction p_other) {
         FloatPoint v1 = get_vector().to_float();
         FloatPoint v2 = p_other.get_vector().to_float();
         double length1 = v1.size();
@@ -129,7 +129,7 @@ public abstract class Direction implements Comparable<Direction>, java.io.Serial
      * angle between p_2 and this direction, 0, if p_1 is equal to p_2, * and -1
      * otherwise.
      */
-    public int compare_from(Direction p_1, Direction p_2) {
+    default public int compare_from(Direction p_1, Direction p_2) {
         int result;
         if (p_1.compareTo(this) >= 0) {
             if (p_2.compareTo(this) >= 0) {
@@ -149,14 +149,19 @@ public abstract class Direction implements Comparable<Direction>, java.io.Serial
      * Returns an approximation of the signed angle corresponding to this
      * dierection.
      */
-    public double angle_approx() {
+    default public double angle_approx() {
         return this.get_vector().angle_approx();
     }
 
-    // auxiliary functions needed because the virtual function mechanism
-    // does not work in parameter position
-    abstract int compareTo(IntDirection p_other);
-
-    abstract int compareTo(BigIntDirection p_other);
-
+    /**
+     * Implements the Comparable interface. Returns 1, if this direction has a
+     * strict bigger angle with the positive x-axis than p_other_direction, 0,
+     * if this direction is equal to p_other_direction, and -1 otherwise. Throws
+     * an exception, if p_other_direction is not a Direction.
+     */
+    default public int compareTo(Direction p_other_direction) {
+        return -p_other_direction.compareTo(this);
+    }
+    int compareTo(IntDirection p_other);
+    int compareTo(BigIntDirection p_other);
 }

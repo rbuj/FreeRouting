@@ -30,7 +30,7 @@ import net.freerouting.freeroute.datastructures.Signum;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class IntDirection extends Direction {
+public class IntDirection implements Direction {
 
     public final int x;
     public final int y;
@@ -61,7 +61,7 @@ public class IntDirection extends Direction {
     }
 
     @Override
-    int compareTo(IntDirection p_other) {
+    public int compareTo(IntDirection p_other) {
         if (y > 0) {
             if (p_other.y < 0) {
                 return -1;
@@ -150,19 +150,8 @@ public class IntDirection extends Direction {
         return new IntDirection(new_x, new_y);
     }
 
-    /**
-     * Implements the Comparable interface. Returns 1, if this direction has a
-     * strict bigger angle with the positive x-axis than p_other_direction, 0,
-     * if this direction is equal to p_other_direction, and -1 otherwise. Throws
-     * an exception, if p_other_direction is not a Direction.
-     */
     @Override
-    public int compareTo(Direction p_other_direction) {
-        return -p_other_direction.compareTo(this);
-    }
-
-    @Override
-    int compareTo(BigIntDirection p_other) {
+    public int compareTo(BigIntDirection p_other) {
         return -(p_other.compareTo(this));
     }
 

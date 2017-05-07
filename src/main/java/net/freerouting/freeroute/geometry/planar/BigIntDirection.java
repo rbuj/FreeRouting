@@ -30,7 +30,7 @@ import java.math.BigInteger;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class BigIntDirection extends Direction {
+public class BigIntDirection implements Direction {
 
     final BigInteger x;
     final BigInteger y;
@@ -74,25 +74,14 @@ public class BigIntDirection extends Direction {
         return new BigIntDirection(x.negate(), y.negate());
     }
 
-    /**
-     * Implements the Comparable interface. Returns 1, if this direction has a
-     * strict bigger angle with the positive x-axis than p_other_direction, 0,
-     * if this direction is equal to p_other_direction, and -1 otherwise. Throws
-     * an exception, if p_other_direction is not a Direction.
-     */
     @Override
-    public int compareTo(Direction p_other_direction) {
-        return -p_other_direction.compareTo(this);
-    }
-
-    @Override
-    int compareTo(IntDirection p_other) {
+    public int compareTo(IntDirection p_other) {
         BigIntDirection other = new BigIntDirection(p_other);
         return compareTo(other);
     }
 
     @Override
-    int compareTo(BigIntDirection p_other) {
+    public int compareTo(BigIntDirection p_other) {
         int x1 = x.signum();
         int y1 = y.signum();
         int x2 = p_other.x.signum();
