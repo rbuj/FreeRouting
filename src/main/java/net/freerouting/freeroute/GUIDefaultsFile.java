@@ -67,17 +67,16 @@ public class GUIDefaultsFile {
      */
     public static boolean read(net.freerouting.freeroute.BoardFrame p_board_frame,
             net.freerouting.freeroute.interactive.BoardHandling p_board_handling, java.io.Reader p_reader) {
+        boolean result = false;
         if (p_reader == null) {
-            return false;
+            return result;
         }
         GUIDefaultsScanner scanner = new GUIDefaultsScanner(p_reader);
         GUIDefaultsFile new_instance = new GUIDefaultsFile(p_board_frame, p_board_handling, scanner, null);
-        boolean result = true;
         try {
             result = new_instance.read_defaults_scope();
         } catch (java.io.IOException e) {
             System.out.println("unable to read defaults file");
-            result = false;
         }
         return result;
     }
@@ -272,7 +271,7 @@ public class GUIDefaultsFile {
                 return false;
             }
         }
-        javax.swing.JFrame curr_frame = null;
+        javax.swing.JFrame curr_frame;
         if (null != p_frame) {
             switch (p_frame) {
                 case BOARD_FRAME:

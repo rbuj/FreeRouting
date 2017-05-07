@@ -336,7 +336,7 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow {
 
         @Override
         public void setValueAt(Object p_value, int p_row, int p_col) {
-            Number number_value = null;
+            Number number_value;
             if (p_value instanceof Number) {
                 // does ot work because of a localisation Bug in Java
                 number_value = (Number) p_value;

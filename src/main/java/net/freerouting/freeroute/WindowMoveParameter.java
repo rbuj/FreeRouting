@@ -156,8 +156,9 @@ public class WindowMoveParameter extends BoardSavableSubWindow {
                 double input_value;
                 if (!(input instanceof Number)) {
                     input_value = 0;
+                } else {
+                    input_value = ((Number) input).doubleValue();
                 }
-                input_value = ((Number) input).doubleValue();
                 if (input_value < 0) {
                     input_value = 0;
                 }
@@ -195,8 +196,9 @@ public class WindowMoveParameter extends BoardSavableSubWindow {
                 double input_value;
                 if (!(input instanceof Number)) {
                     input_value = 0;
+                } else {
+                    input_value = ((Number) input).doubleValue();
                 }
-                input_value = ((Number) input).doubleValue();
                 if (input_value < 0) {
                     input_value = 0;
                 }

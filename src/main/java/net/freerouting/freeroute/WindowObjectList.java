@@ -196,7 +196,7 @@ public abstract class WindowObjectList extends BoardSavableSubWindow {
 
     @Override
     public boolean read(java.io.ObjectInputStream p_object_stream) {
-        int[] saved_selected_indices = null;
+        int[] saved_selected_indices;
         try {
             saved_selected_indices = (int[]) p_object_stream.readObject();
         } catch (IOException | ClassNotFoundException e) {
