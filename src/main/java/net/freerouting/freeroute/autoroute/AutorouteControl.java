@@ -202,7 +202,7 @@ public class AutorouteControl {
             via_rule = curr_net_class.get_via_rule();
         } else {
             trace_clearance_class_no = 1;
-            via_rule = p_board.rules.via_rules.size() == 0 ? null : p_board.rules.via_rules.get(0);
+            via_rule = p_board.rules.via_rules.isEmpty() ? null : p_board.rules.via_rules.get(0);
             curr_net_class = null;
         }
         for (int i = 0; i < layer_count; ++i) {
