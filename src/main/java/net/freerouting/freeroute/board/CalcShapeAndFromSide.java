@@ -22,6 +22,7 @@ import net.freerouting.freeroute.geometry.planar.Line;
 import net.freerouting.freeroute.geometry.planar.Polyline;
 import net.freerouting.freeroute.geometry.planar.Side;
 import net.freerouting.freeroute.geometry.planar.TileShape;
+import net.freerouting.freeroute.geometry.planar.TileShapeUtils;
 
 /**
  * Used in the shove algorithm to calculate the fromside for pushing and to cut
@@ -92,7 +93,7 @@ class CalcShapeAndFromSide {
             curr_shape = curr_shape.to_Simplex();
             Line end_cutline = calc_cutline_at_end(p_index, p_trace);
             if (end_cutline != null) {
-                TileShape cut_plane = TileShape.get_instance(end_cutline);
+                TileShape cut_plane = TileShapeUtils.get_instance(end_cutline);
                 TileShape tmp_shape = curr_shape.intersection(cut_plane);
                 if (tmp_shape != curr_shape && !tmp_shape.is_empty()) {
                     curr_shape = tmp_shape.to_Simplex();
@@ -101,7 +102,7 @@ class CalcShapeAndFromSide {
             }
             Line start_cutline = calc_cutline_at_start(p_index, p_trace);
             if (start_cutline != null) {
-                TileShape cut_plane = TileShape.get_instance(start_cutline);
+                TileShape cut_plane = TileShapeUtils.get_instance(start_cutline);
                 TileShape tmp_shape = curr_shape.intersection(cut_plane);
                 if (tmp_shape != curr_shape && !tmp_shape.is_empty()) {
                     curr_shape = tmp_shape.to_Simplex();

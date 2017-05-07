@@ -24,6 +24,7 @@ import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntOctagon;
 import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.TileShape;
+import net.freerouting.freeroute.geometry.planar.TileShapeUtils;
 
 /**
  *
@@ -184,7 +185,7 @@ public abstract class Trace extends Item implements Connectable {
         if (p_point == null || !(p_point.equals(this.first_corner()) || p_point.equals(this.last_corner()))) {
             return new TreeSet<>();
         }
-        TileShape search_shape = TileShape.get_instance(p_point);
+        TileShape search_shape = TileShapeUtils.get_instance(p_point);
         Set<SearchTreeObject> overlaps = board.overlapping_objects(search_shape, this.layer);
         Set<Item> result = new TreeSet<>();
         for (SearchTreeObject curr_ob : overlaps) {

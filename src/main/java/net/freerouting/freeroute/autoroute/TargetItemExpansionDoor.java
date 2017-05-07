@@ -22,6 +22,7 @@ package net.freerouting.freeroute.autoroute;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.ShapeSearchTree;
 import net.freerouting.freeroute.geometry.planar.Simplex;
+import net.freerouting.freeroute.geometry.planar.SimplexUtils;
 import net.freerouting.freeroute.geometry.planar.TileShape;
 
 /**
@@ -46,7 +47,7 @@ public class TargetItemExpansionDoor implements ExpandableObject {
         tree_entry_no = p_tree_entry_no;
         room = p_room;
         if (room == null) {
-            this.shape = Simplex.EMPTY;
+            this.shape = SimplexUtils.EMPTY;
         } else {
             TileShape item_shape = item.get_tree_shape(p_search_tree, tree_entry_no);
             this.shape = item_shape.intersection(room.get_shape());

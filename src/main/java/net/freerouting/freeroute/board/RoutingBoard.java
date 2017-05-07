@@ -37,6 +37,7 @@ import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.Polyline;
 import net.freerouting.freeroute.geometry.planar.PolylineShape;
 import net.freerouting.freeroute.geometry.planar.TileShape;
+import net.freerouting.freeroute.geometry.planar.TileShapeUtils;
 import net.freerouting.freeroute.geometry.planar.Vector;
 import net.freerouting.freeroute.rules.BoardRules;
 import net.freerouting.freeroute.rules.ViaInfo;
@@ -434,7 +435,7 @@ public class RoutingBoard extends BasicBoard {
      * the layer is ignored
      */
     public Item pick_nearest_routing_item(Point p_location, int p_layer, Item p_from_item) {
-        TileShape point_shape = TileShape.get_instance(p_location);
+        TileShape point_shape = TileShapeUtils.get_instance(p_location);
         Collection<Item> found_items = overlapping_items(point_shape, p_layer);
         FloatPoint pick_location = p_location.to_float();
         double min_dist = Integer.MAX_VALUE;

@@ -579,7 +579,7 @@ public class IntOctagon extends RegularTileShape {
     @Override
     public Simplex to_Simplex() {
         if (is_empty()) {
-            return Simplex.EMPTY;
+            return SimplexUtils.EMPTY;
         }
         if (precalculated_to_simplex == null) {
             Line[] line_arr = new Line[8];

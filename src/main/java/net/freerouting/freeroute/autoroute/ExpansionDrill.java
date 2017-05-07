@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.TileShape;
+import net.freerouting.freeroute.geometry.planar.TileShapeUtils;
 
 /**
  * Layer change expansion object in the maze search algorithm.
@@ -76,7 +77,7 @@ public class ExpansionDrill implements ExpandableObject {
      * on some layer in the compensated search tree.
      */
     public boolean calculate_expansion_rooms(AutorouteEngine p_autoroute_engine) {
-        TileShape search_shape = TileShape.get_instance(location);
+        TileShape search_shape = TileShapeUtils.get_instance(location);
         Collection<net.freerouting.freeroute.board.SearchTreeObject> overlaps
                 = p_autoroute_engine.autoroute_search_tree.overlapping_objects(search_shape, -1);
         for (int i = this.first_layer; i <= this.last_layer; ++i) {

@@ -41,7 +41,9 @@ import net.freerouting.freeroute.geometry.planar.Shape;
 import net.freerouting.freeroute.geometry.planar.ShapeBoundingDirections;
 import net.freerouting.freeroute.geometry.planar.Side;
 import net.freerouting.freeroute.geometry.planar.Simplex;
+import net.freerouting.freeroute.geometry.planar.SimplexUtils;
 import net.freerouting.freeroute.geometry.planar.TileShape;
+import net.freerouting.freeroute.geometry.planar.TileShapeUtils;
 import net.freerouting.freeroute.rules.ClearanceMatrix;
 
 /**
@@ -682,7 +684,7 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
             }
         }
         if (cut_line != null) {
-            TileShape result_piece = TileShape.get_instance(cut_line);
+            TileShape result_piece = TileShapeUtils.get_instance(cut_line);
             if (room_shape != null) {
                 result_piece = room_shape.intersection(result_piece);
             }
@@ -716,7 +718,7 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
                 return result;
             }
             // Calculate the new shape to be contained in the result shape.
-            TileShape cut_half_plane = TileShape.get_instance(cut_line);
+            TileShape cut_half_plane = TileShapeUtils.get_instance(cut_line);
             TileShape new_shape_to_be_contained = shape_to_be_contained.intersection(cut_half_plane);
 
             TileShape result_piece;
@@ -728,7 +730,7 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
             if (result_piece.dimension() >= 2) {
                 result.add(new IncompleteFreeSpaceExpansionRoom(result_piece, layer, new_shape_to_be_contained));
             }
-            TileShape opposite_half_plane = TileShape.get_instance(cut_line.opposite());
+            TileShape opposite_half_plane = TileShapeUtils.get_instance(cut_line.opposite());
             TileShape rest_piece;
             if (room_shape == null) {
                 rest_piece = opposite_half_plane;
@@ -768,10 +770,10 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
             return;
         }
         TileShape[] shape_pieces = trace_shape.cutout(pin_shape);
-        TileShape new_trace_shape = Simplex.EMPTY;
+        TileShape new_trace_shape = SimplexUtils.EMPTY;
         for (int i = 0; i < shape_pieces.length; ++i) {
             if (shape_pieces[i].dimension() == 2) {
-                if (new_trace_shape == Simplex.EMPTY || shape_pieces[i].contains(compare_corner)) {
+                if (new_trace_shape == SimplexUtils.EMPTY || shape_pieces[i].contains(compare_corner)) {
                     new_trace_shape = shape_pieces[i];
                 }
             }

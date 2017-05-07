@@ -26,6 +26,7 @@ import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.Shape;
 import net.freerouting.freeroute.geometry.planar.TileShape;
+import net.freerouting.freeroute.geometry.planar.TileShapeUtils;
 import net.freerouting.freeroute.geometry.planar.Vector;
 import net.freerouting.freeroute.library.Padstack;
 
@@ -159,7 +160,7 @@ public class Via extends DrillItem {
     public net.freerouting.freeroute.autoroute.ExpansionDrill get_autoroute_drill_info(ShapeSearchTree p_autoroute_tree) {
         if (this.autoroute_drill_info == null) {
             net.freerouting.freeroute.autoroute.ItemAutorouteInfo via_autoroute_info = this.get_autoroute_info();
-            TileShape curr_drill_shape = TileShape.get_instance(this.get_center());
+            TileShape curr_drill_shape = TileShapeUtils.get_instance(this.get_center());
             this.autoroute_drill_info
                     = new net.freerouting.freeroute.autoroute.ExpansionDrill(curr_drill_shape, this.get_center(), this.first_layer(), this.last_layer());
             int via_layer_count = this.last_layer() - this.first_layer() + 1;

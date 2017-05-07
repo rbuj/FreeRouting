@@ -30,69 +30,6 @@ import java.util.LinkedList;
 public abstract class TileShape extends PolylineShape implements ConvexShape {
 
     /**
-     * creates a Simplex as intersection of the halfplanes defined by an array
-     * of directed lines
-     */
-    public static TileShape get_instance(Line[] p_line_arr) {
-        Simplex result = Simplex.get_instance(p_line_arr);
-        return result.simplify();
-    }
-
-    /**
-     * Creates a TileShape from a Point array, who forms the corners of the
-     * shape of a convex polygon. May work only for IntPoints.
-     */
-    public static TileShape get_instance(Point[] p_convex_polygon) {
-        Line[] line_arr = new Line[p_convex_polygon.length];
-        for (int j = 0; j < line_arr.length - 1; ++j) {
-            line_arr[j] = new Line(p_convex_polygon[j], p_convex_polygon[j + 1]);
-        }
-        line_arr[line_arr.length - 1]
-                = new Line(p_convex_polygon[line_arr.length - 1], p_convex_polygon[0]);
-        return get_instance(line_arr);
-    }
-
-    /**
-     * creates a half_plane from a directed line
-     */
-    public static TileShape get_instance(Line p_line) {
-        Line[] lines = new Line[1];
-        lines[0] = p_line;
-        return Simplex.get_instance(lines);
-    }
-
-    /**
-     * Creates a normalized IntOctagon from the input values. For the meaning of
-     * the parameter shortcuts see class IntOctagon.
-     */
-    public static IntOctagon get_instance(int p_lx, int p_ly, int p_rx,
-            int p_uy, int p_ulx, int p_lrx,
-            int p_llx, int p_urx) {
-        IntOctagon oct = new IntOctagon(p_lx, p_ly, p_rx, p_uy, p_ulx,
-                p_lrx, p_llx, p_urx);
-        return oct.normalize();
-    }
-
-    /**
-     * creates a boxlike convex shape
-     */
-    public static IntOctagon get_instance(int p_lower_left_x,
-            int p_lower_left_y,
-            int p_upper_right_x,
-            int p_upper_right_y) {
-        IntBox box = new IntBox(p_lower_left_x, p_lower_left_y,
-                p_upper_right_x, p_upper_right_y);
-        return box.to_IntOctagon();
-    }
-
-    /**
-     * creates the smallest IntOctagon containing p_point
-     */
-    public static IntBox get_instance(Point p_point) {
-        return p_point.surrounding_box();
-    }
-
-    /**
      * Tries to simplify the result shape to a simpler shape. Simplifying always
      * in the intersection function may cause performance problems.
      */
@@ -736,7 +673,7 @@ public abstract class TileShape extends PolylineShape implements ConvexShape {
         for (int i = 0; i < new_lines.length; ++i) {
             new_lines[i] = this.border_line(i).turn_90_degree(p_factor, p_pole);
         }
-        return get_instance(new_lines);
+        return TileShapeUtils.get_instance(new_lines);
     }
 
     @Override
@@ -753,15 +690,15 @@ public abstract class TileShape extends PolylineShape implements ConvexShape {
         Point[] polygon_corners = corner_polygon.corner_array();
         TileShape result;
         if (polygon_corners.length >= 3) {
-            result = get_instance(polygon_corners);
+            result = TileShapeUtils.get_instance(polygon_corners);
         } else if (polygon_corners.length == 2) {
             Polyline curr_polyline = new Polyline(polygon_corners);
             LineSegment curr_segment = new LineSegment(curr_polyline, 0);
             result = curr_segment.to_simplex();
         } else if (polygon_corners.length == 1) {
-            result = get_instance(polygon_corners[0]);
+            result = TileShapeUtils.get_instance(polygon_corners[0]);
         } else {
-            result = Simplex.EMPTY;
+            result = SimplexUtils.EMPTY;
         }
         return result;
     }
@@ -772,7 +709,7 @@ public abstract class TileShape extends PolylineShape implements ConvexShape {
         for (int i = 0; i < new_lines.length; ++i) {
             new_lines[i] = this.border_line(i).mirror_vertical(p_pole);
         }
-        return get_instance(new_lines);
+        return TileShapeUtils.get_instance(new_lines);
     }
 
     @Override
@@ -781,7 +718,7 @@ public abstract class TileShape extends PolylineShape implements ConvexShape {
         for (int i = 0; i < new_lines.length; ++i) {
             new_lines[i] = this.border_line(i).mirror_horizontal(p_pole);
         }
-        return get_instance(new_lines);
+        return TileShapeUtils.get_instance(new_lines);
     }
 
     /**

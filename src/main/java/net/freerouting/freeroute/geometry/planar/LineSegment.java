@@ -191,7 +191,7 @@ public class LineSegment implements java.io.Serializable {
         } else {
             line_arr[3] = this.end;
         }
-        Simplex result = Simplex.get_instance(line_arr);
+        Simplex result = SimplexUtils.get_instance(line_arr);
         return result;
     }
 

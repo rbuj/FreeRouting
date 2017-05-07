@@ -29,28 +29,8 @@ import java.util.LinkedList;
 @SuppressWarnings("serial")
 public class Simplex extends TileShape {
 
-    /**
-     * Standard implementation for an empty Simplex.
-     */
-    public static final Simplex EMPTY = new Simplex(new Line[0]);
-
-    /**
-     * creates a Simplex as intersection of the halfplanes defined by an array
-     * of directed lines
-     */
-    public static Simplex get_instance(Line[] p_line_arr) {
-        if (p_line_arr.length <= 0) {
-            return Simplex.EMPTY;
-        }
-        Line[] curr_arr = new Line[p_line_arr.length];
-        System.arraycopy(p_line_arr, 0, curr_arr, 0, p_line_arr.length);
-        // sort the lines in ascending direction
-        java.util.Arrays.sort(curr_arr);
-        Simplex curr_simplex = new Simplex(curr_arr);
-        Simplex result = curr_simplex.remove_redundant_lines();
-        return result;
-    }
     private final Line[] arr;
+
     /**
      * the following fields are for storing precalculated data
      */
@@ -84,7 +64,7 @@ public class Simplex extends TileShape {
     public TileShape simplify() {
         TileShape result = this;
         if (this.is_empty()) {
-            result = Simplex.EMPTY;
+            result = SimplexUtils.EMPTY;
         } else if (this.is_IntBox()) {
             result = this.bounding_box();
         } else if (this.is_IntOctagon()) {
@@ -609,7 +589,7 @@ public class Simplex extends TileShape {
         Simplex offset_simplex = offset(p_offset);
         IntOctagon bounding_oct = this.bounding_octagon();
         if (bounding_oct == null) {
-            return Simplex.EMPTY;
+            return SimplexUtils.EMPTY;
         }
         IntOctagon offset_oct = bounding_oct.offset(p_offset);
         return offset_simplex.intersection(offset_oct.to_Simplex());
@@ -648,7 +628,7 @@ public class Simplex extends TileShape {
     @Override
     public Simplex intersection(Simplex p_other) {
         if (this.is_empty() || p_other.is_empty()) {
-            return EMPTY;
+            return SimplexUtils.EMPTY;
         }
         Line[] new_arr = new Line[arr.length + p_other.arr.length];
         System.arraycopy(arr, 0, new_arr, 0, arr.length);
@@ -1045,7 +1025,7 @@ public class Simplex extends TileShape {
             return this; // nothing removed
         }
         if (new_length == 0) {
-            return Simplex.EMPTY;
+            return SimplexUtils.EMPTY;
         }
         Line[] result = new Line[new_length];
         System.arraycopy(line_arr, 0, result, 0, new_length);

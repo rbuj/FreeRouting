@@ -186,7 +186,7 @@ public class Circle implements ConvexShape, java.io.Serializable {
             tangent_line_arr[3 * quadrant_division_count + i] = curr_tangent.turn_90_degree(2, this.center);
             tangent_line_arr[i] = curr_tangent.turn_90_degree(3, this.center);
         }
-        return TileShape.get_instance(tangent_line_arr);
+        return TileShapeUtils.get_instance(tangent_line_arr);
     }
 
     @Override

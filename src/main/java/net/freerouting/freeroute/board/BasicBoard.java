@@ -34,6 +34,7 @@ import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.Polyline;
 import net.freerouting.freeroute.geometry.planar.PolylineShape;
 import net.freerouting.freeroute.geometry.planar.TileShape;
+import net.freerouting.freeroute.geometry.planar.TileShapeUtils;
 import net.freerouting.freeroute.geometry.planar.Vector;
 import net.freerouting.freeroute.geometry.planar.VectorUtils;
 import net.freerouting.freeroute.library.BoardLibrary;
@@ -728,7 +729,7 @@ public class BasicBoard implements java.io.Serializable {
     public boolean split_traces(Point p_location, int p_layer, int p_net_no) {
         ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.TRACES);
         Collection<Item> picked_items = this.pick_items(p_location, p_layer, filter);
-        IntOctagon location_shape = TileShape.get_instance(p_location).bounding_octagon();
+        IntOctagon location_shape = TileShapeUtils.get_instance(p_location).bounding_octagon();
         boolean trace_split = false;
         for (Item curr_item : picked_items) {
             Trace curr_trace = (Trace) curr_item;
@@ -971,7 +972,7 @@ public class BasicBoard implements java.io.Serializable {
      * by the filter are picked.
      */
     public Set<Item> pick_items(Point p_location, int p_layer, ItemSelectionFilter p_filter) {
-        TileShape point_shape = TileShape.get_instance(p_location);
+        TileShape point_shape = TileShapeUtils.get_instance(p_location);
         Collection<SearchTreeObject> overlaps = overlapping_objects(point_shape, p_layer);
         Set<Item> result = new TreeSet<>();
         for (SearchTreeObject curr_object : overlaps) {
@@ -1244,7 +1245,7 @@ public class BasicBoard implements java.io.Serializable {
      * found.
      */
     public Trace get_trace_tail(Point p_location, int p_layer, int[] p_net_no_arr) {
-        TileShape point_shape = TileShape.get_instance(p_location);
+        TileShape point_shape = TileShapeUtils.get_instance(p_location);
         Collection<SearchTreeObject> found_items = overlapping_objects(point_shape, p_layer);
         Iterator<SearchTreeObject> it = found_items.iterator();
         while (it.hasNext()) {

@@ -32,6 +32,7 @@ import net.freerouting.freeroute.board.TestLevel;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.TileShape;
+import net.freerouting.freeroute.geometry.planar.TileShapeUtils;
 
 /**
  *
@@ -303,7 +304,7 @@ public abstract class LocateFoundConnectionAlgo {
             if (layer_changed) {
                 // the next trace leads to a via
                 ExpansionDrill current_target_drill = (ExpansionDrill) this.backtrack_array[this.current_target_door_index].door;
-                this.current_target_shape = TileShape.get_instance(current_target_drill.location);
+                this.current_target_shape = TileShapeUtils.get_instance(current_target_drill.location);
             } else {
                 // the next trace leads to the final target
                 connection_done = true;

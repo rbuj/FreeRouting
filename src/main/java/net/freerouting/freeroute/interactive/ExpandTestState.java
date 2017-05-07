@@ -35,6 +35,7 @@ import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.RoutingBoard;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.TileShape;
+import net.freerouting.freeroute.geometry.planar.TileShapeUtils;
 
 /**
  * State for testing the expanding algorithm of the autorouter.
@@ -182,7 +183,7 @@ public class ExpandTestState extends InteractiveState {
         this.autoroute_engine.init_connection(route_net_no, null, null);
         if (route_item == null) {
             // create an expansion room in the empty space
-            TileShape contained_shape = TileShape.get_instance(p_location.round());
+            TileShape contained_shape = TileShapeUtils.get_instance(p_location.round());
             IncompleteFreeSpaceExpansionRoom expansion_room
                     = autoroute_engine.add_incomplete_expansion_room(null, layer, contained_shape);
             hdlg.screen_messages.set_status_message("expansion test started");

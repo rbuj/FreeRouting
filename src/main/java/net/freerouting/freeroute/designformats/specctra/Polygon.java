@@ -22,6 +22,7 @@ package net.freerouting.freeroute.designformats.specctra;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
+import net.freerouting.freeroute.geometry.planar.SimplexUtils;
 
 /**
  * Describes a polygon in a Specctra dsn file.
@@ -57,7 +58,7 @@ public class Polygon extends Shape {
     @Override
     public net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
         if (coor.length < 2) {
-            return net.freerouting.freeroute.geometry.planar.Simplex.EMPTY;
+            return SimplexUtils.EMPTY;
         }
         IntPoint[] corner_arr = new IntPoint[coor.length / 2];
         for (int i = 0; i < corner_arr.length; ++i) {

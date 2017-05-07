@@ -29,6 +29,7 @@ import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.Shape;
 import net.freerouting.freeroute.geometry.planar.TileShape;
+import net.freerouting.freeroute.geometry.planar.TileShapeUtils;
 import net.freerouting.freeroute.geometry.planar.Vector;
 import net.freerouting.freeroute.library.Padstack;
 
@@ -283,7 +284,7 @@ public abstract class DrillItem extends Item implements Connectable {
     @Override
     public Set<Item> get_normal_contacts() {
         Point drill_center = this.get_center();
-        TileShape search_shape = TileShape.get_instance(drill_center);
+        TileShape search_shape = TileShapeUtils.get_instance(drill_center);
         Set<SearchTreeObject> overlaps = board.overlapping_objects(search_shape, -1);
         Iterator<SearchTreeObject> it = overlaps.iterator();
         Set<Item> result = new TreeSet<>();
@@ -350,7 +351,7 @@ public abstract class DrillItem extends Item implements Connectable {
 
     @Override
     public TileShape get_trace_connection_shape(ShapeSearchTree p_search_tree, int p_index) {
-        return TileShape.get_instance(this.get_center());
+        return TileShapeUtils.get_instance(this.get_center());
     }
 
     /**

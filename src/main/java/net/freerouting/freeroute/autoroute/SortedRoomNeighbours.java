@@ -40,7 +40,9 @@ import net.freerouting.freeroute.geometry.planar.Line;
 import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.Side;
 import net.freerouting.freeroute.geometry.planar.Simplex;
+import net.freerouting.freeroute.geometry.planar.SimplexUtils;
 import net.freerouting.freeroute.geometry.planar.TileShape;
+import net.freerouting.freeroute.geometry.planar.TileShapeUtils;
 
 /**
  * To calculate the neigbour rooms of an expansion room. The neighbour rooms
@@ -486,7 +488,7 @@ public class SortedRoomNeighbours {
                             IntPoint cut_line_start = prev_neighbour.last_corner().to_float().round();
                             IntPoint cut_line_end = next_neighbour.first_corner().to_float().round();
                             Line cut_line = new Line(cut_line_start, cut_line_end);
-                            TileShape cut_half_plane = TileShape.get_instance(cut_line);
+                            TileShape cut_half_plane = TileShapeUtils.get_instance(cut_line);
                             ((CompleteFreeSpaceExpansionRoom) this.completed_room).set_shape(this.completed_room.get_shape().intersection(cut_half_plane));
                             corner_cut_off = true;
                             if (incomplete_room.get_contained_shape().side_of(cut_line) != Side.ON_THE_LEFT) {
@@ -549,7 +551,7 @@ public class SortedRoomNeighbours {
                         ++curr_index;
                         new_edge_lines[curr_index] = end_edge_line;
                     }
-                    Simplex new_room_shape = Simplex.get_instance(new_edge_lines);
+                    Simplex new_room_shape = SimplexUtils.get_instance(new_edge_lines);
                     if (!new_room_shape.is_empty()) {
 
                         TileShape new_contained_shape = this.completed_room.get_shape().intersection(new_room_shape);

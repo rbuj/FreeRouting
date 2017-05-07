@@ -28,6 +28,7 @@ import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Line;
 import net.freerouting.freeroute.geometry.planar.Side;
 import net.freerouting.freeroute.geometry.planar.TileShape;
+import net.freerouting.freeroute.geometry.planar.TileShapeUtils;
 import net.freerouting.freeroute.rules.BoardRules;
 
 /**
@@ -89,7 +90,7 @@ public class TileConstructionState extends CornerItemConstructionState {
                 prev_corner = next_corner;
             }
             edge_lines[corner_count - 1] = new Line(prev_corner, first_corner);
-            TileShape obstacle_shape = TileShape.get_instance(edge_lines);
+            TileShape obstacle_shape = TileShapeUtils.get_instance(edge_lines);
             RoutingBoard board = hdlg.get_routing_board();
             int layer = hdlg.settings.layer;
             int cl_class = BoardRules.clearance_class_none();

@@ -413,7 +413,7 @@ public class PolygonShape extends PolylineShape {
         }
         bounding_lines[bounding_lines.length - 1]
                 = new Line(hull.corners[hull.corners.length - 1], hull.corners[0]);
-        return TileShape.get_instance(bounding_lines);
+        return TileShapeUtils.get_instance(bounding_lines);
     }
 
     @Override
@@ -554,7 +554,7 @@ public class PolygonShape extends PolylineShape {
             Iterator<PolygonShape> it = convex_pieces.iterator();
             for (int i = 0; i < precalculated_convex_pieces.length; ++i) {
                 PolygonShape curr_piece = it.next();
-                precalculated_convex_pieces[i] = TileShape.get_instance(curr_piece.corners);
+                precalculated_convex_pieces[i] = TileShapeUtils.get_instance(curr_piece.corners);
             }
         }
         return this.precalculated_convex_pieces;
