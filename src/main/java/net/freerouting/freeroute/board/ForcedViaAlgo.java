@@ -26,6 +26,7 @@ import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Limits;
 import net.freerouting.freeroute.geometry.planar.Point;
+import net.freerouting.freeroute.geometry.planar.PointUtils;
 import net.freerouting.freeroute.geometry.planar.Shape;
 import net.freerouting.freeroute.geometry.planar.Simplex;
 import net.freerouting.freeroute.geometry.planar.TileShape;
@@ -87,7 +88,7 @@ public class ForcedViaAlgo {
      */
     public static boolean check(ViaInfo p_via_info, Point p_location, int[] p_net_no_arr, int p_max_recursion_depth,
             int p_max_via_recursion_depth, RoutingBoard p_board) {
-        Vector translate_vector = p_location.difference_by(Point.ZERO);
+        Vector translate_vector = p_location.difference_by(PointUtils.ZERO);
         int calc_from_side_offset = p_board.get_min_trace_half_width();
         ForcedPadAlgo forced_pad_algo = new ForcedPadAlgo(p_board);
         Padstack via_padstack = p_via_info.get_padstack();
@@ -126,7 +127,7 @@ public class ForcedViaAlgo {
     public static boolean insert(ViaInfo p_via_info, Point p_location, int[] p_net_no_arr,
             int p_trace_clearance_class_no, int[] p_trace_pen_halfwidth_arr, int p_max_recursion_depth,
             int p_max_via_recursion_depth, RoutingBoard p_board) {
-        Vector translate_vector = p_location.difference_by(Point.ZERO);
+        Vector translate_vector = p_location.difference_by(PointUtils.ZERO);
         int calc_from_side_offset = p_board.get_min_trace_half_width();
         ForcedPadAlgo forced_pad_algo = new ForcedPadAlgo(p_board);
         Padstack via_padstack = p_via_info.get_padstack();

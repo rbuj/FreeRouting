@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Point;
+import net.freerouting.freeroute.geometry.planar.PointUtils;
 import net.freerouting.freeroute.geometry.planar.Shape;
 import net.freerouting.freeroute.geometry.planar.TileShape;
 import net.freerouting.freeroute.geometry.planar.TileShapeUtils;
@@ -77,7 +78,7 @@ public class Via extends DrillItem {
             this.precalculated_shapes = new Shape[padstack.to_layer() - padstack.from_layer() + 1];
             for (int i = 0; i < this.precalculated_shapes.length; ++i) {
                 int padstack_layer = i + this.first_layer();
-                Vector translate_vector = get_center().difference_by(Point.ZERO);
+                Vector translate_vector = get_center().difference_by(PointUtils.ZERO);
                 Shape curr_shape = padstack.get_shape(padstack_layer);
 
                 if (curr_shape == null) {

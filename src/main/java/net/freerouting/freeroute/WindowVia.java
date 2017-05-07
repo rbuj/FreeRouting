@@ -23,6 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import net.freerouting.freeroute.board.Layer;
+import net.freerouting.freeroute.geometry.planar.PointUtils;
 import net.freerouting.freeroute.rules.BoardRules;
 import net.freerouting.freeroute.rules.ViaRule;
 
@@ -317,7 +318,7 @@ public class WindowVia extends BoardSavableSubWindow {
                 }
                 int circle_radius = (int) Math.round(coordinate_transform.user_to_board(radius));
                 if (circle_radius > 0) {
-                    padstack_shapes[i] = new net.freerouting.freeroute.geometry.planar.Circle(net.freerouting.freeroute.geometry.planar.Point.ZERO, circle_radius);
+                    padstack_shapes[i] = new net.freerouting.freeroute.geometry.planar.Circle(PointUtils.ZERO, circle_radius);
                     shape_exists = true;
                 }
             }

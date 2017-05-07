@@ -352,7 +352,7 @@ public class Circle implements ConvexShape, java.io.Serializable {
 
     public String to_string(java.util.Locale p_locale) {
         String result = "Circle: ";
-        if (!(center.equals(Point.ZERO))) {
+        if (!(center.equals(PointUtils.ZERO))) {
             String center_string = "center " + center.toString();
             result += center_string;
         }

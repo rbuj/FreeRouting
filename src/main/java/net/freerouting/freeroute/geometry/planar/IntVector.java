@@ -236,7 +236,7 @@ public class IntVector extends Vector {
     @Override
     public Vector change_length_approx(double p_length) {
         FloatPoint new_point = this.to_float().change_size(p_length);
-        return new_point.round().difference_by(Point.ZERO);
+        return new_point.round().difference_by(PointUtils.ZERO);
     }
 
     @Override

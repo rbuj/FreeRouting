@@ -23,6 +23,7 @@ import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Point;
+import net.freerouting.freeroute.geometry.planar.PointUtils;
 import net.freerouting.freeroute.geometry.planar.TileShape;
 import net.freerouting.freeroute.geometry.planar.Vector;
 
@@ -96,19 +97,19 @@ public class ObstacleArea extends Item {
             }
             Area turned_area = this.relative_area;
             if (this.side_changed && !this.board.components.get_flip_style_rotate_first()) {
-                turned_area = turned_area.mirror_vertical(Point.ZERO);
+                turned_area = turned_area.mirror_vertical(PointUtils.ZERO);
             }
             if (this.rotation_in_degree != 0) {
                 double rotation = this.rotation_in_degree;
                 if (rotation % 90 == 0) {
-                    turned_area = turned_area.turn_90_degree(((int) rotation) / 90, Point.ZERO);
+                    turned_area = turned_area.turn_90_degree(((int) rotation) / 90, PointUtils.ZERO);
                 } else {
                     turned_area = turned_area.rotate_approx(Math.toRadians(rotation), FloatPoint.ZERO);
                 }
 
             }
             if (this.side_changed && this.board.components.get_flip_style_rotate_first()) {
-                turned_area = turned_area.mirror_vertical(Point.ZERO);
+                turned_area = turned_area.mirror_vertical(PointUtils.ZERO);
             }
             this.precalculated_absolute_area = turned_area.translate_by(this.translation);
         }
@@ -191,8 +192,8 @@ public class ObstacleArea extends Item {
         while (this.rotation_in_degree < 0) {
             this.rotation_in_degree += 360;
         }
-        Point rel_location = Point.ZERO.translate_by(this.translation);
-        this.translation = rel_location.turn_90_degree(p_factor, p_pole).difference_by(Point.ZERO);
+        Point rel_location = PointUtils.ZERO.translate_by(this.translation);
+        this.translation = rel_location.turn_90_degree(p_factor, p_pole).difference_by(PointUtils.ZERO);
         this.clear_derived_data();
     }
 
@@ -210,7 +211,7 @@ public class ObstacleArea extends Item {
             this.rotation_in_degree += 360;
         }
         FloatPoint new_translation = this.translation.to_float().rotate(Math.toRadians(p_angle_in_degree), p_pole);
-        this.translation = new_translation.round().difference_by(Point.ZERO);
+        this.translation = new_translation.round().difference_by(PointUtils.ZERO);
         this.clear_derived_data();
     }
 
@@ -220,8 +221,8 @@ public class ObstacleArea extends Item {
         if (this.board != null) {
             this.layer = board.get_layer_count() - this.layer - 1;
         }
-        Point rel_location = Point.ZERO.translate_by(this.translation);
-        this.translation = rel_location.mirror_vertical(p_pole).difference_by(Point.ZERO);
+        Point rel_location = PointUtils.ZERO.translate_by(this.translation);
+        this.translation = rel_location.mirror_vertical(p_pole).difference_by(PointUtils.ZERO);
         this.clear_derived_data();
     }
 

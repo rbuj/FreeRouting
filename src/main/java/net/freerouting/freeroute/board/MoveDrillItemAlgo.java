@@ -28,6 +28,7 @@ import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.IntOctagon;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Point;
+import net.freerouting.freeroute.geometry.planar.PointUtils;
 import net.freerouting.freeroute.geometry.planar.TileShape;
 import net.freerouting.freeroute.geometry.planar.Vector;
 
@@ -276,7 +277,7 @@ public class MoveDrillItemAlgo {
             FloatPoint[] shove_deltas = curr_offset_shape.nearest_relative_outside_locations(curr_via_shape, try_count);
             try_via_centers = new IntPoint[shove_deltas.length];
             for (int i = 0; i < try_via_centers.length; ++i) {
-                Vector curr_delta = shove_deltas[i].round().difference_by(Point.ZERO);
+                Vector curr_delta = shove_deltas[i].round().difference_by(PointUtils.ZERO);
                 try_via_centers[i] = (IntPoint) curr_via_center.translate_by(curr_delta);
             }
         }

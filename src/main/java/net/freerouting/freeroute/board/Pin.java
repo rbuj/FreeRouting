@@ -27,6 +27,7 @@ import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Line;
 import net.freerouting.freeroute.geometry.planar.Point;
+import net.freerouting.freeroute.geometry.planar.PointUtils;
 import net.freerouting.freeroute.geometry.planar.Polyline;
 import net.freerouting.freeroute.geometry.planar.Shape;
 import net.freerouting.freeroute.geometry.planar.TileShape;
@@ -87,7 +88,7 @@ public class Pin extends DrillItem {
             // rotation may be not exact
             FloatPoint location_approx = rel_location.to_float();
             location_approx = location_approx.rotate(Math.toRadians(component_rotation), FloatPoint.ZERO);
-            rel_location = location_approx.round().difference_by(Point.ZERO);
+            rel_location = location_approx.round().difference_by(PointUtils.ZERO);
         }
         if (!component.placed_on_front() && board.components.get_flip_style_rotate_first()) {
             rel_location = rel_location.mirror_at_y_axis();
@@ -197,7 +198,7 @@ public class Pin extends DrillItem {
                 rel_location = package_pin.relative_location.mirror_at_y_axis();
             }
 
-            Vector component_translation = component.get_location().difference_by(Point.ZERO);
+            Vector component_translation = component.get_location().difference_by(PointUtils.ZERO);
 
             for (int index = 0; index < this.precalculated_shapes.length; ++index) {
 
@@ -211,14 +212,14 @@ public class Pin extends DrillItem {
                 if (pin_rotation % 90 == 0) {
                     int pin_ninety_degree_factor = ((int) pin_rotation) / 90;
                     if (pin_ninety_degree_factor != 0) {
-                        curr_shape = (ConvexShape) curr_shape.turn_90_degree(pin_ninety_degree_factor, Point.ZERO);
+                        curr_shape = (ConvexShape) curr_shape.turn_90_degree(pin_ninety_degree_factor, PointUtils.ZERO);
                     }
                 } else {
                     curr_shape = (ConvexShape) curr_shape.rotate_approx(Math.toRadians(pin_rotation), FloatPoint.ZERO);
                 }
 
                 if (mirror_at_y_axis) {
-                    curr_shape = (ConvexShape) curr_shape.mirror_vertical(Point.ZERO);
+                    curr_shape = (ConvexShape) curr_shape.mirror_vertical(PointUtils.ZERO);
                 }
 
                 // translate the shape first relative to the component
@@ -227,13 +228,13 @@ public class Pin extends DrillItem {
                 if (component_rotation % 90 == 0) {
                     int component_ninety_degree_factor = ((int) component_rotation) / 90;
                     if (component_ninety_degree_factor != 0) {
-                        translated_shape = (ConvexShape) translated_shape.turn_90_degree(component_ninety_degree_factor, Point.ZERO);
+                        translated_shape = (ConvexShape) translated_shape.turn_90_degree(component_ninety_degree_factor, PointUtils.ZERO);
                     }
                 } else {
                     translated_shape = (ConvexShape) translated_shape.rotate_approx(Math.toRadians(component_rotation), FloatPoint.ZERO);
                 }
                 if (!component.placed_on_front() && board.components.get_flip_style_rotate_first()) {
-                    translated_shape = (ConvexShape) translated_shape.mirror_vertical(Point.ZERO);
+                    translated_shape = (ConvexShape) translated_shape.mirror_vertical(PointUtils.ZERO);
                 }
                 this.precalculated_shapes[index] = (ConvexShape) translated_shape.translate_by(component_translation);
             }

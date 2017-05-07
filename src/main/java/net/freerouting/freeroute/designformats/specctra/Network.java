@@ -30,6 +30,7 @@ import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Point;
+import net.freerouting.freeroute.geometry.planar.PointUtils;
 import net.freerouting.freeroute.geometry.planar.Vector;
 import net.freerouting.freeroute.rules.BoardRules;
 import net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass;
@@ -870,7 +871,7 @@ public class Network extends ScopeKeyword {
         if (component_location == null) {
             return; // component is not yet placed.
         }
-        Vector component_translation = component_location.difference_by(Point.ZERO);
+        Vector component_translation = component_location.difference_by(PointUtils.ZERO);
         net.freerouting.freeroute.board.FixedState fixed_state;
         if (p_location.position_fixed) {
             fixed_state = net.freerouting.freeroute.board.FixedState.SYSTEM_FIXED;
