@@ -108,7 +108,7 @@ public final class MainApp extends Application {
                                 }
                             }
                             if (locale == null) {
-                                LOGGER.log(Level.INFO, "locale: " + new_locale + " not found [using default]");
+                                LOGGER.log(Level.INFO, "locale: {0} not found [using default]", new_locale);
                                 locale = new Locale("en", "");
                             }
                             Locale.setDefault(locale);
