@@ -185,11 +185,6 @@ public class CopyItemState extends InteractiveState {
          */
         Map<Integer, Integer> cmp_no_pairs = new TreeMap<>();
 
-        /**
-         * Contains the new created components after copying.
-         */
-        Collection<Component> copied_components = new LinkedList<>();
-
         Vector translate_vector = current_position.difference_by(start_position);
         Iterator<Item> it = item_list.iterator();
         while (it.hasNext()) {
@@ -231,7 +226,6 @@ public class CopyItemState extends InteractiveState {
                     Component new_component
                             = board.components.add(new_location, old_component.get_rotation_in_degree(),
                                     old_component.placed_on_front(), new_package);
-                    copied_components.add(new_component);
                     new_cmp_no = new_component.no;
                     cmp_no_pairs.put(curr_cmp_no, new_cmp_no);
                 }

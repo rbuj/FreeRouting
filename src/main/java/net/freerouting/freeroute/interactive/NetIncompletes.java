@@ -212,12 +212,10 @@ public class NetIncompletes {
      */
     private NetItem[] calculate_net_items(Collection<Item> p_item_list) {
         NetItem[] result = new NetItem[p_item_list.size()];
-        Collection<Item> handeled_items = new LinkedList<>();
         int curr_index = 0;
         while (!p_item_list.isEmpty()) {
             Item start_item = p_item_list.iterator().next();
             Collection<Item> curr_connected_set = start_item.get_connected_set(this.net.net_number);
-            handeled_items.addAll(curr_connected_set);
             p_item_list.removeAll(curr_connected_set);
             Iterator<Item> it = curr_connected_set.iterator();
             while (it.hasNext()) {
