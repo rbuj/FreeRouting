@@ -43,7 +43,7 @@ public class MoveComponent {
     private final int max_via_recursion_depth;
     private final RoutingBoard board;
     private boolean all_items_movable = true;
-    private SortedItem[] item_group_arr;
+    private final SortedItem[] item_group_arr;
     private Component component = null;
 
     /**
@@ -75,6 +75,7 @@ public class MoveComponent {
             if (!curr_item_movable) {
                 // MoveItemGroup currently only implemented for DrillItems
                 all_items_movable = false;
+                item_group_arr = null;
                 return;
             }
             if (curr_item instanceof DrillItem) {
