@@ -633,7 +633,7 @@ public class Simplex extends TileShape {
         Line[] new_arr = new Line[arr.length + p_other.arr.length];
         System.arraycopy(arr, 0, new_arr, 0, arr.length);
         System.arraycopy(p_other.arr, 0, new_arr, arr.length, p_other.arr.length);
-        java.util.Arrays.sort(new_arr);
+        java.util.Arrays.parallelSort(new_arr);
         Simplex result = new Simplex(new_arr);
         return result.remove_redundant_lines();
     }

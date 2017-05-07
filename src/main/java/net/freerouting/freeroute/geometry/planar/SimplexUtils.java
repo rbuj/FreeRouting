@@ -37,7 +37,7 @@ public final class SimplexUtils {
         Line[] curr_arr = new Line[p_line_arr.length];
         System.arraycopy(p_line_arr, 0, curr_arr, 0, p_line_arr.length);
         // sort the lines in ascending direction
-        java.util.Arrays.sort(curr_arr);
+        java.util.Arrays.parallelSort(curr_arr);
         Simplex curr_simplex = new Simplex(curr_arr);
         Simplex result = curr_simplex.remove_redundant_lines();
         return result;

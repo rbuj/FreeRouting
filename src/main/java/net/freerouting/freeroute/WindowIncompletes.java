@@ -51,7 +51,7 @@ public class WindowIncompletes extends WindowObjectListWithFilter {
         RatsNest ratsnest = board_frame.board_panel.board_handling.get_ratsnest();
         RatsNest.AirLine[] sorted_arr = ratsnest.get_airlines();
 
-        java.util.Arrays.sort(sorted_arr);
+        java.util.Arrays.parallelSort(sorted_arr);
         for (int i = 0; i < sorted_arr.length; ++i) {
             this.add_to_list(sorted_arr[i]);
         }

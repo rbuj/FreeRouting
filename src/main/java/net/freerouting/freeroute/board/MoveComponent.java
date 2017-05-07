@@ -107,7 +107,7 @@ public class MoveComponent {
         }
         // sort the items, in the direction of p_translate_vector, so that
         // the items in front come first.
-        java.util.Arrays.sort(item_group_arr);
+        java.util.Arrays.parallelSort(item_group_arr);
     }
 
     /**

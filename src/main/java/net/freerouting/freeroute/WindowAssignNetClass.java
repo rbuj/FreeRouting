@@ -150,7 +150,7 @@ public class WindowAssignNetClass extends BoardSavableSubWindow {
             for (int i = 0; i < sorted_arr.length; ++i) {
                 sorted_arr[i] = board_rules.nets.get(i + 1);
             }
-            java.util.Arrays.sort(sorted_arr);
+            java.util.Arrays.parallelSort(sorted_arr);
             for (int i = 0; i < data.length; ++i) {
                 this.data[i][0] = sorted_arr[i];
                 this.data[i][1] = sorted_arr[i].get_class();

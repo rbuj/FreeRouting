@@ -55,7 +55,7 @@ public class WindowPadstacks extends WindowObjectListWithFilter {
         for (int i = 0; i < sorted_arr.length; ++i) {
             sorted_arr[i] = padstacks.get(i + 1);
         }
-        java.util.Arrays.sort(sorted_arr);
+        java.util.Arrays.parallelSort(sorted_arr);
         for (int i = 0; i < sorted_arr.length; ++i) {
             this.add_to_list(sorted_arr[i]);
         }
