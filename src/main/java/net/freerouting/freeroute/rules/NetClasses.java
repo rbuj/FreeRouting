@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.rules;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -29,7 +30,7 @@ import java.util.Locale;
 @SuppressWarnings("serial")
 public class NetClasses implements java.io.Serializable {
 
-    private final java.util.Vector<NetClass> class_arr = new java.util.Vector<>();
+    private final ArrayList<NetClass> class_arr = new ArrayList<>();
 
     /**
      * Returns the number of classes in this array.

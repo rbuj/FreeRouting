@@ -20,11 +20,11 @@
 package net.freerouting.freeroute.interactive;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
-import java.util.Vector;
 import net.freerouting.freeroute.board.BasicBoard;
 import net.freerouting.freeroute.board.Connectable;
 import net.freerouting.freeroute.board.Item;
@@ -50,7 +50,7 @@ public class RatsNest {
     public RatsNest(BasicBoard p_board) {
         int max_net_no = p_board.rules.nets.max_net_no();
         // Create the net item lists at once for performance reasons.
-        Vector<Collection<Item>> net_item_lists = new Vector<>(max_net_no);
+        ArrayList<Collection<Item>> net_item_lists = new ArrayList<>(max_net_no);
         for (int i = 0; i < max_net_no; ++i) {
             net_item_lists.add(new LinkedList<>());
         }

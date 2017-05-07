@@ -20,7 +20,7 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
-import net.freerouting.freeroute.rules.ViaRule;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  * Used for manual choice of trace widths in interactive routing.
@@ -33,7 +33,7 @@ public class WindowManualRules extends BoardSavableSubWindow {
     private final net.freerouting.freeroute.interactive.BoardHandling board_handling;
     private final ComboBoxLayer layer_combo_box;
     private final ComboBoxClearance clearance_combo_box;
-    private final javax.swing.JComboBox<ViaRule> via_rule_combo_box;
+    private final javax.swing.JComboBox via_rule_combo_box;
     private final javax.swing.JFormattedTextField trace_width_field;
     private boolean key_input_completed = true;
 
@@ -62,7 +62,7 @@ public class WindowManualRules extends BoardSavableSubWindow {
         main_panel.add(via_rule_label);
 
         net.freerouting.freeroute.board.RoutingBoard routing_board = this.board_handling.get_routing_board();
-        this.via_rule_combo_box = new javax.swing.JComboBox<>(routing_board.rules.via_rules);
+        this.via_rule_combo_box = new javax.swing.JComboBox<>(new DefaultComboBoxModel(routing_board.rules.via_rules.toArray()));
         gridbag_constraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridbag.setConstraints(this.via_rule_combo_box, gridbag_constraints);
         main_panel.add(this.via_rule_combo_box);
@@ -128,7 +128,7 @@ public class WindowManualRules extends BoardSavableSubWindow {
     @Override
     public void refresh() {
         net.freerouting.freeroute.board.RoutingBoard routing_board = board_handling.get_routing_board();
-        javax.swing.ComboBoxModel<ViaRule> new_model = new javax.swing.DefaultComboBoxModel<>(routing_board.rules.via_rules);
+        DefaultComboBoxModel new_model = new javax.swing.DefaultComboBoxModel(routing_board.rules.via_rules.toArray());
         this.via_rule_combo_box.setModel(new_model);
         net.freerouting.freeroute.rules.ClearanceMatrix clearance_matrix = board_handling.get_routing_board().rules.clearance_matrix;
         if (this.clearance_combo_box.get_class_count() != routing_board.rules.clearance_matrix.get_class_count()) {

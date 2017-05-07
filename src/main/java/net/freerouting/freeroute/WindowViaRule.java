@@ -41,7 +41,7 @@ public class WindowViaRule extends javax.swing.JFrame {
 
     private final javax.swing.JPanel main_panel;
 
-    private final javax.swing.JList rule_list;
+    private final javax.swing.JList<ViaInfo> rule_list;
     private final javax.swing.DefaultListModel<ViaInfo> rule_list_model;
 
     private final java.util.ResourceBundle resources;

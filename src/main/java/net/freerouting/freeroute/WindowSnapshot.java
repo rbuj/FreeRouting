@@ -21,6 +21,7 @@ package net.freerouting.freeroute;
 
 import java.io.IOException;
 import java.util.Locale;
+import net.freerouting.freeroute.interactive.SnapShot;
 
 /**
  * Window handling snapshots of the interactive situation.
@@ -31,7 +32,7 @@ import java.util.Locale;
 public class WindowSnapshot extends BoardSavableSubWindow {
 
     private final BoardFrame board_frame;
-    private javax.swing.DefaultListModel<net.freerouting.freeroute.interactive.SnapShot> list_model = new javax.swing.DefaultListModel<>();
+    private javax.swing.DefaultListModel<SnapShot> list_model = new javax.swing.DefaultListModel<>();
     private final javax.swing.JList list;
     private final javax.swing.JTextField name_field;
     final WindowSnapshotSettings settings_window;
@@ -260,12 +261,12 @@ public class WindowSnapshot extends BoardSavableSubWindow {
     @SuppressWarnings("serial")
     private static class SavedAttributes implements java.io.Serializable {
 
-        public final javax.swing.DefaultListModel list_model;
+        public final javax.swing.DefaultListModel<SnapShot> list_model;
         public final int snapshot_count;
         public final java.awt.Point location;
         public final boolean is_visible;
 
-        public SavedAttributes(javax.swing.DefaultListModel p_list_model, int p_snapshot_count, java.awt.Point p_location, boolean p_is_visible) {
+        public SavedAttributes(javax.swing.DefaultListModel<SnapShot> p_list_model, int p_snapshot_count, java.awt.Point p_location, boolean p_is_visible) {
             list_model = p_list_model;
             snapshot_count = p_snapshot_count;
             location = p_location;

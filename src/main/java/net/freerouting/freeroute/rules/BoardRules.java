@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.rules;
 
+import java.util.ArrayList;
 import net.freerouting.freeroute.geometry.planar.ConvexShape;
 
 /**
@@ -62,7 +63,7 @@ public class BoardRules implements java.io.Serializable {
     private boolean ignore_conduction = true;
     private final net.freerouting.freeroute.board.LayerStructure layer_structure;
     public final ViaInfos via_infos = new ViaInfos();
-    public final java.util.Vector<ViaRule> via_rules = new java.util.Vector<>();
+    public final ArrayList<ViaRule> via_rules = new ArrayList<>();
     public final NetClasses net_classes = new NetClasses();
     /**
      * The smallest of all default trace half widths
