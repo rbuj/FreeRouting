@@ -38,8 +38,8 @@ public class WindowVia extends BoardSavableSubWindow {
     private static final int WINDOW_OFFSET = 30;
     private final BoardFrame board_frame;
     private final java.util.ResourceBundle resources;
-    private final javax.swing.JList rule_list;
-    private final javax.swing.DefaultListModel rule_list_model;
+    private final javax.swing.JList<ViaRule> rule_list;
+    private final javax.swing.DefaultListModel<ViaRule> rule_list_model;
     private final javax.swing.JPanel main_panel;
 
     /**
