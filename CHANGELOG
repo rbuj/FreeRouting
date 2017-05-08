@@ -4,6 +4,7 @@ ToDo
 	* Write all documentation in docbook format
 
 xxxx-xx-xx
+        * Fixed javax.swing warnings: found raw type (generics)
         * Use Queue<TreeNode> instead of ArrayStack<TreeNode> in
           MinAreaTree.java. Pop: Use NoSuchElementException when the stack
           has no elements in:
