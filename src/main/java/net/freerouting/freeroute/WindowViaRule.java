@@ -167,7 +167,7 @@ public class WindowViaRule extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
-            ViaInfo selected_via = (ViaInfo) rule_list.getSelectedValue();
+            ViaInfo selected_via = rule_list.getSelectedValue();
             if (selected_via != null) {
                 String message = resources.getString("remove_2") + " " + selected_via.get_name()
                         + " " + resources.getString("from_the_rule") + " " + via_rule.name + "?";
