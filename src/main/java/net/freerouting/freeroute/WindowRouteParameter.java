@@ -406,10 +406,10 @@ public class WindowRouteParameter extends BoardSavableSubWindow {
 
     private void set_pull_tight_region_width(int p_slider_value) {
         int slider_value = Math.max(p_slider_value, 0);
-        slider_value = Math.min(p_slider_value, C_MAX_SLIDER_VALUE);
+        slider_value = Math.min(slider_value, C_MAX_SLIDER_VALUE);
         int new_tidy_width;
         if (slider_value >= 0.9 * C_MAX_SLIDER_VALUE) {
-            p_slider_value = C_MAX_SLIDER_VALUE;
+            slider_value = C_MAX_SLIDER_VALUE;
             new_tidy_width = Integer.MAX_VALUE;
         } else {
             new_tidy_width = slider_value * C_REGION_SCALE_FACTOR;

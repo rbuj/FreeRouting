@@ -692,7 +692,7 @@ public class BasicBoard implements java.io.Serializable {
     public boolean normalize_traces(int p_net_no) {
         boolean result = false;
         boolean something_changed = true;
-        Item curr_item = null;
+        Item curr_item;
         while (something_changed) {
             something_changed = false;
             Iterator<UndoableObjects.UndoableObjectNode> it = item_list.start_read_object();

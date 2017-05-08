@@ -87,7 +87,7 @@ public class GUIDefaultsFile {
     private static boolean skip_scope(GUIDefaultsScanner p_scanner) {
         int open_bracked_count = 1;
         while (open_bracked_count > 0) {
-            Object curr_token = null;
+            Object curr_token;
             try {
                 curr_token = p_scanner.next_token();
             } catch (IOException e) {
