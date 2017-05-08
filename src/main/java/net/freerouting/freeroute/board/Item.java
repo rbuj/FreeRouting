@@ -242,7 +242,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
     public abstract Item copy(int p_id_no);
 
     @Override
-    public Object clone() {
+    public Object clone() throws CloneNotSupportedException {
         return copy(this.get_id_no());
     }
 

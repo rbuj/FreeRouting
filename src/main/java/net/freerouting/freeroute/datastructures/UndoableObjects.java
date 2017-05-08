@@ -25,6 +25,8 @@ import java.util.LinkedList;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Database of objects, for which Undo and Redo operations are made possible.
@@ -291,12 +293,15 @@ public class UndoableObjects implements java.io.Serializable {
             return;
         }
         if (curr_node.level < this.stack_level) {
-
-            UndoableObjectNode old_node = new UndoableObjectNode((UndoableObjects.Storable) p_object.clone(), curr_node.level);
-            old_node.undo_object = curr_node.undo_object;
-            old_node.redo_object = curr_node;
-            curr_node.undo_object = old_node;
-            curr_node.level = this.stack_level;
+            try {
+                UndoableObjectNode old_node = new UndoableObjectNode((UndoableObjects.Storable) p_object.clone(), curr_node.level);
+                old_node.undo_object = curr_node.undo_object;
+                old_node.redo_object = curr_node;
+                curr_node.undo_object = old_node;
+                curr_node.level = this.stack_level;
+            } catch (CloneNotSupportedException ex) {
+                Logger.getLogger(UndoableObjects.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -346,13 +351,13 @@ public class UndoableObjects implements java.io.Serializable {
      * Conditiom for an Object to be stored in an UndoableObjects database. An
      * object of class UndoableObjects.Storable must not contain any references.
      */
-    public interface Storable extends Comparable<Object> {
+    public interface Storable extends Comparable<Object>, Cloneable {
 
         /**
          * Creates an exact copy of this object Public overwriting of the
          * protected clone method in java.lang.Object,
          */
-        Object clone();
+        Object clone() throws CloneNotSupportedException;
     }
 
 }

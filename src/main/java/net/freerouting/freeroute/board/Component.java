@@ -198,7 +198,7 @@ public class Component implements UndoableObjects.Storable, ObjectInfoPanel.Prin
      * Creates a copy of this component.
      */
     @Override
-    public Component clone() {
+    public Component clone() throws CloneNotSupportedException {
         Component result = new Component(name, location, rotation_in_degree, on_front,
                 lib_package_front, lib_package_back, no, position_fixed);
         result.logical_part = this.logical_part;
