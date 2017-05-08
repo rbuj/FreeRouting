@@ -20,8 +20,9 @@
 package net.freerouting.freeroute.rules;
 
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
-import java.util.Vector;
 
 /**
  * Describes the electrical Nets on a board.
@@ -50,21 +51,21 @@ public class Nets implements java.io.Serializable {
     /**
      * The list of electrical nets on the board
      */
-    private final Vector<Net> net_arr;
+    private final List<Net> list;
     private net.freerouting.freeroute.board.BasicBoard board;
 
     /**
      * Creates a new empty net list
      */
     public Nets() {
-        net_arr = new Vector<>();
+        list = new LinkedList<>();
     }
 
     /**
      * Returns the biggest net number on the board.
      */
     public int max_net_no() {
-        return net_arr.size();
+        return list.size();
     }
 
     /**
@@ -72,7 +73,7 @@ public class Nets implements java.io.Serializable {
      * such net exists.
      */
     public Net get(String p_name, int p_subnet_number) {
-        for (Net curr_net : net_arr) {
+        for (Net curr_net : list) {
             if (curr_net.name.compareToIgnoreCase(p_name) == 0 && curr_net.subnet_number == p_subnet_number) {
                 return curr_net;
             }
@@ -85,7 +86,7 @@ public class Nets implements java.io.Serializable {
      */
     public Collection<Net> get(String p_name) {
         Collection<Net> result = new java.util.LinkedList<>();
-        for (Net curr_net : net_arr) {
+        for (Net curr_net : list) {
             if (curr_net != null && curr_net.name.compareToIgnoreCase(p_name) == 0) {
                 result.add(curr_net);
             }
@@ -97,10 +98,10 @@ public class Nets implements java.io.Serializable {
      * Returns the net with the input net number or null, if no such net exists.
      */
     public Net get(int p_net_no) {
-        if (p_net_no < 1 || p_net_no > net_arr.size()) {
+        if (p_net_no < 1 || p_net_no > list.size()) {
             return null;
         }
-        Net result = net_arr.elementAt(p_net_no - 1);
+        Net result = list.get(p_net_no - 1);
         if (result != null && result.net_number != p_net_no) {
             System.out.println("Nets.get: inconsistent net_no");
         }
@@ -112,7 +113,7 @@ public class Nets implements java.io.Serializable {
      */
     public Net new_net() {
         java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.rules.resources.Default", Locale.getDefault());
-        String net_name = resources.getString("net#") + Integer.toString(net_arr.size() + 1);
+        String net_name = resources.getString("net#") + Integer.toString(list.size() + 1);
         return add(net_name, 1, false);
     }
 
@@ -122,12 +123,12 @@ public class Nets implements java.io.Serializable {
      * fromto rules for example. For normal nets it is always 1.
      */
     public Net add(String p_name, int p_subnet_number, boolean p_contains_plane) {
-        int new_net_no = net_arr.size() + 1;
+        int new_net_no = list.size() + 1;
         if (new_net_no >= MAX_LEGAL_NET_NO) {
             System.out.println("Nets.add_net: max_net_no out of range");
         }
         Net new_net = new Net(p_name, p_subnet_number, new_net_no, this, p_contains_plane);
-        net_arr.add(new_net);
+        list.add(new_net);
         return new_net;
     }
 
