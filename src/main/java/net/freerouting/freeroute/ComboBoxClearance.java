@@ -27,7 +27,7 @@ import net.freerouting.freeroute.rules.ClearanceMatrix;
  * @author alfons
  */
 @SuppressWarnings("serial")
-public class ComboBoxClearance extends javax.swing.JComboBox {
+public class ComboBoxClearance extends javax.swing.JComboBox<ClearanceClass> {
 
     private ClearanceClass[] class_arr;
 
@@ -39,7 +39,7 @@ public class ComboBoxClearance extends javax.swing.JComboBox {
         for (int i = 0; i < this.class_arr.length; ++i) {
             this.class_arr[i] = new ClearanceClass(p_clearance_matrix.get_name(i), i);
         }
-        this.setModel(new javax.swing.DefaultComboBoxModel(this.class_arr));
+        this.setModel(new javax.swing.DefaultComboBoxModel<ClearanceClass>(this.class_arr));
         this.setSelectedIndex(1);
     }
 
@@ -52,7 +52,7 @@ public class ComboBoxClearance extends javax.swing.JComboBox {
         for (int i = 0; i < this.class_arr.length; ++i) {
             this.class_arr[i] = new ClearanceClass(p_new_clearance_matrix.get_name(i), i);
         }
-        this.setModel(new javax.swing.DefaultComboBoxModel(this.class_arr));
+        this.setModel(new javax.swing.DefaultComboBoxModel<ClearanceClass>(this.class_arr));
         this.setSelectedIndex(Math.min(old_index, this.class_arr.length - 1));
     }
 
@@ -69,21 +69,5 @@ public class ComboBoxClearance extends javax.swing.JComboBox {
      */
     public int get_class_count() {
         return this.class_arr.length;
-    }
-
-    private static class ClearanceClass {
-
-        public final String name;
-        public final int index;
-
-        public ClearanceClass(String p_name, int p_index) {
-            this.name = p_name;
-            this.index = p_index;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
     }
 }

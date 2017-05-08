@@ -29,7 +29,7 @@ import net.freerouting.freeroute.board.LayerStructure;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class ComboBoxLayer extends javax.swing.JComboBox {
+public class ComboBoxLayer extends javax.swing.JComboBox<Layer> {
 
     /**
      * The layer index, when all layers are selected.
@@ -65,33 +65,11 @@ public class ComboBoxLayer extends javax.swing.JComboBox {
             net.freerouting.freeroute.board.Layer curr_signal_layer = p_layer_structure.get_signal_layer(i);
             layer_arr[curr_layer_no] = new Layer(curr_signal_layer.name, p_layer_structure.get_no(curr_signal_layer));
         }
-        this.setModel(new javax.swing.DefaultComboBoxModel(layer_arr));
+        this.setModel(new javax.swing.DefaultComboBoxModel<Layer>(layer_arr));
         this.setSelectedIndex(0);
     }
 
     public Layer get_selected_layer() {
         return (Layer) this.getSelectedItem();
     }
-
-    public static class Layer {
-
-        final String name;
-
-        /**
-         * The index in the board layer_structure, -1 for the layers with name
-         * "all" or "inner"
-         */
-        final int index;
-
-        Layer(String p_name, int p_index) {
-            name = p_name;
-            index = p_index;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
-    }
-
 }

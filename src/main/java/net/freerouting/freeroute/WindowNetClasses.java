@@ -439,13 +439,13 @@ public class WindowNetClasses extends BoardSavableSubWindow {
                 this.data[i][ColumnName.MAX_TRACE_LENGTH.ordinal()] = (float) max_trace_length;
                 this.data[i][ColumnName.CLEARANCE_CLASS.ordinal()]
                         = board_rules.clearance_matrix.get_name(curr_net_class.get_trace_clearance_class());
-                ComboBoxLayer.Layer combo_layer = layer_combo_box.get_selected_layer();
+                Layer combo_layer = layer_combo_box.get_selected_layer();
                 set_trace_width_field(i, combo_layer);
                 this.data[i][ColumnName.ON_LAYER.ordinal()] = combo_layer.name;
             }
         }
 
-        void set_trace_width_field(int p_rule_no, ComboBoxLayer.Layer p_layer) {
+        void set_trace_width_field(int p_rule_no, Layer p_layer) {
             Float trace_width;
             net.freerouting.freeroute.interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;
             net.freerouting.freeroute.rules.BoardRules board_rules = board_handling.get_routing_board().rules;
@@ -666,10 +666,10 @@ public class WindowNetClasses extends BoardSavableSubWindow {
                         break;
                 }
             } else if (p_col == ColumnName.ON_LAYER.ordinal()) {
-                if (!(p_value instanceof ComboBoxLayer.Layer)) {
+                if (!(p_value instanceof Layer)) {
                     return;
                 }
-                set_trace_width_field(p_row, (ComboBoxLayer.Layer) p_value);
+                set_trace_width_field(p_row, (Layer) p_value);
             }
             this.data[p_row][p_col] = p_value;
             fireTableCellUpdated(p_row, p_col);

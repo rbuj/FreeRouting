@@ -155,7 +155,7 @@ public class WindowManualRules extends BoardSavableSubWindow {
     /**
      * Sets the selected layer to p_layer.
      */
-    private void set_selected_layer(ComboBoxLayer.Layer p_layer) {
+    private void set_selected_layer(Layer p_layer) {
         int curr_half_width;
         switch (p_layer.index) {
             case ComboBoxLayer.ALL_LAYER_INDEX: {
@@ -203,7 +203,7 @@ public class WindowManualRules extends BoardSavableSubWindow {
 
         @Override
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            ComboBoxLayer.Layer new_selected_layer = layer_combo_box.get_selected_layer();
+            Layer new_selected_layer = layer_combo_box.get_selected_layer();
             set_selected_layer(new_selected_layer);
         }
     }
