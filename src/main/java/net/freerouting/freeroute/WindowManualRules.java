@@ -21,7 +21,6 @@ package net.freerouting.freeroute;
 
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
-import net.freerouting.freeroute.rules.ViaRule;
 
 /**
  * Used for manual choice of trace widths in interactive routing.
