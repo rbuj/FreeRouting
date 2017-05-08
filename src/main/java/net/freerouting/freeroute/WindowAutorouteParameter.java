@@ -20,7 +20,14 @@
  */
 package net.freerouting.freeroute;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Locale;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+import net.freerouting.freeroute.board.LayerStructure;
 
 /**
  * Window handling parameters of the automatic routing.
@@ -31,13 +38,13 @@ import java.util.Locale;
 public class WindowAutorouteParameter extends BoardSavableSubWindow {
 
     private final net.freerouting.freeroute.interactive.BoardHandling board_handling;
-    private final javax.swing.JLabel[] signal_layer_name_arr;
-    private final javax.swing.JCheckBox[] signal_layer_active_arr;
-    private final javax.swing.JComboBox[] combo_box_arr;
-    private final javax.swing.JCheckBox vias_allowed;
-    private final javax.swing.JRadioButton fanout_pass_button;
-    private final javax.swing.JRadioButton autoroute_pass_button;
-    private final javax.swing.JRadioButton postroute_pass_button;
+    private final ArrayList<JLabel> signal_layer_name_arr;
+    private final ArrayList<JCheckBox> signal_layer_active_arr;
+    private final ArrayList<JComboBox<String>> combo_box_arr;
+    private final JCheckBox vias_allowed;
+    private final JRadioButton fanout_pass_button;
+    private final JRadioButton autoroute_pass_button;
+    private final JRadioButton postroute_pass_button;
     private final WindowAutorouteDetailParameter detail_window;
     private final DetailListener detail_listener;
     private final String horizontal;
@@ -64,96 +71,98 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow {
         gridbag_constraints.insets = new java.awt.Insets(1, 10, 1, 10);
 
         gridbag_constraints.gridwidth = 3;
-        javax.swing.JLabel layer_label = new javax.swing.JLabel(resources.getString("layer"));
+        JLabel layer_label = new JLabel(resources.getString("layer"));
         gridbag.setConstraints(layer_label, gridbag_constraints);
         main_panel.add(layer_label);
 
-        javax.swing.JLabel active_label = new javax.swing.JLabel(resources.getString("active"));
+        JLabel active_label = new JLabel(resources.getString("active"));
         gridbag.setConstraints(active_label, gridbag_constraints);
         main_panel.add(active_label);
 
         gridbag_constraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        javax.swing.JLabel preferred_direction_label = new javax.swing.JLabel(resources.getString("preferred_direction"));
+        JLabel preferred_direction_label = new JLabel(resources.getString("preferred_direction"));
         gridbag.setConstraints(preferred_direction_label, gridbag_constraints);
         main_panel.add(preferred_direction_label);
 
-        this.horizontal = resources.getString("horizontal");
-        this.vertical = resources.getString("vertical");
+        horizontal = resources.getString("horizontal");
+        vertical = resources.getString("vertical");
 
-        net.freerouting.freeroute.board.LayerStructure layer_structure = board_handling.get_routing_board().layer_structure;
+        LayerStructure layer_structure = board_handling.get_routing_board().layer_structure;
         int signal_layer_count = layer_structure.signal_layer_count();
-        signal_layer_name_arr = new javax.swing.JLabel[signal_layer_count];
-        signal_layer_active_arr = new javax.swing.JCheckBox[signal_layer_count];
-        combo_box_arr = new javax.swing.JComboBox[signal_layer_count];
+        signal_layer_name_arr = new ArrayList<>(signal_layer_count);
+        signal_layer_active_arr = new ArrayList<>(signal_layer_count);
+        combo_box_arr = new ArrayList<>(signal_layer_count);
+        String[] jComboBoxItems = {horizontal, vertical};
+
         for (int i = 0; i < signal_layer_count; ++i) {
-            signal_layer_name_arr[i] = new javax.swing.JLabel();
             net.freerouting.freeroute.board.Layer curr_signal_layer = layer_structure.get_signal_layer(i);
-            signal_layer_name_arr[i].setText(curr_signal_layer.name);
+
+            JLabel jLabel = new JLabel(curr_signal_layer.name);
             gridbag_constraints.gridwidth = 3;
-            gridbag.setConstraints(signal_layer_name_arr[i], gridbag_constraints);
-            main_panel.add(signal_layer_name_arr[i]);
-            signal_layer_active_arr[i] = new javax.swing.JCheckBox();
-            signal_layer_active_arr[i].addActionListener(new LayerActiveListener(i));
-            gridbag.setConstraints(signal_layer_active_arr[i], gridbag_constraints);
-            main_panel.add(signal_layer_active_arr[i]);
-            combo_box_arr[i] = new javax.swing.JComboBox();
-            combo_box_arr[i].addItem(this.horizontal);
-            combo_box_arr[i].addItem(this.vertical);
-            combo_box_arr[i].addActionListener(new PreferredDirectionListener(i));
+            gridbag.setConstraints(jLabel, gridbag_constraints);
+            main_panel.add(jLabel);
+            signal_layer_name_arr.add(i, jLabel);
+
+            JCheckBox jCheckBox = new JCheckBox();
+            jCheckBox.addActionListener(new LayerActiveListener(i));
+            gridbag.setConstraints(jCheckBox, gridbag_constraints);
+            main_panel.add(jCheckBox);
+            signal_layer_active_arr.add(i, jCheckBox);
+
+            JComboBox<String> jComboBox = new JComboBox<>(jComboBoxItems);
+            jComboBox.addActionListener(new PreferredDirectionListener(i));
             gridbag_constraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-            gridbag.setConstraints(combo_box_arr[i], gridbag_constraints);
-            main_panel.add(combo_box_arr[i]);
+            gridbag.setConstraints(jComboBox, gridbag_constraints);
+            main_panel.add(jComboBox);
+            combo_box_arr.add(i, jComboBox);
         }
 
-        javax.swing.JLabel separator = new javax.swing.JLabel("----------------------------------------  ");
+        JLabel separator = new JLabel("----------------------------------------  ");
         gridbag.setConstraints(separator, gridbag_constraints);
         main_panel.add(separator, gridbag_constraints);
 
+        JLabel vias_allowed_label = new JLabel(resources.getString("vias_allowed"));
         gridbag_constraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
-        javax.swing.JLabel vias_allowed_label = new javax.swing.JLabel(resources.getString("vias_allowed"));
         gridbag.setConstraints(vias_allowed_label, gridbag_constraints);
         main_panel.add(vias_allowed_label);
 
-        this.vias_allowed = new javax.swing.JCheckBox();
+        this.vias_allowed = new JCheckBox();
         this.vias_allowed.addActionListener(new ViasAllowedListener());
         gridbag_constraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridbag.setConstraints(vias_allowed, gridbag_constraints);
         main_panel.add(vias_allowed);
 
-        separator = new javax.swing.JLabel("----------------------------------------  ");
+        separator = new JLabel("----------------------------------------  ");
         gridbag.setConstraints(separator, gridbag_constraints);
         main_panel.add(separator, gridbag_constraints);
 
-        javax.swing.JLabel passes_label = new javax.swing.JLabel(resources.getString("passes"));
-
+        JLabel passes_label = new JLabel(resources.getString("passes"));
         gridbag_constraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
         gridbag_constraints.gridheight = 3;
         gridbag.setConstraints(passes_label, gridbag_constraints);
         main_panel.add(passes_label);
 
-        this.fanout_pass_button = new javax.swing.JRadioButton(resources.getString("fanout"));
-        this.autoroute_pass_button = new javax.swing.JRadioButton(resources.getString("autoroute"));
-        this.postroute_pass_button = new javax.swing.JRadioButton(resources.getString("postroute"));
-
+        fanout_pass_button = new JRadioButton(resources.getString("fanout"));
         fanout_pass_button.addActionListener(new FanoutListener());
-        autoroute_pass_button.addActionListener(new AutorouteListener());
-        postroute_pass_button.addActionListener(new PostrouteListener());
-
         fanout_pass_button.setSelected(false);
-        autoroute_pass_button.setSelected(true);
-        autoroute_pass_button.setSelected(true);
-
         gridbag_constraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridbag_constraints.gridheight = 1;
         gridbag.setConstraints(fanout_pass_button, gridbag_constraints);
         main_panel.add(fanout_pass_button, gridbag_constraints);
 
+        autoroute_pass_button = new JRadioButton(resources.getString("autoroute"));
+        autoroute_pass_button.addActionListener(new AutorouteListener());
+        autoroute_pass_button.setSelected(true);
         gridbag.setConstraints(autoroute_pass_button, gridbag_constraints);
         main_panel.add(autoroute_pass_button, gridbag_constraints);
+
+        postroute_pass_button = new JRadioButton(resources.getString("postroute"));
+        postroute_pass_button.addActionListener(new PostrouteListener());
+        autoroute_pass_button.setSelected(true);
         gridbag.setConstraints(postroute_pass_button, gridbag_constraints);
         main_panel.add(postroute_pass_button, gridbag_constraints);
 
-        separator = new javax.swing.JLabel("----------------------------------------  ");
+        separator = new JLabel("----------------------------------------  ");
         gridbag.setConstraints(separator, gridbag_constraints);
         main_panel.add(separator, gridbag_constraints);
 
@@ -185,15 +194,17 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow {
         this.autoroute_pass_button.setSelected(settings.get_with_autoroute());
         this.postroute_pass_button.setSelected(settings.get_with_postroute());
 
-        for (int i = 0; i < signal_layer_active_arr.length; ++i) {
-            this.signal_layer_active_arr[i].setSelected(settings.get_layer_active(layer_structure.get_layer_no(i)));
+        for (Iterator<JCheckBox> it = signal_layer_active_arr.iterator(); it.hasNext();) {
+            JCheckBox jCheckBox = it.next();
+            jCheckBox.setSelected(settings.get_layer_active(layer_structure.get_layer_no(signal_layer_active_arr.indexOf(it))));
         }
 
-        for (int i = 0; i < combo_box_arr.length; ++i) {
-            if (settings.get_preferred_direction_is_horizontal(layer_structure.get_layer_no(i))) {
-                this.combo_box_arr[i].setSelectedItem(this.horizontal);
+        for (Iterator<JComboBox<String>> it = combo_box_arr.iterator(); it.hasNext();) {
+            JComboBox<String> jComboBox = it.next();
+            if (settings.get_preferred_direction_is_horizontal(layer_structure.get_layer_no(combo_box_arr.indexOf(it)))) {
+                jComboBox.setSelectedItem(this.horizontal);
             } else {
-                this.combo_box_arr[i].setSelectedItem(this.vertical);
+                jComboBox.setSelectedItem(this.vertical);
             }
         }
         this.detail_window.refresh();
@@ -243,7 +254,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow {
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             int curr_layer_no = board_handling.get_routing_board().layer_structure.get_layer_no(this.signal_layer_no);
-            board_handling.settings.autoroute_settings.set_layer_active(curr_layer_no, signal_layer_active_arr[this.signal_layer_no].isSelected());
+            board_handling.settings.autoroute_settings.set_layer_active(curr_layer_no, signal_layer_active_arr.get(this.signal_layer_no).isSelected());
         }
     }
 
@@ -259,7 +270,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow {
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             int curr_layer_no = board_handling.get_routing_board().layer_structure.get_layer_no(this.signal_layer_no);
             board_handling.settings.autoroute_settings.set_preferred_direction_is_horizontal(curr_layer_no,
-                    combo_box_arr[signal_layer_no].getSelectedItem().equals(horizontal));
+                    combo_box_arr.get(signal_layer_no).getSelectedItem().equals(horizontal));
         }
     }
 
