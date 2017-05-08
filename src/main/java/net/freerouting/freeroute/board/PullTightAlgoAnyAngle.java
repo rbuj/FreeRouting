@@ -38,6 +38,7 @@ import net.freerouting.freeroute.geometry.planar.TileShape;
 class PullTightAlgoAnyAngle extends PullTightAlgo {
 
     private static final double SKIP_LENGTH = 10.0;
+    private static final double CHECK_DIST = 100.0;
 
     PullTightAlgoAnyAngle(RoutingBoard p_board, int[] p_only_net_no_arr, Stoppable p_stoppable_thread, int p_time_limit,
             Point p_keep_point, int p_keep_point_layer) {
@@ -131,19 +132,18 @@ class PullTightAlgoAnyAngle extends PullTightAlgo {
                 // curr_lines[1] and curr_lines[2] is near new_b.
                 // There may be numerical stability proplems with
                 // near parallel lines.
-                final double check_dist = 100;
                 if (ok) {
                     FloatPoint check_is = curr_lines[0].intersection_approx(curr_lines[1]);
                     double dist = check_is.distance_square(new_a);
 
-                    if (dist > check_dist) {
+                    if (dist > CHECK_DIST) {
                         ok = false;
                     }
                 }
                 if (ok) {
                     FloatPoint check_is = curr_lines[1].intersection_approx(curr_lines[2]);
                     double dist = check_is.distance_square(new_b);
-                    if (dist > check_dist) {
+                    if (dist > CHECK_DIST) {
                         ok = false;
                     }
                 }
