@@ -22,7 +22,6 @@ package net.freerouting.freeroute.datastructures;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Vector;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.logging.Level;
@@ -50,7 +49,7 @@ public class UndoableObjects implements java.io.Serializable {
      * the lists of deleted objects on each undo level, which where already
      * existing before the previous snapshot.
      */
-    private final Vector<Collection<UndoableObjectNode>> deleted_objects_stack;
+    private final LinkedList<Collection<UndoableObjectNode>> deleted_objects_stack;
     private boolean redo_possible = false;
 
     /**
@@ -59,7 +58,7 @@ public class UndoableObjects implements java.io.Serializable {
     public UndoableObjects() {
         stack_level = 0;
         objects = new ConcurrentSkipListMap<>();
-        deleted_objects_stack = new Vector<>();
+        deleted_objects_stack = new LinkedList<>();
     }
 
     /**
@@ -106,7 +105,7 @@ public class UndoableObjects implements java.io.Serializable {
             // stack_level 0
             curr_delete_list = null;
         } else {
-            curr_delete_list = deleted_objects_stack.lastElement();
+            curr_delete_list = deleted_objects_stack.peekLast();
         }
         // search p_object in the list
         UndoableObjectNode object_node = objects.get(p_object);
@@ -138,7 +137,7 @@ public class UndoableObjects implements java.io.Serializable {
     public void generate_snapshot() {
         disable_redo();
         Collection<UndoableObjectNode> curr_deleted_objects_list = new LinkedList<>();
-        deleted_objects_stack.add(curr_deleted_objects_list);
+        deleted_objects_stack.addLast(curr_deleted_objects_list);
         ++stack_level;
     }
 
@@ -170,7 +169,7 @@ public class UndoableObjects implements java.io.Serializable {
             }
         }
         // restore the deleted objects
-        Collection<UndoableObjectNode> curr_delete_list = deleted_objects_stack.elementAt(stack_level - 1);
+        Collection<UndoableObjectNode> curr_delete_list = deleted_objects_stack.get(stack_level - 1);
         Iterator<UndoableObjectNode> it2 = curr_delete_list.iterator();
         while (it2.hasNext()) {
             UndoableObjectNode curr_deleted_node = it2.next();
@@ -215,7 +214,7 @@ public class UndoableObjects implements java.io.Serializable {
             }
         }
         // Delete the objects, which were deleted on the current level, again.
-        Collection<UndoableObjectNode> curr_delete_list = deleted_objects_stack.elementAt(stack_level - 1);
+        Collection<UndoableObjectNode> curr_delete_list = deleted_objects_stack.get(stack_level - 1);
         Iterator<UndoableObjectNode> it2 = curr_delete_list.iterator();
         while (it2.hasNext()) {
             UndoableObjectNode curr_deleted_node = it2.next();
@@ -265,8 +264,8 @@ public class UndoableObjects implements java.io.Serializable {
         int deleted_objects_stack_size = deleted_objects_stack.size();
         if (deleted_objects_stack_size >= 2) {
             // join the top delete list with the delete list of the second top level
-            Collection<UndoableObjectNode> from_delete_list = deleted_objects_stack.elementAt(deleted_objects_stack_size - 1);
-            Collection<UndoableObjectNode> to_delete_list = deleted_objects_stack.elementAt(deleted_objects_stack_size - 2);
+            Collection<UndoableObjectNode> from_delete_list = deleted_objects_stack.get(deleted_objects_stack_size - 1);
+            Collection<UndoableObjectNode> to_delete_list = deleted_objects_stack.get(deleted_objects_stack_size - 2);
             for (UndoableObjectNode curr_deleted_node : from_delete_list) {
                 if (curr_deleted_node.level < this.stack_level - 1) {
                     to_delete_list.add(curr_deleted_node);
