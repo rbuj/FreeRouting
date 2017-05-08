@@ -165,30 +165,34 @@ public class GraphicsContext implements java.io.Serializable {
         init_draw_graphics(g2, p_color, (float) scaled_width * 2);
         set_translucency(g2, p_translucency_factor);
 
-        GeneralPath draw_path = null;
         if (!SHOW_LINE_SEGMENTS) {
-            draw_path = new GeneralPath();
-        }
-
-        for (int i = 0; i < (p_points.length - 1); i++) {
-            if (line_outside_update_box(p_points[i], p_points[i + 1],
-                    p_half_width + UPDATE_OFFSET, clip_box)) {
-                // this check should be unnessersary here,
-                // the system should do it in the draw(line) function
-                continue;
-            }
-            Point2D p1 = coordinate_transform.board_to_screen(p_points[i]);
-            Point2D p2 = coordinate_transform.board_to_screen(p_points[i + 1]);
-            Line2D line = new Line2D.Double(p1, p2);
-
-            if (SHOW_LINE_SEGMENTS) {
-                g2.draw(line);
-            } else {
+            GeneralPath draw_path = new GeneralPath();
+            for (int i = 0; i < (p_points.length - 1); i++) {
+                if (line_outside_update_box(p_points[i], p_points[i + 1],
+                        p_half_width + UPDATE_OFFSET, clip_box)) {
+                    // this check should be unnessersary here,
+                    // the system should do it in the draw(line) function
+                    continue;
+                }
+                Point2D p1 = coordinate_transform.board_to_screen(p_points[i]);
+                Point2D p2 = coordinate_transform.board_to_screen(p_points[i + 1]);
+                Line2D line = new Line2D.Double(p1, p2);
                 draw_path.append(line, false);
             }
-        }
-        if (!SHOW_LINE_SEGMENTS) {
             g2.draw(draw_path);
+        } else {
+            for (int i = 0; i < (p_points.length - 1); i++) {
+                if (line_outside_update_box(p_points[i], p_points[i + 1],
+                        p_half_width + UPDATE_OFFSET, clip_box)) {
+                    // this check should be unnessersary here,
+                    // the system should do it in the draw(line) function
+                    continue;
+                }
+                Point2D p1 = coordinate_transform.board_to_screen(p_points[i]);
+                Point2D p2 = coordinate_transform.board_to_screen(p_points[i + 1]);
+                Line2D line = new Line2D.Double(p1, p2);
+                g2.draw(line);
+            }
         }
     }
 

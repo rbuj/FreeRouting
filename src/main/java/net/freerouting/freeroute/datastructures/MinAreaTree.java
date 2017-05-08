@@ -175,7 +175,7 @@ public class MinAreaTree extends ShapeTree {
             other_leaf = parent.second_child;
         } else {
             System.out.println("MinAreaTree.remove_leaf: parent inconsistent");
-            other_leaf = null;
+            return;
         }
         // link the other leaf to the grand_parent and remove the parent node
         InnerNode grand_parent = parent.parent;
