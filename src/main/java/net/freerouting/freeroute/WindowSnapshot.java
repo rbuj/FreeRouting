@@ -33,7 +33,7 @@ public class WindowSnapshot extends BoardSavableSubWindow {
 
     private final BoardFrame board_frame;
     private javax.swing.DefaultListModel<SnapShot> list_model = new javax.swing.DefaultListModel<>();
-    private final javax.swing.JList list;
+    private final javax.swing.JList<SnapShot> list;
     private final javax.swing.JTextField name_field;
     final WindowSnapshotSettings settings_window;
     private int snapshot_count = 0;
@@ -63,7 +63,7 @@ public class WindowSnapshot extends BoardSavableSubWindow {
         main_panel.add(goto_button, java.awt.BorderLayout.NORTH);
 
         // create snapshot list
-        this.list = new javax.swing.JList(this.list_model);
+        this.list = new javax.swing.JList<>(this.list_model);
         this.list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         this.list.setSelectedIndex(0);
         this.list.setVisibleRowCount(5);
