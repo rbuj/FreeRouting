@@ -140,84 +140,79 @@ public class BatchAutorouter {
      * the board is already completely routed.
      */
     private boolean autoroute_pass(int p_pass_no, boolean p_with_screen_message) {
-        try {
-            Collection<Item> autoroute_item_list = new java.util.LinkedList<>();
-            Set<Item> handeled_items = new TreeSet<>();
-            Iterator<UndoableObjects.UndoableObjectNode> it = routing_board.item_list.start_read_object();
-            for (;;) {
-                UndoableObjects.Storable curr_ob = routing_board.item_list.read_object(it);
-                if (curr_ob == null) {
-                    break;
-                }
-                if (curr_ob instanceof Connectable && curr_ob instanceof Item) {
-                    Item curr_item = (Item) curr_ob;
-                    if (!curr_item.is_route() && !handeled_items.contains(curr_item)) {
-                        for (int i = 0; i < curr_item.net_count(); ++i) {
-                            int curr_net_no = curr_item.get_net_no(i);
-                            Set<Item> connected_set = curr_item.get_connected_set(curr_net_no);
-                            for (Item curr_connected_item : connected_set) {
-                                if (curr_connected_item.net_count() <= 1) {
-                                    handeled_items.add(curr_connected_item);
-                                }
+        Collection<Item> autoroute_item_list = new java.util.LinkedList<>();
+        Set<Item> handeled_items = new TreeSet<>();
+        Iterator<UndoableObjects.UndoableObjectNode> it = routing_board.item_list.start_read_object();
+        for (;;) {
+            UndoableObjects.Storable curr_ob = routing_board.item_list.read_object(it);
+            if (curr_ob == null) {
+                break;
+            }
+            if (curr_ob instanceof Connectable && curr_ob instanceof Item) {
+                Item curr_item = (Item) curr_ob;
+                if (!curr_item.is_route() && !handeled_items.contains(curr_item)) {
+                    for (int i = 0; i < curr_item.net_count(); ++i) {
+                        int curr_net_no = curr_item.get_net_no(i);
+                        Set<Item> connected_set = curr_item.get_connected_set(curr_net_no);
+                        for (Item curr_connected_item : connected_set) {
+                            if (curr_connected_item.net_count() <= 1) {
+                                handeled_items.add(curr_connected_item);
                             }
-                            int net_item_count = routing_board.connectable_item_count(curr_net_no);
-                            if (connected_set.size() < net_item_count) {
-                                autoroute_item_list.add(curr_item);
-                            }
+                        }
+                        int net_item_count = routing_board.connectable_item_count(curr_net_no);
+                        if (connected_set.size() < net_item_count) {
+                            autoroute_item_list.add(curr_item);
                         }
                     }
                 }
             }
-            if (autoroute_item_list.isEmpty()) {
-                this.air_line = null;
-                return false;
-            }
-            int items_to_go_count = autoroute_item_list.size();
-            int ripped_item_count = 0;
-            int not_found = 0;
-            int routed = 0;
-            if (p_with_screen_message) {
-                hdlg.screen_messages.set_batch_autoroute_info(items_to_go_count, routed, ripped_item_count, not_found);
-            }
-            for (Item curr_item : autoroute_item_list) {
-                if (this.is_interrupted) {
-                    break;
-                }
-                for (int i = 0; i < curr_item.net_count(); ++i) {
-                    if (this.thread.is_stop_requested()) {
-                        this.is_interrupted = true;
-                        break;
-                    }
-                    routing_board.start_marking_changed_area();
-                    SortedSet<Item> ripped_item_list = new TreeSet<>();
-                    if (autoroute_item(curr_item, curr_item.get_net_no(i), ripped_item_list, p_pass_no)) {
-                        ++routed;
-                        hdlg.repaint();
-                    } else {
-                        ++not_found;
-                    }
-                    --items_to_go_count;
-                    ripped_item_count += ripped_item_list.size();
-                    if (p_with_screen_message) {
-                        hdlg.screen_messages.set_batch_autoroute_info(items_to_go_count, routed, ripped_item_count, not_found);
-                    }
-                }
-            }
-            if (routing_board.get_test_level() != net.freerouting.freeroute.board.TestLevel.ALL_DEBUGGING_OUTPUT) {
-                Item.StopConnectionOption stop_connection_option;
-                if (this.remove_unconnected_vias) {
-                    stop_connection_option = Item.StopConnectionOption.NONE;
-                } else {
-                    stop_connection_option = Item.StopConnectionOption.FANOUT_VIA;
-                }
-                remove_tails(stop_connection_option);
-            }
-            this.air_line = null;
-            return true;
-        } catch (Exception e) {
+        }
+        if (autoroute_item_list.isEmpty()) {
             this.air_line = null;
             return false;
         }
+        int items_to_go_count = autoroute_item_list.size();
+        int ripped_item_count = 0;
+        int not_found = 0;
+        int routed = 0;
+        if (p_with_screen_message) {
+            hdlg.screen_messages.set_batch_autoroute_info(items_to_go_count, routed, ripped_item_count, not_found);
+        }
+        for (Item curr_item : autoroute_item_list) {
+            if (this.is_interrupted) {
+                break;
+            }
+            for (int i = 0; i < curr_item.net_count(); ++i) {
+                if (this.thread.is_stop_requested()) {
+                    this.is_interrupted = true;
+                    break;
+                }
+                routing_board.start_marking_changed_area();
+                SortedSet<Item> ripped_item_list = new TreeSet<>();
+                if (autoroute_item(curr_item, curr_item.get_net_no(i), ripped_item_list, p_pass_no)) {
+                    ++routed;
+                    hdlg.repaint();
+                } else {
+                    ++not_found;
+                }
+                --items_to_go_count;
+                ripped_item_count += ripped_item_list.size();
+                if (p_with_screen_message) {
+                    hdlg.screen_messages.set_batch_autoroute_info(items_to_go_count, routed, ripped_item_count, not_found);
+                }
+            }
+        }
+        if (routing_board.get_test_level() != net.freerouting.freeroute.board.TestLevel.ALL_DEBUGGING_OUTPUT) {
+            Item.StopConnectionOption stop_connection_option;
+            if (this.remove_unconnected_vias) {
+                stop_connection_option = Item.StopConnectionOption.NONE;
+            } else {
+                stop_connection_option = Item.StopConnectionOption.FANOUT_VIA;
+            }
+            remove_tails(stop_connection_option);
+        }
+        this.air_line = null;
+        return true;
     }
 
     private void remove_tails(Item.StopConnectionOption p_stop_connection_option) {
