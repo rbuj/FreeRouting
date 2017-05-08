@@ -347,7 +347,7 @@ class PullTightAlgo45 extends PullTightAlgo {
             new_y = (int) Math.floor(curr_corner.y);
             new_line_is_horizontal = true;
         }
-        Direction new_line_dir = null;
+        Direction new_line_dir;
         if (new_line_is_vertical) {
             if (prev_corner.y < next_corner.y) {
                 new_line_dir = FortyfiveDegreeDirection.UP.get_direction();

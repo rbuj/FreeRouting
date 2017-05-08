@@ -98,7 +98,7 @@ public class Library extends ScopeKeyword {
 
     static boolean read_padstack_scope(Scanner p_scanner, LayerStructure p_layer_structure,
             CoordinateTransform p_coordinate_transform, net.freerouting.freeroute.library.Padstacks p_board_padstacks) throws DsnFileException {
-        String padstack_name = null;
+        String padstack_name;
         boolean is_drilllable = true;
         boolean placed_absolute = false;
         Collection<Shape> shape_list = new LinkedList<>();
