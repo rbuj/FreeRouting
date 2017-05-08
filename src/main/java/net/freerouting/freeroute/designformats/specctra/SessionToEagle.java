@@ -454,11 +454,6 @@ public class SessionToEagle extends javax.swing.JFrame {
             return false;
         }
 
-        if (padstack_name == null) {
-            System.out.println("SessionToEagle.process_via_scope: padstack_name missing");
-            return false;
-        }
-
         net.freerouting.freeroute.library.Padstack via_padstack = this.board.library.padstacks.get(padstack_name);
 
         if (via_padstack == null) {
