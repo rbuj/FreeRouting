@@ -20,6 +20,8 @@
  */
 package net.freerouting.freeroute.rules;
 
+import java.util.Arrays;
+
 /**
  *
  * @author Alfons Wirtz
@@ -27,21 +29,18 @@ package net.freerouting.freeroute.rules;
 @SuppressWarnings("serial")
 public class DefaultItemClearanceClasses implements java.io.Serializable {
 
-    private final int[] arr = new int[ItemClass.values().length];
+    public static final int LENGTH_ARRAY_CLASSES = ItemClass.values().length;
+    private final int[] arr = new int[LENGTH_ARRAY_CLASSES];
 
     /**
      * Creates a new instance of DefaultItemClearancesClasses
      */
     public DefaultItemClearanceClasses() {
-        for (int i = 1; i < ItemClass.values().length; ++i) {
-            arr[i] = 1;
-        }
+        Arrays.fill(arr, 1);
     }
 
     public DefaultItemClearanceClasses(DefaultItemClearanceClasses p_classes) {
-        for (int i = 1; i < ItemClass.values().length; ++i) {
-            arr[i] = p_classes.arr[i];
-        }
+        System.arraycopy(p_classes.arr, 0, arr, 0, LENGTH_ARRAY_CLASSES);
     }
 
     /**
@@ -64,9 +63,7 @@ public class DefaultItemClearanceClasses implements java.io.Serializable {
      * Sets the indices of all default item clearance classes to p_index.
      */
     public void set_all(int p_index) {
-        for (int i = 1; i < this.arr.length; ++i) {
-            arr[i] = p_index;
-        }
+        Arrays.fill(arr, p_index);
     }
 
     /**
@@ -74,6 +71,6 @@ public class DefaultItemClearanceClasses implements java.io.Serializable {
      * claearance classes for item classes.
      */
     public enum ItemClass {
-        NONE, TRACE, VIA, PIN, SMD, AREA
+        NONE, TRACE, VIA, PIN, SMD, AREA;
     }
 }
