@@ -23,11 +23,26 @@ package net.freerouting.freeroute.geometry.planar;
  *
  * @author Alfons Wirtz
  */
-public enum Side {
+public enum Side implements SideInterface {
 
-    ON_THE_LEFT(Constants.ON_THE_LEFT),
-    ON_THE_RIGHT(Constants.ON_THE_RIGHT),
-    COLLINEAR(Constants.COLLINEAR);
+    ON_THE_LEFT(Constants.ON_THE_LEFT) {
+        @Override
+        public Side negate() {
+            return ON_THE_RIGHT;
+        }
+    },
+    ON_THE_RIGHT(Constants.ON_THE_RIGHT) {
+        @Override
+        public Side negate() {
+            return ON_THE_LEFT;
+        }
+    },
+    COLLINEAR(Constants.COLLINEAR) {
+        @Override
+        public Side negate() {
+            return this;
+        }
+    };
 
     private final String name;
 
@@ -57,20 +72,6 @@ public enum Side {
      */
     public String to_string() {
         return name;
-    }
-
-    /**
-     * returns the opposite side of this side
-     */
-    public final Side negate() {
-        switch (name) {
-            case Constants.ON_THE_LEFT:
-                return ON_THE_RIGHT;
-            case Constants.ON_THE_RIGHT:
-                return ON_THE_LEFT;
-            default:
-                return this;
-        }
     }
 
     private static class Constants {
