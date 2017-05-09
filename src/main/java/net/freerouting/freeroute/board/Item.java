@@ -18,12 +18,14 @@ package net.freerouting.freeroute.board;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.IntStream;
 import net.freerouting.freeroute.boardgraphics.Drawable;
 import net.freerouting.freeroute.boardgraphics.GraphicsContext;
 import net.freerouting.freeroute.datastructures.ShapeTree;
@@ -122,15 +124,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      * Returns true if the net number array of this item contains p_net_no.
      */
     public boolean contains_net(int p_net_no) {
-        if (p_net_no <= 0) {
-            return false;
-        }
-        for (int i = 0; i < net_no_arr.length; ++i) {
-            if (net_no_arr[i] == p_net_no) {
-                return true;
-            }
-        }
-        return false;
+        return (p_net_no <= 0) ? false : IntStream.of(net_no_arr).anyMatch(net_no -> net_no == p_net_no);
     }
 
     @Override
@@ -770,9 +764,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
     @Override
     public void draw(Graphics p_g, GraphicsContext p_graphics_context, Color p_color, double p_intensity) {
         Color[] color_arr = new Color[board.get_layer_count()];
-        for (int i = 0; i < color_arr.length; ++i) {
-            color_arr[i] = p_color;
-        }
+        Arrays.fill(color_arr, p_color);
         draw(p_g, p_graphics_context, color_arr, p_intensity);
     }
 
@@ -917,24 +909,12 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      * was not contained in this array.
      */
     public boolean remove_from_net(int p_net_no) {
-        int found_index = -1;
-        for (int i = 0; i < this.net_no_arr.length; ++i) {
-            if (this.net_no_arr[i] == p_net_no) {
-                found_index = i;
-            }
-        }
-        if (found_index < 0) {
+        if (IntStream.of(net_no_arr).anyMatch(net_no -> net_no == p_net_no)) {
+            this.net_no_arr = IntStream.of(net_no_arr).filter(net_no -> net_no != p_net_no).toArray();
+            return true;
+        } else {
             return false;
         }
-        int[] new_net_no_arr = new int[this.net_no_arr.length - 1];
-        for (int i = 0; i < found_index; ++i) {
-            new_net_no_arr[i] = this.net_no_arr[i];
-        }
-        for (int i = found_index; i < new_net_no_arr.length; ++i) {
-            new_net_no_arr[i] = this.net_no_arr[i + 1];
-        }
-        this.net_no_arr = new_net_no_arr;
-        return true;
     }
 
     /**
