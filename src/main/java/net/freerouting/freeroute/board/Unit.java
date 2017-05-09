@@ -19,36 +19,39 @@
  */
 package net.freerouting.freeroute.board;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Enum for the userunits inch, mil or millimeter.
  *
  * @author Alfons Wirtz
  */
 public enum Unit {
-    MIL {
-        @Override
-        public String toString() {
-            return "mil";
+    MIL("mil"),
+    INCH("inch"),
+    MM("mm"),
+    UM("um");
+
+    private final String name;
+
+    Unit (String s){
+        name = s;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    // Reverse-lookup map for getting a unit from a string
+    private static final Map<String, Unit> lookup = new HashMap<String, Unit>();
+
+    static {
+        for (Unit u : Unit.values()) {
+            lookup.put(u.toString(), u);
         }
-    },
-    INCH {
-        @Override
-        public String toString() {
-            return "inch";
-        }
-    },
-    MM {
-        @Override
-        public String toString() {
-            return "mm";
-        }
-    },
-    UM {
-        @Override
-        public String toString() {
-            return "um";
-        }
-    };
+    }
 
     /**
      * Scales p_value from p_from_unit to p_to_unit
@@ -127,19 +130,7 @@ public enum Unit {
      * string is different from mil, inch and mm.
      */
     public static Unit from_string(String p_string) {
-        Unit result;
-        if (p_string.compareToIgnoreCase("mil") == 0) {
-            result = MIL;
-        } else if (p_string.compareToIgnoreCase("inch") == 0) {
-            result = INCH;
-        } else if (p_string.compareToIgnoreCase("mm") == 0) {
-            result = MM;
-        } else if (p_string.compareToIgnoreCase("um") == 0) {
-            result = UM;
-        } else {
-            result = null;
-        }
-        return result;
+        return lookup.get(p_string);
     }
 
     public static final double INCH_TO_MM = 25.4;
