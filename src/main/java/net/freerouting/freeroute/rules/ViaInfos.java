@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.rules;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -30,7 +31,7 @@ import java.util.Locale;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class ViaInfos implements java.io.Serializable, net.freerouting.freeroute.board.ObjectInfoPanel.Printable {
+public class ViaInfos implements Iterable<ViaInfo>, java.io.Serializable, net.freerouting.freeroute.board.ObjectInfoPanel.Printable {
 
     private final List<ViaInfo> list = new LinkedList<>();
 
@@ -116,5 +117,10 @@ public class ViaInfos implements java.io.Serializable, net.freerouting.freeroute
             p_window.append(curr_via.get_name(), resources.getString("via_info"), curr_via);
             counter = (counter + 1) % max_vias_per_row;
         }
+    }
+
+    @Override
+    public Iterator<ViaInfo> iterator() {
+        return list.iterator();
     }
 }

@@ -205,8 +205,7 @@ public class BoardRules implements java.io.Serializable {
         // Add the rule  containing all vias.
         ViaRule default_rule = new ViaRule(p_name);
         int default_via_cl_class = p_net_class.default_item_clearance_classes.get(DefaultItemClearanceClasses.ItemClass.VIA);
-        for (int i = 0; i < this.via_infos.count(); ++i) {
-            ViaInfo curr_via_info = this.via_infos.get(i);
+        for (ViaInfo curr_via_info : this.via_infos) {
             if (curr_via_info.get_clearance_class() == default_via_cl_class) {
                 net.freerouting.freeroute.library.Padstack curr_padstack = curr_via_info.get_padstack();
                 int curr_from_layer = curr_padstack.from_layer();
@@ -313,8 +312,7 @@ public class BoardRules implements java.io.Serializable {
             }
         }
 
-        for (int i = 0; i < this.via_infos.count(); ++i) {
-            net.freerouting.freeroute.rules.ViaInfo curr_via = this.via_infos.get(i);
+        for (ViaInfo curr_via : this.via_infos) {
             if (curr_via.get_clearance_class() == p_from_no) {
                 curr_via.set_clearance_class(p_to_no);
             }
@@ -343,8 +341,7 @@ public class BoardRules implements java.io.Serializable {
             }
         }
 
-        for (int i = 0; i < this.via_infos.count(); ++i) {
-            net.freerouting.freeroute.rules.ViaInfo curr_via = this.via_infos.get(i);
+        for (ViaInfo curr_via : this.via_infos) {
             if (curr_via.get_clearance_class() == p_index) {
                 return false;
             }
@@ -369,8 +366,7 @@ public class BoardRules implements java.io.Serializable {
             }
         }
 
-        for (int i = 0; i < this.via_infos.count(); ++i) {
-            net.freerouting.freeroute.rules.ViaInfo curr_via = this.via_infos.get(i);
+        for (ViaInfo curr_via : this.via_infos) {
             if (curr_via.get_clearance_class() > p_index) {
                 curr_via.set_clearance_class(curr_via.get_clearance_class() - 1);
             }

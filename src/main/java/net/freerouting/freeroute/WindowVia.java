@@ -25,6 +25,7 @@ import java.util.Locale;
 import net.freerouting.freeroute.board.Layer;
 import net.freerouting.freeroute.geometry.planar.PointUtils;
 import net.freerouting.freeroute.rules.BoardRules;
+import net.freerouting.freeroute.rules.ViaInfo;
 import net.freerouting.freeroute.rules.ViaRule;
 
 /**
@@ -379,9 +380,9 @@ public class WindowVia extends BoardSavableSubWindow {
             }
             net.freerouting.freeroute.library.Padstack selected_padstack = (net.freerouting.freeroute.library.Padstack) selected_value;
             net.freerouting.freeroute.rules.ViaInfo via_with_selected_padstack = null;
-            for (int i = 0; i < pcb.rules.via_infos.count(); ++i) {
-                if (pcb.rules.via_infos.get(i).get_padstack() == selected_padstack) {
-                    via_with_selected_padstack = pcb.rules.via_infos.get(i);
+            for (ViaInfo curr_via_info : pcb.rules.via_infos) {
+                if (curr_via_info.get_padstack() == selected_padstack) {
+                    via_with_selected_padstack = curr_via_info;
                     break;
                 }
             }
@@ -401,8 +402,8 @@ public class WindowVia extends BoardSavableSubWindow {
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             java.util.Collection<WindowObjectInfo.Printable> object_list = new java.util.LinkedList<>();
             net.freerouting.freeroute.rules.ViaInfos via_infos = board_frame.board_panel.board_handling.get_routing_board().rules.via_infos;
-            for (int i = 0; i < via_infos.count(); ++i) {
-                object_list.add(via_infos.get(i));
+            for (ViaInfo curr_via_info : via_infos) {
+                object_list.add(curr_via_info);
             }
             net.freerouting.freeroute.board.CoordinateTransform coordinate_transform = board_frame.board_panel.board_handling.coordinate_transform;
             WindowObjectInfo new_window

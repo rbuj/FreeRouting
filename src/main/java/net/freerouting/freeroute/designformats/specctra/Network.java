@@ -33,6 +33,7 @@ import net.freerouting.freeroute.geometry.planar.PointUtils;
 import net.freerouting.freeroute.geometry.planar.Vector;
 import net.freerouting.freeroute.rules.BoardRules;
 import net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass;
+import net.freerouting.freeroute.rules.ViaInfo;
 
 /**
  * Class for reading and writing net network from dsn-files.
@@ -56,8 +57,7 @@ public class Network extends ScopeKeyword {
 
     public static void write_via_infos(net.freerouting.freeroute.rules.BoardRules p_rules, IndentFileWriter p_file, IdentifierType p_identifier_type)
             throws java.io.IOException {
-        for (int i = 0; i < p_rules.via_infos.count(); ++i) {
-            net.freerouting.freeroute.rules.ViaInfo curr_via = p_rules.via_infos.get(i);
+        for (ViaInfo curr_via : p_rules.via_infos) {
             p_file.start_scope();
             p_file.write("via ");
             p_file.new_line();
@@ -618,8 +618,7 @@ public class Network extends ScopeKeyword {
         net.freerouting.freeroute.rules.ViaRule new_via_rule = new net.freerouting.freeroute.rules.ViaRule(p_net_class.get_name());
         int default_via_cl_class = p_net_class.default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.VIA);
         for (String curr_via_name : p_use_via) {
-            for (int i = 0; i < p_board.rules.via_infos.count(); ++i) {
-                net.freerouting.freeroute.rules.ViaInfo curr_via_info = p_board.rules.via_infos.get(i);
+            for (ViaInfo curr_via_info : p_board.rules.via_infos) {
                 if (curr_via_info.get_clearance_class() == default_via_cl_class) {
                     if (curr_via_info.get_padstack().name.equals(curr_via_name)) {
                         new_via_rule.append_via(curr_via_info);

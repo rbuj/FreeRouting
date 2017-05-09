@@ -36,6 +36,7 @@ import net.freerouting.freeroute.geometry.planar.PolylineShape;
 import net.freerouting.freeroute.geometry.planar.TileShape;
 import net.freerouting.freeroute.rules.BoardRules;
 import net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass;
+import net.freerouting.freeroute.rules.ViaInfo;
 
 /**
  * Class for reading and writing structure scopes from dsn-files.
@@ -172,8 +173,8 @@ class Structure extends ScopeKeyword {
         p_file.new_line();
         p_file.write("(via_at_smd ");
         boolean via_at_smd_allowed = false;
-        for (int i = 0; i < p_rules.via_infos.count(); ++i) {
-            if (p_rules.via_infos.get(i).attach_smd_allowed()) {
+        for (ViaInfo curr_via_info : p_rules.via_infos) {
+            if (curr_via_info.attach_smd_allowed()) {
                 via_at_smd_allowed = true;
                 break;
             }
