@@ -45,7 +45,7 @@ public enum AngleRestriction {
     }
 
     // Reverse-lookup map for getting a unit from an int
-    public static final Map<Integer, AngleRestriction> lookup = new HashMap<Integer, AngleRestriction>();
+    private static final Map<Integer, AngleRestriction> lookup = new HashMap<Integer, AngleRestriction>();
     static {
         for (AngleRestriction angleRestriction : AngleRestriction.values()) {
             lookup.put(angleRestriction.get_no(), angleRestriction);
@@ -64,6 +64,10 @@ public enum AngleRestriction {
      */
     public int get_no() {
         return no;
+    }
+    
+    public static final AngleRestriction get(int i){
+        return lookup.get(i);
     }
 
     private class Constants {
