@@ -19,21 +19,19 @@
  */
 package net.freerouting.freeroute.board;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Enum for angle restrictions none, fortyfive degree and ninety degree.
  *
  * @author Alfons Wirtz
  */
-public class AngleRestriction {
+public enum AngleRestriction {
 
-    public static final AngleRestriction NONE = new AngleRestriction("none", 0);
-    public static final AngleRestriction FORTYFIVE_DEGREE = new AngleRestriction("45 degree", 1);
-    public static final AngleRestriction NINETY_DEGREE = new AngleRestriction("90 degree", 2);
-
-    public static final AngleRestriction[] ARR
-            = {
-                NONE, FORTYFIVE_DEGREE, NINETY_DEGREE
-            };
+    NONE(Constants.NONE, 0),
+    FORTYFIVE_DEGREE(Constants.FORTYFIVE_DEGREE, 1),
+    NINETY_DEGREE(Constants.NINETY_DEGREE, 2);
 
     private final String name;
     private final int no;
@@ -44,6 +42,14 @@ public class AngleRestriction {
     private AngleRestriction(String p_name, int p_no) {
         name = p_name;
         no = p_no;
+    }
+
+    // Reverse-lookup map for getting a unit from an int
+    public static final Map<Integer, AngleRestriction> lookup = new HashMap<Integer, AngleRestriction>();
+    static {
+        for (AngleRestriction angleRestriction : AngleRestriction.values()) {
+            lookup.put(angleRestriction.get_no(), angleRestriction);
+        }
     }
 
     /**
@@ -58,5 +64,11 @@ public class AngleRestriction {
      */
     public int get_no() {
         return no;
+    }
+
+    private class Constants {
+        public static final String NONE = "none";
+        public static final String FORTYFIVE_DEGREE = "45 degree";
+        public static final String NINETY_DEGREE = "90 degree";
     }
 }
