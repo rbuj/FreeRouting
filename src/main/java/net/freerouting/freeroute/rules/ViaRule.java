@@ -73,12 +73,7 @@ public class ViaRule implements java.io.Serializable, net.freerouting.freeroute.
      * Returns true, if p_via_info is contained in the via list of this rule.
      */
     public boolean contains(ViaInfo p_via_info) {
-        for (ViaInfo curr_info : this.list) {
-            if (p_via_info == curr_info) {
-                return true;
-            }
-        }
-        return false;
+        return list.contains(p_via_info);
     }
 
     /**
