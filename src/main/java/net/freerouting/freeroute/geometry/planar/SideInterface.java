@@ -25,6 +25,6 @@ public interface SideInterface {
     /**
      * returns the opposite side of this side
      */
-    public Side negate();
+    Side negate();
 
 }

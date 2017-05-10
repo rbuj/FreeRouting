@@ -28,20 +28,20 @@ public interface ShapeTransformable {
     /**
      * Transforms a specctra dsn shape to a geometry.planar.Shape.
      */
-    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform);
+    net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform);
 
     /**
      * Transforms the relative (vector) coordinates of a specctra dsn shape to a
      * geometry.planar.Shape.
      */
-    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform);
+    net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform);
 
     /**
      * Transforms a shape with holes to the board coordinate system. The first
      * shape in the Collection p_area is the border, the other shapes are holes
      * of the area.
      */
-    static public net.freerouting.freeroute.geometry.planar.Area transform_area_to_board(Collection<Shape> p_area, CoordinateTransform p_coordinate_transform) {
+    static net.freerouting.freeroute.geometry.planar.Area transform_area_to_board(Collection<Shape> p_area, CoordinateTransform p_coordinate_transform) {
         int hole_count = p_area.size() - 1;
         if (hole_count <= -1) {
             System.out.println("Shape.transform_area_to_board: p_area.size() > 0 expected");
@@ -79,7 +79,7 @@ public interface ShapeTransformable {
      * coordinate system. The first shape in the Collection p_area is the
      * border, the other shapes are holes of the area.
      */
-    static public net.freerouting.freeroute.geometry.planar.Area transform_area_to_board_rel(Collection<Shape> p_area, CoordinateTransform p_coordinate_transform) {
+    static net.freerouting.freeroute.geometry.planar.Area transform_area_to_board_rel(Collection<Shape> p_area, CoordinateTransform p_coordinate_transform) {
         int hole_count = p_area.size() - 1;
         if (hole_count <= -1) {
             System.out.println("Shape.transform_area_to_board_rel: p_area.size() > 0 expected");

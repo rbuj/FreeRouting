@@ -43,7 +43,7 @@ public interface ShapeReadable {
      * Reads shape scope from a Specctra dsn file. If p_layer_structure == null,
      * only Layer.PCB and Layer.Signal are expected, no induvidual layers.
      */
-    static public Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
         Shape result = null;
         try {
             Object next_token = p_scanner.next_token();
@@ -75,7 +75,7 @@ public interface ShapeReadable {
     /**
      * Reads an object of type PolylinePath from the dsn-file.
      */
-    static public PolylinePath read_polyline_path_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+    static PolylinePath read_polyline_path_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
         try {
             Layer layer;
             Object next_token = p_scanner.next_token();
@@ -152,7 +152,7 @@ public interface ShapeReadable {
      * first shape in the shape_list of the result is the border of the area.
      * The other shapes in the shape_list are holes (windows).
      */
-    static public ReadAreaScopeResult read_area_scope(Scanner p_scanner,
+    static ReadAreaScopeResult read_area_scope(Scanner p_scanner,
             LayerStructure p_layer_structure, boolean p_skip_window_scopes) throws DsnFileException {
         Collection<Shape> shape_list = new LinkedList<>();
         String clearance_class_name = null;
@@ -229,7 +229,7 @@ public interface ShapeReadable {
      * Reads a rectangle scope from a Specctra dsn file. If p_layer_structure ==
      * null, only Layer.PCB and Layer.Signal are expected, no induvidual layers.
      */
-    static public Rectangle read_rectangle_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+    static Rectangle read_rectangle_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
         try {
             Layer rect_layer = null;
             double rect_coor[] = new double[4];
@@ -290,7 +290,7 @@ public interface ShapeReadable {
      * p_layer_structure == null, only Layer.PCB and Layer.Signal are expected,
      * no induvidual layers.
      */
-    static public Polygon read_polygon_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+    static Polygon read_polygon_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
         try {
             Layer polygon_layer = null;
             boolean layer_ok = true;
@@ -369,7 +369,7 @@ public interface ShapeReadable {
     /**
      * Reads a circle scope from a Specctra dsn file.
      */
-    static public Circle read_circle_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+    static Circle read_circle_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
         try {
             Layer circle_layer = null;
             boolean layer_ok = true;
@@ -434,7 +434,7 @@ public interface ShapeReadable {
     /**
      * Reads an object of type Path from the dsn-file.
      */
-    static public PolygonPath read_polygon_path_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+    static PolygonPath read_polygon_path_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
         try {
             Layer layer = null;
             boolean layer_ok = true;

@@ -28,15 +28,15 @@ public interface ShapeWritable {
     /**
      * Writes a shape scope to a Specctra dsn file.
      */
-    public void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException;
+    void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException;
 
     /**
      * Writes a shape scope to a Specctra session file. In a session file all
      * coordinates must be integer.
      */
-    public void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException;
+    void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException;
 
-    default public void write_hole_scope(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
+    default void write_hole_scope(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
         p_file.start_scope();
         p_file.write("window");
         write_scope(p_file, p_identifier_type);

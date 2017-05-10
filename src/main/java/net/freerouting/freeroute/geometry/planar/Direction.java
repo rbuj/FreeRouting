@@ -37,40 +37,40 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
     /**
      * return any Vector pointing into this direction
      */
-    public Vector get_vector();
+    Vector get_vector();
 
     /**
      * returns true, if the direction is horizontal or vertical
      */
-    public boolean is_orthogonal();
+    boolean is_orthogonal();
 
     /**
      * returns true, if the direction is diagonal
      */
-    public boolean is_diagonal();
+    boolean is_diagonal();
 
     /**
      * returns true, if the direction is orthogonal or diagonal
      */
-    default public boolean is_multiple_of_45_degree() {
+    default boolean is_multiple_of_45_degree() {
         return (is_orthogonal() || is_diagonal());
     }
 
     /**
      * turns the direction by p_factor times 45 degree
      */
-    public Direction turn_45_degree(int p_factor);
+    Direction turn_45_degree(int p_factor);
 
     /**
      * returns the opposite direction of this direction
      */
-    public Direction opposite();
+    Direction opposite();
 
     /**
      * Returns true, if p_ob is a Direction and this Direction and p_ob point
      * into the same direction
      */
-    default public boolean equals(Direction p_other) {
+    default boolean equals(Direction p_other) {
         if (this == p_other) {
             return true;
         }
@@ -93,7 +93,7 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
      * L Side.ON_THE_RIGHT, if this.get_vector() is on the right of L and
      * Side.COLLINEAR, if this.get_vector() is collinear with L.
      */
-    default public Side side_of(Direction p_other) {
+    default Side side_of(Direction p_other) {
         return this.get_vector().side_of(p_other.get_vector());
     }
 
@@ -103,7 +103,7 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
      * {@literal >} 0, Signum.NEGATIVE, if the scalar product is {@literal <} 0,
      * and Signum.ZERO, if the scalar product is equal 0.
      */
-    default public Signum projection(Direction p_other) {
+    default Signum projection(Direction p_other) {
         return this.get_vector().projection(p_other.get_vector());
     }
 
@@ -111,7 +111,7 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
      * calculates an approximation of the direction in the middle of this
      * direction and p_other
      */
-    default public Direction middle_approx(Direction p_other) {
+    default Direction middle_approx(Direction p_other) {
         FloatPoint v1 = get_vector().to_float();
         FloatPoint v2 = p_other.get_vector().to_float();
         double length1 = v1.size();
@@ -129,7 +129,7 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
      * angle between p_2 and this direction, 0, if p_1 is equal to p_2, * and -1
      * otherwise.
      */
-    default public int compare_from(Direction p_1, Direction p_2) {
+    default int compare_from(Direction p_1, Direction p_2) {
         int result;
         if (p_1.compareTo(this) >= 0) {
             if (p_2.compareTo(this) >= 0) {
@@ -149,7 +149,7 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
      * Returns an approximation of the signed angle corresponding to this
      * dierection.
      */
-    default public double angle_approx() {
+    default double angle_approx() {
         return this.get_vector().angle_approx();
     }
 
@@ -159,7 +159,7 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
      * if this direction is equal to p_other_direction, and -1 otherwise. Throws
      * an exception, if p_other_direction is not a Direction.
      */
-    default public int compareTo(Direction p_other_direction) {
+    default int compareTo(Direction p_other_direction) {
         return -p_other_direction.compareTo(this);
     }
     int compareTo(IntDirection p_other);

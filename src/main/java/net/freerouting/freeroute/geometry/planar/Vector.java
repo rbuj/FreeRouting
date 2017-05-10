@@ -33,17 +33,17 @@ public interface Vector extends java.io.Serializable {
     /**
      * returns true, if this vector is equal to the zero vector.
      */
-    public boolean is_zero();
+    boolean is_zero();
 
     /**
      * returns the Vector such that this plus this.negate() is zero
      */
-    public Vector negate();
+    Vector negate();
 
     /**
      * adds p_other to this vector
      */
-    public Vector add(Vector p_other);
+    Vector add(Vector p_other);
 
     /**
      * Let L be the line from the Zero Vector to p_other. The function returns
@@ -51,22 +51,22 @@ public interface Vector extends java.io.Serializable {
      * if this Vector is on the right of L and Side.COLLINEAR, if this Vector is
      * collinear with L.
      */
-    public Side side_of(Vector p_other);
+    Side side_of(Vector p_other);
 
     /**
      * returns true, if the vector is horizontal or vertical
      */
-    public boolean is_orthogonal();
+    boolean is_orthogonal();
 
     /**
      * returns true, if the vector is diagonal
      */
-    public boolean is_diagonal();
+    boolean is_diagonal();
 
     /**
      * Returns true, if the vector is orthogonal or diagonal
      */
-    default public boolean is_multiple_of_45_degree() {
+    default boolean is_multiple_of_45_degree() {
         return is_orthogonal() || is_diagonal();
     }
 
@@ -76,38 +76,38 @@ public interface Vector extends java.io.Serializable {
      * Vector is {@literal <} 0, and Signum.ZERO, if the scalar product is equal
      * 0.
      */
-    public Signum projection(Vector p_other);
+    Signum projection(Vector p_other);
 
     /**
      * Returns an approximation of the scalar product of this vector with
      * p_other by a double.
      */
-    public double scalar_product(Vector p_other);
+    double scalar_product(Vector p_other);
 
     /**
      * approximates the coordinates of this vector by float coordinates
      */
-    public FloatPoint to_float();
+    FloatPoint to_float();
 
     /**
      * Turns this vector by p_factor times 90 degree.
      */
-    public Vector turn_90_degree(int p_factor);
+    Vector turn_90_degree(int p_factor);
 
     /**
      * Mirrors this vector at the x axis.
      */
-    public Vector mirror_at_x_axis();
+    Vector mirror_at_x_axis();
 
     /**
      * Mirrors this vector at the y axis.
      */
-    public Vector mirror_at_y_axis();
+    Vector mirror_at_y_axis();
 
     /**
      * returns an approximation of the euclidian length of this vector
      */
-    default public double length_approx() {
+    default double length_approx() {
         return this.to_float().size();
     }
 
@@ -115,7 +115,7 @@ public interface Vector extends java.io.Serializable {
      * Returns an approximation of the cosinus of the angle between this vector
      * and p_other by a double.
      */
-    default public double cos_angle(Vector p_other) {
+    default double cos_angle(Vector p_other) {
         double result = this.scalar_product(p_other);
         result /= this.to_float().size() * p_other.to_float().size();
         return result;
@@ -125,7 +125,7 @@ public interface Vector extends java.io.Serializable {
      * Returns an approximation of the signed angle between this vector and
      * p_other.
      */
-    default public double angle_approx(Vector p_other) {
+    default double angle_approx(Vector p_other) {
         double result = Math.acos(cos_angle(p_other));
         if (this.side_of(p_other) == Side.ON_THE_LEFT) {
             result = -result;
@@ -137,7 +137,7 @@ public interface Vector extends java.io.Serializable {
      * Returns an approximation of the signed angle between this vector and the
      * x axis.
      */
-    default public double angle_approx() {
+    default double angle_approx() {
         Vector other = new IntVector(1, 0);
         return other.angle_approx(this);
     }
@@ -146,7 +146,7 @@ public interface Vector extends java.io.Serializable {
      * Returns an approximation vector of this vector with the same direction
      * and length p_length.
      */
-    public Vector change_length_approx(double p_lenght);
+    Vector change_length_approx(double p_lenght);
 
     Direction to_normalized_direction();
 
