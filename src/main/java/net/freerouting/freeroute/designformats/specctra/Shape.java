@@ -19,10 +19,6 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-
 /**
  * Describes a shape in a Specctra dsn file.
  *
