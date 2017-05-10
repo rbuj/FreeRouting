@@ -382,7 +382,7 @@ public class SessionToEagle extends javax.swing.JFrame {
             }
             if (prev_token == Keyword.OPEN_BRACKET) {
                 if (next_token == Keyword.POLYGON_PATH) {
-                    wire_path = Shape.read_polygon_path_scope(this.scanner, this.specctra_layer_structure);
+                    wire_path = ShapeReadable.read_polygon_path_scope(this.scanner, this.specctra_layer_structure);
                 } else {
                     ScopeKeyword.skip_scope(this.scanner);
                 }

@@ -381,20 +381,20 @@ class Wiring extends ScopeKeyword {
             }
             if (prev_token == OPEN_BRACKET) {
                 if (next_token == Keyword.POLYGON_PATH) {
-                    path = Shape.read_polygon_path_scope(p_par.scanner, p_par.layer_structure);
+                    path = ShapeReadable.read_polygon_path_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.POLYLINE_PATH) {
-                    path = Shape.read_polyline_path_scope(p_par.scanner, p_par.layer_structure);
+                    path = ShapeReadable.read_polyline_path_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.RECTANGLE) {
 
-                    border_shape = Shape.read_rectangle_scope(p_par.scanner, p_par.layer_structure);
+                    border_shape = ShapeReadable.read_rectangle_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.POLYGON) {
 
-                    border_shape = Shape.read_polygon_scope(p_par.scanner, p_par.layer_structure);
+                    border_shape = ShapeReadable.read_polygon_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.CIRCLE) {
 
-                    border_shape = Shape.read_circle_scope(p_par.scanner, p_par.layer_structure);
+                    border_shape = ShapeReadable.read_circle_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.WINDOW) {
-                    Shape hole_shape = Shape.read_scope(p_par.scanner, p_par.layer_structure);
+                    Shape hole_shape = ShapeReadable.read_scope(p_par.scanner, p_par.layer_structure);
                     hole_list.add(hole_shape);
                     // overread the closing bracket
                     try {
@@ -468,7 +468,7 @@ class Wiring extends ScopeKeyword {
             area.add(border_shape);
             area.addAll(hole_list);
             net.freerouting.freeroute.geometry.planar.Area conduction_area
-                    = Shape.transform_area_to_board(area, p_par.coordinate_transform);
+                    = ShapeTransformable.transform_area_to_board(area, p_par.coordinate_transform);
             result = board.insert_conduction_area(conduction_area, layer_no, net_no_arr, clearance_class_no,
                     false, fixed);
         } else if (path instanceof PolygonPath) {

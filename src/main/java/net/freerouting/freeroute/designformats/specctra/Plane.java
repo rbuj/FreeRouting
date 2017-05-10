@@ -85,7 +85,7 @@ public class Plane extends ScopeKeyword {
                 return false;
             }
             net_name = (String) next_token;
-            conduction_area = Shape.read_area_scope(p_par.scanner, p_par.layer_structure, skip_window_scopes);
+            conduction_area = ShapeReadable.read_area_scope(p_par.scanner, p_par.layer_structure, skip_window_scopes);
             ReadScopeParameter.PlaneInfo plane_info = new ReadScopeParameter.PlaneInfo(conduction_area, net_name);
             p_par.plane_list.add(plane_info);
         } catch (java.io.IOException e) {

@@ -223,7 +223,7 @@ class Structure extends ScopeKeyword {
     }
 
     private static boolean read_boundary_scope(Scanner p_scanner, BoardConstructionInfo p_board_construction_info) throws DsnFileException {
-        Shape curr_shape = Shape.read_scope(p_scanner, null);
+        Shape curr_shape = ShapeReadable.read_scope(p_scanner, null);
         // overread the closing bracket.
         try {
             Object prev_token = null;
@@ -701,7 +701,7 @@ class Structure extends ScopeKeyword {
 
     private static boolean insert_keepout(Shape.ReadAreaScopeResult p_area, ReadScopeParameter p_par, KeepoutType p_keepout_type, FixedState p_fixed_state) {
         net.freerouting.freeroute.geometry.planar.Area keepout_area
-                = Shape.transform_area_to_board(p_area.shape_list, p_par.coordinate_transform);
+                = ShapeTransformable.transform_area_to_board(p_area.shape_list, p_par.coordinate_transform);
         if (keepout_area.dimension() < 2) {
             System.out.println("Structure.insert_keepout: keepout is not an area");
             return true;
@@ -817,7 +817,7 @@ class Structure extends ScopeKeyword {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
                     try {
-                        keepout_list.add(Shape.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                        keepout_list.add(ShapeReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
                     } catch (DsnFileException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
@@ -827,7 +827,7 @@ class Structure extends ScopeKeyword {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
                     try {
-                        via_keepout_list.add(Shape.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                        via_keepout_list.add(ShapeReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
                     } catch (DsnFileException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
@@ -837,7 +837,7 @@ class Structure extends ScopeKeyword {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
                     try {
-                        place_keepout_list.add(Shape.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                        place_keepout_list.add(ShapeReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
                     } catch (DsnFileException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
@@ -934,7 +934,7 @@ class Structure extends ScopeKeyword {
                 continue;
             }
             net.freerouting.freeroute.geometry.planar.Area plane_area
-                    = Shape.transform_area_to_board(plane_info.area.shape_list, p_par.coordinate_transform);
+                    = ShapeTransformable.transform_area_to_board(plane_info.area.shape_list, p_par.coordinate_transform);
             Layer curr_layer = (plane_info.area.shape_list.iterator().next()).layer;
             if (curr_layer.no >= 0) {
                 int clearance_class_no;

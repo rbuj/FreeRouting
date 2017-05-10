@@ -67,7 +67,7 @@ public class Package {
                     } else if (next_token == Keyword.SIDE) {
                         is_front = read_placement_side(p_scanner);
                     } else if (next_token == Keyword.OUTLINE) {
-                        Shape curr_shape = Shape.read_scope(p_scanner, p_layer_structure);
+                        Shape curr_shape = ShapeReadable.read_scope(p_scanner, p_layer_structure);
                         if (curr_shape != null) {
                             outline.add(curr_shape);
                         }
@@ -78,17 +78,17 @@ public class Package {
                             return null;
                         }
                     } else if (next_token == Keyword.KEEPOUT) {
-                        Shape.ReadAreaScopeResult keepout_area = Shape.read_area_scope(p_scanner, p_layer_structure, false);
+                        Shape.ReadAreaScopeResult keepout_area = ShapeReadable.read_area_scope(p_scanner, p_layer_structure, false);
                         if (keepout_area != null) {
                             keepouts.add(keepout_area);
                         }
                     } else if (next_token == Keyword.VIA_KEEPOUT) {
-                        Shape.ReadAreaScopeResult keepout_area = Shape.read_area_scope(p_scanner, p_layer_structure, false);
+                        Shape.ReadAreaScopeResult keepout_area = ShapeReadable.read_area_scope(p_scanner, p_layer_structure, false);
                         if (keepout_area != null) {
                             via_keepouts.add(keepout_area);
                         }
                     } else if (next_token == Keyword.PLACE_KEEPOUT) {
-                        Shape.ReadAreaScopeResult keepout_area = Shape.read_area_scope(p_scanner, p_layer_structure, false);
+                        Shape.ReadAreaScopeResult keepout_area = ShapeReadable.read_area_scope(p_scanner, p_layer_structure, false);
                         if (keepout_area != null) {
                             place_keepouts.add(keepout_area);
                         }
