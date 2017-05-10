@@ -21,7 +21,6 @@
 package net.freerouting.freeroute;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Locale;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
