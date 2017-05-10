@@ -194,14 +194,12 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow {
         this.autoroute_pass_button.setSelected(settings.get_with_autoroute());
         this.postroute_pass_button.setSelected(settings.get_with_postroute());
 
-        for (Iterator<JCheckBox> it = signal_layer_active_arr.iterator(); it.hasNext();) {
-            JCheckBox jCheckBox = it.next();
-            jCheckBox.setSelected(settings.get_layer_active(layer_structure.get_layer_no(signal_layer_active_arr.indexOf(it))));
+        for (JCheckBox jCheckBox : signal_layer_active_arr) {
+            jCheckBox.setSelected(settings.get_layer_active(layer_structure.get_layer_no(signal_layer_active_arr.indexOf(jCheckBox))));
         }
 
-        for (Iterator<JComboBox<String>> it = combo_box_arr.iterator(); it.hasNext();) {
-            JComboBox<String> jComboBox = it.next();
-            if (settings.get_preferred_direction_is_horizontal(layer_structure.get_layer_no(combo_box_arr.indexOf(it)))) {
+        for (JComboBox<String> jComboBox : combo_box_arr) {
+            if (settings.get_preferred_direction_is_horizontal(layer_structure.get_layer_no(combo_box_arr.indexOf(jComboBox)))) {
                 jComboBox.setSelectedItem(this.horizontal);
             } else {
                 jComboBox.setSelectedItem(this.vertical);
