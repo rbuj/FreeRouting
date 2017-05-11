@@ -105,10 +105,10 @@ public class ReadScopeParameter {
 
     static class PlaneInfo {
 
-        final Shape.ReadAreaScopeResult area;
+        final Area area;
         final String net_name;
 
-        PlaneInfo(Shape.ReadAreaScopeResult p_area, String p_net_name) {
+        PlaneInfo(Area p_area, String p_net_name) {
             area = p_area;
             net_name = p_net_name;
         }

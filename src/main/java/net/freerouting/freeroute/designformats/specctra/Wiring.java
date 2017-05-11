@@ -465,7 +465,7 @@ class Wiring extends ScopeKeyword {
             area.add(border_shape);
             area.addAll(hole_list);
             net.freerouting.freeroute.geometry.planar.Area conduction_area
-                    = ShapeTransformable.transform_area_to_board(area, p_par.coordinate_transform);
+                    = AreaTransformable.transform_area_to_board(area, p_par.coordinate_transform);
             result = board.insert_conduction_area(conduction_area, layer_no, net_no_arr, clearance_class_no,
                     false, fixed);
         } else if (path instanceof PolygonPath) {

@@ -16,27 +16,11 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
-import java.util.Collection;
-import java.util.LinkedList;
-
 /**
  *
  * @author robert
  */
 public interface ShapeReadable {
-
-    static class ReadAreaScopeResult {
-
-        String area_name; // may be generated later on, if area_name is null.
-        final Collection<Shape> shape_list;
-        final String clearance_class_name;
-
-        private ReadAreaScopeResult(String p_area_name, Collection<Shape> p_shape_list, String p_clearance_class_name) {
-            area_name = p_area_name;
-            shape_list = p_shape_list;
-            clearance_class_name = p_clearance_class_name;
-        }
-    }
 
     /**
      * Reads shape scope from a Specctra dsn file. If p_layer_structure == null,
@@ -71,81 +55,4 @@ public interface ShapeReadable {
         return result;
     }
 
-    /**
-     * Reads a shape , which may contain holes from a specctra dsn-file. The
-     * first shape in the shape_list of the result is the border of the area.
-     * The other shapes in the shape_list are holes (windows).
-     */
-    static ReadAreaScopeResult read_area_scope(Scanner p_scanner,
-            LayerStructure p_layer_structure, boolean p_skip_window_scopes) throws DsnFileException {
-        Collection<Shape> shape_list = new LinkedList<>();
-        String clearance_class_name = null;
-        String area_name = null;
-        boolean result_ok = true;
-        Object next_token;
-        try {
-            next_token = p_scanner.next_token();
-        } catch (java.io.IOException e) {
-            System.out.println("Shape.read_area_scope: IO error scanning file");
-            return null;
-        }
-        if (next_token instanceof String) {
-            String curr_name = (String) next_token;
-            if (!curr_name.isEmpty()) {
-                area_name = curr_name;
-            }
-        }
-        Shape curr_shape = read_scope(p_scanner, p_layer_structure);
-        if (curr_shape == null) {
-            result_ok = false;
-        }
-        shape_list.add(curr_shape);
-        next_token = null;
-        for (;;) {
-            Object prev_token = next_token;
-            try {
-                next_token = p_scanner.next_token();
-            } catch (java.io.IOException e) {
-                System.out.println("Shape.read_area_scope: IO error scanning file");
-                return null;
-            }
-            if (next_token == null) {
-                System.out.println("Shape.read_area_scope: unexpected end of file");
-                return null;
-            }
-            if (next_token == Keyword.CLOSED_BRACKET) {
-                // end of scope
-                break;
-            }
-
-            if (prev_token == Keyword.OPEN_BRACKET) {
-                // a new scope is expected
-                if (next_token == Keyword.WINDOW && !p_skip_window_scopes) {
-                    Shape hole_shape = read_scope(p_scanner, p_layer_structure);
-                    shape_list.add(hole_shape);
-                    // overread closing bracket
-                    try {
-                        next_token = p_scanner.next_token();
-                    } catch (java.io.IOException e) {
-                        System.out.println("Shape.read_area_scope: IO error scanning file");
-                        return null;
-                    }
-                    if (next_token != Keyword.CLOSED_BRACKET) {
-                        System.out.println("Shape.read_area_scope: closed bracket expected");
-                        return null;
-                    }
-
-                } else if (next_token == Keyword.CLEARANCE_CLASS) {
-                    clearance_class_name = DsnFile.read_string_scope(p_scanner);
-                } else {
-                    // skip unknown scope
-                    ScopeKeyword.skip_scope(p_scanner);
-                }
-            }
-        }
-        if (!result_ok) {
-            return null;
-        }
-        return new ReadAreaScopeResult(area_name, shape_list, clearance_class_name);
-    }
 }

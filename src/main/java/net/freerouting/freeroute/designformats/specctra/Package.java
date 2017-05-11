@@ -35,9 +35,9 @@ public class Package {
         try {
             boolean is_front = true;
             Collection<Shape> outline = new LinkedList<>();
-            Collection<Shape.ReadAreaScopeResult> keepouts = new LinkedList<>();
-            Collection<Shape.ReadAreaScopeResult> via_keepouts = new LinkedList<>();
-            Collection<Shape.ReadAreaScopeResult> place_keepouts = new LinkedList<>();
+            Collection<Area> keepouts = new LinkedList<>();
+            Collection<Area> via_keepouts = new LinkedList<>();
+            Collection<Area> place_keepouts = new LinkedList<>();
             Object next_token = p_scanner.next_token();
             if (!(next_token instanceof String)) {
                 System.out.println("Package.read_scope: String expected");
@@ -78,17 +78,17 @@ public class Package {
                             return null;
                         }
                     } else if (next_token == Keyword.KEEPOUT) {
-                        Shape.ReadAreaScopeResult keepout_area = ShapeReadable.read_area_scope(p_scanner, p_layer_structure, false);
+                        Area keepout_area = AreaReadable.read_area_scope(p_scanner, p_layer_structure, false);
                         if (keepout_area != null) {
                             keepouts.add(keepout_area);
                         }
                     } else if (next_token == Keyword.VIA_KEEPOUT) {
-                        Shape.ReadAreaScopeResult keepout_area = ShapeReadable.read_area_scope(p_scanner, p_layer_structure, false);
+                        Area keepout_area = AreaReadable.read_area_scope(p_scanner, p_layer_structure, false);
                         if (keepout_area != null) {
                             via_keepouts.add(keepout_area);
                         }
                     } else if (next_token == Keyword.PLACE_KEEPOUT) {
-                        Shape.ReadAreaScopeResult keepout_area = ShapeReadable.read_area_scope(p_scanner, p_layer_structure, false);
+                        Area keepout_area = AreaReadable.read_area_scope(p_scanner, p_layer_structure, false);
                         if (keepout_area != null) {
                             place_keepouts.add(keepout_area);
                         }
@@ -362,15 +362,15 @@ public class Package {
     /**
      * Collection of keepoouts belonging to this package
      */
-    public final Collection<Shape.ReadAreaScopeResult> keepouts;
+    public final Collection<Area> keepouts;
     /**
      * Collection of via keepoouts belonging to this package
      */
-    public final Collection<Shape.ReadAreaScopeResult> via_keepouts;
+    public final Collection<Area> via_keepouts;
     /**
      * Collection of place keepoouts belonging to this package
      */
-    public final Collection<Shape.ReadAreaScopeResult> place_keepouts;
+    public final Collection<Area> place_keepouts;
     /**
      * If false, the package is placed on the back side of the board
      */
@@ -379,8 +379,8 @@ public class Package {
     /**
      * Creates a new instance of Package
      */
-    public Package(String p_name, PinInfo[] p_pin_info_arr, Collection<Shape> p_outline, Collection<Shape.ReadAreaScopeResult> p_keepouts,
-            Collection<Shape.ReadAreaScopeResult> p_via_keepouts, Collection<Shape.ReadAreaScopeResult> p_place_keepouts, boolean p_is_front) {
+    public Package(String p_name, PinInfo[] p_pin_info_arr, Collection<Shape> p_outline, Collection<Area> p_keepouts,
+            Collection<Area> p_via_keepouts, Collection<Area> p_place_keepouts, boolean p_is_front) {
         name = p_name;
         pin_info_arr = p_pin_info_arr;
         outline = p_outline;

@@ -699,9 +699,9 @@ class Structure extends ScopeKeyword {
         return true;
     }
 
-    private static boolean insert_keepout(Shape.ReadAreaScopeResult p_area, ReadScopeParameter p_par, KeepoutType p_keepout_type, FixedState p_fixed_state) {
+    private static boolean insert_keepout(Area p_area, ReadScopeParameter p_par, KeepoutType p_keepout_type, FixedState p_fixed_state) {
         net.freerouting.freeroute.geometry.planar.Area keepout_area
-                = ShapeTransformable.transform_area_to_board(p_area.shape_list, p_par.coordinate_transform);
+                = AreaTransformable.transform_area_to_board(p_area.shape_list, p_par.coordinate_transform);
         if (keepout_area.dimension() < 2) {
             System.out.println("Structure.insert_keepout: keepout is not an area");
             return true;
@@ -771,9 +771,9 @@ class Structure extends ScopeKeyword {
         // The correct location is the scope PlaceControl, but Electra writes it here.
         boolean flip_style_rotate_first = false;
 
-        Collection<Shape.ReadAreaScopeResult> keepout_list = new LinkedList<>();
-        Collection<Shape.ReadAreaScopeResult> via_keepout_list = new LinkedList<>();
-        Collection<Shape.ReadAreaScopeResult> place_keepout_list = new LinkedList<>();
+        Collection<Area> keepout_list = new LinkedList<>();
+        Collection<Area> via_keepout_list = new LinkedList<>();
+        Collection<Area> place_keepout_list = new LinkedList<>();
 
         Object next_token = null;
         for (;;) {
@@ -817,7 +817,7 @@ class Structure extends ScopeKeyword {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
                     try {
-                        keepout_list.add(ShapeReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                        keepout_list.add(AreaReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
                     } catch (DsnFileException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
@@ -827,7 +827,7 @@ class Structure extends ScopeKeyword {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
                     try {
-                        via_keepout_list.add(ShapeReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                        via_keepout_list.add(AreaReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
                     } catch (DsnFileException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
@@ -837,7 +837,7 @@ class Structure extends ScopeKeyword {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
                     try {
-                        place_keepout_list.add(ShapeReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                        place_keepout_list.add(AreaReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
                     } catch (DsnFileException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
@@ -899,19 +899,19 @@ class Structure extends ScopeKeyword {
             fixed_state = FixedState.USER_FIXED;
         }
         // insert the keepouts
-        for (Shape.ReadAreaScopeResult curr_area : keepout_list) {
+        for (Area curr_area : keepout_list) {
             if (!insert_keepout(curr_area, p_par, KeepoutType.keepout, fixed_state)) {
                 return false;
             }
         }
 
-        for (Shape.ReadAreaScopeResult curr_area : via_keepout_list) {
+        for (Area curr_area : via_keepout_list) {
             if (!insert_keepout(curr_area, p_par, KeepoutType.via_keepout, FixedState.SYSTEM_FIXED)) {
                 return false;
             }
         }
 
-        for (Shape.ReadAreaScopeResult curr_area : place_keepout_list) {
+        for (Area curr_area : place_keepout_list) {
             if (!insert_keepout(curr_area, p_par, KeepoutType.place_keepout, FixedState.SYSTEM_FIXED)) {
                 return false;
             }
@@ -934,7 +934,7 @@ class Structure extends ScopeKeyword {
                 continue;
             }
             net.freerouting.freeroute.geometry.planar.Area plane_area
-                    = ShapeTransformable.transform_area_to_board(plane_info.area.shape_list, p_par.coordinate_transform);
+                    = AreaTransformable.transform_area_to_board(plane_info.area.shape_list, p_par.coordinate_transform);
             Layer curr_layer = (plane_info.area.shape_list.iterator().next()).layer;
             if (curr_layer.no >= 0) {
                 int clearance_class_no;

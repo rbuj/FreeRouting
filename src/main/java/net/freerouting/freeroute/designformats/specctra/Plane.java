@@ -77,7 +77,7 @@ public class Plane extends ScopeKeyword {
         boolean skip_window_scopes = p_par.host_cad != null && p_par.host_cad.equalsIgnoreCase("allegro");
         // Cadence Allegro cutouts the pins on power planes, which leads to performance problems
         // when dividing a conduction area into convex pieces.
-        Shape.ReadAreaScopeResult conduction_area;
+        Area conduction_area;
         try {
             Object next_token = p_par.scanner.next_token();
             if (!(next_token instanceof String)) {
@@ -85,7 +85,7 @@ public class Plane extends ScopeKeyword {
                 return false;
             }
             net_name = (String) next_token;
-            conduction_area = ShapeReadable.read_area_scope(p_par.scanner, p_par.layer_structure, skip_window_scopes);
+            conduction_area = AreaReadable.read_area_scope(p_par.scanner, p_par.layer_structure, skip_window_scopes);
             ReadScopeParameter.PlaneInfo plane_info = new ReadScopeParameter.PlaneInfo(conduction_area, net_name);
             p_par.plane_list.add(plane_info);
         } catch (java.io.IOException e) {

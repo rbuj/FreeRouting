@@ -322,27 +322,27 @@ public class Library extends ScopeKeyword {
             generate_missing_keepout_names("via_keepout_", curr_package.via_keepouts);
             generate_missing_keepout_names("place_keepout_", curr_package.place_keepouts);
             net.freerouting.freeroute.library.Package.Keepout[] keepout_arr = new net.freerouting.freeroute.library.Package.Keepout[curr_package.keepouts.size()];
-            Iterator<Shape.ReadAreaScopeResult> it2 = curr_package.keepouts.iterator();
+            Iterator<Area> it2 = curr_package.keepouts.iterator();
             for (int i = 0; i < keepout_arr.length; ++i) {
-                Shape.ReadAreaScopeResult curr_keepout = it2.next();
+                Area curr_keepout = it2.next();
                 Layer curr_layer = curr_keepout.shape_list.iterator().next().layer;
-                net.freerouting.freeroute.geometry.planar.Area curr_area = ShapeTransformable.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
+                net.freerouting.freeroute.geometry.planar.Area curr_area = AreaTransformable.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
                 keepout_arr[i] = new net.freerouting.freeroute.library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.no);
             }
             net.freerouting.freeroute.library.Package.Keepout[] via_keepout_arr = new net.freerouting.freeroute.library.Package.Keepout[curr_package.via_keepouts.size()];
             it2 = curr_package.via_keepouts.iterator();
             for (int i = 0; i < via_keepout_arr.length; ++i) {
-                Shape.ReadAreaScopeResult curr_keepout = it2.next();
+                Area curr_keepout = it2.next();
                 Layer curr_layer = (curr_keepout.shape_list.iterator().next()).layer;
-                net.freerouting.freeroute.geometry.planar.Area curr_area = ShapeTransformable.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
+                net.freerouting.freeroute.geometry.planar.Area curr_area = AreaTransformable.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
                 via_keepout_arr[i] = new net.freerouting.freeroute.library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.no);
             }
             net.freerouting.freeroute.library.Package.Keepout[] place_keepout_arr = new net.freerouting.freeroute.library.Package.Keepout[curr_package.place_keepouts.size()];
             it2 = curr_package.place_keepouts.iterator();
             for (int i = 0; i < place_keepout_arr.length; ++i) {
-                Shape.ReadAreaScopeResult curr_keepout = it2.next();
+                Area curr_keepout = it2.next();
                 Layer curr_layer = (curr_keepout.shape_list.iterator().next()).layer;
-                net.freerouting.freeroute.geometry.planar.Area curr_area = ShapeTransformable.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
+                net.freerouting.freeroute.geometry.planar.Area curr_area = AreaTransformable.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
                 place_keepout_arr[i] = new net.freerouting.freeroute.library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.no);
             }
             board.library.packages.add(curr_package.name, pin_arr, outline_arr,
@@ -351,9 +351,9 @@ public class Library extends ScopeKeyword {
         return true;
     }
 
-    private void generate_missing_keepout_names(String p_keepout_type, Collection<Shape.ReadAreaScopeResult> p_keepout_list) {
+    private void generate_missing_keepout_names(String p_keepout_type, Collection<Area> p_keepout_list) {
         boolean all_names_existing = true;
-        for (Shape.ReadAreaScopeResult curr_keepout : p_keepout_list) {
+        for (Area curr_keepout : p_keepout_list) {
             if (curr_keepout.area_name == null) {
                 all_names_existing = false;
                 break;
@@ -364,7 +364,7 @@ public class Library extends ScopeKeyword {
         }
         // generate names
         Integer curr_name_index = 1;
-        for (Shape.ReadAreaScopeResult curr_keepout : p_keepout_list) {
+        for (Area curr_keepout : p_keepout_list) {
             curr_keepout.area_name = p_keepout_type + curr_name_index.toString();
             ++curr_name_index;
         }
