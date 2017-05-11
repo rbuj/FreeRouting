@@ -46,4 +46,9 @@ public abstract class Path extends Shape {
      */
     @Override
     public abstract void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException;
+
+    static Path read_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+        throw new UnsupportedOperationException();
+    }
+
 }

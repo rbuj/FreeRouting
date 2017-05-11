@@ -19,6 +19,9 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 
@@ -93,5 +96,80 @@ public class PolylinePath extends Path {
     public Rectangle bounding_box() {
         System.out.println("PolylinePath.boundingbox not implemented");
         return null;
+    }
+
+    /**
+     * Reads an object of type PolylinePath from the dsn-file.
+     */
+    static Path read_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+        try {
+            Layer layer;
+            Object next_token = p_scanner.next_token();
+            if (next_token == Keyword.PCB_SCOPE) {
+                layer = Layer.PCB;
+            } else if (next_token == Keyword.SIGNAL) {
+                layer = Layer.SIGNAL;
+            } else {
+                if (p_layer_structure == null) {
+                    System.out.println("PolylinePath.read_scope: only layer types pcb or signal expected");
+                    return null;
+                }
+                if (!(next_token instanceof String)) {
+                    System.out.println("PolylinePath.read_scope: layer name string expected");
+                    return null;
+                }
+                int layer_no = p_layer_structure.get_no((String) next_token);
+                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
+                    System.out.print("Shape.read_polyline_path_scope: layer name ");
+                    System.out.print((String) next_token);
+                    System.out.println(" not found in layer structure ");
+                    return null;
+                }
+                layer = p_layer_structure.arr[layer_no];
+            }
+            Collection<Object> corner_list = new LinkedList<>();
+
+            // read the width and the corners of the path
+            for (;;) {
+                next_token = p_scanner.next_token();
+                if (next_token == Keyword.CLOSED_BRACKET) {
+                    break;
+                }
+                corner_list.add(next_token);
+            }
+            if (corner_list.size() < 5) {
+                System.out.println("PolylinePath.read_scope: to few numbers in scope");
+                return null;
+            }
+            Iterator<Object> it = corner_list.iterator();
+            double width;
+            Object next_object = it.next();
+            if (next_object instanceof Double) {
+                width = (double) next_object;
+            } else if (next_object instanceof Integer) {
+                width = (int) next_object;
+            } else {
+                System.out.println("PolylinePath.read_scope: number expected");
+                return null;
+            }
+            double[] corner_arr = new double[corner_list.size() - 1];
+            for (int i = 0; i < corner_arr.length; ++i) {
+                next_object = it.next();
+                if (next_object instanceof Double) {
+                    corner_arr[i] = (double) next_object;
+                } else if (next_object instanceof Integer) {
+                    corner_arr[i] = (int) next_object;
+                } else {
+                    System.out.println("Shape.read_polygon_path_scope: number expected");
+                    return null;
+                }
+
+            }
+            return new PolylinePath(layer, width, corner_arr);
+        } catch (java.io.IOException e) {
+            System.out.println("PolylinePath.read_scope: IO error scanning file");
+            System.out.println(e);
+            return null;
+        }
     }
 }

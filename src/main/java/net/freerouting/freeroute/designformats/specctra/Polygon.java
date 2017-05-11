@@ -19,6 +19,9 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
@@ -129,4 +132,84 @@ public class Polygon extends Shape {
         p_file.end_scope();
     }
 
+    /**
+     * Reads a closed polygon scope from a Specctra dsn file. If
+     * p_layer_structure == null, only Layer.PCB and Layer.Signal are expected,
+     * no induvidual layers.
+     */
+    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+        try {
+            Layer polygon_layer = null;
+            boolean layer_ok = true;
+            Object next_token = p_scanner.next_token();
+            if (next_token == Keyword.PCB_SCOPE) {
+                polygon_layer = Layer.PCB;
+            } else if (next_token == Keyword.SIGNAL) {
+                polygon_layer = Layer.SIGNAL;
+            } else {
+                if (p_layer_structure == null) {
+                    System.out.println("Shape.read_polygon_scope: only layer types pcb or signal expected");
+                    return null;
+                }
+                if (!(next_token instanceof String)) {
+                    System.out.println("Shape.read_polygon_scope: layer name string expected");
+                    return null;
+                }
+                int layer_no = p_layer_structure.get_no((String) next_token);
+                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
+                    System.out.print("Shape.read_polygon_scope: layer name ");
+                    System.out.print((String) next_token);
+                    System.out.println(" not found in layer structure ");
+                    layer_ok = false;
+                } else {
+                    polygon_layer = p_layer_structure.arr[layer_no];
+                }
+            }
+
+            // overread the aperture width
+            next_token = p_scanner.next_token();
+
+            Collection<Object> coor_list = new LinkedList<>();
+
+            // read the coordinates of the polygon
+            for (;;) {
+                next_token = p_scanner.next_token();
+                if (next_token == null) {
+                    System.out.println("Shape.read_polygon_scope: unexpected end of file");
+                    return null;
+                }
+                if (next_token == Keyword.OPEN_BRACKET) {
+                    // unknown scope
+                    ScopeKeyword.skip_scope(p_scanner);
+                    next_token = p_scanner.next_token();
+                }
+                if (next_token == Keyword.CLOSED_BRACKET) {
+                    break;
+                }
+                coor_list.add(next_token);
+            }
+            if (!layer_ok) {
+                return null;
+            }
+            double[] coor_arr = new double[coor_list.size()];
+            Iterator<Object> it = coor_list.iterator();
+            for (int i = 0; i < coor_arr.length; ++i) {
+                Object next_object = it.next();
+                if (next_object instanceof Double) {
+                    coor_arr[i] = (double) next_object;
+                } else if (next_object instanceof Integer) {
+                    coor_arr[i] = (int) next_object;
+                } else {
+                    System.out.println("Shape.read_polygon_scope: number expected");
+                    return null;
+                }
+
+            }
+            return new Polygon(polygon_layer, coor_arr);
+        } catch (java.io.IOException e) {
+            System.out.println("Rectangle.read_scope: IO error scanning file");
+            System.out.println(e);
+            return null;
+        }
+    }
 }

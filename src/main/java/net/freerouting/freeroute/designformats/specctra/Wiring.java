@@ -381,18 +381,15 @@ class Wiring extends ScopeKeyword {
             }
             if (prev_token == OPEN_BRACKET) {
                 if (next_token == Keyword.POLYGON_PATH) {
-                    path = ShapeReadable.read_polygon_path_scope(p_par.scanner, p_par.layer_structure);
+                    path = PolygonPath.read_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.POLYLINE_PATH) {
-                    path = ShapeReadable.read_polyline_path_scope(p_par.scanner, p_par.layer_structure);
+                    path = PolylinePath.read_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.RECTANGLE) {
-
-                    border_shape = ShapeReadable.read_rectangle_scope(p_par.scanner, p_par.layer_structure);
+                    border_shape = Rectangle.read_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.POLYGON) {
-
-                    border_shape = ShapeReadable.read_polygon_scope(p_par.scanner, p_par.layer_structure);
+                    border_shape = Polygon.read_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.CIRCLE) {
-
-                    border_shape = ShapeReadable.read_circle_scope(p_par.scanner, p_par.layer_structure);
+                    border_shape = Circle.read_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.WINDOW) {
                     Shape hole_shape = ShapeReadable.read_scope(p_par.scanner, p_par.layer_structure);
                     hole_list.add(hole_shape);

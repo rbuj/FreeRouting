@@ -19,6 +19,9 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
@@ -149,5 +152,90 @@ public class PolygonPath extends Path {
             }
         }
         return new Rectangle(layer, bounds);
+    }
+
+    /**
+     * Reads an object of type Path from the dsn-file.
+     */
+    static Path read_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+        try {
+            Layer layer = null;
+            boolean layer_ok = true;
+            Object next_token = p_scanner.next_token();
+            if (next_token == Keyword.PCB_SCOPE) {
+                layer = Layer.PCB;
+            } else if (next_token == Keyword.SIGNAL) {
+                layer = Layer.SIGNAL;
+            } else {
+                if (p_layer_structure == null) {
+                    System.out.println("Shape.read_polygon_path_scope: only layer types pcb or signal expected");
+                    return null;
+                }
+                if (!(next_token instanceof String)) {
+                    System.out.println("Path.read_scope: layer name string expected");
+                    return null;
+                }
+                int layer_no = p_layer_structure.get_no((String) next_token);
+                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
+                    System.out.print("Shape.read_polygon_path_scope: layer with name ");
+                    System.out.print((String) next_token);
+                    System.out.println(" not found in layer structure ");
+                    layer_ok = false;
+                } else {
+                    layer = p_layer_structure.arr[layer_no];
+                }
+            }
+            Collection<Object> corner_list = new LinkedList<>();
+
+            // read the width and the corners of the path
+            for (;;) {
+                next_token = p_scanner.next_token();
+                if (next_token == Keyword.OPEN_BRACKET) {
+                    // unknown scope
+                    ScopeKeyword.skip_scope(p_scanner);
+                    next_token = p_scanner.next_token();
+                }
+                if (next_token == Keyword.CLOSED_BRACKET) {
+                    break;
+                }
+                corner_list.add(next_token);
+            }
+            if (corner_list.size() < 5) {
+                System.out.println("Shape.read_polygon_path_scope: to few numbers in scope");
+                return null;
+            }
+            if (!layer_ok) {
+                return null;
+            }
+            Iterator<Object> it = corner_list.iterator();
+            double width;
+            Object next_object = it.next();
+            if (next_object instanceof Double) {
+                width = (double) next_object;
+            } else if (next_object instanceof Integer) {
+                width = (int) next_object;
+            } else {
+                System.out.println("Shape.read_polygon_path_scope: number expected");
+                return null;
+            }
+            double[] coordinate_arr = new double[corner_list.size() - 1];
+            for (int i = 0; i < coordinate_arr.length; ++i) {
+                next_object = it.next();
+                if (next_object instanceof Double) {
+                    coordinate_arr[i] = (double) next_object;
+                } else if (next_object instanceof Integer) {
+                    coordinate_arr[i] = (int) next_object;
+                } else {
+                    System.out.println("Shape.read_polygon_path_scope: number expected");
+                    return null;
+                }
+
+            }
+            return new PolygonPath(layer, width, coordinate_arr);
+        } catch (java.io.IOException e) {
+            System.out.println("Shape.read_polygon_path_scope: IO error scanning file");
+            System.out.println(e);
+            return null;
+        }
     }
 }

@@ -118,4 +118,63 @@ public class Rectangle extends Shape {
         p_file.write(")");
     }
 
+    /**
+     * Reads a rectangle scope from a Specctra dsn file. If p_layer_structure ==
+     * null, only Layer.PCB and Layer.Signal are expected, no induvidual layers.
+     */
+    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+        try {
+            Layer rect_layer = null;
+            double rect_coor[] = new double[4];
+
+            Object next_token = p_scanner.next_token();
+            if (next_token == Keyword.PCB_SCOPE) {
+                rect_layer = Layer.PCB;
+            } else if (next_token == Keyword.SIGNAL) {
+                rect_layer = Layer.SIGNAL;
+            } else if (p_layer_structure != null) {
+                if (!(next_token instanceof String)) {
+                    System.out.println("Shape.read_rectangle_scope: layer name string expected");
+                    return null;
+                }
+                String layer_name = (String) next_token;
+                int layer_no = p_layer_structure.get_no(layer_name);
+                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
+                    System.out.println("Shape.read_rectangle_scope: layer name " + layer_name
+                            + " not found in layer structure ");
+                } else {
+                    rect_layer = p_layer_structure.arr[layer_no];
+                }
+            } else {
+                rect_layer = Layer.SIGNAL;
+            }
+            // fill the the rectangle
+            for (int i = 0; i < 4; ++i) {
+                next_token = p_scanner.next_token();
+                if (next_token instanceof Double) {
+                    rect_coor[i] = (double) next_token;
+                } else if (next_token instanceof Integer) {
+                    rect_coor[i] = (int) next_token;
+                } else {
+                    System.out.println("Shape.read_rectangle_scope: number expected");
+                    return null;
+                }
+            }
+            // overread the closing bracket
+
+            next_token = p_scanner.next_token();
+            if (next_token != Keyword.CLOSED_BRACKET) {
+                System.out.println("Shape.read_rectangle_scope ) expected");
+                return null;
+            }
+            if (rect_layer == null) {
+                return null;
+            }
+            return new Rectangle(rect_layer, rect_coor);
+        } catch (java.io.IOException e) {
+            System.out.println("Shape.read_rectangle_scope: IO error scanning file");
+            System.out.println(e);
+            return null;
+        }
+    }
 }
