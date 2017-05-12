@@ -247,8 +247,8 @@ class Wiring extends ScopeKeyword {
     }
 
     static net.freerouting.freeroute.board.FixedState calc_fixed(Scanner p_scanner) {
+        net.freerouting.freeroute.board.FixedState result;
         try {
-            net.freerouting.freeroute.board.FixedState result = net.freerouting.freeroute.board.FixedState.UNFIXED;
             Object next_token = p_scanner.next_token();
             if (next_token == Keyword.SHOVE_FIXED) {
                 result = net.freerouting.freeroute.board.FixedState.SHOVE_FIXED;
@@ -256,6 +256,8 @@ class Wiring extends ScopeKeyword {
                 result = net.freerouting.freeroute.board.FixedState.SYSTEM_FIXED;
             } else if (next_token != Keyword.NORMAL) {
                 result = net.freerouting.freeroute.board.FixedState.USER_FIXED;
+            } else {
+                result = net.freerouting.freeroute.board.FixedState.UNFIXED;
             }
             next_token = p_scanner.next_token();
             if (next_token != Keyword.CLOSED_BRACKET) {
