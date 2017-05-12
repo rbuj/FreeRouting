@@ -59,7 +59,7 @@ public class Package {
                 }
                 if (prev_token == Keyword.OPEN_BRACKET) {
                     if (next_token == Keyword.PIN) {
-                        PinInfo next_pin = read_pin_info(p_scanner);
+                        PinInfo next_pin = PinInfo.read_pin_info(p_scanner);
                         if (next_pin == null) {
                             return null;
                         }
@@ -97,11 +97,7 @@ public class Package {
                     }
                 }
             }
-            PinInfo[] pin_info_arr = new PinInfo[pin_info_list.size()];
-            Iterator<PinInfo> it = pin_info_list.iterator();
-            for (int i = 0; i < pin_info_arr.length; ++i) {
-                pin_info_arr[i] = it.next();
-            }
+            PinInfo[] pin_info_arr = pin_info_list.toArray(new PinInfo[pin_info_list.size()]);
             return new Package(package_name, pin_info_arr, outline, keepouts, via_keepouts, place_keepouts, is_front);
         } catch (java.io.IOException e) {
             System.out.println("Package.read_scope: IO error scanning file");
@@ -124,25 +120,7 @@ public class Package {
         }
         // write the pins of the package
         for (int i = 0; i < p_package.pin_count(); ++i) {
-            net.freerouting.freeroute.library.Package.Pin curr_pin = p_package.get_pin(i);
-            p_par.file.new_line();
-            p_par.file.write("(pin ");
-            net.freerouting.freeroute.library.Padstack curr_padstack = p_par.board.library.padstacks.get(curr_pin.padstack_no);
-            p_par.identifier_type.write(curr_padstack.name, p_par.file);
-            p_par.file.write(" ");
-            p_par.identifier_type.write(curr_pin.name, p_par.file);
-            double[] rel_coor = p_par.coordinate_transform.board_to_dsn(curr_pin.relative_location);
-            for (int j = 0; j < rel_coor.length; ++j) {
-                p_par.file.write(" ");
-                p_par.file.write(Double.toString(rel_coor[j]));
-            }
-            int rotation = (int) Math.round(curr_pin.rotation_in_degree);
-            if (rotation != 0) {
-                p_par.file.write("(rotate ");
-                p_par.file.write(Integer.toString(rotation));
-                p_par.file.write(")");
-            }
-            p_par.file.write(")");
+            PinInfo.write_scope(p_par, p_package.get_pin(i));
         }
         // write the keepouts belonging to  the package.
         for (int i = 0; i < p_package.keepout_arr.length; ++i) {
@@ -195,111 +173,6 @@ public class Package {
             dsn_hole.write_hole_scope(p_par.file, p_par.identifier_type);
         }
         p_par.file.end_scope();
-    }
-
-    /**
-     * Reads the information of a single pin in a package.
-     */
-    private static PinInfo read_pin_info(Scanner p_scanner) {
-        try {
-            // Read the padstack name.
-            p_scanner.yybegin(SpecctraFileScanner.NAME);
-            String padstack_name;
-            Object next_token = p_scanner.next_token();
-            if (next_token instanceof String) {
-                padstack_name = (String) next_token;
-            } else if (next_token instanceof Integer) {
-                padstack_name = next_token.toString();
-            } else {
-                System.out.println("Package.read_pin_info: String or Integer expected");
-                return null;
-            }
-            double rotation = 0;
-
-            p_scanner.yybegin(SpecctraFileScanner.NAME); // to be able to handle pin names starting with a digit.
-            next_token = p_scanner.next_token();
-            if (next_token == Keyword.OPEN_BRACKET) {
-                // read the padstack rotation
-                next_token = p_scanner.next_token();
-                if (next_token == Keyword.ROTATE) {
-                    rotation = read_rotation(p_scanner);
-                } else {
-                    ScopeKeyword.skip_scope(p_scanner);
-                }
-                p_scanner.yybegin(SpecctraFileScanner.NAME);
-                next_token = p_scanner.next_token();
-            }
-            // Read the pin name.
-            String pin_name;
-            if (next_token instanceof String) {
-                pin_name = (String) next_token;
-            } else if (next_token instanceof Integer) {
-                pin_name = next_token.toString();
-            } else {
-                System.out.println("Package.read_pin_info: String or Integer expected");
-                return null;
-            }
-
-            double[] pin_coor = new double[2];
-            for (int i = 0; i < 2; ++i) {
-                next_token = p_scanner.next_token();
-                if (next_token instanceof Double) {
-                    pin_coor[i] = (double) next_token;
-                } else if (next_token instanceof Integer) {
-                    pin_coor[i] = (int) next_token;
-                } else {
-                    System.out.println("Package.read_pin_info: number expected");
-                    return null;
-                }
-            }
-            // Handle scopes at the end of the pin scope.
-            for (;;) {
-                Object prev_token = next_token;
-                next_token = p_scanner.next_token();
-
-                if (next_token == null) {
-                    System.out.println("Package.read_pin_info: unexpected end of file");
-                    return null;
-                }
-                if (next_token == Keyword.CLOSED_BRACKET) {
-                    // end of scope
-                    break;
-                }
-                if (prev_token == Keyword.OPEN_BRACKET) {
-                    if (next_token == Keyword.ROTATE) {
-                        rotation = read_rotation(p_scanner);
-                    } else {
-                        ScopeKeyword.skip_scope(p_scanner);
-                    }
-                }
-            }
-            return new PinInfo(padstack_name, pin_name, pin_coor, rotation);
-        } catch (java.io.IOException e) {
-            System.out.println("Package.read_pin_info: IO error while scanning file");
-            return null;
-        }
-    }
-
-    private static double read_rotation(Scanner p_scanner) {
-        double result = 0;
-        try {
-            Object next_token = p_scanner.next_token();
-            if (next_token instanceof Integer) {
-                result = (int) next_token;
-            } else if (next_token instanceof Double) {
-                result = (double) next_token;
-            } else {
-                System.out.println("Package.read_rotation: number expected");
-            }
-            // Overread The closing bracket.
-            next_token = p_scanner.next_token();
-            if (next_token != Keyword.CLOSED_BRACKET) {
-                System.out.println("Package.read_rotation: closing bracket expected");
-            }
-        } catch (java.io.IOException e) {
-            System.out.println("Package.read_rotation: IO error while scanning file");
-        }
-        return result;
     }
 
     /**
@@ -388,32 +261,5 @@ public class Package {
         via_keepouts = p_via_keepouts;
         place_keepouts = p_place_keepouts;
         is_front = p_is_front;
-    }
-
-    static public class PinInfo {
-
-        /**
-         * Phe name of the pastack of this pin.
-         */
-        public final String padstack_name;
-        /**
-         * Phe name of this pin.
-         */
-        public final String pin_name;
-        /**
-         * The x- and y-coordinates relative to the package location.
-         */
-        public final double[] rel_coor;
-        /**
-         * The rotation of the pin relative to the package.
-         */
-        public final double rotation;
-
-        PinInfo(String p_padstack_name, String p_pin_name, double[] p_rel_coor, double p_rotation) {
-            padstack_name = p_padstack_name;
-            pin_name = p_pin_name;
-            rel_coor = p_rel_coor;
-            rotation = p_rotation;
-        }
     }
 }

@@ -106,7 +106,7 @@ public class RulesFile {
                 } else if (next_token == Keyword.LAYER) {
                     add_layer_rules(scanner, routing_board);
                 } else if (next_token == Keyword.PADSTACK) {
-                    Library.read_padstack_scope(scanner, layer_structure, coordinate_transform, routing_board.library.padstacks);
+                    Padstack.read_padstack_scope(scanner, layer_structure, coordinate_transform, routing_board.library.padstacks);
                 } else if (next_token == Keyword.VIA) {
                     read_via_info(scanner, routing_board);
                 } else if (next_token == Keyword.VIA_RULE) {
@@ -149,7 +149,7 @@ public class RulesFile {
         for (int i = 1; i <= p_par.board.library.padstacks.count(); ++i) {
             net.freerouting.freeroute.library.Padstack curr_padstack = p_par.board.library.padstacks.get(i);
             if (p_par.board.library.get_via_padstack(curr_padstack.name) != null) {
-                Library.write_padstack_scope(p_par, curr_padstack);
+                Padstack.write_padstack_scope(p_par, curr_padstack);
             }
         }
         Network.write_via_infos(p_par.board.rules, p_par.file, p_par.identifier_type);

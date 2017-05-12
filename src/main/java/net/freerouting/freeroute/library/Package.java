@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute.library;
 
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Locale;
 import net.freerouting.freeroute.geometry.planar.Area;
 import net.freerouting.freeroute.geometry.planar.Shape;
