@@ -13,7 +13,7 @@
  *   GNU General Public License at <http://www.gnu.org/licenses/> 
  *   for more details.
  *
- * ConvexShape2.java
+ * ConvexShape.java
  *
  * Created on 15. November 2002, 08:44
  */

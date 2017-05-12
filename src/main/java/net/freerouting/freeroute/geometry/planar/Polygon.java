@@ -15,9 +15,11 @@
  */
 package net.freerouting.freeroute.geometry.planar;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 /**
  *
@@ -36,14 +38,30 @@ public class Polygon implements java.io.Serializable {
      * collinear with its previous and next point will be removed.
      */
     public Polygon(Point[] p_point_arr) {
-        corners = new LinkedList<>();
         if (p_point_arr.length == 0) {
+            corners = new ArrayList<>();
             return;
         }
-        for (int i = 0; i < p_point_arr.length; ++i) {
-            corners.add(p_point_arr[i]);
-        }
+        corners = Arrays.asList(p_point_arr);
 
+        check();
+    }
+
+    /**
+     * Creates a polygon from p_point_list. Multiple points and points, which
+     * are collinear with its previous and next point will be removed.
+     */
+    public Polygon(Collection<Point> p_point_list) {
+        if (p_point_list.isEmpty()) {
+            corners = new ArrayList<>();
+            return;
+        }
+        corners = new ArrayList<>(p_point_list);
+
+        check();
+    }
+
+    public void check() {
         boolean corner_removed = true;
         while (corner_removed) {
             corner_removed = false;
@@ -93,11 +111,13 @@ public class Polygon implements java.io.Serializable {
      * returns the array of corners of this polygon
      */
     public Point[] corner_array() {
-        int corner_count = corners.size();
-        Point[] result = new Point[corner_count];
-        Iterator<Point> it = corners.iterator();
-        for (int i = 0; i < corner_count; ++i) {
-            result[i] = it.next();
+        int size = corners.size();
+        Point[] result;
+        if (size != 0) {
+            result = new Point[corners.size()];
+            corners.toArray(result);
+        } else {
+            result = new Point[0];
         }
         return result;
     }
@@ -106,12 +126,14 @@ public class Polygon implements java.io.Serializable {
      * Reverts the order of the corners of this polygon.
      */
     public Polygon revert_corners() {
-        Point[] corner_arr = corner_array();
-        Point[] reverse_corner_arr = new Point[corner_arr.length];
-        for (int i = 0; i < corner_arr.length; ++i) {
-            reverse_corner_arr[i] = corner_arr[corner_arr.length - i - 1];
+        ArrayList<Point> reverse_corners;
+        if (corners.size() != 0) {
+            reverse_corners = new ArrayList<>(corners);
+            Collections.reverse(reverse_corners);
+        } else {
+            reverse_corners = new ArrayList<>();
         }
-        return new Polygon(reverse_corner_arr);
+        return new Polygon(reverse_corners);
     }
 
     /**
