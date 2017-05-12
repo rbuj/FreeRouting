@@ -20,7 +20,7 @@
 package net.freerouting.freeroute.board;
 
 import java.util.EnumMap;
-import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -51,11 +51,11 @@ public class ItemSelectionFilter implements java.io.Serializable {
         for (SelectableChoices value : SelectableChoices.values()) {
             values.put(value, true);
         }
-        values.put(SelectableChoices.KEEPOUT, false);
-        values.put(SelectableChoices.VIA_KEEPOUT, false);
-        values.put(SelectableChoices.COMPONENT_KEEPOUT, false);
-        values.put(SelectableChoices.CONDUCTION, false);
-        values.put(SelectableChoices.BOARD_OUTLINE, false);
+        values.replace(SelectableChoices.KEEPOUT, false);
+        values.replace(SelectableChoices.VIA_KEEPOUT, false);
+        values.replace(SelectableChoices.COMPONENT_KEEPOUT, false);
+        values.replace(SelectableChoices.CONDUCTION, false);
+        values.replace(SelectableChoices.BOARD_OUTLINE, false);
     }
 
     /**
@@ -65,9 +65,9 @@ public class ItemSelectionFilter implements java.io.Serializable {
         for (SelectableChoices value : SelectableChoices.values()) {
             values.put(value, false);
         }
-        values.put(p_item_type, true);
-        values.put(SelectableChoices.FIXED, true);
-        values.put(SelectableChoices.UNFIXED, true);
+        values.replace(p_item_type, true);
+        values.replace(SelectableChoices.FIXED, true);
+        values.replace(SelectableChoices.UNFIXED, true);
     }
 
     /**
@@ -78,10 +78,10 @@ public class ItemSelectionFilter implements java.io.Serializable {
             values.put(value, false);
         }
         for (int i = 0; i < p_item_types.length; ++i) {
-            values.put(p_item_types[i], true);
+            values.replace(p_item_types[i], true);
         }
-        values.put(SelectableChoices.FIXED, true);
-        values.put(SelectableChoices.UNFIXED, true);
+        values.replace(SelectableChoices.FIXED, true);
+        values.replace(SelectableChoices.UNFIXED, true);
     }
 
     /**
@@ -95,17 +95,15 @@ public class ItemSelectionFilter implements java.io.Serializable {
      * Selects or deselects an item type
      */
     public void set_selected(SelectableChoices p_choice, boolean p_value) {
-        values.put(p_choice, p_value);
+        values.replace(p_choice, p_value);
     }
 
     /**
      * Selects all item types.
      */
     public void select_all() {
-        Iterator<SelectableChoices> enumKeySet = values.keySet().iterator();
-        while (enumKeySet.hasNext()) {
-            SelectableChoices selectableChoices = enumKeySet.next();
-            values.put(selectableChoices, true);
+        for (Entry<SelectableChoices, Boolean> entry : values.entrySet()) {
+            entry.setValue(true);
         }
     }
 
@@ -113,10 +111,8 @@ public class ItemSelectionFilter implements java.io.Serializable {
      * Deselects all item types.
      */
     public void deselect_all() {
-        Iterator<SelectableChoices> enumKeySet = values.keySet().iterator();
-        while (enumKeySet.hasNext()) {
-            SelectableChoices selectableChoices = enumKeySet.next();
-            values.put(selectableChoices, false);
+        for (Entry<SelectableChoices, Boolean> entry : values.entrySet()) {
+            entry.setValue(false);
         }
     }
 
