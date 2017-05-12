@@ -42,7 +42,7 @@ public class Polygon implements java.io.Serializable {
             corners = new ArrayList<>();
             return;
         }
-        corners = Arrays.asList(p_point_arr);
+        corners = new ArrayList<>(Arrays.asList(p_point_arr));
 
         check();
     }
