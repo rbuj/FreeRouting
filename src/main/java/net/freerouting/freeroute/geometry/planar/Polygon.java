@@ -127,7 +127,7 @@ public class Polygon implements java.io.Serializable {
      */
     public Polygon revert_corners() {
         ArrayList<Point> reverse_corners;
-        if (corners.size() != 0) {
+        if (!corners.isEmpty()) {
             reverse_corners = new ArrayList<>(corners);
             Collections.reverse(reverse_corners);
         } else {
