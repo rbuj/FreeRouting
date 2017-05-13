@@ -44,12 +44,6 @@ import net.freerouting.freeroute.geometry.planar.Side;
 public class PlanarDelaunayTriangulation {
 
     /**
-     * Randum generatur to shuffle the input corners. A fixed SEED is used to
-     * make the results reproduceble.
-     */
-    private static final int SEED = 99;
-    private static final java.util.Random RANDOM_GENERATOR = new java.util.Random(SEED);
-    /**
      * The structure for seaching the triangle containing a given input corner.
      */
     private final TriangleGraph search_graph;
@@ -77,9 +71,7 @@ public class PlanarDelaunayTriangulation {
         }
 
         // create a random permutation of the corners.
-        // use a fixed SEED to get reproducable result
-        RANDOM_GENERATOR.setSeed(SEED);
-        Collections.shuffle(corner_list, RANDOM_GENERATOR);
+        Collections.shuffle(corner_list);
 
         // create a big triangle contaning all corners in the list to start with.
         int bounding_coor = Limits.CRIT_INT;

@@ -22,6 +22,7 @@ package net.freerouting.freeroute.geometry.planar;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import org.apache.commons.lang3.RandomUtils;
 
 /**
  * Shape described bei a closed polygon of corner points. The corners are
@@ -34,8 +35,6 @@ import java.util.LinkedList;
 @SuppressWarnings("serial")
 public class PolygonShape extends PolylineShape {
 
-    private static final int SEED = 99;
-    private static final java.util.Random RANDOM_GENERATOR = new java.util.Random(SEED);
     public final Point[] corners;
     /**
      * the following fields are for storing precalculated data
@@ -543,8 +542,6 @@ public class PolygonShape extends PolylineShape {
     public TileShape[] split_to_convex() {
         if (this.precalculated_convex_pieces == null) // not yet precalculated
         {
-            // use a fixed SEED to get reproducable result
-            RANDOM_GENERATOR.setSeed(SEED);
             Collection<PolygonShape> convex_pieces = split_to_convex_recu();
             if (convex_pieces == null) {
                 // split failed, maybe the polygon has selfontersections
@@ -566,7 +563,7 @@ public class PolygonShape extends PolylineShape {
      */
     private Collection<PolygonShape> split_to_convex_recu() {
         // start with a hashed corner and search the first concave corner
-        int start_corner_no = RANDOM_GENERATOR.nextInt(corners.length);
+        int start_corner_no = RandomUtils.nextInt(0, corners.length);
         Point curr_corner = corners[start_corner_no];
         Point prev_corner;
         if (start_corner_no != 0) {
