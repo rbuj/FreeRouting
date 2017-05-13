@@ -54,11 +54,21 @@ public class GraphicsContext implements java.io.Serializable {
     /**
      * initialise some values in p_graphics
      */
+    private static void init_draw_graphics(Graphics2D p_graphics, Color p_color) {
+        p_graphics.setColor(p_color);
+        p_graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        p_graphics.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
+        p_graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
+        p_graphics.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_SPEED);
+    }
+
+    /**
+     * initialise some values in p_graphics
+     */
     private static void init_draw_graphics(Graphics2D p_graphics, Color p_color, float p_width) {
         BasicStroke bs = new BasicStroke(Math.max(p_width, 0), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
         p_graphics.setStroke(bs);
-        p_graphics.setColor(p_color);
-        p_graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        init_draw_graphics(p_graphics, p_color);
     }
 
     private static void set_translucency(Graphics2D p_g2, double p_factor) {
@@ -288,9 +298,8 @@ public class GraphicsContext implements java.io.Serializable {
         Ellipse2D circle
                 = new Ellipse2D.Double(center.getX() - radius, center.getY() - radius, diameter, diameter);
         Graphics2D g2 = (Graphics2D) p_g;
-        g2.setColor(p_color);
+        init_draw_graphics(g2, p_color);
         set_translucency(g2, p_translucency_factor);
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.fill(circle);
     }
 
@@ -330,9 +339,8 @@ public class GraphicsContext implements java.io.Serializable {
         }
         if (p_g instanceof Graphics2D) {
             Graphics2D g2 = (Graphics2D) p_g;
-            g2.setColor(p_color);
+            init_draw_graphics(g2, p_color);
             set_translucency(g2, p_translucency_factor);
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.fill(draw_path);
         }
     }
@@ -368,9 +376,8 @@ public class GraphicsContext implements java.io.Serializable {
             draw_polygon.addPoint((int) Math.round(curr_corner.getX()),
                     (int) Math.round(curr_corner.getY()));
         }
-        g2.setColor(p_color);
+        init_draw_graphics(g2, p_color);
         set_translucency(g2, p_translucency_factor);
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.fill(draw_polygon);
     }
 
@@ -395,9 +402,8 @@ public class GraphicsContext implements java.io.Serializable {
         }
         if (p_g instanceof Graphics2D) {
             Graphics2D g2 = (Graphics2D) p_g;
-            g2.setColor(p_color);
+            init_draw_graphics(g2, p_color);
             set_translucency(g2, p_translucency_factor);
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.fill(draw_path);
         }
     }
