@@ -135,8 +135,8 @@ public abstract class ShapeTree {
         if (p_entries == null) {
             return;
         }
-        for (int i = 0; i < p_entries.length; ++i) {
-            remove_leaf(p_entries[i]);
+        for (Leaf leaf : p_entries) {
+            remove_leaf(leaf);
         }
     }
 
@@ -154,9 +154,9 @@ public abstract class ShapeTree {
         Leaf[] leaf_arr = this.to_array();
         double cumulative_depth = 0;
         int maximum_depth = 0;
-        for (int i = 0; i < leaf_arr.length; ++i) {
-            if (leaf_arr[i] != null) {
-                int distance_to_root = leaf_arr[i].distance_to_root();
+        for (Leaf leaf : leaf_arr) {
+            if (leaf != null) {
+                int distance_to_root = leaf.distance_to_root();
                 cumulative_depth += distance_to_root;
                 maximum_depth = Math.max(maximum_depth, distance_to_root);
             }
