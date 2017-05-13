@@ -19,8 +19,8 @@
  */
 package net.freerouting.freeroute.board;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
 import net.freerouting.freeroute.boardgraphics.GraphicsContext;
@@ -45,7 +45,7 @@ public class BoardOutline extends Item {
     /**
      * The board shapes inside the outline curves.
      */
-    private final List<PolylineShape> shapes;
+    private final ArrayList<PolylineShape> shapes;
     /**
      * The board shape outside the outline curves, where a keepout will be
      * generated The outline curves are holes of the keepout_area.
@@ -63,7 +63,15 @@ public class BoardOutline extends Item {
      */
     public BoardOutline(PolylineShape[] p_shapes, int p_clearance_class_no, int p_id_no, BasicBoard p_board) {
         super(new int[0], p_clearance_class_no, p_id_no, 0, FixedState.SYSTEM_FIXED, p_board);
-        shapes = Arrays.asList(p_shapes);
+        shapes = new ArrayList<>(Arrays.asList(p_shapes));
+    }
+
+    /**
+     * Creates a new instance of BoardOutline
+     */
+    public BoardOutline(ArrayList<PolylineShape> p_shapes, int p_clearance_class_no, int p_id_no, BasicBoard p_board) {
+        super(new int[0], p_clearance_class_no, p_id_no, 0, FixedState.SYSTEM_FIXED, p_board);
+        shapes = p_shapes;
     }
 
     @Override
@@ -222,10 +230,7 @@ public class BoardOutline extends Item {
      */
     Area get_keepout_area() {
         if (this.keepout_area == null) {
-            PolylineShape[] hole_arr = new PolylineShape[this.shapes.size()];
-            for (int i = 0; i < hole_arr.length; ++i) {
-                hole_arr[i] = this.shapes.get(i);
-            }
+            PolylineShape[] hole_arr = this.shapes.toArray(new PolylineShape[this.shapes.size()]);
             keepout_area = new PolylineArea(this.board.bounding_box, hole_arr);
         }
         return this.keepout_area;
@@ -254,7 +259,7 @@ public class BoardOutline extends Item {
 
     @Override
     public Item copy(int p_id_no) {
-        return new BoardOutline(this.shapes.toArray(new PolylineShape[this.shapes.size()]), this.clearance_class_no(), p_id_no, this.board);
+        return new BoardOutline((ArrayList) this.shapes.clone(), this.clearance_class_no(), p_id_no, this.board);
     }
 
     @Override
