@@ -67,11 +67,7 @@ public class PolylineTrace extends Trace {
 
     @Override
     public Item copy(int p_id_no) {
-        int[] curr_net_no_arr = new int[this.net_count()];
-        for (int i = 0; i < curr_net_no_arr.length; ++i) {
-            curr_net_no_arr[i] = get_net_no(i);
-        }
-        return new PolylineTrace(lines, get_layer(), get_half_width(), curr_net_no_arr, clearance_class_no(),
+        return new PolylineTrace(lines, get_layer(), get_half_width(), net_no_arr, clearance_class_no(),
                 p_id_no, get_component_no(), get_fixed_state(), board);
     }
 

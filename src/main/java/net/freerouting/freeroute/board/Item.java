@@ -25,7 +25,6 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.IntStream;
 import net.freerouting.freeroute.boardgraphics.Drawable;
 import net.freerouting.freeroute.boardgraphics.GraphicsContext;
 import net.freerouting.freeroute.datastructures.ShapeTree;
@@ -38,6 +37,7 @@ import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.TileShape;
 import net.freerouting.freeroute.geometry.planar.Vector;
 import net.freerouting.freeroute.rules.Nets;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Basic class of the items on a board.
@@ -85,8 +85,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
         if (p_net_no_arr == null) {
             net_no_arr = new int[0];
         } else {
-            net_no_arr = new int[p_net_no_arr.length];
-            System.arraycopy(p_net_no_arr, 0, net_no_arr, 0, p_net_no_arr.length);
+            net_no_arr = ArrayUtils.clone(p_net_no_arr);
         }
         clearance_class = p_clearance_type;
         component_no = p_component_no;
@@ -124,7 +123,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      * Returns true if the net number array of this item contains p_net_no.
      */
     public boolean contains_net(int p_net_no) {
-        return (p_net_no <= 0) ? false : IntStream.of(net_no_arr).anyMatch(net_no -> net_no == p_net_no);
+        return (p_net_no <= 0) ? false : ArrayUtils.contains(net_no_arr, p_net_no);
     }
 
     @Override
@@ -155,11 +154,9 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      * common number.
      */
     public boolean shares_net_no(int[] p_net_no_arr) {
-        for (int i = 0; i < net_no_arr.length; ++i) {
-            for (int j = 0; j < p_net_no_arr.length; ++j) {
-                if (net_no_arr[i] == p_net_no_arr[j]) {
-                    return true;
-                }
+        for (int net_no : net_no_arr) {
+            if (ArrayUtils.contains(p_net_no_arr, net_no)) {
+                return true;
             }
         }
         return false;
@@ -909,11 +906,12 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      * was not contained in this array.
      */
     public boolean remove_from_net(int p_net_no) {
-        if (IntStream.of(net_no_arr).anyMatch(net_no -> net_no == p_net_no)) {
-            this.net_no_arr = IntStream.of(net_no_arr).filter(net_no -> net_no != p_net_no).toArray();
-            return true;
-        } else {
+        int i = ArrayUtils.indexOf(net_no_arr, p_net_no);
+        if (i == ArrayUtils.INDEX_NOT_FOUND) {
             return false;
+        } else {
+            this.net_no_arr = ArrayUtils.remove(net_no_arr, i);
+            return true;
         }
     }
 
@@ -1187,8 +1185,8 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      * Checks, if all nets of this items are normal.
      */
     public boolean nets_normal() {
-        for (int i = 0; i < this.net_no_arr.length; ++i) {
-            if (!Nets.is_normal_net_no(this.net_no_arr[i])) {
+        for (int net_no : net_no_arr) {
+            if (!Nets.is_normal_net_no(net_no)) {
                 return false;
             }
         }
@@ -1259,7 +1257,6 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      * at the next fanout via or at any via.
      */
     public enum StopConnectionOption {
-
         NONE, FANOUT_VIA, VIA
     }
 }
