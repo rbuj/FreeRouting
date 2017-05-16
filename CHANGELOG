@@ -4,7 +4,13 @@ ToDo
 	* Write all documentation in docbook format
 
 xxxx-xx-xx
-        * Fixed javax.swing warnings: found raw type (generics)
+        * Change encodig for properties files for Java SE 9: properties
+          files are loaded in UTF-8 encoding.
+        * Bump source & target to JDK 9: preparation for the upcoming major
+          release of Java SE.
+        * Use Apache Commons Lang: avoid the implementation of common
+          methods, mostly they are operations on arrays.
+        * Fixed javax.swing warnings: found raw type (generics).
         * Use Queue<TreeNode> instead of ArrayStack<TreeNode> in
           MinAreaTree.java. Pop: Use NoSuchElementException when the stack
           has no elements in:
