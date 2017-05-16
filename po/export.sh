@@ -5,7 +5,7 @@ while read resource
 do
   for filename in ../src/main/resources/$resource/resources/*_en.properties; do
     file=`basename $filename`
-    po2prop --progress=none -t $filename $locale/$resource/${file/_en.properties/.po} ${filename/_en.properties/_$locale.properties}
+    po2prop --progress=none --personality=java-utf8 -t $filename $locale/$resource/${file/_en.properties/.po} ${filename/_en.properties/_$locale.properties}
     case $locale in
       "ca")
        sed -i -e 's/English version of/Catalan version of/g' ${filename/_en.properties/_$locale.properties}
