@@ -22,11 +22,32 @@ package net.freerouting.freeroute.datastructures;
  *
  * @author Alfons Wirtz
  */
-public class Signum {
+public enum Signum {
 
-    public static final Signum POSITIVE = new Signum("positive");
-    public static final Signum NEGATIVE = new Signum("negative");
-    public static final Signum ZERO = new Signum("zero");
+    POSITIVE(Constants.POSITIVE) {
+        @Override
+        public Signum negate() {
+            return NEGATIVE;
+        }
+    },
+    NEGATIVE(Constants.NEGATIVE) {
+        @Override
+        public Signum negate() {
+            return POSITIVE;
+        }
+    },
+    ZERO(Constants.ZERO) {
+        @Override
+        public Signum negate() {
+            return this;
+        }
+    };
+
+    private final String name;
+
+    private Signum(String p_name) {
+        name = p_name;
+    }
 
     /**
      * Returns the signum of p_value. Values are Signum.POSITIVE,
@@ -34,7 +55,6 @@ public class Signum {
      */
     public static final Signum of(double p_value) {
         Signum result;
-
         if (p_value > 0) {
             result = POSITIVE;
         } else if (p_value < 0) {
@@ -50,7 +70,6 @@ public class Signum {
      */
     public static final int as_int(double p_value) {
         int result;
-
         if (p_value > 0) {
             result = 1;
         } else if (p_value < 0) {
@@ -59,11 +78,6 @@ public class Signum {
             result = 0;
         }
         return result;
-    }
-    private final String name;
-
-    private Signum(String p_name) {
-        name = p_name;
     }
 
     /**
@@ -76,16 +90,14 @@ public class Signum {
     /**
      * Returns the opposite Signum of this Signum
      */
-    public final Signum negate() {
-        Signum result;
-        if (this == POSITIVE) {
-            result = NEGATIVE;
-        } else if (this == NEGATIVE) {
-            result = POSITIVE;
-        } else {
-            result = this;
-        }
-        return result;
+    public Signum negate() {
+        throw new UnsupportedOperationException();
     }
 
+    private class Constants {
+
+        public static final String POSITIVE = "positive";
+        public static final String NEGATIVE = "negative";
+        public static final String ZERO = "zero";
+    }
 }
