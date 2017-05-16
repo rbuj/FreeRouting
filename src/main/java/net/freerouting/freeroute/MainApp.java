@@ -20,12 +20,8 @@
  */
 package net.freerouting.freeroute;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -64,6 +60,7 @@ public final class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
+        List<String> locale_list = Arrays.asList("ca", "de", "es", "en");
         /**
          * Parse commandline arguments
          */
@@ -97,21 +94,12 @@ public final class MainApp extends Application {
                     case "-l":
                         if (iterator.hasNext()) {
                             String new_locale = iterator.next();
-                            try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
-                                String line = reader.readLine();
-                                while (line != null) {
-                                    if (line.equals(new_locale)) {
-                                        locale = new Locale(new_locale, "");
-                                        break;
-                                    }
-                                    line = reader.readLine();
-                                }
-                            }
-                            if (locale == null) {
+                            if (locale_list.contains(new_locale)) {
+                                locale = new Locale(new_locale, "");
+                            } else {
                                 LOGGER.log(Level.INFO, "locale: {0} not found [using default]", new_locale);
                                 locale = new Locale("en", "");
                             }
-                            Locale.setDefault(locale);
                         } else {
                             throw new IllegalArgumentException("Argument: " + string + " [missing locale]");
                         }
@@ -129,21 +117,13 @@ public final class MainApp extends Application {
 
             if (locale == null) {
                 String new_locale = java.util.Locale.getDefault().getLanguage();
-                try (InputStream in = MainApp.class.getClass().getResourceAsStream("/LOCALES"); BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
-                    String line = reader.readLine();
-                    while (line != null) {
-                        if (line.equals(new_locale)) {
-                            locale = new Locale(new_locale, "");
-                            break;
-                        }
-                        line = reader.readLine();
-                    }
-                }
-                if (locale == null) {
+                if (locale_list.contains(new_locale)) {
+                    locale = new Locale(new_locale, "");
+                } else {
                     locale = new Locale("en", "");
                 }
-                Locale.setDefault(locale);
             }
+            Locale.setDefault(locale);
 
             /**
              * Set data fields
@@ -153,7 +133,7 @@ public final class MainApp extends Application {
             } else {
                 test_level = TestLevel.RELEASE_VERSION;
             }
-        } catch (IOException | IllegalArgumentException exc) {
+        } catch (IllegalArgumentException exc) {
             LOGGER.log(Level.SEVERE, exc.toString());
             System.exit(1);
         }
@@ -185,7 +165,6 @@ public final class MainApp extends Application {
             launch_mode = LaunchMode.FROM_START_MENU;
         }
 
-//      new DesignFile((design_file_name.isEmpty() ? null : new File(design_file_name)), design_dir_name),
         controller.init_variables(
                 design_dir_name,
                 design_file_name.isEmpty() ? null : new File(design_file_name),
