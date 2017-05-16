@@ -30,6 +30,8 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
+import java.util.Map;
+import static java.util.Map.entry;
 
 /**
  *
@@ -44,6 +46,13 @@ public abstract class Cursor {
     private static final Line2D RIGHT_DIAGONAL_LINE = new Line2D.Double(-MAX_COOR, -MAX_COOR, MAX_COOR, MAX_COOR);
     private static final Line2D LEFT_DIAGONAL_LINE = new Line2D.Double(-MAX_COOR, MAX_COOR, MAX_COOR, -MAX_COOR);
 
+    private static final Map<java.awt.RenderingHints.Key, Object> RENDERING_HINTS_MAP = Map.ofEntries(
+            entry(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON),
+            entry(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED),
+            entry(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED),
+            entry(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_SPEED)
+    );
+
     public static Cursor get_45_degree_cross_hair_cursor() {
         return new FortyfiveDegreeCrossHairCursor();
     }
@@ -51,13 +60,11 @@ public abstract class Cursor {
     protected static void init_graphics(Graphics2D p_graphics) {
         BasicStroke bs = new BasicStroke(0, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
         p_graphics.setStroke(bs);
-        p_graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        p_graphics.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
-        p_graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
-        p_graphics.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_SPEED);
+        p_graphics.addRenderingHints(RENDERING_HINTS_MAP);
         p_graphics.setColor(Color.WHITE);
         p_graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
     }
+
     double x_coor;
     double y_coor;
     boolean location_initialized = false;
@@ -72,20 +79,22 @@ public abstract class Cursor {
 
     private static class FortyfiveDegreeCrossHairCursor extends Cursor {
 
+        static final GeneralPath draw_path = new GeneralPath(Path2D.WIND_EVEN_ODD);
+        static {
+            draw_path.append(VERTICAL_LINE, false);
+            draw_path.append(HORIZONTAL_LINE, false);
+            draw_path.append(RIGHT_DIAGONAL_LINE, false);
+            draw_path.append(LEFT_DIAGONAL_LINE, false);
+        }
+
         @Override
         public void draw(Graphics p_graphics) {
-
             if (!location_initialized) {
                 return;
             }
             if (p_graphics instanceof Graphics2D) {
                 Graphics2D g2 = (Graphics2D) p_graphics;
                 init_graphics(g2);
-                GeneralPath draw_path = new GeneralPath(Path2D.WIND_EVEN_ODD);
-                draw_path.append(VERTICAL_LINE, false);
-                draw_path.append(HORIZONTAL_LINE, false);
-                draw_path.append(RIGHT_DIAGONAL_LINE, false);
-                draw_path.append(LEFT_DIAGONAL_LINE, false);
                 g2.translate(this.x_coor, this.y_coor);
                 g2.draw(draw_path);
             }
