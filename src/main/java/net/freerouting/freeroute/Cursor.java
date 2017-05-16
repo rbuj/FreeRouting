@@ -79,12 +79,12 @@ public abstract class Cursor {
 
     private static class FortyfiveDegreeCrossHairCursor extends Cursor {
 
-        static final GeneralPath draw_path = new GeneralPath(Path2D.WIND_EVEN_ODD);
+        static final GeneralPath DRAW_PATH = new GeneralPath(Path2D.WIND_EVEN_ODD);
         static {
-            draw_path.append(VERTICAL_LINE, false);
-            draw_path.append(HORIZONTAL_LINE, false);
-            draw_path.append(RIGHT_DIAGONAL_LINE, false);
-            draw_path.append(LEFT_DIAGONAL_LINE, false);
+            DRAW_PATH.append(VERTICAL_LINE, false);
+            DRAW_PATH.append(HORIZONTAL_LINE, false);
+            DRAW_PATH.append(RIGHT_DIAGONAL_LINE, false);
+            DRAW_PATH.append(LEFT_DIAGONAL_LINE, false);
         }
 
         @Override
@@ -96,7 +96,7 @@ public abstract class Cursor {
                 Graphics2D g2 = (Graphics2D) p_graphics;
                 init_graphics(g2);
                 g2.translate(this.x_coor, this.y_coor);
-                g2.draw(draw_path);
+                g2.draw(DRAW_PATH);
             }
         }
     }
