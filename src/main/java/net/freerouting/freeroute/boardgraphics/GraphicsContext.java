@@ -30,7 +30,8 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.util.HashMap;
+import java.util.Map;
+import static java.util.Map.entry;
 import net.freerouting.freeroute.geometry.planar.Area;
 import net.freerouting.freeroute.geometry.planar.Circle;
 import net.freerouting.freeroute.geometry.planar.Ellipse;
@@ -51,14 +52,12 @@ public class GraphicsContext implements java.io.Serializable {
     private static final int UPDATE_OFFSET = 10_000;
     private static final boolean SHOW_LINE_SEGMENTS = false;
     private static final boolean SHOW_AREA_DIVISION = false;
-    private static final HashMap<java.awt.RenderingHints.Key, Object> RENDERING_HINTS_MAP = new HashMap<java.awt.RenderingHints.Key, Object>() {
-        {
-            put(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            put(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
-            put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
-            put(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_SPEED);
-        }
-    };
+    private static final Map<java.awt.RenderingHints.Key, Object> RENDERING_HINTS_MAP = Map.ofEntries(
+            entry(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON),
+            entry(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED),
+            entry(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED),
+            entry(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_SPEED)
+    );
 
     /**
      * initialise some values in p_graphics
