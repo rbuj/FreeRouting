@@ -19,8 +19,8 @@
  */
 package net.freerouting.freeroute.geometry.planar;
 
-import net.freerouting.freeroute.datastructures.BigIntAux;
 import net.freerouting.freeroute.datastructures.Signum;
+import static org.apache.commons.math3.util.ArithmeticUtils.gcd;
 
 /**
  *
@@ -244,10 +244,10 @@ public final class IntVector implements Vector {
         int dx = x;
         int dy = y;
 
-        int gcd = BigIntAux.binaryGcd(Math.abs(dx), Math.abs(dy));
-        if (gcd > 1) {
-            dx /= gcd;
-            dy /= gcd;
+        int gcd_positive = gcd(dx, dy);
+        if (gcd_positive > 1) {
+            dx /= gcd_positive;
+            dy /= gcd_positive;
         }
         return new IntDirection(dx, dy);
     }

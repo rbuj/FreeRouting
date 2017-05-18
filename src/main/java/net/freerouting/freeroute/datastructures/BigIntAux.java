@@ -19,30 +19,6 @@ import java.math.BigInteger;
  * @author Alfons Wirtz
  */
 public class BigIntAux {
-    // the following function binaryGcd is copied from private parts of java.math
-    // because we need it public.
-
-    /*
-    * TRAILING_ZERO_TABLE[i] is the number of trailing zero bits in the binary
-    * representaion of i.
-     */
-    final static byte[] TRAILING_ZERO_TABLE = {
-        -25, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        6, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        7, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        6, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
-        4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0};
 
     /**
      * calculates the determinant of the vectors (p_x_1, p_y_1) and (p_x_2,
@@ -80,58 +56,6 @@ public class BigIntAux {
             result[1] = tmp_1.add(tmp_2);
         }
         return result;
-    }
-
-    /**
-     * Calculate GCD of a and b interpreted as unsigned integers.
-     */
-    public static final int binaryGcd(int a, int b) {
-        if (b == 0) {
-            return a;
-        }
-        if (a == 0) {
-            return b;
-        }
-
-        int x;
-        int aZeros = 0;
-        while ((x = a & 0xff) == 0) {
-            a >>>= 8;
-            aZeros += 8;
-        }
-        int y = TRAILING_ZERO_TABLE[x];
-        aZeros += y;
-        a >>>= y;
-
-        int bZeros = 0;
-        while ((x = b & 0xff) == 0) {
-            b >>>= 8;
-            bZeros += 8;
-        }
-        y = TRAILING_ZERO_TABLE[x];
-        bZeros += y;
-        b >>>= y;
-
-        int t = (aZeros < bZeros ? aZeros : bZeros);
-
-        while (a != b) {
-            if ((a + 0x8000_0000) > (b + 0x8000_0000)) {  // a > b as unsigned
-                a -= b;
-
-                while ((x = a & 0xff) == 0) {
-                    a >>>= 8;
-                }
-                a >>>= TRAILING_ZERO_TABLE[x];
-            } else {
-                b -= a;
-
-                while ((x = b & 0xff) == 0) {
-                    b >>>= 8;
-                }
-                b >>>= TRAILING_ZERO_TABLE[x];
-            }
-        }
-        return a << t;
     }
 
     private BigIntAux() // disallow instantiation

@@ -4,6 +4,8 @@ ToDo
 	* Write all documentation in docbook format
 
 xxxx-xx-xx
+        * Use Apache Commons Math:
+                * ArithmeticUtils.gcd(int p, int q)
         * Change encodig for properties files for Java SE 9: properties
           files are loaded in UTF-8 encoding.
         * Bump source & target to JDK 9: preparation for the upcoming major
