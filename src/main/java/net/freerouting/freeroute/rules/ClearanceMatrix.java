@@ -389,9 +389,7 @@ public class ClearanceMatrix implements java.io.Serializable {
 
         private MatrixEntry() {
             layer = new int[layer_structure.arr.length];
-            for (int i = 0; i < layer_structure.arr.length; ++i) {
-                layer[i] = 0;
-            }
+            java.util.Arrays.fill(layer, 0);
         }
 
         /**

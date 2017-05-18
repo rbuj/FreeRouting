@@ -97,9 +97,7 @@ public class NetClass implements java.io.Serializable, net.freerouting.freeroute
      * layers.
      */
     public void set_trace_half_width_on_inner(int p_value) {
-        for (int i = 1; i < trace_half_width_arr.length - 1; ++i) {
-            trace_half_width_arr[i] = p_value;
-        }
+        java.util.Arrays.fill(trace_half_width_arr, 1, trace_half_width_arr.length - 1, p_value);
     }
 
     /**
@@ -259,9 +257,7 @@ public class NetClass implements java.io.Serializable, net.freerouting.freeroute
      * Activates or deactivates all inner layers for routing
      */
     public void set_all_inner_layers_active(boolean p_value) {
-        for (int i = 1; i < trace_half_width_arr.length - 1; ++i) {
-            active_routing_layer_arr[i] = p_value;
-        }
+        java.util.Arrays.fill(this.active_routing_layer_arr, 1, trace_half_width_arr.length - 1, p_value);
     }
 
     @Override
