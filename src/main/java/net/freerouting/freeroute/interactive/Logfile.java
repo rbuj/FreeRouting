@@ -16,6 +16,7 @@
 package net.freerouting.freeroute.interactive;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -89,7 +90,7 @@ public class Logfile {
     public boolean start_write(File p_file) {
         try {
             this.file_writer = new OutputStreamWriter(new FileOutputStream(p_file), StandardCharsets.UTF_8);
-        } catch (IOException e) {
+        } catch (FileNotFoundException ex) {
             System.out.println("unable to create logfile");
             return false;
         }
