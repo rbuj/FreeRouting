@@ -281,20 +281,4 @@ public class DesignFile {
     public boolean is_created_from_text_file() {
         return input_file != output_file;
     }
-
-    public void dispose() {
-    }
-
-    @Override
-    protected void finalize() {
-        try {
-            dispose();
-        } finally {
-            try {
-                super.finalize();
-            } catch (Throwable ex) {
-                Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
 }
