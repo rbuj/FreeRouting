@@ -956,7 +956,7 @@ public class MazeSearchAlgo {
                     + this.search_tree.clearance_compensation_value(obstacle_item.clearance_class_no(), layer);
 
         } else if (obstacle_item instanceof net.freerouting.freeroute.board.Via) {
-            TileShape via_shape = ((net.freerouting.freeroute.board.Via) obstacle_item).get_tree_shape_on_layer(this.search_tree, layer);
+            TileShape via_shape = ((net.freerouting.freeroute.board.DrillItem) obstacle_item).get_tree_shape_on_layer(this.search_tree, layer);
             obstacle_half_width = 0.5 * via_shape.max_width();
         } else {
             System.out.println("MazeSearchAlgo. room_shape_is_thick: unexpected obstacle item");
