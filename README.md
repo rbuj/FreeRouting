@@ -36,7 +36,7 @@ If you have further questions or want some feedback, please sent an Email to sup
 
 ## Here are some instructions how to run the Freerouting project in the NetBeans IDE
 
-1. Go to the Java SE download web page of Oracle to download and install JDK 8 with NetBeans 8.0. https://netbeans.org/downloads/
+1. Go to the Java EA download web page and download and install JDK 9 EA http://jdk.java.net/9/, and download Development version of NetBeans IDE http://bits.netbeans.org/download/trunk/nightly/latest/
 2. Start the NetBeans IDE and select File | Open Project in the pull down menu and select freeroute project.
 3. Build the project. The router should run now.
 
@@ -51,12 +51,16 @@ Install maven
 sudo dnf install maven
 ```
 
-Install Oracle JDK & JRE http://www.oracle.com/technetwork/java/javase/downloads/index.html
+Install Oracle JDK & JRE 9 EA http://jdk.java.net/9/
 ```bash
-sudo rpm -ivh jdk-8u77-linux-x64.rpm
-sudo rpm -ivh jre-8u77-linux-x64.rpm 
-sudo  alternatives --config java
-sudo  alternatives --config javac
+tar xzvf jdk-9-ea+170_linux-x64_bin.tar.gz -C /usr/java
+su -c chown -R root:root /usr/java
+su -c chown -R +x /usr/java/bin
+su -c pdate-alternatives --install /usr/bin/java java /usr/java/jdk1.9*/bin/java 1065
+su -c update-alternatives --install /usr/bin/javac javac /usr/java/jdk1.9*/bin/javac 1065
+su -c update-alternatives --install /usr/bin/jar jar /usr/java/jdk1.9*/bin/jar 1065
+su -c update-alternatives --install /usr/bin/javaws javaws /usr/java/jdk1.9*/bin/javaws 1065
+su -c update-alternatives --config java
 ```
 
 Download freeroute source
@@ -73,11 +77,11 @@ mvn install
 Run freeroute
 ```bash
 cd target
-java -jar freeroute-1.4.jar
+java -jar freeroute-1.4.1.jar
 ```
 
 ### OS X
-Download and install Oracle's JDK & JRE 8. https://www.java.com/en/download/
+Download and install Oracle's JDK & JRE 9. http://jdk.java.net/9/
 
 Install Apache Maven. https://maven.apache.org/
 
@@ -95,5 +99,5 @@ mvn install
 Run freeroute
 ```bash
 cd target
-java -jar freeroute-1.4.jar
+java -jar freeroute-1.4.1.jar
 ```

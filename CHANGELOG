@@ -1,9 +1,10 @@
 ToDo
-        * Bump version to 1.4.1
+        * Bump version to 1.4.2
 	* Migrate all GUI from swing to JavaFX
 	* Write all documentation in docbook format
 
-xxxx-xx-xx
+2017-05-19
+        * Bump version to 1.4.1
         * Use Apache Commons Math:
                 * ArithmeticUtils.gcd(int p, int q)
         * Change encodig for properties files for Java SE 9: properties
