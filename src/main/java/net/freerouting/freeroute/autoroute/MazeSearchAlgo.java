@@ -1044,7 +1044,7 @@ public class MazeSearchAlgo {
         boolean randomize = this.ctrl.ripup_pass_no >= 4 && this.ctrl.ripup_pass_no % 3 != 0;
         if (randomize) {
             // shuffle the result to avoid repetitive loops
-            double random_number = this.RANDOM_GENERATOR.nextDouble();
+            double random_number = MazeSearchAlgo.RANDOM_GENERATOR.nextDouble();
             double random_factor = 0.5 + random_number * random_number;
             detour *= random_factor;
         }
