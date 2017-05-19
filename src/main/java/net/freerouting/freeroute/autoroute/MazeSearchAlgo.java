@@ -732,7 +732,7 @@ public class MazeSearchAlgo {
             if (!(curr_obstacle_item instanceof net.freerouting.freeroute.board.Via)) {
                 return;
             }
-            net.freerouting.freeroute.library.Padstack curr_obstacle_padstack = ((net.freerouting.freeroute.board.Via) curr_obstacle_item).get_padstack();
+            net.freerouting.freeroute.library.Padstack curr_obstacle_padstack = ((net.freerouting.freeroute.board.DrillItem) curr_obstacle_item).get_padstack();
             if (!this.ctrl.via_rule.contains_padstack(curr_obstacle_padstack) || curr_obstacle_item.clearance_class_no() != this.ctrl.via_clearance_class) {
                 return;
             }

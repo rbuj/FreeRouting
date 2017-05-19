@@ -437,7 +437,7 @@ public class SessionToEagle extends javax.swing.JFrame {
             if (next_token instanceof Double) {
                 location[i] = (double) next_token;
             } else if (next_token instanceof Integer) {
-                location[i] = (int) next_token;
+                location[i] = ((Number) next_token).doubleValue();
             } else {
                 System.out.println("SessionToEagle.process_via_scope: number expected");
                 return false;

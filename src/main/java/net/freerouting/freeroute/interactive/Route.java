@@ -343,7 +343,7 @@ public class Route {
             DrillItem target = (DrillItem) nearest_target_item;
             connection_point = target.get_center();
         } else if (nearest_target_item instanceof PolylineTrace) {
-            return board.connect_to_trace(p_from_point, (PolylineTrace) nearest_target_item,
+            return board.connect_to_trace(p_from_point, (Trace) nearest_target_item,
                     this.pen_half_width_arr[layer], this.clearance_class);
         } else if (nearest_target_item instanceof ConductionArea) {
             connection_point = p_from_point;

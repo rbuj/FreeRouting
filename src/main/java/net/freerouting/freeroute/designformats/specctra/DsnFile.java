@@ -268,7 +268,7 @@ public class DsnFile {
             if (next_token instanceof Double) {
                 value = (double) next_token;
             } else if (next_token instanceof Integer) {
-                value = (int) next_token;
+                value = ((Number) next_token).doubleValue();
             } else {
                 throw new DsnFileException("DsnFile.read_float_scope: number expected");
             }

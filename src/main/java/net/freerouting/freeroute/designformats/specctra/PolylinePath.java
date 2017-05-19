@@ -147,7 +147,7 @@ public class PolylinePath extends Path {
             if (next_object instanceof Double) {
                 width = (double) next_object;
             } else if (next_object instanceof Integer) {
-                width = (int) next_object;
+                width = ((Number) next_object).doubleValue();
             } else {
                 System.out.println("PolylinePath.read_scope: number expected");
                 return null;
@@ -158,7 +158,7 @@ public class PolylinePath extends Path {
                 if (next_object instanceof Double) {
                     corner_arr[i] = (double) next_object;
                 } else if (next_object instanceof Integer) {
-                    corner_arr[i] = (int) next_object;
+                    corner_arr[i] = ((Number) next_object).doubleValue();
                 } else {
                     System.out.println("Shape.read_polygon_path_scope: number expected");
                     return null;

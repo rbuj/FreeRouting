@@ -152,7 +152,7 @@ public class Circle extends Shape {
                 if (next_token instanceof Double) {
                     circle_coor[curr_index] = (double) next_token;
                 } else if (next_token instanceof Integer) {
-                    circle_coor[curr_index] = (int) next_token;
+                    circle_coor[curr_index] = ((Number) next_token).doubleValue();
                 } else {
                     System.out.println("Shape.read_circle_scope: number expected");
                     return null;

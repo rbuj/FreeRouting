@@ -95,7 +95,7 @@ public class PinInfo {
                 if (next_token instanceof Double) {
                     pin_coor[i] = (double) next_token;
                 } else if (next_token instanceof Integer) {
-                    pin_coor[i] = (int) next_token;
+                    pin_coor[i] = ((Number) next_token).doubleValue();
                 } else {
                     System.out.println("Package.read_pin_info: number expected");
                     return null;
@@ -134,7 +134,7 @@ public class PinInfo {
         try {
             Object next_token = p_scanner.next_token();
             if (next_token instanceof Integer) {
-                result = (int) next_token;
+                result = ((Number) next_token).doubleValue();
             } else if (next_token instanceof Double) {
                 result = (double) next_token;
             } else {

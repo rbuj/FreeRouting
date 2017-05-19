@@ -84,7 +84,7 @@ public class Circuit {
             if (next_token instanceof Double) {
                 length_arr[i] = (double) next_token;
             } else if (next_token instanceof Integer) {
-                length_arr[i] = (int) next_token;
+                length_arr[i] = ((Number) next_token).doubleValue();
             } else {
                 System.out.println("Circuit.read_length_scope: number expected");
                 return null;

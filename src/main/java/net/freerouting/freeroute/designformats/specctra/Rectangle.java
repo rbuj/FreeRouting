@@ -154,7 +154,7 @@ public class Rectangle extends Shape {
                 if (next_token instanceof Double) {
                     rect_coor[i] = (double) next_token;
                 } else if (next_token instanceof Integer) {
-                    rect_coor[i] = (int) next_token;
+                    rect_coor[i] = ((Number) next_token).doubleValue();
                 } else {
                     System.out.println("Shape.read_rectangle_scope: number expected");
                     return null;

@@ -26,6 +26,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import net.freerouting.freeroute.board.ClearanceViolation;
 import net.freerouting.freeroute.board.Component;
+import net.freerouting.freeroute.board.DrillItem;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.LayerStructure;
 import net.freerouting.freeroute.board.Via;
@@ -386,7 +387,7 @@ public class MoveItemState extends InteractiveState {
         boolean placement_side_changable = true;
         for (Item curr_item : item_list) {
             if (curr_item instanceof Via) {
-                if (board_library.get_mirrored_via_padstack(((Via) curr_item).get_padstack()) == null) {
+                if (board_library.get_mirrored_via_padstack(((DrillItem) curr_item).get_padstack()) == null) {
                     placement_side_changable = false;
                     break;
                 }

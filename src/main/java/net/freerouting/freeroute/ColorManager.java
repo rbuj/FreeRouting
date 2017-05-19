@@ -27,6 +27,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
@@ -222,7 +223,7 @@ public class ColorManager extends BoardSavableSubWindow {
                 boolean isSelected,
                 int row,
                 int column) {
-            ((JButton) editorComponent).setText(value.toString());
+            ((AbstractButton) editorComponent).setText(value.toString());
             currentColor = (Color) value;
             return editorComponent;
         }

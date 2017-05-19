@@ -116,7 +116,7 @@ public abstract class Rule {
             if (next_token instanceof Double) {
                 value = (double) next_token;
             } else if (next_token instanceof Integer) {
-                value = (int) next_token;
+                value = ((Number) next_token).doubleValue();
             } else {
                 System.out.println("Rule.read_width_rule: number expected");
                 return null;
@@ -238,7 +238,7 @@ public abstract class Rule {
             if (next_token instanceof Double) {
                 value = (double) next_token;
             } else if (next_token instanceof Integer) {
-                value = (int) next_token;
+                value = ((Number) next_token).doubleValue();
             } else {
                 System.out.println("Rule.read_clearance_rule: number expected");
                 return null;

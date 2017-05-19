@@ -197,7 +197,7 @@ public class Component extends ScopeKeyword {
                 if (next_token instanceof Double) {
                     location[i] = (double) next_token;
                 } else if (next_token instanceof Integer) {
-                    location[i] = (int) next_token;
+                    location[i] = ((Number) next_token).doubleValue();
                 } else if (next_token == Keyword.CLOSED_BRACKET) {
                     // component is not yet placed
                     return new ComponentPlacement.ComponentLocation(name, null, true, 0, false, pin_infos,
@@ -219,7 +219,7 @@ public class Component extends ScopeKeyword {
             if (next_token instanceof Double) {
                 rotation = (double) next_token;
             } else if (next_token instanceof Integer) {
-                rotation = (int) next_token;
+                rotation = ((Number) next_token).doubleValue();
             } else {
                 System.out.println("Component.read_place_scope: number expected");
                 return null;

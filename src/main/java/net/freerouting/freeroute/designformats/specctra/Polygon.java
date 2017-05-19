@@ -198,7 +198,7 @@ public class Polygon extends Shape {
                 if (next_object instanceof Double) {
                     coor_arr[i] = (double) next_object;
                 } else if (next_object instanceof Integer) {
-                    coor_arr[i] = (int) next_object;
+                    coor_arr[i] = ((Number) next_object).doubleValue();
                 } else {
                     System.out.println("Shape.read_polygon_scope: number expected");
                     return null;
