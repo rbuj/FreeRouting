@@ -259,7 +259,7 @@ public class BoardOutline extends Item {
 
     @Override
     public Item copy(int p_id_no) {
-        return new BoardOutline((ArrayList) this.shapes.clone(), this.clearance_class_no(), p_id_no, this.board);
+        return new BoardOutline(new ArrayList<>(this.shapes), this.clearance_class_no(), p_id_no, this.board);
     }
 
     @Override
