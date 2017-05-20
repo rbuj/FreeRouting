@@ -26,7 +26,7 @@ public interface ShapeReadable {
      * Reads shape scope from a Specctra dsn file. If p_layer_structure == null,
      * only Layer.PCB and Layer.Signal are expected, no induvidual layers.
      */
-    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
         Shape result = null;
         try {
             Object next_token = p_scanner.next_token();
@@ -48,9 +48,7 @@ public interface ShapeReadable {
                 ScopeKeyword.skip_scope(p_scanner);
             }
         } catch (java.io.IOException e) {
-            System.out.println("Shape.read_scope: IO error scanning file");
-            System.out.println(e);
-            return result;
+            throw new ReadScopeException("Shape.read_scope: IO error scanning file", e);
         }
         return result;
     }

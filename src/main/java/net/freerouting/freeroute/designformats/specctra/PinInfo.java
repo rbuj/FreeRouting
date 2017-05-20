@@ -49,7 +49,7 @@ public class PinInfo {
     /**
      * Reads the information of a single pin in a package.
      */
-    public static PinInfo read_pin_info(Scanner p_scanner) {
+    public static PinInfo read_pin_info(Scanner p_scanner) throws ReadScopeException {
         try {
             // Read the padstack name.
             p_scanner.yybegin(SpecctraFileScanner.NAME);
@@ -60,8 +60,7 @@ public class PinInfo {
             } else if (next_token instanceof Integer) {
                 padstack_name = next_token.toString();
             } else {
-                System.out.println("Package.read_pin_info: String or Integer expected");
-                return null;
+                throw new ReadScopeException("Package.read_pin_info: String or Integer expected");
             }
             double rotation = 0;
 
@@ -85,8 +84,7 @@ public class PinInfo {
             } else if (next_token instanceof Integer) {
                 pin_name = next_token.toString();
             } else {
-                System.out.println("Package.read_pin_info: String or Integer expected");
-                return null;
+                throw new ReadScopeException("Package.read_pin_info: String or Integer expected");
             }
 
             double[] pin_coor = new double[2];
@@ -97,8 +95,7 @@ public class PinInfo {
                 } else if (next_token instanceof Integer) {
                     pin_coor[i] = ((Number) next_token).doubleValue();
                 } else {
-                    System.out.println("Package.read_pin_info: number expected");
-                    return null;
+                    throw new ReadScopeException("Package.read_pin_info: number expected");
                 }
             }
             // Handle scopes at the end of the pin scope.
@@ -107,8 +104,7 @@ public class PinInfo {
                 next_token = p_scanner.next_token();
 
                 if (next_token == null) {
-                    System.out.println("Package.read_pin_info: unexpected end of file");
-                    return null;
+                    throw new ReadScopeException("Package.read_pin_info: unexpected end of file");
                 }
                 if (next_token == Keyword.CLOSED_BRACKET) {
                     // end of scope
@@ -124,12 +120,11 @@ public class PinInfo {
             }
             return new PinInfo(padstack_name, pin_name, pin_coor, rotation);
         } catch (java.io.IOException e) {
-            System.out.println("Package.read_pin_info: IO error while scanning file");
-            return null;
+            throw new ReadScopeException("Package.read_pin_info: IO error while scanning file", e);
         }
     }
 
-    private static double read_rotation(Scanner p_scanner) {
+    private static double read_rotation(Scanner p_scanner) throws ReadScopeException {
         double result = 0;
         try {
             Object next_token = p_scanner.next_token();
@@ -138,15 +133,15 @@ public class PinInfo {
             } else if (next_token instanceof Double) {
                 result = (double) next_token;
             } else {
-                System.out.println("Package.read_rotation: number expected");
+                throw new ReadScopeException("Package.read_rotation: number expected");
             }
             // Overread The closing bracket.
             next_token = p_scanner.next_token();
             if (next_token != Keyword.CLOSED_BRACKET) {
-                System.out.println("Package.read_rotation: closing bracket expected");
+                throw new ReadScopeException("Package.read_rotation: closing bracket expected");
             }
         } catch (java.io.IOException e) {
-            System.out.println("Package.read_rotation: IO error while scanning file");
+            throw new ReadScopeException("Package.read_rotation: IO error while scanning file", e);
         }
         return result;
     }

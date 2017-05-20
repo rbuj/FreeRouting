@@ -20,6 +20,8 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.BasicBoard;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 
@@ -57,83 +59,88 @@ public class RulesFile {
         try {
             Object curr_token = scanner.next_token();
             if (curr_token != Keyword.OPEN_BRACKET) {
-                System.out.println("RulesFile.read: open bracket expected");
-                return false;
+                throw new ReadScopeException("RulesFile.read: open bracket expected");
             }
+
             curr_token = scanner.next_token();
             if (curr_token != Keyword.RULES) {
-                System.out.println("RulesFile.read: keyword rules expected");
-                return false;
+                throw new ReadScopeException("RulesFile.read: keyword rules expected");
             }
+
             curr_token = scanner.next_token();
             if (curr_token != Keyword.PCB_SCOPE) {
-                System.out.println("RulesFile.read: keyword pcb expected");
-                return false;
+                throw new ReadScopeException("RulesFile.read: keyword pcb expected");
             }
+
             scanner.yybegin(SpecctraFileScanner.NAME);
             curr_token = scanner.next_token();
             if (!(curr_token instanceof String) || !curr_token.equals(p_design_name)) {
-                System.out.println("RulesFile.read: design_name not matching");
-                return false;
+                throw new ReadScopeException("RulesFile.read: design_name not matching");
             }
         } catch (java.io.IOException e) {
-            System.out.println("RulesFile.read: IO error scanning file");
+            Logger.getLogger(RulesFile.class.getName()).log(Level.SEVERE, "RulesFile.read: IO error scanning file", e);
+            return false;
+        } catch (ReadScopeException ex) {
+            Logger.getLogger(RulesFile.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+
         LayerStructure layer_structure = new LayerStructure(routing_board.layer_structure);
         CoordinateTransform coordinate_transform = routing_board.communication.coordinate_transform;
-        Object next_token = null;
-        for (;;) {
-            Object prev_token = next_token;
-            try {
-                next_token = scanner.next_token();
-            } catch (java.io.IOException e) {
-                System.out.println("RulesFile.read: IO error scanning file");
-                return false;
-            }
-            if (next_token == null) {
-                System.out.println("Structure.read_scope: unexpected end of file");
-                return false;
-            }
-            if (next_token == Keyword.CLOSED_BRACKET) {
-                // end of scope
-                break;
-            }
-            boolean read_ok = true;
-            if (prev_token == Keyword.OPEN_BRACKET) {
-                if (next_token == Keyword.RULE) {
-                    add_rules(Rule.read_scope(scanner), routing_board, null);
-                } else if (next_token == Keyword.LAYER) {
-                    add_layer_rules(scanner, routing_board);
-                } else if (next_token == Keyword.PADSTACK) {
-                    Padstack.read_padstack_scope(scanner, layer_structure, coordinate_transform, routing_board.library.padstacks);
-                } else if (next_token == Keyword.VIA) {
-                    read_via_info(scanner, routing_board);
-                } else if (next_token == Keyword.VIA_RULE) {
-                    read_via_rule(scanner, routing_board);
-                } else if (next_token == Keyword.CLASS) {
-                    read_net_class(scanner, layer_structure, routing_board);
-                } else if (next_token == Keyword.SNAP_ANGLE) {
-
-                    net.freerouting.freeroute.board.AngleRestriction snap_angle = Structure.read_snap_angle(scanner);
-                    if (snap_angle != null) {
-                        routing_board.rules.set_trace_angle_restriction(snap_angle);
+        try {
+            Object next_token = null;
+            for (;;) {
+                Object prev_token = next_token;
+                try {
+                    next_token = scanner.next_token();
+                } catch (java.io.IOException e) {
+                    throw new ReadScopeException("RulesFile.read: IO error scanning file", e);
+                }
+                if (next_token == null) {
+                    throw new ReadScopeException("Structure.read_scope: unexpected end of file");
+                }
+                if (next_token == Keyword.CLOSED_BRACKET) {
+                    // end of scope
+                    break;
+                }
+                boolean read_ok = true;
+                if (prev_token == Keyword.OPEN_BRACKET) {
+                    if (next_token == Keyword.RULE) {
+                        add_rules(Rule.read_scope(scanner), routing_board, null);
+                    } else if (next_token == Keyword.LAYER) {
+                        add_layer_rules(scanner, routing_board);
+                    } else if (next_token == Keyword.PADSTACK) {
+                        Padstack.read_padstack_scope(scanner, layer_structure, coordinate_transform, routing_board.library.padstacks);
+                    } else if (next_token == Keyword.VIA) {
+                        read_via_info(scanner, routing_board);
+                    } else if (next_token == Keyword.VIA_RULE) {
+                        read_via_rule(scanner, routing_board);
+                    } else if (next_token == Keyword.CLASS) {
+                        read_net_class(scanner, layer_structure, routing_board);
+                    } else if (next_token == Keyword.SNAP_ANGLE) {
+                        net.freerouting.freeroute.board.AngleRestriction snap_angle = Structure.read_snap_angle(scanner);
+                        if (snap_angle != null) {
+                            routing_board.rules.set_trace_angle_restriction(snap_angle);
+                        }
+                    } else if (next_token == Keyword.AUTOROUTE_SETTINGS) {
+                        net.freerouting.freeroute.interactive.AutorouteSettings autoroute_settings
+                                = AutorouteSettings.read_scope(scanner, layer_structure);
+                        if (autoroute_settings != null) {
+                            p_board_handling.settings.autoroute_settings = autoroute_settings;
+                        }
+                    } else {
+                        ScopeKeyword.skip_scope(scanner);
                     }
-                } else if (next_token == Keyword.AUTOROUTE_SETTINGS) {
-                    net.freerouting.freeroute.interactive.AutorouteSettings autoroute_settings
-                            = AutorouteSettings.read_scope(scanner, layer_structure);
-                    if (autoroute_settings != null) {
-                        p_board_handling.settings.autoroute_settings = autoroute_settings;
-                    }
-                } else {
-                    ScopeKeyword.skip_scope(scanner);
+                }
+                if (!read_ok) {
+                    return false;
                 }
             }
-            if (!read_ok) {
-                return false;
-            }
+            return true;
+        } catch (ReadScopeException ex) {
+            Logger.getLogger(RulesFile.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-        return true;
     }
 
     private static void write_rules(WriteScopeParameter p_par, String p_design_name) throws java.io.IOException {
@@ -183,19 +190,17 @@ public class RulesFile {
         }
     }
 
-    private static boolean add_layer_rules(Scanner p_scanner, BasicBoard p_board) {
+    private static boolean add_layer_rules(Scanner p_scanner, BasicBoard p_board) throws ReadScopeException {
         try {
             Object next_token = p_scanner.next_token();
             if (!(next_token instanceof String)) {
-                System.out.println("RulesFile.add_layer_rules: String expected");
-                return false;
+                throw new ReadScopeException("RulesFile.add_layer_rules: String expected");
             }
             String layer_string = (String) next_token;
             next_token = p_scanner.next_token();
             while (next_token != Keyword.CLOSED_BRACKET) {
                 if (next_token != Keyword.OPEN_BRACKET) {
-                    System.out.println("RulesFile.add_layer_rules: ( expected");
-                    return false;
+                    throw new ReadScopeException("RulesFile.add_layer_rules: ( expected");
                 }
                 next_token = p_scanner.next_token();
                 if (next_token == Keyword.RULE) {
@@ -208,12 +213,11 @@ public class RulesFile {
             }
             return true;
         } catch (java.io.IOException e) {
-            System.out.println("RulesFile.add_layer_rules: IO error scanning file");
-            return false;
+            throw new ReadScopeException("RulesFile.add_layer_rules: IO error scanning file", e);
         }
     }
 
-    private static boolean read_via_info(Scanner p_scanner, BasicBoard p_board) {
+    private static boolean read_via_info(Scanner p_scanner, BasicBoard p_board) throws ReadScopeException {
         net.freerouting.freeroute.rules.ViaInfo curr_via_info = Network.read_via_info(p_scanner, p_board);
         if (curr_via_info == null) {
             return false;
@@ -227,7 +231,7 @@ public class RulesFile {
         return true;
     }
 
-    private static boolean read_via_rule(Scanner p_scanner, BasicBoard p_board) {
+    private static boolean read_via_rule(Scanner p_scanner, BasicBoard p_board) throws ReadScopeException {
         java.util.Collection<String> via_rule = Network.read_via_rule(p_scanner, p_board);
         if (via_rule == null) {
             return false;
@@ -236,7 +240,7 @@ public class RulesFile {
         return true;
     }
 
-    private static boolean read_net_class(Scanner p_scanner, LayerStructure p_layer_structure, BasicBoard p_board) throws DsnFileException {
+    private static boolean read_net_class(Scanner p_scanner, LayerStructure p_layer_structure, BasicBoard p_board) throws DsnFileException, ReadScopeException {
         NetClass curr_class = NetClass.read_scope(p_scanner);
         if (curr_class == null) {
             return false;

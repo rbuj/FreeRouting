@@ -81,18 +81,16 @@ public class Plane extends ScopeKeyword {
         try {
             Object next_token = p_par.scanner.next_token();
             if (!(next_token instanceof String)) {
-                System.out.println("Plane.read_scope: String expected");
-                return false;
+                throw new ReadScopeException("Plane.read_scope: String expected");
             }
             net_name = (String) next_token;
             conduction_area = AreaReadable.read_area_scope(p_par.scanner, p_par.layer_structure, skip_window_scopes);
             ReadScopeParameter.PlaneInfo plane_info = new ReadScopeParameter.PlaneInfo(conduction_area, net_name);
             p_par.plane_list.add(plane_info);
         } catch (java.io.IOException e) {
-            System.out.println("Plane.read_scope: IO error scanning file");
-            System.out.println(e);
+            Logger.getLogger(Plane.class.getName()).log(Level.SEVERE, "Plane.read_scope: IO error scanning file", e);
             return false;
-        } catch (DsnFileException ex) {
+        } catch (DsnFileException | ReadScopeException ex) {
             Logger.getLogger(Plane.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }

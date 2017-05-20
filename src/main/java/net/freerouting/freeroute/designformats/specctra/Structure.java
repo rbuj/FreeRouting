@@ -222,7 +222,7 @@ class Structure extends ScopeKeyword {
         p_par.file.end_scope();
     }
 
-    private static boolean read_boundary_scope(Scanner p_scanner, BoardConstructionInfo p_board_construction_info) throws DsnFileException {
+    private static boolean read_boundary_scope(Scanner p_scanner, BoardConstructionInfo p_board_construction_info) throws DsnFileException, ReadScopeException {
         Shape curr_shape = ShapeReadable.read_scope(p_scanner, null);
         // overread the closing bracket.
         try {
@@ -240,12 +240,10 @@ class Structure extends ScopeKeyword {
                 prev_token = next_token;
             }
         } catch (java.io.IOException e) {
-            System.out.println("Structure.read_boundary_scope: IO error scanning file");
-            return false;
+            throw new ReadScopeException("Structure.read_boundary_scope: IO error scanning file", e);
         }
         if (curr_shape == null) {
-            System.out.println("Structure.read_boundary_scope: shape is null");
-            return true;
+            throw new ReadScopeException("Structure.read_boundary_scope: shape is null");
         }
         if (curr_shape.layer == Layer.PCB) {
             if (p_board_construction_info.bounding_shape == null) {
@@ -261,22 +259,20 @@ class Structure extends ScopeKeyword {
         return true;
     }
 
-    static boolean read_layer_scope(Scanner p_scanner, BoardConstructionInfo p_board_construction_info, String p_string_quote) {
+    static boolean read_layer_scope(Scanner p_scanner, BoardConstructionInfo p_board_construction_info, String p_string_quote) throws ReadScopeException {
         try {
             boolean layer_ok = true;
             boolean is_signal = true;
             Object next_token = p_scanner.next_token();
             if (!(next_token instanceof String)) {
-                System.out.println("Structure.read_layer_scope: String expected");
-                return false;
+                throw new ReadScopeException("Structure.read_layer_scope: String expected");
             }
             Collection<String> net_names = new LinkedList<>();
             String layer_string = (String) next_token;
             next_token = p_scanner.next_token();
             while (next_token != Keyword.CLOSED_BRACKET) {
                 if (next_token != Keyword.OPEN_BRACKET) {
-                    System.out.println("Structure.read_layer_scope: ( expected");
-                    return false;
+                    throw new ReadScopeException("Structure.read_layer_scope: ( expected");
                 }
                 next_token = p_scanner.next_token();
                 if (next_token == Keyword.TYPE) {
@@ -293,8 +289,7 @@ class Structure extends ScopeKeyword {
                     }
                     next_token = p_scanner.next_token();
                     if (next_token != Keyword.CLOSED_BRACKET) {
-                        System.out.println("Structure.read_layer_scope: ) expected");
-                        return false;
+                        throw new ReadScopeException("Structure.read_layer_scope: ) expected");
                     }
                 } else if (next_token == Keyword.RULE) {
                     Collection<Rule> curr_rules = Rule.read_scope(p_scanner);
@@ -323,15 +318,13 @@ class Structure extends ScopeKeyword {
                 ++p_board_construction_info.found_layer_count;
             }
         } catch (java.io.IOException e) {
-            System.out.println("Layer.read_scope: IO error scanning file");
-            System.out.println(e);
-            return false;
+            throw new ReadScopeException("Layer.read_scope: IO error scanning file", e);
         }
         return true;
 
     }
 
-    static Collection<String> read_via_padstacks(Scanner p_scanner) {
+    static Collection<String> read_via_padstacks(Scanner p_scanner) throws ReadScopeException {
         try {
             Collection<String> normal_vias = new LinkedList<>();
             Collection<String> spare_vias = new LinkedList<>();
@@ -350,32 +343,28 @@ class Structure extends ScopeKeyword {
                 } else if (next_token instanceof String) {
                     normal_vias.add((String) next_token);
                 } else {
-                    System.out.println("Structure.read_via_padstack: String expected");
-                    return null;
+                    throw new ReadScopeException("Structure.read_via_padstack: String expected");
                 }
             }
             // add the spare vias to the end of the list
             normal_vias.addAll(spare_vias);
             return normal_vias;
         } catch (java.io.IOException e) {
-            System.out.println("Structure.read_via_padstack: IO error scanning file");
-            return null;
+            throw new ReadScopeException("Structure.read_via_padstack: IO error scanning file", e);
         }
     }
 
-    private static boolean read_control_scope(ReadScopeParameter p_par) throws DsnFileException {
+    private static boolean read_control_scope(ReadScopeParameter p_par) throws DsnFileException, ReadScopeException {
         Object next_token = null;
         for (;;) {
             Object prev_token = next_token;
             try {
                 next_token = p_par.scanner.next_token();
             } catch (java.io.IOException e) {
-                System.out.println("Structure.read_control_scope: IO error scanning file");
-                return false;
+                throw new ReadScopeException("Structure.read_control_scope: IO error scanning file");
             }
             if (next_token == null) {
-                System.out.println("Structure.read_control_scope: unexpected end of file");
-                return false;
+                throw new ReadScopeException("Structure.read_control_scope: unexpected end of file");
             }
             if (next_token == CLOSED_BRACKET) {
                 // end of scope
@@ -392,7 +381,7 @@ class Structure extends ScopeKeyword {
         return true;
     }
 
-    static net.freerouting.freeroute.board.AngleRestriction read_snap_angle(Scanner p_scanner) {
+    static net.freerouting.freeroute.board.AngleRestriction read_snap_angle(Scanner p_scanner) throws ReadScopeException {
         try {
             Object next_token = p_scanner.next_token();
             net.freerouting.freeroute.board.AngleRestriction snap_angle;
@@ -403,18 +392,15 @@ class Structure extends ScopeKeyword {
             } else if (next_token == Keyword.NONE) {
                 snap_angle = net.freerouting.freeroute.board.AngleRestriction.NONE;
             } else {
-                System.out.println("Structure.read_snap_angle_scope: unexpected token");
-                return null;
+                throw new ReadScopeException("Structure.read_snap_angle_scope: unexpected token");
             }
             next_token = p_scanner.next_token();
             if (next_token != Keyword.CLOSED_BRACKET) {
-                System.out.println("Structure.read_selection_layer_scop: closing bracket expected");
-                return null;
+                throw new ReadScopeException("Structure.read_selection_layer_scop: closing bracket expected");
             }
             return snap_angle;
         } catch (java.io.IOException e) {
-            System.out.println("Structure.read_snap_angl: IO error scanning file");
-            return null;
+            throw new ReadScopeException("Structure.read_snap_angl: IO error scanning file");
         }
     }
 
@@ -798,18 +784,28 @@ class Structure extends ScopeKeyword {
                 if (next_token == Keyword.BOUNDARY) {
                     try {
                         read_boundary_scope(p_par.scanner, board_construction_info);
-                    } catch (DsnFileException ex) {
+                    } catch (DsnFileException | ReadScopeException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
                 } else if (next_token == Keyword.LAYER) {
-                    read_ok = read_layer_scope(p_par.scanner, board_construction_info, p_par.string_quote);
+                    try {
+                        read_ok = read_layer_scope(p_par.scanner, board_construction_info, p_par.string_quote);
+                    } catch (ReadScopeException ex) {
+                        Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                    }
                     if (p_par.layer_structure != null) {
                         // correct the layer_structure because another layer isr read
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
                 } else if (next_token == Keyword.VIA) {
-                    p_par.via_padstack_names = read_via_padstacks(p_par.scanner);
+                    try {
+                        p_par.via_padstack_names = read_via_padstacks(p_par.scanner);
+                    } catch (ReadScopeException ex) {
+                        Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                    }
                 } else if (next_token == Keyword.RULE) {
                     board_construction_info.default_rules.addAll(Rule.read_scope(p_par.scanner));
                 } else if (next_token == Keyword.KEEPOUT) {
@@ -818,7 +814,7 @@ class Structure extends ScopeKeyword {
                     }
                     try {
                         keepout_list.add(AreaReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
-                    } catch (DsnFileException ex) {
+                    } catch (DsnFileException | ReadScopeException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
@@ -828,7 +824,7 @@ class Structure extends ScopeKeyword {
                     }
                     try {
                         via_keepout_list.add(AreaReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
-                    } catch (DsnFileException ex) {
+                    } catch (DsnFileException | ReadScopeException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
@@ -838,7 +834,7 @@ class Structure extends ScopeKeyword {
                     }
                     try {
                         place_keepout_list.add(AreaReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
-                    } catch (DsnFileException ex) {
+                    } catch (DsnFileException | ReadScopeException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
@@ -860,15 +856,20 @@ class Structure extends ScopeKeyword {
                 } else if (next_token == Keyword.CONTROL) {
                     try {
                         read_ok = read_control_scope(p_par);
-                    } catch (DsnFileException ex) {
+                    } catch (DsnFileException | ReadScopeException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
                 } else if (next_token == Keyword.FLIP_STYLE) {
                     flip_style_rotate_first = PlaceControl.read_flip_style_rotate_first(p_par.scanner);
                 } else if (next_token == Keyword.SNAP_ANGLE) {
-
-                    net.freerouting.freeroute.board.AngleRestriction snap_angle = read_snap_angle(p_par.scanner);
+                    net.freerouting.freeroute.board.AngleRestriction snap_angle;
+                    try {
+                        snap_angle = read_snap_angle(p_par.scanner);
+                    } catch (ReadScopeException ex) {
+                        Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
+                        return false;
+                    }
                     if (snap_angle != null) {
                         p_par.snap_angle = snap_angle;
                     }

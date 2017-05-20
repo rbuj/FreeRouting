@@ -31,7 +31,7 @@ import net.freerouting.freeroute.board.Item;
  */
 public class Package {
 
-    public static Package read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws DsnFileException {
+    public static Package read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws DsnFileException, ReadScopeException {
         try {
             boolean is_front = true;
             Collection<Shape> outline = new LinkedList<>();
@@ -40,8 +40,7 @@ public class Package {
             Collection<Area> place_keepouts = new LinkedList<>();
             Object next_token = p_scanner.next_token();
             if (!(next_token instanceof String)) {
-                System.out.println("Package.read_scope: String expected");
-                return null;
+                throw new ReadScopeException("Package.read_scope: String expected");
             }
             String package_name = (String) next_token;
             Collection<PinInfo> pin_info_list = new LinkedList<>();
@@ -50,8 +49,7 @@ public class Package {
                 next_token = p_scanner.next_token();
 
                 if (next_token == null) {
-                    System.out.println("Package.read_scope: unexpected end of file");
-                    return null;
+                    throw new ReadScopeException("Package.read_scope: unexpected end of file");
                 }
                 if (next_token == Keyword.CLOSED_BRACKET) {
                     // end of scope
@@ -74,8 +72,7 @@ public class Package {
                         // overread closing bracket
                         next_token = p_scanner.next_token();
                         if (next_token != Keyword.CLOSED_BRACKET) {
-                            System.out.println("Package.read_scope: closed bracket expected");
-                            return null;
+                            throw new ReadScopeException("Package.read_scope: closed bracket expected");
                         }
                     } else if (next_token == Keyword.KEEPOUT) {
                         Area keepout_area = AreaReadable.read_area_scope(p_scanner, p_layer_structure, false);
@@ -100,9 +97,7 @@ public class Package {
             PinInfo[] pin_info_arr = pin_info_list.toArray(new PinInfo[pin_info_list.size()]);
             return new Package(package_name, pin_info_arr, outline, keepouts, via_keepouts, place_keepouts, is_front);
         } catch (java.io.IOException e) {
-            System.out.println("Package.read_scope: IO error scanning file");
-            System.out.println(e);
-            return null;
+            throw new ReadScopeException("Package.read_scope: IO error scanning file", e);
         }
     }
 

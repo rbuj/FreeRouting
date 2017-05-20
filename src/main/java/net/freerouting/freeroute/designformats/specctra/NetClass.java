@@ -29,15 +29,14 @@ import java.util.LinkedList;
  */
 public class NetClass {
 
-    public static NetClass read_scope(Scanner p_scanner) throws DsnFileException {
+    public static NetClass read_scope(Scanner p_scanner) throws DsnFileException, ReadScopeException {
 
         try {
             // read the class name
             p_scanner.yybegin(SpecctraFileScanner.NAME);
             Object next_token = p_scanner.next_token();
             if (!(next_token instanceof String)) {
-                System.out.println("NetClass.read_scope: String expected");
-                return null;
+                throw new ReadScopeException("NetClass.read_scope: String expected");
             }
             String class_name = (String) next_token;
             Collection<String> net_list = new LinkedList<>();
@@ -54,8 +53,7 @@ public class NetClass {
                     break;
                 }
                 if (!(next_token instanceof String)) {
-                    System.out.println("NetClass.read_scope: String expected");
-                    return null;
+                    throw new ReadScopeException("NetClass.read_scope: String expected");
                 }
                 net_list.add((String) next_token);
             }
@@ -74,8 +72,7 @@ public class NetClass {
                 for (;;) {
                     next_token = p_scanner.next_token();
                     if (next_token == null) {
-                        System.out.println("NetClass.read_scope: unexpected end of file");
-                        return null;
+                        throw new ReadScopeException("NetClass.read_scope: unexpected end of file");
                     }
                     if (next_token == Keyword.CLOSED_BRACKET) {
                         // end of scope
@@ -112,8 +109,7 @@ public class NetClass {
             return new NetClass(class_name, trace_clearance_class, net_list, rules, layer_rules,
                     use_via, use_layer, via_rule, shove_fixed, pull_tight, min_trace_length, max_trace_length);
         } catch (java.io.IOException e) {
-            System.out.println("NetClass.read_scope: IO error while scanning file");
-            return null;
+            throw new ReadScopeException("NetClass.read_scope: IO error while scanning file", e);
         }
     }
 

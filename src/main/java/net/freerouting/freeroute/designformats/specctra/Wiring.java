@@ -309,55 +309,47 @@ class Wiring extends ScopeKeyword {
 
     @Override
     public boolean read_scope(ReadScopeParameter p_par) {
-        Object next_token = null;
-        for (;;) {
-            Object prev_token = next_token;
-            try {
+        try {
+            Object next_token = null;
+            for (;;) {
+                Object prev_token = next_token;
                 next_token = p_par.scanner.next_token();
-            } catch (java.io.IOException e) {
-                System.out.println("Wiring.read_scope: IO error scanning file");
-                return false;
-            }
-            if (next_token == null) {
-                System.out.println("Wiring.read_scope: unexpected end of file");
-                return false;
-            }
-            if (next_token == CLOSED_BRACKET) {
-                // end of scope
-                break;
-            }
-            boolean read_ok = true;
-            if (prev_token == OPEN_BRACKET) {
-                if (next_token == Keyword.WIRE) {
-                    try {
+                if (next_token == null) {
+                    throw new ReadScopeException("Wiring.read_scope: unexpected end of file");
+                }
+                if (next_token == CLOSED_BRACKET) {
+                    // end of scope
+                    break;
+                }
+                boolean read_ok = true;
+                if (prev_token == OPEN_BRACKET) {
+                    if (next_token == Keyword.WIRE) {
                         read_wire_scope(p_par);
-                    } catch (DsnFileException ex) {
-                        Logger.getLogger(Wiring.class.getName()).log(Level.SEVERE, null, ex);
-                        return false;
-                    }
-                } else if (next_token == Keyword.VIA) {
-                    try {
+                    } else if (next_token == Keyword.VIA) {
                         read_ok = read_via_scope(p_par);
-                    } catch (DsnFileException ex) {
-                        Logger.getLogger(Wiring.class.getName()).log(Level.SEVERE, null, ex);
-                        return false;
+                    } else {
+                        skip_scope(p_par.scanner);
                     }
-                } else {
-                    skip_scope(p_par.scanner);
+                }
+                if (!read_ok) {
+                    return false;
                 }
             }
-            if (!read_ok) {
-                return false;
+            RoutingBoard board = p_par.board_handling.get_routing_board();
+            for (int i = 1; i <= board.rules.nets.max_net_no(); ++i) {
+                board.normalize_traces(i);
             }
+            return true;
+        } catch (java.io.IOException e) {
+            System.out.println("Wiring.read_scope: IO error scanning file");
+            return false;
+        } catch (DsnFileException | ReadScopeException ex) {
+            Logger.getLogger(Wiring.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-        RoutingBoard board = p_par.board_handling.get_routing_board();
-        for (int i = 1; i <= board.rules.nets.max_net_no(); ++i) {
-            board.normalize_traces(i);
-        }
-        return true;
     }
 
-    private Item read_wire_scope(ReadScopeParameter p_par) throws DsnFileException {
+    private Item read_wire_scope(ReadScopeParameter p_par) throws DsnFileException, ReadScopeException {
         Net.Id net_id = null;
         String clearance_class_name = null;
         net.freerouting.freeroute.board.FixedState fixed = net.freerouting.freeroute.board.FixedState.UNFIXED;
@@ -370,12 +362,10 @@ class Wiring extends ScopeKeyword {
             try {
                 next_token = p_par.scanner.next_token();
             } catch (java.io.IOException e) {
-                System.out.println("Wiring.read_wire_scope: IO error scanning file");
-                return null;
+                throw new ReadScopeException("Wiring.read_wire_scope: IO error scanning file", e);
             }
             if (next_token == null) {
-                System.out.println("Wiring.read_wire_scope: unexpected end of file");
-                return null;
+                throw new ReadScopeException("Wiring.read_wire_scope: unexpected end of file");
             }
             if (next_token == CLOSED_BRACKET) {
                 // end of scope
@@ -399,12 +389,10 @@ class Wiring extends ScopeKeyword {
                     try {
                         next_token = p_par.scanner.next_token();
                     } catch (java.io.IOException e) {
-                        System.out.println("Wiring.read_wire_scope: IO error scanning file");
-                        return null;
+                        throw new ReadScopeException("Wiring.read_wire_scope: IO error scanning file", e);
                     }
                     if (next_token != Keyword.CLOSED_BRACKET) {
-                        System.out.println("Wiring.read_wire_scope: closing bracket expected");
-                        return null;
+                        throw new ReadScopeException("Wiring.read_wire_scope: closing bracket expected");
                     }
                 } else if (next_token == Keyword.NET) {
                     net_id = read_net_id(p_par.scanner);
@@ -418,8 +406,7 @@ class Wiring extends ScopeKeyword {
             }
         }
         if (path == null && border_shape == null) {
-            System.out.println("Wiring.read_wire_scope: shape missing");
-            return null;
+            throw new ReadScopeException("Wiring.read_wire_scope: shape missing");
         }
         RoutingBoard board = p_par.board_handling.get_routing_board();
 
@@ -446,13 +433,8 @@ class Wiring extends ScopeKeyword {
             half_width = 0;
         }
         if (layer_no < 0 || layer_no >= board.get_layer_count()) {
-            System.out.print("Wiring.read_wire_scope: unexpected layer ");
-            if (path != null) {
-                System.out.println(path.layer.name);
-            } else {
-                System.out.println(border_shape.layer.name);
-            }
-            return null;
+            String layer_name = (path != null) ? path.layer.name : border_shape.layer.name;
+            throw new ReadScopeException("Wiring.read_wire_scope: unexpected layer " + layer_name);
         }
 
         IntBox bounding_box = board.get_bounding_box();
@@ -482,8 +464,7 @@ class Wiring extends ScopeKeyword {
                 curr_point[1] = path.coordinate_arr[2 * i + 1];
                 FloatPoint curr_corner = p_par.coordinate_transform.dsn_to_board(curr_point);
                 if (!bounding_box.contains(curr_corner)) {
-                    System.out.println("Wiring.read_wire_scope: wire corner outside board");
-                    return null;
+                    throw new ReadScopeException("Wiring.read_wire_scope: wire corner outside board");
                 }
                 corner_arr[i] = curr_corner.round();
             }
@@ -509,8 +490,7 @@ class Wiring extends ScopeKeyword {
             Polyline trace_polyline = new Polyline(line_arr);
             result = board.insert_trace_without_cleaning(trace_polyline, layer_no, half_width, net_no_arr, clearance_class_no, fixed);
         } else {
-            System.out.println("Wiring.read_wire_scope: unexpected Path subclass");
-            return null;
+            throw new ReadScopeException("Wiring.read_wire_scope: unexpected Path subclass");
         }
         if (result != null && result.net_count() == 0) {
             try_correct_net(result);
@@ -541,14 +521,13 @@ class Wiring extends ScopeKeyword {
         }
     }
 
-    private boolean read_via_scope(ReadScopeParameter p_par) throws DsnFileException {
+    private boolean read_via_scope(ReadScopeParameter p_par) throws DsnFileException, ReadScopeException {
         try {
             net.freerouting.freeroute.board.FixedState fixed = net.freerouting.freeroute.board.FixedState.UNFIXED;
             // read the padstack name
             Object next_token = p_par.scanner.next_token();
             if (!(next_token instanceof String)) {
-                System.out.println("Wiring.read_via_scope: padstack name expected");
-                return false;
+                throw new ReadScopeException("Wiring.read_via_scope: padstack name expected");
             }
             String padstack_name = (String) next_token;
             // read the location
@@ -560,8 +539,7 @@ class Wiring extends ScopeKeyword {
                 } else if (next_token instanceof Integer) {
                     location[i] = ((Number) next_token).doubleValue();
                 } else {
-                    System.out.println("Wiring.read_via_scope: number expected");
-                    return false;
+                    throw new ReadScopeException("Wiring.read_via_scope: number expected");
                 }
             }
             Net.Id net_id = null;
@@ -570,8 +548,7 @@ class Wiring extends ScopeKeyword {
                 Object prev_token = next_token;
                 next_token = p_par.scanner.next_token();
                 if (next_token == null) {
-                    System.out.println("Wiring.read_via_scope: unexpected end of file");
-                    return false;
+                    throw new ReadScopeException("Wiring.read_via_scope: unexpected end of file");
                 }
                 if (next_token == CLOSED_BRACKET) {
                     // end of scope
@@ -592,8 +569,7 @@ class Wiring extends ScopeKeyword {
             RoutingBoard board = p_par.board_handling.get_routing_board();
             net.freerouting.freeroute.library.Padstack curr_padstack = board.library.padstacks.get(padstack_name);
             if (curr_padstack == null) {
-                System.out.println("Wiring.read_via_scope: via padstack not found");
-                return false;
+                throw new ReadScopeException("Wiring.read_via_scope: via padstack not found");
             }
             net.freerouting.freeroute.rules.NetClass net_class = board.rules.get_default_net_class();
             Collection<net.freerouting.freeroute.rules.Net> found_nets = get_subnets(net_id, board.rules);
@@ -625,8 +601,7 @@ class Wiring extends ScopeKeyword {
             }
             return true;
         } catch (java.io.IOException e) {
-            System.out.println("Wiring.read_via_scope: IO error scanning file");
-            return false;
+            throw new ReadScopeException("Wiring.read_via_scope: IO error scanning file", e);
         }
     }
 }

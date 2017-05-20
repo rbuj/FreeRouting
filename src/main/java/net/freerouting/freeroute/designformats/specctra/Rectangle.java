@@ -122,7 +122,7 @@ public class Rectangle extends Shape {
      * Reads a rectangle scope from a Specctra dsn file. If p_layer_structure ==
      * null, only Layer.PCB and Layer.Signal are expected, no induvidual layers.
      */
-    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
         try {
             Layer rect_layer = null;
             double rect_coor[] = new double[4];
@@ -134,8 +134,7 @@ public class Rectangle extends Shape {
                 rect_layer = Layer.SIGNAL;
             } else if (p_layer_structure != null) {
                 if (!(next_token instanceof String)) {
-                    System.out.println("Shape.read_rectangle_scope: layer name string expected");
-                    return null;
+                    throw new ReadScopeException("Shape.read_rectangle_scope: layer name string expected");
                 }
                 String layer_name = (String) next_token;
                 int layer_no = p_layer_structure.get_no(layer_name);
@@ -156,25 +155,21 @@ public class Rectangle extends Shape {
                 } else if (next_token instanceof Integer) {
                     rect_coor[i] = ((Number) next_token).doubleValue();
                 } else {
-                    System.out.println("Shape.read_rectangle_scope: number expected");
-                    return null;
+                    throw new ReadScopeException("Shape.read_rectangle_scope: number expected");
                 }
             }
             // overread the closing bracket
 
             next_token = p_scanner.next_token();
             if (next_token != Keyword.CLOSED_BRACKET) {
-                System.out.println("Shape.read_rectangle_scope ) expected");
-                return null;
+                throw new ReadScopeException("Shape.read_rectangle_scope ) expected");
             }
             if (rect_layer == null) {
                 return null;
             }
             return new Rectangle(rect_layer, rect_coor);
         } catch (java.io.IOException e) {
-            System.out.println("Shape.read_rectangle_scope: IO error scanning file");
-            System.out.println(e);
-            return null;
+            throw new ReadScopeException("Shape.read_rectangle_scope: IO error scanning file", e);
         }
     }
 }

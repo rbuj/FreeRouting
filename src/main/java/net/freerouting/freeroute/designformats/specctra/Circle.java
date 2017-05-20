@@ -108,7 +108,7 @@ public class Circle extends Shape {
     /**
      * Reads a circle scope from a Specctra dsn file.
      */
-    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) {
+    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
         try {
             Layer circle_layer = null;
             boolean layer_ok = true;
@@ -121,12 +121,10 @@ public class Circle extends Shape {
                 circle_layer = Layer.SIGNAL;
             } else {
                 if (p_layer_structure == null) {
-                    System.out.println("Shape.read_circle_scope: p_layer_structure != null expected");
-                    return null;
+                    throw new ReadScopeException("Shape.read_circle_scope: p_layer_structure != null expected");
                 }
                 if (!(next_token instanceof String)) {
-                    System.out.println("Shape.read_circle_scope: string for layer_name expected");
-                    return null;
+                    throw new ReadScopeException("Shape.read_circle_scope: string for layer_name expected");
                 }
                 int layer_no = p_layer_structure.get_no((String) next_token);
                 if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
@@ -146,16 +144,14 @@ public class Circle extends Shape {
                     break;
                 }
                 if (curr_index > 2) {
-                    System.out.println("Shape.read_circle_scope: closed bracket expected");
-                    return null;
+                    throw new ReadScopeException("Shape.read_circle_scope: closed bracket expected");
                 }
                 if (next_token instanceof Double) {
                     circle_coor[curr_index] = (double) next_token;
                 } else if (next_token instanceof Integer) {
                     circle_coor[curr_index] = ((Number) next_token).doubleValue();
                 } else {
-                    System.out.println("Shape.read_circle_scope: number expected");
-                    return null;
+                    throw new ReadScopeException("Shape.read_circle_scope: number expected");
                 }
                 ++curr_index;
             }
@@ -164,9 +160,7 @@ public class Circle extends Shape {
             }
             return new Circle(circle_layer, circle_coor);
         } catch (java.io.IOException e) {
-            System.out.println("Shape.read_rectangle_scope: IO error scanning file");
-            System.out.println(e);
-            return null;
+            throw new ReadScopeException("Shape.read_rectangle_scope: IO error scanning file", e);
         }
     }
 }

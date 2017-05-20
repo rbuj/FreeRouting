@@ -77,7 +77,7 @@ public class Padstack {
     }
 
     static boolean read_padstack_scope(Scanner p_scanner, LayerStructure p_layer_structure,
-            CoordinateTransform p_coordinate_transform, net.freerouting.freeroute.library.Padstacks p_board_padstacks) throws DsnFileException {
+            CoordinateTransform p_coordinate_transform, net.freerouting.freeroute.library.Padstacks p_board_padstacks) throws DsnFileException, ReadScopeException {
         String padstack_name;
         boolean is_drilllable = true;
         boolean placed_absolute = false;
@@ -87,8 +87,7 @@ public class Padstack {
             if (next_token instanceof String) {
                 padstack_name = (String) next_token;
             } else {
-                System.out.println("Library.read_padstack_scope: unexpected padstack identifier");
-                return false;
+                throw new ReadScopeException("Library.read_padstack_scope: unexpected padstack identifier");
             }
 
             while (next_token != Keyword.CLOSED_BRACKET) {
@@ -107,8 +106,7 @@ public class Padstack {
                             curr_next_token = p_scanner.next_token();
                         }
                         if (curr_next_token != Keyword.CLOSED_BRACKET) {
-                            System.out.println("Library.read_padstack_scope: closing bracket expected");
-                            return false;
+                            throw new ReadScopeException("Library.read_padstack_scope: closing bracket expected");
                         }
                     } else if (next_token == Keyword.ATTACH) {
                         is_drilllable = DsnFile.read_on_off_scope(p_scanner);
@@ -121,9 +119,7 @@ public class Padstack {
 
             }
         } catch (java.io.IOException e) {
-            System.out.println("Library.read_padstack_scope: IO error scanning file");
-            System.out.println(e);
-            return false;
+            throw new ReadScopeException("Library.read_padstack_scope: IO error scanning file", e);
         }
         if (p_board_padstacks.get(padstack_name) != null) {
             // Padstack exists already
@@ -174,8 +170,7 @@ public class Padstack {
             } else {
                 int shape_layer = p_layer_structure.get_no(pad_shape.layer.name);
                 if (shape_layer < 0 || shape_layer >= padstack_shapes.length) {
-                    System.out.println("Library.read_padstack_scope: layer number found");
-                    return false;
+                    throw new ReadScopeException("Library.read_padstack_scope: layer number found");
                 }
                 padstack_shapes[shape_layer] = padstack_shape;
             }

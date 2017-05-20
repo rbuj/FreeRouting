@@ -30,7 +30,7 @@ public class Circuit {
      * Currently only the length matching rule is read from a circuit scope. If
      * the scope does not contain a length matching rule, nulll is returned.
      */
-    public static ReadScopeResult read_scope(Scanner p_scanner) throws DsnFileException {
+    public static ReadScopeResult read_scope(Scanner p_scanner) throws DsnFileException, ReadScopeException {
         Object next_token = null;
         double min_trace_length = 0;
         double max_trace_length = 0;
@@ -41,12 +41,10 @@ public class Circuit {
             try {
                 next_token = p_scanner.next_token();
             } catch (java.io.IOException e) {
-                System.out.println("Circuit.read_scope: IO error scanning file");
-                return null;
+                throw new ReadScopeException("Circuit.read_scope: IO error scanning file", e);
             }
             if (next_token == null) {
-                System.out.println("Circuit.read_scope: unexpected end of file");
-                return null;
+                throw new ReadScopeException("Circuit.read_scope: unexpected end of file");
             }
             if (next_token == Keyword.CLOSED_BRACKET) {
                 // end of scope
@@ -71,23 +69,21 @@ public class Circuit {
         return new ReadScopeResult(max_trace_length, min_trace_length, use_via, use_layer);
     }
 
-    static LengthMatchingRule read_length_scope(Scanner p_scanner) {
+    static LengthMatchingRule read_length_scope(Scanner p_scanner) throws ReadScopeException {
         double[] length_arr = new double[2];
         Object next_token = null;
         for (int i = 0; i < 2; ++i) {
             try {
                 next_token = p_scanner.next_token();
             } catch (java.io.IOException e) {
-                System.out.println("Circuit.read_length_scope: IO error scanning file");
-                return null;
+                throw new ReadScopeException("Circuit.read_length_scope: IO error scanning file");
             }
             if (next_token instanceof Double) {
                 length_arr[i] = (double) next_token;
             } else if (next_token instanceof Integer) {
                 length_arr[i] = ((Number) next_token).doubleValue();
             } else {
-                System.out.println("Circuit.read_length_scope: number expected");
-                return null;
+                throw new ReadScopeException("Circuit.read_length_scope: number expected");
             }
         }
         LengthMatchingRule result = new LengthMatchingRule(length_arr[0], length_arr[1]);
@@ -96,12 +92,10 @@ public class Circuit {
             try {
                 next_token = p_scanner.next_token();
             } catch (java.io.IOException e) {
-                System.out.println("Circuit.read_length_scope: IO error scanning file");
-                return null;
+                throw new ReadScopeException("Circuit.read_length_scope: IO error scanning file", e);
             }
             if (next_token == null) {
-                System.out.println("Circuit.read_length_scope: unexpected end of file");
-                return null;
+                throw new ReadScopeException("Circuit.read_length_scope: unexpected end of file");
             }
             if (next_token == Keyword.CLOSED_BRACKET) {
                 // end of scope

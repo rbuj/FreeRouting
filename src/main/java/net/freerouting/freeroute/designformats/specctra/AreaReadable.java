@@ -31,7 +31,7 @@ public interface AreaReadable {
      * The other shapes in the shape_list are holes (windows).
      */
     static Area read_area_scope(Scanner p_scanner,
-            LayerStructure p_layer_structure, boolean p_skip_window_scopes) throws DsnFileException {
+            LayerStructure p_layer_structure, boolean p_skip_window_scopes) throws DsnFileException, ReadScopeException {
         Collection<Shape> shape_list = new LinkedList<>();
         String clearance_class_name = null;
         String area_name = null;
@@ -40,8 +40,7 @@ public interface AreaReadable {
         try {
             next_token = p_scanner.next_token();
         } catch (java.io.IOException e) {
-            System.out.println("Shape.read_area_scope: IO error scanning file");
-            return null;
+            throw new ReadScopeException("Shape.read_area_scope: IO error scanning file", e);
         }
         if (next_token instanceof String) {
             String curr_name = (String) next_token;
@@ -60,12 +59,10 @@ public interface AreaReadable {
             try {
                 next_token = p_scanner.next_token();
             } catch (java.io.IOException e) {
-                System.out.println("Shape.read_area_scope: IO error scanning file");
-                return null;
+                throw new ReadScopeException("Shape.read_area_scope: IO error scanning file");
             }
             if (next_token == null) {
-                System.out.println("Shape.read_area_scope: unexpected end of file");
-                return null;
+                throw new ReadScopeException("Shape.read_area_scope: unexpected end of file");
             }
             if (next_token == Keyword.CLOSED_BRACKET) {
                 // end of scope
@@ -81,12 +78,10 @@ public interface AreaReadable {
                     try {
                         next_token = p_scanner.next_token();
                     } catch (java.io.IOException e) {
-                        System.out.println("Shape.read_area_scope: IO error scanning file");
-                        return null;
+                        throw new ReadScopeException("Shape.read_area_scope: IO error scanning file");
                     }
                     if (next_token != Keyword.CLOSED_BRACKET) {
-                        System.out.println("Shape.read_area_scope: closed bracket expected");
-                        return null;
+                        throw new ReadScopeException("Shape.read_area_scope: closed bracket expected");
                     }
 
                 } else if (next_token == Keyword.CLEARANCE_CLASS) {

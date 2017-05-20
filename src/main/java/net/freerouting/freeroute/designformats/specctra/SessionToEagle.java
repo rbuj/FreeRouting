@@ -382,7 +382,13 @@ public class SessionToEagle extends javax.swing.JFrame {
             }
             if (prev_token == Keyword.OPEN_BRACKET) {
                 if (next_token == Keyword.POLYGON_PATH) {
-                    wire_path = PolygonPath.read_scope(this.scanner, this.specctra_layer_structure);
+                    try {
+                        wire_path = PolygonPath.read_scope(this.scanner, this.specctra_layer_structure);
+                    } catch (ReadScopeException ex) {
+                        Logger.getLogger(SessionToEagle.class.getName()).log(Level.SEVERE, null, ex);
+                        // conduction areas are skipped
+                        return true;
+                    }
                 } else {
                     ScopeKeyword.skip_scope(this.scanner);
                 }

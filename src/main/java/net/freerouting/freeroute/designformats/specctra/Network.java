@@ -241,20 +241,18 @@ public class Network extends ScopeKeyword {
         return true;
     }
 
-    static net.freerouting.freeroute.rules.ViaInfo read_via_info(Scanner p_scanner, net.freerouting.freeroute.board.BasicBoard p_board) {
+    static net.freerouting.freeroute.rules.ViaInfo read_via_info(Scanner p_scanner, net.freerouting.freeroute.board.BasicBoard p_board) throws ReadScopeException {
         try {
             p_scanner.yybegin(SpecctraFileScanner.NAME);
             Object next_token = p_scanner.next_token();
             if (!(next_token instanceof String)) {
-                System.out.println("Network.read_via_info: string expected");
-                return null;
+                throw new ReadScopeException("Network.read_via_info: string expected");
             }
             String name = (String) next_token;
             p_scanner.yybegin(SpecctraFileScanner.NAME);
             next_token = p_scanner.next_token();
             if (!(next_token instanceof String)) {
-                System.out.println("Network.read_via_info: string expected");
-                return null;
+                throw new ReadScopeException("Network.read_via_info: string expected");
             }
             String padstack_name = (String) next_token;
             net.freerouting.freeroute.library.Padstack via_padstack = p_board.library.get_via_padstack(padstack_name);
@@ -262,16 +260,14 @@ public class Network extends ScopeKeyword {
                 // The padstack may not yet be inserted into the list of via padstacks
                 via_padstack = p_board.library.padstacks.get(padstack_name);
                 if (via_padstack == null) {
-                    System.out.println("Network.read_via_info: padstack not found");
-                    return null;
+                    throw new ReadScopeException("Network.read_via_info: padstack not found");
                 }
                 p_board.library.add_via_padstack(via_padstack);
             }
             p_scanner.yybegin(SpecctraFileScanner.NAME);
             next_token = p_scanner.next_token();
             if (!(next_token instanceof String)) {
-                System.out.println("Network.read_via_info: string expected");
-                return null;
+                throw new ReadScopeException("Network.read_via_info: string expected");
             }
             int clearance_class = p_board.rules.clearance_matrix.get_no((String) next_token);
             if (clearance_class < 0) {
@@ -282,24 +278,21 @@ public class Network extends ScopeKeyword {
             next_token = p_scanner.next_token();
             if (next_token != Keyword.CLOSED_BRACKET) {
                 if (next_token != Keyword.ATTACH) {
-                    System.out.println("Network.read_via_info: Keyword.ATTACH expected");
-                    return null;
+                    throw new ReadScopeException("Network.read_via_info: Keyword.ATTACH expected");
                 }
                 attach_allowed = true;
                 next_token = p_scanner.next_token();
                 if (next_token != Keyword.CLOSED_BRACKET) {
-                    System.out.println("Network.read_via_info: closing bracket expected");
-                    return null;
+                    throw new ReadScopeException("Network.read_via_info: closing bracket expected");
                 }
             }
             return new net.freerouting.freeroute.rules.ViaInfo(name, via_padstack, clearance_class, attach_allowed, p_board.rules);
         } catch (java.io.IOException e) {
-            System.out.println("Network.read_via_info: IO error while scanning file");
-            return null;
+            throw new ReadScopeException("Network.read_via_info: IO error while scanning file", e);
         }
     }
 
-    static Collection<String> read_via_rule(Scanner p_scanner, net.freerouting.freeroute.board.BasicBoard p_board) {
+    static Collection<String> read_via_rule(Scanner p_scanner, net.freerouting.freeroute.board.BasicBoard p_board) throws ReadScopeException {
         try {
             Collection<String> result = new LinkedList<>();
             for (;;) {
@@ -309,15 +302,13 @@ public class Network extends ScopeKeyword {
                     break;
                 }
                 if (!(next_token instanceof String)) {
-                    System.out.println("Network.read_via_rule: string expected");
-                    return null;
+                    throw new ReadScopeException("Network.read_via_rule: string expected");
                 }
                 result.add((String) next_token);
             }
             return result;
         } catch (java.io.IOException e) {
-            System.out.println("Network.read_via_rule: IO error while scanning file");
-            return null;
+            throw new ReadScopeException("Network.read_via_rule: IO error while scanning file", e);
         }
     }
 
@@ -1030,97 +1021,86 @@ public class Network extends ScopeKeyword {
         Collection<NetClass.ClassClass> class_class_list = new LinkedList<>();
         Collection<net.freerouting.freeroute.rules.ViaInfo> via_infos = new LinkedList<>();
         Collection<Collection<String>> via_rules = new LinkedList<>();
-        Object next_token = null;
-        for (;;) {
-            Object prev_token = next_token;
-            try {
-                next_token = p_par.scanner.next_token();
-            } catch (java.io.IOException e) {
-                System.out.println("Network.read_scope: IO error scanning file");
-                System.out.println(e);
-                return false;
-            }
-            if (next_token == null) {
-                System.out.println("Network.read_scope: unexpected end of file");
-                return false;
-            }
-            if (next_token == CLOSED_BRACKET) {
-                // end of scope
-                break;
-            }
-            if (prev_token == OPEN_BRACKET) {
-                if (next_token == Keyword.NET) {
-                    read_net_scope(p_par.scanner, p_par.netlist, p_par.board_handling.get_routing_board(),
-                            p_par.coordinate_transform, p_par.layer_structure);
-                } else if (next_token == Keyword.VIA) {
-                    net.freerouting.freeroute.rules.ViaInfo curr_via_info = read_via_info(p_par.scanner, p_par.board_handling.get_routing_board());
-                    if (curr_via_info == null) {
-                        return false;
-                    }
-                    via_infos.add(curr_via_info);
-                } else if (next_token == Keyword.VIA_RULE) {
-                    Collection<String> curr_via_rule = read_via_rule(p_par.scanner, p_par.board_handling.get_routing_board());
-                    if (curr_via_rule == null) {
-                        return false;
-                    }
-                    via_rules.add(curr_via_rule);
-                } else if (next_token == Keyword.CLASS) {
-                    try {
+        try {
+            Object next_token = null;
+            for (;;) {
+                Object prev_token = next_token;
+                try {
+                    next_token = p_par.scanner.next_token();
+                } catch (java.io.IOException e) {
+                    throw new ReadScopeException("Network.read_scope: IO error scanning file", e);
+                }
+                if (next_token == null) {
+                    throw new ReadScopeException("Network.read_scope: unexpected end of file");
+                }
+                if (next_token == CLOSED_BRACKET) {
+                    // end of scope
+                    break;
+                }
+                if (prev_token == OPEN_BRACKET) {
+                    if (next_token == Keyword.NET) {
+                        read_net_scope(p_par.scanner, p_par.netlist, p_par.board_handling.get_routing_board(),
+                                p_par.coordinate_transform, p_par.layer_structure);
+                    } else if (next_token == Keyword.VIA) {
+                        net.freerouting.freeroute.rules.ViaInfo curr_via_info = read_via_info(p_par.scanner, p_par.board_handling.get_routing_board());
+                        if (curr_via_info == null) {
+                            return false;
+                        }
+                        via_infos.add(curr_via_info);
+                    } else if (next_token == Keyword.VIA_RULE) {
+                        Collection<String> curr_via_rule = read_via_rule(p_par.scanner, p_par.board_handling.get_routing_board());
+                        if (curr_via_rule == null) {
+                            return false;
+                        }
+                        via_rules.add(curr_via_rule);
+                    } else if (next_token == Keyword.CLASS) {
                         NetClass curr_class = NetClass.read_scope(p_par.scanner);
                         if (curr_class == null) {
                             return false;
                         }
                         classes.add(curr_class);
-                    } catch (DsnFileException ex) {
-                        Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
-                        return false;
-                    }
-                } else if (next_token == Keyword.CLASS_CLASS) {
-                    try {
+                    } else if (next_token == Keyword.CLASS_CLASS) {
                         NetClass.ClassClass curr_class_class = NetClass.read_class_class_scope(p_par.scanner);
                         if (curr_class_class == null) {
                             return false;
                         }
                         class_class_list.add(curr_class_class);
-                    } catch (DsnFileException ex) {
-                        Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
-                        return false;
+                    } else {
+                        skip_scope(p_par.scanner);
                     }
-                } else {
-                    skip_scope(p_par.scanner);
                 }
             }
+            insert_via_infos(via_infos, p_par.board_handling.get_routing_board(), p_par.via_at_smd_allowed);
+            insert_via_rules(via_rules, p_par.board_handling.get_routing_board());
+            insert_net_classes(classes, p_par);
+            insert_class_pairs(class_class_list, p_par);
+            insert_compoments(p_par);
+            insert_logical_parts(p_par);
+            return true;
+        } catch (DsnFileException | ReadScopeException ex) {
+            Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-        insert_via_infos(via_infos, p_par.board_handling.get_routing_board(), p_par.via_at_smd_allowed);
-        insert_via_rules(via_rules, p_par.board_handling.get_routing_board());
-        insert_net_classes(classes, p_par);
-        insert_class_pairs(class_class_list, p_par);
-        insert_compoments(p_par);
-        insert_logical_parts(p_par);
-        return true;
     }
 
     private boolean read_net_scope(Scanner p_scanner, NetList p_net_list, RoutingBoard p_board,
-            CoordinateTransform p_coordinate_transform, LayerStructure p_layer_structure) {
+            CoordinateTransform p_coordinate_transform, LayerStructure p_layer_structure) throws ReadScopeException {
         // read the net name
         Object next_token;
         try {
             next_token = p_scanner.next_token();
         } catch (java.io.IOException e) {
-            System.out.println("Network.read_net_scope: IO error while scanning file");
-            return false;
+            throw new ReadScopeException("Network.read_net_scope: IO error while scanning file", e);
         }
         if (!(next_token instanceof String)) {
-            System.out.println("Network.read_net_scope: String expected");
-            return false;
+            throw new ReadScopeException("Network.read_net_scope: String expected");
         }
         String net_name = (String) next_token;
         int subnet_number = 1;
         try {
             next_token = p_scanner.next_token();
         } catch (java.io.IOException e) {
-            System.out.println("Network.read_net_scope: IO error while scanning file");
-            return false;
+            throw new ReadScopeException("Network.read_net_scope: IO error while scanning file", e);
         }
         boolean scope_is_empty = (next_token == CLOSED_BRACKET);
         if (next_token instanceof Integer) {
@@ -1136,12 +1116,10 @@ public class Network extends ScopeKeyword {
                 try {
                     next_token = p_scanner.next_token();
                 } catch (java.io.IOException e) {
-                    System.out.println("Network.read_net_scope: IO error scanning file");
-                    return false;
+                    throw new ReadScopeException("Network.read_net_scope: IO error scanning file", e);
                 }
                 if (next_token == null) {
-                    System.out.println("Network.read_net_scope: unexpected end of file");
-                    return false;
+                    throw new ReadScopeException("Network.read_net_scope: unexpected end of file");
                 }
                 if (next_token == CLOSED_BRACKET) {
                     // end of scope
@@ -1192,16 +1170,14 @@ public class Network extends ScopeKeyword {
             }
             Net curr_subnet = p_net_list.get_net(net_id);
             if (curr_subnet == null) {
-                System.out.println("Network.read_net_scope: net not found in netlist");
-                return false;
+                throw new ReadScopeException("Network.read_net_scope: net not found in netlist");
             }
             curr_subnet.set_pins(curr_pin_list);
             if (!net_rules.isEmpty()) {
                 // Evaluate the net rules.
                 net.freerouting.freeroute.rules.Net board_net = p_board.rules.nets.get(curr_subnet.id.name, curr_subnet.id.subnet_number);
                 if (board_net == null) {
-                    System.out.println("Network.read_net_scope: board net not found");
-                    return false;
+                    throw new ReadScopeException("Network.read_net_scope: board net not found");
                 }
                 Iterator<Rule> it = net_rules.iterator();
                 while (it.hasNext()) {
