@@ -20,6 +20,7 @@ package net.freerouting.freeroute;
  *
  * @author robert
  */
+@SuppressWarnings("serial")
 public class GUIDefaultsFileException extends Exception {
 
     /**
