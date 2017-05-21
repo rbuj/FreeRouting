@@ -18,7 +18,6 @@ package net.freerouting.freeroute;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,6 +32,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javax.swing.JOptionPane;
 import static net.freerouting.freeroute.Filename.GUI_DEFAULTS_FILE_NAME;
 import static net.freerouting.freeroute.Filename.LOG_FILE_EXTENSIONS;
 import net.freerouting.freeroute.board.BoardObserverAdaptor;
@@ -311,18 +311,11 @@ public class BoardFrame extends javax.swing.JFrame {
             File defaults_file = new File(design_file.get_parent(), GUI_DEFAULTS_FILE_NAME);
             if (defaults_file.exists()) {
                 try (Reader reader = new InputStreamReader(new FileInputStream(defaults_file), StandardCharsets.UTF_8)) {
-                    boolean read_ok = GUIDefaultsFile.read(this, board_panel.board_handling, reader);
-                    if (!read_ok) {
-                        screen_messages.set_status_message(resources.getString("error_1"));
-                        Platform.runLater(() -> {
-                            Alert alert = new Alert(AlertType.ERROR, resources.getString("error_1"));
-                            alert.showAndWait();
-                        });
-                    }
-                } catch (FileNotFoundException ex) {
+                    GUIDefaultsFile.read(this, board_panel.board_handling, reader);
+                } catch (IOException | GUIDefaultsFileException ex) {
                     Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    screen_messages.set_status_message(resources.getString("error_1"));
+                    JOptionPane.showMessageDialog(this, ex.toString(), resources.getString("error_1"), JOptionPane.ERROR_MESSAGE);
                 }
             }
         }

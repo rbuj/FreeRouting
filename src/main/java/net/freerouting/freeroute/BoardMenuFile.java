@@ -261,6 +261,8 @@ public class BoardMenuFile extends javax.swing.JMenu {
         } catch (IOException ex) {
             Logger.getLogger(BoardMenuFile.class.getName()).log(Level.SEVERE, null, ex);
             board_frame.screen_messages.set_status_message(resources.getString("message_18"));
+        } catch (GUIDefaultsFileException ex) {
+            Logger.getLogger(BoardMenuFile.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
