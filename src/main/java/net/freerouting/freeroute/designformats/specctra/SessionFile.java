@@ -74,8 +74,7 @@ public class SessionFile {
             IndentFileWriter p_file, String p_session_name, String p_design_name) throws java.io.IOException {
         double scale_factor = p_board.communication.coordinate_transform.dsn_to_board(1) / p_board.communication.resolution;
         CoordinateTransform coordinate_transform = new CoordinateTransform(scale_factor, 0, 0);
-        p_file.start_scope();
-        p_file.write("session ");
+        p_file.start_scope("session ");
         p_identifier_type.write(p_session_name, p_file);
         p_file.new_line();
         p_file.write("(base_design ");
@@ -89,8 +88,7 @@ public class SessionFile {
 
     public static void write_placement(BasicBoard p_board, IdentifierType p_identifier_type,
             CoordinateTransform p_coordinate_transform, IndentFileWriter p_file) throws java.io.IOException {
-        p_file.start_scope();
-        p_file.write("placement");
+        p_file.start_scope("placement");
         Resolution.write_scope(p_file, p_board.communication);
 
         for (int i = 1; i <= p_board.library.packages.count(); ++i) {
@@ -122,8 +120,7 @@ public class SessionFile {
                 if (undeleted_item_found) {
                     if (!component_found) {
                         // write the scope header
-                        p_file.start_scope();
-                        p_file.write("component ");
+                        p_file.start_scope("component ");
                         p_identifier_type.write(p_package.name, p_file);
                         component_found = true;
                     }
@@ -164,8 +161,7 @@ public class SessionFile {
 
     public static void write_was_is(BasicBoard p_board, IdentifierType p_identifier_type,
             IndentFileWriter p_file) throws java.io.IOException {
-        p_file.start_scope();
-        p_file.write("was_is");
+        p_file.start_scope("was_is");
         Collection<net.freerouting.freeroute.board.Pin> board_pins = p_board.get_pins();
         for (net.freerouting.freeroute.board.Pin curr_pin : board_pins) {
             net.freerouting.freeroute.board.Pin swapped_with = curr_pin.get_changed_to();
@@ -199,8 +195,7 @@ public class SessionFile {
 
     private static void write_routes(BasicBoard p_board, IdentifierType p_identifier_type, CoordinateTransform p_coordinate_transform,
             IndentFileWriter p_file) throws java.io.IOException {
-        p_file.start_scope();
-        p_file.write("routes ");
+        p_file.start_scope("routes ");
         Resolution.write_scope(p_file, p_board.communication);
         Parser.write_scope(p_file, p_board.communication.specctra_parser_info, p_identifier_type, true);
         write_library(p_board, p_identifier_type, p_coordinate_transform, p_file);
@@ -210,8 +205,7 @@ public class SessionFile {
 
     private static void write_library(BasicBoard p_board, IdentifierType p_identifier_type, CoordinateTransform p_coordinate_transform,
             IndentFileWriter p_file) throws java.io.IOException {
-        p_file.start_scope();
-        p_file.write("library_out ");
+        p_file.start_scope("library_out ");
         for (int i = 0; i < p_board.library.via_padstack_count(); ++i) {
             write_padstack(p_board.library.get_via_padstack(i), p_board, p_identifier_type, p_coordinate_transform, p_file);
         }
@@ -241,8 +235,7 @@ public class SessionFile {
             return;
         }
 
-        p_file.start_scope();
-        p_file.write("padstack ");
+        p_file.start_scope("padstack ");
         p_identifier_type.write(p_padstack.name, p_file);
         for (int i = first_layer_no; i <= last_layer_no; ++i) {
             net.freerouting.freeroute.geometry.planar.Shape curr_board_shape = p_padstack.get_shape(i);
@@ -252,8 +245,7 @@ public class SessionFile {
             net.freerouting.freeroute.board.Layer board_layer = p_board.layer_structure.arr[i];
             Layer curr_layer = new Layer(board_layer.name, i, board_layer.is_signal);
             Shape curr_shape = p_coordinate_transform.board_to_dsn_rel(curr_board_shape, curr_layer);
-            p_file.start_scope();
-            p_file.write("shape");
+            p_file.start_scope("shape");
             curr_shape.write_scope_int(p_file, p_identifier_type);
             p_file.end_scope();
         }
@@ -266,8 +258,7 @@ public class SessionFile {
 
     private static void write_network(BasicBoard p_board, IdentifierType p_identifier_type, CoordinateTransform p_coordinate_transform,
             IndentFileWriter p_file) throws java.io.IOException {
-        p_file.start_scope();
-        p_file.write("network_out ");
+        p_file.start_scope("network_out ");
         for (int i = 1; i <= p_board.rules.nets.max_net_no(); ++i) {
             write_net(i, p_board, p_identifier_type, p_coordinate_transform, p_file);
         }
@@ -289,8 +280,7 @@ public class SessionFile {
             boolean is_conduction_area = curr_item instanceof ConductionArea
                     && p_board.layer_structure.arr[curr_item.first_layer()].is_signal;
             if (!header_written && (is_wire || is_via || is_conduction_area)) {
-                p_file.start_scope();
-                p_file.write("net ");
+                p_file.start_scope("net ");
                 net.freerouting.freeroute.rules.Net curr_net = p_board.rules.nets.get(p_net_no);
                 if (curr_net == null) {
                     System.out.println("SessionFile.write_net: net not found");
@@ -318,8 +308,7 @@ public class SessionFile {
         int layer_no = p_wire.get_layer();
         net.freerouting.freeroute.board.Layer board_layer = p_board.layer_structure.arr[layer_no];
         int wire_width = (int) Math.round(p_coordinate_transform.board_to_dsn(2 * p_wire.get_half_width()));
-        p_file.start_scope();
-        p_file.write("wire");
+        p_file.start_scope("wire");
         Point[] corner_arr = p_wire.polyline().corner_arr();
         int[] coors = new int[2 * corner_arr.length];
         int corner_index = 0;
@@ -354,8 +343,7 @@ public class SessionFile {
             CoordinateTransform p_coordinate_transform, IndentFileWriter p_file) throws java.io.IOException {
         net.freerouting.freeroute.library.Padstack via_padstack = p_via.get_padstack();
         FloatPoint via_location = p_via.get_center().to_float();
-        p_file.start_scope();
-        p_file.write("via ");
+        p_file.start_scope("via ");
         p_identifier_type.write(via_padstack.name, p_file);
         p_file.write(" ");
         double[] location = p_coordinate_transform.board_to_dsn(via_location);
@@ -384,8 +372,7 @@ public class SessionFile {
     private static void write_path(String p_layer_name, int p_width, int[] p_coors, IdentifierType p_identifier_type,
             IndentFileWriter p_file)
             throws java.io.IOException {
-        p_file.start_scope();
-        p_file.write("path ");
+        p_file.start_scope("path ");
         p_identifier_type.write(p_layer_name, p_file);
         p_file.write(" ");
         p_file.write(Integer.toString(p_width));
@@ -420,8 +407,7 @@ public class SessionFile {
             boundary_shape = curr_area.get_border();
             holes = curr_area.get_holes();
         }
-        p_file.start_scope();
-        p_file.write("wire ");
+        p_file.start_scope("wire ");
         Shape dsn_shape = p_coordinate_transform.board_to_dsn(boundary_shape, conduction_layer);
         if (dsn_shape != null) {
             dsn_shape.write_scope_int(p_file, p_identifier_type);

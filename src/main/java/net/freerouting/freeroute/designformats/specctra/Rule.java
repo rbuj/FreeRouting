@@ -134,8 +134,7 @@ public abstract class Rule {
     }
 
     public static void write_scope(net.freerouting.freeroute.rules.NetClass p_net_class, WriteScopeParameter p_par) throws java.io.IOException {
-        p_par.file.start_scope();
-        p_par.file.write("rule");
+        p_par.file.start_scope("rule");
 
         // write the trace width
         int default_trace_half_width = p_net_class.get_trace_half_width(0);
@@ -153,14 +152,12 @@ public abstract class Rule {
     }
 
     private static void write_layer_rule(net.freerouting.freeroute.rules.NetClass p_net_class, int p_layer_no, WriteScopeParameter p_par) throws java.io.IOException {
-        p_par.file.start_scope();
-        p_par.file.write("layer_rule ");
+        p_par.file.start_scope("layer_rule ");
 
         net.freerouting.freeroute.board.Layer curr_board_layer = p_par.board.layer_structure.arr[p_layer_no];
 
         p_par.file.write(curr_board_layer.name);
-        p_par.file.start_scope();
-        p_par.file.write("rule ");
+        p_par.file.start_scope("rule ");
 
         int curr_trace_half_width = p_net_class.get_trace_half_width(p_layer_no);
 
@@ -178,8 +175,7 @@ public abstract class Rule {
      * Writes the default rule as a scope to an output dsn-file.
      */
     public static void write_default_rule(WriteScopeParameter p_par, int p_layer) throws java.io.IOException {
-        p_par.file.start_scope();
-        p_par.file.write("rule");
+        p_par.file.start_scope("rule");
         // write the trace width
         double trace_width = 2 * p_par.coordinate_transform.board_to_dsn(p_par.board.rules.get_default_net_class().get_trace_half_width(0));
         p_par.file.new_line();

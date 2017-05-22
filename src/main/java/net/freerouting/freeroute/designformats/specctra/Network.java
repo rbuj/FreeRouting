@@ -43,8 +43,7 @@ import net.freerouting.freeroute.rules.ViaInfo;
 public class Network extends ScopeKeyword {
 
     public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
-        p_par.file.start_scope();
-        p_par.file.write("network");
+        p_par.file.start_scope("network");
         Collection<net.freerouting.freeroute.board.Pin> board_pins = p_par.board.get_pins();
         for (int i = 1; i <= p_par.board.rules.nets.max_net_no(); ++i) {
             Net.write_scope(p_par, p_par.board.rules.nets.get(i), board_pins);
@@ -58,8 +57,7 @@ public class Network extends ScopeKeyword {
     public static void write_via_infos(net.freerouting.freeroute.rules.BoardRules p_rules, IndentFileWriter p_file, IdentifierType p_identifier_type)
             throws java.io.IOException {
         for (ViaInfo curr_via : p_rules.via_infos) {
-            p_file.start_scope();
-            p_file.write("via ");
+            p_file.start_scope("via ");
             p_file.new_line();
             p_identifier_type.write(curr_via.get_name(), p_file);
             p_file.write(" ");
@@ -76,8 +74,7 @@ public class Network extends ScopeKeyword {
     public static void write_via_rules(net.freerouting.freeroute.rules.BoardRules p_rules, IndentFileWriter p_file, IdentifierType p_identifier_type)
             throws java.io.IOException {
         for (net.freerouting.freeroute.rules.ViaRule curr_rule : p_rules.via_rules) {
-            p_file.start_scope();
-            p_file.write("via_rule");
+            p_file.start_scope("via_rule");
             p_file.new_line();
             p_identifier_type.write(curr_rule.name, p_file);
             for (int i = 0; i < curr_rule.via_count(); ++i) {
@@ -97,8 +94,7 @@ public class Network extends ScopeKeyword {
 
     public static void write_net_class(net.freerouting.freeroute.rules.NetClass p_net_class, WriteScopeParameter p_par)
             throws java.io.IOException {
-        p_par.file.start_scope();
-        p_par.file.write("class ");
+        p_par.file.start_scope("class ");
         p_par.identifier_type.write(p_net_class.get_name(), p_par.file);
         final int nets_per_row = 8;
         int net_counter = 0;
@@ -146,8 +142,7 @@ public class Network extends ScopeKeyword {
             throws java.io.IOException {
         double min_trace_length = p_net_class.get_minimum_trace_length();
         double max_trace_length = p_net_class.get_maximum_trace_length();
-        p_par.file.start_scope();
-        p_par.file.write("circuit ");
+        p_par.file.start_scope("circuit ");
         p_par.file.new_line();
         p_par.file.write("(use_layer");
         int layer_count = p_net_class.layer_count();

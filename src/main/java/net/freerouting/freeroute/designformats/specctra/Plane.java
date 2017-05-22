@@ -49,8 +49,7 @@ public class Plane extends ScopeKeyword {
             boundary_shape = curr_area.get_border();
             holes = curr_area.get_holes();
         }
-        p_par.file.start_scope();
-        p_par.file.write("plane ");
+        p_par.file.start_scope("plane ");
         p_par.identifier_type.write(net_name, p_par.file);
         Shape dsn_shape = p_par.coordinate_transform.board_to_dsn(boundary_shape, plane_layer);
         if (dsn_shape != null) {

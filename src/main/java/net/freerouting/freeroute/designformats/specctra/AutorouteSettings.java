@@ -156,8 +156,7 @@ public class AutorouteSettings {
 
     static void write_scope(IndentFileWriter p_file, net.freerouting.freeroute.interactive.AutorouteSettings p_settings,
             net.freerouting.freeroute.board.LayerStructure p_layer_structure, IdentifierType p_identifier_type) throws java.io.IOException {
-        p_file.start_scope();
-        p_file.write("autoroute_settings");
+        p_file.start_scope("autoroute_settings");
         p_file.new_line();
         p_file.write("(fanout ");
         if (p_settings.get_with_fanout()) {
@@ -216,8 +215,7 @@ public class AutorouteSettings {
         p_file.write(")");
         for (int i = 0; i < p_layer_structure.arr.length; ++i) {
             net.freerouting.freeroute.board.Layer curr_layer = p_layer_structure.arr[i];
-            p_file.start_scope();
-            p_file.write("layer_rule ");
+            p_file.start_scope("layer_rule ");
             p_identifier_type.write(curr_layer.name, p_file);
             p_file.new_line();
             p_file.write("(active ");

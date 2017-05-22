@@ -35,8 +35,7 @@ import net.freerouting.freeroute.geometry.planar.Vector;
 public class Library extends ScopeKeyword {
 
     public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
-        p_par.file.start_scope();
-        p_par.file.write("library");
+        p_par.file.start_scope("library");
         for (net.freerouting.freeroute.library.Package curr_package : p_par.board.library.packages) {
             Package.write_scope(p_par, curr_package);
         }

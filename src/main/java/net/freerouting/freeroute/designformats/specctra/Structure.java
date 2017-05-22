@@ -46,11 +46,9 @@ import net.freerouting.freeroute.rules.ViaInfo;
 class Structure extends ScopeKeyword {
 
     public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
-        p_par.file.start_scope();
-        p_par.file.write("structure");
+        p_par.file.start_scope("structure");
         // write the bounding box
-        p_par.file.start_scope();
-        p_par.file.write("boundary");
+        p_par.file.start_scope("boundary");
         IntBox bounds = p_par.board.get_bounding_box();
         double[] rect_coor = p_par.coordinate_transform.board_to_dsn(bounds);
         Rectangle bounding_rectangle = new Rectangle(Layer.PCB, rect_coor);
@@ -77,8 +75,7 @@ class Structure extends ScopeKeyword {
         // write the outline
         for (int i = 0; i < outline.shape_count(); ++i) {
             Shape outline_shape = p_par.coordinate_transform.board_to_dsn(outline.get_shape(i), Layer.SIGNAL);
-            p_par.file.start_scope();
-            p_par.file.write("boundary");
+            p_par.file.start_scope("boundary");
             outline_shape.write_scope(p_par.file, p_par.identifier_type);
             p_par.file.end_scope();
         }
@@ -168,8 +165,7 @@ class Structure extends ScopeKeyword {
     }
 
     private static void write_control_scope(net.freerouting.freeroute.rules.BoardRules p_rules, IndentFileWriter p_file) throws java.io.IOException {
-        p_file.start_scope();
-        p_file.write("control");
+        p_file.start_scope("control");
         p_file.new_line();
         p_file.write("(via_at_smd ");
         boolean via_at_smd_allowed = false;
@@ -201,11 +197,10 @@ class Structure extends ScopeKeyword {
             boundary_shape = keepout_area.get_border();
             holes = keepout_area.get_holes();
         }
-        p_par.file.start_scope();
         if (p_keepout instanceof net.freerouting.freeroute.board.ViaObstacleArea) {
-            p_par.file.write("via_keepout");
+            p_par.file.start_scope("via_keepout");
         } else {
-            p_par.file.write("keepout");
+            p_par.file.start_scope("keepout");
         }
         Shape dsn_shape = p_par.coordinate_transform.board_to_dsn(boundary_shape, keepout_layer);
         if (dsn_shape != null) {
@@ -405,8 +400,7 @@ class Structure extends ScopeKeyword {
     }
 
     static void write_snap_angle(IndentFileWriter p_file, net.freerouting.freeroute.board.AngleRestriction p_angle_restriction) throws java.io.IOException {
-        p_file.start_scope();
-        p_file.write("snap_angle ");
+        p_file.start_scope("snap_angle ");
         p_file.new_line();
 
         if (p_angle_restriction == net.freerouting.freeroute.board.AngleRestriction.NINETY_DEGREE) {

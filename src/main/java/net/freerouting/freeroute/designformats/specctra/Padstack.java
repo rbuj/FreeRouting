@@ -49,8 +49,7 @@ public class Padstack {
             return;
         }
 
-        p_par.file.start_scope();
-        p_par.file.write("padstack ");
+        p_par.file.start_scope("padstack ");
         p_par.identifier_type.write(p_padstack.name, p_par.file);
         for (int i = first_layer_no; i <= last_layer_no; ++i) {
             net.freerouting.freeroute.geometry.planar.Shape curr_board_shape = p_padstack.get_shape(i);
@@ -60,8 +59,7 @@ public class Padstack {
             net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.arr[i];
             Layer curr_layer = new Layer(board_layer.name, i, board_layer.is_signal);
             Shape curr_shape = p_par.coordinate_transform.board_to_dsn_rel(curr_board_shape, curr_layer);
-            p_par.file.start_scope();
-            p_par.file.write("shape");
+            p_par.file.start_scope("shape");
             curr_shape.write_scope(p_par.file, p_par.identifier_type);
             p_par.file.end_scope();
         }

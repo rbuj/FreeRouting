@@ -102,8 +102,7 @@ public class Package {
     }
 
     public static void write_scope(WriteScopeParameter p_par, net.freerouting.freeroute.library.Package p_package) throws java.io.IOException {
-        p_par.file.start_scope();
-        p_par.file.write("image ");
+        p_par.file.start_scope("image ");
         p_par.identifier_type.write(p_package.name, p_par.file);
         // write the placement side of the package
         p_par.file.new_line();
@@ -126,8 +125,7 @@ public class Package {
         }
         // write the package outline.
         for (int i = 0; i < p_package.outline.length; ++i) {
-            p_par.file.start_scope();
-            p_par.file.write("outline");
+            p_par.file.start_scope("outline");
             Shape curr_outline = p_par.coordinate_transform.board_to_dsn_rel(p_package.outline[i], Layer.SIGNAL);
             curr_outline.write_scope(p_par.file, p_par.identifier_type);
             p_par.file.end_scope();
@@ -153,11 +151,10 @@ public class Package {
             boundary_shape = p_keepout.area.get_border();
             holes = p_keepout.area.get_holes();
         }
-        p_par.file.start_scope();
         if (p_is_via_keepout) {
-            p_par.file.write("via_keepout");
+            p_par.file.start_scope("via_keepout");
         } else {
-            p_par.file.write("keepout");
+            p_par.file.start_scope("keepout");
         }
         Shape dsn_shape = p_par.coordinate_transform.board_to_dsn(boundary_shape, keepout_layer);
         if (dsn_shape != null) {
@@ -193,8 +190,7 @@ public class Package {
                 if (undeleted_item_found || !curr_component.is_placed()) {
                     if (!component_found) {
                         // write the scope header
-                        p_par.file.start_scope();
-                        p_par.file.write("component ");
+                        p_par.file.start_scope("component ");
                         p_par.identifier_type.write(p_package.name, p_par.file);
                         component_found = true;
                     }

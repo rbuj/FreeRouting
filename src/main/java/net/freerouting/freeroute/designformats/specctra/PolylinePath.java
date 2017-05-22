@@ -46,8 +46,7 @@ public class PolylinePath extends Path {
      */
     @Override
     public void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
-        p_file.start_scope();
-        p_file.write("polyline_path ");
+        p_file.start_scope("polyline_path ");
         p_identifier.write(this.layer.name, p_file);
         p_file.write(" ");
         p_file.write(Double.toString(this.width));
@@ -64,8 +63,7 @@ public class PolylinePath extends Path {
 
     @Override
     public void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
-        p_file.start_scope();
-        p_file.write("polyline_path ");
+        p_file.start_scope("polyline_path ");
         p_identifier.write(this.layer.name, p_file);
         p_file.write(" ");
         p_file.write(Double.toString(this.width));

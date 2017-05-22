@@ -49,8 +49,7 @@ import net.freerouting.freeroute.geometry.planar.Polyline;
 class Wiring extends ScopeKeyword {
 
     public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
-        p_par.file.start_scope();
-        p_par.file.write("wiring");
+        p_par.file.start_scope("wiring");
         // write the wires
         Collection<Trace> board_wires = p_par.board.get_traces();
         Iterator<Trace> it = board_wires.iterator();
@@ -93,8 +92,7 @@ class Wiring extends ScopeKeyword {
         } else {
             via_net = null;
         }
-        p_par.file.start_scope();
-        p_par.file.write("via ");
+        p_par.file.start_scope("via ");
         p_par.identifier_type.write(via_padstack.name, p_par.file);
         for (int i = 0; i < via_coor.length; ++i) {
             p_par.file.write(" ");
@@ -127,8 +125,7 @@ class Wiring extends ScopeKeyword {
             System.out.println("Wiring.write_wire_scope: net not found");
             return;
         }
-        p_par.file.start_scope();
-        p_par.file.write("wire");
+        p_par.file.start_scope("wire");
 
         if (p_par.compat_mode) {
             Point[] corner_arr = curr_wire.polyline().corner_arr();
@@ -171,8 +168,7 @@ class Wiring extends ScopeKeyword {
             boundary_shape = curr_area.get_border();
             holes = curr_area.get_holes();
         }
-        p_par.file.start_scope();
-        p_par.file.write("wire ");
+        p_par.file.start_scope("wire ");
         Shape dsn_shape = p_par.coordinate_transform.board_to_dsn(boundary_shape, conduction_layer);
         if (dsn_shape != null) {
             dsn_shape.write_scope(p_par.file, p_par.identifier_type);

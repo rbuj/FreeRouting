@@ -210,8 +210,7 @@ public class DsnFile {
                         routing_board.communication.specctra_parser_info.string_quote,
                         routing_board.communication.coordinate_transform, p_compat_mode);
 
-        p_file.start_scope();
-        p_file.write("PCB ");
+        p_file.start_scope("PCB ");
         write_scope_parameter.identifier_type.write(p_design_name, p_file);
         Parser.write_scope(write_scope_parameter.file,
                 write_scope_parameter.board.communication.specctra_parser_info, write_scope_parameter.identifier_type, false);

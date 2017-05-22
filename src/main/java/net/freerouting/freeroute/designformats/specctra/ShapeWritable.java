@@ -37,8 +37,7 @@ public interface ShapeWritable {
     void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException;
 
     default void write_hole_scope(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
-        p_file.start_scope();
-        p_file.write("window");
+        p_file.start_scope("window");
         write_scope(p_file, p_identifier_type);
         p_file.end_scope();
     }

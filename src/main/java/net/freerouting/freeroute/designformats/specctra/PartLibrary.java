@@ -30,14 +30,12 @@ public class PartLibrary extends ScopeKeyword {
         if (logical_parts.count() <= 0) {
             return;
         }
-        p_par.file.start_scope();
-        p_par.file.write("part_library");
+        p_par.file.start_scope("part_library");
 
         // write the logical part mappings
         for (int i = 1; i <= logical_parts.count(); ++i) {
             net.freerouting.freeroute.library.LogicalPart curr_part = logical_parts.get(i);
-            p_par.file.start_scope();
-            p_par.file.write("logical_part_mapping ");
+            p_par.file.start_scope("logical_part_mapping ");
             p_par.identifier_type.write(curr_part.name, p_par.file);
             p_par.file.new_line();
             p_par.file.write("(comp");
@@ -56,8 +54,7 @@ public class PartLibrary extends ScopeKeyword {
         for (int i = 1; i <= logical_parts.count(); ++i) {
             net.freerouting.freeroute.library.LogicalPart curr_part = logical_parts.get(i);
 
-            p_par.file.start_scope();
-            p_par.file.write("logical_part ");
+            p_par.file.start_scope("logical_part ");
             p_par.identifier_type.write(curr_part.name, p_par.file);
             p_par.file.new_line();
             for (int j = 0; j < curr_part.pin_count(); ++j) {

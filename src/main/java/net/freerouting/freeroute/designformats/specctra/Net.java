@@ -37,8 +37,7 @@ public class Net {
         p_par.file.start_scope();
         write_net_id(p_net, p_par.file, p_par.identifier_type);
         // write the pins scope
-        p_par.file.start_scope();
-        p_par.file.write("pins");
+        p_par.file.start_scope("pins");
         Iterator<net.freerouting.freeroute.board.Pin> it = p_pin_list.iterator();
         while (it.hasNext()) {
             net.freerouting.freeroute.board.Pin curr_pin = it.next();

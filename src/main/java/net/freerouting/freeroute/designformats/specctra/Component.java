@@ -57,8 +57,7 @@ public class Component extends ScopeKeyword {
 
     public static void write_scope(WriteScopeParameter p_par, net.freerouting.freeroute.board.Component p_component)
             throws java.io.IOException {
-        p_par.file.start_scope();
-        p_par.file.write("place ");
+        p_par.file.start_scope("place ");
         p_par.file.new_line();
         p_par.identifier_type.write(p_component.name, p_par.file);
         if (p_component.is_placed()) {

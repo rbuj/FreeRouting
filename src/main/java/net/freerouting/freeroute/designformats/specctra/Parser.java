@@ -90,8 +90,7 @@ public class Parser extends ScopeKeyword {
      */
     public static void write_scope(net.freerouting.freeroute.datastructures.IndentFileWriter p_file, SpecctraParserInfo p_parser_info,
             net.freerouting.freeroute.datastructures.IdentifierType p_identifier_type, boolean p_reduced) throws java.io.IOException {
-        p_file.start_scope();
-        p_file.write("parser");
+        p_file.start_scope("parser");
         if (!p_reduced) {
             p_file.new_line();
             p_file.write("(string_quote ");
