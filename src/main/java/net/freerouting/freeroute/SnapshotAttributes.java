@@ -17,7 +17,6 @@
 package net.freerouting.freeroute;
 
 import java.util.EnumMap;
-import java.util.Map.Entry;
 
 /**
  *
@@ -47,11 +46,11 @@ public class SnapshotAttributes {
     }
 
     public boolean get(SNAPSHOT_ATTRIBUTE_KEY key) {
-        return snapshot_attributes_map.get(key).booleanValue();
+        return snapshot_attributes_map.get(key);
     }
 
     public void set(SNAPSHOT_ATTRIBUTE_KEY key, boolean value) {
-        snapshot_attributes_map.replace(key, Boolean.valueOf(value));
+        snapshot_attributes_map.replace(key, value);
     }
 
     public EnumMap<SNAPSHOT_ATTRIBUTE_KEY, Boolean> clone_map() {
