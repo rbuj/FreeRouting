@@ -63,7 +63,6 @@ public class BoardFrame extends javax.swing.JFrame {
     /**
      * The windows above stored in an array
      */
-    static final int SUBWINDOW_COUNT = 24;
     static final CustomFileFilter LOGFILE_FILTER = new CustomFileFilter(LOG_FILE_EXTENSIONS);
 
     /**
