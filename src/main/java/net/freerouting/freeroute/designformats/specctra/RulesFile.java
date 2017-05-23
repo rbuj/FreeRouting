@@ -103,7 +103,6 @@ public class RulesFile {
                     // end of scope
                     break;
                 }
-                boolean read_ok = true;
                 if (prev_token == Keyword.OPEN_BRACKET) {
                     if (next_token == Keyword.RULE) {
                         add_rules(Rule.read_scope(scanner), routing_board, null);
@@ -131,9 +130,6 @@ public class RulesFile {
                     } else {
                         ScopeKeyword.skip_scope(scanner);
                     }
-                }
-                if (!read_ok) {
-                    return false;
                 }
             }
             return true;
@@ -189,7 +185,7 @@ public class RulesFile {
         }
     }
 
-    private static boolean add_layer_rules(Scanner p_scanner, BasicBoard p_board) throws ReadScopeException {
+    private static void add_layer_rules(Scanner p_scanner, BasicBoard p_board) throws ReadScopeException {
         try {
             Object next_token = p_scanner.next_token();
             if (!(next_token instanceof String)) {
@@ -210,41 +206,28 @@ public class RulesFile {
                 }
                 next_token = p_scanner.next_token();
             }
-            return true;
         } catch (java.io.IOException e) {
             throw new ReadScopeException("RulesFile.add_layer_rules: IO error scanning file", e);
         }
     }
 
-    private static boolean read_via_info(Scanner p_scanner, BasicBoard p_board) throws ReadScopeException {
+    private static void read_via_info(Scanner p_scanner, BasicBoard p_board) throws ReadScopeException {
         net.freerouting.freeroute.rules.ViaInfo curr_via_info = Network.read_via_info(p_scanner, p_board);
-        if (curr_via_info == null) {
-            return false;
-        }
         net.freerouting.freeroute.rules.ViaInfo existing_via = p_board.rules.via_infos.get(curr_via_info.get_name());
         if (existing_via != null) {
             // replace existing via info
             p_board.rules.via_infos.remove(existing_via);
         }
         p_board.rules.via_infos.add(curr_via_info);
-        return true;
     }
 
-    private static boolean read_via_rule(Scanner p_scanner, BasicBoard p_board) throws ReadScopeException {
+    private static void read_via_rule(Scanner p_scanner, BasicBoard p_board) throws ReadScopeException {
         java.util.Collection<String> via_rule = Network.read_via_rule(p_scanner, p_board);
-        if (via_rule == null) {
-            return false;
-        }
         Network.add_via_rule(via_rule, p_board);
-        return true;
     }
 
-    private static boolean read_net_class(Scanner p_scanner, LayerStructure p_layer_structure, BasicBoard p_board) throws DsnFileException, ReadScopeException {
+    private static void read_net_class(Scanner p_scanner, LayerStructure p_layer_structure, BasicBoard p_board) throws DsnFileException, ReadScopeException {
         NetClass curr_class = NetClass.read_scope(p_scanner);
-        if (curr_class == null) {
-            return false;
-        }
         Network.insert_net_class(curr_class, p_layer_structure, p_board, p_board.communication.coordinate_transform, false);
-        return true;
     }
 }

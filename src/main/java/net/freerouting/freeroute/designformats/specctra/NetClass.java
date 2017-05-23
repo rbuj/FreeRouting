@@ -87,12 +87,10 @@ public class NetClass {
                             via_rule = DsnFile.read_string_scope(p_scanner);
                         } else if (next_token == Keyword.CIRCUIT) {
                             Circuit.ReadScopeResult curr_rule = Circuit.read_scope(p_scanner);
-                            if (curr_rule != null) {
-                                max_trace_length = curr_rule.max_length;
-                                min_trace_length = curr_rule.min_length;
-                                use_via.addAll(curr_rule.use_via);
-                                use_layer.addAll(curr_rule.use_layer);
-                            }
+                            max_trace_length = curr_rule.max_length;
+                            min_trace_length = curr_rule.min_length;
+                            use_via.addAll(curr_rule.use_via);
+                            use_layer.addAll(curr_rule.use_layer);
                         } else if (next_token == Keyword.CLEARANCE_CLASS) {
                             trace_clearance_class = DsnFile.read_string_scope(p_scanner);
                         } else if (next_token == Keyword.SHOVE_FIXED) {

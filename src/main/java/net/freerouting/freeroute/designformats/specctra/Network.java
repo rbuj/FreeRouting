@@ -1038,21 +1038,12 @@ public class Network extends ScopeKeyword {
                                 p_par.coordinate_transform, p_par.layer_structure);
                     } else if (next_token == Keyword.VIA) {
                         net.freerouting.freeroute.rules.ViaInfo curr_via_info = read_via_info(p_par.scanner, p_par.board_handling.get_routing_board());
-                        if (curr_via_info == null) {
-                            return false;
-                        }
                         via_infos.add(curr_via_info);
                     } else if (next_token == Keyword.VIA_RULE) {
                         Collection<String> curr_via_rule = read_via_rule(p_par.scanner, p_par.board_handling.get_routing_board());
-                        if (curr_via_rule == null) {
-                            return false;
-                        }
                         via_rules.add(curr_via_rule);
                     } else if (next_token == Keyword.CLASS) {
                         NetClass curr_class = NetClass.read_scope(p_par.scanner);
-                        if (curr_class == null) {
-                            return false;
-                        }
                         classes.add(curr_class);
                     } else if (next_token == Keyword.CLASS_CLASS) {
                         NetClass.ClassClass curr_class_class = NetClass.read_class_class_scope(p_par.scanner);

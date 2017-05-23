@@ -58,9 +58,6 @@ public class Package {
                 if (prev_token == Keyword.OPEN_BRACKET) {
                     if (next_token == Keyword.PIN) {
                         PinInfo next_pin = PinInfo.read_pin_info(p_scanner);
-                        if (next_pin == null) {
-                            return null;
-                        }
                         pin_info_list.add(next_pin);
                     } else if (next_token == Keyword.SIDE) {
                         is_front = read_placement_side(p_scanner);

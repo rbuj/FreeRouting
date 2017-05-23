@@ -53,10 +53,8 @@ public class Circuit {
             if (prev_token == Keyword.OPEN_BRACKET) {
                 if (next_token == Keyword.LENGTH) {
                     LengthMatchingRule length_rule = read_length_scope(p_scanner);
-                    if (length_rule != null) {
-                        min_trace_length = length_rule.min_length;
-                        max_trace_length = length_rule.max_length;
-                    }
+                    min_trace_length = length_rule.min_length;
+                    max_trace_length = length_rule.max_length;
                 } else if (next_token == Keyword.USE_VIA) {
                     use_via.addAll(Structure.read_via_padstacks(p_scanner));
                 } else if (next_token == Keyword.USE_LAYER) {

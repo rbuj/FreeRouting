@@ -82,9 +82,6 @@ public class Library extends ScopeKeyword {
                         }
                     } else if (next_token == Keyword.IMAGE) {
                         Package curr_package = Package.read_scope(p_par.scanner, p_par.layer_structure);
-                        if (curr_package == null) {
-                            return false;
-                        }
                         package_list.add(curr_package);
                     } else {
                         skip_scope(p_par.scanner);
