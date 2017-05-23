@@ -71,7 +71,7 @@ public enum AngleRestriction {
         return lookup.get(i);
     }
 
-    private class Constants {
+    private static class Constants {
         public static final String NONE = "none";
         public static final String FORTYFIVE_DEGREE = "45 degree";
         public static final String NINETY_DEGREE = "90 degree";

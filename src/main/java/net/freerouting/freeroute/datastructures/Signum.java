@@ -94,7 +94,7 @@ public enum Signum {
         throw new UnsupportedOperationException();
     }
 
-    private class Constants {
+    private static class Constants {
 
         public static final String POSITIVE = "positive";
         public static final String NEGATIVE = "negative";
