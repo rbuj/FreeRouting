@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.interactive;
 
 import net.freerouting.freeroute.SnapshotAttributes;
+import net.freerouting.freeroute.SubwindowSelections;
 
 /**
  * Snapshot of the client situation in an interactive session.
@@ -62,7 +63,7 @@ public class SnapShot implements java.io.Serializable {
     private final int interactive_state_no;
     public final net.freerouting.freeroute.boardgraphics.GraphicsContext graphics_context;
     private final java.awt.Point viewport_position;
-    public final net.freerouting.freeroute.BoardFrame.SubwindowSelections subwindow_filters;
+    public final SubwindowSelections subwindow_filters;
 
     /**
      * Creates a SnapShot of the display region and the interactive settings

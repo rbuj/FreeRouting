@@ -26,6 +26,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.util.EnumMap;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -106,32 +107,16 @@ public class BoardFrame extends javax.swing.JFrame {
     private final BoardObservers board_observers;
     private final IdNoGenerator item_id_no_generator;
 
-    WindowAbout about_window = null;
-    WindowRouteParameter route_parameter_window = null;
-    WindowAutorouteParameter autoroute_parameter_window = null;
-    WindowSelectParameter select_parameter_window = null;
-    WindowMoveParameter move_parameter_window = null;
-    WindowClearanceMatrix clearance_matrix_window = null;
-    WindowVia via_window = null;
-    WindowEditVias edit_vias_window = null;
-    WindowNetClasses edit_net_rules_window = null;
-    WindowAssignNetClass assign_net_classes_window = null;
-    WindowPadstacks padstacks_window = null;
-    WindowPackages packages_window = null;
-    WindowIncompletes incompletes_window = null;
-    WindowNets net_info_window = null;
-    WindowClearanceViolations clearance_violations_window = null;
-    WindowLengthViolations length_violations_window = null;
-    WindowUnconnectedRoute unconnected_route_window = null;
-    WindowRouteStubs route_stubs_window = null;
-    WindowComponents components_window = null;
-    WindowLayerVisibility layer_visibility_window = null;
-    WindowObjectVisibility object_visibility_window = null;
-    WindowDisplayMisc display_misc_window = null;
-    WindowSnapshot snapshot_window = null;
-    ColorManager color_manager = null;
+    enum SAVABLE_SUBWINDOW_KEY {
+        ABOUT, ROUTE_PARAMETER, AUTOROUTE_PARAMETER, SELECT_PARAMETER, MOVE_PARAMETER,
+        CLEARANCE_MATRIX, VIA, EDIT_VIAS, EDIT_NET_RULES, ASSIGN_NET_CLASSES,
+        PADSTACKS, PACKAGES, INCOMPLETES, NET_INFO, CLEARANCE_VIOLATIONS,
+        LENGHT_VIOLATIONS, UNCONNECTED_ROUTE, ROUTE_STUBS, COMPONENTS, LAYER_VISIBILITY,
+        OBJECT_VISIBILITY, DISPLAY_MISC, SNAPSHOT, COLOR_MANAGER
+    }
 
-    BoardSavableSubWindow[] permanent_subwindows = new BoardSavableSubWindow[SUBWINDOW_COUNT];
+    EnumMap<SAVABLE_SUBWINDOW_KEY, BoardSavableSubWindow> savable_subwindows;
+    EnumMap<SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY, WindowObjectListWithFilter> snapshot_subwindows;
 
     java.util.Collection<BoardTemporarySubWindow> temporary_subwindows = new java.util.LinkedList<>();
 
@@ -272,8 +257,8 @@ public class BoardFrame extends javax.swing.JFrame {
 
                     allocate_permanent_subwindows();
 
-                    for (int i = 0; i < permanent_subwindows.length; ++i) {
-                        permanent_subwindows[i].read(object_stream);
+                    for (BoardSavableSubWindow window : savable_subwindows.values()) {
+                        window.read(object_stream);
                     }
                 } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -339,8 +324,8 @@ public class BoardFrame extends javax.swing.JFrame {
             object_stream.writeObject(board_panel.get_viewport_position());
             object_stream.writeObject(getLocation());
             object_stream.writeObject(getBounds());
-            for (int i = 0; i < permanent_subwindows.length; ++i) {
-                permanent_subwindows[i].save(object_stream);
+            for (BoardSavableSubWindow window : savable_subwindows.values()) {
+                window.save(object_stream);
             }
             return true;
         } catch (IOException e) {
@@ -439,10 +424,10 @@ public class BoardFrame extends javax.swing.JFrame {
      */
     @Override
     public void dispose() {
-        for (int i = 0; i < permanent_subwindows.length; ++i) {
-            if (permanent_subwindows[i] != null) {
-                permanent_subwindows[i].dispose();
-                permanent_subwindows[i] = null;
+        for (BoardSavableSubWindow window : savable_subwindows.values()) {
+            if (window != null) {
+                window.dispose();
+                window = null;
             }
         }
         for (BoardTemporarySubWindow curr_subwindow : temporary_subwindows) {
@@ -459,54 +444,86 @@ public class BoardFrame extends javax.swing.JFrame {
     }
 
     private void allocate_permanent_subwindows() {
-        color_manager = new ColorManager(this);
-        permanent_subwindows[0] = color_manager;
-        object_visibility_window = WindowObjectVisibility.get_instance(this);
-        permanent_subwindows[1] = object_visibility_window;
-        layer_visibility_window = WindowLayerVisibility.get_instance(this);
-        permanent_subwindows[2] = layer_visibility_window;
-        display_misc_window = new WindowDisplayMisc(this);
-        permanent_subwindows[3] = display_misc_window;
-        snapshot_window = new WindowSnapshot(this);
-        permanent_subwindows[4] = snapshot_window;
-        route_parameter_window = new WindowRouteParameter(this);
-        permanent_subwindows[5] = route_parameter_window;
-        select_parameter_window = new WindowSelectParameter(this);
-        permanent_subwindows[6] = select_parameter_window;
-        clearance_matrix_window = new WindowClearanceMatrix(this);
-        permanent_subwindows[7] = clearance_matrix_window;
-        padstacks_window = new WindowPadstacks(this);
-        permanent_subwindows[8] = padstacks_window;
-        packages_window = new WindowPackages(this);
-        permanent_subwindows[9] = packages_window;
-        components_window = new WindowComponents(this);
-        permanent_subwindows[10] = components_window;
-        incompletes_window = new WindowIncompletes(this);
-        permanent_subwindows[11] = incompletes_window;
-        clearance_violations_window = new WindowClearanceViolations(this);
-        permanent_subwindows[12] = clearance_violations_window;
-        net_info_window = new WindowNets(this);
-        permanent_subwindows[13] = net_info_window;
-        via_window = new WindowVia(this);
-        permanent_subwindows[14] = via_window;
-        edit_vias_window = new WindowEditVias(this);
-        permanent_subwindows[15] = edit_vias_window;
-        edit_net_rules_window = new WindowNetClasses(this);
-        permanent_subwindows[16] = edit_net_rules_window;
-        assign_net_classes_window = new WindowAssignNetClass(this);
-        permanent_subwindows[17] = assign_net_classes_window;
-        length_violations_window = new WindowLengthViolations(this);
-        permanent_subwindows[18] = length_violations_window;
-        about_window = new WindowAbout();
-        permanent_subwindows[19] = about_window;
-        move_parameter_window = new WindowMoveParameter(this);
-        permanent_subwindows[20] = move_parameter_window;
-        unconnected_route_window = new WindowUnconnectedRoute(this);
-        permanent_subwindows[21] = unconnected_route_window;
-        route_stubs_window = new WindowRouteStubs(this);
-        permanent_subwindows[22] = route_stubs_window;
-        autoroute_parameter_window = new WindowAutorouteParameter(this);
-        permanent_subwindows[23] = autoroute_parameter_window;
+        savable_subwindows = new EnumMap<>(SAVABLE_SUBWINDOW_KEY.class);
+
+        WindowAbout about_window = new WindowAbout();
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.ABOUT, about_window);
+
+        WindowRouteParameter route_parameter_window = new WindowRouteParameter(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.ROUTE_PARAMETER, route_parameter_window);
+
+        WindowAutorouteParameter autoroute_parameter_window = new WindowAutorouteParameter(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.AUTOROUTE_PARAMETER, autoroute_parameter_window);
+
+        WindowSelectParameter select_parameter_window = new WindowSelectParameter(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER, select_parameter_window);
+
+        WindowMoveParameter move_parameter_window = new WindowMoveParameter(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.MOVE_PARAMETER, move_parameter_window);
+
+        WindowClearanceMatrix clearance_matrix_window = new WindowClearanceMatrix(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.CLEARANCE_MATRIX, clearance_matrix_window);
+
+        WindowVia via_window = new WindowVia(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.VIA, via_window);
+
+        WindowEditVias edit_vias_window = new WindowEditVias(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.EDIT_VIAS, edit_vias_window);
+
+        WindowNetClasses edit_net_rules_window = new WindowNetClasses(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.EDIT_NET_RULES, edit_net_rules_window);
+
+        WindowAssignNetClass assign_net_classes_window = new WindowAssignNetClass(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.ASSIGN_NET_CLASSES, assign_net_classes_window);
+
+        WindowPadstacks padstacks_window = new WindowPadstacks(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.PADSTACKS, padstacks_window);
+
+        WindowPackages packages_window = new WindowPackages(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.PACKAGES, packages_window);
+
+        WindowIncompletes incompletes_window = new WindowIncompletes(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.INCOMPLETES, incompletes_window);
+
+        WindowNets net_info_window = new WindowNets(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.NET_INFO, net_info_window);
+
+        WindowClearanceViolations clearance_violations_window = new WindowClearanceViolations(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.CLEARANCE_VIOLATIONS, clearance_violations_window);
+
+        WindowLengthViolations length_violations_window = new WindowLengthViolations(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.LENGHT_VIOLATIONS, length_violations_window);
+
+        WindowUnconnectedRoute unconnected_route_window = new WindowUnconnectedRoute(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.UNCONNECTED_ROUTE, unconnected_route_window);
+
+        WindowRouteStubs route_stubs_window = new WindowRouteStubs(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.ROUTE_STUBS, route_stubs_window);
+
+        WindowComponents components_window = new WindowComponents(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.COMPONENTS, components_window);
+
+        WindowLayerVisibility layer_visibility_window = WindowLayerVisibility.get_instance(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.LAYER_VISIBILITY, layer_visibility_window);
+
+        WindowObjectVisibility object_visibility_window = WindowObjectVisibility.get_instance(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.OBJECT_VISIBILITY, object_visibility_window);
+
+        WindowDisplayMisc display_misc_window = new WindowDisplayMisc(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.DISPLAY_MISC, display_misc_window);
+
+        WindowSnapshot snapshot_window = new WindowSnapshot(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.SNAPSHOT, snapshot_window);
+
+        ColorManager color_manager = new ColorManager(this);
+        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.COLOR_MANAGER, color_manager);
+
+        snapshot_subwindows = new EnumMap<>(SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY.class);
+        snapshot_subwindows.put(SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY.PACKAGES, packages_window);
+        snapshot_subwindows.put(SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY.PADSTACKS, padstacks_window);
+        snapshot_subwindows.put(SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY.NET_INFO, net_info_window);
+        snapshot_subwindows.put(SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY.INCOMPLETES, incompletes_window);
+        snapshot_subwindows.put(SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY.COMPONENTS, components_window);
     }
 
     /**
@@ -517,32 +534,32 @@ public class BoardFrame extends javax.swing.JFrame {
 
         setLocation(120, 0);
 
-        select_parameter_window.setLocation(0, 0);
-        select_parameter_window.setVisible(true);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER).setLocation(0, 0);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER).setVisible(true);
 
-        route_parameter_window.setLocation(0, 100);
-        autoroute_parameter_window.setLocation(0, 200);
-        move_parameter_window.setLocation(0, 50);
-        clearance_matrix_window.setLocation(0, 150);
-        via_window.setLocation(50, 150);
-        edit_vias_window.setLocation(100, 150);
-        edit_net_rules_window.setLocation(100, 200);
-        assign_net_classes_window.setLocation(100, 250);
-        padstacks_window.setLocation(100, 30);
-        packages_window.setLocation(200, 30);
-        components_window.setLocation(300, 30);
-        incompletes_window.setLocation(400, 30);
-        clearance_violations_window.setLocation(500, 30);
-        length_violations_window.setLocation(550, 30);
-        net_info_window.setLocation(350, 30);
-        unconnected_route_window.setLocation(650, 30);
-        route_stubs_window.setLocation(600, 30);
-        snapshot_window.setLocation(0, 250);
-        layer_visibility_window.setLocation(0, 450);
-        object_visibility_window.setLocation(0, 550);
-        display_misc_window.setLocation(0, 350);
-        color_manager.setLocation(0, 600);
-        about_window.setLocation(200, 200);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.ROUTE_PARAMETER).setLocation(0, 100);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.AUTOROUTE_PARAMETER).setLocation(0, 200);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.MOVE_PARAMETER).setLocation(0, 50);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.CLEARANCE_MATRIX).setLocation(0, 150);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.VIA).setLocation(50, 150);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.EDIT_VIAS).setLocation(100, 150);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.EDIT_NET_RULES).setLocation(100, 200);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.ASSIGN_NET_CLASSES).setLocation(100, 250);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.PADSTACKS).setLocation(100, 30);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.PACKAGES).setLocation(200, 30);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.COMPONENTS).setLocation(300, 30);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.INCOMPLETES).setLocation(400, 30);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.CLEARANCE_VIOLATIONS).setLocation(500, 30);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.LENGHT_VIOLATIONS).setLocation(550, 30);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.NET_INFO).setLocation(350, 30);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.UNCONNECTED_ROUTE).setLocation(650, 30);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.ROUTE_STUBS).setLocation(600, 30);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.SNAPSHOT).setLocation(0, 250);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.LAYER_VISIBILITY).setLocation(0, 450);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.OBJECT_VISIBILITY).setLocation(0, 550);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.DISPLAY_MISC).setLocation(0, 350);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.COLOR_MANAGER).setLocation(0, 600);
+        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.ABOUT).setLocation(200, 200);
     }
 
     /**
@@ -556,9 +573,9 @@ public class BoardFrame extends javax.swing.JFrame {
      * Refreshs all displayed coordinates after the user unit has changed.
      */
     public void refresh_windows() {
-        for (int i = 0; i < permanent_subwindows.length; ++i) {
-            if (permanent_subwindows[i] != null) {
-                permanent_subwindows[i].refresh();
+        for (BoardSavableSubWindow window : savable_subwindows.values()) {
+            if (window != null) {
+                window.refresh();
             }
         }
     }
@@ -574,6 +591,7 @@ public class BoardFrame extends javax.swing.JFrame {
      * Restore the selected snapshot in the snapshot window.
      */
     public void goto_selected_snapshot() {
+        WindowSnapshot snapshot_window = (WindowSnapshot) savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.SNAPSHOT);
         if (snapshot_window != null) {
             snapshot_window.goto_selected();
         }
@@ -584,6 +602,7 @@ public class BoardFrame extends javax.swing.JFrame {
      * Thecurent selected snapshot will be no more selected.
      */
     public void select_previous_snapshot() {
+        WindowSnapshot snapshot_window = (WindowSnapshot) savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.SNAPSHOT);
         if (snapshot_window != null) {
             snapshot_window.select_previous_item();
         }
@@ -594,6 +613,7 @@ public class BoardFrame extends javax.swing.JFrame {
      * Thecurent selected snapshot will be no more selected.
      */
     public void select_next_snapshot() {
+        WindowSnapshot snapshot_window = (WindowSnapshot) savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.SNAPSHOT);
         if (snapshot_window != null) {
             snapshot_window.select_next_item();
         }
@@ -603,12 +623,7 @@ public class BoardFrame extends javax.swing.JFrame {
      * Used for storing the subwindowfilters in a snapshot.
      */
     public SubwindowSelections get_snapshot_subwindow_selections() {
-        SubwindowSelections result = new SubwindowSelections();
-        result.incompletes_selection = incompletes_window.get_snapshot_info();
-        result.packages_selection = packages_window.get_snapshot_info();
-        result.nets_selection = net_info_window.get_snapshot_info();
-        result.components_selection = components_window.get_snapshot_info();
-        result.padstacks_selection = padstacks_window.get_snapshot_info();
+        SubwindowSelections result = new SubwindowSelections(snapshot_subwindows);
         return result;
     }
 
@@ -616,11 +631,7 @@ public class BoardFrame extends javax.swing.JFrame {
      * Used for restoring the subwindowfilters from a snapshot.
      */
     public void set_snapshot_subwindow_selections(SubwindowSelections p_filters) {
-        incompletes_window.set_snapshot_info(p_filters.incompletes_selection);
-        packages_window.set_snapshot_info(p_filters.packages_selection);
-        net_info_window.set_snapshot_info(p_filters.nets_selection);
-        components_window.set_snapshot_info(p_filters.components_selection);
-        padstacks_window.set_snapshot_info(p_filters.padstacks_selection);
+        p_filters.set_snapshot_info(snapshot_subwindows);
     }
 
     /**
@@ -628,22 +639,9 @@ public class BoardFrame extends javax.swing.JFrame {
      */
     public void repaint_all() {
         repaint();
-        for (int i = 0; i < permanent_subwindows.length; ++i) {
-            permanent_subwindows[i].repaint();
+        for (BoardSavableSubWindow window : savable_subwindows.values()) {
+            window.repaint();
         }
-    }
-
-    /**
-     * Used for storing the subwindow filters in a snapshot.
-     */
-    @SuppressWarnings("serial")
-    public static class SubwindowSelections implements java.io.Serializable {
-
-        private WindowObjectListWithFilter.SnapshotInfo incompletes_selection;
-        private WindowObjectListWithFilter.SnapshotInfo packages_selection;
-        private WindowObjectListWithFilter.SnapshotInfo nets_selection;
-        private WindowObjectListWithFilter.SnapshotInfo components_selection;
-        private WindowObjectListWithFilter.SnapshotInfo padstacks_selection;
     }
 
     private class WindowStateListener extends java.awt.event.WindowAdapter {
@@ -660,8 +658,8 @@ public class BoardFrame extends javax.swing.JFrame {
 
         @Override
         public void windowIconified(java.awt.event.WindowEvent evt) {
-            for (int i = 0; i < permanent_subwindows.length; ++i) {
-                permanent_subwindows[i].parent_iconified();
+            for (BoardSavableSubWindow window : savable_subwindows.values()) {
+                window.parent_iconified();
             }
             for (BoardSubWindow curr_subwindow : temporary_subwindows) {
                 if (curr_subwindow != null) {
@@ -672,9 +670,9 @@ public class BoardFrame extends javax.swing.JFrame {
 
         @Override
         public void windowDeiconified(java.awt.event.WindowEvent evt) {
-            for (int i = 0; i < permanent_subwindows.length; ++i) {
-                if (permanent_subwindows[i] != null) {
-                    permanent_subwindows[i].parent_deiconified();
+            for (BoardSavableSubWindow window : savable_subwindows.values()) {
+                if (window != null) {
+                    window.parent_deiconified();
                 }
             }
             for (BoardSubWindow curr_subwindow : temporary_subwindows) {

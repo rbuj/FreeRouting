@@ -164,28 +164,28 @@ public class GUIDefaultsFile {
 
     private void write_windows_scope() throws java.io.IOException {
         out_file.start_scope("windows");
-        write_frame_scope(this.board_frame, "board_frame");
-        write_frame_scope(this.board_frame.color_manager, "color_manager");
-        write_frame_scope(this.board_frame.layer_visibility_window, "layer_visibility");
-        write_frame_scope(this.board_frame.object_visibility_window, "object_visibility");
-        write_frame_scope(this.board_frame.display_misc_window, "display_miscellanious");
-        write_frame_scope(this.board_frame.snapshot_window, "snapshots");
-        write_frame_scope(this.board_frame.select_parameter_window, "select_parameter");
-        write_frame_scope(this.board_frame.route_parameter_window, "route_parameter");
-        write_frame_scope(this.board_frame.route_parameter_window.manual_rule_window, "manual_rules");
-        write_frame_scope(this.board_frame.route_parameter_window.detail_window, "route_details");
-        write_frame_scope(this.board_frame.move_parameter_window, "move_parameter");
-        write_frame_scope(this.board_frame.clearance_matrix_window, "clearance_matrix");
-        write_frame_scope(this.board_frame.via_window, "via_rules");
-        write_frame_scope(this.board_frame.edit_vias_window, "edit_vias");
-        write_frame_scope(this.board_frame.edit_net_rules_window, "edit_net_rules");
-        write_frame_scope(this.board_frame.assign_net_classes_window, "assign_net_rules");
-        write_frame_scope(this.board_frame.padstacks_window, "padstack_info");
-        write_frame_scope(this.board_frame.packages_window, "package_info");
-        write_frame_scope(this.board_frame.components_window, "component_info");
-        write_frame_scope(this.board_frame.net_info_window, "net_info");
-        write_frame_scope(this.board_frame.incompletes_window, "incompletes_info");
-        write_frame_scope(this.board_frame.clearance_violations_window, "violations_info");
+        write_frame_scope(board_frame, "board_frame");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.COLOR_MANAGER), "color_manager");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.LAYER_VISIBILITY), "layer_visibility");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.OBJECT_VISIBILITY), "object_visibility");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.DISPLAY_MISC), "display_miscellanious");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.SNAPSHOT), "snapshots");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER), "select_parameter");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.ROUTE_PARAMETER), "route_parameter");
+        write_frame_scope(((WindowRouteParameter) board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.COLOR_MANAGER)).manual_rule_window, "manual_rules");
+        write_frame_scope(((WindowRouteParameter) board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.COLOR_MANAGER)).detail_window, "route_details");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.MOVE_PARAMETER), "move_parameter");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.CLEARANCE_MATRIX), "clearance_matrix");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.VIA), "via_rules");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.EDIT_VIAS), "edit_vias");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.EDIT_NET_RULES), "edit_net_rules");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.ASSIGN_NET_CLASSES), "assign_net_rules");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.PADSTACKS), "padstack_info");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.PACKAGES), "package_info");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.COMPONENTS), "component_info");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.NET_INFO), "net_info");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.INCOMPLETES), "incompletes_info");
+        write_frame_scope(board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.CLEARANCE_VIOLATIONS), "violations_info");
         out_file.end_scope();
     }
 
@@ -833,127 +833,129 @@ public class GUIDefaultsFile {
         COLOR_MANAGER {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.color_manager;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.COLOR_MANAGER);
             }
         },
         OBJECT_VISIBILITY {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.object_visibility_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.OBJECT_VISIBILITY);
             }
         },
         LAYER_VISIBILITY {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.layer_visibility_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.LAYER_VISIBILITY);
             }
         },
         DISPLAY_MISCELLANIOUS {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.display_misc_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.DISPLAY_MISC);
             }
         },
         SNAPSHOTS {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.snapshot_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.SNAPSHOT);
             }
         },
         SELECT_PARAMETER {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.select_parameter_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER);
             }
         },
         ROUTE_PARAMETER {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.route_parameter_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.ROUTE_PARAMETER);
             }
         },
         MANUAL_RULES {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.route_parameter_window.manual_rule_window;
+                WindowRouteParameter route_parameter_window = (WindowRouteParameter) board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.ROUTE_PARAMETER);
+                return route_parameter_window.manual_rule_window;
             }
         },
         ROUTE_DETAILS {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.route_parameter_window.detail_window;
+                WindowRouteParameter route_parameter_window = (WindowRouteParameter) board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.ROUTE_PARAMETER);
+                return route_parameter_window.detail_window;
             }
         },
         MOVE_PARAMETER {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.move_parameter_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.MOVE_PARAMETER);
             }
         },
         CLEARANCE_MATRIX {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.clearance_matrix_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.CLEARANCE_MATRIX);
             }
         },
         VIA_RULES {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.via_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.VIA);
             }
         },
         EDIT_VIAS {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.edit_vias_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.EDIT_VIAS);
             }
         },
         EDIT_NET_RULES {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.edit_net_rules_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.EDIT_NET_RULES);
             }
         },
         ASSIGN_NET_RULES {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.assign_net_classes_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.ASSIGN_NET_CLASSES);
             }
         },
         PADSTACK_INFO {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.padstacks_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.PADSTACKS);
             }
         },
         PACKAGE_INFO {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.packages_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.PACKAGES);
             }
         },
         COMPONENT_INFO {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.components_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.COMPONENTS);
             }
         },
         NET_INFO {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.net_info_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.NET_INFO);
             }
         },
         INCOMPLETES_INFO {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.incompletes_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.INCOMPLETES);
             }
         },
         VIOLATIONS_INFO {
             @Override
             public javax.swing.JFrame get_frame(BoardFrame board_frame) throws GUIDefaultsFileException {
-                return board_frame.clearance_violations_window;
+                return board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.CLEARANCE_VIOLATIONS);
             }
         };
 

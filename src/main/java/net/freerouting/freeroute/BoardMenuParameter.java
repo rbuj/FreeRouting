@@ -52,7 +52,7 @@ public class BoardMenuParameter extends javax.swing.JMenu {
         javax.swing.JMenuItem selectwindow = new javax.swing.JMenuItem();
         selectwindow.setText(parameter_menu.resources.getString("select"));
         selectwindow.addActionListener((java.awt.event.ActionEvent evt) -> {
-            parameter_menu.board_frame.select_parameter_window.setVisible(true);
+            parameter_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER).setVisible(true);
         });
 
         parameter_menu.add(selectwindow);
@@ -60,7 +60,7 @@ public class BoardMenuParameter extends javax.swing.JMenu {
         javax.swing.JMenuItem routewindow = new javax.swing.JMenuItem();
         routewindow.setText(parameter_menu.resources.getString("route"));
         routewindow.addActionListener((java.awt.event.ActionEvent evt) -> {
-            parameter_menu.board_frame.route_parameter_window.setVisible(true);
+            parameter_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.ROUTE_PARAMETER).setVisible(true);
         });
 
         parameter_menu.add(routewindow);
@@ -68,7 +68,7 @@ public class BoardMenuParameter extends javax.swing.JMenu {
         javax.swing.JMenuItem autoroutewindow = new javax.swing.JMenuItem();
         autoroutewindow.setText(parameter_menu.resources.getString("autoroute"));
         autoroutewindow.addActionListener((java.awt.event.ActionEvent evt) -> {
-            parameter_menu.board_frame.autoroute_parameter_window.setVisible(true);
+            parameter_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.AUTOROUTE_PARAMETER).setVisible(true);
         });
 
         parameter_menu.add(autoroutewindow);
@@ -76,7 +76,7 @@ public class BoardMenuParameter extends javax.swing.JMenu {
         javax.swing.JMenuItem movewindow = new javax.swing.JMenuItem();
         movewindow.setText(parameter_menu.resources.getString("move"));
         movewindow.addActionListener((java.awt.event.ActionEvent evt) -> {
-            parameter_menu.board_frame.move_parameter_window.setVisible(true);
+            parameter_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.MOVE_PARAMETER).setVisible(true);
         });
 
         parameter_menu.add(movewindow);

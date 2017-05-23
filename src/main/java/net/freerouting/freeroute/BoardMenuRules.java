@@ -51,21 +51,21 @@ public class BoardMenuRules extends javax.swing.JMenu {
         javax.swing.JMenuItem clearance_window = new javax.swing.JMenuItem();
         clearance_window.setText(rules_menu.resources.getString("clearance_matrix"));
         clearance_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            rules_menu.board_frame.clearance_matrix_window.setVisible(true);
+            rules_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.CLEARANCE_MATRIX).setVisible(true);
         });
         rules_menu.add(clearance_window);
 
         javax.swing.JMenuItem via_window = new javax.swing.JMenuItem();
         via_window.setText(rules_menu.resources.getString("vias"));
         via_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            rules_menu.board_frame.via_window.setVisible(true);
+            rules_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.VIA).setVisible(true);
         });
         rules_menu.add(via_window);
 
         javax.swing.JMenuItem nets_window = new javax.swing.JMenuItem();
         nets_window.setText(rules_menu.resources.getString("nets"));
         nets_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            rules_menu.board_frame.net_info_window.setVisible(true);
+            rules_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.NET_INFO).setVisible(true);
         });
 
         rules_menu.add(nets_window);
@@ -73,7 +73,7 @@ public class BoardMenuRules extends javax.swing.JMenu {
         javax.swing.JMenuItem net_class_window = new javax.swing.JMenuItem();
         net_class_window.setText(rules_menu.resources.getString("net_classes"));
         net_class_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            rules_menu.board_frame.edit_net_rules_window.setVisible(true);
+            rules_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.EDIT_NET_RULES).setVisible(true);
         });
         rules_menu.add(net_class_window);
 

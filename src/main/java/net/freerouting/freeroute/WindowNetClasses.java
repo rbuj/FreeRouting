@@ -245,7 +245,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
 
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
-            board_frame.assign_net_classes_window.setVisible(true);
+            board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.ASSIGN_NET_CLASSES).setVisible(true);
         }
     }
 
@@ -531,7 +531,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
                     return; // name exists already
                 }
                 net_rule.set_name(new_name);
-                board_frame.via_window.refresh();
+                board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.VIA).refresh();
             } else if (p_col == ColumnName.VIA_RULE.ordinal()) {
                 if (!(p_value instanceof String)) {
                     return;

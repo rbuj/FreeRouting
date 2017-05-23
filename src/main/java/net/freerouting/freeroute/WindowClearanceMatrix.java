@@ -386,8 +386,9 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow {
                             + " " + resources.getString("and") + " " + clearance_matrix.get_name(curr_column);
                 }
                 message += resources.getString("change_anyway");
-                int selected_option
-                        = javax.swing.JOptionPane.showConfirmDialog(board_frame.clearance_matrix_window, message, null, javax.swing.JOptionPane.YES_NO_OPTION);
+                int selected_option = javax.swing.JOptionPane.showConfirmDialog(
+                        board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.CLEARANCE_MATRIX),
+                        message, null, javax.swing.JOptionPane.YES_NO_OPTION);
                 if (selected_option != javax.swing.JOptionPane.YES_OPTION) {
                     return;
                 }

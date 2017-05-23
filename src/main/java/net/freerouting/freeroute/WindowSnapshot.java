@@ -199,7 +199,8 @@ public class WindowSnapshot extends BoardSavableSubWindow {
                 board_handling.graphics_context.other_color_table
                         = new net.freerouting.freeroute.boardgraphics.OtherColorTableModel(curr_snapshot.graphics_context.other_color_table);
 
-                board_frame.color_manager.set_table_models(board_handling.graphics_context);
+                ColorManager color_manager = (ColorManager) board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.COLOR_MANAGER);
+                color_manager.set_table_models(board_handling.graphics_context);
             }
 
             if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.DISPLAY_REGION)) {

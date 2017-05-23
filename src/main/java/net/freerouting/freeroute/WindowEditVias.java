@@ -271,7 +271,7 @@ public class WindowEditVias extends BoardSavableSubWindow {
                     return;
                 }
                 via_info.set_name(new_name);
-                board_frame.via_window.refresh();
+                board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.VIA).refresh();
             } else if (p_col == ColumnName.PADSTACK.ordinal()) {
                 if (!(p_value instanceof String)) {
                     return;

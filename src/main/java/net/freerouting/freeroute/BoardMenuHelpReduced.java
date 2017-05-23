@@ -45,7 +45,7 @@ public class BoardMenuHelpReduced extends javax.swing.JMenu {
         javax.swing.JMenuItem about_window = new javax.swing.JMenuItem();
         about_window.setText(this.resources.getString("about"));
         about_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            board_frame.about_window.setVisible(true);
+            board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.ABOUT).setVisible(true);
         });
         this.add(about_window);
     }

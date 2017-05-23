@@ -52,7 +52,7 @@ public class BoardMenuOther extends javax.swing.JMenu {
         snapshots.setText(other_menu.resources.getString("snapshots"));
         snapshots.setToolTipText(other_menu.resources.getString("snapshots_tooltip"));
         snapshots.addActionListener((java.awt.event.ActionEvent evt) -> {
-            other_menu.board_frame.snapshot_window.setVisible(true);
+            other_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.SNAPSHOT).setVisible(true);
         });
 
         other_menu.add(snapshots);

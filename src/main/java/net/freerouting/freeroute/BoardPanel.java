@@ -336,8 +336,9 @@ public class BoardPanel extends javax.swing.JPanel {
      * Selects the p_signal_layer_no-th layer in the select_parameter_window.
      */
     public void set_selected_signal_layer(int p_signal_layer_no) {
-        if (this.board_frame.select_parameter_window != null) {
-            this.board_frame.select_parameter_window.select(p_signal_layer_no);
+        if (board_frame.savable_subwindows != null) {
+            ((WindowSelectParameter) board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER))
+                    .select(p_signal_layer_no);
             this.popup_menu_dynamic_route.disable_layer_item(p_signal_layer_no);
             this.popup_menu_stitch_route.disable_layer_item(p_signal_layer_no);
             this.popup_menu_copy.disable_layer_item(p_signal_layer_no);
