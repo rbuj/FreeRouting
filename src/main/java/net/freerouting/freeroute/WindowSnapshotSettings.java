@@ -58,7 +58,7 @@ public class WindowSnapshotSettings extends BoardSavableSubWindow {
 
         snapshot_attributes_map = new EnumMap<>(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.class);
         for (SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY key : SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.values()) {
-            JCheckBox check_box = new JCheckBox(resources.getString(key.name().toLowerCase()));
+            JCheckBox check_box = new JCheckBox(resources.getString(key.name().toLowerCase(Locale.ENGLISH)));
             gridbag.setConstraints(check_box, gridbag_constraints);
             check_box.setActionCommand(key.name());
             snapshot_attributes_map.put(key, check_box);

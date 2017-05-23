@@ -21,6 +21,7 @@ package net.freerouting.freeroute;
 
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.freerouting.freeroute.board.ItemSelectionFilter;
@@ -633,7 +634,7 @@ public class GUIDefaultsFile {
         for (SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY key : SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.values()) {
             if (key != SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.INFO_LIST_SELECTIONS && !attributes.get(key)) {
                 out_file.new_line();
-                out_file.write(key.name().toLowerCase() + " ");
+                out_file.write(key.name().toLowerCase(Locale.ENGLISH) + " ");
             }
         }
         out_file.end_scope();
