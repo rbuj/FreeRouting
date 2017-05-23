@@ -20,6 +20,8 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import java.util.Map;
+import static java.util.Map.entry;
 import java.util.ResourceBundle;
 
 /**
@@ -49,37 +51,20 @@ public class BoardMenuParameter extends javax.swing.JMenu {
 
         parameter_menu.setText(parameter_menu.resources.getString("parameter"));
 
-        javax.swing.JMenuItem selectwindow = new javax.swing.JMenuItem();
-        selectwindow.setText(parameter_menu.resources.getString("select"));
-        selectwindow.addActionListener((java.awt.event.ActionEvent evt) -> {
-            parameter_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER).setVisible(true);
-        });
+        Map<BoardFrame.SAVABLE_SUBWINDOW_KEY, String> menu_items = Map.ofEntries(
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER, "select"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.ROUTE_PARAMETER, "route"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.AUTOROUTE_PARAMETER, "autoroute"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.MOVE_PARAMETER, "move"));
 
-        parameter_menu.add(selectwindow);
-
-        javax.swing.JMenuItem routewindow = new javax.swing.JMenuItem();
-        routewindow.setText(parameter_menu.resources.getString("route"));
-        routewindow.addActionListener((java.awt.event.ActionEvent evt) -> {
-            parameter_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.ROUTE_PARAMETER).setVisible(true);
-        });
-
-        parameter_menu.add(routewindow);
-
-        javax.swing.JMenuItem autoroutewindow = new javax.swing.JMenuItem();
-        autoroutewindow.setText(parameter_menu.resources.getString("autoroute"));
-        autoroutewindow.addActionListener((java.awt.event.ActionEvent evt) -> {
-            parameter_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.AUTOROUTE_PARAMETER).setVisible(true);
-        });
-
-        parameter_menu.add(autoroutewindow);
-
-        javax.swing.JMenuItem movewindow = new javax.swing.JMenuItem();
-        movewindow.setText(parameter_menu.resources.getString("move"));
-        movewindow.addActionListener((java.awt.event.ActionEvent evt) -> {
-            parameter_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.MOVE_PARAMETER).setVisible(true);
-        });
-
-        parameter_menu.add(movewindow);
+        for (Map.Entry<BoardFrame.SAVABLE_SUBWINDOW_KEY, String> entry : menu_items.entrySet()) {
+            javax.swing.JMenuItem menu_item = new javax.swing.JMenuItem();
+            menu_item.setText(parameter_menu.resources.getString(entry.getValue()));
+            menu_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                parameter_menu.board_frame.savable_subwindows.get(entry.getKey()).setVisible(true);
+            });
+            parameter_menu.add(menu_item);
+        }
 
         return parameter_menu;
     }

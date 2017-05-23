@@ -20,6 +20,8 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import java.util.Map;
+import static java.util.Map.entry;
 
 /**
  * Creates the rules menu of a board frame.
@@ -48,34 +50,20 @@ public class BoardMenuRules extends javax.swing.JMenu {
 
         rules_menu.setText(rules_menu.resources.getString("rules"));
 
-        javax.swing.JMenuItem clearance_window = new javax.swing.JMenuItem();
-        clearance_window.setText(rules_menu.resources.getString("clearance_matrix"));
-        clearance_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            rules_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.CLEARANCE_MATRIX).setVisible(true);
-        });
-        rules_menu.add(clearance_window);
+        Map<BoardFrame.SAVABLE_SUBWINDOW_KEY, String> menu_items = Map.ofEntries(
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.CLEARANCE_MATRIX, "clearance_matrix"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.VIA, "vias"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.NET_INFO, "nets"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.EDIT_NET_RULES, "net_classes"));
 
-        javax.swing.JMenuItem via_window = new javax.swing.JMenuItem();
-        via_window.setText(rules_menu.resources.getString("vias"));
-        via_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            rules_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.VIA).setVisible(true);
-        });
-        rules_menu.add(via_window);
-
-        javax.swing.JMenuItem nets_window = new javax.swing.JMenuItem();
-        nets_window.setText(rules_menu.resources.getString("nets"));
-        nets_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            rules_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.NET_INFO).setVisible(true);
-        });
-
-        rules_menu.add(nets_window);
-
-        javax.swing.JMenuItem net_class_window = new javax.swing.JMenuItem();
-        net_class_window.setText(rules_menu.resources.getString("net_classes"));
-        net_class_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            rules_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.EDIT_NET_RULES).setVisible(true);
-        });
-        rules_menu.add(net_class_window);
+        for (Map.Entry<BoardFrame.SAVABLE_SUBWINDOW_KEY, String> entry : menu_items.entrySet()) {
+            javax.swing.JMenuItem menu_item = new javax.swing.JMenuItem();
+            menu_item.setText(rules_menu.resources.getString(entry.getValue()));
+            menu_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                rules_menu.board_frame.savable_subwindows.get(entry.getKey()).setVisible(true);
+            });
+            rules_menu.add(menu_item);
+        }
 
         return rules_menu;
     }

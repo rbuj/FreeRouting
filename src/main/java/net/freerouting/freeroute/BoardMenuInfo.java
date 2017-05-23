@@ -20,6 +20,9 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import static java.util.Map.entry;
 
 /**
  *
@@ -47,61 +50,24 @@ public class BoardMenuInfo extends javax.swing.JMenu {
 
         info_menu.setText(info_menu.resources.getString("info"));
 
-        javax.swing.JMenuItem package_window = new javax.swing.JMenuItem();
-        package_window.setText(info_menu.resources.getString("library_packages"));
-        package_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            info_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.PACKAGES).setVisible(true);
-        });
-        info_menu.add(package_window);
+        Map<BoardFrame.SAVABLE_SUBWINDOW_KEY, String> menu_items = Map.ofEntries(
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.PACKAGES, "library_packages"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.PADSTACKS, "library_padstacks"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.COMPONENTS, "board_components"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.INCOMPLETES, "incompletes"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.LENGHT_VIOLATIONS, "length_violations"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.CLEARANCE_VIOLATIONS, "clearance_violations"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.UNCONNECTED_ROUTE, "unconnected_route"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.ROUTE_STUBS, "route_stubs"));
 
-        javax.swing.JMenuItem padstacks_window = new javax.swing.JMenuItem();
-        padstacks_window.setText(info_menu.resources.getString("library_padstacks"));
-        padstacks_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            info_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.PADSTACKS).setVisible(true);
-        });
-        info_menu.add(padstacks_window);
-
-        javax.swing.JMenuItem components_window = new javax.swing.JMenuItem();
-        components_window.setText(info_menu.resources.getString("board_components"));
-        components_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            info_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.COMPONENTS).setVisible(true);
-        });
-        info_menu.add(components_window);
-
-        javax.swing.JMenuItem incompletes_window = new javax.swing.JMenuItem();
-        incompletes_window.setText(info_menu.resources.getString("incompletes"));
-        incompletes_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            info_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.INCOMPLETES).setVisible(true);
-        });
-        info_menu.add(incompletes_window);
-
-        javax.swing.JMenuItem length_violations_window = new javax.swing.JMenuItem();
-        length_violations_window.setText(info_menu.resources.getString("length_violations"));
-        length_violations_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            info_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.LENGHT_VIOLATIONS).setVisible(true);
-        });
-        info_menu.add(length_violations_window);
-
-        javax.swing.JMenuItem clearance_violations_window = new javax.swing.JMenuItem();
-        clearance_violations_window.setText(info_menu.resources.getString("clearance_violations"));
-        clearance_violations_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            info_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.CLEARANCE_VIOLATIONS).setVisible(true);
-        });
-        info_menu.add(clearance_violations_window);
-
-        javax.swing.JMenuItem unconnnected_route_window = new javax.swing.JMenuItem();
-        unconnnected_route_window.setText(info_menu.resources.getString("unconnected_route"));
-        unconnnected_route_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            info_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.UNCONNECTED_ROUTE).setVisible(true);
-        });
-        info_menu.add(unconnnected_route_window);
-
-        javax.swing.JMenuItem route_stubs_window = new javax.swing.JMenuItem();
-        route_stubs_window.setText(info_menu.resources.getString("route_stubs"));
-        route_stubs_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            info_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.ROUTE_STUBS).setVisible(true);
-        });
-        info_menu.add(route_stubs_window);
+        for (Entry<BoardFrame.SAVABLE_SUBWINDOW_KEY, String> entry : menu_items.entrySet()) {
+            javax.swing.JMenuItem menu_item = new javax.swing.JMenuItem();
+            menu_item.setText(info_menu.resources.getString(entry.getValue()));
+            menu_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                info_menu.board_frame.savable_subwindows.get(entry.getKey()).setVisible(true);
+            });
+            info_menu.add(menu_item);
+        }
 
         return info_menu;
     }

@@ -20,6 +20,8 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import java.util.Map;
+import static java.util.Map.entry;
 
 /**
  * Creates the display menu of a board frame.
@@ -47,40 +49,20 @@ public class BoardMenuDisplay extends javax.swing.JMenu {
         BoardMenuDisplay display_menu = new BoardMenuDisplay(p_board_frame);
         display_menu.setText(display_menu.resources.getString("display"));
 
-        javax.swing.JMenuItem itemvisibility = new javax.swing.JMenuItem();
-        itemvisibility.setText(display_menu.resources.getString("object_visibility"));
-        itemvisibility.setToolTipText(display_menu.resources.getString("object_visibility_tooltip"));
-        itemvisibility.addActionListener((java.awt.event.ActionEvent evt) -> {
-            display_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.OBJECT_VISIBILITY).setVisible(true);
-        });
+        Map<BoardFrame.SAVABLE_SUBWINDOW_KEY, String> menu_items = Map.ofEntries(
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.OBJECT_VISIBILITY, "object_visibility"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.LAYER_VISIBILITY, "layer_visibility"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.COLOR_MANAGER, "colors"),
+                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.DISPLAY_MISC, "miscellaneous"));
 
-        display_menu.add(itemvisibility);
-
-        javax.swing.JMenuItem layervisibility = new javax.swing.JMenuItem();
-        layervisibility.setText(display_menu.resources.getString("layer_visibility"));
-        layervisibility.setToolTipText(display_menu.resources.getString("layer_visibility_tooltip"));
-        layervisibility.addActionListener((java.awt.event.ActionEvent evt) -> {
-            display_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.LAYER_VISIBILITY).setVisible(true);
-        });
-
-        display_menu.add(layervisibility);
-
-        javax.swing.JMenuItem colors = new javax.swing.JMenuItem();
-        colors.setText(display_menu.resources.getString("colors"));
-        colors.setToolTipText(display_menu.resources.getString("colors_tooltip"));
-        colors.addActionListener((java.awt.event.ActionEvent evt) -> {
-            display_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.COLOR_MANAGER).setVisible(true);
-        });
-
-        display_menu.add(colors);
-
-        javax.swing.JMenuItem miscellanious = new javax.swing.JMenuItem();
-        miscellanious.setText(display_menu.resources.getString("miscellaneous"));
-        miscellanious.addActionListener((java.awt.event.ActionEvent evt) -> {
-            display_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.DISPLAY_MISC).setVisible(true);
-        });
-
-        display_menu.add(miscellanious);
+        for (Map.Entry<BoardFrame.SAVABLE_SUBWINDOW_KEY, String> entry : menu_items.entrySet()) {
+            javax.swing.JMenuItem menu_item = new javax.swing.JMenuItem();
+            menu_item.setText(display_menu.resources.getString(entry.getValue()));
+            menu_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                display_menu.board_frame.savable_subwindows.get(entry.getKey()).setVisible(true);
+            });
+            display_menu.add(menu_item);
+        }
 
         return display_menu;
     }
