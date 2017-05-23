@@ -34,6 +34,7 @@ public enum Unit {
     UM("um");
 
     private final String name;
+    public static final int size = 4;
 
     Unit (String s){
         name = s;
@@ -45,7 +46,7 @@ public enum Unit {
     }
 
     // Reverse-lookup map for getting a unit from a string
-    private static final Map<String, Unit> lookup = new HashMap<String, Unit>();
+    private static final Map<String, Unit> lookup = new HashMap<String, Unit>(size);
 
     static {
         for (Unit u : Unit.values()) {

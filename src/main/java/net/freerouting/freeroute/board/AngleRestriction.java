@@ -35,6 +35,7 @@ public enum AngleRestriction {
 
     private final String name;
     private final int no;
+    public static final int size = 3;
 
     /**
      * Creates a new instance of SnapAngle
@@ -45,7 +46,7 @@ public enum AngleRestriction {
     }
 
     // Reverse-lookup map for getting a unit from an int
-    private static final Map<Integer, AngleRestriction> lookup = new HashMap<Integer, AngleRestriction>();
+    private static final Map<Integer, AngleRestriction> lookup = new HashMap<Integer, AngleRestriction>(size);
     static {
         for (AngleRestriction angleRestriction : AngleRestriction.values()) {
             lookup.put(angleRestriction.get_no(), angleRestriction);
