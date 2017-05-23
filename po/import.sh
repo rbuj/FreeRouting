@@ -6,7 +6,7 @@ do
   for filename in ../src/main/resources/$resource/resources/*_en.properties; do
     file=`basename $filename`
     cp ../src/main/resources/$resource/resources/${file/_en.properties/_${locale}.properties} $locale/$resource/${file/_en.properties/}-$locale.properties
-    prop2po --progress=none --duplicates=msgctxt -t $filename $locale/$resource/${file/_en.properties/}-$locale.properties $locale/$resource/${file/_en.properties/.po}
+    prop2po --progress=none --personality=java-utf8 --duplicates=msgctxt -t $filename $locale/$resource/${file/_en.properties/}-$locale.properties $locale/$resource/${file/_en.properties/.po}
     case $locale in
       "ca")
        sed -i -e 's/English version/Catalan version/g' $locale/$resource/${file/_en.properties/.po}
