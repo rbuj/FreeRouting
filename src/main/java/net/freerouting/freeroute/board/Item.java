@@ -996,9 +996,9 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
     protected boolean is_selected_by_fixed_filter(ItemSelectionFilter p_filter) {
         boolean result;
         if (this.is_user_fixed()) {
-            result = p_filter.is_selected(ItemSelectionFilter.SelectableChoices.FIXED);
+            result = p_filter.is_selected(ItemSelectionFilter.SELECTABLE_CHOICES.FIXED);
         } else {
-            result = p_filter.is_selected(ItemSelectionFilter.SelectableChoices.UNFIXED);
+            result = p_filter.is_selected(ItemSelectionFilter.SELECTABLE_CHOICES.UNFIXED);
         }
         return result;
     }

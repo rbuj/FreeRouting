@@ -615,7 +615,7 @@ public class RoutingBoard extends BasicBoard {
         // Check, if there ends a item of the same net at p_from_corner.
         // If so, its geometry will be used to cut off dog ears of the check shape.
         Trace picked_trace = null;
-        ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.TRACES);
+        ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.TRACES);
         Set<Item> picked_items = this.pick_items(from_corner, p_layer, filter);
         if (picked_items.size() == 1) {
             Trace curr_picked_trace = (Trace) picked_items.iterator().next();
@@ -753,7 +753,7 @@ public class RoutingBoard extends BasicBoard {
 
             pull_tight_algo.split_traces_at_keep_point();
             // otherwise the new corner may no more be contained in the new trace after optimizing
-            ItemSelectionFilter item_filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.TRACES);
+            ItemSelectionFilter item_filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.TRACES);
             Set<Item> curr_picked_items = this.pick_items(new_corner, p_layer, item_filter);
             new_trace = null;
             if (!curr_picked_items.isEmpty()) {

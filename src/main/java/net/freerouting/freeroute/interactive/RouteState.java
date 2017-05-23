@@ -378,7 +378,7 @@ public class RouteState extends InteractiveState {
                 boolean connected_to_plane = false;
                 // check, if the layer change resulted in a connection to a power plane.
                 int old_layer = hdlg.settings.get_layer();
-                ItemSelectionFilter selection_filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.VIAS);
+                ItemSelectionFilter selection_filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.VIAS);
                 Collection<Item> picked_items
                         = hdlg.get_routing_board().pick_items(route.get_last_corner(), old_layer, selection_filter);
                 Via new_via = null;

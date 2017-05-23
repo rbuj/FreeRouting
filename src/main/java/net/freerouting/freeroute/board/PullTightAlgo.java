@@ -449,7 +449,7 @@ public abstract class PullTightAlgo {
         if (this.keep_point == null) {
             return false;
         }
-        ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.TRACES);
+        ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.TRACES);
         Collection<Item> picked_items = this.board.pick_items(this.keep_point, this.keep_point_layer, filter);
         for (Item curr_item : picked_items) {
             Trace[] split_pieces = ((Trace) curr_item).split(this.keep_point);

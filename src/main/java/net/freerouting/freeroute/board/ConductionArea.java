@@ -153,7 +153,7 @@ public class ConductionArea extends ObstacleArea implements Connectable {
         if (!this.is_selected_by_fixed_filter(p_filter)) {
             return false;
         }
-        return p_filter.is_selected(ItemSelectionFilter.SelectableChoices.CONDUCTION);
+        return p_filter.is_selected(ItemSelectionFilter.SELECTABLE_CHOICES.CONDUCTION);
     }
 
     @Override

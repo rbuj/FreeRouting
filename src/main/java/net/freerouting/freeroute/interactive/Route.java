@@ -300,7 +300,7 @@ public class Route {
      * inside an smd pin of the own net,
      */
     private boolean snap_to_smd_center(int p_layer) {
-        ItemSelectionFilter selection_filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.PINS);
+        ItemSelectionFilter selection_filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.PINS);
         java.util.Collection<Item> picked_items = board.pick_items(this.prev_corner, p_layer, selection_filter);
         net.freerouting.freeroute.board.Pin found_smd_pin = null;
         for (Item curr_item : picked_items) {
@@ -429,7 +429,7 @@ public class Route {
             }
         }
         // add the from item, if it is a pin
-        ItemSelectionFilter selection_filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.PINS);
+        ItemSelectionFilter selection_filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.PINS);
         java.util.Collection<Item> picked_items = board.pick_items(this.prev_corner, this.layer, selection_filter);
         for (Item curr_item : picked_items) {
             if (curr_item instanceof net.freerouting.freeroute.board.Pin) {

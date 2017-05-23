@@ -54,7 +54,7 @@ public class PinSwapState extends InteractiveState {
 
     @Override
     public InteractiveState left_button_clicked(FloatPoint p_location) {
-        ItemSelectionFilter selection_filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.PINS);
+        ItemSelectionFilter selection_filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.PINS);
         java.util.Collection<Item> picked_items = hdlg.pick_items(p_location, selection_filter);
         if (picked_items.isEmpty()) {
             this.hdlg.screen_messages.set_status_message(resources.getString("no_pin_selected"));

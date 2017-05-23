@@ -435,7 +435,7 @@ public class Pin extends DrillItem {
         if (!this.is_selected_by_fixed_filter(p_filter)) {
             return false;
         }
-        return p_filter.is_selected(ItemSelectionFilter.SelectableChoices.PINS);
+        return p_filter.is_selected(ItemSelectionFilter.SELECTABLE_CHOICES.PINS);
     }
 
     @Override

@@ -115,7 +115,7 @@ public class InsertFoundConnectionAlgo {
         net.freerouting.freeroute.board.Pin start_pin = null;
         net.freerouting.freeroute.board.Pin end_pin = null;
         if (ctrl.with_neckdown) {
-            ItemSelectionFilter item_filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.PINS);
+            ItemSelectionFilter item_filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.PINS);
             Point curr_end_corner = p_trace.corners[0];
             for (int i = 0; i < 2; ++i) {
                 Set<Item> picked_items = this.board.pick_items(curr_end_corner, p_trace.layer, item_filter);

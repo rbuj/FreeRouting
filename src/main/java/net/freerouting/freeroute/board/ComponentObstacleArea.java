@@ -66,7 +66,7 @@ public class ComponentObstacleArea extends ObstacleArea {
         if (!this.is_selected_by_fixed_filter(p_filter)) {
             return false;
         }
-        return p_filter.is_selected(ItemSelectionFilter.SelectableChoices.COMPONENT_KEEPOUT);
+        return p_filter.is_selected(ItemSelectionFilter.SELECTABLE_CHOICES.COMPONENT_KEEPOUT);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class ComponentObstacleArea extends ObstacleArea {
         if (!this.is_selected_by_fixed_filter(p_filter)) {
             return false;
         }
-        return p_filter.is_selected(ItemSelectionFilter.SelectableChoices.COMPONENT_KEEPOUT);
+        return p_filter.is_selected(ItemSelectionFilter.SELECTABLE_CHOICES.COMPONENT_KEEPOUT);
     }
 
     @Override

@@ -593,23 +593,23 @@ public class GUIDefaultsFile {
                 break;
             }
             if (next_token == Keyword.TRACES) {
-                item_selection_filter.set_selected(ItemSelectionFilter.SelectableChoices.TRACES, true);
+                item_selection_filter.set_selected(ItemSelectionFilter.SELECTABLE_CHOICES.TRACES, true);
             } else if (next_token == Keyword.VIAS) {
-                item_selection_filter.set_selected(ItemSelectionFilter.SelectableChoices.VIAS, true);
+                item_selection_filter.set_selected(ItemSelectionFilter.SELECTABLE_CHOICES.VIAS, true);
             } else if (next_token == Keyword.PINS) {
-                item_selection_filter.set_selected(ItemSelectionFilter.SelectableChoices.PINS, true);
+                item_selection_filter.set_selected(ItemSelectionFilter.SELECTABLE_CHOICES.PINS, true);
             } else if (next_token == Keyword.CONDUCTION) {
-                item_selection_filter.set_selected(ItemSelectionFilter.SelectableChoices.CONDUCTION, true);
+                item_selection_filter.set_selected(ItemSelectionFilter.SELECTABLE_CHOICES.CONDUCTION, true);
             } else if (next_token == Keyword.KEEPOUT) {
-                item_selection_filter.set_selected(ItemSelectionFilter.SelectableChoices.KEEPOUT, true);
+                item_selection_filter.set_selected(ItemSelectionFilter.SELECTABLE_CHOICES.KEEPOUT, true);
             } else if (next_token == Keyword.VIA_KEEPOUT) {
-                item_selection_filter.set_selected(ItemSelectionFilter.SelectableChoices.VIA_KEEPOUT, true);
+                item_selection_filter.set_selected(ItemSelectionFilter.SELECTABLE_CHOICES.VIA_KEEPOUT, true);
             } else if (next_token == Keyword.FIXED) {
-                item_selection_filter.set_selected(ItemSelectionFilter.SelectableChoices.FIXED, true);
+                item_selection_filter.set_selected(ItemSelectionFilter.SELECTABLE_CHOICES.FIXED, true);
             } else if (next_token == Keyword.UNFIXED) {
-                item_selection_filter.set_selected(ItemSelectionFilter.SelectableChoices.UNFIXED, true);
+                item_selection_filter.set_selected(ItemSelectionFilter.SELECTABLE_CHOICES.UNFIXED, true);
             } else if (next_token == Keyword.VIAS) {
-                item_selection_filter.set_selected(ItemSelectionFilter.SelectableChoices.VIAS, true);
+                item_selection_filter.set_selected(ItemSelectionFilter.SELECTABLE_CHOICES.VIAS, true);
             } else {
                 throw new GUIDefaultsFileException("Unexpected token");
             }
@@ -620,8 +620,8 @@ public class GUIDefaultsFile {
         out_file.start_scope("selectable_items ");
         out_file.new_line();
         ItemSelectionFilter item_selection_filter = this.board_handling.settings.get_item_selection_filter();
-        ItemSelectionFilter.SelectableChoices[] selectable_choices
-                = ItemSelectionFilter.SelectableChoices.values();
+        ItemSelectionFilter.SELECTABLE_CHOICES[] selectable_choices
+                = ItemSelectionFilter.SELECTABLE_CHOICES.values();
         for (int i = 0; i < selectable_choices.length; ++i) {
             if (item_selection_filter.is_selected(selectable_choices[i])) {
                 out_file.write(selectable_choices[i].toString());

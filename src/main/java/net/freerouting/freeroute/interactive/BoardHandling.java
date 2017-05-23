@@ -420,7 +420,7 @@ public class BoardHandling {
     /**
      * Changes the interactive selectability of p_item_type.
      */
-    public void set_selectable(ItemSelectionFilter.SelectableChoices p_item_type, boolean p_value) {
+    public void set_selectable(ItemSelectionFilter.SELECTABLE_CHOICES p_item_type, boolean p_value) {
         settings.set_selectable(p_item_type, p_value);
         if (!p_value && this.interactive_state instanceof SelectedItemState) {
             set_interactive_state(((SelectedItemState) interactive_state).filter());

@@ -35,53 +35,53 @@ public class ItemSelectionFilter implements java.io.Serializable {
     /**
      * The possible choices in the filter.
      */
-    public enum SelectableChoices {
+    public enum SELECTABLE_CHOICES {
         TRACES, VIAS, PINS, CONDUCTION, KEEPOUT, VIA_KEEPOUT, COMPONENT_KEEPOUT, BOARD_OUTLINE, FIXED, UNFIXED
     }
 
     /**
      * the filter array of the item types
      */
-    private final EnumMap<SelectableChoices, Boolean> values = new EnumMap<>(SelectableChoices.class);
+    private final EnumMap<SELECTABLE_CHOICES, Boolean> values = new EnumMap<>(SELECTABLE_CHOICES.class);
 
     /**
      * Creates a new filter with all item types selected.
      */
     public ItemSelectionFilter() {
-        for (SelectableChoices value : SelectableChoices.values()) {
+        for (SELECTABLE_CHOICES value : SELECTABLE_CHOICES.values()) {
             values.put(value, true);
         }
-        values.replace(SelectableChoices.KEEPOUT, false);
-        values.replace(SelectableChoices.VIA_KEEPOUT, false);
-        values.replace(SelectableChoices.COMPONENT_KEEPOUT, false);
-        values.replace(SelectableChoices.CONDUCTION, false);
-        values.replace(SelectableChoices.BOARD_OUTLINE, false);
+        values.replace(SELECTABLE_CHOICES.KEEPOUT, false);
+        values.replace(SELECTABLE_CHOICES.VIA_KEEPOUT, false);
+        values.replace(SELECTABLE_CHOICES.COMPONENT_KEEPOUT, false);
+        values.replace(SELECTABLE_CHOICES.CONDUCTION, false);
+        values.replace(SELECTABLE_CHOICES.BOARD_OUTLINE, false);
     }
 
     /**
      * Creates a new filter with only p_item_type selected.
      */
-    public ItemSelectionFilter(SelectableChoices p_item_type) {
-        for (SelectableChoices value : SelectableChoices.values()) {
+    public ItemSelectionFilter(SELECTABLE_CHOICES p_item_type) {
+        for (SELECTABLE_CHOICES value : SELECTABLE_CHOICES.values()) {
             values.put(value, false);
         }
         values.replace(p_item_type, true);
-        values.replace(SelectableChoices.FIXED, true);
-        values.replace(SelectableChoices.UNFIXED, true);
+        values.replace(SELECTABLE_CHOICES.FIXED, true);
+        values.replace(SELECTABLE_CHOICES.UNFIXED, true);
     }
 
     /**
      * Creates a new filter with only p_item_types selected.
      */
-    public ItemSelectionFilter(SelectableChoices[] p_item_types) {
-        for (SelectableChoices value : SelectableChoices.values()) {
+    public ItemSelectionFilter(SELECTABLE_CHOICES[] p_item_types) {
+        for (SELECTABLE_CHOICES value : SELECTABLE_CHOICES.values()) {
             values.put(value, false);
         }
         for (int i = 0; i < p_item_types.length; ++i) {
             values.replace(p_item_types[i], true);
         }
-        values.replace(SelectableChoices.FIXED, true);
-        values.replace(SelectableChoices.UNFIXED, true);
+        values.replace(SELECTABLE_CHOICES.FIXED, true);
+        values.replace(SELECTABLE_CHOICES.UNFIXED, true);
     }
 
     /**
@@ -94,7 +94,7 @@ public class ItemSelectionFilter implements java.io.Serializable {
     /**
      * Selects or deselects an item type
      */
-    public void set_selected(SelectableChoices p_choice, boolean p_value) {
+    public void set_selected(SELECTABLE_CHOICES p_choice, boolean p_value) {
         values.replace(p_choice, p_value);
     }
 
@@ -102,7 +102,7 @@ public class ItemSelectionFilter implements java.io.Serializable {
      * Selects all item types.
      */
     public void select_all() {
-        for (Entry<SelectableChoices, Boolean> entry : values.entrySet()) {
+        for (Entry<SELECTABLE_CHOICES, Boolean> entry : values.entrySet()) {
             entry.setValue(true);
         }
     }
@@ -111,7 +111,7 @@ public class ItemSelectionFilter implements java.io.Serializable {
      * Deselects all item types.
      */
     public void deselect_all() {
-        for (Entry<SelectableChoices, Boolean> entry : values.entrySet()) {
+        for (Entry<SELECTABLE_CHOICES, Boolean> entry : values.entrySet()) {
             entry.setValue(false);
         }
     }
@@ -132,7 +132,7 @@ public class ItemSelectionFilter implements java.io.Serializable {
     /**
      * Looks, if the input item type is selected.
      */
-    public boolean is_selected(SelectableChoices p_choice) {
+    public boolean is_selected(SELECTABLE_CHOICES p_choice) {
         return values.get(p_choice);
     }
 }

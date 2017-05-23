@@ -65,10 +65,10 @@ public class HoleConstructionState extends CornerItemConstructionState {
      */
     private boolean start_ok(FloatPoint p_location) {
         IntPoint pick_location = p_location.round();
-        ItemSelectionFilter.SelectableChoices[] selectable_choices
-                = {ItemSelectionFilter.SelectableChoices.KEEPOUT,
-                    ItemSelectionFilter.SelectableChoices.VIA_KEEPOUT,
-                    ItemSelectionFilter.SelectableChoices.CONDUCTION
+        ItemSelectionFilter.SELECTABLE_CHOICES[] selectable_choices
+                = {ItemSelectionFilter.SELECTABLE_CHOICES.KEEPOUT,
+                    ItemSelectionFilter.SELECTABLE_CHOICES.VIA_KEEPOUT,
+                    ItemSelectionFilter.SELECTABLE_CHOICES.CONDUCTION
                 };
         ItemSelectionFilter selection_filter = new ItemSelectionFilter(selectable_choices);
         java.util.Collection<net.freerouting.freeroute.board.Item> found_items = hdlg.get_routing_board().pick_items(pick_location,

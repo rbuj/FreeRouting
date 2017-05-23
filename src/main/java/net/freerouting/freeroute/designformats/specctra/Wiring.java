@@ -228,7 +228,7 @@ class Wiring extends ScopeKeyword {
 
     private static boolean via_exists(IntPoint p_location, net.freerouting.freeroute.library.Padstack p_padstack,
             int[] p_net_no_arr, net.freerouting.freeroute.board.BasicBoard p_board) {
-        ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.VIAS);
+        ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.VIAS);
         int from_layer = p_padstack.from_layer();
         int to_layer = p_padstack.to_layer();
         Collection<Item> picked_items = p_board.pick_items(p_location, p_padstack.from_layer(), filter);

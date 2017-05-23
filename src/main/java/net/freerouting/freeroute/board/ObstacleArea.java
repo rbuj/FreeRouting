@@ -231,7 +231,7 @@ public class ObstacleArea extends Item {
         if (!this.is_selected_by_fixed_filter(p_filter)) {
             return false;
         }
-        return p_filter.is_selected(ItemSelectionFilter.SelectableChoices.KEEPOUT);
+        return p_filter.is_selected(ItemSelectionFilter.SELECTABLE_CHOICES.KEEPOUT);
     }
 
     @Override

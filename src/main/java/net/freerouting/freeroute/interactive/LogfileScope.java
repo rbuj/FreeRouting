@@ -1053,7 +1053,7 @@ public abstract class LogfileScope {
         public InteractiveState read_scope(Logfile p_logfile, InteractiveState p_return_state, BoardHandling p_board_handling) {
             int item_type_no = p_logfile.read_int();
             int selection = p_logfile.read_int();
-            net.freerouting.freeroute.board.ItemSelectionFilter.SelectableChoices item_type = net.freerouting.freeroute.board.ItemSelectionFilter.SelectableChoices.values()[item_type_no];
+            net.freerouting.freeroute.board.ItemSelectionFilter.SELECTABLE_CHOICES item_type = net.freerouting.freeroute.board.ItemSelectionFilter.SELECTABLE_CHOICES.values()[item_type_no];
             if (selection == 0) {
                 p_board_handling.settings.item_selection_filter.set_selected(item_type, false);
                 if (p_return_state instanceof SelectedItemState) {

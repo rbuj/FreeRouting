@@ -516,7 +516,7 @@ public class Settings implements java.io.Serializable {
     /**
      * Changes the interactive selectability of p_item_type.
      */
-    public void set_selectable(ItemSelectionFilter.SelectableChoices p_item_type, boolean p_value) {
+    public void set_selectable(ItemSelectionFilter.SELECTABLE_CHOICES p_item_type, boolean p_value) {
         if (read_only) {
             return;
         }

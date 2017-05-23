@@ -361,7 +361,7 @@ public class MazeSearchAlgo {
         if (!layer_active && p_list_element.door instanceof ExpansionDrill) {
             // check for drill to a foreign conduction area on split plane.
             Point drill_location = ((ExpansionDrill) p_list_element.door).location;
-            ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.CONDUCTION);
+            ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.CONDUCTION);
             Set<Item> picked_items = autoroute_engine.board.pick_items(drill_location, layer_no, filter);
             for (Item curr_item : picked_items) {
                 if (!curr_item.contains_net(ctrl.net_no)) {

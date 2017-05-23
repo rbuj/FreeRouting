@@ -211,7 +211,7 @@ public class BoardOutline extends Item {
         if (!this.is_selected_by_fixed_filter(p_filter)) {
             return false;
         }
-        return p_filter.is_selected(ItemSelectionFilter.SelectableChoices.BOARD_OUTLINE);
+        return p_filter.is_selected(ItemSelectionFilter.SELECTABLE_CHOICES.BOARD_OUTLINE);
     }
 
     @Override

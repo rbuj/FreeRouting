@@ -91,7 +91,7 @@ public class WindowSelectParameter extends BoardSavableSubWindow {
         gridbag.setConstraints(selectable_items_label, gridbag_constraints);
         main_panel.add(selectable_items_label);
 
-        final ItemSelectionFilter.SelectableChoices[] filter_values = ItemSelectionFilter.SelectableChoices.values();
+        final ItemSelectionFilter.SELECTABLE_CHOICES[] filter_values = ItemSelectionFilter.SELECTABLE_CHOICES.values();
 
         this.item_selection_choices = new javax.swing.JCheckBox[filter_values.length];
 
@@ -152,7 +152,7 @@ public class WindowSelectParameter extends BoardSavableSubWindow {
         if (item_selection_filter == null) {
             System.out.println("SelectParameterWindow.refresh: item_selection_filter is null");
         } else {
-            final ItemSelectionFilter.SelectableChoices[] filter_values = ItemSelectionFilter.SelectableChoices.values();
+            final ItemSelectionFilter.SELECTABLE_CHOICES[] filter_values = ItemSelectionFilter.SELECTABLE_CHOICES.values();
             for (int i = 0; i < filter_values.length; ++i) {
                 this.item_selection_choices[i].setSelected(item_selection_filter.is_selected(filter_values[i]));
             }
@@ -213,22 +213,22 @@ public class WindowSelectParameter extends BoardSavableSubWindow {
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             boolean is_selected = item_selection_choices[item_no].isSelected();
 
-            ItemSelectionFilter.SelectableChoices item_type = ItemSelectionFilter.SelectableChoices.values()[item_no];
+            ItemSelectionFilter.SELECTABLE_CHOICES item_type = ItemSelectionFilter.SELECTABLE_CHOICES.values()[item_no];
 
             board_handling.set_selectable(item_type, is_selected);
 
             // make shure that from fixed and unfixed items at least one type is selected.
-            if (item_type == ItemSelectionFilter.SelectableChoices.FIXED) {
-                int unfixed_no = ItemSelectionFilter.SelectableChoices.UNFIXED.ordinal();
+            if (item_type == ItemSelectionFilter.SELECTABLE_CHOICES.FIXED) {
+                int unfixed_no = ItemSelectionFilter.SELECTABLE_CHOICES.UNFIXED.ordinal();
                 if (!is_selected && !item_selection_choices[unfixed_no].isSelected()) {
                     item_selection_choices[unfixed_no].setSelected(true);
-                    board_handling.set_selectable(ItemSelectionFilter.SelectableChoices.UNFIXED, true);
+                    board_handling.set_selectable(ItemSelectionFilter.SELECTABLE_CHOICES.UNFIXED, true);
                 }
-            } else if (item_type == ItemSelectionFilter.SelectableChoices.UNFIXED) {
-                int fixed_no = ItemSelectionFilter.SelectableChoices.FIXED.ordinal();
+            } else if (item_type == ItemSelectionFilter.SELECTABLE_CHOICES.UNFIXED) {
+                int fixed_no = ItemSelectionFilter.SELECTABLE_CHOICES.FIXED.ordinal();
                 if (!is_selected && !item_selection_choices[fixed_no].isSelected()) {
                     item_selection_choices[fixed_no].setSelected(true);
-                    board_handling.set_selectable(ItemSelectionFilter.SelectableChoices.FIXED, true);
+                    board_handling.set_selectable(ItemSelectionFilter.SELECTABLE_CHOICES.FIXED, true);
                 }
             }
         }

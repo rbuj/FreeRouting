@@ -68,7 +68,7 @@ public class MenuState extends InteractiveState {
     }
 
     public InteractiveState swap_pin(FloatPoint p_location) {
-        ItemSelectionFilter selection_filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.PINS);
+        ItemSelectionFilter selection_filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.PINS);
         Collection<Item> picked_items = hdlg.pick_items(p_location, selection_filter);
         InteractiveState result = this;
         if (picked_items.size() > 0) {

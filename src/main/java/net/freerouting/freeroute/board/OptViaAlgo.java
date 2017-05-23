@@ -139,7 +139,7 @@ public class OptViaAlgo {
             System.out.println("OptViaAlgo.opt_via_location: move via failed");
             return false;
         }
-        ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.TRACES);
+        ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.TRACES);
         Collection<Item> picked_items = p_board.pick_items(new_location, first_trace.get_layer(), filter);
         for (Item curr_item : picked_items) {
             ((PolylineTrace) curr_item).pull_tight(true, p_trace_pull_tight_accuracy, null);
@@ -148,7 +148,7 @@ public class OptViaAlgo {
         for (Item curr_item : picked_items) {
             ((PolylineTrace) curr_item).pull_tight(true, p_trace_pull_tight_accuracy, null);
         }
-        filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.VIAS);
+        filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.VIAS);
         picked_items = p_board.pick_items(new_location, first_trace.get_layer(), filter);
         for (Item curr_item : picked_items) {
             opt_via_location(p_board, (Via) curr_item, p_trace_cost_arr,
@@ -260,7 +260,7 @@ public class OptViaAlgo {
         }
         if (contact_plane != null) {
             // check, that the new location is inside the contact plane
-            ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.CONDUCTION);
+            ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.CONDUCTION);
             Collection<Item> picked_items = p_board.pick_items(new_via_location, contact_plane.get_layer(), filter);
             boolean contact_ok = false;
             for (Item curr_item : picked_items) {
@@ -278,7 +278,7 @@ public class OptViaAlgo {
             System.out.println("OptViaAlgo.opt_plane_or_fanout_via: move via failed");
             return false;
         }
-        ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.TRACES);
+        ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.TRACES);
         Collection<Item> picked_items = p_board.pick_items(new_via_location, contact_trace.get_layer(), filter);
         for (Item curr_item : picked_items) {
             ((PolylineTrace) curr_item).pull_tight(true, p_trace_pull_tight_accuracy, null);

@@ -727,7 +727,7 @@ public class BasicBoard implements java.io.Serializable {
      * trace was split.
      */
     public boolean split_traces(Point p_location, int p_layer, int p_net_no) {
-        ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SelectableChoices.TRACES);
+        ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.TRACES);
         Collection<Item> picked_items = this.pick_items(p_location, p_layer, filter);
         IntOctagon location_shape = TileShapeUtils.get_instance(p_location).bounding_octagon();
         boolean trace_split = false;
