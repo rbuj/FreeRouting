@@ -201,17 +201,13 @@ public class GUIDefaultsFile {
     private void write_bounds(Rectangle2D p_bounds) throws java.io.IOException {
         out_file.start_scope("bounds");
         out_file.new_line();
-        Integer x = (int) p_bounds.getX();
-        out_file.write(x.toString());
-        Integer y = (int) p_bounds.getY();
+        out_file.write(Integer.toString(((Number) p_bounds.getX()).intValue()));
         out_file.write(" ");
-        out_file.write(y.toString());
-        Integer width = (int) p_bounds.getWidth();
+        out_file.write(Integer.toString(((Number) p_bounds.getY()).intValue()));
         out_file.write(" ");
-        out_file.write(width.toString());
-        Integer height = (int) p_bounds.getHeight();
+        out_file.write(Integer.toString(((Number) p_bounds.getWidth()).intValue()));
         out_file.write(" ");
-        out_file.write(height.toString());
+        out_file.write(Integer.toString(((Number) p_bounds.getHeight()).intValue()));
         out_file.end_scope();
     }
 
@@ -632,103 +628,27 @@ public class GUIDefaultsFile {
     }
 
     private void write_deselected_snapshot_attributes() throws java.io.IOException {
-        net.freerouting.freeroute.interactive.SnapShot.Attributes attributes = this.board_handling.settings.get_snapshot_attributes();
+        SnapshotAttributes attributes = this.board_handling.settings.get_snapshot_attributes();
         out_file.start_scope("deselected_snapshot_attributes ");
-        if (!attributes.object_colors) {
-            out_file.new_line();
-            out_file.write("object_colors ");
-        }
-        if (!attributes.object_visibility) {
-            out_file.new_line();
-            out_file.write("object_visibility ");
-        }
-        if (!attributes.layer_visibility) {
-            out_file.new_line();
-            out_file.write("layer_visibility ");
-        }
-        if (!attributes.display_region) {
-            out_file.new_line();
-            out_file.write("display_region ");
-        }
-        if (!attributes.interactive_state) {
-            out_file.new_line();
-            out_file.write("interactive_state ");
-        }
-        if (!attributes.selection_layers) {
-            out_file.new_line();
-            out_file.write("selection_layers ");
-        }
-        if (!attributes.selectable_items) {
-            out_file.new_line();
-            out_file.write("selectable_items ");
-        }
-        if (!attributes.current_layer) {
-            out_file.new_line();
-            out_file.write("current_layer ");
-        }
-        if (!attributes.rule_selection) {
-            out_file.new_line();
-            out_file.write("rule_selection ");
-        }
-        if (!attributes.manual_rule_settings) {
-            out_file.new_line();
-            out_file.write("manual_rule_settings ");
-        }
-        if (!attributes.push_and_shove_enabled) {
-            out_file.new_line();
-            out_file.write("push_and_shove_enabled ");
-        }
-        if (!attributes.drag_components_enabled) {
-            out_file.new_line();
-            out_file.write("drag_components_enabled ");
-        }
-        if (!attributes.pull_tight_region) {
-            out_file.new_line();
-            out_file.write("pull_tight_region ");
-        }
-        if (!attributes.component_grid) {
-            out_file.new_line();
-            out_file.write("component_grid ");
+        for (SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY key : SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.values()) {
+            if (key != SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.INFO_LIST_SELECTIONS && !attributes.get(key)) {
+                out_file.new_line();
+                out_file.write(key.name().toLowerCase() + " ");
+            }
         }
         out_file.end_scope();
     }
 
     private void read_deselected_snapshot_attributes() throws java.io.IOException, GUIDefaultsFileException {
-        net.freerouting.freeroute.interactive.SnapShot.Attributes attributes = this.board_handling.settings.get_snapshot_attributes();
+        SnapshotAttributes attributes = this.board_handling.settings.get_snapshot_attributes();
         for (;;) {
             Object next_token = this.scanner.next_token();
             if (next_token == Keyword.CLOSED_BRACKET) {
                 break;
             }
-            if (next_token == Keyword.OBJECT_COLORS) {
-                attributes.object_colors = false;
-            } else if (next_token == Keyword.OBJECT_VISIBILITY) {
-                attributes.object_visibility = false;
-            } else if (next_token == Keyword.LAYER_VISIBILITY) {
-                attributes.layer_visibility = false;
-            } else if (next_token == Keyword.DISPLAY_REGION) {
-                attributes.display_region = false;
-            } else if (next_token == Keyword.INTERACTIVE_STATE) {
-                attributes.interactive_state = false;
-            } else if (next_token == Keyword.SELECTION_LAYERS) {
-                attributes.selection_layers = false;
-            } else if (next_token == Keyword.SELECTABLE_ITEMS) {
-                attributes.selectable_items = false;
-            } else if (next_token == Keyword.CURRENT_LAYER) {
-                attributes.current_layer = false;
-            } else if (next_token == Keyword.RULE_SELECTION) {
-                attributes.rule_selection = false;
-            } else if (next_token == Keyword.MANUAL_RULE_SETTINGS) {
-                attributes.manual_rule_settings = false;
-            } else if (next_token == Keyword.PUSH_AND_SHOVE_ENABLED) {
-                attributes.push_and_shove_enabled = false;
-            } else if (next_token == Keyword.DRAG_COMPONENTS_ENABLED) {
-                attributes.drag_components_enabled = false;
-            } else if (next_token == Keyword.PULL_TIGHT_REGION) {
-                attributes.pull_tight_region = false;
-            } else if (next_token == Keyword.COMPONENT_GRID) {
-                attributes.component_grid = false;
-            } else {
+            try {
+                attributes.set(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.valueOf(next_token.toString()), Boolean.FALSE);
+            } catch (IllegalArgumentException | NullPointerException ex) {
                 throw new GUIDefaultsFileException("Unexpected token");
             }
         }

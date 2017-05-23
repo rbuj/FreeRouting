@@ -191,8 +191,9 @@ public class WindowSnapshot extends BoardSavableSubWindow {
             net.freerouting.freeroute.interactive.SnapShot curr_snapshot = list_model.elementAt(index);
 
             curr_snapshot.go_to(board_handling);
+            SnapshotAttributes snapshot_attributes = curr_snapshot.settings.get_snapshot_attributes();
 
-            if (curr_snapshot.settings.get_snapshot_attributes().object_colors) {
+            if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.OBJECT_COLORS)) {
                 board_handling.graphics_context.item_color_table
                         = new net.freerouting.freeroute.boardgraphics.ItemColorTableModel(curr_snapshot.graphics_context.item_color_table);
                 board_handling.graphics_context.other_color_table
@@ -201,7 +202,7 @@ public class WindowSnapshot extends BoardSavableSubWindow {
                 board_frame.color_manager.set_table_models(board_handling.graphics_context);
             }
 
-            if (curr_snapshot.settings.get_snapshot_attributes().display_region) {
+            if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.DISPLAY_REGION)) {
                 java.awt.Point viewport_position = curr_snapshot.copy_viewport_position();
                 if (viewport_position != null) {
                     board_handling.graphics_context.coordinate_transform = new net.freerouting.freeroute.boardgraphics.CoordinateTransform(curr_snapshot.graphics_context.coordinate_transform);

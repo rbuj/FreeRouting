@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.interactive;
 
+import net.freerouting.freeroute.SnapshotAttributes;
 import net.freerouting.freeroute.board.ItemSelectionFilter;
 import net.freerouting.freeroute.board.RoutingBoard;
 
@@ -112,7 +113,7 @@ public class Settings implements java.io.Serializable {
     /**
      * Defines the data of the snapshot selected for restoring.
      */
-    SnapShot.Attributes snapshot_attributes;
+    SnapshotAttributes snapshot_attributes;
     /**
      * Indicates, if the data of this class are not allowed to be changed in
      * ineractive board editing.
@@ -152,7 +153,7 @@ public class Settings implements java.io.Serializable {
         }
         autoroute_settings = new AutorouteSettings(p_board);
         item_selection_filter = new ItemSelectionFilter();
-        snapshot_attributes = new SnapShot.Attributes();
+        snapshot_attributes = new SnapshotAttributes();
     }
 
     /**
@@ -181,7 +182,7 @@ public class Settings implements java.io.Serializable {
         System.arraycopy(p_settings.manual_trace_half_width_arr, 0, this.manual_trace_half_width_arr, 0, this.manual_trace_half_width_arr.length);
         this.autoroute_settings = new AutorouteSettings(p_settings.autoroute_settings);
         this.item_selection_filter = new ItemSelectionFilter(p_settings.item_selection_filter);
-        this.snapshot_attributes = new SnapShot.Attributes(p_settings.snapshot_attributes);
+        this.snapshot_attributes = new SnapshotAttributes(p_settings.snapshot_attributes);
     }
 
     public int get_layer() {
@@ -308,7 +309,7 @@ public class Settings implements java.io.Serializable {
     /**
      * Defines the data of the snapshot selected for restoring.
      */
-    public SnapShot.Attributes get_snapshot_attributes() {
+    public SnapshotAttributes get_snapshot_attributes() {
         return this.snapshot_attributes;
     }
 
@@ -556,7 +557,7 @@ public class Settings implements java.io.Serializable {
         }
         if (this.snapshot_attributes == null) {
             System.out.println("Settings.readObject: snapshot_attributes is null");
-            this.snapshot_attributes = new SnapShot.Attributes();
+            this.snapshot_attributes = new SnapshotAttributes();
         }
         this.read_only = false;
     }
