@@ -24,6 +24,8 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import java.util.Map;
+import static java.util.Map.entry;
 
 /**
  *
@@ -45,54 +47,23 @@ public class PopupMenuMove extends PopupMenuDisplay {
         rotate_menu.setText(resources.getString("turn"));
         this.add(rotate_menu, 0);
 
-        javax.swing.JMenuItem turn_90_item = new javax.swing.JMenuItem();
-        turn_90_item.setText(resources.getString("90_degree"));
-        turn_90_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-            turn_45_degree(2);
-        });
-        rotate_menu.add(turn_90_item);
+        Map<String, Integer> menu_rotate_items = Map.ofEntries(
+                entry("90_degree", 2),
+                entry("180_degree", 4),
+                entry("-90_degree", 6),
+                entry("45_degree", 1),
+                entry("135_degree", 3),
+                entry("-135_degree", 5),
+                entry("-45_degree", 7));
 
-        javax.swing.JMenuItem turn_180_item = new javax.swing.JMenuItem();
-        turn_180_item.setText(resources.getString("180_degree"));
-        turn_180_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-            turn_45_degree(4);
-        });
-        rotate_menu.add(turn_180_item);
-
-        javax.swing.JMenuItem turn_270_item = new javax.swing.JMenuItem();
-        turn_270_item.setText(resources.getString("-90_degree"));
-        turn_270_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-            turn_45_degree(6);
-        });
-        rotate_menu.add(turn_270_item);
-
-        javax.swing.JMenuItem turn_45_item = new javax.swing.JMenuItem();
-        turn_45_item.setText(resources.getString("45_degree"));
-        turn_45_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-            turn_45_degree(1);
-        });
-        rotate_menu.add(turn_45_item);
-
-        javax.swing.JMenuItem turn_135_item = new javax.swing.JMenuItem();
-        turn_135_item.setText(resources.getString("135_degree"));
-        turn_135_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-            turn_45_degree(3);
-        });
-        rotate_menu.add(turn_135_item);
-
-        javax.swing.JMenuItem turn_225_item = new javax.swing.JMenuItem();
-        turn_225_item.setText(resources.getString("-135_degree"));
-        turn_225_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-            turn_45_degree(5);
-        });
-        rotate_menu.add(turn_225_item);
-
-        javax.swing.JMenuItem turn_315_item = new javax.swing.JMenuItem();
-        turn_315_item.setText(resources.getString("-45_degree"));
-        turn_315_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-            turn_45_degree(7);
-        });
-        rotate_menu.add(turn_315_item);
+        for (Map.Entry<String, Integer> entry : menu_rotate_items.entrySet()) {
+            javax.swing.JMenuItem menu_item = new javax.swing.JMenuItem();
+            menu_item.setText(resources.getString(entry.getKey()));
+            menu_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                turn_45_degree(entry.getValue());
+            });
+            rotate_menu.add(menu_item);
+        }
 
         javax.swing.JMenuItem change_side_item = new javax.swing.JMenuItem();
         change_side_item.setText(resources.getString("change_side"));
