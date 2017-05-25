@@ -108,9 +108,9 @@ public class BoardFrame extends javax.swing.JFrame {
     private final IdNoGenerator item_id_no_generator;
 
     SavableSubwindows savable_subwindows;
-    EnumMap<SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY, WindowObjectListWithFilter> snapshot_subwindows;
+    TemporarySubwindows temporary_subwindows = new TemporarySubwindows();
 
-    java.util.Collection<BoardTemporarySubWindow> temporary_subwindows = new java.util.LinkedList<>();
+    EnumMap<SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY, WindowObjectListWithFilter> snapshot_subwindows;
 
     DesignFile design_file = null;
 
@@ -413,6 +413,7 @@ public class BoardFrame extends javax.swing.JFrame {
     @Override
     public void dispose() {
         savable_subwindows.dispose_all();
+        temporary_subwindows.dispose_all();
         if (board_panel.board_handling != null) {
             board_panel.board_handling.dispose();
             board_panel.board_handling = null;
@@ -631,21 +632,13 @@ public class BoardFrame extends javax.swing.JFrame {
         @Override
         public void windowIconified(java.awt.event.WindowEvent evt) {
             savable_subwindows.iconifed_all();
-            for (BoardSubWindow curr_subwindow : temporary_subwindows) {
-                if (curr_subwindow != null) {
-                    curr_subwindow.parent_iconified();
-                }
-            }
+            temporary_subwindows.iconifed_all();
         }
 
         @Override
         public void windowDeiconified(java.awt.event.WindowEvent evt) {
             savable_subwindows.deiconifed_all();
-            for (BoardSubWindow curr_subwindow : temporary_subwindows) {
-                if (curr_subwindow != null) {
-                    curr_subwindow.parent_deiconified();
-                }
-            }
+            temporary_subwindows.deiconifed_all();
         }
     }
 }

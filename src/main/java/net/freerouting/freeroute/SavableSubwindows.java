@@ -37,7 +37,7 @@ public class SavableSubwindows {
     EnumMap<SAVABLE_SUBWINDOW_KEY, BoardSavableSubWindow> savable_subwindows_map;
 
     /**
-     * The contructor method.
+     * The constructor method.
      */
     public SavableSubwindows() {
         savable_subwindows_map = new EnumMap<>(SAVABLE_SUBWINDOW_KEY.class);
