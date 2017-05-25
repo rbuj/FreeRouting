@@ -8,7 +8,7 @@ ToDo
         * Subwindows manager
                 * TemporarySubwindows.java
                 * SavableSubwindows.java
-        * Class structure (final class & contructor access)
+        * Class structure (final class & constructor access)
         * Update translations
         * SnapshotAttributes.java: refactor inner class to outer class
         * GUIDefaultsFileException.java: new exception used for controling
