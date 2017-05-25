@@ -1,7 +1,21 @@
 ToDo
-        * Bump version to 1.4.2
+        * Bump version to 1.4.3
 	* Migrate all GUI from swing to JavaFX
 	* Write all documentation in docbook format
+
+2017-05-25
+        * Bump version to 1.4.2
+        * Subwindows manager
+                * TemporarySubwindows.java
+                * SavableSubwindows.java
+        * Class structure (final class & contructor access)
+        * Update translations
+        * SnapshotAttributes.java: refactor inner class to outer class
+        * GUIDefaultsFileException.java: new exception used for controling
+          read scope methods in GUIDefaultsFile class
+        * ReadScopeException.java: new exception used for controling
+          read scope methods in specctra dessign formats
+        * Other improvements
 
 2017-05-19
         * Bump version to 1.4.1
