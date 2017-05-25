@@ -22,6 +22,7 @@ package net.freerouting.freeroute;
 import java.util.Locale;
 import java.util.Map;
 import static java.util.Map.entry;
+import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
 
 /**
  * Creates the rules menu of a board frame.
@@ -50,13 +51,13 @@ public class BoardMenuRules extends javax.swing.JMenu {
 
         rules_menu.setText(rules_menu.resources.getString("rules"));
 
-        Map<BoardFrame.SAVABLE_SUBWINDOW_KEY, String> menu_items = Map.ofEntries(
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.CLEARANCE_MATRIX, "clearance_matrix"),
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.VIA, "vias"),
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.NET_INFO, "nets"),
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.EDIT_NET_RULES, "net_classes"));
+        Map<SAVABLE_SUBWINDOW_KEY, String> menu_items = Map.ofEntries(
+                entry(SAVABLE_SUBWINDOW_KEY.CLEARANCE_MATRIX, "clearance_matrix"),
+                entry(SAVABLE_SUBWINDOW_KEY.VIA, "vias"),
+                entry(SAVABLE_SUBWINDOW_KEY.NET_INFO, "nets"),
+                entry(SAVABLE_SUBWINDOW_KEY.EDIT_NET_RULES, "net_classes"));
 
-        for (Map.Entry<BoardFrame.SAVABLE_SUBWINDOW_KEY, String> entry : menu_items.entrySet()) {
+        for (Map.Entry<SAVABLE_SUBWINDOW_KEY, String> entry : menu_items.entrySet()) {
             javax.swing.JMenuItem menu_item = new javax.swing.JMenuItem();
             menu_item.setText(rules_menu.resources.getString(entry.getValue()));
             menu_item.addActionListener((java.awt.event.ActionEvent evt) -> {

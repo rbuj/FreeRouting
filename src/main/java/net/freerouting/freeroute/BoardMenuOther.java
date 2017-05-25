@@ -21,6 +21,7 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
 
 /**
  *
@@ -52,7 +53,7 @@ public class BoardMenuOther extends javax.swing.JMenu {
         snapshots.setText(other_menu.resources.getString("snapshots"));
         snapshots.setToolTipText(other_menu.resources.getString("snapshots_tooltip"));
         snapshots.addActionListener((java.awt.event.ActionEvent evt) -> {
-            other_menu.board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.SNAPSHOT).setVisible(true);
+            other_menu.board_frame.savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.SNAPSHOT).setVisible(true);
         });
 
         other_menu.add(snapshots);

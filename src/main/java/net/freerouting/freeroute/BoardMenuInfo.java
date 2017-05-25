@@ -23,6 +23,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import static java.util.Map.entry;
+import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
 
 /**
  *
@@ -50,17 +51,17 @@ public class BoardMenuInfo extends javax.swing.JMenu {
 
         info_menu.setText(info_menu.resources.getString("info"));
 
-        Map<BoardFrame.SAVABLE_SUBWINDOW_KEY, String> menu_items = Map.ofEntries(
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.PACKAGES, "library_packages"),
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.PADSTACKS, "library_padstacks"),
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.COMPONENTS, "board_components"),
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.INCOMPLETES, "incompletes"),
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.LENGHT_VIOLATIONS, "length_violations"),
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.CLEARANCE_VIOLATIONS, "clearance_violations"),
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.UNCONNECTED_ROUTE, "unconnected_route"),
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.ROUTE_STUBS, "route_stubs"));
+        Map<SAVABLE_SUBWINDOW_KEY, String> menu_items = Map.ofEntries(
+                entry(SAVABLE_SUBWINDOW_KEY.PACKAGES, "library_packages"),
+                entry(SAVABLE_SUBWINDOW_KEY.PADSTACKS, "library_padstacks"),
+                entry(SAVABLE_SUBWINDOW_KEY.COMPONENTS, "board_components"),
+                entry(SAVABLE_SUBWINDOW_KEY.INCOMPLETES, "incompletes"),
+                entry(SAVABLE_SUBWINDOW_KEY.LENGHT_VIOLATIONS, "length_violations"),
+                entry(SAVABLE_SUBWINDOW_KEY.CLEARANCE_VIOLATIONS, "clearance_violations"),
+                entry(SAVABLE_SUBWINDOW_KEY.UNCONNECTED_ROUTE, "unconnected_route"),
+                entry(SAVABLE_SUBWINDOW_KEY.ROUTE_STUBS, "route_stubs"));
 
-        for (Entry<BoardFrame.SAVABLE_SUBWINDOW_KEY, String> entry : menu_items.entrySet()) {
+        for (Entry<SAVABLE_SUBWINDOW_KEY, String> entry : menu_items.entrySet()) {
             javax.swing.JMenuItem menu_item = new javax.swing.JMenuItem();
             menu_item.setText(info_menu.resources.getString(entry.getValue()));
             menu_item.addActionListener((java.awt.event.ActionEvent evt) -> {

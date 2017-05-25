@@ -22,6 +22,7 @@ package net.freerouting.freeroute;
 import java.util.Locale;
 import java.util.Map;
 import static java.util.Map.entry;
+import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
 
 /**
  * Creates the display menu of a board frame.
@@ -49,13 +50,13 @@ public class BoardMenuDisplay extends javax.swing.JMenu {
         BoardMenuDisplay display_menu = new BoardMenuDisplay(p_board_frame);
         display_menu.setText(display_menu.resources.getString("display"));
 
-        Map<BoardFrame.SAVABLE_SUBWINDOW_KEY, String> menu_items = Map.ofEntries(
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.OBJECT_VISIBILITY, "object_visibility"),
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.LAYER_VISIBILITY, "layer_visibility"),
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.COLOR_MANAGER, "colors"),
-                entry(BoardFrame.SAVABLE_SUBWINDOW_KEY.DISPLAY_MISC, "miscellaneous"));
+        Map<SAVABLE_SUBWINDOW_KEY, String> menu_items = Map.ofEntries(
+                entry(SAVABLE_SUBWINDOW_KEY.OBJECT_VISIBILITY, "object_visibility"),
+                entry(SAVABLE_SUBWINDOW_KEY.LAYER_VISIBILITY, "layer_visibility"),
+                entry(SAVABLE_SUBWINDOW_KEY.COLOR_MANAGER, "colors"),
+                entry(SAVABLE_SUBWINDOW_KEY.DISPLAY_MISC, "miscellaneous"));
 
-        for (Map.Entry<BoardFrame.SAVABLE_SUBWINDOW_KEY, String> entry : menu_items.entrySet()) {
+        for (Map.Entry<SAVABLE_SUBWINDOW_KEY, String> entry : menu_items.entrySet()) {
             javax.swing.JMenuItem menu_item = new javax.swing.JMenuItem();
             menu_item.setText(display_menu.resources.getString(entry.getValue()));
             menu_item.addActionListener((java.awt.event.ActionEvent evt) -> {

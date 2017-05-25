@@ -36,6 +36,7 @@ import javafx.scene.control.Alert.AlertType;
 import javax.swing.JOptionPane;
 import static net.freerouting.freeroute.Filename.GUI_DEFAULTS_FILE_NAME;
 import static net.freerouting.freeroute.Filename.LOG_FILE_EXTENSIONS;
+import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
 import net.freerouting.freeroute.board.BoardObserverAdaptor;
 import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.ItemIdNoGenerator;
@@ -106,15 +107,7 @@ public class BoardFrame extends javax.swing.JFrame {
     private final BoardObservers board_observers;
     private final IdNoGenerator item_id_no_generator;
 
-    enum SAVABLE_SUBWINDOW_KEY {
-        ABOUT, ROUTE_PARAMETER, AUTOROUTE_PARAMETER, SELECT_PARAMETER, MOVE_PARAMETER,
-        CLEARANCE_MATRIX, VIA, EDIT_VIAS, EDIT_NET_RULES, ASSIGN_NET_CLASSES,
-        PADSTACKS, PACKAGES, INCOMPLETES, NET_INFO, CLEARANCE_VIOLATIONS,
-        LENGHT_VIOLATIONS, UNCONNECTED_ROUTE, ROUTE_STUBS, COMPONENTS, LAYER_VISIBILITY,
-        OBJECT_VISIBILITY, DISPLAY_MISC, SNAPSHOT, COLOR_MANAGER
-    }
-
-    EnumMap<SAVABLE_SUBWINDOW_KEY, BoardSavableSubWindow> savable_subwindows;
+    SavableSubwindows savable_subwindows;
     EnumMap<SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY, WindowObjectListWithFilter> snapshot_subwindows;
 
     java.util.Collection<BoardTemporarySubWindow> temporary_subwindows = new java.util.LinkedList<>();
@@ -256,9 +249,7 @@ public class BoardFrame extends javax.swing.JFrame {
 
                     allocate_permanent_subwindows();
 
-                    for (BoardSavableSubWindow window : savable_subwindows.values()) {
-                        window.read(object_stream);
-                    }
+                    savable_subwindows.read_all(object_stream);
                 } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, ex);
                     Platform.runLater(() -> {
@@ -323,9 +314,7 @@ public class BoardFrame extends javax.swing.JFrame {
             object_stream.writeObject(board_panel.get_viewport_position());
             object_stream.writeObject(getLocation());
             object_stream.writeObject(getBounds());
-            for (BoardSavableSubWindow window : savable_subwindows.values()) {
-                window.save(object_stream);
-            }
+            savable_subwindows.save_all(object_stream);
             return true;
         } catch (IOException e) {
             Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, e);
@@ -423,17 +412,7 @@ public class BoardFrame extends javax.swing.JFrame {
      */
     @Override
     public void dispose() {
-        for (BoardSavableSubWindow window : savable_subwindows.values()) {
-            if (window != null) {
-                window.dispose();
-                window = null;
-            }
-        }
-        for (BoardTemporarySubWindow curr_subwindow : temporary_subwindows) {
-            if (curr_subwindow != null) {
-                curr_subwindow.board_frame_disposed();
-            }
-        }
+        savable_subwindows.dispose_all();
         if (board_panel.board_handling != null) {
             board_panel.board_handling.dispose();
             board_panel.board_handling = null;
@@ -443,7 +422,7 @@ public class BoardFrame extends javax.swing.JFrame {
     }
 
     private void allocate_permanent_subwindows() {
-        savable_subwindows = new EnumMap<>(SAVABLE_SUBWINDOW_KEY.class);
+        savable_subwindows = new SavableSubwindows();
 
         WindowAbout about_window = new WindowAbout();
         savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.ABOUT, about_window);
@@ -572,11 +551,7 @@ public class BoardFrame extends javax.swing.JFrame {
      * Refreshs all displayed coordinates after the user unit has changed.
      */
     public void refresh_windows() {
-        for (BoardSavableSubWindow window : savable_subwindows.values()) {
-            if (window != null) {
-                window.refresh();
-            }
-        }
+        savable_subwindows.refresh_all();
     }
 
     /**
@@ -638,9 +613,7 @@ public class BoardFrame extends javax.swing.JFrame {
      */
     public void repaint_all() {
         repaint();
-        for (BoardSavableSubWindow window : savable_subwindows.values()) {
-            window.repaint();
-        }
+        savable_subwindows.repaint_all();
     }
 
     private class WindowStateListener extends java.awt.event.WindowAdapter {
@@ -657,9 +630,7 @@ public class BoardFrame extends javax.swing.JFrame {
 
         @Override
         public void windowIconified(java.awt.event.WindowEvent evt) {
-            for (BoardSavableSubWindow window : savable_subwindows.values()) {
-                window.parent_iconified();
-            }
+            savable_subwindows.iconifed_all();
             for (BoardSubWindow curr_subwindow : temporary_subwindows) {
                 if (curr_subwindow != null) {
                     curr_subwindow.parent_iconified();
@@ -669,11 +640,7 @@ public class BoardFrame extends javax.swing.JFrame {
 
         @Override
         public void windowDeiconified(java.awt.event.WindowEvent evt) {
-            for (BoardSavableSubWindow window : savable_subwindows.values()) {
-                if (window != null) {
-                    window.parent_deiconified();
-                }
-            }
+            savable_subwindows.deiconifed_all();
             for (BoardSubWindow curr_subwindow : temporary_subwindows) {
                 if (curr_subwindow != null) {
                     curr_subwindow.parent_deiconified();

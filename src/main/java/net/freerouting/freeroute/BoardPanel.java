@@ -29,6 +29,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
 import net.freerouting.freeroute.interactive.BoardHandling;
 import net.freerouting.freeroute.interactive.ScreenMessages;
 
@@ -337,7 +338,7 @@ public class BoardPanel extends javax.swing.JPanel {
      */
     public void set_selected_signal_layer(int p_signal_layer_no) {
         if (board_frame.savable_subwindows != null) {
-            ((WindowSelectParameter) board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER))
+            ((WindowSelectParameter) board_frame.savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER))
                     .select(p_signal_layer_no);
             this.popup_menu_dynamic_route.disable_layer_item(p_signal_layer_no);
             this.popup_menu_stitch_route.disable_layer_item(p_signal_layer_no);

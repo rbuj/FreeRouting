@@ -20,6 +20,7 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
 import net.freerouting.freeroute.board.ObjectInfoPanel.Printable;
 import net.freerouting.freeroute.rules.BoardRules;
 import net.freerouting.freeroute.rules.NetClass;
@@ -245,7 +246,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
 
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
-            board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.ASSIGN_NET_CLASSES).setVisible(true);
+            board_frame.savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.ASSIGN_NET_CLASSES).setVisible(true);
         }
     }
 
@@ -531,7 +532,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
                     return; // name exists already
                 }
                 net_rule.set_name(new_name);
-                board_frame.savable_subwindows.get(BoardFrame.SAVABLE_SUBWINDOW_KEY.VIA).refresh();
+                board_frame.savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.VIA).refresh();
             } else if (p_col == ColumnName.VIA_RULE.ordinal()) {
                 if (!(p_value instanceof String)) {
                     return;
