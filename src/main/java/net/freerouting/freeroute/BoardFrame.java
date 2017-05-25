@@ -552,7 +552,9 @@ public final class BoardFrame extends javax.swing.JFrame {
      * Refreshs all displayed coordinates after the user unit has changed.
      */
     public void refresh_windows() {
-        savable_subwindows.refresh_all();
+        if (null != savable_subwindows) {
+            savable_subwindows.refresh_all();
+        }
     }
 
     /**
