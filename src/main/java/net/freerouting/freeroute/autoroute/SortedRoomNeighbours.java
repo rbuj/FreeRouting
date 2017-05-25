@@ -614,7 +614,7 @@ public class SortedRoomNeighbours {
         private Point precalculated_first_corner = null;
         private Point precalculated_last_corner = null;
 
-        public SortedRoomNeighbour(TileShape p_neighbour_shape, TileShape p_intersection,
+        SortedRoomNeighbour(TileShape p_neighbour_shape, TileShape p_intersection,
                 int p_touching_side_no_of_room, int p_touching_side_no_of_neighbour_room,
                 boolean p_room_touch_is_corner, boolean p_neighbour_room_touch_is_corner) {
             neighbour_shape = p_neighbour_shape;

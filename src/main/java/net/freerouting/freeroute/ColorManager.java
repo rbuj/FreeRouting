@@ -48,7 +48,7 @@ import net.freerouting.freeroute.boardgraphics.GraphicsContext;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class ColorManager extends BoardSavableSubWindow {
+public final class ColorManager extends BoardSavableSubWindow {
 
     /**
      * Initializes p_color_table and return the created scroll_pane of the color
@@ -151,7 +151,7 @@ public class ColorManager extends BoardSavableSubWindow {
         Border selectedBorder = null;
         boolean isBordered = true;
 
-        public ColorRenderer(boolean p_is_bordered) {
+        ColorRenderer(boolean p_is_bordered) {
             super();
             this.isBordered = p_is_bordered;
             setOpaque(true); //MUST do this for background to show up.
@@ -194,7 +194,7 @@ public class ColorManager extends BoardSavableSubWindow {
 
         Color currentColor = null;
 
-        public ColorEditor(JButton b) {
+        ColorEditor(JButton b) {
             super(new JCheckBox()); //Unfortunately, the constructor
             //expects a check box, combo box,
             //or text field.

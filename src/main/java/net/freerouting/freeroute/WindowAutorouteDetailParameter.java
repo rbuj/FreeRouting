@@ -27,7 +27,7 @@ import java.util.Locale;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowAutorouteDetailParameter extends BoardSavableSubWindow {
+public final class WindowAutorouteDetailParameter extends BoardSavableSubWindow {
 
     private final net.freerouting.freeroute.interactive.BoardHandling board_handling;
     private final javax.swing.JFormattedTextField via_cost_field;
@@ -405,7 +405,7 @@ public class WindowAutorouteDetailParameter extends BoardSavableSubWindow {
 
         private final int signal_layer_no;
 
-        public PreferredDirectionTraceCostKeyListener(int p_layer_no) {
+        PreferredDirectionTraceCostKeyListener(int p_layer_no) {
             this.signal_layer_no = p_layer_no;
         }
 
@@ -438,7 +438,7 @@ public class WindowAutorouteDetailParameter extends BoardSavableSubWindow {
 
         private final int signal_layer_no;
 
-        public PreferredDirectionTraceCostFocusListener(int p_layer_no) {
+        PreferredDirectionTraceCostFocusListener(int p_layer_no) {
             this.signal_layer_no = p_layer_no;
         }
 
@@ -459,7 +459,7 @@ public class WindowAutorouteDetailParameter extends BoardSavableSubWindow {
 
         private final int signal_layer_no;
 
-        public AgainstPreferredDirectionTraceCostKeyListener(int p_layer_no) {
+        AgainstPreferredDirectionTraceCostKeyListener(int p_layer_no) {
             this.signal_layer_no = p_layer_no;
         }
 
@@ -492,7 +492,7 @@ public class WindowAutorouteDetailParameter extends BoardSavableSubWindow {
 
         private final int signal_layer_no;
 
-        public AgainstPreferredDirectionTraceCostFocusListener(int p_layer_no) {
+        AgainstPreferredDirectionTraceCostFocusListener(int p_layer_no) {
             this.signal_layer_no = p_layer_no;
         }
 

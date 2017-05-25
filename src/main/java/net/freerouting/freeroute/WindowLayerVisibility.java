@@ -27,7 +27,7 @@ import java.util.Locale;
  * @author alfons
  */
 @SuppressWarnings("serial")
-public class WindowLayerVisibility extends WindowVisibility {
+public final class WindowLayerVisibility extends WindowVisibility {
 
     /**
      * Returns a new instance of LayerVisibilityFrame

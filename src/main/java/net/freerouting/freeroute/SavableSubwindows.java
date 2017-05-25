@@ -24,7 +24,7 @@ import java.util.EnumMap;
  *
  * @author robert
  */
-public class SavableSubwindows {
+public final class SavableSubwindows {
 
     enum SAVABLE_SUBWINDOW_KEY {
         ABOUT, ROUTE_PARAMETER, AUTOROUTE_PARAMETER, SELECT_PARAMETER, MOVE_PARAMETER,

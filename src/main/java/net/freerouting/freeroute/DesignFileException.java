@@ -22,7 +22,7 @@ package net.freerouting.freeroute;
  * {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  */
 @SuppressWarnings("serial")
-public class DesignFileException extends Exception {
+public final class DesignFileException extends Exception {
 
     /**
      * Creates a new instance of <code>DesignFileException</code> without detail

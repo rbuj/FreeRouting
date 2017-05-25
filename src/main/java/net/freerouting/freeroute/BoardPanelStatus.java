@@ -28,7 +28,7 @@ import java.util.Locale;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-class BoardPanelStatus extends javax.swing.JPanel {
+final class BoardPanelStatus extends javax.swing.JPanel {
 
     final javax.swing.JLabel status_message;
     final javax.swing.JLabel add_message;

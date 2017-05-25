@@ -73,7 +73,7 @@ class DrillPage implements ExpandableObject {
     /**
      * Creates a new instance of DrillPage
      */
-    public DrillPage(IntBox p_shape, RoutingBoard p_board) {
+    DrillPage(IntBox p_shape, RoutingBoard p_board) {
         shape = p_shape;
         board = p_board;
         maze_search_info_arr = new MazeSearchElement[p_board.get_layer_count()];

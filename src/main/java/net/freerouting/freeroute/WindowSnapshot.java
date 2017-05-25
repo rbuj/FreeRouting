@@ -30,7 +30,7 @@ import net.freerouting.freeroute.interactive.SnapShot;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowSnapshot extends BoardSavableSubWindow {
+public final class WindowSnapshot extends BoardSavableSubWindow {
 
     private final BoardFrame board_frame;
     private javax.swing.DefaultListModel<SnapShot> list_model = new javax.swing.DefaultListModel<>();
@@ -269,7 +269,7 @@ public class WindowSnapshot extends BoardSavableSubWindow {
         public final java.awt.Point location;
         public final boolean is_visible;
 
-        public SavedAttributes(javax.swing.DefaultListModel<SnapShot> p_list_model, int p_snapshot_count, java.awt.Point p_location, boolean p_is_visible) {
+        SavedAttributes(javax.swing.DefaultListModel<SnapShot> p_list_model, int p_snapshot_count, java.awt.Point p_location, boolean p_is_visible) {
             list_model = p_list_model;
             snapshot_count = p_snapshot_count;
             location = p_location;

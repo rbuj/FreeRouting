@@ -30,7 +30,7 @@ import javax.swing.JCheckBox;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowSnapshotSettings extends BoardSavableSubWindow {
+public final class WindowSnapshotSettings extends BoardSavableSubWindow {
 
     private final net.freerouting.freeroute.interactive.BoardHandling board_handling;
 

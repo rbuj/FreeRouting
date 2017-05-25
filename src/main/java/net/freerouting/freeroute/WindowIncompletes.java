@@ -29,7 +29,7 @@ import net.freerouting.freeroute.interactive.RatsNest;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowIncompletes extends WindowObjectListWithFilter {
+public final class WindowIncompletes extends WindowObjectListWithFilter {
 
     /**
      * Creates a new instance of IncompletesWindow

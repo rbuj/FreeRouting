@@ -41,7 +41,7 @@ import static net.freerouting.freeroute.Filename.GUI_DEFAULTS_FILE_NAME;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class BoardMenuFile extends javax.swing.JMenu {
+final class BoardMenuFile extends javax.swing.JMenu {
 
     private final BoardFrame board_frame;
     private final boolean session_file_option;

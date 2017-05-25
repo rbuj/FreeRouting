@@ -307,7 +307,7 @@ public class PlanarDelaunayTriangulation {
         public final PlanarDelaunayTriangulation.Storable object;
         public final Point coor;
 
-        public Corner(PlanarDelaunayTriangulation.Storable p_object, Point p_coor) {
+        Corner(PlanarDelaunayTriangulation.Storable p_object, Point p_coor) {
             object = p_object;
             coor = p_coor;
         }
@@ -327,7 +327,7 @@ public class PlanarDelaunayTriangulation {
 
         private Triangle anchor = null;
 
-        public TriangleGraph(Triangle p_triangle) {
+        TriangleGraph(Triangle p_triangle) {
             if (p_triangle != null) {
                 insert(p_triangle, null);
             } else {
@@ -417,7 +417,7 @@ public class PlanarDelaunayTriangulation {
          */
         private final int id_no;
 
-        public Edge(Corner p_start_corner, Corner p_end_corner) {
+        Edge(Corner p_start_corner, Corner p_end_corner) {
             start_corner = p_start_corner;
             end_corner = p_end_corner;
             id_no = new_edge_id_no();
@@ -638,7 +638,7 @@ public class PlanarDelaunayTriangulation {
          */
         private final Triangle first_parent;
 
-        public Triangle(Edge[] p_edge_lines, Triangle p_first_parent) {
+        Triangle(Edge[] p_edge_lines, Triangle p_first_parent) {
             this.edge_lines = p_edge_lines;
             // create an empty list for the children.
             this.children = new LinkedList<>();

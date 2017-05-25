@@ -29,7 +29,7 @@ import net.freerouting.freeroute.rules.NetClass;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowAssignNetClass extends BoardSavableSubWindow {
+public final class WindowAssignNetClass extends BoardSavableSubWindow {
 
     private static final int TEXTFIELD_HEIGHT = 16;
     private static final int TEXTFIELD_WIDTH = 100;
@@ -102,7 +102,7 @@ public class WindowAssignNetClass extends BoardSavableSubWindow {
                     resources.getString("net_name_tooltip"), resources.getString("class_name_tooltip")
                 };
 
-        public AssignRuleTable(AssignRuleTableModel p_table_model) {
+        AssignRuleTable(AssignRuleTableModel p_table_model) {
             super(p_table_model);
         }
 
@@ -127,7 +127,7 @@ public class WindowAssignNetClass extends BoardSavableSubWindow {
         private Object[][] data = null;
         private String[] column_names = null;
 
-        public AssignRuleTableModel() {
+        AssignRuleTableModel() {
             column_names = new String[2];
 
             column_names[0] = resources.getString("net_name");

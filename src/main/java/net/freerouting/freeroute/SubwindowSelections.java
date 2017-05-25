@@ -25,7 +25,7 @@ import java.util.Map.Entry;
  * @author robert
  */
 @SuppressWarnings("serial")
-public class SubwindowSelections implements java.io.Serializable {
+public final class SubwindowSelections implements java.io.Serializable {
 
     enum SNAPSHOT_SUBWINDOW_KEY {
         INCOMPLETES, PACKAGES, NET_INFO, COMPONENTS, PADSTACKS

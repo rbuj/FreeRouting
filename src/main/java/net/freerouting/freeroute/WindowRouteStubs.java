@@ -35,7 +35,7 @@ import net.freerouting.freeroute.geometry.planar.FloatPoint;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowRouteStubs extends WindowObjectListWithFilter {
+public final class WindowRouteStubs extends WindowObjectListWithFilter {
 
     private final java.util.ResourceBundle resources;
 
@@ -140,7 +140,7 @@ public class WindowRouteStubs extends WindowObjectListWithFilter {
         private final FloatPoint location;
         private final int layer_no;
 
-        public RouteStubInfo(Item p_stub, FloatPoint p_location, int p_layer_no) {
+        RouteStubInfo(Item p_stub, FloatPoint p_location, int p_layer_no) {
             net.freerouting.freeroute.interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;
             this.stub_item = p_stub;
             this.location = board_handling.coordinate_transform.board_to_user(p_location);

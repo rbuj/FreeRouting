@@ -739,7 +739,7 @@ class Structure extends ScopeKeyword {
     /**
      * Creates a new instance of Structure
      */
-    public Structure() {
+    Structure() {
         super("structure");
     }
 
@@ -1101,7 +1101,7 @@ class Structure extends ScopeKeyword {
         final TileShape[] convex_shapes;
         boolean is_hole;
 
-        public OutlineShape(PolylineShape p_shape) {
+        OutlineShape(PolylineShape p_shape) {
             shape = p_shape;
             bounding_box = p_shape.bounding_box();
             convex_shapes = p_shape.split_to_convex();

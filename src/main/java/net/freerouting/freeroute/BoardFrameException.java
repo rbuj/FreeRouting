@@ -22,7 +22,7 @@ package net.freerouting.freeroute;
  * {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  */
 @SuppressWarnings("serial")
-public class BoardFrameException extends Exception {
+public final class BoardFrameException extends Exception {
 
     /**
      * Creates a new instance of <code>BoardFrameException</code> without detail

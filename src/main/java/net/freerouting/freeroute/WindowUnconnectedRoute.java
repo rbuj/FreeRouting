@@ -33,7 +33,7 @@ import net.freerouting.freeroute.board.Item;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowUnconnectedRoute extends WindowObjectListWithFilter {
+public final class WindowUnconnectedRoute extends WindowObjectListWithFilter {
 
     private final java.util.ResourceBundle resources;
     private int max_unconnected_route_info_id_no = 0;
@@ -118,7 +118,7 @@ public class WindowUnconnectedRoute extends WindowObjectListWithFilter {
         private final Integer trace_count;
         private final Integer via_count;
 
-        public UnconnectedRouteInfo(net.freerouting.freeroute.rules.Net p_net, Collection<Item> p_item_list) {
+        UnconnectedRouteInfo(net.freerouting.freeroute.rules.Net p_net, Collection<Item> p_item_list) {
             this.net = p_net;
             this.item_list = p_item_list;
             ++max_unconnected_route_info_id_no;

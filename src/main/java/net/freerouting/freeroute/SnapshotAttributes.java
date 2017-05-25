@@ -22,7 +22,7 @@ import java.util.EnumMap;
  *
  * @author robert
  */
-public class SnapshotAttributes {
+public final class SnapshotAttributes {
 
     public enum SNAPSHOT_ATTRIBUTE_KEY {
         OBJECT_COLORS, OBJECT_VISIBILITY, LAYER_VISIBILITY, DISPLAY_REGION,

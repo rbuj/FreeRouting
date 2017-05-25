@@ -31,7 +31,7 @@ import net.freerouting.freeroute.rules.ViaInfos;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowEditVias extends BoardSavableSubWindow {
+public final class WindowEditVias extends BoardSavableSubWindow {
 
     private static final int TEXTFIELD_HEIGHT = 16;
     private static final int TEXTFIELD_WIDTH = 100;
@@ -200,7 +200,7 @@ public class WindowEditVias extends BoardSavableSubWindow {
         private Object[][] data = null;
         private String[] column_names = null;
 
-        public ViaTableModel() {
+        ViaTableModel() {
             column_names = new String[ColumnName.values().length];
 
             for (int i = 0; i < column_names.length; ++i) {

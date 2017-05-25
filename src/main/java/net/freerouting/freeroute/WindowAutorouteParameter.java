@@ -34,7 +34,7 @@ import net.freerouting.freeroute.board.LayerStructure;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowAutorouteParameter extends BoardSavableSubWindow {
+public final class WindowAutorouteParameter extends BoardSavableSubWindow {
 
     private final net.freerouting.freeroute.interactive.BoardHandling board_handling;
     private final ArrayList<JLabel> signal_layer_name_arr;
@@ -244,7 +244,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow {
 
         private final int signal_layer_no;
 
-        public LayerActiveListener(int p_layer_no) {
+        LayerActiveListener(int p_layer_no) {
             signal_layer_no = p_layer_no;
         }
 
@@ -259,7 +259,7 @@ public class WindowAutorouteParameter extends BoardSavableSubWindow {
 
         private final int signal_layer_no;
 
-        public PreferredDirectionListener(int p_layer_no) {
+        PreferredDirectionListener(int p_layer_no) {
             signal_layer_no = p_layer_no;
         }
 

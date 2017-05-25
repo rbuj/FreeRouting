@@ -25,7 +25,7 @@ package net.freerouting.freeroute;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-class BoardMenuBar extends javax.swing.JMenuBar {
+final class BoardMenuBar extends javax.swing.JMenuBar {
 
     private final BoardMenuFile file_menu;
 
@@ -33,7 +33,7 @@ class BoardMenuBar extends javax.swing.JMenuBar {
         this.file_menu.add_design_dependent_items();
     }
 
-    BoardMenuBar (BoardFrame p_board_frame, boolean p_session_file_option) {
+    private BoardMenuBar (BoardFrame p_board_frame, boolean p_session_file_option) {
         file_menu = BoardMenuFile.get_instance(p_board_frame, p_session_file_option);
     }
 

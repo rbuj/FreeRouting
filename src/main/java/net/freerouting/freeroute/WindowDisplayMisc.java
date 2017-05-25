@@ -27,7 +27,7 @@ import java.util.Locale;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowDisplayMisc extends BoardSavableSubWindow {
+public final class WindowDisplayMisc extends BoardSavableSubWindow {
 
     private static final int MAX_SLIDER_VALUE = 100;
 

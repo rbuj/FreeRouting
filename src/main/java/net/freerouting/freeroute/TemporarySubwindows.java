@@ -20,7 +20,7 @@ package net.freerouting.freeroute;
  *
  * @author robert
  */
-public class TemporarySubwindows {
+public final class TemporarySubwindows {
 
     java.util.Collection<BoardTemporarySubWindow> temporary_subwindows_list;
 

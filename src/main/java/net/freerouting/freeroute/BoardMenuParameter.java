@@ -31,7 +31,7 @@ import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class BoardMenuParameter extends javax.swing.JMenu {
+final class BoardMenuParameter extends javax.swing.JMenu {
 
     private final BoardFrame board_frame;
     private final ResourceBundle resources;

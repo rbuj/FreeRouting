@@ -30,7 +30,7 @@ import net.freerouting.freeroute.library.Packages;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowPackages extends WindowObjectListWithFilter {
+public final class WindowPackages extends WindowObjectListWithFilter {
 
     /**
      * Creates a new instance of PackagesWindow

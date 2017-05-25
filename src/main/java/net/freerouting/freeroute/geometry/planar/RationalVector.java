@@ -69,7 +69,7 @@ public final class RationalVector implements Vector {
      * returns true, if the x and y coordinates of this vector are 0
      */
     @Override
-    public final boolean is_zero() {
+    public boolean is_zero() {
         return x.signum() == 0 && y.signum() == 0;
     }
 
@@ -77,7 +77,7 @@ public final class RationalVector implements Vector {
      * returns true, if this RationalVector is equal to p_ob
      */
     @Override
-    public final boolean equals(Object p_ob) {
+    public boolean equals(Object p_ob) {
         if (this == p_ob) {
             return true;
         }
@@ -118,7 +118,7 @@ public final class RationalVector implements Vector {
      * adds p_other to this vector
      */
     @Override
-    public final Vector add(Vector p_other) {
+    public Vector add(Vector p_other) {
         return p_other.add(this);
     }
 
@@ -266,13 +266,13 @@ public final class RationalVector implements Vector {
     }
 
     @Override
-    public final Vector add(IntVector p_other) {
+    public Vector add(IntVector p_other) {
         RationalVector other = new RationalVector(p_other);
         return add(other);
     }
 
     @Override
-    public final Vector add(RationalVector p_other) {
+    public Vector add(RationalVector p_other) {
         BigInteger v1[] = new BigInteger[3];
         v1[0] = x;
         v1[1] = y;

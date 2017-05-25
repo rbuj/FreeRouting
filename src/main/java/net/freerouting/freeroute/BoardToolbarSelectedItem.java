@@ -28,7 +28,7 @@ import java.util.Locale;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-class BoardToolbarSelectedItem extends javax.swing.JToolBar {
+final class BoardToolbarSelectedItem extends javax.swing.JToolBar {
 
     private final BoardFrame board_frame;
     private final java.util.ResourceBundle resources;

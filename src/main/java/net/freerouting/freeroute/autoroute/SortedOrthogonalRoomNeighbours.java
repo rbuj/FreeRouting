@@ -463,7 +463,7 @@ public class SortedOrthogonalRoomNeighbours {
          */
         public final int last_touching_side;
 
-        public SortedRoomNeighbour(IntBox p_neighbour_shape, IntBox p_intersection) {
+        SortedRoomNeighbour(IntBox p_neighbour_shape, IntBox p_intersection) {
             shape = p_neighbour_shape;
             intersection = p_intersection;
 

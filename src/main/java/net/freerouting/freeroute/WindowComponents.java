@@ -30,7 +30,7 @@ import net.freerouting.freeroute.board.Components;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowComponents extends WindowObjectListWithFilter {
+public final class WindowComponents extends WindowObjectListWithFilter {
 
     /**
      * Creates a new instance of ComponentsWindow

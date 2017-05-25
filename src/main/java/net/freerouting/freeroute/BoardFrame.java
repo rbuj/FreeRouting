@@ -53,7 +53,7 @@ import net.freerouting.freeroute.interactive.ScreenMessages;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class BoardFrame extends javax.swing.JFrame {
+public final class BoardFrame extends javax.swing.JFrame {
 
     /**
      * true, if the frame is created by an application running under Java Web

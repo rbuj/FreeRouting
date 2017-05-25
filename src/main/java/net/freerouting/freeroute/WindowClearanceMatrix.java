@@ -30,7 +30,7 @@ import net.freerouting.freeroute.rules.ClearanceMatrix;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowClearanceMatrix extends BoardSavableSubWindow {
+public final class WindowClearanceMatrix extends BoardSavableSubWindow {
 
     /**
      * Characters, which are not allowed in the name of a clearance class.
@@ -300,7 +300,7 @@ public class WindowClearanceMatrix extends BoardSavableSubWindow {
         private Object[][] data = null;
         private String[] column_names = null;
 
-        public ClearanceTableModel(net.freerouting.freeroute.interactive.BoardHandling p_board_handling) {
+        ClearanceTableModel(net.freerouting.freeroute.interactive.BoardHandling p_board_handling) {
             net.freerouting.freeroute.rules.ClearanceMatrix clearance_matrix = p_board_handling.get_routing_board().rules.clearance_matrix;
 
             column_names = new String[clearance_matrix.get_class_count() + 1];

@@ -29,7 +29,7 @@ import java.util.Locale;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowObjectInfo extends BoardTemporarySubWindow implements net.freerouting.freeroute.board.ObjectInfoPanel {
+public final class WindowObjectInfo extends BoardTemporarySubWindow implements net.freerouting.freeroute.board.ObjectInfoPanel {
 
     private static final int MAX_WINDOW_HEIGHT = 500;
     private static final int SCROLLBAR_ADD = 30;
@@ -354,7 +354,7 @@ public class WindowObjectInfo extends BoardTemporarySubWindow implements net.fre
          */
         private final Collection<Printable> objects;
 
-        public InfoButtonListener(String p_title, java.util.Collection<Printable> p_objects) {
+        InfoButtonListener(String p_title, java.util.Collection<Printable> p_objects) {
             this.title = p_title;
             this.objects = p_objects;
         }

@@ -31,7 +31,7 @@ import net.freerouting.freeroute.interactive.ClearanceViolations;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowClearanceViolations extends WindowObjectListWithFilter {
+public final class WindowClearanceViolations extends WindowObjectListWithFilter {
 
     private final java.util.ResourceBundle resources;
 
@@ -110,7 +110,7 @@ public class WindowClearanceViolations extends WindowObjectListWithFilter {
         public final ClearanceViolation violation;
         public final FloatPoint location;
 
-        public ViolationInfo(ClearanceViolation p_violation) {
+        ViolationInfo(ClearanceViolation p_violation) {
             this.violation = p_violation;
             FloatPoint board_location = p_violation.shape.centre_of_gravity();
             this.location = board_frame.board_panel.board_handling.coordinate_transform.board_to_user(board_location);

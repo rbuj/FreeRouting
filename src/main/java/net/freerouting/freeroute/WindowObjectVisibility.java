@@ -28,7 +28,7 @@ import net.freerouting.freeroute.boardgraphics.ColorIntensityTable.ObjectNames;
  * @author alfons
  */
 @SuppressWarnings("serial")
-public class WindowObjectVisibility extends WindowVisibility {
+public final class WindowObjectVisibility extends WindowVisibility {
 
     /**
      * Returns a new instance of ItemVisibilityFrame

@@ -32,7 +32,7 @@ class ChangedArea {
     final int layer_count;
     MutableOctagon[] arr;
 
-    public ChangedArea(int p_layer_count) {
+    ChangedArea(int p_layer_count) {
         layer_count = p_layer_count;
         arr = new MutableOctagon[layer_count];
         // initialise all octagons to empty

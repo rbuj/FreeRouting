@@ -30,7 +30,7 @@ import net.freerouting.freeroute.rules.ViaRule;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowViaRule extends javax.swing.JFrame {
+public final class WindowViaRule extends javax.swing.JFrame {
 
     private final ViaRule via_rule;
 

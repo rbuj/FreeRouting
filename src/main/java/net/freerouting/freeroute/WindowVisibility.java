@@ -147,7 +147,7 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
 
         public int slider_no;
 
-        public SliderChangeListener(int p_slider_no) {
+        SliderChangeListener(int p_slider_no) {
             slider_no = p_slider_no;
         }
 

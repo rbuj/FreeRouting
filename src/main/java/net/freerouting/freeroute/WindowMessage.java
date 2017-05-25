@@ -26,7 +26,7 @@ package net.freerouting.freeroute;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowMessage extends javax.swing.JFrame {
+public final class WindowMessage extends javax.swing.JFrame {
 
     /**
      * Displays a window with the input message at the center of the screen.

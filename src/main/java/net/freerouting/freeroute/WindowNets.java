@@ -30,7 +30,7 @@ import net.freerouting.freeroute.rules.Nets;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowNets extends WindowObjectListWithFilter {
+public final class WindowNets extends WindowObjectListWithFilter {
 
     private final java.util.ResourceBundle resources;
 

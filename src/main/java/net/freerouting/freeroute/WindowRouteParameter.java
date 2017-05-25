@@ -28,7 +28,7 @@ import java.util.Locale;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowRouteParameter extends BoardSavableSubWindow {
+public final class WindowRouteParameter extends BoardSavableSubWindow {
 
     private static final int C_MAX_SLIDER_VALUE = 999;
     private static final int C_REGION_SCALE_FACTOR = 200;

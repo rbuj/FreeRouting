@@ -53,7 +53,7 @@ public final class IntVector implements Vector {
      * returns true, if this IntVector is equal to p_ob
      */
     @Override
-    public final boolean equals(Object p_ob) {
+    public boolean equals(Object p_ob) {
         if (this == p_ob) {
             return true;
         }
@@ -79,7 +79,7 @@ public final class IntVector implements Vector {
      * returns true, if both coordinates of this vector are 0
      */
     @Override
-    public final boolean is_zero() {
+    public boolean is_zero() {
         return x == 0 && y == 0;
     }
 
@@ -105,7 +105,7 @@ public final class IntVector implements Vector {
      * Calculates the determinant of the matrix consisting of this Vector and
      * p_other.
      */
-    public final long determinant(IntVector p_other) {
+    public long determinant(IntVector p_other) {
         return (long) x * p_other.y - (long) y * p_other.x;
     }
 
@@ -158,17 +158,17 @@ public final class IntVector implements Vector {
      * adds p_other to this vector
      */
     @Override
-    public final Vector add(Vector p_other) {
+    public Vector add(Vector p_other) {
         return p_other.add(this);
     }
 
     @Override
-    public final Vector add(IntVector p_other) {
+    public Vector add(IntVector p_other) {
         return new IntVector(x + p_other.x, y + p_other.y);
     }
 
     @Override
-    public final Vector add(RationalVector p_other) {
+    public Vector add(RationalVector p_other) {
         return p_other.add(this);
     }
 
@@ -176,12 +176,12 @@ public final class IntVector implements Vector {
      * returns the Point, which results from adding this vector to p_point
      */
     @Override
-    public final Point add_to(IntPoint p_point) {
+    public Point add_to(IntPoint p_point) {
         return new IntPoint(p_point.x + x, p_point.y + y);
     }
 
     @Override
-    public final Point add_to(RationalPoint p_point) {
+    public Point add_to(RationalPoint p_point) {
         return p_point.translate_by(this);
     }
 

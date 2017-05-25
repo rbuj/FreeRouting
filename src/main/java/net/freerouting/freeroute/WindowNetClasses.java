@@ -32,7 +32,7 @@ import net.freerouting.freeroute.rules.ViaRule;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowNetClasses extends BoardSavableSubWindow {
+public final class WindowNetClasses extends BoardSavableSubWindow {
 
     private static final int TEXTFIELD_HEIGHT = 16;
     private static final int TEXTFIELD_WIDTH = 100;
@@ -364,7 +364,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
 
         private final String[] column_tool_tips;
 
-        public NetClassTable(NetClassTableModel p_table_model) {
+        NetClassTable(NetClassTableModel p_table_model) {
             super(p_table_model);
             column_tool_tips = new String[9];
             column_tool_tips[0] = null;
@@ -400,7 +400,7 @@ public class WindowNetClasses extends BoardSavableSubWindow {
         private Object[][] data = null;
         private String[] column_names = null;
 
-        public NetClassTableModel() {
+        NetClassTableModel() {
             column_names = new String[ColumnName.values().length];
 
             for (int i = 0; i < column_names.length; ++i) {

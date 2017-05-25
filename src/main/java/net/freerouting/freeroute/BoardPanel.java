@@ -40,7 +40,7 @@ import net.freerouting.freeroute.interactive.ScreenMessages;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class BoardPanel extends javax.swing.JPanel {
+public final class BoardPanel extends javax.swing.JPanel {
 
     private static final double C_ZOOM_FACTOR = 2.0;
     public javax.swing.JPopupMenu popup_menu_insert_cancel;

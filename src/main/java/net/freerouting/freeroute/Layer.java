@@ -20,7 +20,7 @@ package net.freerouting.freeroute;
  *
  * @author robert
  */
-public class Layer {
+public final class Layer {
 
     final String name;
 

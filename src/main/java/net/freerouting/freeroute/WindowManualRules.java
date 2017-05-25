@@ -29,7 +29,7 @@ import net.freerouting.freeroute.rules.ViaRule;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowManualRules extends BoardSavableSubWindow {
+public final class WindowManualRules extends BoardSavableSubWindow {
 
     private final net.freerouting.freeroute.interactive.BoardHandling board_handling;
     private final ComboBoxLayer layer_combo_box;

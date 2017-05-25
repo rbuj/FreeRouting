@@ -132,7 +132,7 @@ public class Circuit {
         public final double max_length;
         public final double min_length;
 
-        public LengthMatchingRule(double p_max_length, double p_min_length) {
+        LengthMatchingRule(double p_max_length, double p_min_length) {
             max_length = p_max_length;
             min_length = p_min_length;
         }

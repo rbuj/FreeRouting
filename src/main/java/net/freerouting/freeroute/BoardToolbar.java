@@ -28,7 +28,7 @@ import javax.swing.SwingConstants;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-class BoardToolbar extends javax.swing.JPanel {
+final class BoardToolbar extends javax.swing.JPanel {
 
     private final BoardFrame board_frame;
     private final javax.swing.JToggleButton select_button;

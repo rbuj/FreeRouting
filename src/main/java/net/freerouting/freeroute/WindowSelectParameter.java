@@ -28,7 +28,7 @@ import net.freerouting.freeroute.board.ItemSelectionFilter;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowSelectParameter extends BoardSavableSubWindow {
+public final class WindowSelectParameter extends BoardSavableSubWindow {
 
     private final net.freerouting.freeroute.interactive.BoardHandling board_handling;
 
@@ -174,7 +174,7 @@ public class WindowSelectParameter extends BoardSavableSubWindow {
         public final int signal_layer_no;
         public final int layer_no;
 
-        public CurrentLayerListener(int p_signal_layer_no, int p_layer_no) {
+        CurrentLayerListener(int p_signal_layer_no, int p_layer_no) {
             signal_layer_no = p_signal_layer_no;
             layer_no = p_layer_no;
         }
@@ -205,7 +205,7 @@ public class WindowSelectParameter extends BoardSavableSubWindow {
 
         private final int item_no;
 
-        public ItemSelectionListener(int p_item_no) {
+        ItemSelectionListener(int p_item_no) {
             item_no = p_item_no;
         }
 

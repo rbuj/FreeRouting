@@ -157,7 +157,7 @@ public abstract class LogfileScope {
      */
     private static abstract class CornerlistScope extends LogfileScope {
 
-        public CornerlistScope(String p_name) {
+        CornerlistScope(String p_name) {
             super(p_name);
         }
 
@@ -215,7 +215,7 @@ public abstract class LogfileScope {
 
     private static class CreateTraceScope extends CornerlistScope {
 
-        public CreateTraceScope(String p_name) {
+        CreateTraceScope(String p_name) {
             super(p_name);
         }
 
@@ -229,7 +229,7 @@ public abstract class LogfileScope {
 
     private static class CreateTileScope extends CornerlistScope {
 
-        public CreateTileScope(String p_name) {
+        CreateTileScope(String p_name) {
             super(p_name);
         }
 
@@ -242,7 +242,7 @@ public abstract class LogfileScope {
 
     private static class CreateCircleScope extends CornerlistScope {
 
-        public CreateCircleScope(String p_name) {
+        CreateCircleScope(String p_name) {
             super(p_name);
         }
 
@@ -255,7 +255,7 @@ public abstract class LogfileScope {
 
     private static class CreatePolygonShapeScope extends CornerlistScope {
 
-        public CreatePolygonShapeScope(String p_name) {
+        CreatePolygonShapeScope(String p_name) {
             super(p_name);
         }
 
@@ -268,7 +268,7 @@ public abstract class LogfileScope {
 
     private static class AddHoleScope extends CornerlistScope {
 
-        public AddHoleScope(String p_name) {
+        AddHoleScope(String p_name) {
             super(p_name);
         }
 
@@ -281,7 +281,7 @@ public abstract class LogfileScope {
 
     private static class DragItemScope extends CornerlistScope {
 
-        public DragItemScope(String p_name) {
+        DragItemScope(String p_name) {
             super(p_name);
         }
 
@@ -294,7 +294,7 @@ public abstract class LogfileScope {
 
     private static class MakeSpaceScope extends CornerlistScope {
 
-        public MakeSpaceScope(String p_name) {
+        MakeSpaceScope(String p_name) {
             super(p_name);
         }
 
@@ -307,7 +307,7 @@ public abstract class LogfileScope {
 
     private static class CopyItemScope extends CornerlistScope {
 
-        public CopyItemScope(String p_name) {
+        CopyItemScope(String p_name) {
             super(p_name);
         }
 
@@ -329,7 +329,7 @@ public abstract class LogfileScope {
 
     private static class MoveItemScope extends CornerlistScope {
 
-        public MoveItemScope(String p_name) {
+        MoveItemScope(String p_name) {
             super(p_name);
         }
 
@@ -361,7 +361,7 @@ public abstract class LogfileScope {
 
     private static class Turn90DegreeScope extends LogfileScope {
 
-        public Turn90DegreeScope(String p_name) {
+        Turn90DegreeScope(String p_name) {
             super(p_name);
         }
 
@@ -381,7 +381,7 @@ public abstract class LogfileScope {
 
     private static class RotateScope extends LogfileScope {
 
-        public RotateScope(String p_name) {
+        RotateScope(String p_name) {
             super(p_name);
         }
 
@@ -401,7 +401,7 @@ public abstract class LogfileScope {
 
     private static class ChangePlacementSideScope extends LogfileScope {
 
-        public ChangePlacementSideScope(String p_name) {
+        ChangePlacementSideScope(String p_name) {
             super(p_name);
         }
 
@@ -420,7 +420,7 @@ public abstract class LogfileScope {
 
     private static class SetZoomWithWheelScope extends LogfileScope {
 
-        public SetZoomWithWheelScope(String p_name) {
+        SetZoomWithWheelScope(String p_name) {
             super(p_name);
         }
 
@@ -444,7 +444,7 @@ public abstract class LogfileScope {
 
     private static class ChangeLayerScope extends LogfileScope {
 
-        public ChangeLayerScope(String p_name) {
+        ChangeLayerScope(String p_name) {
             super(p_name);
         }
 
@@ -459,7 +459,7 @@ public abstract class LogfileScope {
 
     private static class StartSelectScope extends LogfileScope {
 
-        public StartSelectScope(String p_name) {
+        StartSelectScope(String p_name) {
             super(p_name);
         }
 
@@ -481,7 +481,7 @@ public abstract class LogfileScope {
 
     private static class ToggleSelectScope extends LogfileScope {
 
-        public ToggleSelectScope(String p_name) {
+        ToggleSelectScope(String p_name) {
             super(p_name);
         }
 
@@ -503,7 +503,7 @@ public abstract class LogfileScope {
 
     private static class SelectRegionScope extends LogfileScope {
 
-        public SelectRegionScope(String p_name) {
+        SelectRegionScope(String p_name) {
             super(p_name);
         }
 
@@ -532,7 +532,7 @@ public abstract class LogfileScope {
 
     private static class CutoutRouteScope extends LogfileScope {
 
-        public CutoutRouteScope(String p_name) {
+        CutoutRouteScope(String p_name) {
             super(p_name);
         }
 
@@ -562,7 +562,7 @@ public abstract class LogfileScope {
 
     private static class DeleteSelectedScope extends LogfileScope {
 
-        public DeleteSelectedScope(String p_name) {
+        DeleteSelectedScope(String p_name) {
             super(p_name);
         }
 
@@ -582,7 +582,7 @@ public abstract class LogfileScope {
 
     private static class OptimizeSelectedScope extends LogfileScope {
 
-        public OptimizeSelectedScope(String p_name) {
+        OptimizeSelectedScope(String p_name) {
             super(p_name);
         }
 
@@ -602,7 +602,7 @@ public abstract class LogfileScope {
 
     private static class AutorouteSelectedScope extends LogfileScope {
 
-        public AutorouteSelectedScope(String p_name) {
+        AutorouteSelectedScope(String p_name) {
             super(p_name);
         }
 
@@ -622,7 +622,7 @@ public abstract class LogfileScope {
 
     private static class FanoutSelectedScope extends LogfileScope {
 
-        public FanoutSelectedScope(String p_name) {
+        FanoutSelectedScope(String p_name) {
             super(p_name);
         }
 
@@ -645,7 +645,7 @@ public abstract class LogfileScope {
      */
     private static class AssignClearanceClassScope extends LogfileScope {
 
-        public AssignClearanceClassScope(String p_name) {
+        AssignClearanceClassScope(String p_name) {
             super(p_name);
         }
 
@@ -669,7 +669,7 @@ public abstract class LogfileScope {
      */
     private static class AssignSelectedToNewNetScope extends LogfileScope {
 
-        public AssignSelectedToNewNetScope(String p_name) {
+        AssignSelectedToNewNetScope(String p_name) {
             super(p_name);
         }
 
@@ -693,7 +693,7 @@ public abstract class LogfileScope {
      */
     private static class AssignSelectedToNewGroupScope extends LogfileScope {
 
-        public AssignSelectedToNewGroupScope(String p_name) {
+        AssignSelectedToNewGroupScope(String p_name) {
             super(p_name);
         }
 
@@ -713,7 +713,7 @@ public abstract class LogfileScope {
 
     private static class ExtendToWholeConnectedSetsScope extends LogfileScope {
 
-        public ExtendToWholeConnectedSetsScope(String p_name) {
+        ExtendToWholeConnectedSetsScope(String p_name) {
             super(p_name);
         }
 
@@ -731,7 +731,7 @@ public abstract class LogfileScope {
 
     private static class ExtendToWholeComponentsScope extends LogfileScope {
 
-        public ExtendToWholeComponentsScope(String p_name) {
+        ExtendToWholeComponentsScope(String p_name) {
             super(p_name);
         }
 
@@ -749,7 +749,7 @@ public abstract class LogfileScope {
 
     private static class ExtendToWholeNetsScope extends LogfileScope {
 
-        public ExtendToWholeNetsScope(String p_name) {
+        ExtendToWholeNetsScope(String p_name) {
             super(p_name);
         }
 
@@ -767,7 +767,7 @@ public abstract class LogfileScope {
 
     private static class ExtendToWholeConnectionsScope extends LogfileScope {
 
-        public ExtendToWholeConnectionsScope(String p_name) {
+        ExtendToWholeConnectionsScope(String p_name) {
             super(p_name);
         }
 
@@ -785,7 +785,7 @@ public abstract class LogfileScope {
 
     private static class FixSelectedScope extends LogfileScope {
 
-        public FixSelectedScope(String p_name) {
+        FixSelectedScope(String p_name) {
             super(p_name);
         }
 
@@ -802,7 +802,7 @@ public abstract class LogfileScope {
 
     private static class UnfixSelectedScope extends LogfileScope {
 
-        public UnfixSelectedScope(String p_name) {
+        UnfixSelectedScope(String p_name) {
             super(p_name);
         }
 
@@ -819,7 +819,7 @@ public abstract class LogfileScope {
 
     private static class CompleteScope extends LogfileScope {
 
-        public CompleteScope(String p_name) {
+        CompleteScope(String p_name) {
             super(p_name);
         }
 
@@ -831,7 +831,7 @@ public abstract class LogfileScope {
 
     private static class CancelScope extends LogfileScope {
 
-        public CancelScope(String p_name) {
+        CancelScope(String p_name) {
             super(p_name);
         }
 
@@ -843,7 +843,7 @@ public abstract class LogfileScope {
 
     private static class SetTraceHalfWidthScope extends LogfileScope {
 
-        public SetTraceHalfWidthScope(String p_name) {
+        SetTraceHalfWidthScope(String p_name) {
             super(p_name);
         }
 
@@ -858,7 +858,7 @@ public abstract class LogfileScope {
 
     private static class SetPullTightRegionWidthScope extends LogfileScope {
 
-        public SetPullTightRegionWidthScope(String p_name) {
+        SetPullTightRegionWidthScope(String p_name) {
             super(p_name);
         }
 
@@ -872,7 +872,7 @@ public abstract class LogfileScope {
 
     private static class SetPushEnabledScope extends LogfileScope {
 
-        public SetPushEnabledScope(String p_name) {
+        SetPushEnabledScope(String p_name) {
             super(p_name);
         }
 
@@ -886,7 +886,7 @@ public abstract class LogfileScope {
 
     private static class SetDragComponentsEnabledScope extends LogfileScope {
 
-        public SetDragComponentsEnabledScope(String p_name) {
+        SetDragComponentsEnabledScope(String p_name) {
             super(p_name);
         }
 
@@ -900,7 +900,7 @@ public abstract class LogfileScope {
 
     private static class SetPullTightAccuracyScope extends LogfileScope {
 
-        public SetPullTightAccuracyScope(String p_name) {
+        SetPullTightAccuracyScope(String p_name) {
             super(p_name);
         }
 
@@ -914,7 +914,7 @@ public abstract class LogfileScope {
 
     private static class SetIgnoreConductionScope extends LogfileScope {
 
-        public SetIgnoreConductionScope(String p_name) {
+        SetIgnoreConductionScope(String p_name) {
             super(p_name);
         }
 
@@ -928,7 +928,7 @@ public abstract class LogfileScope {
 
     private static class SetLayerScope extends LogfileScope {
 
-        public SetLayerScope(String p_name) {
+        SetLayerScope(String p_name) {
             super(p_name);
         }
 
@@ -942,7 +942,7 @@ public abstract class LogfileScope {
 
     private static class SetClearanceCompensationScope extends LogfileScope {
 
-        public SetClearanceCompensationScope(String p_name) {
+        SetClearanceCompensationScope(String p_name) {
             super(p_name);
         }
 
@@ -960,7 +960,7 @@ public abstract class LogfileScope {
 
     private static class SetManualTraceHalfWidthScope extends LogfileScope {
 
-        public SetManualTraceHalfWidthScope(String p_name) {
+        SetManualTraceHalfWidthScope(String p_name) {
             super(p_name);
         }
 
@@ -975,7 +975,7 @@ public abstract class LogfileScope {
 
     private static class SetManualTraceClearanceClassScope extends LogfileScope {
 
-        public SetManualTraceClearanceClassScope(String p_name) {
+        SetManualTraceClearanceClassScope(String p_name) {
             super(p_name);
         }
 
@@ -989,7 +989,7 @@ public abstract class LogfileScope {
 
     private static class SetManualTraceWidthSelectionScope extends LogfileScope {
 
-        public SetManualTraceWidthSelectionScope(String p_name) {
+        SetManualTraceWidthSelectionScope(String p_name) {
             super(p_name);
         }
 
@@ -1003,7 +1003,7 @@ public abstract class LogfileScope {
 
     private static class SetSnapAngleScope extends LogfileScope {
 
-        public SetSnapAngleScope(String p_name) {
+        SetSnapAngleScope(String p_name) {
             super(p_name);
         }
 
@@ -1017,7 +1017,7 @@ public abstract class LogfileScope {
 
     private static class SetSelectOnAllLayerScope extends LogfileScope {
 
-        public SetSelectOnAllLayerScope(String p_name) {
+        SetSelectOnAllLayerScope(String p_name) {
             super(p_name);
         }
 
@@ -1031,7 +1031,7 @@ public abstract class LogfileScope {
 
     private static class SetStitchRouteScope extends LogfileScope {
 
-        public SetStitchRouteScope(String p_name) {
+        SetStitchRouteScope(String p_name) {
             super(p_name);
         }
 
@@ -1045,7 +1045,7 @@ public abstract class LogfileScope {
 
     private static class SetSelectableScope extends LogfileScope {
 
-        public SetSelectableScope(String p_name) {
+        SetSelectableScope(String p_name) {
             super(p_name);
         }
 
@@ -1068,7 +1068,7 @@ public abstract class LogfileScope {
 
     private static class UndoScope extends LogfileScope {
 
-        public UndoScope(String p_name) {
+        UndoScope(String p_name) {
             super(p_name);
         }
 
@@ -1082,7 +1082,7 @@ public abstract class LogfileScope {
 
     private static class RedoScope extends LogfileScope {
 
-        public RedoScope(String p_name) {
+        RedoScope(String p_name) {
             super(p_name);
         }
 
@@ -1096,7 +1096,7 @@ public abstract class LogfileScope {
 
     private static class GenerateSnapshotScope extends LogfileScope {
 
-        public GenerateSnapshotScope(String p_name) {
+        GenerateSnapshotScope(String p_name) {
             super(p_name);
         }
 
@@ -1109,7 +1109,7 @@ public abstract class LogfileScope {
 
     private static class CenterDisplayScope extends LogfileScope {
 
-        public CenterDisplayScope(String p_name) {
+        CenterDisplayScope(String p_name) {
             super(p_name);
         }
 
@@ -1124,7 +1124,7 @@ public abstract class LogfileScope {
 
     private static class ZoomFrameScope extends LogfileScope {
 
-        public ZoomFrameScope(String p_name) {
+        ZoomFrameScope(String p_name) {
             super(p_name);
         }
 

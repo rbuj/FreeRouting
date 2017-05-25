@@ -47,7 +47,7 @@ public abstract class PrintableShape {
         /**
          * Creates a Circle from the input coordinates.
          */
-        public Circle(FloatPoint p_center, double p_radius) {
+        Circle(FloatPoint p_center, double p_radius) {
             center = p_center;
             radius = p_radius;
         }
@@ -75,7 +75,7 @@ public abstract class PrintableShape {
         public final FloatPoint lower_left;
         public final FloatPoint upper_right;
 
-        public Rectangle(FloatPoint p_lower_left, FloatPoint p_upper_right) {
+        Rectangle(FloatPoint p_lower_left, FloatPoint p_upper_right) {
             lower_left = p_lower_left;
             upper_right = p_upper_right;
         }
@@ -95,7 +95,7 @@ public abstract class PrintableShape {
 
         public final FloatPoint[] corner_arr;
 
-        public Polygon(FloatPoint[] p_corners) {
+        Polygon(FloatPoint[] p_corners) {
             corner_arr = p_corners;
         }
 

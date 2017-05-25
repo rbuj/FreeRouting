@@ -36,7 +36,7 @@ import net.freerouting.freeroute.rules.ViaRule;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowVia extends BoardSavableSubWindow {
+public final class WindowVia extends BoardSavableSubWindow {
 
     private static final int WINDOW_OFFSET = 30;
     private final BoardFrame board_frame;

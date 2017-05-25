@@ -444,7 +444,7 @@ public abstract class LocateFoundConnectionAlgo {
         public final IntPoint[] corners;
         public final int layer;
 
-        public ResultItem(IntPoint[] p_corners, int p_layer) {
+        ResultItem(IntPoint[] p_corners, int p_layer) {
             corners = p_corners;
             layer = p_layer;
         }

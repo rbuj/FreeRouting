@@ -31,7 +31,7 @@ import javax.help.HelpSetException;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class BoardMenuHelp extends BoardMenuHelpReduced {
+final class BoardMenuHelp extends BoardMenuHelpReduced {
 
     private static CSH.DisplayHelpFromSource contents_help = null;
     private static CSH.DisplayHelpAfterTracking direct_help = null;
@@ -41,7 +41,7 @@ public class BoardMenuHelp extends BoardMenuHelpReduced {
      * BoardMenuHelpReduced to avoid ClassNotFound exception when the library
      * jh.jar is not found, which is only used in this extended class.
      */
-    public BoardMenuHelp(BoardFrame p_board_frame) {
+    BoardMenuHelp(BoardFrame p_board_frame) {
         super(p_board_frame);
         this.initialize_help();
         javax.swing.JMenuItem direct_help_window = new javax.swing.JMenuItem();

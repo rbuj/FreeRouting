@@ -77,7 +77,7 @@ public abstract class BoardSavableSubWindow extends BoardSubWindow {
         public final Rectangle2D bounds;
         public final boolean is_visible;
 
-        public SavedAttributes(Rectangle2D p_bounds, boolean p_is_visible) {
+        SavedAttributes(Rectangle2D p_bounds, boolean p_is_visible) {
             bounds = p_bounds;
             is_visible = p_is_visible;
         }

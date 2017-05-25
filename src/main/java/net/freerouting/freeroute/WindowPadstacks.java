@@ -32,7 +32,7 @@ import net.freerouting.freeroute.library.Padstacks;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowPadstacks extends WindowObjectListWithFilter {
+public final class WindowPadstacks extends WindowObjectListWithFilter {
 
     /**
      * Creates a new instance of PadstacksWindow

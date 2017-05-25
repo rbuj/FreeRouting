@@ -728,7 +728,7 @@ public class Sorted45DegreeRoomNeighbours {
          * this.last_touching_side will be -1, if sorting did not work because
          * the room_shape is contained in the neighbour shape.
          */
-        public SortedRoomNeighbour(IntOctagon p_neighbour_shape, IntOctagon p_intersection) {
+        SortedRoomNeighbour(IntOctagon p_neighbour_shape, IntOctagon p_intersection) {
             shape = p_neighbour_shape;
             intersection = p_intersection;
 

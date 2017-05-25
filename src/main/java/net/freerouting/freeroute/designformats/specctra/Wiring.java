@@ -299,7 +299,7 @@ class Wiring extends ScopeKeyword {
     /**
      * Creates a new instance of Wiring
      */
-    public Wiring() {
+    Wiring() {
         super("wiring");
     }
 

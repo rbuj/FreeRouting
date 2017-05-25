@@ -28,7 +28,7 @@ import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class BoardMenuHelpReduced extends javax.swing.JMenu {
+class BoardMenuHelpReduced extends javax.swing.JMenu {
 
     protected final BoardFrame board_frame;
     protected final java.util.ResourceBundle resources;
@@ -38,7 +38,7 @@ public class BoardMenuHelpReduced extends javax.swing.JMenu {
      * BoardMenuHelp to avoid ClassNotFound exception when the library jh.jar is
      * not found, which is only used in the extended help menu.
      */
-    public BoardMenuHelpReduced(BoardFrame p_board_frame) {
+    BoardMenuHelpReduced(BoardFrame p_board_frame) {
         this.board_frame = p_board_frame;
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuHelp", Locale.getDefault());
         this.setText(this.resources.getString("help"));

@@ -20,12 +20,12 @@ package net.freerouting.freeroute;
  *
  * @author robert
  */
-public class ClearanceClass {
+final class ClearanceClass {
 
-    public final String name;
-    public final int index;
+    final String name;
+    final int index;
 
-    public ClearanceClass(String p_name, int p_index) {
+    ClearanceClass(String p_name, int p_index) {
         this.name = p_name;
         this.index = p_index;
     }

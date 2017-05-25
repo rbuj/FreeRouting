@@ -29,7 +29,7 @@ import net.freerouting.freeroute.board.LayerStructure;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class ComboBoxLayer extends javax.swing.JComboBox<Layer> {
+public final class ComboBoxLayer extends javax.swing.JComboBox<Layer> {
 
     /**
      * The layer index, when all layers are selected.

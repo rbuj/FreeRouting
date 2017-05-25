@@ -35,7 +35,7 @@ class PullTightAlgo90 extends PullTightAlgo {
     /**
      * Creates a new instance of PullTight90
      */
-    public PullTightAlgo90(RoutingBoard p_board, int[] p_only_net_no_arr, Stoppable p_stoppable_thread, int p_time_limit,
+    PullTightAlgo90(RoutingBoard p_board, int[] p_only_net_no_arr, Stoppable p_stoppable_thread, int p_time_limit,
             Point p_keep_point, int p_keep_point_layer) {
         super(p_board, p_only_net_no_arr, p_stoppable_thread, p_time_limit, p_keep_point, p_keep_point_layer);
     }

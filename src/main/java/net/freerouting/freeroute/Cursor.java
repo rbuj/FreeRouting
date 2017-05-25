@@ -77,7 +77,7 @@ public abstract class Cursor {
         location_initialized = true;
     }
 
-    private static class FortyfiveDegreeCrossHairCursor extends Cursor {
+    private final static class FortyfiveDegreeCrossHairCursor extends Cursor {
 
         static final GeneralPath DRAW_PATH = new GeneralPath(Path2D.WIND_EVEN_ODD);
         static {

@@ -22,7 +22,7 @@ package net.freerouting.freeroute;
  * {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  */
 @SuppressWarnings("serial")
-public class BoardMenuFileException extends Exception {
+public final class BoardMenuFileException extends Exception {
 
     /**
      * Creates a new instance of <code>BoardMenuFileException</code> without

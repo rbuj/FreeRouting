@@ -28,7 +28,7 @@ import java.util.Locale;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowMoveParameter extends BoardSavableSubWindow {
+public final class WindowMoveParameter extends BoardSavableSubWindow {
 
     private final net.freerouting.freeroute.interactive.BoardHandling board_handling;
     private final javax.swing.JFormattedTextField horizontal_grid_field;

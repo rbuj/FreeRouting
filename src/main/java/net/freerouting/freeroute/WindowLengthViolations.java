@@ -33,7 +33,7 @@ import net.freerouting.freeroute.rules.Nets;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class WindowLengthViolations extends WindowObjectListWithFilter {
+public final class WindowLengthViolations extends WindowObjectListWithFilter {
 
     private final java.util.ResourceBundle resources;
 
