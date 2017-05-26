@@ -291,7 +291,7 @@ public class DsnFile {
             String result = (String) next_token;
             next_token = p_scanner.next_token();
             if (next_token != Keyword.CLOSED_BRACKET) {
-                System.out.println("DsnFile.read_string_scope: closing bracket expected");
+                throw new DsnFileException("DsnFile.read_string_scope: closing bracket expected");
             }
             return result;
         } catch (java.io.IOException exc) {
