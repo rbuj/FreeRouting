@@ -65,12 +65,4 @@ public class DefaultItemClearanceClasses implements java.io.Serializable {
     public void set_all(int p_index) {
         Arrays.fill(arr, p_index);
     }
-
-    /**
-     * Used in the function get_default_clearance_class to get the default
-     * claearance classes for item classes.
-     */
-    public enum ItemClass {
-        NONE, TRACE, VIA, PIN, SMD, AREA;
-    }
 }

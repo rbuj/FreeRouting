@@ -59,7 +59,7 @@ public class PartLibrary extends ScopeKeyword {
             p_par.file.new_line();
             for (int j = 0; j < curr_part.pin_count(); ++j) {
                 p_par.file.new_line();
-                net.freerouting.freeroute.library.LogicalPart.PartPin curr_pin = curr_part.get_pin(j);
+                net.freerouting.freeroute.library.PartPin curr_pin = curr_part.get_pin(j);
                 p_par.file.write("(pin ");
                 p_par.identifier_type.write(curr_pin.pin_name, p_par.file);
                 p_par.file.write(" 0 ");

@@ -628,8 +628,8 @@ public class GUIDefaultsFile {
     private void write_deselected_snapshot_attributes() throws java.io.IOException {
         SnapshotAttributes attributes = this.board_handling.settings.get_snapshot_attributes();
         out_file.start_scope("deselected_snapshot_attributes ");
-        for (SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY key : SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.values()) {
-            if (key != SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.INFO_LIST_SELECTIONS && !attributes.get(key)) {
+        for (SnapshotAttributeKey key : SnapshotAttributeKey.values()) {
+            if (key != SnapshotAttributeKey.INFO_LIST_SELECTIONS && !attributes.get(key)) {
                 out_file.new_line();
                 out_file.write(key.name().toLowerCase(Locale.ENGLISH) + " ");
             }
@@ -645,7 +645,7 @@ public class GUIDefaultsFile {
                 break;
             }
             try {
-                attributes.set(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.valueOf(next_token.toString()), Boolean.FALSE);
+                attributes.set(SnapshotAttributeKey.valueOf(next_token.toString()), Boolean.FALSE);
             } catch (IllegalArgumentException | NullPointerException ex) {
                 throw new GUIDefaultsFileException("Unexpected token");
             }

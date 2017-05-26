@@ -404,7 +404,7 @@ public class Pin extends DrillItem {
         if (logical_part == null) {
             return result;
         }
-        net.freerouting.freeroute.library.LogicalPart.PartPin this_part_pin = logical_part.get_pin(this.pin_no);
+        net.freerouting.freeroute.library.PartPin this_part_pin = logical_part.get_pin(this.pin_no);
         if (this_part_pin == null) {
             return result;
         }
@@ -416,7 +416,7 @@ public class Pin extends DrillItem {
             if (i == this.pin_no) {
                 continue;
             }
-            net.freerouting.freeroute.library.LogicalPart.PartPin curr_part_pin = logical_part.get_pin(i);
+            net.freerouting.freeroute.library.PartPin curr_part_pin = logical_part.get_pin(i);
             if (curr_part_pin != null && curr_part_pin.gate_pin_swap_code == this_part_pin.gate_pin_swap_code
                     && curr_part_pin.gate_name.equals(this_part_pin.gate_name)) {
                 Pin curr_swappeble_pin = this.board.get_pin(this.get_component_no(), curr_part_pin.pin_no);

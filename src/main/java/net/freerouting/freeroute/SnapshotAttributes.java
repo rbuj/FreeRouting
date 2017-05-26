@@ -24,19 +24,11 @@ import java.util.EnumMap;
  */
 public final class SnapshotAttributes {
 
-    public enum SNAPSHOT_ATTRIBUTE_KEY {
-        OBJECT_COLORS, OBJECT_VISIBILITY, LAYER_VISIBILITY, DISPLAY_REGION,
-        INTERACTIVE_STATE, SELECTION_LAYERS, SELECTABLE_ITEMS, CURRENT_LAYER,
-        RULE_SELECTION, MANUAL_RULE_SETTINGS, PUSH_AND_SHOVE_ENABLED,
-        DRAG_COMPONENTS_ENABLED, PULL_TIGHT_REGION, COMPONENT_GRID,
-        INFO_LIST_SELECTIONS
-    }
-
-    EnumMap<SNAPSHOT_ATTRIBUTE_KEY, Boolean> snapshot_attributes_map;
+    EnumMap<SnapshotAttributeKey, Boolean> snapshot_attributes_map;
 
     public SnapshotAttributes() {
-        snapshot_attributes_map = new EnumMap<>(SNAPSHOT_ATTRIBUTE_KEY.class);
-        for (SNAPSHOT_ATTRIBUTE_KEY key : SNAPSHOT_ATTRIBUTE_KEY.values()) {
+        snapshot_attributes_map = new EnumMap<>(SnapshotAttributeKey.class);
+        for (SnapshotAttributeKey key : SnapshotAttributeKey.values()) {
             snapshot_attributes_map.put(key, Boolean.TRUE);
         }
     }
@@ -45,16 +37,16 @@ public final class SnapshotAttributes {
         snapshot_attributes_map = p_snapshot_attributes.clone_map();
     }
 
-    public boolean get(SNAPSHOT_ATTRIBUTE_KEY key) {
+    public boolean get(SnapshotAttributeKey key) {
         return snapshot_attributes_map.get(key);
     }
 
-    public void set(SNAPSHOT_ATTRIBUTE_KEY key, boolean value) {
+    public void set(SnapshotAttributeKey key, boolean value) {
         snapshot_attributes_map.replace(key, value);
     }
 
-    public EnumMap<SNAPSHOT_ATTRIBUTE_KEY, Boolean> clone_map() {
-        EnumMap<SNAPSHOT_ATTRIBUTE_KEY, Boolean> p_snapshot_attributes_map = new EnumMap<>(snapshot_attributes_map);
+    public EnumMap<SnapshotAttributeKey, Boolean> clone_map() {
+        EnumMap<SnapshotAttributeKey, Boolean> p_snapshot_attributes_map = new EnumMap<>(snapshot_attributes_map);
         return p_snapshot_attributes_map;
     }
 }

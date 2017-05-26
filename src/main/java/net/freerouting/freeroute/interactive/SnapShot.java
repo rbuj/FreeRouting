@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.interactive;
 
+import net.freerouting.freeroute.SnapshotAttributeKey;
 import net.freerouting.freeroute.SnapshotAttributes;
 import net.freerouting.freeroute.SubwindowSelections;
 
@@ -95,51 +96,51 @@ public class SnapShot implements java.io.Serializable {
     public void go_to(net.freerouting.freeroute.interactive.BoardHandling p_board_handling) {
         SnapshotAttributes snapshot_attributes = this.settings.snapshot_attributes;
 
-        if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.OBJECT_VISIBILITY)) {
+        if (snapshot_attributes.get(SnapshotAttributeKey.OBJECT_VISIBILITY)) {
             p_board_handling.graphics_context.color_intensity_table
                     = new net.freerouting.freeroute.boardgraphics.ColorIntensityTable(this.graphics_context.color_intensity_table);
         }
-        if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.LAYER_VISIBILITY)) {
+        if (snapshot_attributes.get(SnapshotAttributeKey.LAYER_VISIBILITY)) {
             p_board_handling.graphics_context.set_layer_visibility_arr(this.graphics_context.copy_layer_visibility_arr());
         }
 
-        if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.INTERACTIVE_STATE)) {
+        if (snapshot_attributes.get(SnapshotAttributeKey.INTERACTIVE_STATE)) {
             p_board_handling.set_interactive_state(this.get_interactive_state(p_board_handling, p_board_handling.logfile));
         }
-        if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.SELECTION_LAYERS)) {
+        if (snapshot_attributes.get(SnapshotAttributeKey.SELECTION_LAYERS)) {
             p_board_handling.settings.select_on_all_visible_layers = this.settings.select_on_all_visible_layers;
         }
-        if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.SELECTABLE_ITEMS)) {
+        if (snapshot_attributes.get(SnapshotAttributeKey.SELECTABLE_ITEMS)) {
             p_board_handling.settings.item_selection_filter
                     = new net.freerouting.freeroute.board.ItemSelectionFilter(this.settings.item_selection_filter);
         }
-        if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.CURRENT_LAYER)) {
+        if (snapshot_attributes.get(SnapshotAttributeKey.CURRENT_LAYER)) {
             p_board_handling.settings.layer = this.settings.layer;
         }
-        if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.RULE_SELECTION)) {
+        if (snapshot_attributes.get(SnapshotAttributeKey.RULE_SELECTION)) {
             p_board_handling.settings.manual_rule_selection = this.settings.manual_rule_selection;
         }
-        if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.MANUAL_RULE_SETTINGS)) {
+        if (snapshot_attributes.get(SnapshotAttributeKey.MANUAL_RULE_SETTINGS)) {
             p_board_handling.settings.manual_trace_clearance_class = this.settings.manual_trace_clearance_class;
             p_board_handling.settings.manual_via_rule_index = this.settings.manual_via_rule_index;
             System.arraycopy(this.settings.manual_trace_half_width_arr, 0,
                     p_board_handling.settings.manual_trace_half_width_arr, 0,
                     p_board_handling.settings.manual_trace_half_width_arr.length);
         }
-        if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.PUSH_AND_SHOVE_ENABLED)) {
+        if (snapshot_attributes.get(SnapshotAttributeKey.PUSH_AND_SHOVE_ENABLED)) {
             p_board_handling.settings.push_enabled = this.settings.push_enabled;
         }
-        if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.DRAG_COMPONENTS_ENABLED)) {
+        if (snapshot_attributes.get(SnapshotAttributeKey.DRAG_COMPONENTS_ENABLED)) {
             p_board_handling.settings.drag_components_enabled = this.settings.drag_components_enabled;
         }
-        if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.PULL_TIGHT_REGION)) {
+        if (snapshot_attributes.get(SnapshotAttributeKey.PULL_TIGHT_REGION)) {
             p_board_handling.settings.trace_pull_tight_region_width = this.settings.trace_pull_tight_region_width;
         }
-        if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.COMPONENT_GRID)) {
+        if (snapshot_attributes.get(SnapshotAttributeKey.COMPONENT_GRID)) {
             p_board_handling.settings.horizontal_component_grid = this.settings.horizontal_component_grid;
             p_board_handling.settings.vertical_component_grid = this.settings.vertical_component_grid;
         }
-        if (snapshot_attributes.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.INFO_LIST_SELECTIONS)) {
+        if (snapshot_attributes.get(SnapshotAttributeKey.INFO_LIST_SELECTIONS)) {
             p_board_handling.get_panel().board_frame.set_snapshot_subwindow_selections(this.subwindow_filters);
         }
     }

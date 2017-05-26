@@ -40,6 +40,7 @@ import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.Line;
 import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.Polyline;
+import net.freerouting.freeroute.rules.ItemClass;
 
 /**
  * Class for reading and writing wiring scopes from dsn-files.
@@ -439,7 +440,7 @@ class Wiring extends ScopeKeyword {
         if (border_shape != null) {
             if (clearance_class_no < 0) {
                 clearance_class_no
-                        = net_class.default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.AREA);
+                        = net_class.default_item_clearance_classes.get(ItemClass.AREA);
             }
             Collection<Shape> area = new LinkedList<>();
             area.add(border_shape);
@@ -451,7 +452,7 @@ class Wiring extends ScopeKeyword {
         } else if (path instanceof PolygonPath) {
             if (clearance_class_no < 0) {
                 clearance_class_no
-                        = net_class.default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.TRACE);
+                        = net_class.default_item_clearance_classes.get(ItemClass.TRACE);
             }
             IntPoint[] corner_arr = new IntPoint[path.coordinate_arr.length / 2];
             double[] curr_point = new double[2];
@@ -470,7 +471,7 @@ class Wiring extends ScopeKeyword {
         } else if (path instanceof PolylinePath) {
             if (clearance_class_no < 0) {
                 clearance_class_no
-                        = net_class.default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.TRACE);
+                        = net_class.default_item_clearance_classes.get(ItemClass.TRACE);
             }
             Line[] line_arr = new Line[path.coordinate_arr.length / 4];
             double[] curr_point = new double[2];
@@ -585,7 +586,7 @@ class Wiring extends ScopeKeyword {
                 clearance_class_no = board.rules.clearance_matrix.get_no(clearance_class_name);
             }
             if (clearance_class_no < 0) {
-                clearance_class_no = net_class.default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.VIA);
+                clearance_class_no = net_class.default_item_clearance_classes.get(ItemClass.VIA);
             }
             IntPoint board_location = p_par.coordinate_transform.dsn_to_board(location).round();
             if (via_exists(board_location, curr_padstack, net_no_arr, board)) {

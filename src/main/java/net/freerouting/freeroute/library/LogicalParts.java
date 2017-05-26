@@ -40,7 +40,7 @@ public class LogicalParts implements java.io.Serializable, Iterable<LogicalPart>
     /**
      * Adds a logical part to the database.
      */
-    public LogicalPart add(String p_name, LogicalPart.PartPin[] p_part_pin_arr) {
+    public LogicalPart add(String p_name, PartPin[] p_part_pin_arr) {
         java.util.Arrays.parallelSort(p_part_pin_arr);
         LogicalPart new_part = new LogicalPart(p_name, part_arr.size() + 1, p_part_pin_arr);
         part_arr.add(new_part);

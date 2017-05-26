@@ -32,7 +32,7 @@ import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.PointUtils;
 import net.freerouting.freeroute.geometry.planar.Vector;
 import net.freerouting.freeroute.rules.BoardRules;
-import net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass;
+import net.freerouting.freeroute.rules.ItemClass;
 import net.freerouting.freeroute.rules.ViaInfo;
 
 /**
@@ -319,7 +319,7 @@ public class Network extends ScopeKeyword {
     }
 
     private static void create_default_via_infos(net.freerouting.freeroute.board.BasicBoard p_board, net.freerouting.freeroute.rules.NetClass p_net_class, boolean p_attach_allowed) {
-        int cl_class = p_net_class.default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.VIA);
+        int cl_class = p_net_class.default_item_clearance_classes.get(ItemClass.VIA);
         boolean is_default_class = (p_net_class == p_board.rules.get_default_net_class());
         for (int i = 0; i < p_board.library.via_padstack_count(); ++i) {
             net.freerouting.freeroute.library.Padstack curr_padstack = p_board.library.get_via_padstack(i);
@@ -602,7 +602,7 @@ public class Network extends ScopeKeyword {
 
     private static void create_via_rule(Collection<String> p_use_via, net.freerouting.freeroute.rules.NetClass p_net_class, net.freerouting.freeroute.board.BasicBoard p_board) {
         net.freerouting.freeroute.rules.ViaRule new_via_rule = new net.freerouting.freeroute.rules.ViaRule(p_net_class.get_name());
-        int default_via_cl_class = p_net_class.default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.VIA);
+        int default_via_cl_class = p_net_class.default_item_clearance_classes.get(ItemClass.VIA);
         for (String curr_via_name : p_use_via) {
             for (ViaInfo curr_via_info : p_board.rules.via_infos) {
                 if (curr_via_info.get_clearance_class() == default_via_cl_class) {
@@ -760,8 +760,8 @@ public class Network extends ScopeKeyword {
             if (lib_package == null) {
                 return false;
             }
-            net.freerouting.freeroute.library.LogicalPart.PartPin[] board_part_pins
-                    = new net.freerouting.freeroute.library.LogicalPart.PartPin[next_part.part_pins.size()];
+            net.freerouting.freeroute.library.PartPin[] board_part_pins
+                    = new net.freerouting.freeroute.library.PartPin[next_part.part_pins.size()];
             int curr_index = 0;
             for (PartLibrary.PartPin curr_part_pin : next_part.part_pins) {
                 int pin_no = lib_package.get_pin_no(curr_part_pin.pin_name);
@@ -770,7 +770,7 @@ public class Network extends ScopeKeyword {
                     return false;
                 }
                 board_part_pins[curr_index]
-                        = new net.freerouting.freeroute.library.LogicalPart.PartPin(pin_no, curr_part_pin.pin_name,
+                        = new net.freerouting.freeroute.library.PartPin(pin_no, curr_part_pin.pin_name,
                                 curr_part_pin.gate_name, curr_part_pin.gate_swap_code,
                                 curr_part_pin.gate_pin_name, curr_part_pin.gate_pin_swap_code);
                 ++curr_index;
@@ -906,9 +906,9 @@ public class Network extends ScopeKeyword {
             }
             if (clearance_class < 0) {
                 if (curr_padstack.from_layer() == curr_padstack.to_layer()) {
-                    clearance_class = net_class.default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.SMD);
+                    clearance_class = net_class.default_item_clearance_classes.get(ItemClass.SMD);
                 } else {
-                    clearance_class = net_class.default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.PIN);
+                    clearance_class = net_class.default_item_clearance_classes.get(ItemClass.PIN);
                 }
             }
             routing_board.insert_pin(new_component.no, i, net_no_arr, clearance_class, fixed_state);
@@ -943,7 +943,7 @@ public class Network extends ScopeKeyword {
                     layer = routing_board.get_layer_count() - curr_keepout.layer - 1;
                 }
                 int clearance_class
-                        = routing_board.rules.get_default_net_class().default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.AREA);
+                        = routing_board.rules.get_default_net_class().default_item_clearance_classes.get(ItemClass.AREA);
                 ComponentPlacement.ItemClearanceInfo keepout_info = curr_keepout_infos.get(curr_keepout.name);
                 if (keepout_info != null) {
                     int curr_clearance_class = routing_board.rules.clearance_matrix.get_no(keepout_info.clearance_class);

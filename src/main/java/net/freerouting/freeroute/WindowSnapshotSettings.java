@@ -34,7 +34,7 @@ public final class WindowSnapshotSettings extends BoardSavableSubWindow {
 
     private final net.freerouting.freeroute.interactive.BoardHandling board_handling;
 
-    EnumMap<SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY, javax.swing.JCheckBox> snapshot_attributes_map;
+    EnumMap<SnapshotAttributeKey, javax.swing.JCheckBox> snapshot_attributes_map;
 
     /**
      * Creates a new instance of WindowSnapshotSettings
@@ -56,59 +56,59 @@ public final class WindowSnapshotSettings extends BoardSavableSubWindow {
         gridbag_constraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridbag_constraints.insets = new java.awt.Insets(1, 10, 1, 10);
 
-        snapshot_attributes_map = new EnumMap<>(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.class);
-        for (SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY key : SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.values()) {
+        snapshot_attributes_map = new EnumMap<>(SnapshotAttributeKey.class);
+        for (SnapshotAttributeKey key : SnapshotAttributeKey.values()) {
             JCheckBox check_box = new JCheckBox(resources.getString(key.name().toLowerCase(Locale.ENGLISH)));
             gridbag.setConstraints(check_box, gridbag_constraints);
             check_box.setActionCommand(key.name());
             snapshot_attributes_map.put(key, check_box);
         }
 
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.OBJECT_COLORS), gridbag_constraints);
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.OBJECT_VISIBILITY), gridbag_constraints);
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.LAYER_VISIBILITY), gridbag_constraints);
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.DISPLAY_REGION), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.OBJECT_COLORS), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.OBJECT_VISIBILITY), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.LAYER_VISIBILITY), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.DISPLAY_REGION), gridbag_constraints);
 
         javax.swing.JLabel separator = new javax.swing.JLabel("  ----------------------------------------  ");
         gridbag.setConstraints(separator, gridbag_constraints);
         main_panel.add(separator, gridbag_constraints);
 
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.INTERACTIVE_STATE), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.INTERACTIVE_STATE), gridbag_constraints);
 
         separator = new javax.swing.JLabel("  ----------------------------------------  ");
         gridbag.setConstraints(separator, gridbag_constraints);
         main_panel.add(separator, gridbag_constraints);
 
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.SELECTION_LAYERS), gridbag_constraints);
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.SELECTABLE_ITEMS), gridbag_constraints);
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.CURRENT_LAYER), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.SELECTION_LAYERS), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.SELECTABLE_ITEMS), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.CURRENT_LAYER), gridbag_constraints);
 
         separator = new javax.swing.JLabel("  ----------------------------------------  ");
         gridbag.setConstraints(separator, gridbag_constraints);
         main_panel.add(separator, gridbag_constraints);
 
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.RULE_SELECTION), gridbag_constraints);
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.MANUAL_RULE_SETTINGS), gridbag_constraints);
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.PUSH_AND_SHOVE_ENABLED), gridbag_constraints);
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.DRAG_COMPONENTS_ENABLED), gridbag_constraints);
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.PULL_TIGHT_REGION), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.RULE_SELECTION), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.MANUAL_RULE_SETTINGS), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.PUSH_AND_SHOVE_ENABLED), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.DRAG_COMPONENTS_ENABLED), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.PULL_TIGHT_REGION), gridbag_constraints);
 
         separator = new javax.swing.JLabel("  ----------------------------------------  ");
         gridbag.setConstraints(separator, gridbag_constraints);
         main_panel.add(separator, gridbag_constraints);
 
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.COMPONENT_GRID), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.COMPONENT_GRID), gridbag_constraints);
 
         separator = new javax.swing.JLabel("  ----------------------------------------  ");
         gridbag.setConstraints(separator, gridbag_constraints);
         main_panel.add(separator, gridbag_constraints);
 
-        main_panel.add(snapshot_attributes_map.get(SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.INFO_LIST_SELECTIONS), gridbag_constraints);
+        main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.INFO_LIST_SELECTIONS), gridbag_constraints);
 
         p_board_frame.set_context_sensitive_help(this, "WindowSnapshots_SnapshotSettings");
 
         CheckBoxListener checkBoxListener = new CheckBoxListener();
-        for (SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY key : SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.values()) {
+        for (SnapshotAttributeKey key : SnapshotAttributeKey.values()) {
             snapshot_attributes_map.get(key).addActionListener(checkBoxListener);
         }
 
@@ -123,7 +123,7 @@ public final class WindowSnapshotSettings extends BoardSavableSubWindow {
     @Override
     public void refresh() {
         SnapshotAttributes snapshot_attributes = this.board_handling.settings.get_snapshot_attributes();
-        for (SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY key : SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.values()) {
+        for (SnapshotAttributeKey key : SnapshotAttributeKey.values()) {
             snapshot_attributes_map.get(key).setSelected(snapshot_attributes.get(key));
         }
     }
@@ -132,8 +132,8 @@ public final class WindowSnapshotSettings extends BoardSavableSubWindow {
 
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
-            SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY key
-                    = SnapshotAttributes.SNAPSHOT_ATTRIBUTE_KEY.valueOf(p_evt.getActionCommand());
+            SnapshotAttributeKey key
+                    = SnapshotAttributeKey.valueOf(p_evt.getActionCommand());
             board_handling.settings.get_snapshot_attributes().set(
                     key, snapshot_attributes_map.get(key).isSelected());
         }

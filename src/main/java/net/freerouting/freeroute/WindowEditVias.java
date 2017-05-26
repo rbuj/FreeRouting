@@ -21,6 +21,7 @@ package net.freerouting.freeroute;
 
 import java.util.Locale;
 import net.freerouting.freeroute.rules.BoardRules;
+import net.freerouting.freeroute.rules.ItemClass;
 import net.freerouting.freeroute.rules.ViaInfo;
 import net.freerouting.freeroute.rules.ViaInfos;
 
@@ -151,7 +152,7 @@ public final class WindowEditVias extends BoardSavableSubWindow {
             }
             net.freerouting.freeroute.rules.NetClass default_net_class = routing_board.rules.get_default_net_class();
             ViaInfo new_via = new ViaInfo(new_name, routing_board.library.get_via_padstack(0),
-                    default_net_class.default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.VIA),
+                    default_net_class.default_item_clearance_classes.get(ItemClass.VIA),
                     false, routing_board.rules);
             via_infos.add(new_via);
             adjust_table();

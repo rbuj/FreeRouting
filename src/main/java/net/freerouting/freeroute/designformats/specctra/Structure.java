@@ -35,7 +35,7 @@ import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.PolylineShape;
 import net.freerouting.freeroute.geometry.planar.TileShape;
 import net.freerouting.freeroute.rules.BoardRules;
-import net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass;
+import net.freerouting.freeroute.rules.ItemClass;
 import net.freerouting.freeroute.rules.ViaInfo;
 
 /**
@@ -713,7 +713,7 @@ class Structure extends ScopeKeyword {
         int clearance_class_no;
         if (p_clearance_class_name == null) {
             clearance_class_no
-                    = p_board.rules.get_default_net_class().default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.AREA);
+                    = p_board.rules.get_default_net_class().default_item_clearance_classes.get(ItemClass.AREA);
         } else {
             clearance_class_no = p_board.rules.clearance_matrix.get_no(p_clearance_class_name);
             if (clearance_class_no < 0) {
@@ -940,7 +940,7 @@ class Structure extends ScopeKeyword {
                         clearance_class_no = BoardRules.clearance_class_none();
                     }
                 } else {
-                    clearance_class_no = curr_net.get_class().default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.AREA);
+                    clearance_class_no = curr_net.get_class().default_item_clearance_classes.get(ItemClass.AREA);
                 }
                 int[] net_numbers = new int[1];
                 net_numbers[0] = curr_net.net_number;

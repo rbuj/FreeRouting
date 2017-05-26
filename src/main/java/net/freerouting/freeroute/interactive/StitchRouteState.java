@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.interactive;
 
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
+import net.freerouting.freeroute.rules.ItemClass;
 
 /**
  * State for interactive routing by adding corners with the left mouse button.
@@ -80,7 +81,7 @@ public class StitchRouteState extends RouteState {
         int clearance_draw_width = 50;
         double radius_with_clearance = display_width;
         net.freerouting.freeroute.rules.NetClass default_net_class = hdlg.get_routing_board().rules.get_default_net_class();
-        int cl_class = default_net_class.default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.TRACE);
+        int cl_class = default_net_class.default_item_clearance_classes.get(ItemClass.TRACE);
         radius_with_clearance += hdlg.get_routing_board().clearance_value(cl_class, cl_class, hdlg.settings.layer);
         hdlg.graphics_context.draw(draw_points, display_width, draw_color, p_graphics, 0.5);
         // draw the clearance boundary around the end point

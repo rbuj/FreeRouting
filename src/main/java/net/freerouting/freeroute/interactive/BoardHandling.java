@@ -53,6 +53,7 @@ import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.PolylineShape;
 import net.freerouting.freeroute.rules.BoardRules;
+import net.freerouting.freeroute.rules.ItemClass;
 
 /**
  *
@@ -571,7 +572,7 @@ public class BoardHandling {
                 outline_cl_class_no = Math.max(outline_cl_class_no, 0);
             } else {
                 outline_cl_class_no
-                        = p_rules.get_default_net_class().default_item_clearance_classes.get(net.freerouting.freeroute.rules.DefaultItemClearanceClasses.ItemClass.AREA);
+                        = p_rules.get_default_net_class().default_item_clearance_classes.get(ItemClass.AREA);
             }
         }
         this.board

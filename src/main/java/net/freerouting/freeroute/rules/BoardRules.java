@@ -204,7 +204,7 @@ public class BoardRules implements java.io.Serializable {
         }
         // Add the rule  containing all vias.
         ViaRule default_rule = new ViaRule(p_name);
-        int default_via_cl_class = p_net_class.default_item_clearance_classes.get(DefaultItemClearanceClasses.ItemClass.VIA);
+        int default_via_cl_class = p_net_class.default_item_clearance_classes.get(ItemClass.VIA);
         for (ViaInfo curr_via_info : this.via_infos) {
             if (curr_via_info.get_clearance_class() == default_via_cl_class) {
                 net.freerouting.freeroute.library.Padstack curr_padstack = curr_via_info.get_padstack();
@@ -305,7 +305,7 @@ public class BoardRules implements java.io.Serializable {
             if (curr_net_class.get_trace_clearance_class() == p_from_no) {
                 curr_net_class.set_trace_clearance_class(p_to_no);
             }
-            for (DefaultItemClearanceClasses.ItemClass curr_item_class : DefaultItemClearanceClasses.ItemClass.values()) {
+            for (ItemClass curr_item_class : ItemClass.values()) {
                 if (curr_net_class.default_item_clearance_classes.get(curr_item_class) == p_from_no) {
                     curr_net_class.default_item_clearance_classes.set(curr_item_class, p_to_no);
                 }
@@ -334,7 +334,7 @@ public class BoardRules implements java.io.Serializable {
             if (curr_net_class.get_trace_clearance_class() == p_index) {
                 return false;
             }
-            for (DefaultItemClearanceClasses.ItemClass curr_item_class : DefaultItemClearanceClasses.ItemClass.values()) {
+            for (ItemClass curr_item_class : ItemClass.values()) {
                 if (curr_net_class.default_item_clearance_classes.get(curr_item_class) == p_index) {
                     return false;
                 }
@@ -358,7 +358,7 @@ public class BoardRules implements java.io.Serializable {
             if (curr_net_class.get_trace_clearance_class() > p_index) {
                 curr_net_class.set_trace_clearance_class(curr_net_class.get_trace_clearance_class() - 1);
             }
-            for (DefaultItemClearanceClasses.ItemClass curr_item_class : DefaultItemClearanceClasses.ItemClass.values()) {
+            for (ItemClass curr_item_class : ItemClass.values()) {
                 int curr_class_no = curr_net_class.default_item_clearance_classes.get(curr_item_class);
                 if (curr_class_no > p_index) {
                     curr_net_class.default_item_clearance_classes.set(curr_item_class, curr_class_no - 1);
