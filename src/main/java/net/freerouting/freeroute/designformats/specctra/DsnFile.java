@@ -251,7 +251,6 @@ public class DsnFile {
             }
             next_token = p_scanner.next_token();
             if (next_token != Keyword.CLOSED_BRACKET) {
-                System.out.println("DsnFile.read_integer_scope: closing bracket expected");
                 throw new DsnFileException("DsnFile.read_integer_scope: closing bracket expected");
             }
             return value;
