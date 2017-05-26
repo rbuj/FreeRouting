@@ -19,8 +19,6 @@ package net.freerouting.freeroute;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,7 +29,6 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javax.swing.SwingUtilities;
 import net.freerouting.freeroute.board.TestLevel;
-import net.freerouting.freeroute.designformats.specctra.DsnFileException;
 
 /**
  * FXML Controller class

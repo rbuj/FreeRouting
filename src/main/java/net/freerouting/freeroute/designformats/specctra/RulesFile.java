@@ -20,8 +20,6 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.freerouting.freeroute.board.BasicBoard;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 

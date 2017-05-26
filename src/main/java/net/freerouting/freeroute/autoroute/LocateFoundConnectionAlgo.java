@@ -439,7 +439,7 @@ public abstract class LocateFoundConnectionAlgo {
         return shrinked_room_shape.nearest_point_approx(this.current_from_point).round().to_float();
     }
 
-    protected static class ResultItem {
+    final static class ResultItem {
 
         public final IntPoint[] corners;
         public final int layer;
@@ -450,7 +450,7 @@ public abstract class LocateFoundConnectionAlgo {
         }
     }
 
-    protected static class BacktrackElement {
+    final static class BacktrackElement {
 
         public final ExpandableObject door;
         public final int section_no_of_door;

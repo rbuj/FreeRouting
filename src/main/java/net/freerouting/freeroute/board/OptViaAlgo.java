@@ -418,7 +418,7 @@ public class OptViaAlgo {
             return reposition_via(p_board, p_via, rounded_first_trace_from_corner,
                     p_second_trace_half_width, p_second_trace_layer, p_second_trace_cl_class);
         }
-        Point result = null;
+        Point result;
 
         double curr_weighted_distance_1
                 = float_via_location.weighted_distance(float_first_trace_from_corner, p_first_trace_costs.horizontal,
