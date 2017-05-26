@@ -4,6 +4,7 @@ ToDo
 	* Write all documentation in docbook format
 
 xxxx-xx-xx
+        * Enable OpenGL pipeline and use system look & feel
         * Dispose BoardFrame if can not load design file
 
 2017-05-25

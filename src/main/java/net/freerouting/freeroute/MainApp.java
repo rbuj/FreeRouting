@@ -35,6 +35,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import net.freerouting.freeroute.board.TestLevel;
 
 /**
@@ -186,6 +188,22 @@ public final class MainApp extends Application {
      * Main function of the Application
      */
     public static void main(String[] args) {
+        // Enable OpenGL pipeline
+        System.setProperty("sun.java2d.opengl", "true");
+
+        // System look & feel
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.INFO, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.INFO, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.INFO, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.INFO, null, ex);
+        }
+
         launch(args);
     }
 

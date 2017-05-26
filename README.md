@@ -77,7 +77,8 @@ mvn install
 Run freeroute
 ```bash
 cd target
-java -jar freeroute-1.4.1.jar
+export J2D_TRACE_LEVEL=4
+java -jar freeroute-1.4.3-alpha.jar
 ```
 
 ### OS X
@@ -99,5 +100,6 @@ mvn install
 Run freeroute
 ```bash
 cd target
-java -jar freeroute-1.4.1.jar
+export J2D_TRACE_LEVEL=4
+java -jar freeroute-1.4.3-alpha.jar
 ```
