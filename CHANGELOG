@@ -3,6 +3,9 @@ ToDo
 	* Migrate all GUI from swing to JavaFX
 	* Write all documentation in docbook format
 
+xxxx-xx-xx
+        * Dispose BoardFrame if can not load design file
+
 2017-05-25
         * Bump version to 1.4.2
         * Subwindows manager
@@ -14,7 +17,7 @@ ToDo
         * GUIDefaultsFileException.java: new exception used for controling
           read scope methods in GUIDefaultsFile class
         * ReadScopeException.java: new exception used for controling
-          read scope methods in specctra dessign formats
+          read scope methods in specctra design formats
         * Other improvements
 
 2017-05-19

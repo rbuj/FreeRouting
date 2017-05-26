@@ -937,19 +937,14 @@ public class BoardHandling {
      * Reads an existing board design from the input stream. Returns false, if
      * the input stream does not contains a legal board design.
      */
-    public boolean read_design(java.io.ObjectInputStream p_design, TestLevel p_test_level) {
-        try {
-            board = (RoutingBoard) p_design.readObject();
-            settings = (Settings) p_design.readObject();
-            settings.set_logfile(this.logfile);
-            coordinate_transform = (CoordinateTransform) p_design.readObject();
-            graphics_context = (GraphicsContext) p_design.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            return false;
-        }
+    public void read_design(java.io.ObjectInputStream p_design, TestLevel p_test_level) throws IOException, ClassNotFoundException {
+        board = (RoutingBoard) p_design.readObject();
+        settings = (Settings) p_design.readObject();
+        settings.set_logfile(this.logfile);
+        coordinate_transform = (CoordinateTransform) p_design.readObject();
+        graphics_context = (GraphicsContext) p_design.readObject();
         board.set_test_level(p_test_level);
         screen_messages.set_layer(board.layer_structure.arr[settings.layer].name);
-        return true;
     }
 
     /**

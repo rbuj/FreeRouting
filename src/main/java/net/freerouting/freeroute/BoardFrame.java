@@ -18,6 +18,7 @@ package net.freerouting.freeroute;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -34,6 +35,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javax.swing.JOptionPane;
+import static net.freerouting.freeroute.DesignFile.read_rules_file;
 import static net.freerouting.freeroute.Filename.GUI_DEFAULTS_FILE_NAME;
 import static net.freerouting.freeroute.Filename.LOG_FILE_EXTENSIONS;
 import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
@@ -127,28 +129,33 @@ public final class BoardFrame extends javax.swing.JFrame {
      * output depends on p_test_level.
      */
     public BoardFrame(DesignFile p_design, LaunchMode p_launch_mode, TestLevel p_test_level,
-            boolean p_confirm_cancel) throws BoardFrameException, DsnFileException {
+            boolean p_confirm_cancel) {
         this(p_design, p_launch_mode, p_test_level, new BoardObserverAdaptor(),
                 new ItemIdNoGenerator(), p_confirm_cancel);
-        read();
-        menubar.add_design_dependent_items();
-        if (design_file.is_created_from_text_file()) {
-            try {
-                // Read the file  with the saved rules, if it is existing.
-                String file_name = design_file.get_name();
-                String[] name_parts = file_name.split("\\.");
-                java.util.ResourceBundle rb
-                        = java.util.ResourceBundle.getBundle(
-                                "net.freerouting.freeroute.resources.MainApp",
-                                Locale.getDefault());
-                DesignFile.read_rules_file(name_parts[0], design_file.get_parent(),
-                        board_panel.board_handling,
-                        rb.getString("confirm_import_rules"));
-            } catch (DsnFileException ex) {
-                Logger.getLogger(BoardFrame.class.getName()).log(Level.INFO, "no rules file");
+        try {
+            read();
+            menubar.add_design_dependent_items();
+            if (design_file.is_created_from_text_file()) {
+                try {
+                    // Read the file  with the saved rules, if it is existing.
+                    String file_name = design_file.get_name();
+                    String[] name_parts = file_name.split("\\.");
+                    java.util.ResourceBundle rb
+                            = java.util.ResourceBundle.getBundle(
+                                    "net.freerouting.freeroute.resources.MainApp",
+                                    Locale.getDefault());
+                    read_rules_file(name_parts[0], design_file.get_parent(),
+                            board_panel.board_handling,
+                            rb.getString("confirm_import_rules"));
+                } catch (DsnFileException ex) {
+                    JOptionPane.showMessageDialog(this, ex.toString(), resources.getString("no rules file"), JOptionPane.INFORMATION_MESSAGE);
+                }
+                refresh_windows();
+                setVisible(true);
             }
-            refresh_windows();
-            setVisible(true);
+        } catch (BoardFrameException | IllegalArgumentException | IOException | BoardHandlingException ex) {
+            JOptionPane.showMessageDialog(this, ex.toString(), resources.getString("error_1"), JOptionPane.ERROR_MESSAGE);
+            dispose();
         }
     }
 
@@ -208,63 +215,35 @@ public final class BoardFrame extends javax.swing.JFrame {
      * read from a scpecctra dsn file. Throws BoardFrameException, if the file
      * is invalid.
      */
-    private void read() throws BoardFrameException {
+    private void read() throws BoardFrameException, FileNotFoundException,
+            IllegalArgumentException, IOException, BoardHandlingException {
         java.awt.Point viewport_position = null;
         if (design_file.is_created_from_text_file()) {
-            try {
-                board_panel.board_handling.import_design(
-                        new java.io.InputStreamReader(design_file.get_input_stream(), java.nio.charset.Charset.forName("UTF-8")),
-                        board_observers,
-                        item_id_no_generator,
-                        test_level);
-                viewport_position = new java.awt.Point(0, 0);
-                initialize_windows();
-            } catch (BoardHandlingException exc) {
-                Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, exc);
-                Platform.runLater(() -> {
-                    Alert alert = new Alert(AlertType.ERROR, exc.toString());
-                    alert.showAndWait();
-                    Runtime.getRuntime().exit(1);
-                });
-            }
+            board_panel.board_handling.import_design(
+                    new java.io.InputStreamReader(design_file.get_input_stream(), java.nio.charset.Charset.forName("UTF-8")),
+                    board_observers,
+                    item_id_no_generator,
+                    test_level);
+            viewport_position = new java.awt.Point(0, 0);
+            initialize_windows();
         } else {
             try (ObjectInputStream object_stream = new ObjectInputStream(design_file.get_input_stream())) {
-                boolean read_ok = board_panel.board_handling.read_design(object_stream, test_level);
-                if (!read_ok) {
-                    Platform.runLater(() -> {
-                        Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
-                        alert.showAndWait();
-                        Runtime.getRuntime().exit(1);
-                    });
-                }
+                board_panel.board_handling.read_design(object_stream, test_level);
                 java.awt.Point frame_location;
                 Rectangle2D frame_bounds;
-                try {
-                    viewport_position = (java.awt.Point) object_stream.readObject();
-                    frame_location = (java.awt.Point) object_stream.readObject();
-                    frame_bounds = (Rectangle2D) object_stream.readObject();
 
-                    setLocation(frame_location);
-                    setBounds(frame_bounds.getBounds());
+                viewport_position = (java.awt.Point) object_stream.readObject();
+                frame_location = (java.awt.Point) object_stream.readObject();
+                frame_bounds = (Rectangle2D) object_stream.readObject();
 
-                    allocate_permanent_subwindows();
+                setLocation(frame_location);
+                setBounds(frame_bounds.getBounds());
 
-                    savable_subwindows.read_all(object_stream);
-                } catch (IOException | ClassNotFoundException ex) {
-                    Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    Platform.runLater(() -> {
-                        Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
-                        alert.showAndWait();
-                        Runtime.getRuntime().exit(1);
-                    });
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(BoardFrame.class.getName()).log(Level.SEVERE, null, ex);
-                Platform.runLater(() -> {
-                    Alert alert = new Alert(AlertType.ERROR, "the file is invalid");
-                    alert.showAndWait();
-                    Runtime.getRuntime().exit(1);
-                });
+                allocate_permanent_subwindows();
+
+                savable_subwindows.read_all(object_stream);
+            } catch (ClassNotFoundException ex) {
+                throw new BoardFrameException("the file is invalid", ex);
             }
         }
 
@@ -412,8 +391,12 @@ public final class BoardFrame extends javax.swing.JFrame {
      */
     @Override
     public void dispose() {
-        savable_subwindows.dispose_all();
-        temporary_subwindows.dispose_all();
+        if (savable_subwindows != null) {
+            savable_subwindows.dispose_all();
+        }
+        if (temporary_subwindows != null) {
+            temporary_subwindows.dispose_all();
+        }
         if (board_panel.board_handling != null) {
             board_panel.board_handling.dispose();
             board_panel.board_handling = null;

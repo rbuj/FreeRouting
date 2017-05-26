@@ -90,19 +90,15 @@ public class MainAppController implements Initializable {
     protected void create_board_frame() {
         SwingUtilities.invokeLater(() -> {
             if (inputFile != null) {
-                try {
-                    design_dir_name = inputFile.getParent();
-                    /**
-                     * create board
-                     */
-                    BoardFrame new_frame = new BoardFrame(
-                            new DesignFile(inputFile, design_dir_name),
-                            launch_mode,
-                            test_level,
-                            test_level == null); // true, if it's a test_version
-                } catch (BoardFrameException | DsnFileException ex) {
-                    Logger.getLogger(MainAppController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                design_dir_name = inputFile.getParent();
+                /**
+                 * create board
+                 */
+                BoardFrame new_frame = new BoardFrame(
+                        new DesignFile(inputFile, design_dir_name),
+                        launch_mode,
+                        test_level,
+                        test_level == null); // true, if it's a test_version
             }
         });
     }

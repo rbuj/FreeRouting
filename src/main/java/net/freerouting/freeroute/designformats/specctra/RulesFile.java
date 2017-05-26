@@ -52,7 +52,7 @@ public class RulesFile {
         }
     }
 
-    public static boolean read(java.io.Reader p_reader, String p_design_name,
+    public static void read(java.io.Reader p_reader, String p_design_name,
             net.freerouting.freeroute.interactive.BoardHandling p_board_handling) throws DsnFileException {
         BasicBoard routing_board = p_board_handling.get_routing_board();
         Scanner scanner = new SpecctraFileScanner(p_reader);
@@ -77,12 +77,10 @@ public class RulesFile {
             if (!(curr_token instanceof String) || !curr_token.equals(p_design_name)) {
                 throw new ReadScopeException("RulesFile.read: design_name not matching");
             }
-        } catch (java.io.IOException e) {
-            Logger.getLogger(RulesFile.class.getName()).log(Level.SEVERE, "RulesFile.read: IO error scanning file", e);
-            return false;
+        } catch (java.io.IOException ex) {
+            throw new DsnFileException("RulesFile.read: IO error scanning file", ex);
         } catch (ReadScopeException ex) {
-            Logger.getLogger(RulesFile.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            throw new DsnFileException("RulesFile.read: Error scanning file", ex);
         }
 
         LayerStructure layer_structure = new LayerStructure(routing_board.layer_structure);
@@ -132,10 +130,8 @@ public class RulesFile {
                     }
                 }
             }
-            return true;
         } catch (ReadScopeException ex) {
-            Logger.getLogger(RulesFile.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            throw new DsnFileException("RulesFile.read: Read scope exception", ex);
         }
     }
 

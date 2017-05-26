@@ -48,7 +48,7 @@ import net.freerouting.freeroute.interactive.BoardHandlingException;
  *
  * @author Alfons Wirtz
  */
-public class DesignFile {
+final class DesignFile {
 
     private File output_file;
     private File input_file;
@@ -101,9 +101,8 @@ public class DesignFile {
         }
     }
 
-    public static boolean read_rules_file(String p_design_name, String p_parent_name,
+    static void read_rules_file(String p_design_name, String p_parent_name,
             net.freerouting.freeroute.interactive.BoardHandling p_board_handling, String p_confirm_message) throws DsnFileException {
-        boolean result = false;
         String rule_file_name = p_design_name + ".rules";
         boolean dsn_file_generated_by_host = p_board_handling.get_routing_board().communication.specctra_parser_info.dsn_file_generated_by_host;
         if (dsn_file_generated_by_host) {
@@ -111,42 +110,32 @@ public class DesignFile {
             if (rules_file.exists()) {
                 try (Reader reader = new InputStreamReader(new FileInputStream(rules_file), StandardCharsets.UTF_8)) {
                     if (WindowMessage.confirm(p_confirm_message)) {
-                        result = net.freerouting.freeroute.designformats.specctra.RulesFile.read(reader, p_design_name, p_board_handling);
+                        net.freerouting.freeroute.designformats.specctra.RulesFile.read(reader, p_design_name, p_board_handling);
                         if (rules_file.delete() == false) {
-                            throw new DesignFileException("Can't delete rules file");
+                            throw new DsnFileException("Can't delete rules file");
                         }
                     }
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException | DesignFileException ex) {
-                    Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    throw new DsnFileException("Can't read rules file", ex);
                 }
             }
         }
-        return result;
     }
 
     /**
      * Gets an InputStream from the file. Returns null, if the algorithm failed.
      */
-    public InputStream get_input_stream() {
-        InputStream result;
+    InputStream get_input_stream() throws FileNotFoundException, IllegalArgumentException {
         if (input_file == null) {
-            return null;
+            throw new IllegalArgumentException("input_file == null");
         }
-        try {
-            result = new FileInputStream(input_file);
-        } catch (FileNotFoundException e) {
-            Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, e);
-            result = null;
-        }
-        return result;
+        return new FileInputStream(input_file);
     }
 
     /**
      * Gets the file name as a String. Returns null on failure.
      */
-    public String get_name() {
+    String get_name() {
         if (input_file != null) {
             return input_file.getName();
         } else {
@@ -183,7 +172,7 @@ public class DesignFile {
      * Writes a Specctra Session File to update the design file in the host
      * system. Returns false, if the write failed
      */
-    public boolean write_specctra_session_file(BoardFrame p_board_frame) {
+    boolean write_specctra_session_file(BoardFrame p_board_frame) {
         final java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuFile", Locale.getDefault());
         String design_file_name = get_name();
@@ -225,7 +214,7 @@ public class DesignFile {
         return true;
     }
 
-    public void update_eagle(BoardFrame p_board_frame) {
+    void update_eagle(BoardFrame p_board_frame) {
         final java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuFile", Locale.getDefault());
         String design_file_name = get_name();
@@ -256,29 +245,29 @@ public class DesignFile {
      * Gets the binary file for saving or null, if the design file is not
      * available because the application is run with Java Web Start.
      */
-    public File get_output_file() {
+    File get_output_file() {
         return output_file;
     }
 
-    public File get_input_file() {
+    File get_input_file() {
         return input_file;
     }
 
-    public String get_parent() {
+    String get_parent() {
         if (input_file != null) {
             return input_file.getParent();
         }
         return null;
     }
 
-    public File get_parent_file() {
+    File get_parent_file() {
         if (input_file != null) {
             return input_file.getParentFile();
         }
         return null;
     }
 
-    public boolean is_created_from_text_file() {
+    boolean is_created_from_text_file() {
         return input_file != output_file;
     }
 }
