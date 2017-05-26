@@ -54,8 +54,7 @@ public final class SnapshotAttributes {
     }
 
     public EnumMap<SNAPSHOT_ATTRIBUTE_KEY, Boolean> clone_map() {
-        EnumMap<SNAPSHOT_ATTRIBUTE_KEY, Boolean> p_snapshot_attributes_map = new EnumMap<>(SNAPSHOT_ATTRIBUTE_KEY.class);
-        p_snapshot_attributes_map = snapshot_attributes_map.clone();
+        EnumMap<SNAPSHOT_ATTRIBUTE_KEY, Boolean> p_snapshot_attributes_map = new EnumMap<>(snapshot_attributes_map);
         return p_snapshot_attributes_map;
     }
 }
