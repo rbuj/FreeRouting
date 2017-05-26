@@ -40,6 +40,7 @@ import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.PolylineShape;
 import net.freerouting.freeroute.geometry.planar.Shape;
 import net.freerouting.freeroute.geometry.planar.TileShape;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Context for drawing items in the board package to the screen.
@@ -677,7 +678,7 @@ public class GraphicsContext implements java.io.Serializable {
     }
 
     public void set_layer_visibility_arr(double[] p_layer_visibility_arr) {
-        this.layer_visibility_arr = p_layer_visibility_arr;
+        this.layer_visibility_arr = ArrayUtils.clone(p_layer_visibility_arr);
     }
 
     public double[] copy_layer_visibility_arr() {

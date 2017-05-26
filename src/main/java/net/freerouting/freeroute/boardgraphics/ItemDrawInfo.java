@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.boardgraphics;
 
 import java.awt.Color;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Information for drawing an item on the screen.
@@ -40,7 +41,7 @@ public class ItemDrawInfo {
      * Creates a new instance of ItemDrawInfo
      */
     public ItemDrawInfo(Color[] p_layer_color, double p_intensity) {
-        layer_color = p_layer_color;
+        layer_color = ArrayUtils.clone(p_layer_color);
         intensity = p_intensity;
     }
 }

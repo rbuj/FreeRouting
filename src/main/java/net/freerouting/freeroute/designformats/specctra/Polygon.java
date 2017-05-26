@@ -26,6 +26,7 @@ import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.SimplexUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Describes a polygon in a Specctra dsn file.
@@ -43,7 +44,7 @@ public class Polygon extends Shape {
      */
     public Polygon(Layer p_layer, double[] p_coor) {
         super(p_layer);
-        coor = p_coor;
+        coor = ArrayUtils.clone(p_coor);
     }
 
     @Override

@@ -23,6 +23,7 @@ import java.util.Locale;
 import net.freerouting.freeroute.geometry.planar.Area;
 import net.freerouting.freeroute.geometry.planar.Shape;
 import net.freerouting.freeroute.geometry.planar.Vector;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Component package templates describing the padstacks and relative locations
@@ -75,11 +76,11 @@ public class Package implements Comparable<Package>, net.freerouting.freeroute.b
             Keepout[] p_via_keepout_arr, Keepout[] p_place_keepout_arr, boolean p_is_front, Packages p_package_list) {
         name = p_name;
         no = p_no;
-        pin_arr = p_pin_arr;
-        outline = p_outline;
-        keepout_arr = p_keepout_arr;
-        via_keepout_arr = p_via_keepout_arr;
-        place_keepout_arr = p_place_keepout_arr;
+        pin_arr = ArrayUtils.clone(p_pin_arr);
+        outline = ArrayUtils.clone(p_outline);
+        keepout_arr = ArrayUtils.clone(p_keepout_arr);
+        via_keepout_arr = ArrayUtils.clone(p_via_keepout_arr);
+        place_keepout_arr = ArrayUtils.clone(p_place_keepout_arr);
         is_front = p_is_front;
         package_list = p_package_list;
     }

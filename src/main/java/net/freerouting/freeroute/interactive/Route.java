@@ -45,6 +45,7 @@ import net.freerouting.freeroute.library.Padstack;
 import net.freerouting.freeroute.rules.Net;
 import net.freerouting.freeroute.rules.ViaInfo;
 import net.freerouting.freeroute.rules.ViaRule;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  *
@@ -118,9 +119,9 @@ public class Route {
         trace_tidy_width = p_trace_tidy_width;
         pull_tight_accuracy = p_pull_tight_accuracy;
         prev_corner = p_start_corner;
-        net_no_arr = p_net_no_arr;
-        pen_half_width_arr = p_pen_half_width_arr;
-        layer_active = p_layer_active_arr;
+        net_no_arr = ArrayUtils.clone(p_net_no_arr);
+        pen_half_width_arr = ArrayUtils.clone(p_pen_half_width_arr);
+        layer_active = ArrayUtils.clone(p_layer_active_arr);
         clearance_class = p_clearance_class;
         via_rule = p_via_rule;
         start_item = p_start_item;

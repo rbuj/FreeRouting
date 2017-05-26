@@ -23,6 +23,7 @@ import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntBox;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Describes a rectangle in a Specctra dsn file.
@@ -40,7 +41,7 @@ public class Rectangle extends Shape {
      */
     public Rectangle(Layer p_layer, double[] p_coor) {
         super(p_layer);
-        coor = p_coor;
+        coor = ArrayUtils.clone(p_coor);
     }
 
     @Override

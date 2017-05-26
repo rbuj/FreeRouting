@@ -22,6 +22,7 @@ package net.freerouting.freeroute.geometry.planar;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * A PolylineArea is an Area, where the outside border curve and the hole
@@ -51,7 +52,7 @@ public class PolylineArea implements Area, java.io.Serializable {
      */
     public PolylineArea(PolylineShape p_border_shape, PolylineShape[] p_hole_arr) {
         border_shape = p_border_shape;
-        hole_arr = p_hole_arr;
+        hole_arr = ArrayUtils.clone(p_hole_arr);
     }
 
     @Override
@@ -81,7 +82,7 @@ public class PolylineArea implements Area, java.io.Serializable {
 
     @Override
     public PolylineShape[] get_holes() {
-        return hole_arr;
+        return ArrayUtils.clone(hole_arr);
     }
 
     @Override
@@ -225,7 +226,7 @@ public class PolylineArea implements Area, java.io.Serializable {
                 precalculated_convex_pieces[i] = it.next();
             }
         }
-        return precalculated_convex_pieces;
+        return ArrayUtils.clone(precalculated_convex_pieces);
     }
 
     @Override

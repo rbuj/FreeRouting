@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute.board;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 /**
  * Describes the layer structure of the board.
  *
@@ -33,7 +35,7 @@ public class LayerStructure implements java.io.Serializable {
      * Creates a new instance of LayerStructure
      */
     public LayerStructure(Layer[] p_layer_arr) {
-        arr = p_layer_arr;
+        arr = ArrayUtils.clone(p_layer_arr);
     }
 
     /**

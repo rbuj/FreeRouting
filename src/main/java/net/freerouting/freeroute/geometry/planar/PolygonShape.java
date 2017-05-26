@@ -22,6 +22,7 @@ package net.freerouting.freeroute.geometry.planar;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.RandomUtils;
 
 /**
@@ -540,6 +541,7 @@ public class PolygonShape extends PolylineShape {
      */
     @Override
     public TileShape[] split_to_convex() {
+        TileShape[] r_precalculated_convex_pieces = precalculated_convex_pieces;
         if (this.precalculated_convex_pieces == null) // not yet precalculated
         {
             Collection<PolygonShape> convex_pieces = split_to_convex_recu();
@@ -553,8 +555,9 @@ public class PolygonShape extends PolylineShape {
                 PolygonShape curr_piece = it.next();
                 precalculated_convex_pieces[i] = TileShapeUtils.get_instance(curr_piece.corners);
             }
+            r_precalculated_convex_pieces = ArrayUtils.clone(precalculated_convex_pieces);
         }
-        return this.precalculated_convex_pieces;
+        return r_precalculated_convex_pieces;
     }
 
     /**

@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import net.freerouting.freeroute.board.Item;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Class for reading and writing package scopes from dsn-files.
@@ -243,7 +244,7 @@ public class Package {
     public Package(String p_name, PinInfo[] p_pin_info_arr, Collection<Shape> p_outline, Collection<Area> p_keepouts,
             Collection<Area> p_via_keepouts, Collection<Area> p_place_keepouts, boolean p_is_front) {
         name = p_name;
-        pin_info_arr = p_pin_info_arr;
+        pin_info_arr = ArrayUtils.clone(p_pin_info_arr);
         outline = p_outline;
         keepouts = p_keepouts;
         via_keepouts = p_via_keepouts;

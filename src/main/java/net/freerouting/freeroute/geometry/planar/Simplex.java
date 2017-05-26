@@ -18,6 +18,7 @@ package net.freerouting.freeroute.geometry.planar;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  *
@@ -45,7 +46,7 @@ public class Simplex extends TileShape {
      * TileShape.get_instance
      */
     public Simplex(Line[] p_line_arr) {
-        arr = p_line_arr;
+        arr = ArrayUtils.clone(p_line_arr);
     }
 
     /**
@@ -221,7 +222,7 @@ public class Simplex extends TileShape {
                 precalculated_float_corners[i] = arr[i].intersection_approx(prev);
             }
         }
-        return precalculated_float_corners;
+        return ArrayUtils.clone(precalculated_float_corners);
     }
 
     /**

@@ -28,6 +28,7 @@ import net.freerouting.freeroute.board.SearchTreeObject;
 import net.freerouting.freeroute.board.ShapeSearchTree;
 import net.freerouting.freeroute.datastructures.ShapeTree;
 import net.freerouting.freeroute.geometry.planar.TileShape;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * An expansion room, whose shape is completely calculated, so that it can be
@@ -60,7 +61,7 @@ public class CompleteFreeSpaceExpansionRoom extends FreeSpaceExpansionRoom imple
 
     @Override
     public void set_search_tree_entries(ShapeTree.Leaf[] p_entries, ShapeTree p_tree) {
-        tree_entries = p_entries;
+        tree_entries = ArrayUtils.clone(p_entries);
     }
 
     @Override

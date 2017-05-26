@@ -18,6 +18,7 @@ package net.freerouting.freeroute.geometry.planar;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  *
@@ -282,7 +283,7 @@ public class Polyline implements java.io.Serializable {
                 precalculated_corners[i] = arr[i].intersection(arr[i + 1]);
             }
         }
-        return precalculated_corners;
+        return ArrayUtils.clone(precalculated_corners);
     }
 
     /**
@@ -302,7 +303,7 @@ public class Polyline implements java.io.Serializable {
                 precalculated_float_corners[i] = arr[i].intersection_approx(arr[i + 1]);
             }
         }
-        return precalculated_float_corners;
+        return ArrayUtils.clone(precalculated_float_corners);
     }
 
     /**
