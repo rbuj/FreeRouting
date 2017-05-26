@@ -1134,8 +1134,7 @@ class Structure extends ScopeKeyword {
         }
     }
 
-    enum KeepoutType {
-
+    private enum KeepoutType {
         keepout, via_keepout, place_keepout
     }
 }

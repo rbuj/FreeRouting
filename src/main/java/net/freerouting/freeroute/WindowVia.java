@@ -23,7 +23,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.JFrame;
-import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
 import net.freerouting.freeroute.board.Layer;
 import net.freerouting.freeroute.geometry.planar.PointUtils;
 import net.freerouting.freeroute.rules.BoardRules;
@@ -207,7 +206,7 @@ public final class WindowVia extends BoardSavableSubWindow {
                 curr_subwindow.dispose();
             }
         }
-        JFrame edit_vias_window = board_frame.savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.EDIT_VIAS);
+        JFrame edit_vias_window = board_frame.savable_subwindows.get(SavableSubwindowKey.EDIT_VIAS);
         if (edit_vias_window != null) {
             edit_vias_window.dispose();
         }
@@ -423,7 +422,7 @@ public final class WindowVia extends BoardSavableSubWindow {
 
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
-            board_frame.savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.EDIT_VIAS).setVisible(true);
+            board_frame.savable_subwindows.get(SavableSubwindowKey.EDIT_VIAS).setVisible(true);
         }
     }
 

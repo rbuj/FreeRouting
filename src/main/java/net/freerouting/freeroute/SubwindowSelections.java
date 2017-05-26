@@ -27,21 +27,17 @@ import java.util.Map.Entry;
 @SuppressWarnings("serial")
 public final class SubwindowSelections implements java.io.Serializable {
 
-    enum SNAPSHOT_SUBWINDOW_KEY {
-        INCOMPLETES, PACKAGES, NET_INFO, COMPONENTS, PADSTACKS
-    }
+    private EnumMap<SnapshotSubwindowKey, WindowObjectListWithFilter.SnapshotInfo> window_selections;
 
-    private EnumMap<SNAPSHOT_SUBWINDOW_KEY, WindowObjectListWithFilter.SnapshotInfo> window_selections;
-
-    public SubwindowSelections(EnumMap<SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY, WindowObjectListWithFilter> snapshot_subwindows) {
-        window_selections = new EnumMap<>(SNAPSHOT_SUBWINDOW_KEY.class);
-        for (Entry<SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY, WindowObjectListWithFilter> entry : snapshot_subwindows.entrySet()) {
+    public SubwindowSelections(EnumMap<SnapshotSubwindowKey, WindowObjectListWithFilter> snapshot_subwindows) {
+        window_selections = new EnumMap<>(SnapshotSubwindowKey.class);
+        for (Entry<SnapshotSubwindowKey, WindowObjectListWithFilter> entry : snapshot_subwindows.entrySet()) {
             window_selections.put(entry.getKey(), entry.getValue().get_snapshot_info());
         }
     }
 
-    void set_snapshot_info(EnumMap<SNAPSHOT_SUBWINDOW_KEY, WindowObjectListWithFilter> snapshot_subwindows) {
-        for (Entry<SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY, WindowObjectListWithFilter> entry : snapshot_subwindows.entrySet()) {
+    void set_snapshot_info(EnumMap<SnapshotSubwindowKey, WindowObjectListWithFilter> snapshot_subwindows) {
+        for (Entry<SnapshotSubwindowKey, WindowObjectListWithFilter> entry : snapshot_subwindows.entrySet()) {
             entry.getValue().set_snapshot_info(window_selections.get(entry.getKey()));
         }
     }

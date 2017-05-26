@@ -20,7 +20,6 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
-import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
 import net.freerouting.freeroute.rules.BoardRules;
 import net.freerouting.freeroute.rules.ViaInfo;
 import net.freerouting.freeroute.rules.ViaInfos;
@@ -272,7 +271,7 @@ public final class WindowEditVias extends BoardSavableSubWindow {
                     return;
                 }
                 via_info.set_name(new_name);
-                board_frame.savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.VIA).refresh();
+                board_frame.savable_subwindows.get(SavableSubwindowKey.VIA).refresh();
             } else if (p_col == ColumnName.PADSTACK.ordinal()) {
                 if (!(p_value instanceof String)) {
                     return;

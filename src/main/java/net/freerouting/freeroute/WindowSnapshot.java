@@ -21,7 +21,6 @@ package net.freerouting.freeroute;
 
 import java.io.IOException;
 import java.util.Locale;
-import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
 import net.freerouting.freeroute.interactive.SnapShot;
 
 /**
@@ -200,7 +199,7 @@ public final class WindowSnapshot extends BoardSavableSubWindow {
                 board_handling.graphics_context.other_color_table
                         = new net.freerouting.freeroute.boardgraphics.OtherColorTableModel(curr_snapshot.graphics_context.other_color_table);
 
-                ColorManager color_manager = (ColorManager) board_frame.savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.COLOR_MANAGER);
+                ColorManager color_manager = (ColorManager) board_frame.savable_subwindows.get(SavableSubwindowKey.COLOR_MANAGER);
                 color_manager.set_table_models(board_handling.graphics_context);
             }
 

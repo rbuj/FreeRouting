@@ -23,7 +23,6 @@ import java.util.Locale;
 import java.util.Map;
 import static java.util.Map.entry;
 import java.util.ResourceBundle;
-import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
 
 /**
  * Creates the parameter menu of a board frame.
@@ -52,13 +51,13 @@ final class BoardMenuParameter extends javax.swing.JMenu {
 
         parameter_menu.setText(parameter_menu.resources.getString("parameter"));
 
-        Map<SAVABLE_SUBWINDOW_KEY, String> menu_items = Map.ofEntries(
-                entry(SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER, "select"),
-                entry(SAVABLE_SUBWINDOW_KEY.ROUTE_PARAMETER, "route"),
-                entry(SAVABLE_SUBWINDOW_KEY.AUTOROUTE_PARAMETER, "autoroute"),
-                entry(SAVABLE_SUBWINDOW_KEY.MOVE_PARAMETER, "move"));
+        Map<SavableSubwindowKey, String> menu_items = Map.ofEntries(
+                entry(SavableSubwindowKey.SELECT_PARAMETER, "select"),
+                entry(SavableSubwindowKey.ROUTE_PARAMETER, "route"),
+                entry(SavableSubwindowKey.AUTOROUTE_PARAMETER, "autoroute"),
+                entry(SavableSubwindowKey.MOVE_PARAMETER, "move"));
 
-        for (Map.Entry<SAVABLE_SUBWINDOW_KEY, String> entry : menu_items.entrySet()) {
+        for (Map.Entry<SavableSubwindowKey, String> entry : menu_items.entrySet()) {
             javax.swing.JMenuItem menu_item = new javax.swing.JMenuItem();
             menu_item.setText(parameter_menu.resources.getString(entry.getValue()));
             menu_item.addActionListener((java.awt.event.ActionEvent evt) -> {

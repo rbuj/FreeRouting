@@ -20,7 +20,6 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
-import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
 import net.freerouting.freeroute.datastructures.UndoableObjects;
 import net.freerouting.freeroute.rules.ClearanceMatrix;
 
@@ -388,7 +387,7 @@ public final class WindowClearanceMatrix extends BoardSavableSubWindow {
                 }
                 message += resources.getString("change_anyway");
                 int selected_option = javax.swing.JOptionPane.showConfirmDialog(
-                        board_frame.savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.CLEARANCE_MATRIX),
+                        board_frame.savable_subwindows.get(SavableSubwindowKey.CLEARANCE_MATRIX),
                         message, null, javax.swing.JOptionPane.YES_NO_OPTION);
                 if (selected_option != javax.swing.JOptionPane.YES_OPTION) {
                     return;

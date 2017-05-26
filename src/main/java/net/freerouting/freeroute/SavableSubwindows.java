@@ -24,23 +24,15 @@ import java.util.EnumMap;
  *
  * @author robert
  */
-public final class SavableSubwindows {
+final class SavableSubwindows {
 
-    enum SAVABLE_SUBWINDOW_KEY {
-        ABOUT, ROUTE_PARAMETER, AUTOROUTE_PARAMETER, SELECT_PARAMETER, MOVE_PARAMETER,
-        CLEARANCE_MATRIX, VIA, EDIT_VIAS, EDIT_NET_RULES, ASSIGN_NET_CLASSES,
-        PADSTACKS, PACKAGES, INCOMPLETES, NET_INFO, CLEARANCE_VIOLATIONS,
-        LENGHT_VIOLATIONS, UNCONNECTED_ROUTE, ROUTE_STUBS, COMPONENTS, LAYER_VISIBILITY,
-        OBJECT_VISIBILITY, DISPLAY_MISC, SNAPSHOT, COLOR_MANAGER
-    }
-
-    EnumMap<SAVABLE_SUBWINDOW_KEY, BoardSavableSubWindow> savable_subwindows_map;
+    EnumMap<SavableSubwindowKey, BoardSavableSubWindow> savable_subwindows_map;
 
     /**
      * The constructor method.
      */
     public SavableSubwindows() {
-        savable_subwindows_map = new EnumMap<>(SAVABLE_SUBWINDOW_KEY.class);
+        savable_subwindows_map = new EnumMap<>(SavableSubwindowKey.class);
     }
 
     /**
@@ -54,7 +46,7 @@ public final class SavableSubwindows {
      * @param board_savable_subwindow BoardSavableSubWindow to be associated
      * with the specified key
      */
-    void put(SAVABLE_SUBWINDOW_KEY savable_subwindow_key, BoardSavableSubWindow board_savable_subwindow) {
+    void put(SavableSubwindowKey savable_subwindow_key, BoardSavableSubWindow board_savable_subwindow) {
         savable_subwindows_map.put(savable_subwindow_key, board_savable_subwindow);
     }
 
@@ -67,7 +59,7 @@ public final class SavableSubwindows {
      * @return the BoardSavableSubWindow to which the specified key is mapped,
      * or null if savable_subwindows_map contains no mapping for the key
      */
-    BoardSavableSubWindow get(SAVABLE_SUBWINDOW_KEY savable_subwindow_key) {
+    BoardSavableSubWindow get(SavableSubwindowKey savable_subwindow_key) {
         return savable_subwindows_map.get(savable_subwindow_key);
     }
 

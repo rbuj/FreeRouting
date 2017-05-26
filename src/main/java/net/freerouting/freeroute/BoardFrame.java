@@ -38,7 +38,6 @@ import javax.swing.JOptionPane;
 import static net.freerouting.freeroute.DesignFile.read_rules_file;
 import static net.freerouting.freeroute.Filename.GUI_DEFAULTS_FILE_NAME;
 import static net.freerouting.freeroute.Filename.LOG_FILE_EXTENSIONS;
-import net.freerouting.freeroute.SavableSubwindows.SAVABLE_SUBWINDOW_KEY;
 import net.freerouting.freeroute.board.BoardObserverAdaptor;
 import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.ItemIdNoGenerator;
@@ -112,7 +111,7 @@ public final class BoardFrame extends javax.swing.JFrame {
     SavableSubwindows savable_subwindows;
     TemporarySubwindows temporary_subwindows = new TemporarySubwindows();
 
-    EnumMap<SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY, WindowObjectListWithFilter> snapshot_subwindows;
+    EnumMap<SnapshotSubwindowKey, WindowObjectListWithFilter> snapshot_subwindows;
 
     DesignFile design_file = null;
 
@@ -409,83 +408,83 @@ public final class BoardFrame extends javax.swing.JFrame {
         savable_subwindows = new SavableSubwindows();
 
         WindowAbout about_window = new WindowAbout();
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.ABOUT, about_window);
+        savable_subwindows.put(SavableSubwindowKey.ABOUT, about_window);
 
         WindowRouteParameter route_parameter_window = new WindowRouteParameter(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.ROUTE_PARAMETER, route_parameter_window);
+        savable_subwindows.put(SavableSubwindowKey.ROUTE_PARAMETER, route_parameter_window);
 
         WindowAutorouteParameter autoroute_parameter_window = new WindowAutorouteParameter(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.AUTOROUTE_PARAMETER, autoroute_parameter_window);
+        savable_subwindows.put(SavableSubwindowKey.AUTOROUTE_PARAMETER, autoroute_parameter_window);
 
         WindowSelectParameter select_parameter_window = new WindowSelectParameter(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER, select_parameter_window);
+        savable_subwindows.put(SavableSubwindowKey.SELECT_PARAMETER, select_parameter_window);
 
         WindowMoveParameter move_parameter_window = new WindowMoveParameter(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.MOVE_PARAMETER, move_parameter_window);
+        savable_subwindows.put(SavableSubwindowKey.MOVE_PARAMETER, move_parameter_window);
 
         WindowClearanceMatrix clearance_matrix_window = new WindowClearanceMatrix(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.CLEARANCE_MATRIX, clearance_matrix_window);
+        savable_subwindows.put(SavableSubwindowKey.CLEARANCE_MATRIX, clearance_matrix_window);
 
         WindowVia via_window = new WindowVia(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.VIA, via_window);
+        savable_subwindows.put(SavableSubwindowKey.VIA, via_window);
 
         WindowEditVias edit_vias_window = new WindowEditVias(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.EDIT_VIAS, edit_vias_window);
+        savable_subwindows.put(SavableSubwindowKey.EDIT_VIAS, edit_vias_window);
 
         WindowNetClasses edit_net_rules_window = new WindowNetClasses(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.EDIT_NET_RULES, edit_net_rules_window);
+        savable_subwindows.put(SavableSubwindowKey.EDIT_NET_RULES, edit_net_rules_window);
 
         WindowAssignNetClass assign_net_classes_window = new WindowAssignNetClass(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.ASSIGN_NET_CLASSES, assign_net_classes_window);
+        savable_subwindows.put(SavableSubwindowKey.ASSIGN_NET_CLASSES, assign_net_classes_window);
 
         WindowPadstacks padstacks_window = new WindowPadstacks(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.PADSTACKS, padstacks_window);
+        savable_subwindows.put(SavableSubwindowKey.PADSTACKS, padstacks_window);
 
         WindowPackages packages_window = new WindowPackages(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.PACKAGES, packages_window);
+        savable_subwindows.put(SavableSubwindowKey.PACKAGES, packages_window);
 
         WindowIncompletes incompletes_window = new WindowIncompletes(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.INCOMPLETES, incompletes_window);
+        savable_subwindows.put(SavableSubwindowKey.INCOMPLETES, incompletes_window);
 
         WindowNets net_info_window = new WindowNets(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.NET_INFO, net_info_window);
+        savable_subwindows.put(SavableSubwindowKey.NET_INFO, net_info_window);
 
         WindowClearanceViolations clearance_violations_window = new WindowClearanceViolations(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.CLEARANCE_VIOLATIONS, clearance_violations_window);
+        savable_subwindows.put(SavableSubwindowKey.CLEARANCE_VIOLATIONS, clearance_violations_window);
 
         WindowLengthViolations length_violations_window = new WindowLengthViolations(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.LENGHT_VIOLATIONS, length_violations_window);
+        savable_subwindows.put(SavableSubwindowKey.LENGHT_VIOLATIONS, length_violations_window);
 
         WindowUnconnectedRoute unconnected_route_window = new WindowUnconnectedRoute(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.UNCONNECTED_ROUTE, unconnected_route_window);
+        savable_subwindows.put(SavableSubwindowKey.UNCONNECTED_ROUTE, unconnected_route_window);
 
         WindowRouteStubs route_stubs_window = new WindowRouteStubs(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.ROUTE_STUBS, route_stubs_window);
+        savable_subwindows.put(SavableSubwindowKey.ROUTE_STUBS, route_stubs_window);
 
         WindowComponents components_window = new WindowComponents(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.COMPONENTS, components_window);
+        savable_subwindows.put(SavableSubwindowKey.COMPONENTS, components_window);
 
         WindowLayerVisibility layer_visibility_window = WindowLayerVisibility.get_instance(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.LAYER_VISIBILITY, layer_visibility_window);
+        savable_subwindows.put(SavableSubwindowKey.LAYER_VISIBILITY, layer_visibility_window);
 
         WindowObjectVisibility object_visibility_window = WindowObjectVisibility.get_instance(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.OBJECT_VISIBILITY, object_visibility_window);
+        savable_subwindows.put(SavableSubwindowKey.OBJECT_VISIBILITY, object_visibility_window);
 
         WindowDisplayMisc display_misc_window = new WindowDisplayMisc(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.DISPLAY_MISC, display_misc_window);
+        savable_subwindows.put(SavableSubwindowKey.DISPLAY_MISC, display_misc_window);
 
         WindowSnapshot snapshot_window = new WindowSnapshot(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.SNAPSHOT, snapshot_window);
+        savable_subwindows.put(SavableSubwindowKey.SNAPSHOT, snapshot_window);
 
         ColorManager color_manager = new ColorManager(this);
-        savable_subwindows.put(SAVABLE_SUBWINDOW_KEY.COLOR_MANAGER, color_manager);
+        savable_subwindows.put(SavableSubwindowKey.COLOR_MANAGER, color_manager);
 
-        snapshot_subwindows = new EnumMap<>(SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY.class);
-        snapshot_subwindows.put(SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY.PACKAGES, packages_window);
-        snapshot_subwindows.put(SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY.PADSTACKS, padstacks_window);
-        snapshot_subwindows.put(SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY.NET_INFO, net_info_window);
-        snapshot_subwindows.put(SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY.INCOMPLETES, incompletes_window);
-        snapshot_subwindows.put(SubwindowSelections.SNAPSHOT_SUBWINDOW_KEY.COMPONENTS, components_window);
+        snapshot_subwindows = new EnumMap<>(SnapshotSubwindowKey.class);
+        snapshot_subwindows.put(SnapshotSubwindowKey.PACKAGES, packages_window);
+        snapshot_subwindows.put(SnapshotSubwindowKey.PADSTACKS, padstacks_window);
+        snapshot_subwindows.put(SnapshotSubwindowKey.NET_INFO, net_info_window);
+        snapshot_subwindows.put(SnapshotSubwindowKey.INCOMPLETES, incompletes_window);
+        snapshot_subwindows.put(SnapshotSubwindowKey.COMPONENTS, components_window);
     }
 
     /**
@@ -496,32 +495,32 @@ public final class BoardFrame extends javax.swing.JFrame {
 
         setLocation(120, 0);
 
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER).setLocation(0, 0);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.SELECT_PARAMETER).setVisible(true);
+        savable_subwindows.get(SavableSubwindowKey.SELECT_PARAMETER).setLocation(0, 0);
+        savable_subwindows.get(SavableSubwindowKey.SELECT_PARAMETER).setVisible(true);
 
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.ROUTE_PARAMETER).setLocation(0, 100);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.AUTOROUTE_PARAMETER).setLocation(0, 200);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.MOVE_PARAMETER).setLocation(0, 50);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.CLEARANCE_MATRIX).setLocation(0, 150);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.VIA).setLocation(50, 150);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.EDIT_VIAS).setLocation(100, 150);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.EDIT_NET_RULES).setLocation(100, 200);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.ASSIGN_NET_CLASSES).setLocation(100, 250);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.PADSTACKS).setLocation(100, 30);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.PACKAGES).setLocation(200, 30);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.COMPONENTS).setLocation(300, 30);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.INCOMPLETES).setLocation(400, 30);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.CLEARANCE_VIOLATIONS).setLocation(500, 30);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.LENGHT_VIOLATIONS).setLocation(550, 30);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.NET_INFO).setLocation(350, 30);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.UNCONNECTED_ROUTE).setLocation(650, 30);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.ROUTE_STUBS).setLocation(600, 30);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.SNAPSHOT).setLocation(0, 250);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.LAYER_VISIBILITY).setLocation(0, 450);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.OBJECT_VISIBILITY).setLocation(0, 550);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.DISPLAY_MISC).setLocation(0, 350);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.COLOR_MANAGER).setLocation(0, 600);
-        savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.ABOUT).setLocation(200, 200);
+        savable_subwindows.get(SavableSubwindowKey.ROUTE_PARAMETER).setLocation(0, 100);
+        savable_subwindows.get(SavableSubwindowKey.AUTOROUTE_PARAMETER).setLocation(0, 200);
+        savable_subwindows.get(SavableSubwindowKey.MOVE_PARAMETER).setLocation(0, 50);
+        savable_subwindows.get(SavableSubwindowKey.CLEARANCE_MATRIX).setLocation(0, 150);
+        savable_subwindows.get(SavableSubwindowKey.VIA).setLocation(50, 150);
+        savable_subwindows.get(SavableSubwindowKey.EDIT_VIAS).setLocation(100, 150);
+        savable_subwindows.get(SavableSubwindowKey.EDIT_NET_RULES).setLocation(100, 200);
+        savable_subwindows.get(SavableSubwindowKey.ASSIGN_NET_CLASSES).setLocation(100, 250);
+        savable_subwindows.get(SavableSubwindowKey.PADSTACKS).setLocation(100, 30);
+        savable_subwindows.get(SavableSubwindowKey.PACKAGES).setLocation(200, 30);
+        savable_subwindows.get(SavableSubwindowKey.COMPONENTS).setLocation(300, 30);
+        savable_subwindows.get(SavableSubwindowKey.INCOMPLETES).setLocation(400, 30);
+        savable_subwindows.get(SavableSubwindowKey.CLEARANCE_VIOLATIONS).setLocation(500, 30);
+        savable_subwindows.get(SavableSubwindowKey.LENGHT_VIOLATIONS).setLocation(550, 30);
+        savable_subwindows.get(SavableSubwindowKey.NET_INFO).setLocation(350, 30);
+        savable_subwindows.get(SavableSubwindowKey.UNCONNECTED_ROUTE).setLocation(650, 30);
+        savable_subwindows.get(SavableSubwindowKey.ROUTE_STUBS).setLocation(600, 30);
+        savable_subwindows.get(SavableSubwindowKey.SNAPSHOT).setLocation(0, 250);
+        savable_subwindows.get(SavableSubwindowKey.LAYER_VISIBILITY).setLocation(0, 450);
+        savable_subwindows.get(SavableSubwindowKey.OBJECT_VISIBILITY).setLocation(0, 550);
+        savable_subwindows.get(SavableSubwindowKey.DISPLAY_MISC).setLocation(0, 350);
+        savable_subwindows.get(SavableSubwindowKey.COLOR_MANAGER).setLocation(0, 600);
+        savable_subwindows.get(SavableSubwindowKey.ABOUT).setLocation(200, 200);
     }
 
     /**
@@ -551,7 +550,7 @@ public final class BoardFrame extends javax.swing.JFrame {
      * Restore the selected snapshot in the snapshot window.
      */
     public void goto_selected_snapshot() {
-        WindowSnapshot snapshot_window = (WindowSnapshot) savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.SNAPSHOT);
+        WindowSnapshot snapshot_window = (WindowSnapshot) savable_subwindows.get(SavableSubwindowKey.SNAPSHOT);
         if (snapshot_window != null) {
             snapshot_window.goto_selected();
         }
@@ -562,7 +561,7 @@ public final class BoardFrame extends javax.swing.JFrame {
      * Thecurent selected snapshot will be no more selected.
      */
     public void select_previous_snapshot() {
-        WindowSnapshot snapshot_window = (WindowSnapshot) savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.SNAPSHOT);
+        WindowSnapshot snapshot_window = (WindowSnapshot) savable_subwindows.get(SavableSubwindowKey.SNAPSHOT);
         if (snapshot_window != null) {
             snapshot_window.select_previous_item();
         }
@@ -573,7 +572,7 @@ public final class BoardFrame extends javax.swing.JFrame {
      * Thecurent selected snapshot will be no more selected.
      */
     public void select_next_snapshot() {
-        WindowSnapshot snapshot_window = (WindowSnapshot) savable_subwindows.get(SAVABLE_SUBWINDOW_KEY.SNAPSHOT);
+        WindowSnapshot snapshot_window = (WindowSnapshot) savable_subwindows.get(SavableSubwindowKey.SNAPSHOT);
         if (snapshot_window != null) {
             snapshot_window.select_next_item();
         }
