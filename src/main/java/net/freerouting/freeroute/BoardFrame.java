@@ -219,7 +219,7 @@ public final class BoardFrame extends javax.swing.JFrame {
         java.awt.Point viewport_position = null;
         if (design_file.is_created_from_text_file()) {
             board_panel.board_handling.import_design(
-                    new java.io.InputStreamReader(design_file.get_input_stream(), java.nio.charset.Charset.forName("UTF-8")),
+                    new java.io.InputStreamReader(design_file.get_input_stream(), StandardCharsets.UTF_8),
                     board_observers,
                     item_id_no_generator,
                     test_level);
