@@ -47,6 +47,7 @@ public enum AngleRestriction {
 
     // Reverse-lookup map for getting a unit from an int
     private static final Map<Integer, AngleRestriction> lookup = new HashMap<Integer, AngleRestriction>(size);
+
     static {
         for (AngleRestriction angleRestriction : AngleRestriction.values()) {
             lookup.put(angleRestriction.get_no(), angleRestriction);
@@ -66,14 +67,19 @@ public enum AngleRestriction {
     public int get_no() {
         return no;
     }
-    
-    public static final AngleRestriction get(int i){
+
+    public static final AngleRestriction get(int i) {
         return lookup.get(i);
     }
 
     private static class Constants {
+
         public static final String NONE = "none";
         public static final String FORTYFIVE_DEGREE = "45 degree";
         public static final String NINETY_DEGREE = "90 degree";
+
+        private Constants() {
+            // not called
+        }
     }
 }

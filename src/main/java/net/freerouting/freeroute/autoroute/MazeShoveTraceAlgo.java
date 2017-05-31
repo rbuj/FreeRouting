@@ -41,6 +41,10 @@ import net.freerouting.freeroute.geometry.planar.TileShape;
  */
 public class MazeShoveTraceAlgo {
 
+    private MazeShoveTraceAlgo() {
+        // not called
+    }
+
     /**
      * Returns false, if the algorithm did not succeed and trying to shove from
      * another door section may be more successful.

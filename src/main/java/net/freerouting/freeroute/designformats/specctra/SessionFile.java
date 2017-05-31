@@ -37,6 +37,10 @@ import net.freerouting.freeroute.geometry.planar.Point;
  */
 public class SessionFile {
 
+    private SessionFile() {
+        // not called
+    }
+
     /**
      * Creates a Specctra session file to update the host system from the
      * RoutingBooard

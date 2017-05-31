@@ -21,10 +21,15 @@ package net.freerouting.freeroute.geometry.planar;
  * @author robert
  */
 public final class SimplexUtils {
+
     /**
      * Standard implementation for an empty Simplex.
      */
     public static final Simplex EMPTY = new Simplex(new Line[0]);
+
+    private SimplexUtils() {
+        // not called
+    }
 
     /**
      * creates a Simplex as intersection of the halfplanes defined by an array

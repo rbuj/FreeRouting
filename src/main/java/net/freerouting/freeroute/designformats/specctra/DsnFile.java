@@ -37,6 +37,10 @@ public class DsnFile {
 
     static final String CLASS_CLEARANCE_SEPARATOR = "-";
 
+    private DsnFile() {
+        // not called
+    }
+
     /**
      * Creates a routing board from a Specctra dns file. The parameters
      * p_item_observers and p_item_id_no_generator are used, in case the board

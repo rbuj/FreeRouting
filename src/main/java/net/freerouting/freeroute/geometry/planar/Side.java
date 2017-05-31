@@ -75,8 +75,13 @@ public enum Side implements SideInterface {
     }
 
     private static class Constants {
+
         public static final String ON_THE_LEFT = "on_the_left";
         public static final String ON_THE_RIGHT = "on_the_right";
         public static final String COLLINEAR = "collinear";
+
+        private Constants() {
+            // not called
+        }
     }
 }

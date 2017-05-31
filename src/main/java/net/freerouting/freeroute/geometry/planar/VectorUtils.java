@@ -23,10 +23,15 @@ import java.math.BigInteger;
  * @author robert
  */
 public final class VectorUtils {
+
     /**
      * Standard implementation of the zero vector .
      */
     public static final IntVector ZERO = new IntVector(0, 0);
+
+    private VectorUtils() {
+        // not called
+    }
 
     /**
      * Creates a Vector (p_x, p_y) in the plane.

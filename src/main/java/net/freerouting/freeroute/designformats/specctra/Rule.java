@@ -29,6 +29,10 @@ import java.util.LinkedList;
  */
 public abstract class Rule {
 
+    private Rule() {
+        // not called
+    }
+
     /**
      * Returns a collection of objects of class Rule.
      */

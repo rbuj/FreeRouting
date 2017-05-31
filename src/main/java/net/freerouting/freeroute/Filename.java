@@ -32,4 +32,9 @@ public class Filename {
     static final String[] LOG_FILE_EXTENSIONS = {"log"};
     static final String GUI_DEFAULTS_FILE_NAME = "gui_defaults.par";
     static final String GUI_DEFAULTS_FILE_BACKUP_NAME = "gui_defaults.par.bak";
+
+    private Filename() {
+        // not called
+    }
+
 }

@@ -23,10 +23,15 @@ import java.math.BigInteger;
  * @author robert
  */
 public final class PointUtils {
+
     /**
      * Standard implementation of the zero point .
      */
     public static final IntPoint ZERO = new IntPoint(0, 0);
+
+    private PointUtils() {
+        // not called
+    }
 
     /**
      * creates an IntPoint from p_x and p_y. If p_x or p_y is to big for an

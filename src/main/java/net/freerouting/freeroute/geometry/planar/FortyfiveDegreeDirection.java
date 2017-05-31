@@ -49,6 +49,7 @@ public enum FortyfiveDegreeDirection {
     }
 
     private static class Constants {
+
         /**
          * the direction to the east
          */
@@ -81,5 +82,9 @@ public enum FortyfiveDegreeDirection {
          * the direction to the southeast
          */
         public static final IntDirection DOWN45 = new IntDirection(1, -1);
+
+        private Constants() {
+            // not called
+        }
     }
 }

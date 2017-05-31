@@ -38,6 +38,10 @@ import net.freerouting.freeroute.geometry.planar.Vector;
  */
 public class OptViaAlgo {
 
+    private OptViaAlgo() {
+        // not called
+    }
+
     /**
      * Optimizes the location of a via connected to at most 2 traces according
      * to the trace costs on the layers of the connected traces If

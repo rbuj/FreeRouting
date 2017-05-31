@@ -31,6 +31,10 @@ import net.freerouting.freeroute.datastructures.IndentFileWriter;
  */
 public class RulesFile {
 
+    private RulesFile() {
+        // not called
+    }
+
     public static void write(net.freerouting.freeroute.interactive.BoardHandling p_board_handling, java.io.OutputStream p_output_stream, String p_design_name) {
         IndentFileWriter output_file = new IndentFileWriter(p_output_stream);
         BasicBoard routing_board = p_board_handling.get_routing_board();

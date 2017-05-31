@@ -41,6 +41,10 @@ public class Validate {
     static private boolean first_time = true;
     static private int prev_stub_count = 0;
 
+    private Validate() {
+        // not called
+    }
+
     /**
      * Does some consistancy checking on the routing board and may be some other
      * actions. Returns false, if problems were detected.

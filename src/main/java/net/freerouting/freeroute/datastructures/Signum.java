@@ -99,5 +99,9 @@ public enum Signum {
         public static final String POSITIVE = "positive";
         public static final String NEGATIVE = "negative";
         public static final String ZERO = "zero";
+
+        private Constants() {
+            // not called
+        }
     }
 }
