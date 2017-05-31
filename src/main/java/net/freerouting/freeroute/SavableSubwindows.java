@@ -31,7 +31,7 @@ final class SavableSubwindows {
     /**
      * The constructor method.
      */
-    public SavableSubwindows() {
+    SavableSubwindows() {
         savable_subwindows_map = new EnumMap<>(SavableSubwindowKey.class);
     }
 
