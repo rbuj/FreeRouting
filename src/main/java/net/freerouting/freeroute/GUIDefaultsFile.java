@@ -31,24 +31,24 @@ import net.freerouting.freeroute.interactive.BoardHandling;
  *
  * @author Alfons Wirtz
  */
-public class GUIDefaultsFile {
+final class GUIDefaultsFile {
 
-    protected BoardFrame board_frame;
-    protected BoardHandling board_handling;
+    private final BoardFrame board_frame;
+    private final BoardHandling board_handling;
     /**
      * Used, when reading a defaults file, null otherwise.
      */
-    protected GUIDefaultsScanner scanner;
+    private final GUIDefaultsScanner scanner;
     /**
      * Used, when writing a defaults file; null otherwise.
      */
-    protected IndentFileWriter out_file;
+    private final IndentFileWriter out_file;
 
     /**
      * Writes the GUI setting of p_board_frame as default to p_file. Returns
      * false, if an error occured.
      */
-    public static boolean write(BoardFrame p_board_frame, BoardHandling p_board_handling,
+    static boolean write(BoardFrame p_board_frame, BoardHandling p_board_handling,
             java.io.OutputStream p_output_stream) throws GUIDefaultsFileException {
         if (p_output_stream == null) {
             return false;
@@ -75,7 +75,7 @@ public class GUIDefaultsFile {
      * Reads the GUI setting of p_board_frame from file. Returns false, if an
      * error occured while reading the file.
      */
-    public static void read(BoardFrame p_board_frame, BoardHandling p_board_handling,
+    static void read(BoardFrame p_board_frame, BoardHandling p_board_handling,
             java.io.Reader p_reader) throws GUIDefaultsFileException {
         if (p_reader == null) {
             throw new GUIDefaultsFileException("reader == null");
