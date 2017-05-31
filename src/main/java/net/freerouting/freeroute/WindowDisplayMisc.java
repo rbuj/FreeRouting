@@ -43,6 +43,10 @@ public final class WindowDisplayMisc extends BoardSavableSubWindow {
     private final javax.swing.JRadioButton horizontal_mirror_checkbox;
     private final javax.swing.JSlider auto_layer_dim_slider;
 
+    public static final double ROTATION_0 = 0.0;
+    public static final double ROTATION_90 = 0.5 * Math.PI;
+    public static final double ROTATION_180 = Math.PI;
+    public static final double ROTATION_270 = 1.5 * Math.PI;
     /**
      * Creates a new instance of DisplayMiscWindow
      */
@@ -252,7 +256,7 @@ public final class WindowDisplayMisc extends BoardSavableSubWindow {
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             net.freerouting.freeroute.boardgraphics.CoordinateTransform coordinate_transform
                     = panel.board_handling.graphics_context.coordinate_transform;
-            coordinate_transform.set_rotation(0);
+            coordinate_transform.set_rotation(ROTATION_0);
             panel.repaint();
         }
     }
@@ -263,7 +267,7 @@ public final class WindowDisplayMisc extends BoardSavableSubWindow {
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             net.freerouting.freeroute.boardgraphics.CoordinateTransform coordinate_transform
                     = panel.board_handling.graphics_context.coordinate_transform;
-            coordinate_transform.set_rotation(0.5 * Math.PI);
+            coordinate_transform.set_rotation(ROTATION_90);
             panel.repaint();
         }
     }
@@ -274,7 +278,7 @@ public final class WindowDisplayMisc extends BoardSavableSubWindow {
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             net.freerouting.freeroute.boardgraphics.CoordinateTransform coordinate_transform
                     = panel.board_handling.graphics_context.coordinate_transform;
-            coordinate_transform.set_rotation(Math.PI);
+            coordinate_transform.set_rotation(ROTATION_180);
             panel.repaint();
         }
     }
@@ -285,7 +289,7 @@ public final class WindowDisplayMisc extends BoardSavableSubWindow {
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             net.freerouting.freeroute.boardgraphics.CoordinateTransform coordinate_transform
                     = panel.board_handling.graphics_context.coordinate_transform;
-            coordinate_transform.set_rotation(1.5 * Math.PI);
+            coordinate_transform.set_rotation(ROTATION_270);
             panel.repaint();
         }
     }

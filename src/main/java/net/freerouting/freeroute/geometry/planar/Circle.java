@@ -29,6 +29,7 @@ public class Circle implements ConvexShape, java.io.Serializable {
 
     public final IntPoint center;
     public final int radius;
+    private static final double SQRT2_MINUS_1 = Math.sqrt(2) - 1;
 
     // private TileShape precalculated_bounding_tile = null;
     // private static final int c_max_approximation_segment_length = 10000;
@@ -134,9 +135,9 @@ public class Circle implements ConvexShape, java.io.Serializable {
         int ly = center.y - radius;
         int uy = center.y + radius;
 
-        final double sqrt2_minus_1 = Math.sqrt(2) - 1;
-        final int ceil_corner_value = (int) Math.ceil(sqrt2_minus_1 * radius);
-        final int floor_corner_value = (int) Math.floor(sqrt2_minus_1 * radius);
+        double corner_value = SQRT2_MINUS_1 * radius;
+        final int ceil_corner_value = (int) Math.ceil(corner_value);
+        final int floor_corner_value = (int) Math.floor(corner_value);
 
         int ulx = lx - (center.y + floor_corner_value);
         int lrx = rx - (center.y - ceil_corner_value);

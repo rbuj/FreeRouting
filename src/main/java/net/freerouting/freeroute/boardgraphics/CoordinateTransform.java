@@ -39,6 +39,9 @@ public class CoordinateTransform implements java.io.Serializable {
      * Top side and bottom side of the board are swapped.
      */
     private boolean mirror_top_bottom = true;
+    /**
+     * The rotation angle in radians.
+     */
     private double rotation = 0;
     private final FloatPoint rotation_pole;
 
@@ -227,6 +230,7 @@ public class CoordinateTransform implements java.io.Serializable {
 
     /**
      * Sets the rotation of the displayed board to p_value.
+     * @param p_value the rotation angle in radians.
      */
     public void set_rotation(double p_value) {
         rotation = p_value;
