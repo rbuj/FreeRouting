@@ -194,13 +194,7 @@ public final class MainApp extends Application {
         // System look & feel
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainApp.class.getName()).log(Level.INFO, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(MainApp.class.getName()).log(Level.INFO, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(MainApp.class.getName()).log(Level.INFO, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.INFO, null, ex);
         }
 
