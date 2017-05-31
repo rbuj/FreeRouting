@@ -34,6 +34,10 @@ class PopupMenuSelectedItems extends PopupMenuDisplay {
      */
     PopupMenuSelectedItems(BoardFrame p_board_frame) {
         super(p_board_frame);
+        initializeComponents();
+    }
+
+    private void initializeComponents() {
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         javax.swing.JMenuItem copy_item = new javax.swing.JMenuItem();

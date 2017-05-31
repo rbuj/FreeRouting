@@ -144,7 +144,7 @@ public final class WindowAssignNetClass extends BoardSavableSubWindow {
         /**
          * Calculates the the valus in this table
          */
-        public void set_values() {
+        private void set_values() {
             net.freerouting.freeroute.rules.BoardRules board_rules = board_frame.board_panel.board_handling.get_routing_board().rules;
             Net[] sorted_arr = new Net[this.getRowCount()];
             for (int i = 0; i < sorted_arr.length; ++i) {

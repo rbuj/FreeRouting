@@ -39,6 +39,10 @@ public class PopupMenuMove extends PopupMenuDisplay {
      */
     public PopupMenuMove(BoardFrame p_board_frame) {
         super(p_board_frame);
+        initializeComponents();
+    }
+
+    private void initializeComponents() {
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.PopupMenuMove", Locale.getDefault());
 

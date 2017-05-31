@@ -61,7 +61,7 @@ public class Polygon implements java.io.Serializable {
         check();
     }
 
-    public void check() {
+    private void check() {
         boolean corner_removed = true;
         while (corner_removed) {
             corner_removed = false;

@@ -38,22 +38,26 @@ class PopupMenuChangeLayer extends javax.swing.JMenu {
      */
     PopupMenuChangeLayer(BoardFrame p_board_frame) {
         this.board_frame = p_board_frame;
-
         net.freerouting.freeroute.board.LayerStructure layer_structure = board_frame.board_panel.board_handling.get_routing_board().layer_structure;
         this.item_arr = new LayermenuItem[layer_structure.signal_layer_count()];
-        java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
-
-        this.setText(resources.getString("change_layer"));
-        this.setToolTipText(resources.getString("change_layer_tooltip"));
         int curr_signal_layer_no = 0;
         for (int i = 0; i < layer_structure.arr.length; ++i) {
             if (layer_structure.arr[i].is_signal) {
                 this.item_arr[curr_signal_layer_no] = new LayermenuItem(i);
                 this.item_arr[curr_signal_layer_no].setText(layer_structure.arr[i].name);
-                this.add(this.item_arr[curr_signal_layer_no]);
                 ++curr_signal_layer_no;
             }
+        }
+        initializeComponents();
+    }
+
+    private void initializeComponents() {
+        java.util.ResourceBundle resources
+                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
+        this.setText(resources.getString("change_layer"));
+        this.setToolTipText(resources.getString("change_layer_tooltip"));
+        for (int i = 0; i < this.item_arr.length; ++i) {
+            this.add(this.item_arr[i]);
         }
     }
 

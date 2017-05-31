@@ -217,7 +217,7 @@ public final class WindowEditVias extends BoardSavableSubWindow {
         /**
          * Calculates the the valus in this table
          */
-        public void set_values() {
+        private void set_values() {
             net.freerouting.freeroute.rules.BoardRules board_rules = board_frame.board_panel.board_handling.get_routing_board().rules;
             for (int i = 0; i < data.length; ++i) {
                 ViaInfo curr_via = board_rules.via_infos.get(i);

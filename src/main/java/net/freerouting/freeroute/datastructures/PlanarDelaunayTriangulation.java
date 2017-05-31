@@ -335,7 +335,7 @@ public class PlanarDelaunayTriangulation {
             }
         }
 
-        public void insert(Triangle p_triangle, Triangle p_parent) {
+        private void insert(Triangle p_triangle, Triangle p_parent) {
             p_triangle.initialize_is_on_the_left_of_edge_line_array();
             if (p_parent == null) {
                 anchor = p_triangle;

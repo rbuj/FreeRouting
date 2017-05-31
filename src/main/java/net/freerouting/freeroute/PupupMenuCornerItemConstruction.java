@@ -36,6 +36,10 @@ class PupupMenuCornerItemConstruction extends javax.swing.JPopupMenu {
      */
     PupupMenuCornerItemConstruction(BoardFrame p_board_frame) {
         this.board_panel = p_board_frame.board_panel;
+        initializeComponents();
+    }
+
+    private void initializeComponents() {
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         javax.swing.JMenuItem add_corner_item = new javax.swing.JMenuItem();
