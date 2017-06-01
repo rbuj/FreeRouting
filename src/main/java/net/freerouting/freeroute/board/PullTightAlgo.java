@@ -34,7 +34,6 @@ import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.Polyline;
 import net.freerouting.freeroute.geometry.planar.Side;
 import net.freerouting.freeroute.geometry.planar.TileShape;
-import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Class with functionality for optimising traces and vias.
@@ -181,7 +180,7 @@ public abstract class PullTightAlgo {
         curr_layer = p_layer;
         ShapeSearchTree search_tree = this.board.search_tree_manager.get_default_tree();
         curr_half_width = p_half_width + search_tree.clearance_compensation_value(p_cl_type, p_layer);
-        curr_net_no_arr = ArrayUtils.clone(p_net_no_arr);
+        curr_net_no_arr = (p_net_no_arr == null) ? null : p_net_no_arr.clone();
         curr_cl_type = p_cl_type;
         contact_pins = p_contact_pins;
         return pull_tight(p_polyline);

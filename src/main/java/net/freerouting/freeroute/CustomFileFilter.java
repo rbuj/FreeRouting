@@ -19,8 +19,6 @@
  */
 package net.freerouting.freeroute;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 /**
  * Used in the file chooser to filter all files which do not have an extension
  * from the input array.
@@ -35,7 +33,7 @@ public class CustomFileFilter extends javax.swing.filechooser.FileFilter {
      * Creates a new FileFilter for the input extension
      */
     public CustomFileFilter(String[] p_extensions) {
-        extensions = ArrayUtils.clone(p_extensions);
+        extensions = (p_extensions == null) ? null : p_extensions.clone();
     }
 
     @Override

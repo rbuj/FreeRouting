@@ -22,7 +22,6 @@ package net.freerouting.freeroute.designformats.specctra;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
-import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Class for reading and writing circle scopes from dsn-files.
@@ -40,7 +39,7 @@ public class Circle extends Shape {
      */
     public Circle(Layer p_layer, double[] p_coor) {
         super(p_layer);
-        coor = ArrayUtils.clone(p_coor);
+        coor = (p_coor == null) ? null : p_coor.clone();
     }
 
     public Circle(Layer p_layer, double p_radius, double p_center_x, double p_center_y) {

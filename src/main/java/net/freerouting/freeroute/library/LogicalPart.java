@@ -20,7 +20,6 @@
 package net.freerouting.freeroute.library;
 
 import java.util.Locale;
-import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Contains contain information for gate swap and pin swap for a single
@@ -43,7 +42,7 @@ public class LogicalPart implements net.freerouting.freeroute.board.ObjectInfoPa
     public LogicalPart(String p_name, int p_no, PartPin[] p_part_pin_arr) {
         name = p_name;
         no = p_no;
-        part_pin_arr = ArrayUtils.clone(p_part_pin_arr);
+        part_pin_arr = (p_part_pin_arr == null) ? null : p_part_pin_arr.clone();
     }
 
     public int pin_count() {

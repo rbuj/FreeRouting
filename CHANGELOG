@@ -4,6 +4,7 @@ ToDo
 	* Write all documentation in docbook format
 
 xxxx-xx-xx
+        * Apache Commons -> Google Guava
         * Copy external libs into target/libext folder
         * Enable OpenGL pipeline and use system look & feel
         * Dispose BoardFrame if can not load design file

@@ -20,7 +20,6 @@
 package net.freerouting.freeroute.datastructures;
 
 import java.io.OutputStreamWriter;
-import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Describes legal identifiers together with the character used for string
@@ -38,7 +37,7 @@ public class IdentifierType {
      * containing reserved characters for a new instance of Identifier.
      */
     public IdentifierType(String[] p_reserved_chars, String p_string_quote) {
-        reserved_chars = ArrayUtils.clone(p_reserved_chars);
+        reserved_chars = (p_reserved_chars == null) ? null : p_reserved_chars.clone();
         string_quote = p_string_quote;
     }
 

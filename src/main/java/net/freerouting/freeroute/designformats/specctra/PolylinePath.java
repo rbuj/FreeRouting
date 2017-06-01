@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
-import org.apache.commons.lang3.NotImplementedException;
 
 /**
  * Describes a path defined by a sequence of lines (instead of a sequence of
@@ -81,17 +80,17 @@ public class PolylinePath extends Path {
 
     @Override
     public net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
-        throw new NotImplementedException("PolylinePath.transform_to_board_rel not implemented");
+        throw new UnsupportedOperationException("PolylinePath.transform_to_board_rel not implemented");
     }
 
     @Override
     public net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform) {
-        throw new NotImplementedException("PolylinePath.transform_to_board_rel not implemented");
+        throw new UnsupportedOperationException("PolylinePath.transform_to_board_rel not implemented");
     }
 
     @Override
     public Rectangle bounding_box() {
-        throw new NotImplementedException("PolylinePath.boundingbox not implemented");
+        throw new UnsupportedOperationException("PolylinePath.boundingbox not implemented");
     }
 
     /**

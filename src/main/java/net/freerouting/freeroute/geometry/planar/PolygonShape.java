@@ -22,8 +22,7 @@ package net.freerouting.freeroute.geometry.planar;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.RandomUtils;
+import java.util.Random;
 
 /**
  * Shape described bei a closed polygon of corner points. The corners are
@@ -43,6 +42,8 @@ public class PolygonShape extends PolylineShape {
     transient private IntBox precalculated_bounding_box = null;
     transient private IntOctagon precalculated_bounding_octagon = null;
     transient private TileShape[] precalculated_convex_pieces = null;
+
+    Random randomGenerator = new Random();
 
     /**
      * Creates a new instance of PolygonShape
@@ -541,7 +542,6 @@ public class PolygonShape extends PolylineShape {
      */
     @Override
     public TileShape[] split_to_convex() {
-        TileShape[] r_precalculated_convex_pieces = precalculated_convex_pieces;
         if (this.precalculated_convex_pieces == null) // not yet precalculated
         {
             Collection<PolygonShape> convex_pieces = split_to_convex_recu();
@@ -555,9 +555,8 @@ public class PolygonShape extends PolylineShape {
                 PolygonShape curr_piece = it.next();
                 precalculated_convex_pieces[i] = TileShapeUtils.get_instance(curr_piece.corners);
             }
-            r_precalculated_convex_pieces = ArrayUtils.clone(precalculated_convex_pieces);
         }
-        return r_precalculated_convex_pieces;
+        return (precalculated_convex_pieces == null) ? null : precalculated_convex_pieces.clone();
     }
 
     /**
@@ -566,7 +565,7 @@ public class PolygonShape extends PolylineShape {
      */
     private Collection<PolygonShape> split_to_convex_recu() {
         // start with a hashed corner and search the first concave corner
-        int start_corner_no = RandomUtils.nextInt(0, corners.length);
+        int start_corner_no = randomGenerator.nextInt(corners.length);
         Point curr_corner = corners[start_corner_no];
         Point prev_corner;
         if (start_corner_no != 0) {

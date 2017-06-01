@@ -15,6 +15,7 @@
  */
 package net.freerouting.freeroute.board;
 
+import com.google.common.primitives.Ints;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.io.Serializable;
@@ -37,7 +38,6 @@ import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.TileShape;
 import net.freerouting.freeroute.geometry.planar.Vector;
 import net.freerouting.freeroute.rules.Nets;
-import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Basic class of the items on a board.
@@ -82,11 +82,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
 
     Item(int[] p_net_no_arr, int p_clearance_type, int p_id_no,
             int p_component_no, FixedState p_fixed_state, BasicBoard p_board) {
-        if (p_net_no_arr == null) {
-            net_no_arr = new int[0];
-        } else {
-            net_no_arr = ArrayUtils.clone(p_net_no_arr);
-        }
+        net_no_arr = (p_net_no_arr == null) ? new int[0] : p_net_no_arr.clone();
         clearance_class = p_clearance_type;
         component_no = p_component_no;
         fixed_state = p_fixed_state;
@@ -123,7 +119,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      * Returns true if the net number array of this item contains p_net_no.
      */
     public boolean contains_net(int p_net_no) {
-        return (p_net_no <= 0) ? false : ArrayUtils.contains(net_no_arr, p_net_no);
+        return (p_net_no <= 0) ? false : Ints.contains(net_no_arr, p_net_no);
     }
 
     @Override
@@ -155,7 +151,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      */
     public boolean shares_net_no(int[] p_net_no_arr) {
         for (int net_no : net_no_arr) {
-            if (ArrayUtils.contains(p_net_no_arr, net_no)) {
+            if (Ints.contains(p_net_no_arr, net_no)) {
                 return true;
             }
         }
@@ -906,11 +902,20 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
      * was not contained in this array.
      */
     public boolean remove_from_net(int p_net_no) {
-        int i = ArrayUtils.indexOf(net_no_arr, p_net_no);
-        if (i == ArrayUtils.INDEX_NOT_FOUND) {
+        int index = Ints.indexOf(net_no_arr, p_net_no);
+        if (index == -1) { // if no such index exists
             return false;
         } else {
-            this.net_no_arr = ArrayUtils.remove(net_no_arr, i);
+            int[] new_net_no_arr = new int[this.net_no_arr.length - 1];
+            if (new_net_no_arr.length > 0) {
+                if (index != 0) {
+                    System.arraycopy(this.net_no_arr, 0, new_net_no_arr, 0, index);
+                }
+                if (this.net_no_arr.length != index) {
+                    System.arraycopy(this.net_no_arr, index + 1, new_net_no_arr, index, this.net_no_arr.length - index - 1);
+                }
+            }
+            this.net_no_arr = new_net_no_arr;
             return true;
         }
     }

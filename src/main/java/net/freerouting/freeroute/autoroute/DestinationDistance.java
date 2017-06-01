@@ -22,7 +22,6 @@ package net.freerouting.freeroute.autoroute;
 import net.freerouting.freeroute.autoroute.AutorouteControl.ExpansionCostFactor;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntBox;
-import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Calculation of a good lower bound for the distance between a new
@@ -68,8 +67,8 @@ public class DestinationDistance {
      */
     public DestinationDistance(ExpansionCostFactor[] p_trace_costs,
             boolean[] p_layer_active, double p_min_normal_via_cost, double p_min_cheap_via_cost) {
-        trace_costs = ArrayUtils.clone(p_trace_costs);
-        layer_active = ArrayUtils.clone(p_layer_active);
+        trace_costs = (p_trace_costs == null) ? null : p_trace_costs.clone();
+        layer_active = (p_layer_active == null) ? null : p_layer_active.clone();
         layer_count = p_layer_active.length;
         min_normal_via_cost = p_min_normal_via_cost;
         min_cheap_via_cost = p_min_cheap_via_cost;
