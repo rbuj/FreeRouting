@@ -67,13 +67,6 @@ public enum Side implements SideInterface {
         return result;
     }
 
-    /**
-     * returns the string of this instance
-     */
-    public String to_string() {
-        return name;
-    }
-
     private static class Constants {
 
         public static final String ON_THE_LEFT = "on_the_left";

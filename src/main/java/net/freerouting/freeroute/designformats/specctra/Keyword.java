@@ -146,11 +146,4 @@ public class Keyword {
         name = p_name;
     }
 
-    /**
-     * Returns the name string of this Keyword. The name is used for debugging
-     * purposes.
-     */
-    public String get_name() {
-        return name;
-    }
 }

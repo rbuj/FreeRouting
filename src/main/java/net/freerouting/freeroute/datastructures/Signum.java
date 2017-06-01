@@ -81,13 +81,6 @@ public enum Signum {
     }
 
     /**
-     * Returns the string of this instance
-     */
-    public String to_string() {
-        return name;
-    }
-
-    /**
      * Returns the opposite Signum of this Signum
      */
     public Signum negate() {

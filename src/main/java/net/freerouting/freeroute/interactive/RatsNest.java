@@ -104,13 +104,6 @@ public class RatsNest {
         return result;
     }
 
-    public int incomplete_count(int p_net_no) {
-        if (p_net_no <= 0 || p_net_no > net_incompletes.length) {
-            return 0;
-        }
-        return net_incompletes[p_net_no - 1].count();
-    }
-
     public int length_violation_count() {
         int result = 0;
         for (int i = 0; i < net_incompletes.length; ++i) {

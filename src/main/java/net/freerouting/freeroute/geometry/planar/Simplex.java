@@ -596,25 +596,6 @@ public class Simplex extends TileShape {
     }
 
     /**
-     * Returns the number of the rightmost corner seen from p_from_point No
-     * other point of this simplex may be to the right of the line from
-     * p_from_point to the result corner.
-     */
-    public int index_of_right_most_corner(Point p_from_point) {
-        Point pole = p_from_point;
-        Point right_most_corner = corner(0);
-        int result = 0;
-        for (int i = 1; i < arr.length; ++i) {
-            Point curr_corner = corner(i);
-            if (curr_corner.side_of(pole, right_most_corner) == Side.ON_THE_RIGHT) {
-                right_most_corner = curr_corner;
-                result = i;
-            }
-        }
-        return result;
-    }
-
-    /**
      * Returns the intersection of p_box with this simplex
      */
     @Override

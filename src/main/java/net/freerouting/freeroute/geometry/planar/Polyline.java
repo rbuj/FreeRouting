@@ -647,17 +647,6 @@ public class Polyline implements java.io.Serializable {
     }
 
     /**
-     * Mirrors this polyline at the horizontal line through p_pole
-     */
-    public Polyline mirror_horizontal(IntPoint p_pole) {
-        Line[] new_arr = new Line[arr.length];
-        for (int i = 0; i < new_arr.length; ++i) {
-            new_arr[i] = arr[i].mirror_horizontal(p_pole);
-        }
-        return new Polyline(new_arr);
-    }
-
-    /**
      * Returns the smallest box containing the intersection points from index
      * p_from_corner_no to index p_to_corner_no of the lines of this polyline
      */

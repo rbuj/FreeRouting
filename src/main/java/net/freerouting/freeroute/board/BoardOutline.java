@@ -237,10 +237,7 @@ public class BoardOutline extends Item {
     }
 
     TileShape[] get_keepout_lines() {
-        if (this.keepout_lines == null) {
-            this.keepout_lines = new TileShape[0];
-        }
-        return this.keepout_lines;
+        return (this.keepout_lines == null) ? new TileShape[0] : this.keepout_lines.clone();
     }
 
     @Override

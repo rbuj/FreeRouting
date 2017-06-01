@@ -113,32 +113,6 @@ public class NetClasses implements java.io.Serializable {
     }
 
     /**
-     * Looks, if the list contains a net class with trace half width[i] all
-     * equal to p_trace_half_width_arr[i] for 0 {@literal <}= i {@literal <}
-     * layer_count, trace clearance class equal to p_trace_clearance_class and
-     * via rule equal to p_via_rule. Returns null, if no such net class was
-     * found.
-     */
-    public NetClass find(int[] p_trace_half_width_arr, int p_trace_clearance_class, ViaRule p_via_rule) {
-        for (NetClass curr_class : this.class_arr) {
-            if (curr_class.get_trace_clearance_class() == p_trace_clearance_class && curr_class.get_via_rule() == p_via_rule
-                    && p_trace_half_width_arr.length == curr_class.layer_count()) {
-                boolean trace_widths_equal = true;
-                for (int i = 0; i < curr_class.layer_count(); ++i) {
-                    if (curr_class.get_trace_half_width(i) != p_trace_half_width_arr[i]) {
-                        trace_widths_equal = false;
-                        break;
-                    }
-                }
-                if (trace_widths_equal) {
-                    return curr_class;
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
      * Removes p_net_class from this list. Returns false, if p_net_class was not
      * contained in the list.
      */

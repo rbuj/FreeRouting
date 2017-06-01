@@ -73,16 +73,6 @@ public class LayerStructure {
         return -1;
     }
 
-    public int signal_layer_count() {
-        int result = 0;
-        for (Layer curr_layer : arr) {
-            if (curr_layer.is_signal) {
-                ++result;
-            }
-        }
-        return result;
-    }
-
     /**
      * Returns, if the net with name p_net_name contains a powwer plane.
      */

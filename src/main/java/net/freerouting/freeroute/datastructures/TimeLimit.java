@@ -47,17 +47,4 @@ public class TimeLimit {
         long curr_time = (new java.util.Date()).getTime();
         return (curr_time - this.time_stamp > this.time_limit);
     }
-
-    /**
-     * Multiplies this TimeLimit by p_factor.
-     */
-    public void muultiply(double p_factor) {
-        if (p_factor <= 0) {
-            return;
-        }
-        double new_limit = (p_factor * this.time_limit);
-        new_limit = Math.min(new_limit, Integer.MAX_VALUE);
-        this.time_limit = (int) new_limit;
-    }
-
 }

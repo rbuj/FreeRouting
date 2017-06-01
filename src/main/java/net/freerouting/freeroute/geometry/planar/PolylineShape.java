@@ -82,25 +82,6 @@ public abstract class PolylineShape implements Shape, java.io.Serializable {
     public abstract PolylineShape translate_by(Vector p_vector);
 
     /**
-     * Return all unbounded cornersw of this shape.
-     */
-    public Point[] bounded_corners() {
-        int corner_count = this.border_line_count();
-        Collection<Point> result_list = new LinkedList<>();
-        for (int i = 0; i < corner_count; ++i) {
-            if (this.corner_is_bounded(i)) {
-                result_list.add(this.corner(i));
-            }
-        }
-        Point[] result = new Point[result_list.size()];
-        Iterator<Point> it = result_list.iterator();
-        for (int i = 0; i < result.length; ++i) {
-            result[i] = it.next();
-        }
-        return result;
-    }
-
-    /**
      * Returns an approximation of the p_no-th corner of this shape for p_no
      * between 0 and border_line_count() - 1. If the shape is not bounded at
      * this corner, the coordinates of the result will be set to
@@ -286,57 +267,4 @@ public abstract class PolylineShape implements Shape, java.io.Serializable {
         return new Shape[0];
     }
 
-    /**
-     * Checks, if this shape and p_line have a common point.
-     */
-    public boolean intersects(Line p_line) {
-        Side side_of_first_corner = p_line.side_of(corner(0));
-        if (side_of_first_corner == Side.COLLINEAR) {
-            return true;
-        }
-        for (int i = 1; i < this.border_line_count(); ++i) {
-            if (p_line.side_of(corner(i)) != side_of_first_corner) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Calculates the left most corner of this shape, when looked at from
-     * p_from_point.
-     */
-    public Point left_most_corner(Point p_from_point) {
-        if (this.is_empty()) {
-            return p_from_point;
-        }
-        Point result = this.corner(0);
-        int corner_count = this.border_line_count();
-        for (int i = 1; i < corner_count; ++i) {
-            Point curr_corner = this.corner(i);
-            if (curr_corner.side_of(p_from_point, result) == Side.ON_THE_LEFT) {
-                result = curr_corner;
-            }
-        }
-        return result;
-    }
-
-    /**
-     * Calculates the left most corner of this shape, when looked at from
-     * p_from_point.
-     */
-    public Point right_most_corner(Point p_from_point) {
-        if (this.is_empty()) {
-            return p_from_point;
-        }
-        Point result = this.corner(0);
-        int corner_count = this.border_line_count();
-        for (int i = 1; i < corner_count; ++i) {
-            Point curr_corner = this.corner(i);
-            if (curr_corner.side_of(p_from_point, result) == Side.ON_THE_RIGHT) {
-                result = curr_corner;
-            }
-        }
-        return result;
-    }
 }

@@ -99,15 +99,6 @@ public class ItemSelectionFilter implements java.io.Serializable {
     }
 
     /**
-     * Selects all item types.
-     */
-    public void select_all() {
-        for (Entry<SELECTABLE_CHOICES, Boolean> entry : values.entrySet()) {
-            entry.setValue(true);
-        }
-    }
-
-    /**
      * Deselects all item types.
      */
     public void deselect_all() {

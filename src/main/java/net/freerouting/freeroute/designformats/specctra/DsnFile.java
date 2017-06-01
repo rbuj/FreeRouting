@@ -190,19 +190,10 @@ public class DsnFile {
     public static void write(BoardHandling p_board_handling, OutputStream p_file,
             String p_design_name, boolean p_compat_mode) throws DsnFileException {
         //tests.Validate.check("before writing dsn", p_board);
-        IndentFileWriter output_file = new IndentFileWriter(p_file);
-        if (output_file == null) {
-            throw new DsnFileException("unable to write dsn file");
-        }
-        try {
+        try (IndentFileWriter output_file = new IndentFileWriter(p_file)) {
             write_pcb_scope(p_board_handling, output_file, p_design_name, p_compat_mode);
         } catch (java.io.IOException exc) {
             throw new DsnFileException("unable to write dsn file", exc);
-        }
-        try {
-            output_file.close();
-        } catch (java.io.IOException exc) {
-            throw new DsnFileException("unable to close dsn file", exc);
         }
     }
 

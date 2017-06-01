@@ -329,51 +329,6 @@ public class PolygonShape extends PolylineShape {
         return precalculated_bounding_octagon;
     }
 
-    /**
-     * Checks, if every line segment between 2 points of the shape is contained
-     * completely in the shape.
-     */
-    public boolean is_comvex() {
-        if (corners.length <= 2) {
-            return true;
-        }
-        Point prev_point = corners[corners.length - 1];
-        Point curr_point = corners[0];
-        Point next_point = corners[1];
-
-        for (int ind = 0; ind < corners.length; ++ind) {
-            if (next_point.side_of(prev_point, curr_point) == Side.ON_THE_RIGHT) {
-                return false;
-            }
-            prev_point = curr_point;
-            curr_point = next_point;
-            if (ind == corners.length - 2) {
-                next_point = corners[0];
-            } else {
-                next_point = corners[ind + 2];
-            }
-        }
-        // check, if the sum of the interior angles is at most 2 * pi
-
-        Line first_line = new Line(corners[corners.length - 1], corners[0]);
-        Line curr_line = new Line(corners[0], corners[1]);
-        IntDirection first_direction = (IntDirection) first_line.direction();
-        IntDirection curr_direction = (IntDirection) curr_line.direction();
-        double last_det = first_direction.determinant(curr_direction);
-
-        for (int ind2 = 2; ind2 < corners.length; ++ind2) {
-            curr_line = new Line(curr_line.b, corners[ind2]);
-            curr_direction = (IntDirection) curr_line.direction();
-            double curr_det = first_direction.determinant(curr_direction);
-            if (last_det <= 0 && curr_det > 0) {
-                return false;
-            }
-            last_det = curr_det;
-        }
-
-        return true;
-    }
-
     public PolygonShape convex_hull() {
         if (corners.length <= 2) {
             return this;

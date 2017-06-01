@@ -59,30 +59,6 @@ public final class TileShapeUtils {
     }
 
     /**
-     * Creates a normalized IntOctagon from the input values. For the meaning of
-     * the parameter shortcuts see class IntOctagon.
-     */
-    public static IntOctagon get_instance(int p_lx, int p_ly, int p_rx,
-            int p_uy, int p_ulx, int p_lrx,
-            int p_llx, int p_urx) {
-        IntOctagon oct = new IntOctagon(p_lx, p_ly, p_rx, p_uy, p_ulx,
-                p_lrx, p_llx, p_urx);
-        return oct.normalize();
-    }
-
-    /**
-     * creates a boxlike convex shape
-     */
-    public static IntOctagon get_instance(int p_lower_left_x,
-            int p_lower_left_y,
-            int p_upper_right_x,
-            int p_upper_right_y) {
-        IntBox box = new IntBox(p_lower_left_x, p_lower_left_y,
-                p_upper_right_x, p_upper_right_y);
-        return box.to_IntOctagon();
-    }
-
-    /**
      * creates the smallest IntOctagon containing p_point
      */
     public static IntBox get_instance(Point p_point) {

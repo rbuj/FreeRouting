@@ -140,41 +140,6 @@ public abstract class ShapeTree {
         }
     }
 
-    /**
-     * Returns the number of entries stored in the tree.
-     */
-    public int size() {
-        return leaf_count;
-    }
-
-    /**
-     * Outputs some statistic information about the tree.
-     */
-    public void statistics(String p_message) {
-        Leaf[] leaf_arr = this.to_array();
-        double cumulative_depth = 0;
-        int maximum_depth = 0;
-        for (Leaf leaf : leaf_arr) {
-            if (leaf != null) {
-                int distance_to_root = leaf.distance_to_root();
-                cumulative_depth += distance_to_root;
-                maximum_depth = Math.max(maximum_depth, distance_to_root);
-            }
-        }
-        double everage_depth = cumulative_depth / leaf_arr.length;
-        System.out.print("MinAreaTree: Entry count: ");
-        System.out.print(leaf_arr.length);
-        System.out.print(" log: ");
-        System.out.print(Math.round(Math.log(leaf_arr.length)));
-        System.out.print(" Everage depth: ");
-        System.out.print(Math.round(everage_depth));
-        System.out.print(" ");
-        System.out.print(" Maximum depth: ");
-        System.out.print(maximum_depth);
-        System.out.print(" ");
-        System.out.println(p_message);
-    }
-
     public static class TreeEntry {
 
         public final ShapeTree.Storable object;

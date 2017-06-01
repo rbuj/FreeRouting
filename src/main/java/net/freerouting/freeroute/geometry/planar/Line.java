@@ -196,32 +196,6 @@ public class Line implements Comparable<Line>, java.io.Serializable {
     }
 
     /**
-     * Looks, if all interiour points of p_tile are on the right side of this
-     * line.
-     */
-    public boolean is_on_the_left(TileShape p_tile) {
-        for (int i = 0; i < p_tile.border_line_count(); ++i) {
-            if (this.side_of(p_tile.corner(i)) == Side.ON_THE_RIGHT) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Looks, if all interiour points of p_tile are on the left side of this
-     * line.
-     */
-    public boolean is_on_the_right(TileShape p_tile) {
-        for (int i = 0; i < p_tile.border_line_count(); ++i) {
-            if (this.side_of(p_tile.corner(i)) == Side.ON_THE_LEFT) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
      * Returns the signed distance of this line from p_point. The result will be
      * positive, if the line is on the left of p_point, else negative.
      */
@@ -469,15 +443,6 @@ public class Line implements Comparable<Line>, java.io.Serializable {
      */
     public boolean is_parallel(Line p_other) {
         return this.direction().side_of(p_other.direction()) == Side.COLLINEAR;
-    }
-
-    /**
-     * checks, if this Line and p_other are perpendicular
-     */
-    public boolean is_perpendicular(Line p_other) {
-        Vector v1 = direction().get_vector();
-        Vector v2 = p_other.direction().get_vector();
-        return v1.projection(v2) == Signum.ZERO;
     }
 
     /**

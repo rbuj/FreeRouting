@@ -318,19 +318,6 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
     }
 
     /**
-     * Returns the last layer, where both this item and p_other have a shape.
-     * Returns -1, if such a layer does not exisr.
-     */
-    public int last_common_layer(Item p_other) {
-        int max_first_layer = Math.max(this.first_layer(), p_other.first_layer());
-        int min_last_layer = Math.min(this.last_layer(), p_other.last_layer());
-        if (max_first_layer > min_last_layer) {
-            return -1;
-        }
-        return min_last_layer;
-    }
-
-    /**
      * Return the name of the component of this item or null, if this item does
      * not belong to a component.
      */
@@ -493,16 +480,6 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
     public boolean is_connected() {
         Collection<Item> contacts = this.get_all_contacts();
         return (contacts.size() > 0);
-    }
-
-    /**
-     * Checks, if this item is electrically connected to another connectable
-     * item on the input layer. Returns false for items, which are not
-     * connectable.
-     */
-    public boolean is_connected_on_layer(int p_layer) {
-        Collection<Item> contacts_on_layer = this.get_all_contacts(p_layer);
-        return (contacts_on_layer.size() > 0);
     }
 
     /**

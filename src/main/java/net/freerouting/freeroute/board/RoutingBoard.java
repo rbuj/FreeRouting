@@ -173,23 +173,6 @@ public class RoutingBoard extends BasicBoard {
     }
 
     /**
-     * marks the whole board as changed
-     */
-    public void mark_all_changed_area() {
-        start_marking_changed_area();
-        FloatPoint[] board_corners = new FloatPoint[4];
-        board_corners[0] = bounding_box.ll.to_float();
-        board_corners[1] = new FloatPoint(bounding_box.ur.x, bounding_box.ll.y);
-        board_corners[2] = bounding_box.ur.to_float();
-        board_corners[3] = new FloatPoint(bounding_box.ll.x, bounding_box.ur.y);
-        for (int i = 0; i < get_layer_count(); ++i) {
-            for (int j = 0; j < 4; ++j) {
-                join_changed_area(board_corners[j], i);
-            }
-        }
-    }
-
-    /**
      * Optimizes the route in the internally marked area. If p_net_no
      * {@literal >} 0, only traces with net number p_net_no are optimized. If
      * p_clip_shape != null the optimizing is restricted to p_clip_shape.
@@ -1147,25 +1130,5 @@ public class RoutingBoard extends BasicBoard {
     private void clear_shove_failing_obstacle() {
         shove_failing_obstacle = null;
         shove_failing_layer = -1;
-    }
-
-    /**
-     * Sets, if the autoroute database has to be maintained outside the
-     * outoroute algorithm while changing items on rhe board.
-     */
-    void set_maintaining_autoroute_database(boolean p_value) {
-        if (p_value) {
-
-        } else {
-            this.autoroute_engine = null;
-        }
-    }
-
-    /**
-     * Returns, if the autoroute database is maintained outside the outoroute
-     * algorithm while changing items on rhe board.
-     */
-    boolean is_maintaining_autoroute_database() {
-        return this.autoroute_engine != null;
     }
 }

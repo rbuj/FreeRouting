@@ -64,10 +64,6 @@ class PullTightAlgo45 extends PullTightAlgo {
         return new_result;
     }
 
-    AngleRestriction get_angle_restriction() {
-        return AngleRestriction.FORTYFIVE_DEGREE;
-    }
-
     /**
      * Tries to reduce the amount of corners of p_polyline. Return p_polyline,
      * if nothing was changed.

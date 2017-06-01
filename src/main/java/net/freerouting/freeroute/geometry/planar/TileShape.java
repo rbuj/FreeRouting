@@ -179,32 +179,6 @@ public abstract class TileShape extends PolylineShape implements ConvexShape {
     }
 
     /**
-     * Returns Side.COLLINEAR if p_point is on the border of this shape with
-     * tolerance p_tolerence. p_tolerance is used when determing, if a point is
-     * on the right side of a border line. It is used there in calculating a
-     * determinant and is not the distance of p_point to the border. Otherwise
-     * the function returns Side.ON_THE_LEFT if p_point is outside of this
-     * shape, and Side.ON_THE_RIGTH if p_point is inside this shape.
-     */
-    public Side side_of_border(FloatPoint p_point, double p_tolerance) {
-        int line_count = border_line_count();
-        if (line_count == 0) {
-            return Side.COLLINEAR;
-        }
-        Side result = Side.ON_THE_RIGHT; // point is inside
-        for (int i = 0; i < line_count; ++i) {
-            Side curr_side = border_line(i).side_of(p_point, p_tolerance);
-            if (curr_side == Side.ON_THE_LEFT) {
-                return Side.ON_THE_LEFT; // point is outside
-            } else if (curr_side == Side.COLLINEAR) {
-                result = curr_side;
-            }
-
-        }
-        return result;
-    }
-
-    /**
      * If p_point lies on the border of this shape, the number of the edge line
      * segment containing p_point is returned, otherwise -1 is returned.
      */
@@ -441,24 +415,6 @@ public abstract class TileShape extends PolylineShape implements ConvexShape {
     }
 
     /**
-     * Returns the number of a nearest corner of the shape to p_from_point
-     */
-    public int index_of_nearest_corner(Point p_from_point) {
-        FloatPoint from_point_f = p_from_point.to_float();
-        int result = 0;
-        int corner_count = border_line_count();
-        double min_dist = Double.MIN_VALUE;
-        for (int i = 0; i < corner_count; ++i) {
-            double curr_dist = corner_approx(i).distance(from_point_f);
-            if (curr_dist < min_dist) {
-                min_dist = curr_dist;
-                result = i;
-            }
-        }
-        return result;
-    }
-
-    /**
      * Returns a line segment consisting of an approximations of the corners
      * with index 0 and corner_count / 2.
      */
@@ -534,37 +490,6 @@ public abstract class TileShape extends PolylineShape implements ConvexShape {
             result = this.intersection(centre_box);
         }
         return result;
-    }
-
-    /**
-     * Returns the maximum of the edge widths of the shape. Only defined when
-     * the shape is bounded.
-     */
-    public double length() {
-        if (!this.is_bounded()) {
-            return Integer.MAX_VALUE;
-        }
-        int dimension = this.dimension();
-        if (dimension <= 0) {
-            return 0;
-        }
-        if (dimension == 1) {
-            return this.circumference() / 2;
-        }
-        // now the shape is 2-dimensional
-        double max_distance = -1;
-        double max_distance_2 = -1;
-        FloatPoint gravity_point = this.centre_of_gravity();
-        for (int i = 0; i < border_line_count(); ++i) {
-            double curr_distance = Math.abs(border_line(i).signed_distance(gravity_point));
-            if (curr_distance > max_distance) {
-                max_distance_2 = max_distance;
-                max_distance = curr_distance;
-            } else if (curr_distance > max_distance_2) {
-                max_distance_2 = curr_distance;
-            }
-        }
-        return max_distance + max_distance_2;
     }
 
     /**

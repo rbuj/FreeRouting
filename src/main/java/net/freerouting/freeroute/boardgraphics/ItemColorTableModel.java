@@ -244,10 +244,6 @@ public class ItemColorTableModel extends ColorTableModel {
         set_colors(ColumnNames.VIA_KEEPOUTS.ordinal(), p_color_arr);
     }
 
-    public void set_place_keepout_colors(Color[] p_color_arr) {
-        set_colors(ColumnNames.PLACE_KEEPOUTS.ordinal(), p_color_arr);
-    }
-
     private void set_colors(int p_item_type, Color[] p_color_arr) {
         for (int layer = 0; layer < this.data.length - 1; ++layer) {
             int color_index = layer % p_color_arr.length;

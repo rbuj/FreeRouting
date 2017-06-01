@@ -377,16 +377,6 @@ public class Settings implements java.io.Serializable {
     }
 
     /**
-     * The filter used in interactive selection of board items.
-     */
-    public void set_item_selection_filter(ItemSelectionFilter p_value) {
-        if (read_only) {
-            return;
-        }
-        this.item_selection_filter = p_value;
-    }
-
-    /**
      * Enables or disables pushing obstacles in interactive routing
      */
     public void set_push_enabled(boolean p_value) {
