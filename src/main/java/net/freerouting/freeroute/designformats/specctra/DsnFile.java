@@ -71,19 +71,10 @@ public class DsnFile {
         ReadScopeParameter read_scope_par
                 = new ReadScopeParameter(scanner, p_board_handling, p_observers, p_item_id_no_generator, p_test_level);
         boolean read_ok = Keyword.PCB_SCOPE.read_scope(read_scope_par);
-        ReadResult result;
-        if (read_ok) {
-            result = ReadResult.OK;
-            if (read_scope_par.autoroute_settings == null) {
-                // look for power planes with incorrect layer type and adjust autoroute parameters
-                adjust_plane_autoroute_settings(p_board_handling);
-            }
-        } else if (!read_scope_par.board_outline_ok) {
-            result = ReadResult.OUTLINE_MISSING;
-        } else {
-            result = ReadResult.ERROR;
+        if (read_ok && read_scope_par.autoroute_settings == null) {
+            // look for power planes with incorrect layer type and adjust autoroute parameters
+            adjust_plane_autoroute_settings(p_board_handling);
         }
-        //tests.Validate.check("after reading dsn", read_scope_par.board_handling.get_routing_board());
     }
 
     /**

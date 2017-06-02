@@ -194,7 +194,6 @@ public class ShapeSearchTree90Degree extends ShapeSearchTree {
             // The upper line segment of the obstacle_shape intersects the interiour of p_shape
             int curr_distance = shape_to_be_contained.ll.y - p_obstacle_shape.ur.y;
             if (curr_distance > cut_line_distance) {
-                cut_line_distance = curr_distance;
                 restrained_shape = new IntBox(room_shape.ll.x, p_obstacle_shape.ur.y, room_shape.ur.x, room_shape.ur.y);
             }
         }
