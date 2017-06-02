@@ -304,8 +304,4 @@ public class DsnFile {
         }
         return result;
     }
-
-    public enum ReadResult {
-        OK, OUTLINE_MISSING, ERROR
-    }
 }
