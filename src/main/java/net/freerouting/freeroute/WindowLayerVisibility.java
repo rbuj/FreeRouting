@@ -38,7 +38,8 @@ public final class WindowLayerVisibility extends WindowVisibility {
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         String title = resources.getString("layer_visibility");
         String header_message = resources.getString("layer_visibility_header");
-        net.freerouting.freeroute.board.LayerStructure layer_structure = board_panel.board_handling.get_routing_board().layer_structure;
+        net.freerouting.freeroute.board.LayerStructure layer_structure
+                = board_panel.board_handling.get_routing_board().layer_structure;
         String[] message_arr = new String[layer_structure.arr.length];
         for (int i = 0; i < message_arr.length; ++i) {
             message_arr[i] = layer_structure.arr[i].name;
@@ -54,7 +55,8 @@ public final class WindowLayerVisibility extends WindowVisibility {
     /**
      * Creates a new instance of LayerVisibilityFrame
      */
-    private WindowLayerVisibility(BoardFrame p_board_frame, String p_title, String p_header_message, String[] p_message_arr) {
+    private WindowLayerVisibility(BoardFrame p_board_frame, String p_title,
+            String p_header_message, String[] p_message_arr) {
         super(p_board_frame, p_title, p_header_message, p_message_arr);
     }
 
@@ -68,8 +70,19 @@ public final class WindowLayerVisibility extends WindowVisibility {
         int layer_count = this.get_board_handling().graphics_context.layer_count();
         for (int i = 0; i < layer_count; ++i) {
             if (i != this.get_board_handling().settings.get_layer()) {
-                set_slider_value(i, 0);
-                set_changed_value(i, 0);
+                set_slider_value(i, MIN_SLIDER_VALUE);
+                set_changed_value(i, MIN_VISIBILITY_VALUE);
+            }
+        }
+    }
+
+    @Override
+    protected void set_all_maximum() {
+        int layer_count = this.get_board_handling().graphics_context.layer_count();
+        for (int i = 0; i < layer_count; ++i) {
+            if (i != this.get_board_handling().settings.get_layer()) {
+                set_slider_value(i, MAX_SLIDER_VALUE);
+                set_changed_value(i, MAX_VISIBILITY_VALUE);
             }
         }
     }
@@ -79,7 +92,8 @@ public final class WindowLayerVisibility extends WindowVisibility {
      */
     @Override
     public void refresh() {
-        net.freerouting.freeroute.boardgraphics.GraphicsContext graphics_context = this.get_board_handling().graphics_context;
+        net.freerouting.freeroute.boardgraphics.GraphicsContext graphics_context
+                = this.get_board_handling().graphics_context;
         for (int i = 0; i < graphics_context.layer_count(); ++i) {
             this.set_slider_value(i, graphics_context.get_raw_layer_visibility(i));
         }

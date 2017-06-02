@@ -20,6 +20,7 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import net.freerouting.freeroute.boardgraphics.ColorIntensityTable;
 import net.freerouting.freeroute.boardgraphics.ColorIntensityTable.ObjectNames;
 
 /**
@@ -42,7 +43,8 @@ public final class WindowObjectVisibility extends WindowVisibility {
         for (int i = 0; i < message_arr.length; ++i) {
             message_arr[i] = rb.getString(ObjectNames.values()[i].toString());
         }
-        WindowObjectVisibility result = new WindowObjectVisibility(p_board_frame, title, header_message, message_arr);
+        WindowObjectVisibility result
+                = new WindowObjectVisibility(p_board_frame, title, header_message, message_arr);
         p_board_frame.set_context_sensitive_help(result, "WindowDisplay_ObjectVisibility");
         result.refresh();
         return result;
@@ -51,7 +53,8 @@ public final class WindowObjectVisibility extends WindowVisibility {
     /**
      * Creates a new instance of ItemVisibilityFrame
      */
-    private WindowObjectVisibility(BoardFrame p_board_frame, String p_title, String p_header_message, String[] p_message_arr) {
+    private WindowObjectVisibility(BoardFrame p_board_frame, String p_title,
+            String p_header_message, String[] p_message_arr) {
         super(p_board_frame, p_title, p_header_message, p_message_arr);
     }
 
@@ -60,7 +63,8 @@ public final class WindowObjectVisibility extends WindowVisibility {
      */
     @Override
     public void refresh() {
-        net.freerouting.freeroute.boardgraphics.ColorIntensityTable color_intensity_table = this.get_board_handling().graphics_context.color_intensity_table;
+        ColorIntensityTable color_intensity_table
+                = this.get_board_handling().graphics_context.color_intensity_table;
         for (int i = 0; i < ObjectNames.values().length; ++i) {
             this.set_slider_value(i, color_intensity_table.get_value(ObjectNames.values()[i]));
         }
@@ -68,6 +72,7 @@ public final class WindowObjectVisibility extends WindowVisibility {
 
     @Override
     protected void set_changed_value(int p_index, double p_value) {
-        get_board_handling().graphics_context.color_intensity_table.set_value(ObjectNames.values()[p_index], p_value);
+        get_board_handling().graphics_context.color_intensity_table
+                .set_value(ObjectNames.values()[p_index], p_value);
     }
 }

@@ -20,6 +20,7 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import net.freerouting.freeroute.interactive.BoardHandling;
 
 /**
  * Interactive Frame to adjust the visibility of a set of objects
@@ -29,7 +30,11 @@ import java.util.Locale;
 @SuppressWarnings("serial")
 public abstract class WindowVisibility extends BoardSavableSubWindow {
 
-    private static final int MAX_SLIDER_VALUE = 100;
+    static final int MAX_SLIDER_VALUE = 100;
+    static final int MIN_SLIDER_VALUE = 0;
+    static final double MAX_VISIBILITY_VALUE = 1.0;
+    static final double MIN_VISIBILITY_VALUE = 0.0;
+
     // private data
     private final BoardPanel board_panel;
     private final javax.swing.JLabel header_message;
@@ -39,7 +44,8 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
     /**
      * Creates a new instance of VisibilityFrame
      */
-    public WindowVisibility(BoardFrame p_board_frame, String p_title, String p_header_message, String[] p_message_arr) {
+    public WindowVisibility(BoardFrame p_board_frame, String p_title,
+            String p_header_message, String[] p_message_arr) {
         this.board_panel = p_board_frame.board_panel;
         this.setTitle(p_title);
 
@@ -49,7 +55,8 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
 
         java.awt.GridBagLayout gridbag = new java.awt.GridBagLayout();
         main_panel.setLayout(gridbag);
-        java.awt.GridBagConstraints gridbag_constraints = new java.awt.GridBagConstraints();
+        java.awt.GridBagConstraints gridbag_constraints
+                = new java.awt.GridBagConstraints();
         gridbag_constraints.insets = new java.awt.Insets(5, 10, 5, 10);
         header_message = new javax.swing.JLabel();
         header_message.setText(p_header_message);
@@ -78,12 +85,14 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
         gridbag_constraints.gridwidth = 2;
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
-        javax.swing.JButton min_all_button = new javax.swing.JButton(resources.getString("minimum_all"));
+        javax.swing.JButton min_all_button
+                = new javax.swing.JButton(resources.getString("minimum_all"));
         min_all_button.setToolTipText(resources.getString("minimum_all_tooltip"));
         min_all_button.addActionListener(new MinAllButtonListener());
         gridbag.setConstraints(min_all_button, gridbag_constraints);
         main_panel.add(min_all_button);
-        javax.swing.JButton max_all_button = new javax.swing.JButton(resources.getString("maximum_all"));
+        javax.swing.JButton max_all_button
+                = new javax.swing.JButton(resources.getString("maximum_all"));
         max_all_button.setToolTipText(resources.getString("maximum_all_tooltip"));
         max_all_button.addActionListener(new MaxAllButtonListener());
         gridbag.setConstraints(max_all_button, gridbag_constraints);
@@ -100,21 +109,21 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
         slider_arr[p_no].setValue(visibility);
     }
 
-    protected net.freerouting.freeroute.interactive.BoardHandling get_board_handling() {
+    protected BoardHandling get_board_handling() {
         return board_panel.board_handling;
     }
 
     protected void set_all_minimum() {
         for (int i = 0; i < slider_arr.length; ++i) {
-            set_slider_value(i, 0);
-            set_changed_value(i, 0);
+            set_slider_value(i, MIN_SLIDER_VALUE);
+            set_changed_value(i, MIN_VISIBILITY_VALUE);
         }
     }
 
     protected void set_all_maximum() {
         for (int i = 0; i < slider_arr.length; ++i) {
             set_slider_value(i, MAX_SLIDER_VALUE);
-            set_changed_value(i, 1);
+            set_changed_value(i, MAX_VISIBILITY_VALUE);
         }
     }
 
