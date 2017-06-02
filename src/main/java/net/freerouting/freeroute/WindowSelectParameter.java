@@ -171,11 +171,9 @@ public final class WindowSelectParameter extends BoardSavableSubWindow {
 
     private class CurrentLayerListener implements java.awt.event.ActionListener {
 
-        public final int signal_layer_no;
         public final int layer_no;
 
         CurrentLayerListener(int p_signal_layer_no, int p_layer_no) {
-            signal_layer_no = p_signal_layer_no;
             layer_no = p_layer_no;
         }
 

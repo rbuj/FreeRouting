@@ -142,9 +142,7 @@ public class Connection {
      * null.
      */
     public final Point start_point;
-    public final int start_layer;
     public final Point end_point;
-    public final int end_layer;
     public final Set<Item> item_list;
 
     /**
@@ -152,9 +150,7 @@ public class Connection {
      */
     private Connection(Point p_start_point, int p_start_layer, Point p_end_point, int p_end_layer, Set<Item> p_item_list) {
         start_point = p_start_point;
-        start_layer = p_start_layer;
         end_point = p_end_point;
-        end_layer = p_end_layer;
         item_list = p_item_list;
     }
 
