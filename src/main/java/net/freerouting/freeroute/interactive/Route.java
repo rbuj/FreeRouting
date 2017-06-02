@@ -181,12 +181,10 @@ public class Route {
             check_forced_trace_time_limit = new TimeLimit(CHECK_FORCED_TRACE_TIME_LIMIT);
         }
 
-        // tests.Validate.check("before insert", board);
         Point ok_point = board.insert_forced_trace_segment(prev_corner,
                 curr_corner, pen_half_width_arr[layer], layer, net_no_arr, clearance_class,
                 max_shove_trace_recursion_depth, max_shove_via_recursion_depth, max_spring_over_recursion_depth,
                 trace_tidy_width, pull_tight_accuracy, !is_stitch_mode, check_forced_trace_time_limit);
-        // tests.Validate.check("after insert", board);
         if (ok_point == prev_corner && this.with_neckdown) {
             ok_point = try_neckdown_at_start(curr_corner);
         }

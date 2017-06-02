@@ -275,7 +275,6 @@ public class BatchAutorouter {
         if (autoroute_result == AutorouteEngine.AutorouteResult.ROUTED) {
             routing_board.opt_changed_area(new int[0], null, this.hdlg.settings.get_trace_pull_tight_accuracy(), autoroute_control.trace_costs, this.thread, TIME_LIMIT_TO_PREVENT_ENDLESS_LOOP);
         }
-        // tests.Validate.check("Autoroute  ", hdlg.get_routing_board());
         boolean result = autoroute_result == AutorouteEngine.AutorouteResult.ROUTED || autoroute_result == AutorouteEngine.AutorouteResult.ALREADY_CONNECTED;
         return result;
     }
