@@ -1222,37 +1222,4 @@ public class MazeSearchAlgo {
             section_no_of_door = p_section_no_of_door;
         }
     }
-
-    /**
-     * Used for the result of MazeShoveViaAlgo.check_shove_via and
-     * MazeShoveThinRoomAlgo.check_shove_thin_room.
-     */
-    static class ShoveResult {
-
-        /**
-         * The opposite door to be expanded
-         */
-        final ExpansionDoor opposite_door;
-        /**
-         * The doors at the adjusted edge of the room shape to be expanded.
-         */
-        final Collection<ExpansionDoor> side_doors;
-        /**
-         * The passing point of a trace through the from_door after adjustment.
-         */
-        final FloatPoint from_door_passing_point;
-        /**
-         * The passing point of a trace through the opposite door after
-         * adjustment.
-         */
-        final FloatPoint opposite_door_passing_point;
-
-        ShoveResult(ExpansionDoor p_opposite_door, Collection<ExpansionDoor> p_side_doors,
-                FloatPoint p_from_door_passing_point, FloatPoint p_opposite_door_passing_point) {
-            opposite_door = p_opposite_door;
-            side_doors = p_side_doors;
-            from_door_passing_point = p_from_door_passing_point;
-            opposite_door_passing_point = p_opposite_door_passing_point;
-        }
-    }
 }

@@ -970,7 +970,6 @@ class Structure extends ScopeKeyword {
             // happens if the boundary shape with layer pcb is missing
             if (p_board_construction_info.outline_shapes.isEmpty()) {
                 System.out.println("Structure.create_board: outline missing");
-                p_par.board_outline_ok = false;
                 return false;
             }
             Iterator<Shape> it = p_board_construction_info.outline_shapes.iterator();
@@ -1003,7 +1002,6 @@ class Structure extends ScopeKeyword {
             max_coor = Math.max(max_coor, Math.abs(bounding_box.coor[i] * p_par.resolution));
         }
         if (max_coor == 0) {
-            p_par.board_outline_ok = false;
             return false;
         }
         // make scalefactor smaller, if there is a danger of integer overflow.

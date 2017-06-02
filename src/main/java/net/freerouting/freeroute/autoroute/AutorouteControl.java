@@ -82,11 +82,6 @@ public class AutorouteControl {
     final double[] via_radius_arr;
     double max_via_radius;
     /**
-     * The width of the region around changed traces, where traces are pulled
-     * tight
-     */
-    int tidy_region_width;
-    /**
      * The pull tight accuracy of traces
      */
     int pull_tight_accuracy;
@@ -172,7 +167,6 @@ public class AutorouteControl {
         is_fanout = false;
         remove_unconnected_vias = true;
         with_neckdown = p_settings.get_automatic_neckdown();
-        tidy_region_width = Integer.MAX_VALUE;
         pull_tight_accuracy = 500;
         max_shove_trace_recursion_depth = 20;
         max_shove_via_recursion_depth = 5;

@@ -74,8 +74,6 @@ public class ReadScopeParameter {
 
     boolean dsn_file_generated_by_host = true;
 
-    boolean board_outline_ok = true;
-
     final Collection<String[]> constants = new LinkedList<>();
     net.freerouting.freeroute.board.Communication.SpecctraParserInfo.WriteResolution write_resolution = null;
 
