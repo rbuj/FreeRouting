@@ -19,10 +19,6 @@
  */
 package net.freerouting.freeroute.geometry.planar;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-
 /**
  * Abstract class with functions for shapes, whose borders consist ob straight
  * lines.

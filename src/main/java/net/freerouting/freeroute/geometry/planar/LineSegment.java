@@ -15,8 +15,6 @@
  */
 package net.freerouting.freeroute.geometry.planar;
 
-import net.freerouting.freeroute.datastructures.Signum;
-
 /**
  * Implements functionality for line segments. The difference between a
  * LineSegment and a Line is, that a Line is infinite and a LineSegment has a

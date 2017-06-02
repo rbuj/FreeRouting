@@ -16,8 +16,6 @@
  */
 package net.freerouting.freeroute.geometry.planar;
 
-import java.math.BigInteger;
-
 /**
  *
  * @author robert
