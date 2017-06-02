@@ -282,7 +282,7 @@ public class Polyline implements java.io.Serializable {
                 precalculated_corners[i] = arr[i].intersection(arr[i + 1]);
             }
         }
-        return (precalculated_corners == null) ? null : precalculated_corners.clone();
+        return precalculated_corners.clone();
     }
 
     /**
@@ -302,7 +302,7 @@ public class Polyline implements java.io.Serializable {
                 precalculated_float_corners[i] = arr[i].intersection_approx(arr[i + 1]);
             }
         }
-        return (precalculated_float_corners == null) ? null : precalculated_float_corners.clone();
+        return precalculated_float_corners.clone();
     }
 
     /**

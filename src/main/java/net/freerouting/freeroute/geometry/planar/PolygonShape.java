@@ -511,7 +511,7 @@ public class PolygonShape extends PolylineShape {
                 precalculated_convex_pieces[i] = TileShapeUtils.get_instance(curr_piece.corners);
             }
         }
-        return (precalculated_convex_pieces == null) ? null : precalculated_convex_pieces.clone();
+        return precalculated_convex_pieces.clone();
     }
 
     /**

@@ -225,7 +225,7 @@ public class PolylineArea implements Area, java.io.Serializable {
                 precalculated_convex_pieces[i] = it.next();
             }
         }
-        return (precalculated_convex_pieces == null) ? null : precalculated_convex_pieces.clone();
+        return precalculated_convex_pieces.clone();
     }
 
     @Override

@@ -221,7 +221,7 @@ public class Simplex extends TileShape {
                 precalculated_float_corners[i] = arr[i].intersection_approx(prev);
             }
         }
-        return (precalculated_float_corners == null) ? null : precalculated_float_corners.clone();
+        return precalculated_float_corners.clone();
     }
 
     /**
