@@ -40,10 +40,6 @@ import net.freerouting.freeroute.geometry.planar.Vector;
 public class ObstacleArea extends Item {
 
     /**
-     * For debugging the division into tree shapes
-     */
-    private static final boolean DISPLAY_TREE_SHAPES = false;
-    /**
      * The name of this ObstacleArea, which is null, if the ObstacleArea doos
      * not belong to a component.
      */
@@ -257,12 +253,6 @@ public class ObstacleArea extends Item {
         Color color = p_color_arr[this.layer];
         double intensity = p_graphics_context.get_layer_visibility(this.layer) * p_intensity;
         p_graphics_context.fill_area(this.get_area(), p_g, color, intensity);
-        if (intensity > 0 && DISPLAY_TREE_SHAPES) {
-            ShapeSearchTree default_tree = this.board.search_tree_manager.get_default_tree();
-            for (int i = 0; i < this.tree_shape_count(default_tree); ++i) {
-                p_graphics_context.draw_boundary(this.get_tree_shape(default_tree, i), 1, Color.white, p_g, 1);
-            }
-        }
     }
 
     @Override
