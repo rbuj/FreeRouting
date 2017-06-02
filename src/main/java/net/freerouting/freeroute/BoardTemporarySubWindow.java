@@ -36,7 +36,10 @@ public class BoardTemporarySubWindow extends BoardSubWindow {
     public BoardTemporarySubWindow(BoardFrame p_board_frame) {
         this.board_frame = p_board_frame;
         p_board_frame.temporary_subwindows.add(this);
+        initializeComponents();
+    }
 
+    private void initializeComponents() {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {

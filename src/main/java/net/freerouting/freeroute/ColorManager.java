@@ -154,6 +154,10 @@ public final class ColorManager extends BoardSavableSubWindow {
         ColorRenderer(boolean p_is_bordered) {
             super();
             this.isBordered = p_is_bordered;
+            initializeComponent();
+        }
+
+        private void initializeComponent() {
             setOpaque(true); //MUST do this for background to show up.
         }
 

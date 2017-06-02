@@ -39,6 +39,10 @@ public class PopupMenuDisplay extends javax.swing.JPopupMenu {
      */
     public PopupMenuDisplay(BoardFrame p_board_frame) {
         this.board_panel = p_board_frame.board_panel;
+        initializeComponents();
+    }
+
+    private void initializeComponents() {
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         javax.swing.JMenuItem center_display_item = new javax.swing.JMenuItem();

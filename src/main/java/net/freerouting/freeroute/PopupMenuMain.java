@@ -34,6 +34,10 @@ class PopupMenuMain extends PopupMenuDisplay {
      */
     PopupMenuMain(BoardFrame p_board_frame) {
         super(p_board_frame);
+        initializeComponents();
+    }
+
+    private void initializeComponents() {
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.PopupMenuMain", Locale.getDefault());
 

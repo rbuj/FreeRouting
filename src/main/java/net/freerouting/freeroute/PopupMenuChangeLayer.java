@@ -85,6 +85,10 @@ class PopupMenuChangeLayer extends javax.swing.JMenu {
                     = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
             message1 = resources.getString("layer_changed_to") + " ";
             layer_no = p_layer_no;
+            initializeComponent();
+        }
+
+        private void initializeComponent() {
             addActionListener((java.awt.event.ActionEvent evt) -> {
                 final BoardPanel board_panel = board_frame.board_panel;
                 if (board_panel.board_handling.change_layer_action(layer_no)) {
