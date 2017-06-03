@@ -19,7 +19,6 @@
  */
 package net.freerouting.freeroute.interactive;
 
-import java.util.Iterator;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.PolygonShape;

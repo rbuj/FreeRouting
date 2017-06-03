@@ -19,7 +19,6 @@
  */
 package net.freerouting.freeroute.interactive;
 
-import java.util.Iterator;
 import net.freerouting.freeroute.board.ItemSelectionFilter;
 import net.freerouting.freeroute.board.ObstacleArea;
 import net.freerouting.freeroute.geometry.planar.Area;

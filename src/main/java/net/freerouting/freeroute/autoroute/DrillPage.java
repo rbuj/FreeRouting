@@ -21,7 +21,6 @@
 package net.freerouting.freeroute.autoroute;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.RoutingBoard;

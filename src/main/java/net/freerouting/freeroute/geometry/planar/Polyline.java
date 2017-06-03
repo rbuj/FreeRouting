@@ -16,7 +16,6 @@
 package net.freerouting.freeroute.geometry.planar;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
