@@ -860,12 +860,7 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
                 tree_shape_list.add(curr_tree_shapes[j]);
             }
         }
-        TileShape[] result = new TileShape[tree_shape_list.size()];
-        Iterator<TileShape> it = tree_shape_list.iterator();
-        for (int i = 0; i < result.length; ++i) {
-            result[i] = it.next();
-        }
-        return result;
+        return tree_shape_list.stream().toArray(TileShape[]::new);
     }
 
     TileShape[] calculate_tree_shapes(BoardOutline p_board_outline) {
@@ -876,7 +871,7 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
         if (p_board_outline.keepout_outside_outline_generated()) {
             TileShape[] convex_shapes = p_board_outline.get_keepout_area().split_to_convex();
             if (convex_shapes == null) {
-                return new TileShape[0];
+                result = new TileShape[0];
             }
             Collection<TileShape> tree_shape_list = new LinkedList<>();
             for (int layer_no = 0; layer_no < this.board.layer_structure.arr.length; ++layer_no) {
@@ -887,11 +882,7 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
                     tree_shape_list.add(curr_convex_shape);
                 }
             }
-            result = new TileShape[tree_shape_list.size()];
-            Iterator<TileShape> it = tree_shape_list.iterator();
-            for (int i = 0; i < result.length; ++i) {
-                result[i] = it.next();
-            }
+            result = tree_shape_list.stream().toArray(TileShape[]::new);
         } else {
             // Only the line shapes of the outline are inserted as obstales into the tree.
             result = new TileShape[p_board_outline.line_count() * this.board.layer_structure.arr.length];

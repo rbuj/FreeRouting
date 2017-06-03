@@ -120,11 +120,7 @@ class DrillPage implements ExpandableObject {
                 }
                 prev_obstacle_shape = curr_obstacle_shape;
             }
-            TileShape[] holes = new TileShape[cutout_shapes.size()];
-            Iterator<TileShape> it = cutout_shapes.iterator();
-            for (int i = 0; i < holes.length; ++i) {
-                holes[i] = it.next();
-            }
+            TileShape[] holes = cutout_shapes.stream().toArray(TileShape[]::new);
             PolylineArea shape_with_holes = new PolylineArea(this.shape, holes);
             TileShape[] drill_shapes = shape_with_holes.split_to_convex(p_autoroute_engine.stoppable_thread);
 

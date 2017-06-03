@@ -61,11 +61,7 @@ public class PolygonShapeConstructionState extends CornerItemConstructionState {
         int corner_count = corner_list.size();
         boolean construction_succeeded = (corner_count > 2);
         if (construction_succeeded) {
-            IntPoint[] corner_arr = new IntPoint[corner_count];
-            Iterator<IntPoint> it = corner_list.iterator();
-            for (int i = 0; i < corner_count; ++i) {
-                corner_arr[i] = it.next();
-            }
+            IntPoint[] corner_arr = corner_list.stream().toArray(IntPoint[]::new);
             PolygonShape obstacle_shape = new PolygonShape(corner_arr);
             int cl_class = BoardRules.clearance_class_none();
             if (obstacle_shape.split_to_convex() == null) {

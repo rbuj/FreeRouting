@@ -850,12 +850,7 @@ public class Simplex extends TileShape {
             result_list.add(curr_piece.intersection(p_outer_simplex));
             next_division_line = prev_division_line;
         }
-        Simplex[] result = new Simplex[result_list.size()];
-        Iterator<Simplex> it = result_list.iterator();
-        for (int i = 0; i < result.length; ++i) {
-            result[i] = it.next();
-        }
-        return result;
+        return result_list.stream().toArray(Simplex[]::new);
     }
 
     @Override

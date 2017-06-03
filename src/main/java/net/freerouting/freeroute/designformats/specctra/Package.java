@@ -91,7 +91,7 @@ public class Package {
                     }
                 }
             }
-            PinInfo[] pin_info_arr = pin_info_list.toArray(new PinInfo[pin_info_list.size()]);
+            PinInfo[] pin_info_arr = pin_info_list.stream().toArray(PinInfo[]::new);
             return new Package(package_name, pin_info_arr, outline, keepouts, via_keepouts, place_keepouts, is_front);
         } catch (java.io.IOException e) {
             throw new ReadScopeException("Package.read_scope: IO error scanning file", e);

@@ -141,11 +141,7 @@ public class HoleConstructionState extends CornerItemConstructionState {
             }
         }
         if (construction_succeeded) {
-            IntPoint[] new_hole_corners = new IntPoint[corner_count];
-            Iterator<IntPoint> it = corner_list.iterator();
-            for (int i = 0; i < corner_count; ++i) {
-                new_hole_corners[i] = it.next();
-            }
+            IntPoint[] new_hole_corners = corner_list.stream().toArray(IntPoint[]::new);
             new_holes[new_holes.length - 1] = new PolygonShape(new_hole_corners);
             PolylineArea new_obs_area = new PolylineArea(new_border, new_holes);
 

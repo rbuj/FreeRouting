@@ -20,7 +20,6 @@
 package net.freerouting.freeroute.designformats.specctra;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * Describes a layer structure read from a dsn file.
@@ -35,11 +34,7 @@ public class LayerStructure {
      * Creates a new instance of LayerStructure from a list of layers
      */
     public LayerStructure(Collection<Layer> p_layer_list) {
-        arr = new Layer[p_layer_list.size()];
-        Iterator<Layer> it = p_layer_list.iterator();
-        for (int i = 0; i < arr.length; ++i) {
-            arr[i] = it.next();
-        }
+        arr = p_layer_list.stream().toArray(Layer[]::new);
     }
 
     /**

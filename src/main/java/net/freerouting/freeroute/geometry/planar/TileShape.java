@@ -810,12 +810,7 @@ public abstract class TileShape extends PolylineShape implements ConvexShape {
                 pieces.add(curr_piece);
             }
         }
-        Polyline[] result = new Polyline[pieces.size()];
-        Iterator<Polyline> it = pieces.iterator();
-        for (int i = 0; i < result.length; ++i) {
-            result[i] = it.next();
-        }
-        return result;
+        return pieces.stream().toArray(Polyline[]::new);
     }
 
     @Override
@@ -843,12 +838,7 @@ public abstract class TileShape extends PolylineShape implements ConvexShape {
                 section_list.add(curr_section);
             }
         }
-        TileShape[] result = new TileShape[section_list.size()];
-        Iterator<TileShape> it = section_list.iterator();
-        for (int i = 0; i < result.length; ++i) {
-            result[i] = it.next();
-        }
-        return result;
+        return section_list.stream().toArray(TileShape[]::new);
     }
 
     /**

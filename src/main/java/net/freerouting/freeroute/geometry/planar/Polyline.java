@@ -541,11 +541,7 @@ public class Polyline implements java.io.Serializable {
             TileShape s1 = TileShapeUtils.get_instance(lines);
             int cut_line_count = cut_dog_ear_lines.size();
             if (cut_line_count > 0) {
-                Line[] cut_lines = new Line[cut_line_count];
-                Iterator<Line> it = cut_dog_ear_lines.iterator();
-                for (int j = 0; j < cut_line_count; ++j) {
-                    cut_lines[j] = it.next();
-                }
+                Line[] cut_lines = cut_dog_ear_lines.stream().toArray(Line[]::new);
                 s1 = s1.intersection(TileShapeUtils.get_instance(cut_lines));
             }
             int curr_shape_no = i - from_no - 1;

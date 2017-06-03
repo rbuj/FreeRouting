@@ -242,11 +242,7 @@ public abstract class LocateFoundConnectionAlgo {
         this.angle_restriction = p_angle_restriction;
         this.test_level = p_test_level;
         Collection<BacktrackElement> backtrack_list = backtrack(p_maze_search_result, p_ripped_item_list);
-        this.backtrack_array = new BacktrackElement[backtrack_list.size()];
-        Iterator<BacktrackElement> it = backtrack_list.iterator();
-        for (int i = 0; i < backtrack_array.length; ++i) {
-            this.backtrack_array[i] = it.next();
-        }
+        this.backtrack_array = backtrack_list.stream().toArray(BacktrackElement[]::new);
         this.connection_items = new LinkedList<>();
         BacktrackElement start_info = this.backtrack_array[backtrack_array.length - 1];
         if (!(start_info.door instanceof TargetItemExpansionDoor)) {

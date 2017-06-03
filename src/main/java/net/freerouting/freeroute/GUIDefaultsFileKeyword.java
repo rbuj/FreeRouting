@@ -379,12 +379,7 @@ enum GUIDefaultsFileKeyword {
             }
             color_list.add(curr_color);
         }
-        java.awt.Color[] result = new java.awt.Color[color_list.size()];
-        java.util.Iterator<java.awt.Color> it = color_list.iterator();
-        for (int i = 0; i < result.length; ++i) {
-            result[i] = it.next();
-        }
-        return result;
+        return color_list.stream().toArray(java.awt.Color[]::new);
     }
 
     private static double read_color_intensity(GUIDefaultsScanner scanner) throws java.io.IOException, GUIDefaultsFileException {

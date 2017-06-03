@@ -126,11 +126,7 @@ public class TileConstructionState extends CornerItemConstructionState {
      *
      */
     private void remove_concave_corners() {
-        IntPoint[] corner_arr = new IntPoint[corner_list.size()];
-        Iterator<IntPoint> it = corner_list.iterator();
-        for (int i = 0; i < corner_arr.length; ++i) {
-            corner_arr[i] = it.next();
-        }
+        IntPoint[] corner_arr = corner_list.stream().toArray(IntPoint[]::new);
 
         int new_length = corner_arr.length;
         if (new_length < 3) {
@@ -185,11 +181,7 @@ public class TileConstructionState extends CornerItemConstructionState {
         if (corner_list.size() < 4) {
             return;
         }
-        IntPoint[] corner_arr = new IntPoint[corner_list.size()];
-        Iterator<IntPoint> it = corner_list.iterator();
-        for (int i = 0; i < corner_arr.length; ++i) {
-            corner_arr[i] = it.next();
-        }
+        IntPoint[] corner_arr = corner_list.stream().toArray(IntPoint[]::new);
         int new_length = corner_arr.length;
 
         IntPoint first_corner = corner_arr[0];

@@ -219,11 +219,7 @@ public class PolylineArea implements Area, java.io.Serializable {
                     curr_piece_list = new_piece_list;
                 }
             }
-            precalculated_convex_pieces = new TileShape[curr_piece_list.size()];
-            Iterator<TileShape> it = curr_piece_list.iterator();
-            for (int i = 0; i < precalculated_convex_pieces.length; ++i) {
-                precalculated_convex_pieces[i] = it.next();
-            }
+            precalculated_convex_pieces = curr_piece_list.stream().toArray(TileShape[]::new);
         }
         return precalculated_convex_pieces.clone();
     }

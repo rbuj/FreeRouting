@@ -108,11 +108,7 @@ public class BoardLibrary implements java.io.Serializable {
      * Returns the via padstacks, which can be used for routing.
      */
     public Padstack[] get_via_padstacks() {
-        if (this.via_padstacks == null) {
-            return new Padstack[0];
-        }
-        Padstack[] result = via_padstacks.toArray(new Padstack[via_padstacks.size()]);
-        return result;
+        return (this.via_padstacks == null) ? new Padstack[0] : via_padstacks.stream().toArray(Padstack[]::new);
     }
 
     /**

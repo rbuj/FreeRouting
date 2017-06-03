@@ -230,7 +230,7 @@ public class BoardOutline extends Item {
      */
     Area get_keepout_area() {
         if (this.keepout_area == null) {
-            PolylineShape[] hole_arr = this.shapes.toArray(new PolylineShape[this.shapes.size()]);
+            PolylineShape[] hole_arr = this.shapes.stream().toArray(PolylineShape[]::new);
             keepout_area = new PolylineArea(this.board.bounding_box, hole_arr);
         }
         return this.keepout_area;
