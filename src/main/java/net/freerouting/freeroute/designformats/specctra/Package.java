@@ -171,8 +171,7 @@ public class Package {
             throws java.io.IOException {
         Collection<Item> board_items = p_par.board.get_items();
         boolean component_found = false;
-        for (int i = 1; i <= p_par.board.components.count(); ++i) {
-            net.freerouting.freeroute.board.Component curr_component = p_par.board.components.get(i);
+        for (net.freerouting.freeroute.board.Component curr_component : p_par.board.components) {
             if (curr_component.get_package() == p_package) {
                 // check, if not all items of the component are deleted
                 boolean undeleted_item_found = false;

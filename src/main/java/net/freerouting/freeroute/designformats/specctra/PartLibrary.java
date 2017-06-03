@@ -38,8 +38,7 @@ public class PartLibrary extends ScopeKeyword {
             p_par.identifier_type.write(curr_part.name, p_par.file);
             p_par.file.new_line();
             p_par.file.write("(comp");
-            for (int j = 1; j <= p_par.board.components.count(); ++j) {
-                net.freerouting.freeroute.board.Component curr_compomnent = p_par.board.components.get(j);
+            for (net.freerouting.freeroute.board.Component curr_compomnent : p_par.board.components) {
                 if (curr_compomnent.get_logical_part() == curr_part) {
                     p_par.file.write(" ");
                     p_par.file.write(curr_compomnent.name);

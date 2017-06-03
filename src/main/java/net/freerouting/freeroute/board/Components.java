@@ -33,7 +33,7 @@ import net.freerouting.freeroute.library.Package;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class Components implements java.io.Serializable {
+public class Components implements Iterable<Component>, java.io.Serializable {
 
     private final UndoableObjects undo_list = new UndoableObjects();
     private final ArrayList<Component> component_arr = new ArrayList<>();
@@ -208,6 +208,11 @@ public class Components implements java.io.Serializable {
      */
     public boolean get_flip_style_rotate_first() {
         return flip_style_rotate_first;
+    }
+
+    @Override
+    public Iterator<Component> iterator() {
+        return component_arr.iterator();
     }
 
 }

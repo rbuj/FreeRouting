@@ -108,8 +108,7 @@ public class SessionFile {
             IndentFileWriter p_file, net.freerouting.freeroute.library.Package p_package) throws java.io.IOException {
         Collection<net.freerouting.freeroute.board.Item> board_items = p_board.get_items();
         boolean component_found = false;
-        for (int i = 1; i <= p_board.components.count(); ++i) {
-            net.freerouting.freeroute.board.Component curr_component = p_board.components.get(i);
+        for (net.freerouting.freeroute.board.Component curr_component : p_board.components) {
             if (curr_component.get_package() == p_package) {
                 // check, if not all items of the component are deleted
                 boolean undeleted_item_found = false;
