@@ -111,7 +111,7 @@ public class Polygon implements java.io.Serializable {
      * returns the array of corners of this polygon
      */
     public Point[] corner_array() {
-        return (corners.size() == 0) ? new Point[0] : corners.stream().toArray(Point[]::new);
+        return corners.stream().toArray(Point[]::new);
     }
 
     /**
