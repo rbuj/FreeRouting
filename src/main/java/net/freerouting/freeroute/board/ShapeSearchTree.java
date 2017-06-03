@@ -871,7 +871,7 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
         if (p_board_outline.keepout_outside_outline_generated()) {
             TileShape[] convex_shapes = p_board_outline.get_keepout_area().split_to_convex();
             if (convex_shapes == null) {
-                result = new TileShape[0];
+                return new TileShape[0];
             }
             Collection<TileShape> tree_shape_list = new LinkedList<>();
             for (int layer_no = 0; layer_no < this.board.layer_structure.arr.length; ++layer_no) {
