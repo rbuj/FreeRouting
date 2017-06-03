@@ -364,10 +364,8 @@ public class BasicBoard implements java.io.Serializable {
     /**
      * Inserts an Outline into the board.
      */
-    public BoardOutline insert_outline(PolylineShape[] p_outline_shapes, int p_clearance_class_no) {
-        BoardOutline result = new BoardOutline(p_outline_shapes, p_clearance_class_no, 0, this);
-        insert_item(result);
-        return result;
+    private void insert_outline(PolylineShape[] p_outline_shapes, int p_clearance_class_no) {
+        insert_item(new BoardOutline(p_outline_shapes, p_clearance_class_no, 0, this));
     }
 
     /**
