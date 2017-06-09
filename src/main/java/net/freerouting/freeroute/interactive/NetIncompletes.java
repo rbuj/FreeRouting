@@ -72,10 +72,12 @@ public class NetIncompletes {
             p_graphics_context.draw(draw_points, draw_width, draw_color, p_graphics, draw_intensity);
         }
     }
+
     /**
      * Collection of elements of class AirLine.
      */
     final Collection<RatsNest.AirLine> incompletes;
+
     /**
      * The length of the violation of the length restriction of the net, > 0, if
      * the cumulative trace length is to big, < 0, if the trace length is to
@@ -89,7 +91,7 @@ public class NetIncompletes {
     /**
      * Creates a new instance of NetIncompletes
      */
-    public NetIncompletes(int p_net_no, Collection<Item> p_net_items, BasicBoard p_board) {
+    NetIncompletes(int p_net_no, Collection<Item> p_net_items, BasicBoard p_board) {
         this.draw_marker_radius = p_board.rules.get_min_trace_half_width() * 2;
         this.incompletes = new LinkedList<>();
         this.net = p_board.rules.nets.get(p_net_no);

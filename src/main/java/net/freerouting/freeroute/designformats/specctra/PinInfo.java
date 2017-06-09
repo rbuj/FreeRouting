@@ -39,7 +39,7 @@ public class PinInfo {
      */
     public final double rotation;
 
-    PinInfo(String p_padstack_name, String p_pin_name, double[] p_rel_coor, double p_rotation) {
+    private PinInfo(String p_padstack_name, String p_pin_name, double[] p_rel_coor, double p_rotation) {
         padstack_name = p_padstack_name;
         pin_name = p_pin_name;
         rel_coor = p_rel_coor;

@@ -127,7 +127,7 @@ public final class BoardFrame extends javax.swing.JFrame {
      * functionality not yet ready for release is included. Also the warning
      * output depends on p_test_level.
      */
-    public BoardFrame(DesignFile p_design, LaunchMode p_launch_mode, TestLevel p_test_level,
+    BoardFrame(DesignFile p_design, LaunchMode p_launch_mode, TestLevel p_test_level,
             boolean p_confirm_cancel) {
         this(p_design, p_launch_mode, p_test_level, new BoardObserverAdaptor(),
                 new ItemIdNoGenerator(), p_confirm_cancel);
@@ -163,7 +163,7 @@ public final class BoardFrame extends javax.swing.JFrame {
      * p_item_id_no_generator are used for syncronizing purposes, if the frame
      * is embedded into a host system,
      */
-    BoardFrame(DesignFile p_design, LaunchMode p_launch_mode, TestLevel p_test_level, BoardObservers p_observers,
+    private BoardFrame(DesignFile p_design, LaunchMode p_launch_mode, TestLevel p_test_level, BoardObservers p_observers,
             IdNoGenerator p_item_id_no_generator, boolean p_confirm_cancel) {
         design_file = p_design;
         test_level = p_test_level;

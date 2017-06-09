@@ -293,7 +293,7 @@ public abstract class Rule {
 
         final double value;
 
-        public WidthRule(double p_value) {
+        private WidthRule(double p_value) {
             value = p_value;
         }
     }
@@ -303,7 +303,7 @@ public abstract class Rule {
         final double value;
         final Collection<String> clearance_class_pairs;
 
-        public ClearanceRule(double p_value, Collection<String> p_class_pairs) {
+        private ClearanceRule(double p_value, Collection<String> p_class_pairs) {
             value = p_value;
             clearance_class_pairs = p_class_pairs;
         }
@@ -314,7 +314,7 @@ public abstract class Rule {
         final Collection<String> layer_names;
         final Collection<Rule> rules;
 
-        LayerRule(Collection<String> p_layer_names, Collection<Rule> p_rules) {
+        private LayerRule(Collection<String> p_layer_names, Collection<Rule> p_rules) {
             layer_names = p_layer_names;
             rules = p_rules;
         }

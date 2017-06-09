@@ -62,7 +62,7 @@ public class RationalPoint extends Point {
     /**
      * creates a RetionalPoint from an IntPoint
      */
-    RationalPoint(IntPoint p_point) {
+    private RationalPoint(IntPoint p_point) {
         x = BigInteger.valueOf(p_point.x);
         y = BigInteger.valueOf(p_point.y);
         z = BigInteger.ONE;

@@ -37,7 +37,7 @@ public class PopupMenuDisplay extends javax.swing.JPopupMenu {
     /**
      * Creates a new instance of PopupMenuDisplay
      */
-    public PopupMenuDisplay(BoardFrame p_board_frame) {
+    PopupMenuDisplay(BoardFrame p_board_frame) {
         this.board_panel = p_board_frame.board_panel;
         initializeComponents();
     }

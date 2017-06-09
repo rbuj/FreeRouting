@@ -80,7 +80,7 @@ public class MazeListElement implements Comparable<MazeListElement> {
     /**
      * Creates a new instance of ExpansionInfo
      */
-    public MazeListElement(ExpandableObject p_door, int p_section_no_of_door,
+    MazeListElement(ExpandableObject p_door, int p_section_no_of_door,
             ExpandableObject p_backtrack_door, int p_section_no_of_backtrack_door,
             double p_expansion_value, double p_sorting_value,
             CompleteExpansionRoom p_next_room, FloatLine p_shape_entry,

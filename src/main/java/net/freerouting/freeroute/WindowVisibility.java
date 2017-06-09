@@ -44,7 +44,7 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
     /**
      * Creates a new instance of VisibilityFrame
      */
-    public WindowVisibility(BoardFrame p_board_frame, String p_title,
+    WindowVisibility(BoardFrame p_board_frame, String p_title,
             String p_header_message, String[] p_message_arr) {
         this.board_panel = p_board_frame.board_panel;
         this.setTitle(p_title);

@@ -96,7 +96,7 @@ public class SessionToEagle extends javax.swing.JFrame {
      */
     private final double board_scale_factor;
 
-    SessionToEagle(Scanner p_scanner, java.io.OutputStreamWriter p_out_file, net.freerouting.freeroute.board.BasicBoard p_board,
+    private SessionToEagle(Scanner p_scanner, java.io.OutputStreamWriter p_out_file, net.freerouting.freeroute.board.BasicBoard p_board,
             net.freerouting.freeroute.board.Unit p_unit, double p_session_file_scale_dominator, double p_board_scale_factor) {
         scanner = p_scanner;
         out_file = p_out_file;

@@ -46,7 +46,7 @@ public final class WindowClearanceMatrix extends BoardSavableSubWindow {
     /**
      * Creates a new instance of ClearanceMatrixWindow
      */
-    public WindowClearanceMatrix(BoardFrame p_board_frame) {
+    WindowClearanceMatrix(BoardFrame p_board_frame) {
         this.board_frame = p_board_frame;
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowClearanceMatrix", Locale.getDefault());
 

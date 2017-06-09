@@ -40,7 +40,7 @@ public final class WindowMoveParameter extends BoardSavableSubWindow {
     /**
      * Creates a new instance of WindowMoveParameter
      */
-    public WindowMoveParameter(BoardFrame p_board_frame) {
+    WindowMoveParameter(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
         Locale locale = Locale.getDefault();
         java.util.ResourceBundle resources

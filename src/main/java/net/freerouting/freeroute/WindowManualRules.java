@@ -41,7 +41,7 @@ public final class WindowManualRules extends BoardSavableSubWindow {
     /**
      * Creates a new instance of TraceWidthWindow
      */
-    public WindowManualRules(BoardFrame p_board_frame) {
+    WindowManualRules(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
         Locale locale = Locale.getDefault();
         java.util.ResourceBundle resources

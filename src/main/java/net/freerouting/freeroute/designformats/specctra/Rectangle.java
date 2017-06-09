@@ -38,7 +38,7 @@ public class Rectangle extends Shape {
      * contains the rectangle coordinates in the following order: lower left x,
      * lower left y, upper right x, uppper right y.
      */
-    public Rectangle(Layer p_layer, double[] p_coor) {
+    Rectangle(Layer p_layer, double[] p_coor) {
         super(p_layer);
         coor = (p_coor == null) ? null : p_coor.clone();
     }

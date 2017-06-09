@@ -39,7 +39,7 @@ public class DefaultItemClearanceClasses implements java.io.Serializable {
         Arrays.fill(arr, 1);
     }
 
-    public DefaultItemClearanceClasses(DefaultItemClearanceClasses p_classes) {
+    DefaultItemClearanceClasses(DefaultItemClearanceClasses p_classes) {
         System.arraycopy(p_classes.arr, 0, arr, 0, LENGTH_ARRAY_CLASSES);
     }
 

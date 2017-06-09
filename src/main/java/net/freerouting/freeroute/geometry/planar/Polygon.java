@@ -37,7 +37,7 @@ public class Polygon implements java.io.Serializable {
      * Creates a polygon from p_point_arr. Multiple points and points, which are
      * collinear with its previous and next point will be removed.
      */
-    public Polygon(Point[] p_point_arr) {
+    Polygon(Point[] p_point_arr) {
         if (p_point_arr.length == 0) {
             corners = new ArrayList<>();
             return;
@@ -51,7 +51,7 @@ public class Polygon implements java.io.Serializable {
      * Creates a polygon from p_point_list. Multiple points and points, which
      * are collinear with its previous and next point will be removed.
      */
-    public Polygon(Collection<Point> p_point_list) {
+    private Polygon(Collection<Point> p_point_list) {
         if (p_point_list.isEmpty()) {
             corners = new ArrayList<>();
             return;

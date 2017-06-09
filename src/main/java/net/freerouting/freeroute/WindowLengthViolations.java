@@ -40,7 +40,7 @@ public final class WindowLengthViolations extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of WindowLengthViolations
      */
-    public WindowLengthViolations(BoardFrame p_board_frame) {
+    WindowLengthViolations(BoardFrame p_board_frame) {
         super(p_board_frame);
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowLengthViolations", Locale.getDefault());
         this.setTitle(resources.getString("title"));

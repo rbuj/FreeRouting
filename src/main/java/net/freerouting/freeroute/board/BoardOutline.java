@@ -61,7 +61,7 @@ public class BoardOutline extends Item {
     /**
      * Creates a new instance of BoardOutline
      */
-    public BoardOutline(PolylineShape[] p_shapes, int p_clearance_class_no, int p_id_no, BasicBoard p_board) {
+    BoardOutline(PolylineShape[] p_shapes, int p_clearance_class_no, int p_id_no, BasicBoard p_board) {
         super(new int[0], p_clearance_class_no, p_id_no, 0, FixedState.SYSTEM_FIXED, p_board);
         shapes = new ArrayList<>(Arrays.asList(p_shapes));
     }
@@ -69,7 +69,7 @@ public class BoardOutline extends Item {
     /**
      * Creates a new instance of BoardOutline
      */
-    public BoardOutline(ArrayList<PolylineShape> p_shapes, int p_clearance_class_no, int p_id_no, BasicBoard p_board) {
+    private BoardOutline(ArrayList<PolylineShape> p_shapes, int p_clearance_class_no, int p_id_no, BasicBoard p_board) {
         super(new int[0], p_clearance_class_no, p_id_no, 0, FixedState.SYSTEM_FIXED, p_board);
         shapes = p_shapes;
     }

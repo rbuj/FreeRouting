@@ -54,7 +54,7 @@ public class NetClass implements java.io.Serializable, net.freerouting.freeroute
     /**
      * Creates a new instance of NetClass
      */
-    public NetClass(String p_name, net.freerouting.freeroute.board.LayerStructure p_layer_structure, ClearanceMatrix p_clearance_matrix) {
+    NetClass(String p_name, net.freerouting.freeroute.board.LayerStructure p_layer_structure, ClearanceMatrix p_clearance_matrix) {
         this.name = p_name;
         this.board_layer_structure = p_layer_structure;
         this.clearance_matrix = p_clearance_matrix;
@@ -63,7 +63,6 @@ public class NetClass implements java.io.Serializable, net.freerouting.freeroute
         for (int i = 0; i < p_layer_structure.arr.length; ++i) {
             this.active_routing_layer_arr[i] = p_layer_structure.arr[i].is_signal;
         }
-
     }
 
     @Override

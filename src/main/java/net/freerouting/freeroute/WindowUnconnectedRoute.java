@@ -41,7 +41,7 @@ public final class WindowUnconnectedRoute extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of WindowUnconnectedRoute
      */
-    public WindowUnconnectedRoute(BoardFrame p_board_frame) {
+    WindowUnconnectedRoute(BoardFrame p_board_frame) {
         super(p_board_frame);
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.CleanupWindows", Locale.getDefault());
         this.setTitle(resources.getString("unconnected_route"));

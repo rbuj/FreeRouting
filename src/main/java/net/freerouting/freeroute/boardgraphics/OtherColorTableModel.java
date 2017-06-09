@@ -30,7 +30,7 @@ import java.util.Locale;
 @SuppressWarnings("serial")
 public class OtherColorTableModel extends ColorTableModel {
 
-    public OtherColorTableModel() {
+    OtherColorTableModel() {
         super(1);
         data[0] = new Color[ColumnNames.values().length];
         Object[] curr_row = data[0];

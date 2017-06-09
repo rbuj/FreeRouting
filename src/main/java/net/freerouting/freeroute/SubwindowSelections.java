@@ -29,7 +29,7 @@ public final class SubwindowSelections implements java.io.Serializable {
 
     private EnumMap<SnapshotSubwindowKey, WindowObjectListWithFilter.SnapshotInfo> window_selections;
 
-    public SubwindowSelections(EnumMap<SnapshotSubwindowKey, WindowObjectListWithFilter> snapshot_subwindows) {
+    SubwindowSelections(EnumMap<SnapshotSubwindowKey, WindowObjectListWithFilter> snapshot_subwindows) {
         window_selections = new EnumMap<>(SnapshotSubwindowKey.class);
         for (Entry<SnapshotSubwindowKey, WindowObjectListWithFilter> entry : snapshot_subwindows.entrySet()) {
             window_selections.put(entry.getKey(), entry.getValue().get_snapshot_info());

@@ -161,7 +161,7 @@ public class NetClass {
     /**
      * Creates a new instance of NetClass
      */
-    public NetClass(String p_name, String p_trace_clearance_class, Collection<String> p_net_list,
+    private NetClass(String p_name, String p_trace_clearance_class, Collection<String> p_net_list,
             Collection<Rule> p_rules, Collection<Rule.LayerRule> p_layer_rules, Collection<String> p_use_via,
             Collection<String> p_use_layer, String p_via_rule, boolean p_shove_fixed, boolean p_pull_tight,
             double p_min_trace_length, double p_max_trace_length) {
@@ -185,7 +185,7 @@ public class NetClass {
         public final Collection<Rule> rules;
         public final Collection<Rule.LayerRule> layer_rules;
 
-        public ClassClass(Collection<String> p_class_names, Collection<Rule> p_rules,
+        private ClassClass(Collection<String> p_class_names, Collection<Rule> p_rules,
                 Collection<Rule.LayerRule> p_layer_rules) {
             class_names = p_class_names;
             rules = p_rules;

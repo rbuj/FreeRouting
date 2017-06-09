@@ -28,7 +28,7 @@ public class Area implements AreaReadable, AreaTransformable {
     final Collection<Shape> shape_list;
     final String clearance_class_name;
 
-    public Area(String p_area_name, Collection<Shape> p_shape_list, String p_clearance_class_name) {
+    Area(String p_area_name, Collection<Shape> p_shape_list, String p_clearance_class_name) {
         area_name = p_area_name;
         shape_list = p_shape_list;
         clearance_class_name = p_clearance_class_name;

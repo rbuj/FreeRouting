@@ -43,7 +43,7 @@ public final class WindowSelectParameter extends BoardSavableSubWindow {
     /**
      * Creates a new instance of SelectWindow
      */
-    public WindowSelectParameter(BoardFrame p_board_frame) {
+    WindowSelectParameter(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
 
         java.util.ResourceBundle resources

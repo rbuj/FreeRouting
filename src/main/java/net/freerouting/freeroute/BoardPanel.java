@@ -66,7 +66,7 @@ public final class BoardPanel extends javax.swing.JPanel {
     /**
      * Creates a new BoardPanel in an Application
      */
-    public BoardPanel(ScreenMessages p_screen_messages, BoardFrame p_board_frame) {
+    BoardPanel(ScreenMessages p_screen_messages, BoardFrame p_board_frame) {
         screen_messages = p_screen_messages;
         try {
             // used to be able to change the location of the mouse pointer

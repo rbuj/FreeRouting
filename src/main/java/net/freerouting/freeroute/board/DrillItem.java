@@ -61,7 +61,7 @@ public abstract class DrillItem extends Item implements Connectable {
      */
     private int precalculated_last_layer = -1;
 
-    public DrillItem(Point p_center, int[] p_net_no_arr, int p_clearance_type, int p_id_no,
+    DrillItem(Point p_center, int[] p_net_no_arr, int p_clearance_type, int p_id_no,
             int p_group_no, FixedState p_fixed_state, BasicBoard p_board) {
         super(p_net_no_arr, p_clearance_type, p_id_no, p_group_no, p_fixed_state, p_board);
         this.center = p_center;

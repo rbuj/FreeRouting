@@ -38,7 +38,7 @@ public final class WindowClearanceViolations extends WindowObjectListWithFilter 
     /**
      * Creates a new instance of IncompletesWindow
      */
-    public WindowClearanceViolations(BoardFrame p_board_frame) {
+    WindowClearanceViolations(BoardFrame p_board_frame) {
         super(p_board_frame);
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowClearanceViolations", Locale.getDefault());
         this.setTitle(resources.getString("title"));

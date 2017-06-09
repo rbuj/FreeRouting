@@ -239,7 +239,7 @@ public class Package {
     /**
      * Creates a new instance of Package
      */
-    public Package(String p_name, PinInfo[] p_pin_info_arr, Collection<Shape> p_outline, Collection<Area> p_keepouts,
+    private Package(String p_name, PinInfo[] p_pin_info_arr, Collection<Shape> p_outline, Collection<Area> p_keepouts,
             Collection<Area> p_via_keepouts, Collection<Area> p_place_keepouts, boolean p_is_front) {
         name = p_name;
         pin_info_arr = (p_pin_info_arr == null) ? null : p_pin_info_arr.clone();

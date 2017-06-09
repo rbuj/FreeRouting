@@ -45,7 +45,7 @@ public class CoordinateTransform implements java.io.Serializable {
     private double rotation = 0;
     private final FloatPoint rotation_pole;
 
-    public CoordinateTransform(IntBox p_design_box, Dimension p_panel_bounds) {
+    CoordinateTransform(IntBox p_design_box, Dimension p_panel_bounds) {
         this.screen_bounds = p_panel_bounds;
         this.design_box = p_design_box;
         this.rotation_pole = p_design_box.centre_of_gravity();

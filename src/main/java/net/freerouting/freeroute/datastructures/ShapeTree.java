@@ -50,7 +50,7 @@ public abstract class ShapeTree {
     /**
      * Creates a new instance of ShapeTree
      */
-    public ShapeTree(ShapeBoundingDirections p_directions) {
+    ShapeTree(ShapeBoundingDirections p_directions) {
         bounding_directions = p_directions;
         root = null;
         leaf_count = 0;
@@ -133,7 +133,7 @@ public abstract class ShapeTree {
         public TreeNode first_child;
         public TreeNode second_child;
 
-        public InnerNode(RegularTileShape p_bounding_shape, InnerNode p_parent) {
+        InnerNode(RegularTileShape p_bounding_shape, InnerNode p_parent) {
             bounding_shape = p_bounding_shape;
             parent = p_parent;
             first_child = null;
@@ -152,7 +152,7 @@ public abstract class ShapeTree {
          */
         public int shape_index_in_object;
 
-        public Leaf(ShapeTree.Storable p_object, int p_index, InnerNode p_parent, RegularTileShape p_bounding_shape) {
+        private Leaf(ShapeTree.Storable p_object, int p_index, InnerNode p_parent, RegularTileShape p_bounding_shape) {
             bounding_shape = p_bounding_shape;
             parent = p_parent;
             object = p_object;

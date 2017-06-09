@@ -39,7 +39,7 @@ public class PolygonPath extends Path {
     /**
      * Creates a new instance of PolygonPath
      */
-    public PolygonPath(Layer p_layer, double p_width, double[] p_coordinate_arr) {
+    PolygonPath(Layer p_layer, double p_width, double[] p_coordinate_arr) {
         super(p_layer, p_width, p_coordinate_arr);
     }
 

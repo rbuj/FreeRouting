@@ -67,7 +67,7 @@ final class DesignFile {
         }
     }
 
-    DesignFile(File p_design_file) {
+    private DesignFile(File p_design_file) {
         if (p_design_file != null) {
             input_file = p_design_file;
             String file_name = p_design_file.getName();

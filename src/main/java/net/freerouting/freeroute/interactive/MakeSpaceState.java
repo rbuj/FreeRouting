@@ -38,7 +38,7 @@ public class MakeSpaceState extends DragState {
     /**
      * Creates a new instance of MakeSpaceState
      */
-    public MakeSpaceState(FloatPoint p_location, InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
+    MakeSpaceState(FloatPoint p_location, InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
         super(p_location, p_parent_state, p_board_handling, p_logfile);
         int[] shove_trace_width_arr = new int[hdlg.get_routing_board().get_layer_count()];
         boolean[] layer_active_arr = new boolean[shove_trace_width_arr.length];

@@ -36,7 +36,7 @@ public class PolylinePath extends Path {
     /**
      * Creates a new instance of PolylinePath
      */
-    public PolylinePath(Layer p_layer, double p_width, double[] p_corner_arr) {
+    PolylinePath(Layer p_layer, double p_width, double[] p_corner_arr) {
         super(p_layer, p_width, p_corner_arr);
     }
 

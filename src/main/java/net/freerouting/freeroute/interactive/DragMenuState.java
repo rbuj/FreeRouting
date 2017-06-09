@@ -39,7 +39,7 @@ public class DragMenuState extends MenuState {
     /**
      * Creates a new instance of DragMenuState
      */
-    public DragMenuState(BoardHandling p_board_handling, Logfile p_logfile) {
+    private DragMenuState(BoardHandling p_board_handling, Logfile p_logfile) {
         super(p_board_handling, p_logfile);
     }
 

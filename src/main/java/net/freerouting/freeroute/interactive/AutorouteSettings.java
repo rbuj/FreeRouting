@@ -57,7 +57,7 @@ public class AutorouteSettings implements java.io.Serializable {
     /**
      * Creates a new instance of AutorouteSettings
      */
-    public AutorouteSettings(RoutingBoard p_board) {
+    AutorouteSettings(RoutingBoard p_board) {
         this(p_board.get_layer_count());
 
         // set default values
@@ -110,7 +110,7 @@ public class AutorouteSettings implements java.io.Serializable {
     /**
      * Copy constructor
      */
-    public AutorouteSettings(AutorouteSettings p_settings) {
+    AutorouteSettings(AutorouteSettings p_settings) {
         start_ripup_costs = p_settings.start_ripup_costs;
         start_pass_no = p_settings.start_pass_no;
         via_costs = p_settings.via_costs;

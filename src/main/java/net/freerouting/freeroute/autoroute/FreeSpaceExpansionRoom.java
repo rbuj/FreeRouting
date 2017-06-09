@@ -51,7 +51,7 @@ public abstract class FreeSpaceExpansionRoom implements ExpansionRoom {
      * obstacle, and is as big as possible. p_contained_points will remain
      * contained in the shape, after it is completed.
      */
-    public FreeSpaceExpansionRoom(TileShape p_shape, int p_layer) {
+    FreeSpaceExpansionRoom(TileShape p_shape, int p_layer) {
         shape = p_shape;
         layer = p_layer;
         doors = new LinkedList<>();

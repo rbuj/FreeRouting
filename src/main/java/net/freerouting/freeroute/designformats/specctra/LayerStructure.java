@@ -33,14 +33,14 @@ public class LayerStructure {
     /**
      * Creates a new instance of LayerStructure from a list of layers
      */
-    public LayerStructure(Collection<Layer> p_layer_list) {
+    LayerStructure(Collection<Layer> p_layer_list) {
         arr = p_layer_list.stream().toArray(Layer[]::new);
     }
 
     /**
      * Creates a dsn-LayerStructure from a board LayerStructure.
      */
-    public LayerStructure(net.freerouting.freeroute.board.LayerStructure p_board_layer_structure) {
+    LayerStructure(net.freerouting.freeroute.board.LayerStructure p_board_layer_structure) {
         arr = new Layer[p_board_layer_structure.arr.length];
         for (int i = 0; i < arr.length; ++i) {
             net.freerouting.freeroute.board.Layer board_layer = p_board_layer_structure.arr[i];

@@ -120,7 +120,7 @@ public class Circuit {
         public final java.util.Collection<String> use_via;
         public final java.util.Collection<String> use_layer;
 
-        public ReadScopeResult(double p_max_length, double p_min_length, java.util.Collection<String> p_use_via, java.util.Collection<String> p_use_layer) {
+        private ReadScopeResult(double p_max_length, double p_min_length, java.util.Collection<String> p_use_via, java.util.Collection<String> p_use_layer) {
             max_length = p_max_length;
             min_length = p_min_length;
             use_via = p_use_via;

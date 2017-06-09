@@ -39,7 +39,7 @@ public final class WindowSnapshotSettings extends BoardSavableSubWindow {
     /**
      * Creates a new instance of WindowSnapshotSettings
      */
-    public WindowSnapshotSettings(BoardFrame p_board_frame) {
+    WindowSnapshotSettings(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
 
         java.util.ResourceBundle resources

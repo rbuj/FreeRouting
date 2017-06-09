@@ -116,7 +116,7 @@ public class BasicBoard implements java.io.Serializable {
      * may be used, which are still in experimental state. Also warnings for
      * debugging may be printed depending on the size of p_test_level.
      */
-    public BasicBoard(IntBox p_bounding_box, LayerStructure p_layer_structure, PolylineShape[] p_outline_shapes,
+    BasicBoard(IntBox p_bounding_box, LayerStructure p_layer_structure, PolylineShape[] p_outline_shapes,
             int p_outline_cl_class_no, BoardRules p_rules, Communication p_communication, TestLevel p_test_level) {
         layer_structure = p_layer_structure;
         rules = p_rules;

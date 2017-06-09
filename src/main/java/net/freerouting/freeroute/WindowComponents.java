@@ -35,7 +35,7 @@ public final class WindowComponents extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of ComponentsWindow
      */
-    public WindowComponents(BoardFrame p_board_frame) {
+    WindowComponents(BoardFrame p_board_frame) {
         super(p_board_frame);
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());

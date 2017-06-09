@@ -37,7 +37,7 @@ public final class WindowNets extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of NetsWindow
      */
-    public WindowNets(BoardFrame p_board_frame) {
+    WindowNets(BoardFrame p_board_frame) {
         super(p_board_frame);
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowNets", Locale.getDefault());
         this.setTitle(resources.getString("title"));

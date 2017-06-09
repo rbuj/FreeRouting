@@ -53,7 +53,7 @@ public class ExpansionDoor implements ExpandableObject {
     /**
      * Creates a new instance of ExpansionDoor
      */
-    public ExpansionDoor(ExpansionRoom p_first_room, ExpansionRoom p_second_room, int p_dimension) {
+    ExpansionDoor(ExpansionRoom p_first_room, ExpansionRoom p_second_room, int p_dimension) {
         first_room = p_first_room;
         second_room = p_second_room;
         dimension = p_dimension;
@@ -62,7 +62,7 @@ public class ExpansionDoor implements ExpandableObject {
     /**
      * Creates a new instance of ExpansionDoor
      */
-    public ExpansionDoor(ExpansionRoom p_first_room, ExpansionRoom p_second_room) {
+    ExpansionDoor(ExpansionRoom p_first_room, ExpansionRoom p_second_room) {
         first_room = p_first_room;
         second_room = p_second_room;
         dimension = first_room.get_shape().intersection(second_room.get_shape()).dimension();

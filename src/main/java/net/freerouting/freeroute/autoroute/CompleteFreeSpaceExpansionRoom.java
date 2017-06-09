@@ -51,7 +51,7 @@ public class CompleteFreeSpaceExpansionRoom extends FreeSpaceExpansionRoom imple
     /**
      * Creates a new instance of CompleteFreeSpaceExpansionRoom
      */
-    public CompleteFreeSpaceExpansionRoom(TileShape p_shape, int p_layer, int p_id_no) {
+    CompleteFreeSpaceExpansionRoom(TileShape p_shape, int p_layer, int p_id_no) {
         super(p_shape, p_layer);
         target_doors = new LinkedList<>();
         id_no = p_id_no;

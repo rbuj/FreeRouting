@@ -71,8 +71,9 @@ public class Package implements Comparable<Package>, net.freerouting.freeroute.b
      * Creates a new instance of Package. p_package_list is the list of packages
      * containing this package.
      */
-    public Package(String p_name, int p_no, Pin[] p_pin_arr, Shape[] p_outline, Keepout[] p_keepout_arr,
-            Keepout[] p_via_keepout_arr, Keepout[] p_place_keepout_arr, boolean p_is_front, Packages p_package_list) {
+    Package(String p_name, int p_no, Pin[] p_pin_arr, Shape[] p_outline,
+            Keepout[] p_keepout_arr, Keepout[] p_via_keepout_arr,
+            Keepout[] p_place_keepout_arr, boolean p_is_front, Packages p_package_list) {
         name = p_name;
         no = p_no;
         pin_arr = (p_pin_arr == null) ? null : p_pin_arr.clone();

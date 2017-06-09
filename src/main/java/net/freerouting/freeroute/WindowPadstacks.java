@@ -37,7 +37,7 @@ public final class WindowPadstacks extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of PadstacksWindow
      */
-    public WindowPadstacks(BoardFrame p_board_frame) {
+    WindowPadstacks(BoardFrame p_board_frame) {
         super(p_board_frame);
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());

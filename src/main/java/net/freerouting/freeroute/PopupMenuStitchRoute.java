@@ -34,7 +34,7 @@ public class PopupMenuStitchRoute extends PopupMenuDisplay {
     /**
      * Creates a new instance of PopupMenuStitchRoute
      */
-    public PopupMenuStitchRoute(BoardFrame p_board_frame) {
+    PopupMenuStitchRoute(BoardFrame p_board_frame) {
         super(p_board_frame);
         net.freerouting.freeroute.board.LayerStructure layer_structure = board_panel.board_handling.get_routing_board().layer_structure;
 

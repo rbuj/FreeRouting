@@ -43,7 +43,7 @@ public final class RationalVector implements Vector {
      * represent the 2-dimensional Vector with the rational number Tuple ( p_x /
      * p_z , p_y / p_z).
      */
-    public RationalVector(BigInteger p_x, BigInteger p_y, BigInteger p_z) {
+    RationalVector(BigInteger p_x, BigInteger p_y, BigInteger p_z) {
         if (p_z.signum() >= 0) {
             x = p_x;
             y = p_y;

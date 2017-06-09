@@ -32,14 +32,14 @@ public class ZoomRegionState extends SelectRegionState {
     /**
      * Returns a new instance of this class.
      */
-    public static ZoomRegionState get_instance(InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
+    static ZoomRegionState get_instance(InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
         return get_instance(null, p_parent_state, p_board_handling, p_logfile);
     }
 
     /**
      * Returns a new instance of this class with first point p_location.
      */
-    public static ZoomRegionState get_instance(FloatPoint p_location, InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
+    static ZoomRegionState get_instance(FloatPoint p_location, InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
         ZoomRegionState new_instance = new ZoomRegionState(p_parent_state, p_board_handling, p_logfile);
         new_instance.corner1 = p_location;
         new_instance.hdlg.screen_messages.set_status_message(new_instance.resources.getString("drag_left_mouse_button_to_create_region_to_display"));
@@ -49,7 +49,7 @@ public class ZoomRegionState extends SelectRegionState {
     /**
      * Creates a new instance of ZoomRegionState
      */
-    public ZoomRegionState(InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
+    private ZoomRegionState(InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
         super(p_parent_state, p_board_handling, p_logfile);
         if (this.logfile != null) {
             logfile.start_scope(net.freerouting.freeroute.interactive.LogfileScope.ZOOM_FRAME);

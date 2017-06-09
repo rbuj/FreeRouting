@@ -42,7 +42,7 @@ public class ShapeSearchTree90Degree extends ShapeSearchTree {
     /**
      * Creates a new instance of ShapeSearchTree90Degree
      */
-    public ShapeSearchTree90Degree(BasicBoard p_board, int p_compensated_clearance_class_no) {
+    ShapeSearchTree90Degree(BasicBoard p_board, int p_compensated_clearance_class_no) {
         super(OrthogonalBoundingDirections.INSTANCE, p_board, p_compensated_clearance_class_no);
     }
 

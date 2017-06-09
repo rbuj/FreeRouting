@@ -55,7 +55,7 @@ public class Via extends DrillItem {
     /**
      * Creates a new instance of Via with the input parameters
      */
-    public Via(Padstack p_padstack, Point p_center, int[] p_net_no_arr, int p_clearance_type, int p_id_no,
+    Via(Padstack p_padstack, Point p_center, int[] p_net_no_arr, int p_clearance_type, int p_id_no,
             int p_group_no, FixedState p_fixed_state, boolean p_attach_allowed, BasicBoard p_board) {
         super(p_center, p_net_no_arr, p_clearance_type, p_id_no, p_group_no, p_fixed_state, p_board);
         this.padstack = p_padstack;

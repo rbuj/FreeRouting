@@ -37,12 +37,12 @@ public class Circle extends Shape {
      * dimension 3. p_coor [0] is the radius of the circle, p_coor [1] is the x
      * coordinate of the circle, p_coor [2] is the y coordinate of the circle.
      */
-    public Circle(Layer p_layer, double[] p_coor) {
+    private Circle(Layer p_layer, double[] p_coor) {
         super(p_layer);
         coor = (p_coor == null) ? null : p_coor.clone();
     }
 
-    public Circle(Layer p_layer, double p_radius, double p_center_x, double p_center_y) {
+    Circle(Layer p_layer, double p_radius, double p_center_x, double p_center_y) {
         super(p_layer);
         coor = new double[3];
         coor[0] = p_radius;

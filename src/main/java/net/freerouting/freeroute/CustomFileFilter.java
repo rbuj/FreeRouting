@@ -32,7 +32,7 @@ public class CustomFileFilter extends javax.swing.filechooser.FileFilter {
     /**
      * Creates a new FileFilter for the input extension
      */
-    public CustomFileFilter(String[] p_extensions) {
+    CustomFileFilter(String[] p_extensions) {
         extensions = (p_extensions == null) ? null : p_extensions.clone();
     }
 

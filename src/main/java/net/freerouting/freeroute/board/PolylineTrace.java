@@ -54,7 +54,7 @@ public class PolylineTrace extends Trace {
     /**
      * creates a new instance of a PolylineTrace with the input data
      */
-    public PolylineTrace(Polyline p_polyline, int p_layer, int p_half_width,
+    PolylineTrace(Polyline p_polyline, int p_layer, int p_half_width,
             int[] p_net_no_arr, int p_clearance_type, int p_id_no,
             int p_group_no, FixedState p_fixed_state, BasicBoard p_board) {
         super(p_layer, p_half_width, p_net_no_arr, p_clearance_type,

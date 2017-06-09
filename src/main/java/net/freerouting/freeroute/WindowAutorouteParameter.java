@@ -52,7 +52,7 @@ public final class WindowAutorouteParameter extends BoardSavableSubWindow {
     /**
      * Creates a new instance of WindowAutorouteParameter
      */
-    public WindowAutorouteParameter(BoardFrame p_board_frame) {
+    WindowAutorouteParameter(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowAutorouteParameter", Locale.getDefault());

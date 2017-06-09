@@ -58,6 +58,7 @@ public class Layer {
         }
         p_par.file.end_scope();
     }
+
     public final String name;
     public final int no;
     public final boolean is_signal;
@@ -71,7 +72,7 @@ public class Layer {
      * p_net_names is a list of nets for this layer, if the layer is a power
      * plane.
      */
-    public Layer(String p_name, int p_no, boolean p_is_signal, Collection<String> p_net_names) {
+    Layer(String p_name, int p_no, boolean p_is_signal, Collection<String> p_net_names) {
         name = p_name;
         no = p_no;
         is_signal = p_is_signal;
@@ -84,7 +85,7 @@ public class Layer {
      * p_is_signal, the layer is a signal layer, otherwise it is a powerground
      * layer. For Layer objects describing more than 1 layer the number is -1.
      */
-    public Layer(String p_name, int p_no, boolean p_is_signal) {
+    Layer(String p_name, int p_no, boolean p_is_signal) {
         name = p_name;
         no = p_no;
         is_signal = p_is_signal;

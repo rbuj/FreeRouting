@@ -58,7 +58,7 @@ public class ScopeKeyword extends Keyword {
         return true;
     }
 
-    public ScopeKeyword(String p_name) {
+    ScopeKeyword(String p_name) {
         super(p_name);
     }
 

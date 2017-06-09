@@ -205,7 +205,7 @@ public class ForcedPadAlgo {
     /**
      * Creates a new instance of ForcedPadAlgo
      */
-    public ForcedPadAlgo(RoutingBoard p_board) {
+    ForcedPadAlgo(RoutingBoard p_board) {
         board = p_board;
     }
 

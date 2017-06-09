@@ -33,7 +33,7 @@ public class BoardTemporarySubWindow extends BoardSubWindow {
     /**
      * Creates a new instance of BoardTemporarySubWindow
      */
-    public BoardTemporarySubWindow(BoardFrame p_board_frame) {
+    BoardTemporarySubWindow(BoardFrame p_board_frame) {
         this.board_frame = p_board_frame;
         p_board_frame.temporary_subwindows.add(this);
         initializeComponents();

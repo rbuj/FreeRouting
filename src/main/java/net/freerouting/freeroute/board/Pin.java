@@ -686,7 +686,7 @@ public class Pin extends DrillItem {
         /**
          * Creates a new instance of TraceExitRestriction
          */
-        public TraceExitRestriction(Direction p_direction, double p_min_length) {
+        private TraceExitRestriction(Direction p_direction, double p_min_length) {
             direction = p_direction;
             min_length = p_min_length;
         }

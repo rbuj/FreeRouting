@@ -40,6 +40,7 @@ public class ClearanceMatrix implements java.io.Serializable {
         result.set_default_value(p_default_value);
         return result;
     }
+
     /**
      * count of clearance classes
      */
@@ -52,7 +53,7 @@ public class ClearanceMatrix implements java.io.Serializable {
      * Creates a new instance for p_class_count clearance classes on
      * p_layer_count layers. p_names is an array of dimension p_class_count;
      */
-    public ClearanceMatrix(int p_class_count, net.freerouting.freeroute.board.LayerStructure p_layer_structure, String[] p_name_arr) {
+    private ClearanceMatrix(int p_class_count, net.freerouting.freeroute.board.LayerStructure p_layer_structure, String[] p_name_arr) {
         class_count = Math.max(p_class_count, 1);
         layer_structure = p_layer_structure;
         row = new Row[class_count];

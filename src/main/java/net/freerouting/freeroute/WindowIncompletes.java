@@ -34,7 +34,7 @@ public final class WindowIncompletes extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of IncompletesWindow
      */
-    public WindowIncompletes(BoardFrame p_board_frame) {
+    WindowIncompletes(BoardFrame p_board_frame) {
         super(p_board_frame);
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());

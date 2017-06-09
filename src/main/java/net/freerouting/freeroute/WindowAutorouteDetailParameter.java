@@ -49,7 +49,7 @@ public final class WindowAutorouteDetailParameter extends BoardSavableSubWindow 
     /**
      * Creates a new instance of WindowAutorouteDetailParameter
      */
-    public WindowAutorouteDetailParameter(BoardFrame p_board_frame) {
+    WindowAutorouteDetailParameter(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
         Locale locale = Locale.getDefault();
         java.util.ResourceBundle resources

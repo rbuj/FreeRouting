@@ -338,7 +338,7 @@ public class UndoableObjects implements java.io.Serializable {
         /**
          * Creates a new instance of UndoableObjectNode
          */
-        UndoableObjectNode(Storable p_object, int p_level) {
+        private UndoableObjectNode(Storable p_object, int p_level) {
             object = p_object;
             level = p_level;
             undo_object = null;

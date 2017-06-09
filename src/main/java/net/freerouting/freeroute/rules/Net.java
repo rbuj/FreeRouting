@@ -62,7 +62,7 @@ public class Net implements Comparable<Net>, net.freerouting.freeroute.board.Obj
      * Creates a new instance of Net. p_net_list is the net list, where this net
      * belongs to.
      */
-    public Net(String p_name, int p_subnet_number, int p_no, Nets p_net_list, boolean p_contains_plane) {
+    Net(String p_name, int p_subnet_number, int p_no, Nets p_net_list, boolean p_contains_plane) {
         name = p_name;
         subnet_number = p_subnet_number;
         net_number = p_no;

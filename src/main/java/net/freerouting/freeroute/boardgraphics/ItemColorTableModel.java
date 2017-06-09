@@ -34,7 +34,7 @@ public class ItemColorTableModel extends ColorTableModel {
     private transient boolean item_colors_precalculated = false;
     private transient Color[][] precalculated_item_colors = null;
 
-    public ItemColorTableModel(net.freerouting.freeroute.board.LayerStructure p_layer_structure) {
+    ItemColorTableModel(net.freerouting.freeroute.board.LayerStructure p_layer_structure) {
         super(p_layer_structure.arr.length);
 
         int row_count = p_layer_structure.arr.length;
@@ -102,7 +102,7 @@ public class ItemColorTableModel extends ColorTableModel {
         }
     }
 
-    public ItemColorTableModel(java.io.ObjectInputStream p_stream)
+    ItemColorTableModel(java.io.ObjectInputStream p_stream)
             throws java.io.IOException, java.lang.ClassNotFoundException {
         super(p_stream);
     }

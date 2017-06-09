@@ -111,6 +111,7 @@ public class Polyline implements java.io.Serializable {
         System.arraycopy(tmp_arr, 0, result, 0, new_length);
         return result;
     }
+
     /**
      * the array of lines of this Polyline.
      */
@@ -125,7 +126,7 @@ public class Polyline implements java.io.Serializable {
      * and the i+1-th lines of the new created p_polyline for 0 {@literal <}= i
      * {@literal <} p_point_arr.length. p_polygon must have at least 2 corners
      */
-    public Polyline(Polygon p_polygon) {
+    private Polyline(Polygon p_polygon) {
         Point[] point_arr = p_polygon.corner_array();
         if (point_arr.length < 2) {
             System.out.println("Polyline: must contain at least 2 different points");

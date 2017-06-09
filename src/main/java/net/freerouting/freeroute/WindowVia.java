@@ -52,7 +52,7 @@ public final class WindowVia extends BoardSavableSubWindow {
     /**
      * Creates a new instance of ViaWindow
      */
-    public WindowVia(BoardFrame p_board_frame) {
+    WindowVia(BoardFrame p_board_frame) {
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowVia", Locale.getDefault());
         this.setTitle(resources.getString("title"));
 

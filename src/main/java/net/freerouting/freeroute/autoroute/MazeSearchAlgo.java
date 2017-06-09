@@ -191,7 +191,7 @@ public class MazeSearchAlgo {
     /**
      * Creates a new instance of MazeSearchAlgo
      */
-    MazeSearchAlgo(AutorouteEngine p_autoroute_engine, AutorouteControl p_ctrl) {
+    private MazeSearchAlgo(AutorouteEngine p_autoroute_engine, AutorouteControl p_ctrl) {
         autoroute_engine = p_autoroute_engine;
         ctrl = p_ctrl;
         RANDOM_GENERATOR.setSeed(p_ctrl.ripup_costs); // To get reproducable random numbers in the ripup algorithm.
@@ -1217,7 +1217,7 @@ public class MazeSearchAlgo {
         public final ExpandableObject destination_door;
         public final int section_no_of_door;
 
-        Result(ExpandableObject p_destination_door, int p_section_no_of_door) {
+        private Result(ExpandableObject p_destination_door, int p_section_no_of_door) {
             destination_door = p_destination_door;
             section_no_of_door = p_section_no_of_door;
         }

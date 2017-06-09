@@ -42,7 +42,7 @@ public final class WindowRouteStubs extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of WindowRouteStubs
      */
-    public WindowRouteStubs(BoardFrame p_board_frame) {
+    WindowRouteStubs(BoardFrame p_board_frame) {
         super(p_board_frame);
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.CleanupWindows", Locale.getDefault());
         this.setTitle(resources.getString("route_stubs"));

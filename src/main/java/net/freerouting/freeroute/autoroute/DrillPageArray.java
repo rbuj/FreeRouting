@@ -62,7 +62,7 @@ public class DrillPageArray {
     /**
      * Creates a new instance of DrillPageArray
      */
-    public DrillPageArray(RoutingBoard p_board, int p_max_page_width) {
+    DrillPageArray(RoutingBoard p_board, int p_max_page_width) {
         this.bounds = p_board.bounding_box;
         double length = bounds.ur.x - bounds.ll.x;
         double height = bounds.ur.y - bounds.ll.y;

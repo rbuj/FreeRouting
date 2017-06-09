@@ -49,7 +49,7 @@ public final class WindowViaRule extends javax.swing.JFrame {
     /**
      * Creates a new instance of ViaRuleWindow
      */
-    public WindowViaRule(ViaRule p_via_rule, ViaInfos p_via_list, BoardFrame p_board_frame) {
+    WindowViaRule(ViaRule p_via_rule, ViaInfos p_via_list, BoardFrame p_board_frame) {
         this.via_rule = p_via_rule;
         this.via_list = p_via_list;
 

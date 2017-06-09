@@ -44,7 +44,7 @@ public final class ComboBoxLayer extends javax.swing.JComboBox<Layer> {
     /**
      * Creates a new instance of LayerComboBox
      */
-    public ComboBoxLayer(LayerStructure p_layer_structure) {
+    ComboBoxLayer(LayerStructure p_layer_structure) {
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         int signal_layer_count = p_layer_structure.signal_layer_count();

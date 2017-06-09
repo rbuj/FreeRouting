@@ -45,7 +45,7 @@ public class ComponentOutline extends Item {
     /**
      * Creates a new instance of ComponentOutline
      */
-    public ComponentOutline(Area p_area, boolean p_is_front, Vector p_translation, double p_rotation_in_degree,
+    ComponentOutline(Area p_area, boolean p_is_front, Vector p_translation, double p_rotation_in_degree,
             int p_component_no, FixedState p_fixed_state, BasicBoard p_board) {
         super(new int[0], 0, 0, p_component_no, p_fixed_state, p_board);
         this.relative_area = p_area;

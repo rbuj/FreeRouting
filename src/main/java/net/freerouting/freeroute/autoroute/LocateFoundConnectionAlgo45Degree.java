@@ -105,7 +105,7 @@ public class LocateFoundConnectionAlgo45Degree extends LocateFoundConnectionAlgo
     /**
      * Creates a new instance of LocateFoundConnectionAlgo45Degree
      */
-    public LocateFoundConnectionAlgo45Degree(MazeSearchAlgo.Result p_maze_search_result,
+    LocateFoundConnectionAlgo45Degree(MazeSearchAlgo.Result p_maze_search_result,
             AutorouteControl p_ctrl, ShapeSearchTree p_search_tree, AngleRestriction p_angle_restriction,
             SortedSet<Item> p_ripped_item_list, TestLevel p_test_level) {
         super(p_maze_search_result, p_ctrl, p_search_tree, p_angle_restriction, p_ripped_item_list, p_test_level);

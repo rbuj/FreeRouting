@@ -177,9 +177,10 @@ public class ShoveTraceAlgo {
         }
         return result;
     }
+
     private final RoutingBoard board;
 
-    public ShoveTraceAlgo(RoutingBoard p_board) {
+    ShoveTraceAlgo(RoutingBoard p_board) {
         board = p_board;
     }
 

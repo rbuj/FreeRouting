@@ -42,7 +42,7 @@ public class SearchTreeManager {
     /**
      * Creates a new instance of SearchTreeManager
      */
-    public SearchTreeManager(BasicBoard p_board) {
+    SearchTreeManager(BasicBoard p_board) {
         board = p_board;
         compensated_search_trees = new LinkedList<>();
         default_tree = new ShapeSearchTree(FortyfiveDegreeBoundingDirections.INSTANCE, p_board, 0);

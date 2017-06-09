@@ -109,7 +109,7 @@ public final class ColorManager extends BoardSavableSubWindow {
     /**
      * Creates a new instance of ColorManager
      */
-    public ColorManager(BoardFrame p_board_frame) {
+    ColorManager(BoardFrame p_board_frame) {
         GraphicsContext graphics_context = p_board_frame.board_panel.board_handling.graphics_context;
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());

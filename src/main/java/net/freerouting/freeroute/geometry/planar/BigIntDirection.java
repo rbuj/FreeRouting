@@ -43,7 +43,7 @@ public class BigIntDirection implements Direction {
     /**
      * creates a BigIntDirection from an IntDirection
      */
-    BigIntDirection(IntDirection p_dir) {
+    private BigIntDirection(IntDirection p_dir) {
         x = BigInteger.valueOf(p_dir.x);
         y = BigInteger.valueOf(p_dir.y);
     }

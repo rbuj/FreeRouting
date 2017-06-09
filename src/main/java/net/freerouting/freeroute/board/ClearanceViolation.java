@@ -49,7 +49,7 @@ public class ClearanceViolation implements ObjectInfoPanel.Printable {
     /**
      * Creates a new instance of ClearanceViolation
      */
-    public ClearanceViolation(Item p_first_item, Item p_second_item, ConvexShape p_shape, int p_layer) {
+    ClearanceViolation(Item p_first_item, Item p_second_item, ConvexShape p_shape, int p_layer) {
         first_item = p_first_item;
         second_item = p_second_item;
         shape = p_shape;

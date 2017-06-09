@@ -128,7 +128,7 @@ public class Settings implements java.io.Serializable {
     /**
      * Creates a new interactive settings variable.
      */
-    public Settings(RoutingBoard p_board, Logfile p_logfile) {
+    Settings(RoutingBoard p_board, Logfile p_logfile) {
         this.logfile = p_logfile;
         // Initialise with default values.
         layer = 0;
@@ -159,7 +159,7 @@ public class Settings implements java.io.Serializable {
     /**
      * Copy constructor
      */
-    public Settings(Settings p_settings) {
+    Settings(Settings p_settings) {
         this.logfile = p_settings.logfile;
         this.read_only = p_settings.read_only;
         this.layer = p_settings.layer;

@@ -57,7 +57,7 @@ public abstract class WindowObjectList extends BoardSavableSubWindow {
     /**
      * Creates a new instance of ObjectListWindow
      */
-    public WindowObjectList(BoardFrame p_board_frame) {
+    WindowObjectList(BoardFrame p_board_frame) {
         this.board_frame = p_board_frame;
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowObjectList", Locale.getDefault());
 

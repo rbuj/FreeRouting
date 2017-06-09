@@ -47,10 +47,11 @@ public final class WindowDisplayMisc extends BoardSavableSubWindow {
     private static final double ROTATION_90 = 0.5 * Math.PI;
     private static final double ROTATION_180 = Math.PI;
     private static final double ROTATION_270 = 1.5 * Math.PI;
+
     /**
      * Creates a new instance of DisplayMiscWindow
      */
-    public WindowDisplayMisc(BoardFrame p_board_frame) {
+    WindowDisplayMisc(BoardFrame p_board_frame) {
         this.panel = p_board_frame.board_panel;
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.DisplayMisc", Locale.getDefault());

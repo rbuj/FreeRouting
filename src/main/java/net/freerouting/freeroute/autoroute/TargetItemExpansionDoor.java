@@ -41,7 +41,7 @@ public class TargetItemExpansionDoor implements ExpandableObject {
     /**
      * Creates a new instance of ItemExpansionInfo
      */
-    public TargetItemExpansionDoor(Item p_item, int p_tree_entry_no, CompleteExpansionRoom p_room, ShapeSearchTree p_search_tree) {
+    TargetItemExpansionDoor(Item p_item, int p_tree_entry_no, CompleteExpansionRoom p_room, ShapeSearchTree p_search_tree) {
         item = p_item;
         tree_entry_no = p_tree_entry_no;
         room = p_room;

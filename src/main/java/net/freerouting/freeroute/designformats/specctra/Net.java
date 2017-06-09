@@ -85,7 +85,7 @@ public class Net {
     /**
      * Creates a new instance of Net
      */
-    public Net(Id p_net_id) {
+    Net(Id p_net_id) {
         id = p_net_id;
     }
 
@@ -105,7 +105,7 @@ public class Net {
         public final String name;
         public final int subnet_number;
 
-        public Id(String p_name, int p_subnet_number) {
+        Id(String p_name, int p_subnet_number) {
             name = p_name;
             subnet_number = p_subnet_number;
         }
@@ -125,7 +125,7 @@ public class Net {
         public final String component_name;
         public final String pin_name;
 
-        public Pin(String p_component_name, String p_pin_name) {
+        Pin(String p_component_name, String p_pin_name) {
             component_name = p_component_name;
             pin_name = p_pin_name;
         }

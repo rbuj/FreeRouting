@@ -278,7 +278,7 @@ public class AutorouteControl {
         final int to_layer;
         final boolean attach_smd_allowed;
 
-        ViaMask(int p_from_layer, int p_to_layer, boolean p_attach_smd_allowed) {
+        private ViaMask(int p_from_layer, int p_to_layer, boolean p_attach_smd_allowed) {
             from_layer = p_from_layer;
             to_layer = p_to_layer;
             attach_smd_allowed = p_attach_smd_allowed;

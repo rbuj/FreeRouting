@@ -43,7 +43,7 @@ public class ComponentPlacement {
     /**
      * Creates a new instance of ComponentPlacement
      */
-    public ComponentPlacement(String p_lib_name) {
+    ComponentPlacement(String p_lib_name) {
         lib_name = p_lib_name;
         locations = new LinkedList<>();
     }

@@ -39,7 +39,7 @@ public class LogicalPart implements net.freerouting.freeroute.board.ObjectInfoPa
      * pin_no. The pin_no's of the part pins must be the same number as in the
      * componnents library package.
      */
-    public LogicalPart(String p_name, int p_no, PartPin[] p_part_pin_arr) {
+    LogicalPart(String p_name, int p_no, PartPin[] p_part_pin_arr) {
         name = p_name;
         no = p_no;
         part_pin_arr = (p_part_pin_arr == null) ? null : p_part_pin_arr.clone();

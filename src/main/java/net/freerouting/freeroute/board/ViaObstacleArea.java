@@ -34,7 +34,7 @@ public class ViaObstacleArea extends ObstacleArea {
     /**
      * Creates a new area item which may belong to several nets
      */
-    ViaObstacleArea(Area p_area, int p_layer, Vector p_translation, double p_rotation_in_degree, boolean p_side_changed,
+    private ViaObstacleArea(Area p_area, int p_layer, Vector p_translation, double p_rotation_in_degree, boolean p_side_changed,
             int[] p_net_no_arr, int p_clearance_type, int p_id_no, int p_group_no, String p_name, FixedState p_fixed_state, BasicBoard p_board) {
         super(p_area, p_layer, p_translation, p_rotation_in_degree, p_side_changed, p_net_no_arr,
                 p_clearance_type, p_id_no, p_group_no, p_name, p_fixed_state, p_board);

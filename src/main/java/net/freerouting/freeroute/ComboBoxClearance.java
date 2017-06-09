@@ -34,7 +34,7 @@ public final class ComboBoxClearance extends javax.swing.JComboBox<ClearanceClas
     /**
      * Creates a new instance of ClearanceComboBox
      */
-    public ComboBoxClearance(ClearanceMatrix p_clearance_matrix) {
+    ComboBoxClearance(ClearanceMatrix p_clearance_matrix) {
         this.class_arr = new ClearanceClass[p_clearance_matrix.get_class_count()];
         for (int i = 0; i < this.class_arr.length; ++i) {
             this.class_arr[i] = new ClearanceClass(p_clearance_matrix.get_name(i), i);

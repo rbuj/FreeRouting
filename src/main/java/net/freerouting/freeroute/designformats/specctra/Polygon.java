@@ -41,7 +41,7 @@ public class Polygon extends Shape {
      * dimension 2 * point_count and contains x0, y0, x1, y1, ... If the polygon
      * is used as rectangle,
      */
-    public Polygon(Layer p_layer, double[] p_coor) {
+    Polygon(Layer p_layer, double[] p_coor) {
         super(p_layer);
         coor = (p_coor == null) ? null : p_coor.clone();
     }

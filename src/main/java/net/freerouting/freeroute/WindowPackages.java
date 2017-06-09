@@ -35,7 +35,7 @@ public final class WindowPackages extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of PackagesWindow
      */
-    public WindowPackages(BoardFrame p_board_frame) {
+    WindowPackages(BoardFrame p_board_frame) {
         super(p_board_frame);
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());

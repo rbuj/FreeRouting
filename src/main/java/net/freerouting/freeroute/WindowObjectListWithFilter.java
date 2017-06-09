@@ -34,7 +34,7 @@ public abstract class WindowObjectListWithFilter extends WindowObjectList {
     /**
      * Creates a new instance of ObjectListWindowWithFilter
      */
-    public WindowObjectListWithFilter(BoardFrame p_board_frame) {
+    WindowObjectListWithFilter(BoardFrame p_board_frame) {
         super(p_board_frame);
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowObjectList", Locale.getDefault());

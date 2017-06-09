@@ -37,7 +37,7 @@ public class PopupMenuMove extends PopupMenuDisplay {
     /**
      * Creates a new instance of PopupMenuMove
      */
-    public PopupMenuMove(BoardFrame p_board_frame) {
+    PopupMenuMove(BoardFrame p_board_frame) {
         super(p_board_frame);
         initializeComponents();
     }

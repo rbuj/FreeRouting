@@ -48,7 +48,7 @@ public class PolygonShape extends PolylineShape {
     /**
      * Creates a new instance of PolygonShape
      */
-    public PolygonShape(Polygon p_polygon) {
+    private PolygonShape(Polygon p_polygon) {
         Polygon curr_polygon = p_polygon;
         if (p_polygon.winding_number_after_closing() < 0) {
             // the the corners of the polygon are in clockwise sense

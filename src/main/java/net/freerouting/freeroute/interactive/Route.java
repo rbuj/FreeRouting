@@ -99,7 +99,7 @@ public class Route {
      * Starts routing a connection. p_pen_half_width_arr is provided because it
      * may be different from the half width array in p_board.rules.
      */
-    public Route(Point p_start_corner, int p_layer, int[] p_pen_half_width_arr, boolean[] p_layer_active_arr, int[] p_net_no_arr,
+    Route(Point p_start_corner, int p_layer, int[] p_pen_half_width_arr, boolean[] p_layer_active_arr, int[] p_net_no_arr,
             int p_clearance_class, ViaRule p_via_rule, boolean p_push_enabled,
             int p_trace_tidy_width, int p_pull_tight_accuracy, Item p_start_item, Set<Item> p_target_set,
             RoutingBoard p_board, boolean p_is_stitch_mode, boolean p_with_neckdown, boolean p_via_snap_to_smd_center,
