@@ -4,6 +4,8 @@ ToDo
 	* Write all documentation in docbook format
 
 xxxx-xx-xx
+        * Class structure (constant & constructor access)
+        * Remove unused/unreferenced/unreachable code
         * Remove custom exception:
                 * DesignFileException.java
         * Apache Commons -> Google Guava
