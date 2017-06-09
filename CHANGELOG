@@ -4,6 +4,8 @@ ToDo
 	* Write all documentation in docbook format
 
 xxxx-xx-xx
+        * Remove custom exception:
+                * DesignFileException.java
         * Apache Commons -> Google Guava
         * Copy external libs into target/libext folder
         * Enable OpenGL pipeline and use system look & feel
