@@ -149,45 +149,6 @@ public class Circle implements ConvexShape, java.io.Serializable {
     @Override
     public TileShape bounding_tile() {
         return bounding_octagon();
-        // the following caused problems with the spring_over algorithm in routing.
-        /* if (this.precalculated_bounding_tile == null)
-        {
-            this.precalculated_bounding_tile = bounding_tile(c_max_approximation_segment_length);
-        }
-        return this.precalculated_bounding_tile; */
-    }
-
-    /**
-     * Creates a bounding tile shape around this circle, so that the length of
-     * the line segments of the tile is at most p_max_segment_length.
-     */
-    public TileShape bounding_tile(int p_max_segment_length) {
-        int quadrant_division_count = this.radius / p_max_segment_length + 1;
-        if (quadrant_division_count <= 2) {
-            return this.bounding_octagon();
-        }
-        Line[] tangent_line_arr = new Line[quadrant_division_count * 4];
-        for (int i = 0; i < quadrant_division_count; ++i) {
-            // calculate the tangential points in the first quadrant
-            Vector border_delta;
-            if (i == 0) {
-                border_delta = new IntVector(this.radius, 0);
-            } else {
-                double curr_angle = i * Math.PI / (2.0 * quadrant_division_count);
-                int curr_x = (int) Math.ceil(Math.sin(curr_angle) * this.radius);
-                int curr_y = (int) Math.ceil(Math.cos(curr_angle) * this.radius);
-                border_delta = new IntVector(curr_x, curr_y);
-            }
-            Point curr_a = this.center.translate_by(border_delta);
-            Point curr_b = curr_a.turn_90_degree(1, this.center);
-            Direction curr_dir = DirectionUtils.get_instance(curr_b.difference_by(this.center));
-            Line curr_tangent = new Line(curr_a, curr_dir);
-            tangent_line_arr[quadrant_division_count + i] = curr_tangent;
-            tangent_line_arr[2 * quadrant_division_count + i] = curr_tangent.turn_90_degree(1, this.center);
-            tangent_line_arr[3 * quadrant_division_count + i] = curr_tangent.turn_90_degree(2, this.center);
-            tangent_line_arr[i] = curr_tangent.turn_90_degree(3, this.center);
-        }
-        return TileShapeUtils.get_instance(tangent_line_arr);
     }
 
     @Override

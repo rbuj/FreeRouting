@@ -144,14 +144,6 @@ public class IntBox extends RegularTileShape {
         return 2;
     }
 
-    /**
-     * Chechs, if p_point is located in the interiour of this box.
-     */
-    public boolean contains_inside(IntPoint p_point) {
-        return p_point.x > this.ll.x && p_point.x < this.ur.x
-                && p_point.y > this.ll.y && p_point.y < this.ur.y;
-    }
-
     @Override
     public boolean is_IntBox() {
         return true;
@@ -509,34 +501,6 @@ public class IntBox extends RegularTileShape {
     }
 
     /**
-     * Returns the box, where the horizontal boundary is offseted by p_dist. If
-     * p_dist {@literal >} 0, the offset is to the outside, else to the inside.
-     */
-    public IntBox horizontal_offset(double p_dist) {
-        if (p_dist == 0 || is_empty()) {
-            return this;
-        }
-        int dist = (int) Math.round(p_dist);
-        IntPoint lower_left = new IntPoint(ll.x - dist, ll.y);
-        IntPoint upper_right = new IntPoint(ur.x + dist, ur.y);
-        return new IntBox(lower_left, upper_right);
-    }
-
-    /**
-     * Returns the box, where the vertical boundary is offseted by p_dist. If
-     * p_dist {@literal >} 0, the offset is to the outside, else to the inside.
-     */
-    public IntBox vertical_offset(double p_dist) {
-        if (p_dist == 0 || is_empty()) {
-            return this;
-        }
-        int dist = (int) Math.round(p_dist);
-        IntPoint lower_left = new IntPoint(ll.x, ll.y - dist);
-        IntPoint upper_right = new IntPoint(ur.x, ur.y + dist);
-        return new IntBox(lower_left, upper_right);
-    }
-
-    /**
      * Shrinks the width and height of the box by the input width. The box will
      * not vanish completely.
      */
@@ -655,64 +619,6 @@ public class IntBox extends RegularTileShape {
         }
         return !(ll.x < p_other.ll.x || ll.y < p_other.ll.y
                 || ur.x > p_other.ur.x || ur.y > p_other.ur.y);
-    }
-
-    /**
-     * Return true, if p_other is contained in the interiour of this box.
-     */
-    public boolean contains_in_interiour(IntBox p_other) {
-        if (p_other.is_empty()) {
-            return true;
-        }
-        return !(p_other.ll.x <= ll.x || p_other.ll.y <= ll.y
-                || p_other.ur.x >= ur.x || p_other.ur.y >= ur.y);
-    }
-
-    /**
-     * Calculates the part of p_from_box, which has minimal distance to this
-     * box.
-     */
-    public IntBox nearest_part(IntBox p_from_box) {
-        int ll_x;
-
-        if (p_from_box.ll.x >= this.ll.x) {
-            ll_x = p_from_box.ll.x;
-        } else if (p_from_box.ur.x >= this.ll.x) {
-            ll_x = this.ll.x;
-        } else {
-            ll_x = p_from_box.ur.x;
-        }
-
-        int ur_x;
-
-        if (p_from_box.ur.x <= this.ur.x) {
-            ur_x = p_from_box.ur.x;
-        } else if (p_from_box.ll.x <= this.ur.x) {
-            ur_x = this.ur.x;
-        } else {
-            ur_x = p_from_box.ll.x;
-        }
-
-        int ll_y;
-
-        if (p_from_box.ll.y >= this.ll.y) {
-            ll_y = p_from_box.ll.y;
-        } else if (p_from_box.ur.y >= this.ll.y) {
-            ll_y = this.ll.y;
-        } else {
-            ll_y = p_from_box.ur.y;
-        }
-
-        int ur_y;
-
-        if (p_from_box.ur.y <= this.ur.y) {
-            ur_y = p_from_box.ur.y;
-        } else if (p_from_box.ll.y <= this.ur.y) {
-            ur_y = this.ur.y;
-        } else {
-            ur_y = p_from_box.ll.y;
-        }
-        return new IntBox(ll_x, ll_y, ur_x, ur_y);
     }
 
     @Override

@@ -104,21 +104,6 @@ public class BoardRules implements java.io.Serializable {
     }
 
     /**
-     * Returns true, if the trace widths used for routing for the input net are
-     * equal on all layers. If p_net_no {@literal <} 0, the default trace widths
-     * for all nets are checked.
-     */
-    public boolean trace_widths_are_layer_dependent(int p_net_no) {
-        int compare_width = get_trace_half_width(p_net_no, 0);
-        for (int i = 1; i < this.layer_structure.arr.length; ++i) {
-            if (get_trace_half_width(p_net_no, i) != compare_width) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Returns he smallest of all default trace half widths
      */
     public int get_min_trace_half_width() {
@@ -176,17 +161,6 @@ public class BoardRules implements java.io.Serializable {
      */
     public NetClass get_new_net_class() {
         NetClass result = this.net_classes.append(this.layer_structure, this.clearance_matrix);
-        result.set_trace_clearance_class(this.get_default_net_class().get_trace_clearance_class());
-        result.set_via_rule(this.get_default_via_rule());
-        result.set_trace_half_width(this.get_default_net_class().get_trace_half_width(0));
-        return result;
-    }
-
-    /**
-     * Returns an empty new net rule with an internally created name.
-     */
-    public NetClass get_new_net_class(String p_name) {
-        NetClass result = this.net_classes.append(p_name, this.layer_structure, this.clearance_matrix);
         result.set_trace_clearance_class(this.get_default_net_class().get_trace_clearance_class());
         result.set_via_rule(this.get_default_via_rule());
         result.set_trace_half_width(this.get_default_net_class().get_trace_half_width(0));

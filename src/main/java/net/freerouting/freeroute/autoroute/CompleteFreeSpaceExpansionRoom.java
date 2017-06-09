@@ -20,7 +20,6 @@
 package net.freerouting.freeroute.autoroute;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 import net.freerouting.freeroute.board.Connectable;
 import net.freerouting.freeroute.board.Item;
@@ -184,40 +183,6 @@ public class CompleteFreeSpaceExpansionRoom extends FreeSpaceExpansionRoom imple
         double layer_visibility = p_graphics_context.get_layer_visibility(this.get_layer());
         p_graphics_context.fill_area(this.get_shape(), p_graphics, draw_color, p_intensity * layer_visibility);
         p_graphics_context.draw_boundary(this.get_shape(), 0, draw_color, p_graphics, layer_visibility);
-    }
-
-    /**
-     * Check, if this FreeSpaceExpansionRoom is valid.
-     */
-    public boolean validate(AutorouteEngine p_autoroute_engine) {
-        boolean result = true;
-        Collection<ShapeTree.TreeEntry> overlapping_objects = new LinkedList<>();
-        int[] net_no_arr = new int[1];
-        net_no_arr[0] = p_autoroute_engine.get_net_no();
-        p_autoroute_engine.autoroute_search_tree.overlapping_tree_entries(this.get_shape(), this.get_layer(),
-                net_no_arr, overlapping_objects);
-        Iterator<ShapeTree.TreeEntry> it = overlapping_objects.iterator();
-        while (it.hasNext()) {
-            ShapeTree.TreeEntry curr_entry = it.next();
-            if (curr_entry.object == this) {
-                continue;
-            }
-            SearchTreeObject curr_object = (SearchTreeObject) curr_entry.object;
-            if (!curr_object.is_trace_obstacle(p_autoroute_engine.get_net_no())) {
-                continue;
-            }
-            if (curr_object.shape_layer(curr_entry.shape_index_in_object) != get_layer()) {
-                continue;
-            }
-            TileShape curr_shape
-                    = curr_object.get_tree_shape(p_autoroute_engine.autoroute_search_tree, curr_entry.shape_index_in_object);
-            TileShape intersection = this.get_shape().intersection(curr_shape);
-            if (intersection.dimension() > 1) {
-                System.out.println("ExpansionRoom overlap conflict");
-                result = false;
-            }
-        }
-        return result;
     }
 
     /**

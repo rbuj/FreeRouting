@@ -137,35 +137,6 @@ public class FloatPoint implements java.io.Serializable {
     }
 
     /**
-     * Rounds this point, so that if this point is on the right side of any
-     * directed line with direction p_dir, the result point will also be on the
-     * right side.
-     */
-    public IntPoint round_to_the_right(Direction p_dir) {
-        FloatPoint dir = p_dir.get_vector().to_float();
-        int rounded_x;
-
-        if (dir.y > 0) {
-            rounded_x = (int) Math.ceil(x);
-        } else if (dir.y < 0) {
-            rounded_x = (int) Math.floor(x);
-        } else {
-            rounded_x = (int) Math.round(x);
-        }
-
-        int rounded_y;
-
-        if (dir.x > 0) {
-            rounded_y = (int) Math.floor(y);
-        } else if (dir.x < 0) {
-            rounded_y = (int) Math.ceil(y);
-        } else {
-            rounded_y = (int) Math.round(y);
-        }
-        return new IntPoint(rounded_x, rounded_y);
-    }
-
-    /**
      * Round this Point so the x coordinate of the result will be a multiple of
      * p_horizontal_grid and the y coordinate a multiple of p_vertical_grid.
      */
@@ -183,35 +154,6 @@ public class FloatPoint implements java.io.Serializable {
             rounded_y = this.y;
         }
         return new IntPoint((int) rounded_x, (int) rounded_y);
-    }
-
-    /**
-     * Rounds this point, so that if this point is on the left side of any
-     * directed line with direction p_dir, the result point will also be on the
-     * left side.
-     */
-    public IntPoint round_to_the_left(Direction p_dir) {
-        FloatPoint dir = p_dir.get_vector().to_float();
-        int rounded_x;
-
-        if (dir.y > 0) {
-            rounded_x = (int) Math.floor(x);
-        } else if (dir.y < 0) {
-            rounded_x = (int) Math.ceil(x);
-        } else {
-            rounded_x = (int) Math.round(x);
-        }
-
-        int rounded_y;
-
-        if (dir.x > 0) {
-            rounded_y = (int) Math.ceil(y);
-        } else if (dir.x < 0) {
-            rounded_y = (int) Math.floor(y);
-        } else {
-            rounded_y = (int) Math.round(y);
-        }
-        return new IntPoint(rounded_x, rounded_y);
     }
 
     /**

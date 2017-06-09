@@ -20,7 +20,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 import net.freerouting.freeroute.boardgraphics.Drawable;
 import net.freerouting.freeroute.boardgraphics.GraphicsContext;
@@ -401,24 +400,6 @@ public class BasicBoard implements java.io.Serializable {
     }
 
     /**
-     * looks, if an item with id_no p_id_no is on the board. Returns the found
-     * item or null, if no such item is found.
-     */
-    public Item get_item(int p_id_no) {
-        Iterator<UndoableObjects.UndoableObjectNode> it = item_list.start_read_object();
-        for (;;) {
-            Item curr_item = (Item) item_list.read_object(it);
-            if (curr_item == null) {
-                break;
-            }
-            if (curr_item.get_id_no() == p_id_no) {
-                return curr_item;
-            }
-        }
-        return null;
-    }
-
-    /**
      * Returns the list of all items on the board
      */
     public Collection<Item> get_items() {
@@ -739,36 +720,6 @@ public class BasicBoard implements java.io.Serializable {
             }
         }
         return trace_split;
-    }
-
-    /**
-     * Returs a Collection of Collections of items forming a connected set.
-     */
-    public Collection<Collection<Item>> get_connected_sets(int p_net_no) {
-        Collection<Collection<Item>> result = new LinkedList<>();
-        if (p_net_no <= 0) {
-            return result;
-        }
-        SortedSet<Item> items_to_handle = new TreeSet<>();
-        Iterator<UndoableObjects.UndoableObjectNode> it = this.item_list.start_read_object();
-        for (;;) {
-            Item curr_item = (Item) item_list.read_object(it);
-            if (curr_item == null) {
-                break;
-            }
-            if (curr_item instanceof Connectable && curr_item.contains_net(p_net_no)) {
-                items_to_handle.add(curr_item);
-            }
-        }
-        Iterator<Item> it2 = items_to_handle.iterator();
-        while (it2.hasNext()) {
-            Item curr_item = it2.next();
-            Collection<Item> next_connected_set = curr_item.get_connected_set(p_net_no);
-            result.add(next_connected_set);
-            items_to_handle.removeAll(next_connected_set);
-            it2 = items_to_handle.iterator();
-        }
-        return result;
     }
 
     /**

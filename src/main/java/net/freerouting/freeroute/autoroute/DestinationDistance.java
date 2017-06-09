@@ -397,14 +397,4 @@ public class DestinationDistance {
 
         return result;
     }
-
-    public double calculate_cheap_distance(IntBox p_box, int p_layer) {
-        double min_normal_via_cost_save = min_normal_via_cost;
-
-        min_normal_via_cost = min_cheap_via_cost;
-        double result = calculate(p_box, p_layer);
-
-        min_normal_via_cost = min_normal_via_cost_save;
-        return result;
-    }
 }

@@ -91,39 +91,6 @@ public abstract class ShapeTree {
         return new_leaf;
     }
 
-    /**
-     * Inserts the leaves of this tree into an array.
-     */
-    public Leaf[] to_array() {
-        Leaf[] result = new Leaf[this.leaf_count];
-        if (result.length == 0) {
-            return result;
-        }
-        TreeNode curr_node = this.root;
-        int curr_index = 0;
-        for (;;) {
-            // go down from curr_node to the left most leaf
-            while (curr_node instanceof InnerNode) {
-                curr_node = ((InnerNode) curr_node).first_child;
-            }
-            if (curr_node instanceof Leaf) {
-                result[curr_index] = (Leaf) curr_node;
-                ++curr_index;
-            }
-            // go up until parent.second_child != curr_node, which means we came from first_child
-            InnerNode curr_parent = curr_node.parent;
-            while (curr_parent != null && curr_parent.second_child == curr_node) {
-                curr_node = curr_parent;
-                curr_parent = curr_node.parent;
-            }
-            if (curr_parent == null) {
-                break;
-            }
-            curr_node = curr_parent.second_child;
-        }
-        return result;
-    }
-
     abstract void insert(Leaf p_leaf);
 
     abstract void remove_leaf(Leaf p_leaf);
@@ -200,21 +167,6 @@ public abstract class ShapeTree {
             }
             return result;
         }
-
-        /**
-         * Returns the number of nodes between this leaf and the croot of the
-         * tree.
-         */
-        public int distance_to_root() {
-            int result = 1;
-            InnerNode curr_parent = this.parent;
-            while (curr_parent.parent != null) {
-                curr_parent = curr_parent.parent;
-                ++result;
-            }
-            return result;
-        }
-
     }
 
     /**

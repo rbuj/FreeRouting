@@ -208,16 +208,6 @@ public class IntPoint extends Point {
     }
 
     /**
-     * Returns the signed area of the parallelogramm spanned by the vectors p_2
-     * - p_1 and this - p_1
-     */
-    public double signed_area(IntPoint p_1, IntPoint p_2) {
-        IntVector d21 = p_2.difference_by(p_1);
-        IntVector d01 = this.difference_by(p_1);
-        return d21.determinant(d01);
-    }
-
-    /**
      * calculates the square of the distance between this point and p_to_point
      */
     public double distance_square(IntPoint p_to_point) {

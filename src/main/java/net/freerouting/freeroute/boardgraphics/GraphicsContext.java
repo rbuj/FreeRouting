@@ -308,15 +308,6 @@ public class GraphicsContext implements java.io.Serializable {
     }
 
     /**
-     * Draws the interiour of an ellipse.
-     */
-    public void fill_ellipse(Ellipse p_ellipse, Graphics p_g, Color p_color, double p_translucency_factor) {
-        Ellipse[] ellipse_arr = new Ellipse[1];
-        ellipse_arr[0] = p_ellipse;
-        fill_ellipse_arr(ellipse_arr, p_g, p_color, p_translucency_factor);
-    }
-
-    /**
      * Draws the interiour of an array of ellipses. Ellipses contained in an
      * other ellipse are treated as holes.
      */
@@ -364,25 +355,6 @@ public class GraphicsContext implements java.io.Serializable {
             return false;
         }
         return p_y <= p_rect.getY() + p_rect.getHeight() + p_dist;
-    }
-
-    /**
-     * Fill the interior of the polygon shape represented by p_points.
-     */
-    public void fill_shape(FloatPoint[] p_points, Graphics p_g, Color p_color, double p_translucency_factor) {
-        if ((p_color == null) || !(p_g instanceof Graphics2D)) {
-            return;
-        }
-        Graphics2D g2 = (Graphics2D) p_g;
-        Polygon draw_polygon = new Polygon();
-        for (FloatPoint p_point : p_points) {
-            Point2D curr_corner = coordinate_transform.board_to_screen(p_point);
-            draw_polygon.addPoint((int) Math.round(curr_corner.getX()),
-                    (int) Math.round(curr_corner.getY()));
-        }
-        init_draw_graphics(g2, p_color);
-        set_translucency(g2, p_translucency_factor);
-        g2.fill(draw_polygon);
     }
 
     /**

@@ -151,31 +151,4 @@ public class BoardLibrary implements java.io.Serializable {
         }
         return null;
     }
-
-    /**
-     * Looks, if the input padstack is used on p_board in a Package or in drill.
-     */
-    public boolean is_used(Padstack p_padstack, net.freerouting.freeroute.board.BasicBoard p_board) {
-        java.util.Iterator<net.freerouting.freeroute.datastructures.UndoableObjects.UndoableObjectNode> it = p_board.item_list.start_read_object();
-        for (;;) {
-            net.freerouting.freeroute.datastructures.UndoableObjects.Storable curr_item = p_board.item_list.read_object(it);
-            if (curr_item == null) {
-                break;
-            }
-            if (curr_item instanceof net.freerouting.freeroute.board.DrillItem) {
-                if (((net.freerouting.freeroute.board.DrillItem) curr_item).get_padstack() == p_padstack) {
-                    return true;
-                }
-            }
-        }
-        for (Package curr_package : packages) {
-            for (int j = 0; j < curr_package.pin_count(); ++j) {
-                if (curr_package.get_pin(j).padstack_no == p_padstack.no) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
 }

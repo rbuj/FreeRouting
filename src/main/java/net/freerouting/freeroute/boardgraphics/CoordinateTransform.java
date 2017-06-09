@@ -95,13 +95,6 @@ public class CoordinateTransform implements java.io.Serializable {
     }
 
     /**
-     * scale a value the screen to the board coordinate system
-     */
-    public double screen_to_board(double p_val) {
-        return p_val / scale_factor;
-    }
-
-    /**
      * transform a geometry.planar.FloatPoint to a java.awt.geom.Point2D
      */
     public Point2D board_to_screen(FloatPoint p_point) {

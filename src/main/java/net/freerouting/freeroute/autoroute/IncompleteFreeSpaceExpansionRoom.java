@@ -19,7 +19,6 @@
  */
 package net.freerouting.freeroute.autoroute;
 
-import java.util.Collection;
 import net.freerouting.freeroute.geometry.planar.TileShape;
 
 /**
@@ -50,9 +49,4 @@ public class IncompleteFreeSpaceExpansionRoom extends FreeSpaceExpansionRoom {
     public void set_contained_shape(TileShape p_shape) {
         this.contained_shape = p_shape;
     }
-
-    public Collection<TargetItemExpansionDoor> get_target_doors() {
-        return new java.util.LinkedList<>();
-    }
-
 }

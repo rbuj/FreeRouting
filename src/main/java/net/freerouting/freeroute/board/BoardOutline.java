@@ -236,10 +236,6 @@ public class BoardOutline extends Item {
         return this.keepout_area;
     }
 
-    TileShape[] get_keepout_lines() {
-        return (this.keepout_lines == null) ? new TileShape[0] : this.keepout_lines.clone();
-    }
-
     @Override
     public void draw(java.awt.Graphics p_g, GraphicsContext p_graphics_context, java.awt.Color[] p_color_arr, double p_intensity) {
         if (p_graphics_context == null || p_intensity <= 0) {

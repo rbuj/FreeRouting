@@ -35,7 +35,6 @@ enum GUIDefaultsFileKeyword {
                 throws java.io.IOException, GUIDefaultsFileException {
             java.awt.Color curr_color = read_color_not_null(scanner);
             board_handling.graphics_context.other_color_table.set_background_color(curr_color);
-//                board_frame.set_board_background(curr_color);
             read_keyword(scanner, CLOSED_BRACKET);
         }
     },

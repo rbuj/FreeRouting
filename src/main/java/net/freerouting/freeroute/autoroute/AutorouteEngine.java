@@ -516,22 +516,6 @@ public class AutorouteEngine {
     }
 
     /**
-     * Checks, if the internal datastructure is valid.
-     */
-    public boolean validate() {
-        if (complete_expansion_rooms == null) {
-            return true;
-        }
-        boolean result = true;
-        for (CompleteFreeSpaceExpansionRoom curr_room : complete_expansion_rooms) {
-            if (!curr_room.validate(this)) {
-                result = false;
-            }
-        }
-        return result;
-    }
-
-    /**
      * Reset all doors for autorouting the next connnection, in case the
      * autorouting database is retained.
      */

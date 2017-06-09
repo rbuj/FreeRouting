@@ -567,17 +567,6 @@ public class IntOctagon extends RegularTileShape {
                 new_lrx, new_llx, new_urx);
     }
 
-    /**
-     * Checks, if this IntOctagon is normalized.
-     */
-    public boolean is_normalized() {
-        IntOctagon on = this.normalize();
-        boolean result
-                = lx == on.lx && ly == on.ly && rx == on.rx && uy == on.uy
-                && llx == on.llx && lrx == on.lrx && ulx == on.ulx && urx == on.urx;
-        return result;
-    }
-
     @Override
     public Simplex to_Simplex() {
         if (is_empty()) {
@@ -1110,105 +1099,6 @@ public class IntOctagon extends RegularTileShape {
                     break;
                 }
             }
-        }
-        return result;
-    }
-
-    Side border_line_side_of(FloatPoint p_point, int p_line_no, double p_tolerance) {
-        Side result;
-        switch (p_line_no) {
-            case 0:
-                if (p_point.y > this.ly + p_tolerance) {
-                    result = Side.ON_THE_RIGHT;
-                } else if (p_point.y < this.ly - p_tolerance) {
-                    result = Side.ON_THE_LEFT;
-                } else {
-                    result = Side.COLLINEAR;
-                }
-                break;
-            case 2:
-                if (p_point.x < this.rx - p_tolerance) {
-                    result = Side.ON_THE_RIGHT;
-                } else if (p_point.x > this.rx + p_tolerance) {
-                    result = Side.ON_THE_LEFT;
-                } else {
-                    result = Side.COLLINEAR;
-                }
-                break;
-            case 4:
-                if (p_point.y < this.uy - p_tolerance) {
-                    result = Side.ON_THE_RIGHT;
-                } else if (p_point.y > this.uy + p_tolerance) {
-                    result = Side.ON_THE_LEFT;
-                } else {
-                    result = Side.COLLINEAR;
-                }
-                break;
-            case 6:
-                if (p_point.x > this.lx + p_tolerance) {
-                    result = Side.ON_THE_RIGHT;
-                } else if (p_point.x < this.lx - p_tolerance) {
-                    result = Side.ON_THE_LEFT;
-                } else {
-                    result = Side.COLLINEAR;
-                }
-                break;
-            case 1: {
-                double tmp = p_point.y - p_point.x + lrx;
-                if (tmp > p_tolerance) // the p_point is above the the lower right border line of this octagon
-                {
-                    result = Side.ON_THE_RIGHT;
-                } else if (tmp < -p_tolerance) // the p_point is below the the lower right border line of this octagon
-                {
-                    result = Side.ON_THE_LEFT;
-                } else {
-                    result = Side.COLLINEAR;
-                }
-                break;
-            }
-            case 3: {
-                double tmp = p_point.x + p_point.y - urx;
-                if (tmp < -p_tolerance) {
-                    // the p_point is below the the upper right border line of this octagon
-                    result = Side.ON_THE_RIGHT;
-                } else if (tmp > p_tolerance) {
-                    // the p_point is above the the upper right border line of this octagon
-                    result = Side.ON_THE_LEFT;
-                } else {
-                    result = Side.COLLINEAR;
-                }
-                break;
-            }
-            case 5: {
-                double tmp = p_point.y - p_point.x + ulx;
-                if (tmp < -p_tolerance) // the p_point is below the the upper left border line of this octagon
-                {
-                    result = Side.ON_THE_RIGHT;
-                } else if (tmp > p_tolerance) // the p_point is above the the upper left border line of this octagon
-                {
-                    result = Side.ON_THE_LEFT;
-                } else {
-                    result = Side.COLLINEAR;
-                }
-                break;
-            }
-            case 7: {
-                double tmp = p_point.x + p_point.y - llx;
-                if (tmp > p_tolerance) {
-                    // the p_point is above the the lower left border line of this octagon
-                    result = Side.ON_THE_RIGHT;
-                } else if (tmp < -p_tolerance) {
-                    // the p_point is below the the lower left border line of this octagon
-                    result = Side.ON_THE_LEFT;
-                } else {
-                    result = Side.COLLINEAR;
-                }
-                break;
-            }
-            default:
-                System.out.println("IntOctagon.border_line_side_of: p_line_no out of range");
-                result = Side.COLLINEAR;
-                break;
         }
         return result;
     }

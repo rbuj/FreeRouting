@@ -220,22 +220,6 @@ public abstract class DrillItem extends Item implements Connectable {
     }
 
     /**
-     * Returns the smallest distance from the center to the border of the shape
-     * on any layer.
-     */
-    public double smallest_radius() {
-        double result = Double.MAX_VALUE;
-        FloatPoint c = get_center().to_float();
-        for (int i = 0; i < tile_shape_count(); ++i) {
-            Shape curr_shape = get_shape(i);
-            if (curr_shape != null) {
-                result = Math.min(result, curr_shape.border_distance(c));
-            }
-        }
-        return result;
-    }
-
-    /**
      * Returns the center point of this DrillItem.
      */
     public Point get_center() {

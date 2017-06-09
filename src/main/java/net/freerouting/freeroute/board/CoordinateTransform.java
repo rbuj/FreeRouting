@@ -86,14 +86,6 @@ public class CoordinateTransform implements java.io.Serializable {
         return new FloatPoint(board_to_user(p_point.x), board_to_user(p_point.y));
     }
 
-    /**
-     * Transforms a geometry.planar.FloatPoint from the user coordinate space.
-     * to the board coordinate space.
-     */
-    public FloatPoint user_to_board(FloatPoint p_point) {
-        return new FloatPoint(user_to_board(p_point.x), user_to_board(p_point.y));
-    }
-
     public PrintableShape board_to_user(net.freerouting.freeroute.geometry.planar.Shape p_shape) {
         PrintableShape result;
         if (p_shape instanceof net.freerouting.freeroute.geometry.planar.Circle) {

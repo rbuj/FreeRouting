@@ -524,14 +524,7 @@ public final class BoardFrame extends javax.swing.JFrame {
     }
 
     /**
-     * Sets the background of the board panel
-     */
-    public void set_board_background(java.awt.Color p_color) {
-        board_panel.setBackground(p_color);
-    }
-
-    /**
-     * Refreshs all displayed coordinates after the user unit has changed.
+     * Refreshes all displayed coordinates after the user unit has changed.
      */
     public void refresh_windows() {
         if (null != savable_subwindows) {
@@ -558,7 +551,7 @@ public final class BoardFrame extends javax.swing.JFrame {
 
     /**
      * Selects the snapshot, which is previous to the current selected snapshot.
-     * Thecurent selected snapshot will be no more selected.
+     * The current selected snapshot will be no more selected.
      */
     public void select_previous_snapshot() {
         WindowSnapshot snapshot_window = (WindowSnapshot) savable_subwindows.get(SavableSubwindowKey.SNAPSHOT);

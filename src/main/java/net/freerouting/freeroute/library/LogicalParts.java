@@ -61,18 +61,6 @@ public class LogicalParts implements java.io.Serializable, Iterable<LogicalPart>
     }
 
     /**
-     * Returns the logical part with index p_part_no. Part numbers are from 1 to
-     * part count.
-     */
-    public LogicalPart get(int p_part_no) {
-        LogicalPart result = part_arr.get(p_part_no - 1);
-        if (result != null && result.no != p_part_no) {
-            System.out.println("LogicalParts.get: inconsistent part number");
-        }
-        return result;
-    }
-
-    /**
      * Returns the count of logical parts.
      */
     public int count() {

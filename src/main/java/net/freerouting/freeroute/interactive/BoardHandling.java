@@ -302,21 +302,6 @@ public class BoardHandling {
     }
 
     /**
-     * Changes the default trace halfwidth currently used in interactive routing
-     * on the input layer.
-     */
-    public void set_default_trace_halfwidth(int p_layer, int p_value) {
-        if (board_is_read_only) {
-            return;
-        }
-        if (p_layer >= 0 && p_layer <= board.get_layer_count()) {
-            board.rules.set_default_trace_half_width(p_layer, p_value);
-            logfile.start_scope(LogfileScope.SET_TRACE_HALF_WIDTH, p_layer);
-            logfile.add_int(p_value);
-        }
-    }
-
-    /**
      * Switches clearance compansation on or off.
      */
     public void set_clearance_compensation(boolean p_value) {
@@ -1085,16 +1070,6 @@ public class BoardHandling {
     }
 
     /**
-     * Selects all items in an interactive defined rectangle.
-     */
-    public void select_items_in_region() {
-        if (board_is_read_only || !(this.interactive_state instanceof MenuState)) {
-            return;
-        }
-        set_interactive_state(SelectItemsInRegionState.get_instance(this.interactive_state, this, logfile));
-    }
-
-    /**
      * Selects all items in the input collection.
      */
     public void select_items(Set<Item> p_items) {
@@ -1136,25 +1111,6 @@ public class BoardHandling {
         Point2D lower_left = this.graphics_context.coordinate_transform.board_to_screen(bounding_box.ll.to_float());
         Point2D upper_right = this.graphics_context.coordinate_transform.board_to_screen(bounding_box.ur.to_float());
         this.panel.zoom_frame(lower_left, upper_right);
-    }
-
-    /**
-     * Picks item at p_point. Removes it from the selected_items list, if it is
-     * already in there, otherwise adds it to the list. Changes to the selected
-     * items state, if something was selected.
-     */
-    public void toggle_select_action(Point2D p_point) {
-        if (board_is_read_only || !(interactive_state instanceof SelectedItemState)) {
-            return;
-        }
-        FloatPoint location
-                = graphics_context.coordinate_transform.screen_to_board(p_point);
-        InteractiveState return_state
-                = ((SelectedItemState) interactive_state).toggle_select(location);
-        if (return_state != this.interactive_state) {
-            set_interactive_state(return_state);
-            repaint();
-        }
     }
 
     /**

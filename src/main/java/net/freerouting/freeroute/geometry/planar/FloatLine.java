@@ -103,21 +103,6 @@ public class FloatLine {
     }
 
     /**
-     * Returns the signed distance of this line from p_point. The result will be
-     * positive, if the line is on the left of p_point, else negative.
-     */
-    public double signed_distance(FloatPoint p_point) {
-        double dx = this.b.x - this.a.x;
-        double dy = this.b.y - this.a.y;
-        double det
-                = dy * (p_point.x - this.a.x)
-                - dx * (p_point.y - this.a.y);
-        // area of the parallelogramm spanned by the 3 points
-        double length = Math.sqrt(dx * dx + dy * dy);
-        return det / length;
-    }
-
-    /**
      * Returns an approximation of the perpensicular projection of p_point onto
      * this line.
      */
