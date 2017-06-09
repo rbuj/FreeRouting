@@ -43,7 +43,7 @@ public class Limits {
 
     public static final double SQRT2 = Math.sqrt(2);
 
-    private Limits() // disallow instantiation
-    {
+    private Limits() {
+        // disallow instantiation
     }
 }

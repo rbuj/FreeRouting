@@ -23,7 +23,7 @@ package net.freerouting.freeroute.geometry.planar;
  */
 public final class DirectionUtils {
 
-    public static final IntDirection NULL = new IntDirection(0, 0);
+    static final IntDirection NULL = new IntDirection(0, 0);
 
     private DirectionUtils() {
         // not called

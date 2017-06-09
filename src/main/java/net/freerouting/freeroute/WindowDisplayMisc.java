@@ -43,10 +43,10 @@ public final class WindowDisplayMisc extends BoardSavableSubWindow {
     private final javax.swing.JRadioButton horizontal_mirror_checkbox;
     private final javax.swing.JSlider auto_layer_dim_slider;
 
-    public static final double ROTATION_0 = 0.0;
-    public static final double ROTATION_90 = 0.5 * Math.PI;
-    public static final double ROTATION_180 = Math.PI;
-    public static final double ROTATION_270 = 1.5 * Math.PI;
+    private static final double ROTATION_0 = 0.0;
+    private static final double ROTATION_90 = 0.5 * Math.PI;
+    private static final double ROTATION_180 = Math.PI;
+    private static final double ROTATION_270 = 1.5 * Math.PI;
     /**
      * Creates a new instance of DisplayMiscWindow
      */

@@ -33,7 +33,7 @@ import net.freerouting.freeroute.geometry.planar.TileShape;
  */
 public class CalcFromSide {
 
-    public static final CalcFromSide NOT_CALCULATED = new CalcFromSide(-1, null);
+    static final CalcFromSide NOT_CALCULATED = new CalcFromSide(-1, null);
     final int no;
     final FloatPoint border_intersection;
 

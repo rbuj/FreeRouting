@@ -29,7 +29,7 @@ import java.util.Arrays;
 @SuppressWarnings("serial")
 public class DefaultItemClearanceClasses implements java.io.Serializable {
 
-    public static final int LENGTH_ARRAY_CLASSES = ItemClass.values().length;
+    private static final int LENGTH_ARRAY_CLASSES = ItemClass.values().length;
     private final int[] arr = new int[LENGTH_ARRAY_CLASSES];
 
     /**
