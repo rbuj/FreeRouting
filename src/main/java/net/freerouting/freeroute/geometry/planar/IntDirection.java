@@ -40,11 +40,6 @@ public class IntDirection implements Direction {
         y = p_y;
     }
 
-    IntDirection(IntVector p_vector) {
-        x = p_vector.x;
-        y = p_vector.y;
-    }
-
     @Override
     public boolean is_orthogonal() {
         return (x == 0 || y == 0);

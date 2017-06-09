@@ -47,15 +47,6 @@ public class BoardLibrary implements java.io.Serializable {
     /**
      * Creates a new instance of BoardLibrary
      */
-    public BoardLibrary(Padstacks p_padstacks, Packages p_packages) {
-        padstacks = p_padstacks;
-        packages = p_packages;
-        logical_parts = new LogicalParts();
-    }
-
-    /**
-     * Creates a new instance of BoardLibrary
-     */
     public BoardLibrary() {
 
     }

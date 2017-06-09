@@ -81,11 +81,6 @@ public class FloatPoint implements java.io.Serializable {
         y = p_y;
     }
 
-    public FloatPoint(IntPoint p_pt) {
-        x = p_pt.x;
-        y = p_pt.y;
-    }
-
     /**
      * returns the square of the distance from this point to the zero point
      */
