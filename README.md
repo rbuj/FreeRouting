@@ -79,6 +79,8 @@ Run freeroute
 cd target
 export J2D_TRACE_LEVEL=4
 java -cp freeroute-1.4.3-alpha.jar:libext/javahelp-2.0.05.jar:libext/guava-22.0.jar net.freerouting.freeroute.MainApp
+(or)
+java -jar freeroute-1.4.3-alpha.jar
 ```
 
 ### OS X
@@ -102,4 +104,6 @@ Run freeroute
 cd target
 export J2D_TRACE_LEVEL=4
 java -cp freeroute-1.4.3-alpha.jar:libext/javahelp-2.0.05.jar:libext/guava-22.0.jar net.freerouting.freeroute.MainApp
+(or)
+java -jar freeroute-1.4.3-alpha.jar
 ```
