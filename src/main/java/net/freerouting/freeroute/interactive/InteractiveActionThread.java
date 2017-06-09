@@ -152,7 +152,6 @@ public abstract class InteractiveActionThread extends Thread implements net.free
             hdlg.logfile.start_read(this.reader);
             boolean done = true;
             boolean interrupted = false;
-            int debug_counter = 0;
             hdlg.get_panel().board_frame.refresh_windows();
             hdlg.paint_immediately = true;
             while (!done) {
@@ -160,7 +159,6 @@ public abstract class InteractiveActionThread extends Thread implements net.free
                     interrupted = true;
                     done = true;
                 }
-                ++debug_counter;
                 LogfileScope logfile_scope = hdlg.logfile.start_read_scope();
                 if (logfile_scope == null) {
                     done = true; // end of logfile
