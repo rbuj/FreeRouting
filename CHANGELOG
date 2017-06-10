@@ -1,19 +1,26 @@
 ToDo
-        * Bump version to 1.4.3
+        * Bump version to 1.4.4
 	* Migrate all GUI from swing to JavaFX
 	* Write all documentation in docbook format
 
-xxxx-xx-xx
+2017-06-10 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
+
+        * Bump version to 1.4.3
+        * Create jar with dependencies:
+                * target/freeroute-[version]-jar-with-dependencies.jar
+        * Create jar without dependencies (external libs: target/libext):
+                * target/freeroute-[version].jar
         * Class structure (constant & constructor access)
         * Remove unused/unreferenced/unreachable code
         * Remove custom exception:
                 * DesignFileException.java
         * Apache Commons -> Google Guava
-        * Copy external libs into target/libext folder
         * Enable OpenGL pipeline and use system look & feel
         * Dispose BoardFrame if can not load design file
+        * Other improvements
 
-2017-05-25
+2017-05-25 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
+
         * Bump version to 1.4.2
         * Subwindows manager
                 * TemporarySubwindows.java
@@ -27,7 +34,8 @@ xxxx-xx-xx
           read scope methods in specctra design formats
         * Other improvements
 
-2017-05-19
+2017-05-19 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
+
         * Bump version to 1.4.1
         * Use Apache Commons Math:
                 * ArithmeticUtils.gcd(int p, int q)
