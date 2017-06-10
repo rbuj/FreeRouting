@@ -15,15 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-module Freeroute {
+module freeroute {
     requires java.desktop;
     requires java.logging;
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
     requires javafx.swing;
-    requires junit;
-    requires hamcrest.core;
-    requires javahelp;
-    requires guava;
+    requires junit; // filename: not yet modularised
+    requires hamcrest.core; // filename: not yet modularised
+    requires javahelp; // filename: not yet modularised
+    requires guava; // filename: not yet modularised
 }
