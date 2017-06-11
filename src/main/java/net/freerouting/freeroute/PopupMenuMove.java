@@ -49,8 +49,6 @@ public class PopupMenuMove extends PopupMenuDisplay {
         // Add menu for turning the items by a multiple of 90 degree
         javax.swing.JMenuItem rotate_menu = new javax.swing.JMenu();
         rotate_menu.setText(resources.getString("turn"));
-        this.add(rotate_menu, 0);
-
         Map<String, Integer> menu_rotate_items = Map.ofEntries(
                 entry("90_degree", 2),
                 entry("180_degree", 4),
@@ -59,7 +57,6 @@ public class PopupMenuMove extends PopupMenuDisplay {
                 entry("135_degree", 3),
                 entry("-135_degree", 5),
                 entry("-45_degree", 7));
-
         for (Map.Entry<String, Integer> entry : menu_rotate_items.entrySet()) {
             javax.swing.JMenuItem menu_item = new javax.swing.JMenuItem();
             menu_item.setText(resources.getString(entry.getKey()));
@@ -68,6 +65,7 @@ public class PopupMenuMove extends PopupMenuDisplay {
             });
             rotate_menu.add(menu_item);
         }
+        this.add(rotate_menu, 0);
 
         javax.swing.JMenuItem change_side_item = new javax.swing.JMenuItem();
         change_side_item.setText(resources.getString("change_side"));
