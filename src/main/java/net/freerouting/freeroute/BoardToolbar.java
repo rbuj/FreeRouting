@@ -191,15 +191,10 @@ final class BoardToolbar extends javax.swing.JPanel {
 
         right_toolbar.setAutoscrolls(true);
         unit_label.setText(resources.getString("unit_button"));
-        unit_label.setMaximumSize(new java.awt.Dimension(30, 21));
-        unit_label.setPreferredSize(new java.awt.Dimension(30, 21));
         right_toolbar.add(unit_label);
 
         unit_factor_field.setHorizontalAlignment(SwingConstants.CENTER);
         unit_factor_field.setValue(1);
-        unit_factor_field.setMaximumSize(new java.awt.Dimension(100, 18));
-        unit_factor_field.setMinimumSize(new java.awt.Dimension(40, 18));
-        unit_factor_field.setPreferredSize(new java.awt.Dimension(80, 18));
         unit_factor_field.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -224,10 +219,7 @@ final class BoardToolbar extends javax.swing.JPanel {
         unit_combo_box.setModel(new javax.swing.DefaultComboBoxModel<>(net.freerouting.freeroute.board.Unit.values()));
         unit_combo_box.setFocusTraversalPolicyProvider(true);
         unit_combo_box.setInheritsPopupMenu(true);
-        unit_combo_box.setMaximumSize(new java.awt.Dimension(60, 18));
-        unit_combo_box.setMinimumSize(new java.awt.Dimension(60, 18));
         unit_combo_box.setOpaque(false);
-        unit_combo_box.setPreferredSize(new java.awt.Dimension(60, 18));
         unit_combo_box.addActionListener((java.awt.event.ActionEvent evt) -> {
             net.freerouting.freeroute.board.Unit new_unit = (net.freerouting.freeroute.board.Unit) unit_combo_box.getSelectedItem();
             board_frame.board_panel.board_handling.change_user_unit(new_unit);
