@@ -97,7 +97,7 @@ class PopupMenuChangeLayer extends javax.swing.JMenu {
                 }
                 // If change_layer failed the status message is set inside change_layer_action
                 // because the information of the cause of the failing is missing here.
-                board_panel.move_mouse(board_panel.right_button_click_location);
+                board_panel.move_mouse();
             });
         }
     }

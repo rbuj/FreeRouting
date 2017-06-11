@@ -45,33 +45,24 @@ public class PopupMenuDisplay extends javax.swing.JPopupMenu {
     private void initializeComponents() {
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
+
         javax.swing.JMenuItem center_display_item = new javax.swing.JMenuItem();
         center_display_item.setText(resources.getString("center_display"));
         center_display_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-            board_panel.center_display(board_panel.right_button_click_location);
+            board_panel.center_display();
         });
-
         this.add(center_display_item);
 
         javax.swing.JMenu zoom_menu = new javax.swing.JMenu();
         zoom_menu.setText(resources.getString("zoom"));
-
-        javax.swing.JMenuItem zoom_in_item = new javax.swing.JMenuItem();
-        zoom_in_item.setText(resources.getString("zoom_in"));
-        zoom_in_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-            board_panel.zoom_in(board_panel.right_button_click_location);
-        });
-
-        zoom_menu.add(zoom_in_item);
-
-        javax.swing.JMenuItem zoom_out_item = new javax.swing.JMenuItem();
-        zoom_out_item.setText(resources.getString("zoom_out"));
-        zoom_out_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-            board_panel.zoom_out(board_panel.right_button_click_location);
-        });
-
-        zoom_menu.add(zoom_out_item);
-
+        for (Zoom zoom : Zoom.values()) {
+            javax.swing.JMenuItem zoom_item = new javax.swing.JMenuItem();
+            zoom_item.setText(resources.getString(zoom.toString()));
+            zoom_item.addActionListener((java.awt.event.ActionEvent evt) -> {
+                board_panel.zoom_in_out(zoom);
+            });
+            zoom_menu.add(zoom_item);
+        }
         this.add(zoom_menu);
     }
 }

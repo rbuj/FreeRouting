@@ -105,6 +105,6 @@ public class PopupMenuMove extends PopupMenuDisplay {
 
     private void turn_45_degree(int p_factor) {
         board_panel.board_handling.turn_45_degree(p_factor);
-        board_panel.move_mouse(board_panel.right_button_click_location);
+        board_panel.move_mouse();
     }
 }

@@ -41,7 +41,6 @@ import net.freerouting.freeroute.interactive.ScreenMessages;
 @SuppressWarnings("serial")
 public final class BoardPanel extends javax.swing.JPanel {
 
-    private static final double C_ZOOM_FACTOR = 2.0;
     public javax.swing.JPopupMenu popup_menu_insert_cancel;
     public PopupMenuCopy popup_menu_copy;
     public PopupMenuMove popup_menu_move;
@@ -154,7 +153,6 @@ public final class BoardPanel extends javax.swing.JPanel {
         } else if (evt.getButton() == 2 && middle_drag_position == null) {
             middle_drag_position = new java.awt.Point(evt.getPoint());
         }
-
     }
 
     private void mouse_dragged_action(java.awt.event.MouseEvent evt) {
@@ -225,15 +223,28 @@ public final class BoardPanel extends javax.swing.JPanel {
      * zooms in at p_position
      */
     public void zoom_in(java.awt.geom.Point2D p_position) {
-        zoom(C_ZOOM_FACTOR, p_position);
+        zoom_in_out(p_position, Zoom.IN);
     }
 
     /**
      * zooms out at p_position
      */
     public void zoom_out(java.awt.geom.Point2D p_position) {
-        double zoom_factor = 1 / C_ZOOM_FACTOR;
-        zoom(zoom_factor, p_position);
+        zoom_in_out(p_position, Zoom.OUT);
+    }
+
+    /**
+     * zooms in/out at p_position
+     */
+    private void zoom_in_out(java.awt.geom.Point2D p_position, Zoom zoom) {
+        zoom(zoom.get_factor(), p_position);
+    }
+
+    /**
+     * zooms in/out at right_button_click_location
+     */
+    void zoom_in_out(Zoom zoom) {
+        zoom_in_out(right_button_click_location, zoom);
     }
 
     /**
@@ -255,6 +266,10 @@ public final class BoardPanel extends javax.swing.JPanel {
 
         java.awt.geom.Point2D changed_location = zoom(Math.min(width_factor, height_factor), center_point);
         set_viewport_center(changed_location);
+    }
+
+    void center_display() {
+        center_display(right_button_click_location);
     }
 
     public void center_display(Point2D p_new_center) {
@@ -376,6 +391,10 @@ public final class BoardPanel extends javax.swing.JPanel {
 
         java.awt.Point p = new java.awt.Point((int) x, (int) y);
         set_viewport_position(p);
+    }
+
+    void move_mouse() {
+        move_mouse(right_button_click_location);
     }
 
     public void move_mouse(Point2D p_location) {
