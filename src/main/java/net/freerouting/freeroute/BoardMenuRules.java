@@ -29,26 +29,25 @@ import static java.util.Map.entry;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-final class BoardMenuRules extends javax.swing.JMenu {
-
-    private final BoardFrame board_frame;
-    private final java.util.ResourceBundle resources;
+final class BoardMenuRules extends BoardMenu {
 
     /**
      * Creates a new instance of BoardRulesMenu
      */
     private BoardMenuRules(BoardFrame p_board_frame) {
-        board_frame = p_board_frame;
-        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuRules", Locale.getDefault());
+        super(p_board_frame);
     }
 
     /**
      * Returns a new windows menu for the board frame.
      */
-    public static BoardMenuRules get_instance(BoardFrame p_board_frame) {
+    static BoardMenuRules get_instance(BoardFrame p_board_frame) {
         BoardMenuRules rules_menu = new BoardMenuRules(p_board_frame);
+        java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle(
+                BoardMenuRules.class.getPackageName() + ".resources.BoardMenuRules",
+                Locale.getDefault());
 
-        rules_menu.setText(rules_menu.resources.getString("rules"));
+        rules_menu.setText(resources.getString("rules"));
 
         Map<SavableSubwindowKey, String> menu_items = Map.ofEntries(
                 entry(SavableSubwindowKey.CLEARANCE_MATRIX, "clearance_matrix"),
@@ -58,7 +57,7 @@ final class BoardMenuRules extends javax.swing.JMenu {
 
         for (Map.Entry<SavableSubwindowKey, String> entry : menu_items.entrySet()) {
             javax.swing.JMenuItem menu_item = new javax.swing.JMenuItem();
-            menu_item.setText(rules_menu.resources.getString(entry.getValue()));
+            menu_item.setText(resources.getString(entry.getValue()));
             menu_item.addActionListener((java.awt.event.ActionEvent evt) -> {
                 rules_menu.board_frame.savable_subwindows.get(entry.getKey()).setVisible(true);
             });

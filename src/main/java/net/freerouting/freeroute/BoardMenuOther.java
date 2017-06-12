@@ -27,30 +27,29 @@ import java.util.Locale;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-final class BoardMenuOther extends javax.swing.JMenu {
-
-    private final BoardFrame board_frame;
-    private final java.util.ResourceBundle resources;
+final class BoardMenuOther extends BoardMenu {
 
     /**
      * Creates a new instance of BoardMenuOther
      */
     private BoardMenuOther(BoardFrame p_board_frame) {
-        board_frame = p_board_frame;
-        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuOther", Locale.getDefault());
+        super(p_board_frame);
     }
 
     /**
      * Returns a new other menu for the board frame.
      */
-    public static BoardMenuOther get_instance(BoardFrame p_board_frame) {
+    static BoardMenuOther get_instance(BoardFrame p_board_frame) {
         BoardMenuOther other_menu = new BoardMenuOther(p_board_frame);
+        java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle(
+                BoardMenuOther.class.getPackageName() + ".resources.BoardMenuOther",
+                Locale.getDefault());
 
-        other_menu.setText(other_menu.resources.getString("other"));
+        other_menu.setText(resources.getString("other"));
 
         javax.swing.JMenuItem snapshots = new javax.swing.JMenuItem();
-        snapshots.setText(other_menu.resources.getString("snapshots"));
-        snapshots.setToolTipText(other_menu.resources.getString("snapshots_tooltip"));
+        snapshots.setText(resources.getString("snapshots"));
+        snapshots.setToolTipText(resources.getString("snapshots_tooltip"));
         snapshots.addActionListener((java.awt.event.ActionEvent evt) -> {
             other_menu.board_frame.savable_subwindows.get(SavableSubwindowKey.SNAPSHOT).setVisible(true);
         });

@@ -40,28 +40,15 @@ final class BoardMenuBar extends javax.swing.JMenuBar {
     /**
      * Creates a new BoardMenuBar together with its menus
      */
-    public static BoardMenuBar get_instance(BoardFrame p_board_frame, boolean p_session_file_option) {
+    static BoardMenuBar get_instance(BoardFrame p_board_frame, boolean p_session_file_option) {
         BoardMenuBar menubar = new BoardMenuBar(p_board_frame, p_session_file_option);
         menubar.add(menubar.file_menu);
-
-        javax.swing.JMenu display_menu = BoardMenuDisplay.get_instance(p_board_frame);
-        menubar.add(display_menu);
-
-        javax.swing.JMenu parameter_menu = BoardMenuParameter.get_instance(p_board_frame);
-        menubar.add(parameter_menu);
-
-        javax.swing.JMenu rules_menu = BoardMenuRules.get_instance(p_board_frame);
-        menubar.add(rules_menu);
-
-        javax.swing.JMenu info_menu = BoardMenuInfo.get_instance(p_board_frame);
-        menubar.add(info_menu);
-
-        javax.swing.JMenu other_menu = BoardMenuOther.get_instance(p_board_frame);
-        menubar.add(other_menu);
-
-        javax.swing.JMenu help_menu = new BoardMenuHelp(p_board_frame);
-        menubar.add(help_menu);
-
+        menubar.add(BoardMenuDisplay.get_instance(p_board_frame));
+        menubar.add(BoardMenuParameter.get_instance(p_board_frame));
+        menubar.add(BoardMenuRules.get_instance(p_board_frame));
+        menubar.add(BoardMenuInfo.get_instance(p_board_frame));
+        menubar.add(BoardMenuOther.get_instance(p_board_frame));
+        menubar.add(new BoardMenuHelp(p_board_frame));
         return menubar;
     }
 }

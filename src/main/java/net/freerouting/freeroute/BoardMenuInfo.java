@@ -29,26 +29,25 @@ import static java.util.Map.entry;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-final class BoardMenuInfo extends javax.swing.JMenu {
-
-    private final BoardFrame board_frame;
-    private final java.util.ResourceBundle resources;
+final class BoardMenuInfo extends BoardMenu {
 
     /**
      * Creates a new instance of BoardLibraryMenu
      */
     private BoardMenuInfo(BoardFrame p_board_frame) {
-        board_frame = p_board_frame;
-        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuInfo", Locale.getDefault());
+        super(p_board_frame);
     }
 
     /**
      * Returns a new info menu for the board frame.
      */
-    public static BoardMenuInfo get_instance(BoardFrame p_board_frame) {
+    static BoardMenuInfo get_instance(BoardFrame p_board_frame) {
         BoardMenuInfo info_menu = new BoardMenuInfo(p_board_frame);
+        java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle(
+                BoardMenuInfo.class.getPackageName() + ".resources.BoardMenuInfo",
+                Locale.getDefault());
 
-        info_menu.setText(info_menu.resources.getString("info"));
+        info_menu.setText(resources.getString("info"));
 
         Map<SavableSubwindowKey, String> menu_items = Map.ofEntries(
                 entry(SavableSubwindowKey.PACKAGES, "library_packages"),
@@ -62,7 +61,7 @@ final class BoardMenuInfo extends javax.swing.JMenu {
 
         for (Entry<SavableSubwindowKey, String> entry : menu_items.entrySet()) {
             javax.swing.JMenuItem menu_item = new javax.swing.JMenuItem();
-            menu_item.setText(info_menu.resources.getString(entry.getValue()));
+            menu_item.setText(resources.getString(entry.getValue()));
             menu_item.addActionListener((java.awt.event.ActionEvent evt) -> {
                 info_menu.board_frame.savable_subwindows.get(entry.getKey()).setVisible(true);
             });

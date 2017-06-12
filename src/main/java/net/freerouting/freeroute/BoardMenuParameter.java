@@ -22,7 +22,6 @@ package net.freerouting.freeroute;
 import java.util.Locale;
 import java.util.Map;
 import static java.util.Map.entry;
-import java.util.ResourceBundle;
 
 /**
  * Creates the parameter menu of a board frame.
@@ -30,26 +29,25 @@ import java.util.ResourceBundle;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-final class BoardMenuParameter extends javax.swing.JMenu {
-
-    private final BoardFrame board_frame;
-    private final ResourceBundle resources;
+final class BoardMenuParameter extends BoardMenu {
 
     /**
      * Creates a new instance of BoardSelectMenu
      */
     private BoardMenuParameter(BoardFrame p_board_frame) {
-        board_frame = p_board_frame;
-        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuParameter", Locale.getDefault());
+        super(p_board_frame);
     }
 
     /**
      * Returns a new windows menu for the board frame.
      */
-    public static BoardMenuParameter get_instance(BoardFrame p_board_frame) {
+    static BoardMenuParameter get_instance(BoardFrame p_board_frame) {
         BoardMenuParameter parameter_menu = new BoardMenuParameter(p_board_frame);
+        java.util.ResourceBundle resources = java.util.ResourceBundle.getBundle(
+                BoardMenuParameter.class.getPackageName() + ".resources.BoardMenuParameter",
+                Locale.getDefault());
 
-        parameter_menu.setText(parameter_menu.resources.getString("parameter"));
+        parameter_menu.setText(resources.getString("parameter"));
 
         Map<SavableSubwindowKey, String> menu_items = Map.ofEntries(
                 entry(SavableSubwindowKey.SELECT_PARAMETER, "select"),
@@ -59,7 +57,7 @@ final class BoardMenuParameter extends javax.swing.JMenu {
 
         for (Map.Entry<SavableSubwindowKey, String> entry : menu_items.entrySet()) {
             javax.swing.JMenuItem menu_item = new javax.swing.JMenuItem();
-            menu_item.setText(parameter_menu.resources.getString(entry.getValue()));
+            menu_item.setText(resources.getString(entry.getValue()));
             menu_item.addActionListener((java.awt.event.ActionEvent evt) -> {
                 parameter_menu.board_frame.savable_subwindows.get(entry.getKey()).setVisible(true);
             });

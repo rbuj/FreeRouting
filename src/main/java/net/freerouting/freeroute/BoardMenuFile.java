@@ -28,7 +28,6 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static net.freerouting.freeroute.Filename.ALL_FILE_EXTENSIONS;
@@ -41,25 +40,26 @@ import static net.freerouting.freeroute.Filename.GUI_DEFAULTS_FILE_NAME;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-final class BoardMenuFile extends javax.swing.JMenu {
+final class BoardMenuFile extends BoardMenu {
 
-    private final BoardFrame board_frame;
     private final boolean session_file_option;
-    private final ResourceBundle resources;
+    private final java.util.ResourceBundle resources;
 
     /**
      * Creates a new instance of BoardFileMenu
      */
     private BoardMenuFile(BoardFrame p_board_frame, boolean p_session_file_option) {
+        super(p_board_frame);
+        this.resources = java.util.ResourceBundle.getBundle(
+                BoardMenuFile.class.getPackageName() + ".resources.BoardMenuFile",
+                Locale.getDefault());
         session_file_option = p_session_file_option;
-        board_frame = p_board_frame;
-        resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuFile", Locale.getDefault());
     }
 
     /**
      * Returns a new file menu for the board frame.
      */
-    public static BoardMenuFile get_instance(BoardFrame p_board_frame, boolean p_session_file_option) {
+    static BoardMenuFile get_instance(BoardFrame p_board_frame, boolean p_session_file_option) {
         BoardMenuFile file_menu = new BoardMenuFile(p_board_frame, p_session_file_option);
 
         file_menu.setText(file_menu.resources.getString("file"));
@@ -137,7 +137,7 @@ final class BoardMenuFile extends javax.swing.JMenu {
         return file_menu;
     }
 
-    public void add_design_dependent_items() {
+    void add_design_dependent_items() {
         if (this.session_file_option) {
             return;
         }

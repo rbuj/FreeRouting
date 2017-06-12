@@ -27,10 +27,9 @@ import java.util.Locale;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-class BoardMenuHelpReduced extends javax.swing.JMenu {
+class BoardMenuHelpReduced extends BoardMenu {
 
-    protected final BoardFrame board_frame;
-    protected final java.util.ResourceBundle resources;
+    final java.util.ResourceBundle resources;
 
     /**
      * Creates a new instance of BoardMenuHelpReduced Separated from
@@ -38,8 +37,10 @@ class BoardMenuHelpReduced extends javax.swing.JMenu {
      * not found, which is only used in the extended help menu.
      */
     BoardMenuHelpReduced(BoardFrame p_board_frame) {
-        this.board_frame = p_board_frame;
-        this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuHelp", Locale.getDefault());
+        super(p_board_frame);
+        this.resources = java.util.ResourceBundle.getBundle(
+                BoardMenuHelpReduced.class.getPackageName() + ".resources.BoardMenuHelp",
+                Locale.getDefault());
         initializeComponents();
     }
 
