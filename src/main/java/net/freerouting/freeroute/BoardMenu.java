@@ -16,8 +16,6 @@
  */
 package net.freerouting.freeroute;
 
-import java.util.Locale;
-
 /**
  *
  * @author robert
