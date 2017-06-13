@@ -39,7 +39,6 @@ public final class ComboBoxLayer extends javax.swing.JComboBox<Layer> {
      * The layer index, when all inner layers ar selected.
      */
     public final static int INNER_LAYER_INDEX = -2;
-    private final Layer[] layer_arr;
 
     /**
      * Creates a new instance of LayerComboBox
@@ -53,11 +52,11 @@ public final class ComboBoxLayer extends javax.swing.JComboBox<Layer> {
         if (add_inner_layer_item) {
             ++item_count;
         }
-        this.layer_arr = new Layer[item_count];
-        this.layer_arr[0] = new Layer(resources.getString("all"), ALL_LAYER_INDEX);
+        Layer[] layer_arr = new Layer[item_count];
+        layer_arr[0] = new Layer(resources.getString("all"), ALL_LAYER_INDEX);
         int curr_layer_no = 0;
         if (add_inner_layer_item) {
-            this.layer_arr[1] = new Layer(resources.getString("inner"), INNER_LAYER_INDEX);
+            layer_arr[1] = new Layer(resources.getString("inner"), INNER_LAYER_INDEX);
             ++curr_layer_no;
         }
         for (int i = 0; i < signal_layer_count; ++i) {
@@ -65,7 +64,7 @@ public final class ComboBoxLayer extends javax.swing.JComboBox<Layer> {
             net.freerouting.freeroute.board.Layer curr_signal_layer = p_layer_structure.get_signal_layer(i);
             layer_arr[curr_layer_no] = new Layer(curr_signal_layer.name, p_layer_structure.get_no(curr_signal_layer));
         }
-        this.setModel(new javax.swing.DefaultComboBoxModel<>(layer_arr));
+        this.setModel(new ArrayComboBoxModel<>(layer_arr));
         this.setSelectedIndex(0);
     }
 

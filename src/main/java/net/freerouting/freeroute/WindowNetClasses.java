@@ -20,6 +20,7 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import javax.swing.JOptionPane;
 import net.freerouting.freeroute.board.ObjectInfoPanel.Printable;
 import net.freerouting.freeroute.rules.BoardRules;
 import net.freerouting.freeroute.rules.NetClass;
@@ -211,6 +212,7 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             if (table_model.getRowCount() <= 1) {
                 board_frame.screen_messages.set_status_message(resources.getString("message_1"));
+                JOptionPane.showMessageDialog(null, resources.getString("message_1"), resources.getString("remove"), JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
             int selected_row = table.getSelectedRow();
@@ -229,6 +231,7 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
                 if (curr_net.get_class() == net_rule) {
                     String message = resources.getString("message_2") + " " + curr_net.name;
                     board_frame.screen_messages.set_status_message(message);
+                    JOptionPane.showMessageDialog(null, message, resources.getString("remove"), JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
             }

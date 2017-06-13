@@ -75,11 +75,8 @@ public final class WindowAssignNetClass extends BoardSavableSubWindow {
     }
 
     private void add_net_class_combo_box() {
-        this.net_rule_combo_box = new javax.swing.JComboBox<>();
         net.freerouting.freeroute.board.RoutingBoard routing_board = board_frame.board_panel.board_handling.get_routing_board();
-        for (int i = 0; i < routing_board.rules.net_classes.count(); ++i) {
-            net_rule_combo_box.addItem(routing_board.rules.net_classes.get(i));
-        }
+        this.net_rule_combo_box = new javax.swing.JComboBox<>(new ArrayComboBoxModel<>(routing_board.rules.net_classes.toArray()));
         this.table.getColumnModel().getColumn(1).setCellEditor(new javax.swing.DefaultCellEditor(net_rule_combo_box));
     }
 
@@ -122,18 +119,15 @@ public final class WindowAssignNetClass extends BoardSavableSubWindow {
 
     }
 
-    private class AssignRuleTableModel extends javax.swing.table.AbstractTableModel {
+    private final class AssignRuleTableModel extends javax.swing.table.AbstractTableModel {
 
         private Object[][] data = null;
         private String[] column_names = null;
 
         AssignRuleTableModel() {
-            column_names = new String[2];
-
-            column_names[0] = resources.getString("net_name");
-            column_names[1] = resources.getString("class_name");
-
-            net.freerouting.freeroute.rules.BoardRules board_rules = board_frame.board_panel.board_handling.get_routing_board().rules;
+            column_names = new String[]{resources.getString("net_name"), resources.getString("class_name")};
+            net.freerouting.freeroute.rules.BoardRules board_rules
+                    = board_frame.board_panel.board_handling.get_routing_board().rules;
             data = new Object[board_rules.nets.max_net_no()][];
             for (int i = 0; i < data.length; ++i) {
                 this.data[i] = new Object[column_names.length];
@@ -142,10 +136,11 @@ public final class WindowAssignNetClass extends BoardSavableSubWindow {
         }
 
         /**
-         * Calculates the the valus in this table
+         * Calculates the the values in this table
          */
         private void set_values() {
-            net.freerouting.freeroute.rules.BoardRules board_rules = board_frame.board_panel.board_handling.get_routing_board().rules;
+            net.freerouting.freeroute.rules.BoardRules board_rules
+                    = board_frame.board_panel.board_handling.get_routing_board().rules;
             Net[] sorted_arr = new Net[this.getRowCount()];
             for (int i = 0; i < sorted_arr.length; ++i) {
                 sorted_arr[i] = board_rules.nets.get(i + 1);
@@ -199,6 +194,5 @@ public final class WindowAssignNetClass extends BoardSavableSubWindow {
             this.data[p_row][p_col] = p_value;
             fireTableCellUpdated(p_row, p_col);
         }
-
     }
 }

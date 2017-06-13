@@ -20,7 +20,6 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
-import javax.swing.DefaultComboBoxModel;
 import net.freerouting.freeroute.rules.ViaRule;
 
 /**
@@ -63,9 +62,7 @@ public final class WindowManualRules extends BoardSavableSubWindow {
         main_panel.add(via_rule_label);
 
         net.freerouting.freeroute.board.RoutingBoard routing_board = this.board_handling.get_routing_board();
-        ViaRule[] vis_rules_arr = routing_board.rules.via_rules.stream().toArray(ViaRule[]::new);
-        DefaultComboBoxModel<ViaRule> comboBoxModel = new DefaultComboBoxModel<>(vis_rules_arr);
-        this.via_rule_combo_box = new javax.swing.JComboBox<>(comboBoxModel);
+        this.via_rule_combo_box = new javax.swing.JComboBox<>(new ArrayComboBoxModel<>(routing_board.rules.via_rules.stream().toArray(ViaRule[]::new)));
         gridbag_constraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridbag.setConstraints(this.via_rule_combo_box, gridbag_constraints);
         main_panel.add(this.via_rule_combo_box);
@@ -131,9 +128,7 @@ public final class WindowManualRules extends BoardSavableSubWindow {
     @Override
     public void refresh() {
         net.freerouting.freeroute.board.RoutingBoard routing_board = board_handling.get_routing_board();
-        ViaRule[] via_rules = routing_board.rules.via_rules.stream().toArray(ViaRule[]::new);
-        DefaultComboBoxModel<ViaRule> new_model = new javax.swing.DefaultComboBoxModel<>(via_rules);
-        this.via_rule_combo_box.setModel(new_model);
+        this.via_rule_combo_box.setModel(new ArrayComboBoxModel<>(routing_board.rules.via_rules.stream().toArray(ViaRule[]::new)));
         net.freerouting.freeroute.rules.ClearanceMatrix clearance_matrix = board_handling.get_routing_board().rules.clearance_matrix;
         if (this.clearance_combo_box.get_class_count() != routing_board.rules.clearance_matrix.get_class_count()) {
             this.clearance_combo_box.adjust(clearance_matrix);

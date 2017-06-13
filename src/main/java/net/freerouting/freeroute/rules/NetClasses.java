@@ -120,4 +120,8 @@ public class NetClasses implements java.io.Serializable {
         return this.class_arr.remove(p_net_class);
     }
 
+    public NetClass[] toArray() {
+        return class_arr.stream().toArray(NetClass[]::new);
+    }
+
 }
