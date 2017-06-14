@@ -62,7 +62,7 @@ import net.freerouting.freeroute.rules.ItemClass;
  *
  * @author Alfons Wirtz
  */
-public class BoardHandling {
+public final class BoardHandling {
 
     /**
      * The graphical context for drawing the board.

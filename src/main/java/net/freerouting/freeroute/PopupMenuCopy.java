@@ -27,7 +27,7 @@ import java.util.Locale;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class PopupMenuCopy extends PopupMenuDisplay {
+public final class PopupMenuCopy extends PopupMenuDisplay {
 
     private final PopupMenuChangeLayer change_layer_menu;
 

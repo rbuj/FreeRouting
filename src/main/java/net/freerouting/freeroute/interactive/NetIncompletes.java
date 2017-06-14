@@ -40,7 +40,7 @@ import net.freerouting.freeroute.rules.Net;
  *
  * @author Alfons Wirtz
  */
-public class NetIncompletes {
+public final class NetIncompletes {
 
     static void draw_layer_change_marker(FloatPoint p_location, double p_radius, Graphics p_graphics, GraphicsContext p_graphics_context) {
         final int draw_width = 1;
