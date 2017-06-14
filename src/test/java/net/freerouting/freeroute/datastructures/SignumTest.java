@@ -85,17 +85,17 @@ public class SignumTest {
 
         p_value = 0.0;
         expResult = 0;
-        result = Signum.as_int(p_value);;
+        result = Signum.as_int(p_value);
         assertEquals(expResult, result);
 
         p_value = -10.0;
         expResult = -1;
-        result = Signum.as_int(p_value);;
+        result = Signum.as_int(p_value);
         assertEquals(expResult, result);
 
         p_value = 10.0;
         expResult = 1;
-        result = Signum.as_int(p_value);;
+        result = Signum.as_int(p_value);
         assertEquals(expResult, result);
     }
 
