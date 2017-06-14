@@ -22,10 +22,6 @@ package net.freerouting.freeroute.geometry.planar;
  */
 public final class TileShapeUtils {
 
-    private TileShapeUtils() {
-        // not called
-    }
-
     /**
      * creates a Simplex as intersection of the halfplanes defined by an array
      * of directed lines
@@ -63,5 +59,9 @@ public final class TileShapeUtils {
      */
     public static IntBox get_instance(Point p_point) {
         return p_point.surrounding_box();
+    }
+
+    private TileShapeUtils() {
+        // not called
     }
 }

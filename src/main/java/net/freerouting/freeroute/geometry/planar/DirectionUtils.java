@@ -16,7 +16,6 @@ package net.freerouting.freeroute.geometry.planar;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /**
  *
  * @author robert
@@ -24,10 +23,6 @@ package net.freerouting.freeroute.geometry.planar;
 public final class DirectionUtils {
 
     static final IntDirection NULL = new IntDirection(0, 0);
-
-    private DirectionUtils() {
-        // not called
-    }
 
     /**
      * creates a Direction from the input Vector
@@ -56,5 +51,9 @@ public final class DirectionUtils {
         int x = (int) Math.round(Math.cos(p_angle) * scale_factor);
         int y = (int) Math.round(Math.sin(p_angle) * scale_factor);
         return get_instance(new IntVector(x, y));
+    }
+
+    private DirectionUtils() {
+        // not called
     }
 }

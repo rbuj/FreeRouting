@@ -223,6 +223,7 @@ public class CoordinateTransform implements java.io.Serializable {
 
     /**
      * Sets the rotation of the displayed board to p_value.
+     *
      * @param p_value the rotation angle in radians.
      */
     public void set_rotation(double p_value) {

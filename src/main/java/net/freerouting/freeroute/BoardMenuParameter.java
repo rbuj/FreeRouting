@@ -32,13 +32,6 @@ import static java.util.Map.entry;
 final class BoardMenuParameter extends BoardMenu {
 
     /**
-     * Creates a new instance of BoardSelectMenu
-     */
-    private BoardMenuParameter(BoardFrame p_board_frame) {
-        super(p_board_frame);
-    }
-
-    /**
      * Returns a new windows menu for the board frame.
      */
     static BoardMenuParameter get_instance(BoardFrame p_board_frame) {
@@ -65,5 +58,12 @@ final class BoardMenuParameter extends BoardMenu {
         }
 
         return parameter_menu;
+    }
+
+    /**
+     * Creates a new instance of BoardSelectMenu
+     */
+    private BoardMenuParameter(BoardFrame p_board_frame) {
+        super(p_board_frame);
     }
 }

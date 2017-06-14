@@ -27,16 +27,6 @@ package net.freerouting.freeroute;
 @SuppressWarnings("serial")
 final class BoardMenuBar extends javax.swing.JMenuBar {
 
-    private final BoardMenuFile file_menu;
-
-    void add_design_dependent_items() {
-        this.file_menu.add_design_dependent_items();
-    }
-
-    private BoardMenuBar (BoardFrame p_board_frame, boolean p_session_file_option) {
-        file_menu = BoardMenuFile.get_instance(p_board_frame, p_session_file_option);
-    }
-
     /**
      * Creates a new BoardMenuBar together with its menus
      */
@@ -50,5 +40,15 @@ final class BoardMenuBar extends javax.swing.JMenuBar {
         menubar.add(BoardMenuOther.get_instance(p_board_frame));
         menubar.add(new BoardMenuHelp(p_board_frame));
         return menubar;
+    }
+
+    private final BoardMenuFile file_menu;
+
+    private BoardMenuBar(BoardFrame p_board_frame, boolean p_session_file_option) {
+        file_menu = BoardMenuFile.get_instance(p_board_frame, p_session_file_option);
+    }
+
+    void add_design_dependent_items() {
+        this.file_menu.add_design_dependent_items();
     }
 }

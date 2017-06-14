@@ -33,13 +33,6 @@ import java.util.TreeSet;
 public class ItemSelectionFilter implements java.io.Serializable {
 
     /**
-     * The possible choices in the filter.
-     */
-    public enum SELECTABLE_CHOICES {
-        TRACES, VIAS, PINS, CONDUCTION, KEEPOUT, VIA_KEEPOUT, COMPONENT_KEEPOUT, BOARD_OUTLINE, FIXED, UNFIXED
-    }
-
-    /**
      * the filter array of the item types
      */
     private final EnumMap<SELECTABLE_CHOICES, Boolean> values = new EnumMap<>(SELECTABLE_CHOICES.class);
@@ -125,5 +118,12 @@ public class ItemSelectionFilter implements java.io.Serializable {
      */
     public boolean is_selected(SELECTABLE_CHOICES p_choice) {
         return values.get(p_choice);
+    }
+
+    /**
+     * The possible choices in the filter.
+     */
+    public enum SELECTABLE_CHOICES {
+        TRACES, VIAS, PINS, CONDUCTION, KEEPOUT, VIA_KEEPOUT, COMPONENT_KEEPOUT, BOARD_OUTLINE, FIXED, UNFIXED
     }
 }

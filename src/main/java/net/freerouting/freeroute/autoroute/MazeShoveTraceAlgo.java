@@ -41,10 +41,6 @@ import net.freerouting.freeroute.geometry.planar.TileShape;
  */
 public class MazeShoveTraceAlgo {
 
-    private MazeShoveTraceAlgo() {
-        // not called
-    }
-
     /**
      * Returns false, if the algorithm did not succeed and trying to shove from
      * another door section may be more successful.
@@ -316,6 +312,10 @@ public class MazeShoveTraceAlgo {
             points_matching = false;
         }
         return points_matching;
+    }
+
+    private MazeShoveTraceAlgo() {
+        // not called
     }
 
     public static class DoorSection {

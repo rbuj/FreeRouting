@@ -24,7 +24,7 @@ import net.freerouting.freeroute.datastructures.IndentFileWriter;
  * @author robert
  */
 public interface ShapeWritable {
-    
+
     /**
      * Writes a shape scope to a Specctra dsn file.
      */

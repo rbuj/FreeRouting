@@ -30,6 +30,65 @@ import net.freerouting.freeroute.geometry.planar.IntPoint;
  */
 public class Circle extends Shape {
 
+    /**
+     * Reads a circle scope from a Specctra dsn file.
+     */
+    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
+        try {
+            Layer circle_layer = null;
+            boolean layer_ok = true;
+            double circle_coor[] = new double[3];
+
+            Object next_token = p_scanner.next_token();
+            if (next_token == Keyword.PCB_SCOPE) {
+                circle_layer = Layer.PCB;
+            } else if (next_token == Keyword.SIGNAL) {
+                circle_layer = Layer.SIGNAL;
+            } else {
+                if (p_layer_structure == null) {
+                    throw new ReadScopeException("Shape.read_circle_scope: p_layer_structure != null expected");
+                }
+                if (!(next_token instanceof String)) {
+                    throw new ReadScopeException("Shape.read_circle_scope: string for layer_name expected");
+                }
+                int layer_no = p_layer_structure.get_no((String) next_token);
+                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
+                    System.out.print("Shape.read_circle_scope: layer with name ");
+                    System.out.print((String) next_token);
+                    System.out.println(" not found in layer stracture ");
+                    layer_ok = false;
+                } else {
+                    circle_layer = p_layer_structure.arr[layer_no];
+                }
+            }
+            // fill the the the coordinates
+            int curr_index = 0;
+            for (;;) {
+                next_token = p_scanner.next_token();
+                if (next_token == Keyword.CLOSED_BRACKET) {
+                    break;
+                }
+                if (curr_index > 2) {
+                    throw new ReadScopeException("Shape.read_circle_scope: closed bracket expected");
+                }
+                if (next_token instanceof Double) {
+                    circle_coor[curr_index] = (double) next_token;
+                } else if (next_token instanceof Integer) {
+                    circle_coor[curr_index] = ((Number) next_token).doubleValue();
+                } else {
+                    throw new ReadScopeException("Shape.read_circle_scope: number expected");
+                }
+                ++curr_index;
+            }
+            if (!layer_ok) {
+                return null;
+            }
+            return new Circle(circle_layer, circle_coor);
+        } catch (java.io.IOException e) {
+            throw new ReadScopeException("Shape.read_rectangle_scope: IO error scanning file", e);
+        }
+    }
+
     public final double[] coor;
 
     /**
@@ -105,62 +164,4 @@ public class Circle extends Shape {
         p_file.write(")");
     }
 
-    /**
-     * Reads a circle scope from a Specctra dsn file.
-     */
-    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
-        try {
-            Layer circle_layer = null;
-            boolean layer_ok = true;
-            double circle_coor[] = new double[3];
-
-            Object next_token = p_scanner.next_token();
-            if (next_token == Keyword.PCB_SCOPE) {
-                circle_layer = Layer.PCB;
-            } else if (next_token == Keyword.SIGNAL) {
-                circle_layer = Layer.SIGNAL;
-            } else {
-                if (p_layer_structure == null) {
-                    throw new ReadScopeException("Shape.read_circle_scope: p_layer_structure != null expected");
-                }
-                if (!(next_token instanceof String)) {
-                    throw new ReadScopeException("Shape.read_circle_scope: string for layer_name expected");
-                }
-                int layer_no = p_layer_structure.get_no((String) next_token);
-                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
-                    System.out.print("Shape.read_circle_scope: layer with name ");
-                    System.out.print((String) next_token);
-                    System.out.println(" not found in layer stracture ");
-                    layer_ok = false;
-                } else {
-                    circle_layer = p_layer_structure.arr[layer_no];
-                }
-            }
-            // fill the the the coordinates
-            int curr_index = 0;
-            for (;;) {
-                next_token = p_scanner.next_token();
-                if (next_token == Keyword.CLOSED_BRACKET) {
-                    break;
-                }
-                if (curr_index > 2) {
-                    throw new ReadScopeException("Shape.read_circle_scope: closed bracket expected");
-                }
-                if (next_token instanceof Double) {
-                    circle_coor[curr_index] = (double) next_token;
-                } else if (next_token instanceof Integer) {
-                    circle_coor[curr_index] = ((Number) next_token).doubleValue();
-                } else {
-                    throw new ReadScopeException("Shape.read_circle_scope: number expected");
-                }
-                ++curr_index;
-            }
-            if (!layer_ok) {
-                return null;
-            }
-            return new Circle(circle_layer, circle_coor);
-        } catch (java.io.IOException e) {
-            throw new ReadScopeException("Shape.read_rectangle_scope: IO error scanning file", e);
-        }
-    }
 }

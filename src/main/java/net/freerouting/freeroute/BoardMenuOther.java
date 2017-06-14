@@ -30,13 +30,6 @@ import java.util.Locale;
 final class BoardMenuOther extends BoardMenu {
 
     /**
-     * Creates a new instance of BoardMenuOther
-     */
-    private BoardMenuOther(BoardFrame p_board_frame) {
-        super(p_board_frame);
-    }
-
-    /**
      * Returns a new other menu for the board frame.
      */
     static BoardMenuOther get_instance(BoardFrame p_board_frame) {
@@ -57,5 +50,12 @@ final class BoardMenuOther extends BoardMenu {
         other_menu.add(snapshots);
 
         return other_menu;
+    }
+
+    /**
+     * Creates a new instance of BoardMenuOther
+     */
+    private BoardMenuOther(BoardFrame p_board_frame) {
+        super(p_board_frame);
     }
 }

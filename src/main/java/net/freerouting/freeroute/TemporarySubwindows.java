@@ -67,7 +67,7 @@ public final class TemporarySubwindows {
 
     /**
      * Appends a temporary window to temporary subwindow list.
-     * 
+     *
      * @param window temporary window
      */
     void add(BoardTemporarySubWindow window) {
@@ -76,7 +76,7 @@ public final class TemporarySubwindows {
 
     /**
      * Removes the specified temporary window from temporary subwindow list.
-     * 
+     *
      * @param window temporary window
      */
     void remove(BoardTemporarySubWindow window) {

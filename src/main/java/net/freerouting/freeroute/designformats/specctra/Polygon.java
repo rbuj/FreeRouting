@@ -34,6 +34,74 @@ import net.freerouting.freeroute.geometry.planar.SimplexUtils;
  */
 public class Polygon extends Shape {
 
+    /**
+     * Reads a closed polygon scope from a Specctra dsn file. If
+     * p_layer_structure == null, only Layer.PCB and Layer.Signal are expected,
+     * no induvidual layers.
+     */
+    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
+        try {
+            Layer polygon_layer = null;
+            Object next_token = p_scanner.next_token();
+            if (next_token == Keyword.PCB_SCOPE) {
+                polygon_layer = Layer.PCB;
+            } else if (next_token == Keyword.SIGNAL) {
+                polygon_layer = Layer.SIGNAL;
+            } else {
+                if (p_layer_structure == null) {
+                    throw new ReadScopeException("Shape.read_polygon_scope: only layer types pcb or signal expected");
+                }
+                if (!(next_token instanceof String)) {
+                    throw new ReadScopeException("Shape.read_polygon_scope: layer name string expected");
+                }
+                int layer_no = p_layer_structure.get_no((String) next_token);
+                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
+                    throw new ReadScopeException("Shape.read_polygon_scope: layer name " + next_token.toString() + " not found in layer structure ");
+                } else {
+                    polygon_layer = p_layer_structure.arr[layer_no];
+                }
+            }
+
+            // overread the aperture width
+            next_token = p_scanner.next_token();
+
+            Collection<Object> coor_list = new LinkedList<>();
+
+            // read the coordinates of the polygon
+            for (;;) {
+                next_token = p_scanner.next_token();
+                if (next_token == null) {
+                    throw new ReadScopeException("Shape.read_polygon_scope: unexpected end of file");
+                }
+                if (next_token == Keyword.OPEN_BRACKET) {
+                    // unknown scope
+                    ScopeKeyword.skip_scope(p_scanner);
+                    next_token = p_scanner.next_token();
+                }
+                if (next_token == Keyword.CLOSED_BRACKET) {
+                    break;
+                }
+                coor_list.add(next_token);
+            }
+            double[] coor_arr = new double[coor_list.size()];
+            Iterator<Object> it = coor_list.iterator();
+            for (int i = 0; i < coor_arr.length; ++i) {
+                Object next_object = it.next();
+                if (next_object instanceof Double) {
+                    coor_arr[i] = (double) next_object;
+                } else if (next_object instanceof Integer) {
+                    coor_arr[i] = ((Number) next_object).doubleValue();
+                } else {
+                    throw new ReadScopeException("Shape.read_polygon_scope: number expected");
+                }
+
+            }
+            return new Polygon(polygon_layer, coor_arr);
+        } catch (java.io.IOException e) {
+            throw new ReadScopeException("Rectangle.read_scope: IO error scanning file", e);
+        }
+    }
+
     public final double[] coor;
 
     /**
@@ -130,71 +198,4 @@ public class Polygon extends Shape {
         p_file.end_scope();
     }
 
-    /**
-     * Reads a closed polygon scope from a Specctra dsn file. If
-     * p_layer_structure == null, only Layer.PCB and Layer.Signal are expected,
-     * no induvidual layers.
-     */
-    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
-        try {
-            Layer polygon_layer = null;
-            Object next_token = p_scanner.next_token();
-            if (next_token == Keyword.PCB_SCOPE) {
-                polygon_layer = Layer.PCB;
-            } else if (next_token == Keyword.SIGNAL) {
-                polygon_layer = Layer.SIGNAL;
-            } else {
-                if (p_layer_structure == null) {
-                    throw new ReadScopeException("Shape.read_polygon_scope: only layer types pcb or signal expected");
-                }
-                if (!(next_token instanceof String)) {
-                    throw new ReadScopeException("Shape.read_polygon_scope: layer name string expected");
-                }
-                int layer_no = p_layer_structure.get_no((String) next_token);
-                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
-                    throw new ReadScopeException("Shape.read_polygon_scope: layer name " + next_token.toString() + " not found in layer structure ");
-                } else {
-                    polygon_layer = p_layer_structure.arr[layer_no];
-                }
-            }
-
-            // overread the aperture width
-            next_token = p_scanner.next_token();
-
-            Collection<Object> coor_list = new LinkedList<>();
-
-            // read the coordinates of the polygon
-            for (;;) {
-                next_token = p_scanner.next_token();
-                if (next_token == null) {
-                    throw new ReadScopeException("Shape.read_polygon_scope: unexpected end of file");
-                }
-                if (next_token == Keyword.OPEN_BRACKET) {
-                    // unknown scope
-                    ScopeKeyword.skip_scope(p_scanner);
-                    next_token = p_scanner.next_token();
-                }
-                if (next_token == Keyword.CLOSED_BRACKET) {
-                    break;
-                }
-                coor_list.add(next_token);
-            }
-            double[] coor_arr = new double[coor_list.size()];
-            Iterator<Object> it = coor_list.iterator();
-            for (int i = 0; i < coor_arr.length; ++i) {
-                Object next_object = it.next();
-                if (next_object instanceof Double) {
-                    coor_arr[i] = (double) next_object;
-                } else if (next_object instanceof Integer) {
-                    coor_arr[i] = ((Number) next_object).doubleValue();
-                } else {
-                    throw new ReadScopeException("Shape.read_polygon_scope: number expected");
-                }
-
-            }
-            return new Polygon(polygon_layer, coor_arr);
-        } catch (java.io.IOException e) {
-            throw new ReadScopeException("Rectangle.read_scope: IO error scanning file", e);
-        }
-    }
 }

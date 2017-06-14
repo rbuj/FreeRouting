@@ -32,13 +32,6 @@ import static java.util.Map.entry;
 final class BoardMenuInfo extends BoardMenu {
 
     /**
-     * Creates a new instance of BoardLibraryMenu
-     */
-    private BoardMenuInfo(BoardFrame p_board_frame) {
-        super(p_board_frame);
-    }
-
-    /**
      * Returns a new info menu for the board frame.
      */
     static BoardMenuInfo get_instance(BoardFrame p_board_frame) {
@@ -69,5 +62,12 @@ final class BoardMenuInfo extends BoardMenu {
         }
 
         return info_menu;
+    }
+
+    /**
+     * Creates a new instance of BoardLibraryMenu
+     */
+    private BoardMenuInfo(BoardFrame p_board_frame) {
+        super(p_board_frame);
     }
 }

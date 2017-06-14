@@ -33,17 +33,6 @@ import net.freerouting.freeroute.interactive.BoardHandling;
  */
 final class GUIDefaultsFile {
 
-    private final BoardFrame board_frame;
-    private final BoardHandling board_handling;
-    /**
-     * Used, when reading a defaults file, null otherwise.
-     */
-    private final GUIDefaultsScanner scanner;
-    /**
-     * Used, when writing a defaults file; null otherwise.
-     */
-    private final IndentFileWriter out_file;
-
     /**
      * Writes the GUI setting of p_board_frame as default to p_file. Returns
      * false, if an error occured.
@@ -88,6 +77,17 @@ final class GUIDefaultsFile {
             throw new GUIDefaultsFileException("Unable to read defaults file", ex);
         }
     }
+
+    private final BoardFrame board_frame;
+    private final BoardHandling board_handling;
+    /**
+     * Used, when reading a defaults file, null otherwise.
+     */
+    private final GUIDefaultsScanner scanner;
+    /**
+     * Used, when writing a defaults file; null otherwise.
+     */
+    private final IndentFileWriter out_file;
 
     private GUIDefaultsFile(BoardFrame p_board_frame, BoardHandling p_board_handling,
             GUIDefaultsScanner p_scanner, IndentFileWriter p_output_file) {

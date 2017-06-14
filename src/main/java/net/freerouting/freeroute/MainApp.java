@@ -53,6 +53,28 @@ public final class MainApp extends Application {
     private static final String VERSION_NUMBER_STRING = "1.4.4-alpha";
     private static final Logger LOGGER = Logger.getLogger(MainAppController.class.getName());
     private static final TestLevel DEBUG_LEVEL = TestLevel.CRITICAL_DEBUGGING_OUTPUT;
+
+    /**
+     * Main function of the Application
+     */
+    public static void main(String[] args) {
+        // Enable OpenGL pipeline
+        System.setProperty("sun.java2d.opengl", "true");
+
+        // System look & feel
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.INFO, null, ex);
+        }
+
+        launch(args);
+    }
+
+    public static String get_version() {
+        return VERSION_NUMBER_STRING;
+    }
+
     private boolean single_design_option = false;
     private boolean session_file_option = false;
     private String design_file_name = "";
@@ -182,27 +204,6 @@ public final class MainApp extends Application {
         mainStage.setOnCloseRequest((WindowEvent we) -> {
             Runtime.getRuntime().exit(0);
         });
-    }
-
-    /**
-     * Main function of the Application
-     */
-    public static void main(String[] args) {
-        // Enable OpenGL pipeline
-        System.setProperty("sun.java2d.opengl", "true");
-
-        // System look & feel
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(MainApp.class.getName()).log(Level.INFO, null, ex);
-        }
-
-        launch(args);
-    }
-
-    public static String get_version() {
-        return VERSION_NUMBER_STRING;
     }
 
 }

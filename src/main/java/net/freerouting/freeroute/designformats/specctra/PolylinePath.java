@@ -34,66 +34,6 @@ import net.freerouting.freeroute.datastructures.IndentFileWriter;
 public class PolylinePath extends Path {
 
     /**
-     * Creates a new instance of PolylinePath
-     */
-    PolylinePath(Layer p_layer, double p_width, double[] p_corner_arr) {
-        super(p_layer, p_width, p_corner_arr);
-    }
-
-    /**
-     * Writes this path as a scope to an output dsn-file.
-     */
-    @Override
-    public void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
-        p_file.start_scope("polyline_path ");
-        p_identifier.write(this.layer.name, p_file);
-        p_file.write(" ");
-        p_file.write(Double.toString(this.width));
-        int line_count = coordinate_arr.length / 4;
-        for (int i = 0; i < line_count; ++i) {
-            p_file.new_line();
-            for (int j = 0; j < 4; ++j) {
-                p_file.write(Double.toString(coordinate_arr[4 * i + j]));
-                p_file.write(" ");
-            }
-        }
-        p_file.end_scope();
-    }
-
-    @Override
-    public void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
-        p_file.start_scope("polyline_path ");
-        p_identifier.write(this.layer.name, p_file);
-        p_file.write(" ");
-        p_file.write(Double.toString(this.width));
-        int line_count = coordinate_arr.length / 4;
-        for (int i = 0; i < line_count; ++i) {
-            p_file.new_line();
-            for (int j = 0; j < 4; ++j) {
-                Integer curr_coor = (int) Math.round(coordinate_arr[4 * i + j]);
-                p_file.write(curr_coor.toString());
-                p_file.write(" ");
-            }
-        }
-        p_file.end_scope();
-    }
-
-    @Override
-    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
-        throw new UnsupportedOperationException("PolylinePath.transform_to_board_rel not implemented");
-    }
-
-    @Override
-    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform) {
-        throw new UnsupportedOperationException("PolylinePath.transform_to_board_rel not implemented");
-    }
-
-    @Override
-    public Rectangle bounding_box() {
-        throw new UnsupportedOperationException("PolylinePath.boundingbox not implemented");
-    }
-
-    /**
      * Reads an object of type PolylinePath from the dsn-file.
      */
     static Path read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
@@ -157,4 +97,65 @@ public class PolylinePath extends Path {
             throw new ReadScopeException("PolylinePath.read_scope: IO error scanning file", e);
         }
     }
+
+    /**
+     * Creates a new instance of PolylinePath
+     */
+    PolylinePath(Layer p_layer, double p_width, double[] p_corner_arr) {
+        super(p_layer, p_width, p_corner_arr);
+    }
+
+    /**
+     * Writes this path as a scope to an output dsn-file.
+     */
+    @Override
+    public void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
+        p_file.start_scope("polyline_path ");
+        p_identifier.write(this.layer.name, p_file);
+        p_file.write(" ");
+        p_file.write(Double.toString(this.width));
+        int line_count = coordinate_arr.length / 4;
+        for (int i = 0; i < line_count; ++i) {
+            p_file.new_line();
+            for (int j = 0; j < 4; ++j) {
+                p_file.write(Double.toString(coordinate_arr[4 * i + j]));
+                p_file.write(" ");
+            }
+        }
+        p_file.end_scope();
+    }
+
+    @Override
+    public void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
+        p_file.start_scope("polyline_path ");
+        p_identifier.write(this.layer.name, p_file);
+        p_file.write(" ");
+        p_file.write(Double.toString(this.width));
+        int line_count = coordinate_arr.length / 4;
+        for (int i = 0; i < line_count; ++i) {
+            p_file.new_line();
+            for (int j = 0; j < 4; ++j) {
+                Integer curr_coor = (int) Math.round(coordinate_arr[4 * i + j]);
+                p_file.write(curr_coor.toString());
+                p_file.write(" ");
+            }
+        }
+        p_file.end_scope();
+    }
+
+    @Override
+    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
+        throw new UnsupportedOperationException("PolylinePath.transform_to_board_rel not implemented");
+    }
+
+    @Override
+    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform) {
+        throw new UnsupportedOperationException("PolylinePath.transform_to_board_rel not implemented");
+    }
+
+    @Override
+    public Rectangle bounding_box() {
+        throw new UnsupportedOperationException("PolylinePath.boundingbox not implemented");
+    }
+
 }

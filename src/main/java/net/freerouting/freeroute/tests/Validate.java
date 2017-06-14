@@ -31,10 +31,6 @@ import net.freerouting.freeroute.board.PolylineTrace;
  */
 public class Validate {
 
-    private Validate() {
-        // not called
-    }
-
     /**
      * check, that all traces on p_board are multiples of 45 degree
      */
@@ -55,5 +51,9 @@ public class Validate {
             System.out.print(count);
             System.out.println(" traces not 45 degree");
         }
+    }
+
+    private Validate() {
+        // not called
     }
 }

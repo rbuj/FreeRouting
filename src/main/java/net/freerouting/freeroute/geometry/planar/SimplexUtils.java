@@ -27,10 +27,6 @@ public final class SimplexUtils {
      */
     public static final Simplex EMPTY = new Simplex(new Line[0]);
 
-    private SimplexUtils() {
-        // not called
-    }
-
     /**
      * creates a Simplex as intersection of the halfplanes defined by an array
      * of directed lines
@@ -46,5 +42,9 @@ public final class SimplexUtils {
         Simplex curr_simplex = new Simplex(curr_arr);
         Simplex result = curr_simplex.remove_redundant_lines();
         return result;
+    }
+
+    private SimplexUtils() {
+        // not called
     }
 }

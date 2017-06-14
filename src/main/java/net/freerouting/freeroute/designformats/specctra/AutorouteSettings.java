@@ -29,10 +29,6 @@ import net.freerouting.freeroute.datastructures.IndentFileWriter;
  */
 public class AutorouteSettings {
 
-    private AutorouteSettings() {
-        // not called
-    }
-
     static net.freerouting.freeroute.interactive.AutorouteSettings read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws DsnFileException {
         net.freerouting.freeroute.interactive.AutorouteSettings result = new net.freerouting.freeroute.interactive.AutorouteSettings(p_layer_structure.arr.length);
         boolean with_fanout = false;
@@ -248,5 +244,9 @@ public class AutorouteSettings {
             p_file.end_scope();
         }
         p_file.end_scope();
+    }
+
+    private AutorouteSettings() {
+        // not called
     }
 }

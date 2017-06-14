@@ -29,10 +29,6 @@ import java.util.LinkedList;
  */
 public abstract class Rule {
 
-    private Rule() {
-        // not called
-    }
-
     /**
      * Returns a collection of objects of class Rule.
      */
@@ -287,6 +283,10 @@ public abstract class Rule {
         p_file.write("(clearance_class ");
         p_identifier_type.write(p_name, p_file);
         p_file.write(")");
+    }
+
+    private Rule() {
+        // not called
     }
 
     public static class WidthRule extends Rule {

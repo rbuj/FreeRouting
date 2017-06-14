@@ -51,6 +51,7 @@ import net.freerouting.freeroute.geometry.planar.TileShape;
 public class MazeSearchAlgo {
 
     private static final int ALREADY_RIPPED_COSTS = 1;
+    private static final java.util.Random RANDOM_GENERATOR = new java.util.Random();
 
     /**
      * Initializes a new instance of MazeSearchAlgo for secrching a connection
@@ -186,7 +187,6 @@ public class MazeSearchAlgo {
      */
     private ExpandableObject destination_door = null;
     private int section_no_of_destination_door = 0;
-    private static final java.util.Random RANDOM_GENERATOR = new java.util.Random();
 
     /**
      * Creates a new instance of MazeSearchAlgo

@@ -29,10 +29,6 @@ import net.freerouting.freeroute.interactive.InteractiveActionThread;
  */
 public class BatchFanout {
 
-    private final InteractiveActionThread thread;
-    private final RoutingBoard routing_board;
-    private final SortedSet<Component> sorted_components;
-
     public static void fanout_board(InteractiveActionThread p_thread) {
         BatchFanout fanout_instance = new BatchFanout(p_thread);
         final int MAX_PASS_COUNT = 20;
@@ -43,6 +39,10 @@ public class BatchFanout {
             }
         }
     }
+
+    private final InteractiveActionThread thread;
+    private final RoutingBoard routing_board;
+    private final SortedSet<Component> sorted_components;
 
     private BatchFanout(InteractiveActionThread p_thread) {
         this.thread = p_thread;

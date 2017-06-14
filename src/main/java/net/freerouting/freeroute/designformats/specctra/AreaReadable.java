@@ -25,6 +25,7 @@ import static net.freerouting.freeroute.designformats.specctra.ShapeReadable.rea
  * @author robert
  */
 public interface AreaReadable {
+
     /**
      * Reads a shape , which may contain holes from a specctra dsn-file. The
      * first shape in the shape_list of the result is the border of the area.

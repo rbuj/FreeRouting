@@ -21,6 +21,7 @@ package net.freerouting.freeroute.designformats.specctra;
  * @author robert
  */
 public interface ShapeTransformable {
+
     /**
      * Transforms a specctra dsn shape to a geometry.planar.Shape.
      */

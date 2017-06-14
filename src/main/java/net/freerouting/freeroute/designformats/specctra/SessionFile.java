@@ -37,10 +37,6 @@ import net.freerouting.freeroute.geometry.planar.Point;
  */
 public class SessionFile {
 
-    private SessionFile() {
-        // not called
-    }
-
     /**
      * Creates a Specctra session file to update the host system from the
      * RoutingBooard
@@ -420,5 +416,9 @@ public class SessionFile {
             dsn_hole.write_hole_scope(p_file, p_identifier_type);
         }
         p_file.end_scope();
+    }
+
+    private SessionFile() {
+        // not called
     }
 }

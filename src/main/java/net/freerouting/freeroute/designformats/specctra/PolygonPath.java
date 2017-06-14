@@ -37,6 +37,77 @@ import net.freerouting.freeroute.geometry.planar.IntPoint;
 public class PolygonPath extends Path {
 
     /**
+     * Reads an object of type Path from the dsn-file.
+     */
+    static Path read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
+        try {
+            Layer layer = null;
+            Object next_token = p_scanner.next_token();
+            if (next_token == Keyword.PCB_SCOPE) {
+                layer = Layer.PCB;
+            } else if (next_token == Keyword.SIGNAL) {
+                layer = Layer.SIGNAL;
+            } else {
+                if (p_layer_structure == null) {
+                    throw new ReadScopeException("Shape.read_polygon_path_scope: only layer types pcb or signal expected");
+                }
+                if (!(next_token instanceof String)) {
+                    throw new ReadScopeException("Path.read_scope: layer name string expected");
+                }
+                int layer_no = p_layer_structure.get_no((String) next_token);
+                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
+                    throw new ReadScopeException("Shape.read_polygon_path_scope: layer with name " + next_token.toString() + " not found in layer structure ");
+                } else {
+                    layer = p_layer_structure.arr[layer_no];
+                }
+            }
+            Collection<Object> corner_list = new LinkedList<>();
+
+            // read the width and the corners of the path
+            for (;;) {
+                next_token = p_scanner.next_token();
+                if (next_token == Keyword.OPEN_BRACKET) {
+                    // unknown scope
+                    ScopeKeyword.skip_scope(p_scanner);
+                    next_token = p_scanner.next_token();
+                }
+                if (next_token == Keyword.CLOSED_BRACKET) {
+                    break;
+                }
+                corner_list.add(next_token);
+            }
+            if (corner_list.size() < 5) {
+                throw new ReadScopeException("Shape.read_polygon_path_scope: to few numbers in scope");
+            }
+            Iterator<Object> it = corner_list.iterator();
+            double width;
+            Object next_object = it.next();
+            if (next_object instanceof Double) {
+                width = (double) next_object;
+            } else if (next_object instanceof Integer) {
+                width = ((Number) next_object).doubleValue();
+            } else {
+                throw new ReadScopeException("Shape.read_polygon_path_scope: number expected");
+            }
+            double[] coordinate_arr = new double[corner_list.size() - 1];
+            for (int i = 0; i < coordinate_arr.length; ++i) {
+                next_object = it.next();
+                if (next_object instanceof Double) {
+                    coordinate_arr[i] = (double) next_object;
+                } else if (next_object instanceof Integer) {
+                    coordinate_arr[i] = ((Number) next_object).doubleValue();
+                } else {
+                    throw new ReadScopeException("Shape.read_polygon_path_scope: number expected");
+                }
+
+            }
+            return new PolygonPath(layer, width, coordinate_arr);
+        } catch (java.io.IOException e) {
+            throw new ReadScopeException("Shape.read_polygon_path_scope: IO error scanning file", e);
+        }
+    }
+
+    /**
      * Creates a new instance of PolygonPath
      */
     PolygonPath(Layer p_layer, double p_width, double[] p_coordinate_arr) {
@@ -152,74 +223,4 @@ public class PolygonPath extends Path {
         return new Rectangle(layer, bounds);
     }
 
-    /**
-     * Reads an object of type Path from the dsn-file.
-     */
-    static Path read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
-        try {
-            Layer layer = null;
-            Object next_token = p_scanner.next_token();
-            if (next_token == Keyword.PCB_SCOPE) {
-                layer = Layer.PCB;
-            } else if (next_token == Keyword.SIGNAL) {
-                layer = Layer.SIGNAL;
-            } else {
-                if (p_layer_structure == null) {
-                    throw new ReadScopeException("Shape.read_polygon_path_scope: only layer types pcb or signal expected");
-                }
-                if (!(next_token instanceof String)) {
-                    throw new ReadScopeException("Path.read_scope: layer name string expected");
-                }
-                int layer_no = p_layer_structure.get_no((String) next_token);
-                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
-                    throw new ReadScopeException("Shape.read_polygon_path_scope: layer with name " +  next_token.toString() + " not found in layer structure ");
-                } else {
-                    layer = p_layer_structure.arr[layer_no];
-                }
-            }
-            Collection<Object> corner_list = new LinkedList<>();
-
-            // read the width and the corners of the path
-            for (;;) {
-                next_token = p_scanner.next_token();
-                if (next_token == Keyword.OPEN_BRACKET) {
-                    // unknown scope
-                    ScopeKeyword.skip_scope(p_scanner);
-                    next_token = p_scanner.next_token();
-                }
-                if (next_token == Keyword.CLOSED_BRACKET) {
-                    break;
-                }
-                corner_list.add(next_token);
-            }
-            if (corner_list.size() < 5) {
-                throw new ReadScopeException("Shape.read_polygon_path_scope: to few numbers in scope");
-            }
-            Iterator<Object> it = corner_list.iterator();
-            double width;
-            Object next_object = it.next();
-            if (next_object instanceof Double) {
-                width = (double) next_object;
-            } else if (next_object instanceof Integer) {
-                width = ((Number) next_object).doubleValue();
-            } else {
-                throw new ReadScopeException("Shape.read_polygon_path_scope: number expected");
-            }
-            double[] coordinate_arr = new double[corner_list.size() - 1];
-            for (int i = 0; i < coordinate_arr.length; ++i) {
-                next_object = it.next();
-                if (next_object instanceof Double) {
-                    coordinate_arr[i] = (double) next_object;
-                } else if (next_object instanceof Integer) {
-                    coordinate_arr[i] = ((Number) next_object).doubleValue();
-                } else {
-                    throw new ReadScopeException("Shape.read_polygon_path_scope: number expected");
-                }
-
-            }
-            return new PolygonPath(layer, width, coordinate_arr);
-        } catch (java.io.IOException e) {
-            throw new ReadScopeException("Shape.read_polygon_path_scope: IO error scanning file", e);
-        }
-    }
 }

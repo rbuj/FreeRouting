@@ -30,6 +30,10 @@ import java.util.Locale;
 public final class WindowDisplayMisc extends BoardSavableSubWindow {
 
     private static final int MAX_SLIDER_VALUE = 100;
+    private static final double ROTATION_0 = 0.0;
+    private static final double ROTATION_90 = 0.5 * Math.PI;
+    private static final double ROTATION_180 = Math.PI;
+    private static final double ROTATION_270 = 1.5 * Math.PI;
 
     private final BoardPanel panel;
     private final javax.swing.JRadioButton small_cursor_checkbox;
@@ -42,11 +46,6 @@ public final class WindowDisplayMisc extends BoardSavableSubWindow {
     private final javax.swing.JRadioButton vertical_mirror_checkbox;
     private final javax.swing.JRadioButton horizontal_mirror_checkbox;
     private final javax.swing.JSlider auto_layer_dim_slider;
-
-    private static final double ROTATION_0 = 0.0;
-    private static final double ROTATION_90 = 0.5 * Math.PI;
-    private static final double ROTATION_180 = Math.PI;
-    private static final double ROTATION_270 = 1.5 * Math.PI;
 
     /**
      * Creates a new instance of DisplayMiscWindow

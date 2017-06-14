@@ -41,10 +41,6 @@ import net.freerouting.freeroute.rules.ViaInfo;
  */
 public class ForcedViaAlgo {
 
-    private ForcedViaAlgo() {
-        // not called
-    }
-
     /**
      * Checks, if a Via is possible at the input layer after evtl. shoving aside
      * obstacle traces. p_room_shape is used for calculating the from_side.
@@ -262,5 +258,9 @@ public class ForcedViaAlgo {
             }
         }
         return null;
+    }
+
+    private ForcedViaAlgo() {
+        // not called
     }
 }

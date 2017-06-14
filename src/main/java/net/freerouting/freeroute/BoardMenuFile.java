@@ -42,20 +42,6 @@ import static net.freerouting.freeroute.Filename.GUI_DEFAULTS_FILE_NAME;
 @SuppressWarnings("serial")
 final class BoardMenuFile extends BoardMenu {
 
-    private final boolean session_file_option;
-    private final java.util.ResourceBundle resources;
-
-    /**
-     * Creates a new instance of BoardFileMenu
-     */
-    private BoardMenuFile(BoardFrame p_board_frame, boolean p_session_file_option) {
-        super(p_board_frame);
-        this.resources = java.util.ResourceBundle.getBundle(
-                BoardMenuFile.class.getPackageName() + ".resources.BoardMenuFile",
-                Locale.getDefault());
-        session_file_option = p_session_file_option;
-    }
-
     /**
      * Returns a new file menu for the board frame.
      */
@@ -135,6 +121,20 @@ final class BoardMenuFile extends BoardMenu {
         file_menu.add_save_settings_item();
 
         return file_menu;
+    }
+
+    private final boolean session_file_option;
+    private final java.util.ResourceBundle resources;
+
+    /**
+     * Creates a new instance of BoardFileMenu
+     */
+    private BoardMenuFile(BoardFrame p_board_frame, boolean p_session_file_option) {
+        super(p_board_frame);
+        this.resources = java.util.ResourceBundle.getBundle(
+                BoardMenuFile.class.getPackageName() + ".resources.BoardMenuFile",
+                Locale.getDefault());
+        session_file_option = p_session_file_option;
     }
 
     void add_design_dependent_items() {

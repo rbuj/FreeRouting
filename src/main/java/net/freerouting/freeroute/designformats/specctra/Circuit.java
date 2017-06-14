@@ -26,10 +26,6 @@ package net.freerouting.freeroute.designformats.specctra;
  */
 public class Circuit {
 
-    private Circuit() {
-        // not called
-    }
-
     /**
      * Currently only the length matching rule is read from a circuit scope. If
      * the scope does not contain a length matching rule, nulll is returned.
@@ -108,6 +104,10 @@ public class Circuit {
             }
         }
         return result;
+    }
+
+    private Circuit() {
+        // not called
     }
 
     /**

@@ -36,7 +36,7 @@ public enum Unit {
     private final String name;
     public static final int size = 4;
 
-    Unit (String s){
+    Unit(String s) {
         name = s;
     }
 

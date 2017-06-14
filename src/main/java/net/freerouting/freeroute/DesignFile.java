@@ -50,11 +50,32 @@ import net.freerouting.freeroute.interactive.BoardHandlingException;
  */
 final class DesignFile {
 
+    private static final CustomFileFilter FILE_FILTER = new CustomFileFilter(ALL_FILE_EXTENSIONS);
+
+    static void read_rules_file(String p_design_name, String p_parent_name,
+            net.freerouting.freeroute.interactive.BoardHandling p_board_handling, String p_confirm_message) throws DsnFileException {
+        String rule_file_name = p_design_name + ".rules";
+        boolean dsn_file_generated_by_host = p_board_handling.get_routing_board().communication.specctra_parser_info.dsn_file_generated_by_host;
+        if (dsn_file_generated_by_host) {
+            File rules_file = new File(p_parent_name, rule_file_name);
+            if (rules_file.exists()) {
+                try (Reader reader = new InputStreamReader(new FileInputStream(rules_file), StandardCharsets.UTF_8)) {
+                    if (WindowMessage.confirm(p_confirm_message)) {
+                        net.freerouting.freeroute.designformats.specctra.RulesFile.read(reader, p_design_name, p_board_handling);
+                        if (rules_file.delete() == false) {
+                            throw new DsnFileException("Can't delete rules file");
+                        }
+                    }
+                } catch (IOException ex) {
+                    throw new DsnFileException("Can't read rules file", ex);
+                }
+            }
+        }
+    }
+
     private File output_file;
     private File input_file;
     private String design_dir_name;
-
-    private static final CustomFileFilter FILE_FILTER = new CustomFileFilter(ALL_FILE_EXTENSIONS);
 
     DesignFile(File p_design_file, String p_design_dir_name) {
         this(p_design_file);
@@ -98,27 +119,6 @@ final class DesignFile {
         } else {
             input_file = null;
             output_file = null;
-        }
-    }
-
-    static void read_rules_file(String p_design_name, String p_parent_name,
-            net.freerouting.freeroute.interactive.BoardHandling p_board_handling, String p_confirm_message) throws DsnFileException {
-        String rule_file_name = p_design_name + ".rules";
-        boolean dsn_file_generated_by_host = p_board_handling.get_routing_board().communication.specctra_parser_info.dsn_file_generated_by_host;
-        if (dsn_file_generated_by_host) {
-            File rules_file = new File(p_parent_name, rule_file_name);
-            if (rules_file.exists()) {
-                try (Reader reader = new InputStreamReader(new FileInputStream(rules_file), StandardCharsets.UTF_8)) {
-                    if (WindowMessage.confirm(p_confirm_message)) {
-                        net.freerouting.freeroute.designformats.specctra.RulesFile.read(reader, p_design_name, p_board_handling);
-                        if (rules_file.delete() == false) {
-                            throw new DsnFileException("Can't delete rules file");
-                        }
-                    }
-                } catch (IOException ex) {
-                    throw new DsnFileException("Can't read rules file", ex);
-                }
-            }
         }
     }
 

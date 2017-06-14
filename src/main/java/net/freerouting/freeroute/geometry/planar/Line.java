@@ -28,10 +28,6 @@ import net.freerouting.freeroute.datastructures.Signum;
 @SuppressWarnings("serial")
 public class Line implements Comparable<Line>, java.io.Serializable {
 
-    public final Point a;
-    public final Point b;
-    transient private Direction dir; // should only be accessed from get_direction().
-
     /**
      * create a directed line from an IntPoint and an IntDirection
      */
@@ -39,6 +35,10 @@ public class Line implements Comparable<Line>, java.io.Serializable {
         Point b = p_a.translate_by(p_dir.get_vector());
         return new Line(p_a, b);
     }
+
+    public final Point a;
+    public final Point b;
+    transient private Direction dir; // should only be accessed from get_direction().
 
     /**
      * creates a directed Line from two Points

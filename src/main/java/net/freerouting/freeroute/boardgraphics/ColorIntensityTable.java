@@ -30,7 +30,7 @@ import java.util.EnumMap;
 @SuppressWarnings("serial")
 public class ColorIntensityTable implements java.io.Serializable {
 
-    private final EnumMap<ObjectNames,Double> arr = new EnumMap<>(ObjectNames.class);
+    private final EnumMap<ObjectNames, Double> arr = new EnumMap<>(ObjectNames.class);
 
     /**
      * Creates a new instance of ColorIntensityTable. The elements of

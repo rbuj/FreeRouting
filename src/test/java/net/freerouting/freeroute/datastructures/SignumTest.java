@@ -29,8 +29,6 @@ import static org.junit.Assert.*;
  */
 public class SignumTest {
     
-    public SignumTest() {
-    }
     
     @BeforeClass
     public static void setUpClass() {
@@ -38,6 +36,8 @@ public class SignumTest {
     
     @AfterClass
     public static void tearDownClass() {
+    }
+    public SignumTest() {
     }
     
     @Before

@@ -40,10 +40,6 @@ import net.freerouting.freeroute.geometry.planar.Vector;
  */
 public class MoveDrillItemAlgo {
 
-    private MoveDrillItemAlgo() {
-        // not called
-    }
-
     /**
      * checks, if p_drill_item can be translated by p_vector by shoving obstacle
      * traces and vias aside, so that no clearance violations occur.
@@ -285,5 +281,9 @@ public class MoveDrillItemAlgo {
             }
         }
         return try_via_centers;
+    }
+
+    private MoveDrillItemAlgo() {
+        // not called
     }
 }

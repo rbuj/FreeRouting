@@ -80,6 +80,7 @@ public abstract class Cursor {
     private final static class FortyfiveDegreeCrossHairCursor extends Cursor {
 
         static final GeneralPath DRAW_PATH = new GeneralPath(Path2D.WIND_EVEN_ODD);
+
         static {
             DRAW_PATH.append(VERTICAL_LINE, false);
             DRAW_PATH.append(HORIZONTAL_LINE, false);

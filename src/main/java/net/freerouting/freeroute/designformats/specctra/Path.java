@@ -29,6 +29,10 @@ import net.freerouting.freeroute.datastructures.IndentFileWriter;
  */
 public abstract class Path extends Shape {
 
+    static Path read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
+        throw new UnsupportedOperationException();
+    }
+
     public final double width;
     public final double[] coordinate_arr;
 
@@ -46,9 +50,5 @@ public abstract class Path extends Shape {
      */
     @Override
     public abstract void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException;
-
-    static Path read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
-        throw new UnsupportedOperationException();
-    }
 
 }

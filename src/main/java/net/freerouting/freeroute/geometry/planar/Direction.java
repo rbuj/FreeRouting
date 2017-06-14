@@ -23,11 +23,11 @@ import net.freerouting.freeroute.datastructures.Signum;
 
 /**
  *
- * Interface defining functionality of directions in the plane. A Direction
- * is an equivalence class of vectors. Two vectors define the same object of
- * class Direction, if they point into the same direction. We prefer using
- * directions instead of angles, because with angles the arithmetic calculations
- * are in general not exact.
+ * Interface defining functionality of directions in the plane. A Direction is
+ * an equivalence class of vectors. Two vectors define the same object of class
+ * Direction, if they point into the same direction. We prefer using directions
+ * instead of angles, because with angles the arithmetic calculations are in
+ * general not exact.
  *
  * @author Alfons Wirtz
  */
@@ -162,6 +162,8 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
     default int compareTo(Direction p_other_direction) {
         return -p_other_direction.compareTo(this);
     }
+
     int compareTo(IntDirection p_other);
+
     int compareTo(BigIntDirection p_other);
 }

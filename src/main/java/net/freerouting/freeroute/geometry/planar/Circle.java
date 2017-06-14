@@ -27,9 +27,10 @@ package net.freerouting.freeroute.geometry.planar;
 @SuppressWarnings("serial")
 public class Circle implements ConvexShape, java.io.Serializable {
 
+    private static final double SQRT2_MINUS_1 = Math.sqrt(2) - 1;
+
     public final IntPoint center;
     public final int radius;
-    private static final double SQRT2_MINUS_1 = Math.sqrt(2) - 1;
 
     // private TileShape precalculated_bounding_tile = null;
     // private static final int c_max_approximation_segment_length = 10000;

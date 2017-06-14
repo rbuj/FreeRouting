@@ -31,10 +31,6 @@ import net.freerouting.freeroute.datastructures.IndentFileWriter;
  */
 public class RulesFile {
 
-    private RulesFile() {
-        // not called
-    }
-
     public static void write(net.freerouting.freeroute.interactive.BoardHandling p_board_handling, java.io.OutputStream p_output_stream, String p_design_name) {
         IndentFileWriter output_file = new IndentFileWriter(p_output_stream);
         BasicBoard routing_board = p_board_handling.get_routing_board();
@@ -227,5 +223,9 @@ public class RulesFile {
     private static void read_net_class(Scanner p_scanner, LayerStructure p_layer_structure, BasicBoard p_board) throws DsnFileException, ReadScopeException {
         NetClass curr_class = NetClass.read_scope(p_scanner);
         Network.insert_net_class(curr_class, p_layer_structure, p_board, p_board.communication.coordinate_transform, false);
+    }
+
+    private RulesFile() {
+        // not called
     }
 }
