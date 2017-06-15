@@ -261,7 +261,7 @@ public class OptViaAlgo {
         if (contact_plane != null) {
             // check, that the new location is inside the contact plane
             ItemSelectionFilter filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.CONDUCTION);
-            Collection<Item> picked_items = p_board.pick_items(new_via_location, contact_plane.get_layer(), filter);
+            Collection<Item> picked_items = p_board.pick_items(new_via_location, contact_plane.get_layer_no(), filter);
             boolean contact_ok = false;
             for (Item curr_item : picked_items) {
                 if (curr_item == contact_plane) {

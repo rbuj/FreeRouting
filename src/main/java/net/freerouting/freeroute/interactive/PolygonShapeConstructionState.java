@@ -68,7 +68,7 @@ public class PolygonShapeConstructionState extends CornerItemConstructionState {
                 construction_succeeded = false;
             } else {
                 construction_succeeded = hdlg.get_routing_board().check_shape(obstacle_shape,
-                        hdlg.settings.layer, new int[0], cl_class);
+                        hdlg.settings.layer_no, new int[0], cl_class);
             }
             if (construction_succeeded) {
                 this.observers_activated = !hdlg.get_routing_board().observers_active();
@@ -76,7 +76,7 @@ public class PolygonShapeConstructionState extends CornerItemConstructionState {
                     hdlg.get_routing_board().start_notify_observers();
                 }
                 hdlg.get_routing_board().generate_snapshot();
-                hdlg.get_routing_board().insert_obstacle(obstacle_shape, hdlg.settings.layer, cl_class, net.freerouting.freeroute.board.FixedState.UNFIXED);
+                hdlg.get_routing_board().insert_obstacle(obstacle_shape, hdlg.settings.layer_no, cl_class, net.freerouting.freeroute.board.FixedState.UNFIXED);
                 hdlg.get_routing_board().end_notify_observers();
                 if (this.observers_activated) {
                     hdlg.get_routing_board().end_notify_observers();

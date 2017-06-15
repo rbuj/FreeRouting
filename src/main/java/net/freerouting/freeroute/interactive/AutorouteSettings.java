@@ -83,8 +83,9 @@ public class AutorouteSettings implements java.io.Serializable {
         // make more horizontal pefered direction, if the board is horizontal.
         boolean curr_preferred_direction_is_horizontal = horizontal_width < vertical_width;
         for (int i = 0; i < layer_count; ++i) {
-            layer_active_arr[i] = p_board.layer_structure.arr[i].is_signal;
-            if (p_board.layer_structure.arr[i].is_signal) {
+            boolean is_signal = p_board.layer_structure.get_is_signal_layer(i);
+            layer_active_arr[i] = is_signal;
+            if (is_signal) {
                 curr_preferred_direction_is_horizontal = !curr_preferred_direction_is_horizontal;
             }
             preferred_direction_is_horizontal_arr[i] = curr_preferred_direction_is_horizontal;

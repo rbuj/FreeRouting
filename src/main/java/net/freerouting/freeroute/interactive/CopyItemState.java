@@ -57,8 +57,8 @@ public class CopyItemState extends InteractiveState {
     }
 
     /**
-     * Creates a new padstack from p_old_pastack with a layer range starting at
-     * p_new_layer.
+     * Creates a new padstack from p_old_pastack with a layer_no range starting at
+ p_new_layer.
      */
     private static Padstack change_padstack_layers(Padstack p_old_padstack, int p_new_layer,
             RoutingBoard p_board, Map<Padstack, Padstack> p_padstack_pairs) {
@@ -100,7 +100,7 @@ public class CopyItemState extends InteractiveState {
         item_list = new LinkedList<>();
 
         start_position = p_location.round();
-        current_layer = p_board_handling.settings.layer;
+        current_layer = p_board_handling.settings.layer_no;
         layer_changed = false;
         current_position = start_position;
         previous_position = current_position;
@@ -142,7 +142,7 @@ public class CopyItemState extends InteractiveState {
     }
 
     /**
-     * Changes the first layer of the items in the copy list to p_new_layer.
+     * Changes the first layer_no of the items in the copy list to p_new_layer.
      */
     @Override
     public boolean change_layer_action(int p_new_layer) {
@@ -163,7 +163,7 @@ public class CopyItemState extends InteractiveState {
         if (item_list == null) {
             return;
         }
-        Map<Padstack, Padstack> padstack_pairs = new TreeMap<>(); // Contains old and new padstacks after layer change.
+        Map<Padstack, Padstack> padstack_pairs = new TreeMap<>(); // Contains old and new padstacks after layer_no change.
 
         RoutingBoard board = hdlg.get_routing_board();
         if (layer_changed) {

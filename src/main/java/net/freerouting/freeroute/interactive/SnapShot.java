@@ -115,7 +115,7 @@ public class SnapShot implements java.io.Serializable {
                     = new net.freerouting.freeroute.board.ItemSelectionFilter(this.settings.item_selection_filter);
         }
         if (snapshot_attributes.get(SnapshotAttributeKey.CURRENT_LAYER)) {
-            p_board_handling.settings.layer = this.settings.layer;
+            p_board_handling.settings.layer_no = this.settings.layer_no;
         }
         if (snapshot_attributes.get(SnapshotAttributeKey.RULE_SELECTION)) {
             p_board_handling.settings.manual_rule_selection = this.settings.manual_rule_selection;

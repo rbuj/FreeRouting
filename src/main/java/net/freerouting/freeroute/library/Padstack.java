@@ -171,7 +171,7 @@ public class Padstack implements Comparable<Padstack>, net.freerouting.freeroute
                 p_window.indent();
                 p_window.append(shapes[i]);
                 p_window.append(" " + resources.getString("on_layer") + " ");
-                p_window.append(padstack_list.board_layer_structure.arr[i].name);
+                p_window.append(padstack_list.board_layer_structure.get_name_layer(i));
             }
         }
         p_window.newline();

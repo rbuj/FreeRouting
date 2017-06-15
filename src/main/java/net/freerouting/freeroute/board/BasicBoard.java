@@ -881,7 +881,7 @@ public class BasicBoard implements java.io.Serializable {
      * Returns the layer count of this board.
      */
     public int get_layer_count() {
-        return layer_structure.arr.length;
+        return layer_structure.get_layer_count();
     }
 
     /**
@@ -1049,7 +1049,7 @@ public class BasicBoard implements java.io.Serializable {
     public Connectable make_conductive(ObstacleArea p_area, int p_net_no) {
         Item new_item;
         Area curr_area = p_area.get_relative_area();
-        int layer = p_area.get_layer();
+        int layer = p_area.get_layer_no();
         FixedState fixed_state = p_area.get_fixed_state();
         Vector translation = p_area.get_translation();
         double rotation = p_area.get_rotation_in_degree();

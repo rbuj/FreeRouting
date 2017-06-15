@@ -61,8 +61,8 @@ public class RouteState extends InteractiveState {
         }
         int[] route_net_no_arr;
         if (picked_item instanceof net.freerouting.freeroute.board.Pin && net_count > 1) {
-            // tie pin, remove nets, which are already conneccted to this pin on the current layer.
-            route_net_no_arr = get_route_net_numbers_at_tie_pin((net.freerouting.freeroute.board.Pin) picked_item, p_board_handling.settings.layer);
+            // tie pin, remove nets, which are already conneccted to this pin on the current layer_no.
+            route_net_no_arr = get_route_net_numbers_at_tie_pin((net.freerouting.freeroute.board.Pin) picked_item, p_board_handling.settings.layer_no);
         } else {
             route_net_no_arr = new int[net_count];
             for (int i = 0; i < net_count; ++i) {
@@ -138,7 +138,7 @@ public class RouteState extends InteractiveState {
         }
         new_instance.routing_target_set = picked_item.get_unconnected_set(-1);
 
-        new_instance.route = new Route(location, p_board_handling.settings.layer, trace_half_widths, layer_active_arr, route_net_no_arr,
+        new_instance.route = new Route(location, p_board_handling.settings.layer_no, trace_half_widths, layer_active_arr, route_net_no_arr,
                 trace_clearance_class, p_board_handling.get_via_rule(route_net_no_arr[0]),
                 p_board_handling.settings.push_enabled, p_board_handling.settings.trace_pull_tight_region_width,
                 p_board_handling.settings.trace_pull_tight_accuracy, picked_item, new_instance.routing_target_set, routing_board,
@@ -169,10 +169,10 @@ public class RouteState extends InteractiveState {
          * look if an already exististing trace ends at p_start_corner and pick
          * it up in this case.
          */
-        Item picked_item = routing_board.pick_nearest_routing_item(p_location, p_hdlg.settings.layer, null);
+        Item picked_item = routing_board.pick_nearest_routing_item(p_location, p_hdlg.settings.layer_no, null);
         int layer_count = routing_board.get_layer_count();
         if (picked_item == null && p_hdlg.settings.select_on_all_visible_layers) {
-            // Nothing found on preferred layer, try the other visible layers.
+            // Nothing found on preferred layer_no, try the other visible layers.
             // Prefer the outer layers.
             picked_item = pick_routing_item(p_location, 0, p_hdlg);
             if (picked_item == null) {
@@ -181,7 +181,7 @@ public class RouteState extends InteractiveState {
             // prefer signal layers
             if (picked_item == null) {
                 for (int i = 1; i < layer_count - 1; ++i) {
-                    if (routing_board.layer_structure.arr[i].is_signal) {
+                    if (routing_board.layer_structure.get_is_signal_layer(i)) {
                         picked_item = pick_routing_item(p_location, i, p_hdlg);
                         if (picked_item != null) {
                             break;
@@ -191,7 +191,7 @@ public class RouteState extends InteractiveState {
             }
             if (picked_item == null) {
                 for (int i = 1; i < layer_count - 1; ++i) {
-                    if (!routing_board.layer_structure.arr[i].is_signal) {
+                    if (!routing_board.layer_structure.get_is_signal_layer(i)) {
                         picked_item = pick_routing_item(p_location, i, p_hdlg);
                         if (picked_item != null) {
                             break;
@@ -205,7 +205,7 @@ public class RouteState extends InteractiveState {
 
     static private Item pick_routing_item(IntPoint p_location, int p_layer_no, BoardHandling p_hdlg) {
 
-        if (p_layer_no == p_hdlg.settings.layer || (p_hdlg.graphics_context.get_layer_visibility(p_layer_no) <= 0)) {
+        if (p_layer_no == p_hdlg.settings.layer_no || (p_hdlg.graphics_context.get_layer_visibility(p_layer_no) <= 0)) {
             return null;
         }
         Item picked_item = p_hdlg.get_routing_board().pick_nearest_routing_item(p_location, p_layer_no, null);
@@ -264,7 +264,7 @@ public class RouteState extends InteractiveState {
     public InteractiveState key_typed(char p_key_char) {
         InteractiveState curr_return_state = this;
         if (Character.isDigit(p_key_char)) {
-            // change to the p_key_char-ths signal layer
+            // change to the p_key_char-ths signal layer_no
             net.freerouting.freeroute.board.LayerStructure layer_structure = hdlg.get_routing_board().layer_structure;
             int d = Character.digit(p_key_char, 10);
             d = Math.min(d, layer_structure.signal_layer_count());
@@ -277,25 +277,26 @@ public class RouteState extends InteractiveState {
                 change_layer_action(d);
             }
         } else if (p_key_char == '+') {
-            // change to the next signal layer
+            // change to the next signal layer_no
             net.freerouting.freeroute.board.LayerStructure layer_structure = hdlg.get_routing_board().layer_structure;
-            int current_layer_no = hdlg.settings.layer;
+            int layer_count = layer_structure.get_layer_count();
+            int current_layer_no = hdlg.settings.layer_no;
             for (;;) {
                 ++current_layer_no;
-                if (current_layer_no >= layer_structure.arr.length || layer_structure.arr[current_layer_no].is_signal) {
+                if (current_layer_no >= layer_count || layer_structure.get_is_signal_layer(current_layer_no)) {
                     break;
                 }
             }
-            if (current_layer_no < layer_structure.arr.length) {
+            if (current_layer_no < layer_count) {
                 change_layer_action(current_layer_no);
             }
         } else if (p_key_char == '-') {
-            // change to the to the previous signal layer
+            // change to the to the previous signal layer_no
             net.freerouting.freeroute.board.LayerStructure layer_structure = hdlg.get_routing_board().layer_structure;
-            int current_layer_no = hdlg.settings.layer;
+            int current_layer_no = hdlg.settings.layer_no;
             for (;;) {
                 --current_layer_no;
-                if (current_layer_no < 0 || layer_structure.arr[current_layer_no].is_signal) {
+                if (current_layer_no < 0 || layer_structure.get_is_signal_layer(current_layer_no)) {
                     break;
                 }
             }
@@ -315,7 +316,7 @@ public class RouteState extends InteractiveState {
      */
     public InteractiveState add_corner(FloatPoint p_location) {
         boolean route_completed = route.next_corner(p_location);
-        String layer_string = hdlg.get_routing_board().layer_structure.arr[route.nearest_target_layer()].name;
+        String layer_string = hdlg.get_routing_board().layer_structure.get_name_layer(route.nearest_target_layer());
         hdlg.screen_messages.set_target_layer(layer_string);
         if (this.logfile != null) {
             this.logfile.add_corner(p_location);
@@ -341,7 +342,7 @@ public class RouteState extends InteractiveState {
 
     @Override
     public InteractiveState cancel() {
-        Trace tail = hdlg.get_routing_board().get_trace_tail(route.get_last_corner(), hdlg.settings.layer, route.net_no_arr);
+        Trace tail = hdlg.get_routing_board().get_trace_tail(route.get_last_corner(), hdlg.settings.layer_no, route.net_no_arr);
         if (tail != null) {
             Collection<Item> remove_items = tail.get_connection_items(Item.StopConnectionOption.VIA);
             if (hdlg.settings.push_enabled) {
@@ -370,14 +371,14 @@ public class RouteState extends InteractiveState {
         boolean result = true;
         if (p_new_layer >= 0 && p_new_layer < hdlg.get_routing_board().get_layer_count()) {
             if (this.route != null && !this.route.is_layer_active(p_new_layer)) {
-                String layer_name = hdlg.get_routing_board().layer_structure.arr[p_new_layer].name;
+                String layer_name = hdlg.get_routing_board().layer_structure.get_name_layer(p_new_layer);
                 hdlg.screen_messages.set_status_message(resources.getString("layer_not_changed_because_layer") + " " + layer_name + " " + resources.getString("is_not_active_for_the_current_net"));
             }
             boolean change_layer_succeeded = route.change_layer(p_new_layer);
             if (change_layer_succeeded) {
                 boolean connected_to_plane = false;
-                // check, if the layer change resulted in a connection to a power plane.
-                int old_layer = hdlg.settings.get_layer();
+                // check, if the layer_no change resulted in a connection to a power plane.
+                int old_layer = hdlg.settings.get_layer_no();
                 ItemSelectionFilter selection_filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.VIAS);
                 Collection<Item> picked_items
                         = hdlg.get_routing_board().pick_items(route.get_last_corner(), old_layer, selection_filter);
@@ -402,7 +403,7 @@ public class RouteState extends InteractiveState {
                     for (Item curr_item : contacts) {
                         if (curr_item instanceof ConductionArea) {
                             ConductionArea curr_area = (ConductionArea) curr_item;
-                            if (curr_area.get_layer() >= from_layer && curr_area.get_layer() <= to_layer) {
+                            if (curr_area.get_layer_no() >= from_layer && curr_area.get_layer_no() <= to_layer) {
                                 connected_to_plane = true;
                                 break;
                             }
@@ -417,7 +418,7 @@ public class RouteState extends InteractiveState {
                     }
                 } else {
                     hdlg.set_layer(p_new_layer);
-                    String layer_name = hdlg.get_routing_board().layer_structure.arr[p_new_layer].name;
+                    String layer_name = hdlg.get_routing_board().layer_structure.get_name_layer(p_new_layer);
                     hdlg.screen_messages.set_status_message(resources.getString("layer_changed_to") + " " + layer_name);
                     // make the current situation restorable by undo
                     hdlg.get_routing_board().generate_snapshot();
@@ -428,7 +429,7 @@ public class RouteState extends InteractiveState {
             } else {
                 int shove_failing_layer = hdlg.get_routing_board().get_shove_failing_layer();
                 if (shove_failing_layer >= 0) {
-                    String layer_name = hdlg.get_routing_board().layer_structure.arr[hdlg.get_routing_board().get_shove_failing_layer()].name;
+                    String layer_name = hdlg.get_routing_board().layer_structure.get_name_layer(hdlg.get_routing_board().get_shove_failing_layer());
                     hdlg.screen_messages.set_status_message(resources.getString("layer_not_changed_because_of_obstacle_on_layer") + " " + layer_name);
                 } else {
                     System.out.println("RouteState.change_layer_action: shove_failing_layer not set");

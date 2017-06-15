@@ -41,10 +41,11 @@ class PopupMenuChangeLayer extends javax.swing.JMenu {
         net.freerouting.freeroute.board.LayerStructure layer_structure = board_frame.board_panel.board_handling.get_routing_board().layer_structure;
         this.item_arr = new LayermenuItem[layer_structure.signal_layer_count()];
         int curr_signal_layer_no = 0;
-        for (int i = 0; i < layer_structure.arr.length; ++i) {
-            if (layer_structure.arr[i].is_signal) {
+        for (int i = 0; i < layer_structure.get_layer_count(); ++i) {
+            net.freerouting.freeroute.board.Layer curr_layer = layer_structure.get_layer(i);
+            if (curr_layer.is_signal()) {
                 this.item_arr[curr_signal_layer_no] = new LayermenuItem(i);
-                this.item_arr[curr_signal_layer_no].setText(layer_structure.arr[i].name);
+                this.item_arr[curr_signal_layer_no].setText(curr_layer.get_name());
                 ++curr_signal_layer_no;
             }
         }
@@ -92,7 +93,7 @@ class PopupMenuChangeLayer extends javax.swing.JMenu {
             addActionListener((java.awt.event.ActionEvent evt) -> {
                 final BoardPanel board_panel = board_frame.board_panel;
                 if (board_panel.board_handling.change_layer_action(layer_no)) {
-                    String layer_name = board_panel.board_handling.get_routing_board().layer_structure.arr[layer_no].name;
+                    String layer_name = board_panel.board_handling.get_routing_board().layer_structure.get_name_layer(layer_no);
                     board_panel.screen_messages.set_status_message(message1 + layer_name);
                 }
                 // If change_layer failed the status message is set inside change_layer_action

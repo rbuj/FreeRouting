@@ -194,9 +194,9 @@ public class RoutingBoard extends BasicBoard {
      * p_trace_cost_arr is used for optimizing vias and may be null. If
      * p_stoppable_thread != null, the agorithm can be requested to be stopped.
      * If p_time_limit {@literal >} 0; the algorithm will be stopped after
-     * p_time_limit Milliseconds. If p_keep_point != null, traces on layer
-     * p_keep_point_layer containing p_keep_point will also contain this point
-     * after optimizing.
+ p_time_limit Milliseconds. If p_keep_point != null, traces on layer_no
+ p_keep_point_layer containing p_keep_point will also contain this point
+ after optimizing.
      */
     public void opt_changed_area(int[] p_only_net_no_arr, IntOctagon p_clip_shape, int p_accuracy, ExpansionCostFactor[] p_trace_cost_arr,
             Stoppable p_stoppable_thread, int p_time_limit, Point p_keep_point, int p_keep_point_layer) {
@@ -415,7 +415,7 @@ public class RoutingBoard extends BasicBoard {
      * where a routing can start, or where the routig can connect to. If
      * p_from_item != null, items, which are connected to p_from_item, are
      * ignored. Returns null, if no item is found, If p_layer {@literal <} 0,
-     * the layer is ignored
+ the layer_no is ignored
      */
     public Item pick_nearest_routing_item(Point p_location, int p_layer, Item p_from_item) {
         TileShape point_shape = TileShapeUtils.get_instance(p_location);
@@ -455,7 +455,7 @@ public class RoutingBoard extends BasicBoard {
                 }
             } else if (curr_item instanceof ConductionArea) {
                 ConductionArea curr_area = (ConductionArea) curr_item;
-                if ((p_layer < 0 || curr_area.get_layer() == p_layer) && nearest_item == null) {
+                if ((p_layer < 0 || curr_area.get_layer_no() == p_layer) && nearest_item == null) {
                     candidate_found = true;
                     curr_dist = Integer.MAX_VALUE;
                 }
@@ -973,7 +973,7 @@ public class RoutingBoard extends BasicBoard {
             if (item_contact_count == 1) {
                 stub_connections.addAll(curr_item.get_connection_items(p_stop_connection_option));
             } else {
-                // the connected items are no stubs for example if a via is only connected on 1 layer,
+                // the connected items are no stubs for example if a via is only connected on 1 layer_no,
                 // but to several traces.
                 stub_connections.add(curr_item);
             }
@@ -1015,8 +1015,7 @@ public class RoutingBoard extends BasicBoard {
             }
             if (curr_item instanceof ConductionArea) {
                 ConductionArea curr_conduction_area = (ConductionArea) curr_item;
-                Layer curr_layer = layer_structure.arr[curr_conduction_area.get_layer()];
-                if (curr_layer.is_signal && curr_conduction_area.get_is_obstacle() != p_value) {
+                if (layer_structure.get_is_signal_layer(curr_conduction_area.get_layer_no()) && curr_conduction_area.get_is_obstacle() != p_value) {
                     curr_conduction_area.set_is_obstacle(p_value);
                     something_changed = true;
                 }

@@ -33,11 +33,11 @@ public class AutorouteControl {
 
     final int layer_count;
     /**
-     * The horizontal and vertical trace costs on each layer
+     * The horizontal and vertical trace costs on each layer_no
      */
     public final ExpansionCostFactor[] trace_costs;
     /**
-     * Defines for each layer, if it may used for routing.
+     * Defines for each layer_no, if it may used for routing.
      */
     final boolean[] layer_active;
     /**
@@ -46,7 +46,7 @@ public class AutorouteControl {
     int net_no;
     /**
      * The currently used trace half widths in the autoroute algorithm on each
-     * layer
+ layer_no
      */
     final int[] trace_half_width;
     /**
@@ -72,11 +72,11 @@ public class AutorouteControl {
      */
     ViaMask[] via_info_arr;
     /**
-     * The lower bound for the first layer of vias
+     * The lower bound for the first layer_no of vias
      */
     int via_lower_bound;
     /**
-     * The upper bound for the last layer of vias
+     * The upper bound for the last layer_no of vias
      */
     int via_upper_bound;
     final double[] via_radius_arr;
@@ -98,7 +98,7 @@ public class AutorouteControl {
      */
     int max_spring_over_recursion_depth;
     /**
-     * True, if layer change by inserting of vias is allowed
+     * True, if layer_no change by inserting of vias is allowed
      */
     public boolean vias_allowed;
     /**
@@ -249,11 +249,11 @@ public class AutorouteControl {
     public static class ExpansionCostFactor {
 
         /**
-         * The horizontal expansion cost factor on a layer of the board
+         * The horizontal expansion cost factor on a layer_no of the board
          */
         public final double horizontal;
         /**
-         * The verical expansion cost factor on a layer of the board
+         * The verical expansion cost factor on a layer_no of the board
          */
         public final double vertical;
 

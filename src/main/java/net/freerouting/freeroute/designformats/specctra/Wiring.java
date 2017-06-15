@@ -72,7 +72,7 @@ class Wiring extends ScopeKeyword {
                 continue;
             }
             net.freerouting.freeroute.board.ConductionArea curr_area = (net.freerouting.freeroute.board.ConductionArea) curr_ob;
-            if (!(p_par.board.layer_structure.arr[curr_area.get_layer()].is_signal)) {
+            if (!(p_par.board.layer_structure.get_is_signal_layer(curr_area.get_layer_no()))) {
                 // This conduction areas arw written in the structure scope.
                 continue;
             }
@@ -115,8 +115,8 @@ class Wiring extends ScopeKeyword {
         }
         PolylineTrace curr_wire = (PolylineTrace) p_wire;
         int layer_no = curr_wire.get_layer();
-        net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.arr[layer_no];
-        Layer curr_layer = new Layer(board_layer.name, layer_no, board_layer.is_signal);
+        net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(layer_no);
+        Layer curr_layer = new Layer(board_layer.get_name(), layer_no, board_layer.is_signal());
         double wire_width = p_par.coordinate_transform.board_to_dsn(2 * curr_wire.get_half_width());
         net.freerouting.freeroute.rules.Net wire_net = null;
         if (curr_wire.net_count() > 0) {
@@ -157,9 +157,9 @@ class Wiring extends ScopeKeyword {
         }
         net.freerouting.freeroute.rules.Net curr_net = p_par.board.rules.nets.get(p_conduction_area.get_net_no(0));
         net.freerouting.freeroute.geometry.planar.Area curr_area = p_conduction_area.get_area();
-        int layer_no = p_conduction_area.get_layer();
-        net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.arr[layer_no];
-        Layer conduction_layer = new Layer(board_layer.name, layer_no, board_layer.is_signal);
+        int layer_no = p_conduction_area.get_layer_no();
+        net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(layer_no);
+        Layer conduction_layer = new Layer(board_layer.get_name(), layer_no, board_layer.is_signal());
         net.freerouting.freeroute.geometry.planar.Shape boundary_shape;
         net.freerouting.freeroute.geometry.planar.Shape[] holes;
         if (curr_area instanceof net.freerouting.freeroute.geometry.planar.Shape) {

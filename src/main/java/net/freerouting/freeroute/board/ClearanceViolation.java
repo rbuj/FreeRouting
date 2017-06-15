@@ -42,9 +42,9 @@ public class ClearanceViolation implements ObjectInfoPanel.Printable {
      */
     public final ConvexShape shape;
     /**
-     * The layer of the clearance violation
+     * The layer_no of the clearance violation
      */
-    public final int layer;
+    public final int layer_no;
 
     /**
      * Creates a new instance of ClearanceViolation
@@ -53,7 +53,7 @@ public class ClearanceViolation implements ObjectInfoPanel.Printable {
         first_item = p_first_item;
         second_item = p_second_item;
         shape = p_shape;
-        layer = p_layer;
+        layer_no = p_layer;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class ClearanceViolation implements ObjectInfoPanel.Printable {
         p_window.append(", " + resources.getString("width") + " ");
         p_window.append(2 * this.shape.smallest_radius());
         p_window.append(", " + resources.getString("layer") + " ");
-        p_window.append(first_item.board.layer_structure.arr[this.layer].name);
+        p_window.append(first_item.board.layer_structure.get_name_layer(this.layer_no));
         p_window.append(", " + resources.getString("between"));
         p_window.newline();
         p_window.indent();

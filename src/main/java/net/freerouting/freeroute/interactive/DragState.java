@@ -44,7 +44,7 @@ public abstract class DragState extends InteractiveState {
         if (p_board_handling.settings.select_on_all_visible_layers) {
             try_count += p_board_handling.get_layer_count();
         }
-        int curr_layer = p_board_handling.settings.layer;
+        int curr_layer = p_board_handling.settings.layer_no;
         int pick_layer = curr_layer;
         boolean item_found = false;
 
@@ -73,7 +73,7 @@ public abstract class DragState extends InteractiveState {
                     break;
                 }
             }
-            // nothing found on settings.layer, try all visible layers
+            // nothing found on settings.layer_no, try all visible layers
             pick_layer = i;
         }
         DragState result;

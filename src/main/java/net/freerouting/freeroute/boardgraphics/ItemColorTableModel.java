@@ -23,8 +23,8 @@ import java.awt.Color;
 import java.util.Locale;
 
 /**
- * Stores the layer dependent colors used for drawing for the items on the
- * board.
+ * Stores the layer_no dependent colors used for drawing for the items on the
+ board.
  *
  * @author Alfons Wirtz
  */
@@ -35,29 +35,30 @@ public class ItemColorTableModel extends ColorTableModel {
     private transient Color[][] precalculated_item_colors = null;
 
     ItemColorTableModel(net.freerouting.freeroute.board.LayerStructure p_layer_structure) {
-        super(p_layer_structure.arr.length);
+        super(p_layer_structure.get_layer_count());
 
-        int row_count = p_layer_structure.arr.length;
+        int row_count = p_layer_structure.get_layer_count();
         final int item_type_count = ColumnNames.values().length - 1;
         int signal_layer_no = 0;
-        for (int layer = 0; layer < row_count; ++layer) {
-            boolean is_signal_layer = p_layer_structure.arr[layer].is_signal;
-            data[layer] = new Object[item_type_count + 1];
-            Object[] curr_row = data[layer];
-            curr_row[0] = p_layer_structure.arr[layer].name;
-            if (layer == 0) {
+        for (int layer_no = 0; layer_no < row_count; ++layer_no) {
+            net.freerouting.freeroute.board.Layer curr_layer = p_layer_structure.get_layer(layer_no);
+            boolean is_signal_layer = curr_layer.is_signal();
+            data[layer_no] = new Object[item_type_count + 1];
+            Object[] curr_row = data[layer_no];
+            curr_row[0] = curr_layer.get_name();
+            if (layer_no == 0) {
                 curr_row[ColumnNames.PINS.ordinal()] = new Color(150, 50, 0);
                 curr_row[ColumnNames.TRACES.ordinal()] = Color.red;
                 curr_row[ColumnNames.CONDUCTION_AREAS.ordinal()] = new Color(0, 150, 0);
                 curr_row[ColumnNames.KEEPOUTS.ordinal()] = new Color(0, 110, 110);
                 curr_row[ColumnNames.PLACE_KEEPOUTS.ordinal()] = new Color(150, 50, 0);
-            } else if (layer == row_count - 1) {
+            } else if (layer_no == row_count - 1) {
                 curr_row[ColumnNames.PINS.ordinal()] = new Color(160, 80, 0);
                 curr_row[ColumnNames.TRACES.ordinal()] = Color.blue;
                 curr_row[ColumnNames.CONDUCTION_AREAS.ordinal()] = new Color(100, 100, 0);
                 curr_row[ColumnNames.KEEPOUTS.ordinal()] = new Color(0, 100, 160);
                 curr_row[ColumnNames.PLACE_KEEPOUTS.ordinal()] = new Color(160, 80, 0);
-            } else // inner layer
+            } else // inner layer_no
             {
                 if (is_signal_layer) {
                     // currenntly 6 different default colors for traces on the inner layers
@@ -83,7 +84,7 @@ public class ItemColorTableModel extends ColorTableModel {
                             curr_row[ColumnNames.TRACES.ordinal()] = new Color(0, 200, 255);
                             break;
                     }
-                } else // power layer
+                } else // power layer_no
                 {
                     curr_row[ColumnNames.TRACES.ordinal()] = Color.BLACK;
                 }

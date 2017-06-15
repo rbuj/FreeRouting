@@ -56,8 +56,8 @@ public class Padstack {
             if (curr_board_shape == null) {
                 continue;
             }
-            net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.arr[i];
-            Layer curr_layer = new Layer(board_layer.name, i, board_layer.is_signal);
+            net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(i);
+            Layer curr_layer = new Layer(board_layer.get_name(), i, board_layer.is_signal());
             Shape curr_shape = p_par.coordinate_transform.board_to_dsn_rel(curr_board_shape, curr_layer);
             p_par.file.start_scope("shape");
             curr_shape.write_scope(p_par.file, p_par.identifier_type);

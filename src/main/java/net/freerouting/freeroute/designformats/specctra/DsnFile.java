@@ -68,7 +68,7 @@ public class DsnFile {
                 = new ReadScopeParameter(scanner, p_board_handling, p_observers, p_item_id_no_generator, p_test_level);
         boolean read_ok = Keyword.PCB_SCOPE.read_scope(read_scope_par);
         if (read_ok && read_scope_par.autoroute_settings == null) {
-            // look for power planes with incorrect layer type and adjust autoroute parameters
+            // look for power planes with incorrect layer_no type and adjust autoroute parameters
             adjust_plane_autoroute_settings(p_board_handling);
         }
     }
@@ -82,16 +82,17 @@ public class DsnFile {
     private static boolean adjust_plane_autoroute_settings(net.freerouting.freeroute.interactive.BoardHandling p_board_handling) {
         BasicBoard routing_board = p_board_handling.get_routing_board();
         net.freerouting.freeroute.board.LayerStructure board_layer_structure = routing_board.layer_structure;
-        if (board_layer_structure.arr.length <= 2) {
+        int layer_count = board_layer_structure.get_layer_count();
+        if (layer_count <= 2) {
             return false;
         }
-        for (net.freerouting.freeroute.board.Layer curr_layer : board_layer_structure.arr) {
-            if (!curr_layer.is_signal) {
+        for (int i = 0; i < board_layer_structure.get_layer_count(); ++i) {
+            if (!board_layer_structure.get_is_signal_layer(i)) {
                 return false;
             }
         }
-        boolean[] layer_contains_wires_arr = new boolean[board_layer_structure.arr.length];
-        boolean[] changed_layer_arr = new boolean[board_layer_structure.arr.length];
+        boolean[] layer_contains_wires_arr = new boolean[layer_count];
+        boolean[] changed_layer_arr = new boolean[layer_count];
         for (int i = 0; i < layer_contains_wires_arr.length; ++i) {
             layer_contains_wires_arr[i] = false;
             changed_layer_arr[i] = false;
@@ -119,12 +120,12 @@ public class DsnFile {
             }
         }
         for (net.freerouting.freeroute.board.ConductionArea curr_conduction_area : conduction_area_list) {
-            int layer_no = curr_conduction_area.get_layer();
+            int layer_no = curr_conduction_area.get_layer_no();
             if (layer_contains_wires_arr[layer_no]) {
                 continue;
             }
-            net.freerouting.freeroute.board.Layer curr_layer = routing_board.layer_structure.arr[layer_no];
-            if (!curr_layer.is_signal || layer_no == 0 || layer_no == board_layer_structure.arr.length - 1) {
+            net.freerouting.freeroute.board.Layer curr_layer = routing_board.layer_structure.get_layer(layer_no);
+            if (!curr_layer.is_signal() || layer_no == 0 || layer_no == layer_count - 1) {
                 continue;
             }
             net.freerouting.freeroute.geometry.planar.TileShape[] convex_pieces = curr_conduction_area.get_area().split_to_convex();
@@ -151,13 +152,12 @@ public class DsnFile {
         if (nothing_changed) {
             return false;
         }
-        // Adjust the layer prefered directions in the autoroute settings.
+        // Adjust the layer_no prefered directions in the autoroute settings.
         // and deactivate the changed layers.
         net.freerouting.freeroute.interactive.AutorouteSettings autoroute_settings = p_board_handling.settings.autoroute_settings;
-        int layer_count = routing_board.get_layer_count();
         boolean curr_preferred_direction_is_horizontal
                 = autoroute_settings.get_preferred_direction_is_horizontal(0);
-        for (int i = 0; i < layer_count; ++i) {
+        for (int i = 0; i < routing_board.get_layer_count(); ++i) {
             if (changed_layer_arr[i]) {
                 autoroute_settings.set_layer_active(i, false);
             } else if (autoroute_settings.get_layer_active(i)) {

@@ -241,8 +241,8 @@ public class SessionFile {
             if (curr_board_shape == null) {
                 continue;
             }
-            net.freerouting.freeroute.board.Layer board_layer = p_board.layer_structure.arr[i];
-            Layer curr_layer = new Layer(board_layer.name, i, board_layer.is_signal);
+            net.freerouting.freeroute.board.Layer board_layer = p_board.layer_structure.get_layer(i);
+            Layer curr_layer = new Layer(board_layer.get_name(), i, board_layer.is_signal());
             Shape curr_shape = p_coordinate_transform.board_to_dsn_rel(curr_board_shape, curr_layer);
             p_file.start_scope("shape");
             curr_shape.write_scope_int(p_file, p_identifier_type);
@@ -277,7 +277,7 @@ public class SessionFile {
             boolean is_wire = curr_item instanceof PolylineTrace;
             boolean is_via = curr_item instanceof Via;
             boolean is_conduction_area = curr_item instanceof ConductionArea
-                    && p_board.layer_structure.arr[curr_item.first_layer()].is_signal;
+                    && p_board.layer_structure.get_is_signal_layer(curr_item.first_layer());
             if (!header_written && (is_wire || is_via || is_conduction_area)) {
                 p_file.start_scope("net ");
                 net.freerouting.freeroute.rules.Net curr_net = p_board.rules.nets.get(p_net_no);
@@ -305,7 +305,7 @@ public class SessionFile {
     private static void write_wire(PolylineTrace p_wire, BasicBoard p_board, IdentifierType p_identifier_type,
             CoordinateTransform p_coordinate_transform, IndentFileWriter p_file) throws java.io.IOException {
         int layer_no = p_wire.get_layer();
-        net.freerouting.freeroute.board.Layer board_layer = p_board.layer_structure.arr[layer_no];
+        net.freerouting.freeroute.board.Layer board_layer = p_board.layer_structure.get_layer(layer_no);
         int wire_width = (int) Math.round(p_coordinate_transform.board_to_dsn(2 * p_wire.get_half_width()));
         p_file.start_scope("wire");
         Point[] corner_arr = p_wire.polyline().corner_arr();
@@ -333,7 +333,7 @@ public class SessionFile {
             }
             coors = adjusted_coors;
         }
-        write_path(board_layer.name, wire_width, coors, p_identifier_type, p_file);
+        write_path(board_layer.get_name(), wire_width, coors, p_identifier_type, p_file);
         write_fixed_state(p_file, p_wire.get_fixed_state());
         p_file.end_scope();
     }
@@ -394,9 +394,9 @@ public class SessionFile {
             return;
         }
         net.freerouting.freeroute.geometry.planar.Area curr_area = p_conduction_area.get_area();
-        int layer_no = p_conduction_area.get_layer();
-        net.freerouting.freeroute.board.Layer board_layer = p_board.layer_structure.arr[layer_no];
-        Layer conduction_layer = new Layer(board_layer.name, layer_no, board_layer.is_signal);
+        int layer_no = p_conduction_area.get_layer_no();
+        net.freerouting.freeroute.board.Layer board_layer = p_board.layer_structure.get_layer(layer_no);
+        Layer conduction_layer = new Layer(board_layer.get_name(), layer_no, board_layer.is_signal());
         net.freerouting.freeroute.geometry.planar.Shape boundary_shape;
         net.freerouting.freeroute.geometry.planar.Shape[] holes;
         if (curr_area instanceof net.freerouting.freeroute.geometry.planar.Shape) {

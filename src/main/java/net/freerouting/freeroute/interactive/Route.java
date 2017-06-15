@@ -67,7 +67,7 @@ public class Route {
      */
     final int[] net_no_arr;
     private Point prev_corner;
-    private int layer;
+    private int layer_no;
     private final Item start_item;
     private final Set<Item> target_set;
     /**
@@ -105,7 +105,7 @@ public class Route {
             RoutingBoard p_board, boolean p_is_stitch_mode, boolean p_with_neckdown, boolean p_via_snap_to_smd_center,
             boolean p_hilight_shove_failing_obstacle) {
         board = p_board;
-        layer = p_layer;
+        layer_no = p_layer;
         if (p_push_enabled) {
             max_shove_trace_recursion_depth = 20;
             max_shove_via_recursion_depth = 8;
@@ -143,11 +143,11 @@ public class Route {
      * completed by connecting to a target.
      */
     public boolean next_corner(FloatPoint p_corner) {
-        if (!this.layer_active[this.layer]) {
+        if (!this.layer_active[this.layer_no]) {
             return false;
         }
         IntPoint curr_corner = p_corner.round();
-        if (!(board.contains(prev_corner) && board.contains(curr_corner) && board.layer_structure.arr[this.layer].is_signal)) {
+        if (!(board.contains(prev_corner) && board.contains(curr_corner) && board.layer_structure.get_is_signal_layer(this.layer_no))) {
             return false;
         }
 
@@ -170,9 +170,9 @@ public class Route {
         } else if (angle_restriction == AngleRestriction.FORTYFIVE_DEGREE) {
             curr_corner = curr_corner.fortyfive_degree_projection((IntPoint) prev_corner);
         }
-        Item end_routing_item = board.pick_nearest_routing_item(prev_corner, this.layer, null);
+        Item end_routing_item = board.pick_nearest_routing_item(prev_corner, this.layer_no, null);
         // look for a nearby item of this net, which is not connected to end_routing_item.
-        nearest_target_item = board.pick_nearest_routing_item(curr_corner, this.layer, end_routing_item);
+        nearest_target_item = board.pick_nearest_routing_item(curr_corner, this.layer_no, end_routing_item);
         TimeLimit check_forced_trace_time_limit;
         if (is_stitch_mode || this.board.get_test_level() != TestLevel.RELEASE_VERSION) {
             // because no check before inserting in this case
@@ -182,7 +182,7 @@ public class Route {
         }
 
         Point ok_point = board.insert_forced_trace_segment(prev_corner,
-                curr_corner, pen_half_width_arr[layer], layer, net_no_arr, clearance_class,
+                curr_corner, pen_half_width_arr[layer_no], layer_no, net_no_arr, clearance_class,
                 max_shove_trace_recursion_depth, max_shove_via_recursion_depth, max_spring_over_recursion_depth,
                 trace_tidy_width, pull_tight_accuracy, !is_stitch_mode, check_forced_trace_time_limit);
         if (ok_point == prev_corner && this.with_neckdown) {
@@ -236,7 +236,7 @@ public class Route {
             calc_nearest_target_point(this.prev_corner.to_float());
         }
         board.opt_changed_area(opt_net_no_arr, tidy_clip_shape, pull_tight_accuracy,
-                null, null, pull_tight_time_limit, ok_point, layer);
+                null, null, pull_tight_time_limit, ok_point, layer_no);
         return route_completed;
     }
 
@@ -245,7 +245,7 @@ public class Route {
      * false, if changing the layer was not possible.
      */
     public boolean change_layer(int p_to_layer) {
-        if (this.layer == p_to_layer) {
+        if (this.layer_no == p_to_layer) {
             return true;
         }
         if (p_to_layer < 0 || p_to_layer >= this.layer_active.length) {
@@ -262,12 +262,12 @@ public class Route {
         if (this.via_snap_to_smd_center) {
             boolean snapped_to_smd_center = snap_to_smd_center(p_to_layer);
             if (!snapped_to_smd_center) {
-                snap_to_smd_center(this.layer);
+                snap_to_smd_center(this.layer_no);
             }
         }
         boolean result = true;
-        int min_layer = Math.min(this.layer, p_to_layer);
-        int max_layer = Math.max(this.layer, p_to_layer);
+        int min_layer = Math.min(this.layer_no, p_to_layer);
+        int max_layer = Math.max(this.layer_no, p_to_layer);
         boolean via_found = false;
         for (int i = 0; i < this.via_rule.via_count(); ++i) {
             ViaInfo curr_via_info = this.via_rule.get_via(i);
@@ -288,7 +288,7 @@ public class Route {
             board.undo(null);
         }
         if (via_found) {
-            this.layer = p_to_layer;
+            this.layer_no = p_to_layer;
         }
         return result;
     }
@@ -342,7 +342,7 @@ public class Route {
             connection_point = target.get_center();
         } else if (nearest_target_item instanceof PolylineTrace) {
             return board.connect_to_trace(p_from_point, (Trace) nearest_target_item,
-                    this.pen_half_width_arr[layer], this.clearance_class);
+                    this.pen_half_width_arr[layer_no], this.clearance_class);
         } else if (nearest_target_item instanceof ConductionArea) {
             connection_point = p_from_point;
         }
@@ -366,7 +366,7 @@ public class Route {
             TimeLimit time_limit = new TimeLimit(CHECK_FORCED_TRACE_TIME_LIMIT);
             while (!from_corner.equals(to_corner)) {
                 Point curr_ok_point = board.insert_forced_trace_segment(from_corner,
-                        to_corner, pen_half_width_arr[layer], this.layer, net_no_arr,
+                        to_corner, pen_half_width_arr[layer_no], this.layer_no, net_no_arr,
                         clearance_class, max_shove_trace_recursion_depth,
                         max_shove_via_recursion_depth, max_spring_over_recursion_depth,
                         trace_tidy_width, pull_tight_accuracy, !is_stitch_mode, time_limit);
@@ -390,21 +390,21 @@ public class Route {
     }
 
     /**
-     * Calculates the nearest layer of the nearest target item to this.layer.
+     * Calculates the nearest layer_no of the nearest target item to this.layer_no.
      */
     public int nearest_target_layer() {
         if (nearest_target_item == null) {
-            return this.layer;
+            return this.layer_no;
         }
         int result;
         int first_layer = nearest_target_item.first_layer();
         int last_layer = nearest_target_item.last_layer();
-        if (this.layer < first_layer) {
+        if (this.layer_no < first_layer) {
             result = first_layer;
-        } else if (this.layer > last_layer) {
+        } else if (this.layer_no > last_layer) {
             result = last_layer;
         } else {
-            result = this.layer;
+            result = this.layer_no;
         }
         return result;
     }
@@ -428,7 +428,7 @@ public class Route {
         }
         // add the from item, if it is a pin
         ItemSelectionFilter selection_filter = new ItemSelectionFilter(ItemSelectionFilter.SELECTABLE_CHOICES.PINS);
-        java.util.Collection<Item> picked_items = board.pick_items(this.prev_corner, this.layer, selection_filter);
+        java.util.Collection<Item> picked_items = board.pick_items(this.prev_corner, this.layer_no, selection_filter);
         for (Item curr_item : picked_items) {
             if (curr_item instanceof net.freerouting.freeroute.board.Pin) {
                 Collection<net.freerouting.freeroute.board.Pin> curr_swapppable_pins = ((net.freerouting.freeroute.board.Pin) curr_item).get_swappable_pins();
@@ -536,8 +536,8 @@ public class Route {
                 draw_width *= 3;
             }
             p_graphics_context.draw(draw_points, draw_width, draw_color, p_graphics, highligt_color_intensity);
-            if (this.nearest_target_item != null && !this.nearest_target_item.is_on_layer(this.layer)) {
-                // draw a marker to indicate the layer change.
+            if (this.nearest_target_item != null && !this.nearest_target_item.is_on_layer(this.layer_no)) {
+                // draw a marker to indicate the layer_no change.
                 NetIncompletes.draw_layer_change_marker(draw_points[0], 4 * pen_half_width_arr[0], p_graphics, p_graphics_context);
             }
         }
@@ -675,26 +675,26 @@ public class Route {
             return this.prev_corner;
         }
         net.freerouting.freeroute.board.Pin start_pin = (net.freerouting.freeroute.board.Pin) this.start_item;
-        if (!start_pin.is_on_layer(this.layer)) {
+        if (!start_pin.is_on_layer(this.layer_no)) {
             return this.prev_corner;
         }
         FloatPoint pin_center = start_pin.get_center().to_float();
         double curr_clearance
-                = this.board.rules.clearance_matrix.value(this.clearance_class, start_pin.clearance_class_no(), this.layer);
+                = this.board.rules.clearance_matrix.value(this.clearance_class, start_pin.clearance_class_no(), this.layer_no);
         double pin_neck_down_distance
-                = 2 * (0.5 * start_pin.get_max_width(this.layer) + curr_clearance);
+                = 2 * (0.5 * start_pin.get_max_width(this.layer_no) + curr_clearance);
         if (pin_center.distance(this.prev_corner.to_float()) >= pin_neck_down_distance) {
             return this.prev_corner;
         }
 
-        int neck_down_halfwidth = start_pin.get_trace_neckdown_halfwidth(this.layer);
-        if (neck_down_halfwidth >= this.pen_half_width_arr[this.layer]) {
+        int neck_down_halfwidth = start_pin.get_trace_neckdown_halfwidth(this.layer_no);
+        if (neck_down_halfwidth >= this.pen_half_width_arr[this.layer_no]) {
             return this.prev_corner;
         }
 
         // check, that the neck_down started inside the pin shape
         if (!this.prev_corner.equals(start_pin.get_center())) {
-            Item picked_item = this.board.pick_nearest_routing_item(this.prev_corner, this.layer, null);
+            Item picked_item = this.board.pick_nearest_routing_item(this.prev_corner, this.layer_no, null);
             if (picked_item instanceof Trace) {
                 if (((Trace) picked_item).get_half_width() > neck_down_halfwidth) {
                     return this.prev_corner;
@@ -703,7 +703,7 @@ public class Route {
         }
         TimeLimit time_limit = new TimeLimit(CHECK_FORCED_TRACE_TIME_LIMIT);
         Point ok_point = board.insert_forced_trace_segment(prev_corner,
-                p_to_corner, neck_down_halfwidth, layer, net_no_arr, clearance_class, max_shove_trace_recursion_depth,
+                p_to_corner, neck_down_halfwidth, layer_no, net_no_arr, clearance_class, max_shove_trace_recursion_depth,
                 max_shove_via_recursion_depth, max_spring_over_recursion_depth, trace_tidy_width,
                 pull_tight_accuracy, !is_stitch_mode, time_limit);
         return ok_point;
@@ -719,24 +719,24 @@ public class Route {
             return p_from_corner;
         }
         net.freerouting.freeroute.board.Pin target_pin = (net.freerouting.freeroute.board.Pin) this.nearest_target_item;
-        if (!target_pin.is_on_layer(this.layer)) {
+        if (!target_pin.is_on_layer(this.layer_no)) {
             return p_from_corner;
         }
         FloatPoint pin_center = target_pin.get_center().to_float();
         double curr_clearance
-                = this.board.rules.clearance_matrix.value(this.clearance_class, target_pin.clearance_class_no(), this.layer);
+                = this.board.rules.clearance_matrix.value(this.clearance_class, target_pin.clearance_class_no(), this.layer_no);
         double pin_neck_down_distance
-                = 2 * (0.5 * target_pin.get_max_width(this.layer) + curr_clearance);
+                = 2 * (0.5 * target_pin.get_max_width(this.layer_no) + curr_clearance);
         if (pin_center.distance(p_from_corner.to_float()) >= pin_neck_down_distance) {
             return p_from_corner;
         }
-        int neck_down_halfwidth = target_pin.get_trace_neckdown_halfwidth(this.layer);
-        if (neck_down_halfwidth >= this.pen_half_width_arr[this.layer]) {
+        int neck_down_halfwidth = target_pin.get_trace_neckdown_halfwidth(this.layer_no);
+        if (neck_down_halfwidth >= this.pen_half_width_arr[this.layer_no]) {
             return p_from_corner;
         }
         TimeLimit time_limit = new TimeLimit(CHECK_FORCED_TRACE_TIME_LIMIT);
         Point ok_point = board.insert_forced_trace_segment(p_from_corner,
-                p_to_corner, neck_down_halfwidth, layer, net_no_arr, clearance_class,
+                p_to_corner, neck_down_halfwidth, layer_no, net_no_arr, clearance_class,
                 max_shove_trace_recursion_depth, max_shove_via_recursion_depth,
                 max_spring_over_recursion_depth, trace_tidy_width,
                 pull_tight_accuracy, !is_stitch_mode, time_limit);

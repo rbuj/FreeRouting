@@ -300,7 +300,7 @@ public class MazeSearchAlgo {
         int layer_no = p_list_element.next_room.get_layer();
 
         boolean layer_active = ctrl.layer_active[layer_no];
-        if (!layer_active && autoroute_engine.board.layer_structure.arr[layer_no].is_signal) {
+        if (!layer_active && autoroute_engine.board.layer_structure.get_is_signal_layer(layer_no)) {
             return true;
         }
 

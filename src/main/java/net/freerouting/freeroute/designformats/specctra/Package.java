@@ -134,8 +134,8 @@ public class Package {
             boolean p_is_via_keepout) throws java.io.IOException {
         Layer keepout_layer;
         if (p_keepout.layer >= 0) {
-            net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.arr[p_keepout.layer];
-            keepout_layer = new Layer(board_layer.name, p_keepout.layer, board_layer.is_signal);
+            net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(p_keepout.layer);
+            keepout_layer = new Layer(board_layer.get_name(), p_keepout.layer, board_layer.is_signal());
         } else {
             keepout_layer = Layer.SIGNAL;
         }

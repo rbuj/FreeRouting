@@ -138,7 +138,7 @@ public class SessionToEagle extends javax.swing.JFrame {
         this.out_file.write("SET OPTIMIZING OFF\n");
 
         // Activate all layers in Eagle.
-        for (int i = 0; i < this.board.layer_structure.arr.length; ++i) {
+        for (int i = 0; i < this.board.layer_structure.get_layer_count(); ++i) {
             this.out_file.write("LAYER " + this.get_eagle_layer_string(i) + ";\n");
         }
 
@@ -574,7 +574,7 @@ public class SessionToEagle extends javax.swing.JFrame {
 
     private void write_pin_swap(net.freerouting.freeroute.board.Pin p_pin_1, net.freerouting.freeroute.board.Pin p_pin_2) throws java.io.IOException {
         int layer_no = Math.max(p_pin_1.first_layer(), p_pin_2.first_layer());
-        String layer_name = board.layer_structure.arr[layer_no].name;
+        String layer_name = board.layer_structure.get_name_layer(layer_no);
 
         this.out_file.write("CHANGE LAYER ");
         this.out_file.write(layer_name);

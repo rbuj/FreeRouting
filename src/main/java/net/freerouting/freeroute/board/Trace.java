@@ -36,7 +36,7 @@ import net.freerouting.freeroute.geometry.planar.TileShapeUtils;
 public abstract class Trace extends Item implements Connectable {
 
     private final int half_width; // half width of the trace pen
-    private int layer; // board layer of the trace
+    private int layer_no; // board layer_no of the trace
 
     Trace(int p_layer, int p_half_width, int[] p_net_no_arr, int p_clearance_type,
             int p_id_no, int p_group_no, FixedState p_fixed_state, BasicBoard p_board) {
@@ -46,7 +46,7 @@ public abstract class Trace extends Item implements Connectable {
         if (p_board != null) {
             p_layer = Math.min(p_layer, p_board.get_layer_count() - 1);
         }
-        layer = p_layer;
+        layer_no = p_layer;
     }
 
     /**
@@ -61,20 +61,20 @@ public abstract class Trace extends Item implements Connectable {
 
     @Override
     public int first_layer() {
-        return this.layer;
+        return this.layer_no;
     }
 
     @Override
     public int last_layer() {
-        return this.layer;
+        return this.layer_no;
     }
 
     public int get_layer() {
-        return this.layer;
+        return this.layer_no;
     }
 
     public void set_layer(int p_layer) {
-        this.layer = p_layer;
+        this.layer_no = p_layer;
     }
 
     public int get_half_width() {
@@ -92,7 +92,7 @@ public abstract class Trace extends Item implements Connectable {
      * clearance compensation is used in this tree.
      */
     public int get_compensated_half_width(ShapeSearchTree p_search_tree) {
-        int result = this.half_width + p_search_tree.clearance_compensation_value(clearance_class_no(), this.layer);
+        int result = this.half_width + p_search_tree.clearance_compensation_value(clearance_class_no(), this.layer_no);
         return result;
     }
 
@@ -108,16 +108,16 @@ public abstract class Trace extends Item implements Connectable {
     }
 
     /**
-     * Get a list of all items with a connection point on the layer of this
-     * trace equal to its first corner.
+     * Get a list of all items with a connection point on the layer_no of this
+ trace equal to its first corner.
      */
     public Set<Item> get_start_contacts() {
         return get_normal_contacts(first_corner(), false);
     }
 
     /**
-     * Get a list of all items with a connection point on the layer of this
-     * trace equal to its last corner.
+     * Get a list of all items with a connection point on the layer_no of this
+ trace equal to its last corner.
      */
     public Set<Item> get_end_contacts() {
         return get_normal_contacts(last_corner(), false);
@@ -186,7 +186,7 @@ public abstract class Trace extends Item implements Connectable {
             return new TreeSet<>();
         }
         TileShape search_shape = TileShapeUtils.get_instance(p_point);
-        Set<SearchTreeObject> overlaps = board.overlapping_objects(search_shape, this.layer);
+        Set<SearchTreeObject> overlaps = board.overlapping_objects(search_shape, this.layer_no);
         Set<Item> result = new TreeSet<>();
         for (SearchTreeObject curr_ob : overlaps) {
             if (!(curr_ob instanceof Item)) {
@@ -223,7 +223,7 @@ public abstract class Trace extends Item implements Connectable {
 
     @Override
     Point normal_contact_point(Trace p_other) {
-        if (this.layer != p_other.layer) {
+        if (this.layer_no != p_other.layer_no) {
             return null;
         }
         boolean contact_at_first_corner
@@ -344,7 +344,7 @@ public abstract class Trace extends Item implements Connectable {
 
     @Override
     public int shape_layer(int p_index) {
-        return layer;
+        return layer_no;
     }
 
     @Override
@@ -408,7 +408,7 @@ public abstract class Trace extends Item implements Connectable {
         for (int i = 0; i < 2; ++i) {
             IntOctagon curr_oct = curr_end_point.surrounding_octagon();
             curr_oct = curr_oct.enlarge(this.half_width);
-            Set<Item> curr_overlaps = this.board.overlapping_items_with_clearance(curr_oct, this.layer, new int[0], this.clearance_class_no());
+            Set<Item> curr_overlaps = this.board.overlapping_items_with_clearance(curr_oct, this.layer_no, new int[0], this.clearance_class_no());
             for (Item curr_item : curr_overlaps) {
                 if ((curr_item instanceof Pin) && curr_item.shares_net(this)) {
                     result.add((Pin) curr_item);
@@ -429,7 +429,7 @@ public abstract class Trace extends Item implements Connectable {
         p_window.append(resources.getString("to"));
         p_window.append(this.last_corner().to_float());
         p_window.append(resources.getString("on_layer") + " ");
-        p_window.append(this.board.layer_structure.arr[this.layer].name);
+        p_window.append(this.board.layer_structure.get_name_layer(this.layer_no));
         p_window.append(", " + resources.getString("width") + " ");
         p_window.append(2 * this.half_width);
         p_window.append(", " + resources.getString("length") + " ");

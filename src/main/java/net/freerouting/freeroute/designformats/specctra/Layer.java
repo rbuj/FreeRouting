@@ -44,11 +44,11 @@ public class Layer {
     public static void write_scope(WriteScopeParameter p_par, int p_layer_no,
             boolean p_write_rule) throws java.io.IOException {
         p_par.file.start_scope("layer ");
-        net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.arr[p_layer_no];
-        p_par.identifier_type.write(board_layer.name, p_par.file);
+        net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(p_layer_no);
+        p_par.identifier_type.write(board_layer.get_name(), p_par.file);
         p_par.file.new_line();
         p_par.file.write("(type ");
-        if (board_layer.is_signal) {
+        if (board_layer.is_signal()) {
             p_par.file.write("signal)");
         } else {
             p_par.file.write("power)");

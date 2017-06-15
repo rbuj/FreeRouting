@@ -147,7 +147,7 @@ public final class WindowAutorouteDetailParameter extends BoardSavableSubWindow 
         gridbag.setConstraints(separator, gridbag_constraints);
         main_panel.add(separator, gridbag_constraints);
 
-        // add label and number field for the trace costs on each layer.
+        // add label and number field for the trace costs on each layer_no.
         gridbag_constraints.gridwidth = 3;
         javax.swing.JLabel layer_label = new javax.swing.JLabel(resources.getString("trace_costs_on_layer"));
         gridbag.setConstraints(layer_label, gridbag_constraints);
@@ -175,7 +175,7 @@ public final class WindowAutorouteDetailParameter extends BoardSavableSubWindow 
         for (int i = 0; i < signal_layer_count; ++i) {
             layer_name_arr[i] = new javax.swing.JLabel();
             net.freerouting.freeroute.board.Layer curr_signal_layer = layer_structure.get_signal_layer(i);
-            layer_name_arr[i].setText(curr_signal_layer.name);
+            layer_name_arr[i].setText(curr_signal_layer.get_name());
             gridbag_constraints.gridwidth = 3;
             gridbag.setConstraints(layer_name_arr[i], gridbag_constraints);
             main_panel.add(layer_name_arr[i]);

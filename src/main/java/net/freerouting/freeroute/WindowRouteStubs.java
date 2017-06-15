@@ -157,7 +157,7 @@ public final class WindowRouteStubs extends WindowObjectListWithFilter {
             } else {
                 item_string = resources.getString("via");
             }
-            String layer_name = board_frame.board_panel.board_handling.get_routing_board().layer_structure.arr[layer_no].name;
+            String layer_name = board_frame.board_panel.board_handling.get_routing_board().layer_structure.get_name_layer(layer_no);
             String result = item_string + " " + resources.getString("stub_net") + " " + this.net.name + " "
                     + resources.getString("at") + " " + this.location.to_string(resources.getLocale()) + " "
                     + resources.getString("on_layer") + " " + layer_name;

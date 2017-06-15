@@ -41,10 +41,10 @@ public class LayerStructure {
      * Creates a dsn-LayerStructure from a board LayerStructure.
      */
     LayerStructure(net.freerouting.freeroute.board.LayerStructure p_board_layer_structure) {
-        arr = new Layer[p_board_layer_structure.arr.length];
+        arr = new Layer[p_board_layer_structure.get_layer_count()];
         for (int i = 0; i < arr.length; ++i) {
-            net.freerouting.freeroute.board.Layer board_layer = p_board_layer_structure.arr[i];
-            arr[i] = new Layer(board_layer.name, i, board_layer.is_signal);
+            net.freerouting.freeroute.board.Layer board_layer = p_board_layer_structure.get_layer(i);
+            arr[i] = new Layer(board_layer.get_name(), i, board_layer.is_signal());
         }
     }
 

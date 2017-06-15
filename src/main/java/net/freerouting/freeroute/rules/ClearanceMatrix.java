@@ -60,7 +60,7 @@ public class ClearanceMatrix implements java.io.Serializable {
         for (int i = 0; i < class_count; ++i) {
             row[i] = new Row(p_name_arr[i]);
         }
-        this.max_value_on_layer = new int[layer_structure.arr.length];
+        this.max_value_on_layer = new int[layer_structure.get_layer_count()];
     }
 
     /**
@@ -92,7 +92,7 @@ public class ClearanceMatrix implements java.io.Serializable {
      * p_value on all layers.
      */
     public void set_default_value(int p_value) {
-        for (int i = 0; i < layer_structure.arr.length; ++i) {
+        for (int i = 0; i < layer_structure.get_layer_count(); ++i) {
             set_default_value(i, p_value);
         }
     }
@@ -104,7 +104,6 @@ public class ClearanceMatrix implements java.io.Serializable {
     public void set_default_value(int p_layer, int p_value) {
         for (int i = 1; i < class_count; ++i) {
             for (int j = 1; j < class_count; ++j) {
-
                 set_value(i, j, p_layer, p_value);
             }
         }
@@ -115,7 +114,7 @@ public class ClearanceMatrix implements java.io.Serializable {
      * layers.
      */
     public void set_value(int p_i, int p_j, int p_value) {
-        for (int layer = 0; layer < layer_structure.arr.length; ++layer) {
+        for (int layer = 0; layer < layer_structure.get_layer_count(); ++layer) {
             set_value(p_i, p_j, layer, p_value);
         }
     }
@@ -125,7 +124,7 @@ public class ClearanceMatrix implements java.io.Serializable {
      * inner layers.
      */
     public void set_inner_value(int p_i, int p_j, int p_value) {
-        for (int layer = 1; layer < layer_structure.arr.length - 1; ++layer) {
+        for (int layer = 1; layer < layer_structure.get_layer_count() - 1; ++layer) {
             set_value(p_i, p_j, layer, p_value);
         }
     }
@@ -150,7 +149,7 @@ public class ClearanceMatrix implements java.io.Serializable {
      */
     public int value(int p_i, int p_j, int p_layer) {
         if (p_i < 0 || p_i >= class_count || p_j < 0 || p_j >= class_count
-                || p_layer < 0 || p_layer >= layer_structure.arr.length) {
+                || p_layer < 0 || p_layer >= layer_structure.get_layer_count()) {
             return 0;
         }
         return row[p_j].column[p_i].layer[p_layer];
@@ -164,13 +163,13 @@ public class ClearanceMatrix implements java.io.Serializable {
         int i = Math.max(p_i, 0);
         i = Math.min(i, class_count - 1);
         int layer = Math.max(p_layer, 0);
-        layer = Math.min(layer, layer_structure.arr.length - 1);
+        layer = Math.min(layer, layer_structure.get_layer_count() - 1);
         return row[i].max_value[layer];
     }
 
     public int max_value(int p_layer) {
         int layer = Math.max(p_layer, 0);
-        layer = Math.min(layer, layer_structure.arr.length - 1);
+        layer = Math.min(layer, layer_structure.get_layer_count() - 1);
         return this.max_value_on_layer[layer];
     }
 
@@ -180,7 +179,7 @@ public class ClearanceMatrix implements java.io.Serializable {
      */
     public boolean is_layer_dependent(int p_i, int p_j) {
         int compare_value = row[p_j].column[p_i].layer[0];
-        for (int l = 1; l < layer_structure.arr.length; ++l) {
+        for (int l = 1; l < layer_structure.get_layer_count(); ++l) {
             if (row[p_j].column[p_i].layer[l] != compare_value) {
                 return true;
             }
@@ -193,11 +192,12 @@ public class ClearanceMatrix implements java.io.Serializable {
      * and the p_j-th row are not equal on all inner layers.
      */
     public boolean is_inner_layer_dependent(int p_i, int p_j) {
-        if (layer_structure.arr.length <= 2) {
+        int layer_count = layer_structure.get_layer_count();
+        if (layer_count <= 2) {
             return false; // no inner layers
         }
         int compare_value = row[p_j].column[p_i].layer[1];
-        for (int l = 2; l < layer_structure.arr.length - 1; ++l) {
+        for (int l = 2; l < layer_count - 1; ++l) {
             if (row[p_j].column[p_i].layer[l] != compare_value) {
                 return true;
             }
@@ -224,7 +224,7 @@ public class ClearanceMatrix implements java.io.Serializable {
      * Return the layer count of this clearance matrix;#
      */
     public int get_layer_count() {
-        return layer_structure.arr.length;
+        return layer_structure.get_layer_count();
     }
 
     /**
@@ -267,16 +267,17 @@ public class ClearanceMatrix implements java.io.Serializable {
 
         this.row = new_row;
 
+        int layer_count = this.layer_structure.get_layer_count();
         // Set the new matrix elements to default values.
         for (int i = 0; i < old_class_count; ++i) {
-            for (int j = 0; j < this.layer_structure.arr.length; ++j) {
+            for (int j = 0; j < layer_count; ++j) {
                 int default_value = this.value(1, i, j);
                 this.set_value(old_class_count, i, j, default_value);
                 this.set_value(i, old_class_count, j, default_value);
             }
         }
 
-        for (int j = 0; j < this.layer_structure.arr.length; ++j) {
+        for (int j = 0; j < layer_count; ++j) {
             int default_value = this.value(1, 1, j);
             this.set_value(old_class_count, old_class_count, j, default_value);
         }
@@ -350,7 +351,7 @@ public class ClearanceMatrix implements java.io.Serializable {
             for (int i = 0; i < class_count; ++i) {
                 column[i] = new MatrixEntry();
             }
-            max_value = new int[layer_structure.arr.length];
+            max_value = new int[layer_structure.get_layer_count()];
         }
 
         @Override
@@ -367,11 +368,11 @@ public class ClearanceMatrix implements java.io.Serializable {
                 MatrixEntry curr_column = this.column[i];
                 if (curr_column.is_layer_dependent()) {
                     p_window.append(" " + resources.getString("on_layer") + " ");
-                    for (int j = 0; j < layer_structure.arr.length; ++j) {
+                    for (int j = 0; j < layer_structure.get_layer_count(); ++j) {
                         p_window.newline();
                         p_window.indent();
                         p_window.indent();
-                        p_window.append(layer_structure.arr[j].name);
+                        p_window.append(layer_structure.get_name_layer(j));
                         p_window.append(" = ");
                         p_window.append(curr_column.layer[j]);
                     }
@@ -389,7 +390,7 @@ public class ClearanceMatrix implements java.io.Serializable {
         int[] layer;
 
         private MatrixEntry() {
-            layer = new int[layer_structure.arr.length];
+            layer = new int[layer_structure.get_layer_count()];
             java.util.Arrays.fill(layer, 0);
         }
 
@@ -397,7 +398,7 @@ public class ClearanceMatrix implements java.io.Serializable {
          * Returns thrue of all clearances values of this and p_other are equal.
          */
         boolean equals(MatrixEntry p_other) {
-            for (int i = 0; i < layer_structure.arr.length; ++i) {
+            for (int i = 0; i < layer_structure.get_layer_count(); ++i) {
                 if (this.layer[i] != p_other.layer[i]) {
                     return false;
                 }
@@ -410,7 +411,7 @@ public class ClearanceMatrix implements java.io.Serializable {
          */
         boolean is_layer_dependent() {
             int compare_value = layer[0];
-            for (int i = 1; i < layer_structure.arr.length; ++i) {
+            for (int i = 1; i < layer_structure.get_layer_count(); ++i) {
                 if (layer[i] != compare_value) {
                     return true;
                 }

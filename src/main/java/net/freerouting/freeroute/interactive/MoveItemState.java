@@ -393,7 +393,7 @@ public class MoveItemState extends InteractiveState {
                 }
             } else if (curr_item.first_layer() == curr_item.last_layer()) {
                 int new_layer_no = hdlg.get_layer_count() - curr_item.first_layer() - 1;
-                if (!layer_structure.arr[new_layer_no].is_signal) {
+                if (!layer_structure.get_is_signal_layer(new_layer_no)) {
                     placement_side_changable = false;
                     break;
                 }

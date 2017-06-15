@@ -45,7 +45,7 @@ public class ComponentObstacleArea extends ObstacleArea {
 
     @Override
     public Item copy(int p_id_no) {
-        return new ComponentObstacleArea(get_relative_area(), get_layer(), get_translation(),
+        return new ComponentObstacleArea(get_relative_area(), get_layer_no(), get_translation(),
                 get_rotation_in_degree(), get_side_changed(), clearance_class_no(), p_id_no,
                 get_component_no(), this.name, get_fixed_state(), board);
     }

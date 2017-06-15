@@ -40,9 +40,10 @@ public final class WindowLayerVisibility extends WindowVisibility {
         String header_message = resources.getString("layer_visibility_header");
         net.freerouting.freeroute.board.LayerStructure layer_structure
                 = board_panel.board_handling.get_routing_board().layer_structure;
-        String[] message_arr = new String[layer_structure.arr.length];
-        for (int i = 0; i < message_arr.length; ++i) {
-            message_arr[i] = layer_structure.arr[i].name;
+        int layer_count = layer_structure.get_layer_count();
+        String[] message_arr = new String[layer_count];
+        for (int i = 0; i < layer_count; ++i) {
+            message_arr[i] = layer_structure.get_name_layer(i);
         }
         WindowLayerVisibility result = new WindowLayerVisibility(p_board_frame, title, header_message, message_arr);
         for (int i = 0; i < message_arr.length; ++i) {
@@ -69,7 +70,7 @@ public final class WindowLayerVisibility extends WindowVisibility {
     protected void set_all_minimum() {
         int layer_count = this.get_board_handling().graphics_context.layer_count();
         for (int i = 0; i < layer_count; ++i) {
-            if (i != this.get_board_handling().settings.get_layer()) {
+            if (i != this.get_board_handling().settings.get_layer_no()) {
                 set_slider_value(i, MIN_SLIDER_VALUE);
                 set_changed_value(i, MIN_VISIBILITY_VALUE);
             }
@@ -80,7 +81,7 @@ public final class WindowLayerVisibility extends WindowVisibility {
     protected void set_all_maximum() {
         int layer_count = this.get_board_handling().graphics_context.layer_count();
         for (int i = 0; i < layer_count; ++i) {
-            if (i != this.get_board_handling().settings.get_layer()) {
+            if (i != this.get_board_handling().settings.get_layer_no()) {
                 set_slider_value(i, MAX_SLIDER_VALUE);
                 set_changed_value(i, MAX_VISIBILITY_VALUE);
             }

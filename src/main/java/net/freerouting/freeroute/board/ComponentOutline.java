@@ -117,7 +117,7 @@ public class ComponentOutline extends Item {
 
     @Override
     public Color[] get_draw_colors(GraphicsContext p_graphics_context) {
-        Color[] color_arr = new java.awt.Color[this.board.layer_structure.arr.length];
+        Color[] color_arr = new java.awt.Color[this.board.layer_structure.get_layer_count()];
         Color front_draw_color = p_graphics_context.get_component_color(true);
         for (int i = 0; i < color_arr.length - 1; ++i) {
             color_arr[i] = front_draw_color;

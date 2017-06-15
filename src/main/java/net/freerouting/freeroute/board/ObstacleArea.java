@@ -45,9 +45,9 @@ public class ObstacleArea extends Item {
      */
     public final String name;
     /**
-     * the layer of this relative_area
+     * the layer_no of this relative_area
      */
-    private int layer;
+    private int layer_no;
     private Area relative_area;
     private transient Area precalculated_absolute_area = null;
     private Vector translation;
@@ -62,7 +62,7 @@ public class ObstacleArea extends Item {
             int[] p_net_no_arr, int p_clearance_type, int p_id_no, int p_cmp_no, String p_name, FixedState p_fixed_state, BasicBoard p_board) {
         super(p_net_no_arr, p_clearance_type, p_id_no, p_cmp_no, p_fixed_state, p_board);
         this.relative_area = p_area;
-        this.layer = p_layer;
+        this.layer_no = p_layer;
         this.translation = p_translation;
         this.rotation_in_degree = p_rotation_in_degree;
         this.side_changed = p_side_changed;
@@ -82,7 +82,7 @@ public class ObstacleArea extends Item {
     public Item copy(int p_id_no) {
         int[] copied_net_nos = new int[net_no_arr.length];
         System.arraycopy(net_no_arr, 0, copied_net_nos, 0, net_no_arr.length);
-        return new ObstacleArea(relative_area, layer, translation, rotation_in_degree, side_changed, copied_net_nos, clearance_class_no(), p_id_no, get_component_no(), name, get_fixed_state(), board);
+        return new ObstacleArea(relative_area, layer_no, translation, rotation_in_degree, side_changed, copied_net_nos, clearance_class_no(), p_id_no, get_component_no(), name, get_fixed_state(), board);
     }
 
     public Area get_area() {
@@ -118,21 +118,21 @@ public class ObstacleArea extends Item {
 
     @Override
     public boolean is_on_layer(int p_layer) {
-        return layer == p_layer;
+        return layer_no == p_layer;
     }
 
     @Override
     public int first_layer() {
-        return this.layer;
+        return this.layer_no;
     }
 
     @Override
     public int last_layer() {
-        return this.layer;
+        return this.layer_no;
     }
 
-    public int get_layer() {
-        return this.layer;
+    public int get_layer_no() {
+        return this.layer_no;
     }
 
     @Override
@@ -215,7 +215,7 @@ public class ObstacleArea extends Item {
     public void change_placement_side(IntPoint p_pole) {
         this.side_changed = !this.side_changed;
         if (this.board != null) {
-            this.layer = board.get_layer_count() - this.layer - 1;
+            this.layer_no = board.get_layer_count() - this.layer_no - 1;
         }
         Point rel_location = PointUtils.ZERO.translate_by(this.translation);
         this.translation = rel_location.mirror_vertical(p_pole).difference_by(PointUtils.ZERO);
@@ -250,14 +250,14 @@ public class ObstacleArea extends Item {
         if (p_graphics_context == null || p_intensity <= 0) {
             return;
         }
-        Color color = p_color_arr[this.layer];
-        double intensity = p_graphics_context.get_layer_visibility(this.layer) * p_intensity;
+        Color color = p_color_arr[this.layer_no];
+        double intensity = p_graphics_context.get_layer_visibility(this.layer_no) * p_intensity;
         p_graphics_context.fill_area(this.get_area(), p_g, color, intensity);
     }
 
     @Override
     public int shape_layer(int p_index) {
-        return layer;
+        return layer_no;
     }
 
     protected Vector get_translation() {
@@ -311,7 +311,7 @@ public class ObstacleArea extends Item {
             }
         }
         p_window.append(" " + resources.getString("on_layer") + " ");
-        p_window.append(this.board.layer_structure.arr[this.get_layer()].name);
+        p_window.append(this.board.layer_structure.get_name_layer(this.get_layer_no()));
     }
 
     TileShape[] split_to_convex() {

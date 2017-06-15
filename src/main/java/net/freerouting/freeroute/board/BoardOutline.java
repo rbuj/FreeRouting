@@ -77,16 +77,17 @@ public class BoardOutline extends Item {
     @Override
     public int tile_shape_count() {
         int result;
+        int layer_count = this.board.layer_structure.get_layer_count();
         if (this.keepout_outside_outline) {
             TileShape[] tile_shapes = this.get_keepout_area().split_to_convex();
             if (tile_shapes == null) {
                 // an error accured while dividing the area
                 result = 0;
             } else {
-                result = tile_shapes.length * this.board.layer_structure.arr.length;
+                result = tile_shapes.length * layer_count;
             }
         } else {
-            result = this.line_count() * this.board.layer_structure.arr.length;
+            result = this.line_count() * layer_count;
         }
         return result;
     }
@@ -95,12 +96,13 @@ public class BoardOutline extends Item {
     public int shape_layer(int p_index) {
         int shape_count = this.tile_shape_count();
         int result;
+        int layer_count = this.board.layer_structure.get_layer_count();
         if (shape_count > 0) {
-            result = p_index * this.board.layer_structure.arr.length / shape_count;
+            result = p_index * layer_count / shape_count;
         } else {
             result = 0;
         }
-        if (result < 0 || result >= this.board.layer_structure.arr.length) {
+        if (result < 0 || result >= layer_count) {
             System.out.println("BoardOutline.shape_layer: p_index out of range");
         }
         return result;
@@ -127,7 +129,7 @@ public class BoardOutline extends Item {
 
     @Override
     public int last_layer() {
-        return this.board.layer_structure.arr.length - 1;
+        return this.board.layer_structure.get_layer_count() - 1;
     }
 
     @Override
@@ -216,9 +218,10 @@ public class BoardOutline extends Item {
 
     @Override
     public java.awt.Color[] get_draw_colors(GraphicsContext p_graphics_context) {
-        java.awt.Color[] color_arr = new java.awt.Color[this.board.layer_structure.arr.length];
+        int layer_count = this.board.layer_structure.get_layer_count();
+        java.awt.Color[] color_arr = new java.awt.Color[layer_count];
         java.awt.Color draw_color = p_graphics_context.get_outline_color();
-        for (int i = 0; i < color_arr.length; ++i) {
+        for (int i = 0; i < layer_count; ++i) {
             color_arr[i] = draw_color;
         }
         return color_arr;

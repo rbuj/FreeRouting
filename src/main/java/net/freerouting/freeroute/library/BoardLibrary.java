@@ -129,7 +129,7 @@ public class BoardLibrary implements java.io.Serializable {
      * null, if no such via padstack exists.
      */
     public Padstack get_mirrored_via_padstack(Padstack p_via_padstack) {
-        int layer_count = this.padstacks.board_layer_structure.arr.length;
+        int layer_count = this.padstacks.board_layer_structure.get_layer_count();
         if (p_via_padstack.from_layer() == 0 && p_via_padstack.to_layer() == layer_count - 1) {
             return p_via_padstack;
         }

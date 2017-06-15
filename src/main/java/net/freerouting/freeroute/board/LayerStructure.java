@@ -27,7 +27,7 @@ package net.freerouting.freeroute.board;
 @SuppressWarnings("serial")
 public class LayerStructure implements java.io.Serializable {
 
-    public final Layer[] arr;
+    private final Layer[] arr;
 
     /**
      * Creates a new instance of LayerStructure
@@ -42,7 +42,7 @@ public class LayerStructure implements java.io.Serializable {
      */
     public int get_no(String p_name) {
         for (int i = 0; i < arr.length; ++i) {
-            if (p_name.equals(arr[i].name)) {
+            if (p_name.equals(arr[i].get_name())) {
                 return i;
             }
         }
@@ -68,7 +68,7 @@ public class LayerStructure implements java.io.Serializable {
     public int signal_layer_count() {
         int found_signal_layers = 0;
         for (int i = 0; i < arr.length; ++i) {
-            if (arr[i].is_signal) {
+            if (arr[i].is_signal()) {
                 ++found_signal_layers;
             }
         }
@@ -81,7 +81,7 @@ public class LayerStructure implements java.io.Serializable {
     public Layer get_signal_layer(int p_no) {
         int found_signal_layers = 0;
         for (int i = 0; i < arr.length; ++i) {
-            if (arr[i].is_signal) {
+            if (arr[i].is_signal()) {
                 if (p_no == found_signal_layers) {
                     return arr[i];
                 }
@@ -100,7 +100,7 @@ public class LayerStructure implements java.io.Serializable {
             if (arr[i] == p_layer) {
                 return found_signal_layers;
             }
-            if (arr[i].is_signal) {
+            if (arr[i].is_signal()) {
                 ++found_signal_layers;
             }
         }
@@ -116,4 +116,30 @@ public class LayerStructure implements java.io.Serializable {
         return get_no(curr_signal_layer);
     }
 
+    public boolean[] active_routing_layer_arr() {
+        if (arr == null) {
+            return null;
+        }
+        boolean[] active_routing_layer_arr = new boolean[arr.length];
+        for (int i = 0; i < arr.length; ++i) {
+            active_routing_layer_arr[i] = arr[i].is_signal();
+        }
+        return active_routing_layer_arr;
+    }
+
+    public int get_layer_count(){
+        return (arr == null) ? 0 : arr.length;
+    }
+
+    public boolean get_is_signal_layer(int index) {
+        return (arr == null) ? null : (arr[index] == null) ? null : arr[index].is_signal();
+    }
+
+    public String get_name_layer(int index) {
+        return (arr == null) ? null : (arr[index] == null) ? null : arr[index].get_name();
+    }
+
+    public Layer get_layer(int index) {
+        return (arr == null) ? null : (arr[index] == null) ? null : arr[index];
+    }
 }

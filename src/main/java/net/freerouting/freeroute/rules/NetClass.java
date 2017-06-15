@@ -58,11 +58,8 @@ public class NetClass implements java.io.Serializable, net.freerouting.freeroute
         this.name = p_name;
         this.board_layer_structure = p_layer_structure;
         this.clearance_matrix = p_clearance_matrix;
-        this.trace_half_width_arr = new int[p_layer_structure.arr.length];
-        this.active_routing_layer_arr = new boolean[p_layer_structure.arr.length];
-        for (int i = 0; i < p_layer_structure.arr.length; ++i) {
-            this.active_routing_layer_arr[i] = p_layer_structure.arr[i].is_signal;
-        }
+        this.trace_half_width_arr = new int[p_layer_structure.get_layer_count()];
+        this.active_routing_layer_arr = p_layer_structure.active_routing_layer_arr();
     }
 
     @Override
@@ -281,7 +278,7 @@ public class NetClass implements java.io.Serializable, net.freerouting.freeroute
                 p_window.append(resources.getString("trace_width") + " ");
                 p_window.append(2 * trace_half_width_arr[i]);
                 p_window.append(" " + resources.getString("on_layer") + " ");
-                p_window.append(this.board_layer_structure.arr[i].name);
+                p_window.append(this.board_layer_structure.get_name_layer(i));
             }
         } else {
             p_window.append(", " + resources.getString("trace_width") + " ");
@@ -297,7 +294,7 @@ public class NetClass implements java.io.Serializable, net.freerouting.freeroute
     public boolean trace_width_is_layer_dependent() {
         int compare_value = trace_half_width_arr[0];
         for (int i = 1; i < trace_half_width_arr.length; ++i) {
-            if (this.board_layer_structure.arr[i].is_signal && trace_half_width_arr[i] != compare_value) {
+            if (this.board_layer_structure.get_is_signal_layer(i) && trace_half_width_arr[i] != compare_value) {
                 return true;
             }
         }
@@ -314,7 +311,7 @@ public class NetClass implements java.io.Serializable, net.freerouting.freeroute
             return false;
         }
         int first_inner_layer_no = 1;
-        while (!this.board_layer_structure.arr[first_inner_layer_no].is_signal) {
+        while (!this.board_layer_structure.get_is_signal_layer(first_inner_layer_no)) {
             ++first_inner_layer_no;
         }
         if (first_inner_layer_no >= trace_half_width_arr.length - 1) {
@@ -322,7 +319,7 @@ public class NetClass implements java.io.Serializable, net.freerouting.freeroute
         }
         int compare_width = trace_half_width_arr[first_inner_layer_no];
         for (int i = first_inner_layer_no + 1; i < trace_half_width_arr.length - 1; ++i) {
-            if (this.board_layer_structure.arr[i].is_signal && trace_half_width_arr[i] != compare_width) {
+            if (this.board_layer_structure.get_is_signal_layer(i) && trace_half_width_arr[i] != compare_width) {
                 return true;
             }
         }

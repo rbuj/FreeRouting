@@ -120,7 +120,7 @@ public final class WindowSelectParameter extends BoardSavableSubWindow {
         for (int i = 0; i < signal_layer_count; ++i) {
             net.freerouting.freeroute.board.Layer curr_signal_layer = layer_structure.get_signal_layer(i);
             layer_name_arr[i] = new javax.swing.JRadioButton();
-            layer_name_arr[i].setText(curr_signal_layer.name);
+            layer_name_arr[i].setText(curr_signal_layer.get_name());
             gridbag.setConstraints(layer_name_arr[i], gridbag_constraints);
             main_panel.add(layer_name_arr[i]);
             current_layer_button_group.add(layer_name_arr[i]);
@@ -158,7 +158,7 @@ public final class WindowSelectParameter extends BoardSavableSubWindow {
             }
         }
         net.freerouting.freeroute.board.LayerStructure layer_structure = this.board_handling.get_routing_board().layer_structure;
-        net.freerouting.freeroute.board.Layer current_layer = layer_structure.arr[this.board_handling.settings.get_layer()];
+        net.freerouting.freeroute.board.Layer current_layer = layer_structure.get_layer(this.board_handling.settings.get_layer_no());
         layer_name_arr[layer_structure.get_signal_layer_no(current_layer)].setSelected(true);
     }
 

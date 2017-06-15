@@ -471,10 +471,10 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
                     } else {
                         int first_inner_signal_layer_no = 1;
                         net.freerouting.freeroute.board.LayerStructure layer_structure = board_handling.get_routing_board().layer_structure;
-                        while (!layer_structure.arr[first_inner_signal_layer_no].is_signal) {
+                        while (!layer_structure.get_is_signal_layer(first_inner_signal_layer_no)) {
                             ++first_inner_signal_layer_no;
                         }
-                        if (first_inner_signal_layer_no < layer_structure.arr.length - 1) {
+                        if (first_inner_signal_layer_no < layer_structure.get_layer_count() - 1) {
 
                             trace_width = (float) board_handling.coordinate_transform.board_to_user(2 * curr_net_class.get_trace_half_width(first_inner_signal_layer_no));
                         } else {

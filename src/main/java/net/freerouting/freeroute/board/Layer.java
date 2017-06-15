@@ -30,13 +30,13 @@ public class Layer implements java.io.Serializable {
     /**
      * The name of the layer.
      */
-    public final String name;
+    private final String name;
 
     /**
      * True, if this is a signal layer, which can be used for routing. Otherwise
      * it may be for example a power ground layer.
      */
-    public final boolean is_signal;
+    private final boolean is_signal;
 
     /**
      * Creates a new instance of Layer
@@ -44,6 +44,14 @@ public class Layer implements java.io.Serializable {
     public Layer(String p_name, boolean p_is_signal) {
         name = p_name;
         is_signal = p_is_signal;
+    }
+
+    public String get_name(){
+        return name;
+    }
+
+    public boolean is_signal(){
+        return is_signal;
     }
 
     @Override

@@ -121,7 +121,7 @@ public final class WindowClearanceViolations extends WindowObjectListWithFilter 
             net.freerouting.freeroute.board.LayerStructure layer_structure = board_frame.board_panel.board_handling.get_routing_board().layer_structure;
             String result = item_info(violation.first_item) + " - " + item_info(violation.second_item)
                     + " " + resources.getString("at") + " " + location.to_string(resources.getLocale()) + " "
-                    + resources.getString("on_layer") + " " + layer_structure.arr[violation.layer].name;
+                    + resources.getString("on_layer") + " " + layer_structure.get_name_layer(violation.layer_no);
             return result;
         }
 
@@ -144,7 +144,7 @@ public final class WindowClearanceViolations extends WindowObjectListWithFilter 
             if (this.location.y < p_other.location.y) {
                 return -1;
             }
-            return this.violation.layer - p_other.violation.layer;
+            return this.violation.layer_no - p_other.violation.layer_no;
         }
 
     }

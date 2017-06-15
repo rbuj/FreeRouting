@@ -213,10 +213,9 @@ public class AutorouteSettings {
             p_file.write(pass_no.toString());
         }
         p_file.write(")");
-        for (int i = 0; i < p_layer_structure.arr.length; ++i) {
-            net.freerouting.freeroute.board.Layer curr_layer = p_layer_structure.arr[i];
+        for (int i = 0; i < p_layer_structure.get_layer_count(); ++i) {
             p_file.start_scope("layer_rule ");
-            p_identifier_type.write(curr_layer.name, p_file);
+            p_identifier_type.write(p_layer_structure.get_name_layer(i), p_file);
             p_file.new_line();
             p_file.write("(active ");
             if (p_settings.get_layer_active(i)) {

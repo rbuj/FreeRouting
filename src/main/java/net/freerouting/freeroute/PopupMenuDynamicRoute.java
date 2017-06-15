@@ -65,14 +65,14 @@ public final class PopupMenuDynamicRoute extends PopupMenuDisplay {
 
         this.add(snapshot_item, 2);
 
-        if (layer_structure.arr.length > 0) {
+        if (layer_structure.get_layer_count() > 0) {
             this.change_layer_menu = new PopupMenuChangeLayer(p_board_frame);
             this.add(change_layer_menu, 0);
         } else {
             this.change_layer_menu = null;
         }
 
-        net.freerouting.freeroute.board.Layer curr_layer = layer_structure.arr[board_panel.board_handling.settings.get_layer()];
+        net.freerouting.freeroute.board.Layer curr_layer = layer_structure.get_layer(board_panel.board_handling.settings.get_layer_no());
         disable_layer_item(layer_structure.get_signal_layer_no(curr_layer));
     }
 

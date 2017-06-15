@@ -56,7 +56,7 @@ public class ConductionArea extends ObstacleArea implements Connectable {
             System.out.println("ConductionArea.copy not yet implemented for areas with more than 1 net");
             return null;
         }
-        return new ConductionArea(get_relative_area(), get_layer(), get_translation(), get_rotation_in_degree(),
+        return new ConductionArea(get_relative_area(), get_layer_no(), get_translation(), get_rotation_in_degree(),
                 get_side_changed(), net_no_arr, clearance_class_no(), p_id_no, get_component_no(),
                 this.name, is_obstacle, get_fixed_state(), board);
     }
@@ -66,7 +66,7 @@ public class ConductionArea extends ObstacleArea implements Connectable {
         Set<Item> result = new TreeSet<>();
         for (int i = 0; i < tile_shape_count(); ++i) {
             TileShape curr_shape = get_tile_shape(i);
-            Set<SearchTreeObject> overlaps = board.overlapping_objects(curr_shape, get_layer());
+            Set<SearchTreeObject> overlaps = board.overlapping_objects(curr_shape, get_layer_no());
             Iterator<SearchTreeObject> it = overlaps.iterator();
             while (it.hasNext()) {
                 SearchTreeObject curr_ob = it.next();

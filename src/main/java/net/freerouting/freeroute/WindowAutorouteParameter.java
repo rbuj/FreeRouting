@@ -96,7 +96,7 @@ public final class WindowAutorouteParameter extends BoardSavableSubWindow {
         for (int i = 0; i < signal_layer_count; ++i) {
             net.freerouting.freeroute.board.Layer curr_signal_layer = layer_structure.get_signal_layer(i);
 
-            JLabel jLabel = new JLabel(curr_signal_layer.name);
+            JLabel jLabel = new JLabel(curr_signal_layer.get_name());
             gridbag_constraints.gridwidth = 3;
             gridbag.setConstraints(jLabel, gridbag_constraints);
             main_panel.add(jLabel);

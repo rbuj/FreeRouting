@@ -94,7 +94,7 @@ public class SelectItemsInRegionState extends SelectRegionState {
         if (hdlg.settings.select_on_all_visible_layers) {
             select_layer = -1;
         } else {
-            select_layer = hdlg.settings.layer;
+            select_layer = hdlg.settings.layer_no;
         }
         Set<Item> found_items = hdlg.settings.item_selection_filter.filter(hdlg.get_routing_board().overlapping_items(b, select_layer));
         if (hdlg.settings.select_on_all_visible_layers) {

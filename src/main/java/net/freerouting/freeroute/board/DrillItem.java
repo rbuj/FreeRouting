@@ -355,7 +355,7 @@ public abstract class DrillItem extends Item implements Connectable {
             int begin_layer = this.first_layer();
             int end_layer = this.last_layer();
             for (int curr_layer = begin_layer; curr_layer <= end_layer; ++curr_layer) {
-                if (this.board != null && !this.board.layer_structure.arr[curr_layer].is_signal) {
+                if (this.board != null && !this.board.layer_structure.get_is_signal_layer(curr_layer)) {
                     continue;
                 }
                 Shape curr_shape = this.get_shape_on_layer(curr_layer);

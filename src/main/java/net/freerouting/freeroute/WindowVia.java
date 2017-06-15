@@ -238,7 +238,8 @@ public final class WindowVia extends BoardSavableSubWindow {
         @Override
         public void actionPerformed(java.awt.event.ActionEvent p_evt) {
             net.freerouting.freeroute.board.BasicBoard pcb = board_frame.board_panel.board_handling.get_routing_board();
-            if (pcb.layer_structure.arr.length <= 1) {
+            int layer_count = pcb.layer_structure.get_layer_count();
+            if (layer_count <= 1) {
                 return;
             }
             String padstack_name = javax.swing.JOptionPane.showInputDialog(resources.getString("message_1"));
@@ -251,15 +252,15 @@ public final class WindowVia extends BoardSavableSubWindow {
                     return;
                 }
             }
-            Layer start_layer = pcb.layer_structure.arr[0];
-            Layer end_layer = pcb.layer_structure.arr[pcb.layer_structure.arr.length - 1];
+            Layer start_layer = pcb.layer_structure.get_layer(0);
+            Layer end_layer = pcb.layer_structure.get_layer(layer_count - 1);
             boolean layers_selected = false;
-            if (pcb.layer_structure.arr.length == 2) {
+            if (layer_count == 2) {
                 layers_selected = true;
             } else {
-                Layer[] possible_start_layers = new net.freerouting.freeroute.board.Layer[pcb.layer_structure.arr.length - 1];
+                Layer[] possible_start_layers = new net.freerouting.freeroute.board.Layer[layer_count - 1];
                 for (int i = 0; i < possible_start_layers.length; ++i) {
-                    possible_start_layers[i] = pcb.layer_structure.arr[i];
+                    possible_start_layers[i] = pcb.layer_structure.get_layer(i);
                 }
                 Object selected_value = javax.swing.JOptionPane.showInputDialog(null, resources.getString("select_start_layer"),
                         resources.getString("start_layer_selection"),
@@ -274,9 +275,9 @@ public final class WindowVia extends BoardSavableSubWindow {
             }
             if (!layers_selected) {
                 int first_possible_end_layer_no = pcb.layer_structure.get_no(start_layer) + 1;
-                Layer[] possible_end_layers = new net.freerouting.freeroute.board.Layer[pcb.layer_structure.arr.length - first_possible_end_layer_no];
-                for (int i = first_possible_end_layer_no; i < pcb.layer_structure.arr.length; ++i) {
-                    possible_end_layers[i - first_possible_end_layer_no] = pcb.layer_structure.arr[i];
+                Layer[] possible_end_layers = new net.freerouting.freeroute.board.Layer[layer_count - first_possible_end_layer_no];
+                for (int i = first_possible_end_layer_no; i < layer_count; ++i) {
+                    possible_end_layers[i - first_possible_end_layer_no] = pcb.layer_structure.get_layer(i);
                 }
                 Object selected_value = javax.swing.JOptionPane.showInputDialog(null, resources.getString("select_end_layer"),
                         resources.getString("end_layer_selection"),
@@ -310,7 +311,7 @@ public final class WindowVia extends BoardSavableSubWindow {
                     resources.getString("adjust_circles"), javax.swing.JOptionPane.PLAIN_MESSAGE);
             int from_layer_no = pcb.layer_structure.get_no(start_layer);
             int to_layer_no = pcb.layer_structure.get_no(end_layer);
-            net.freerouting.freeroute.geometry.planar.ConvexShape[] padstack_shapes = new net.freerouting.freeroute.geometry.planar.ConvexShape[pcb.layer_structure.arr.length];
+            net.freerouting.freeroute.geometry.planar.ConvexShape[] padstack_shapes = new net.freerouting.freeroute.geometry.planar.ConvexShape[layer_count];
             net.freerouting.freeroute.board.CoordinateTransform coordinate_transform = board_frame.board_panel.board_handling.coordinate_transform;
             boolean shape_exists = false;
             for (int i = from_layer_no; i <= to_layer_no; ++i) {
@@ -351,7 +352,7 @@ public final class WindowVia extends BoardSavableSubWindow {
             layer_names = new javax.swing.JLabel[layer_count];
             circle_radius = new javax.swing.JFormattedTextField[layer_count];
             for (int i = 0; i < layer_count; ++i) {
-                String label_string = resources.getString("radius_on_layer") + " " + layer_structure.arr[from_layer_no + i].name + ": ";
+                String label_string = resources.getString("radius_on_layer") + " " + layer_structure.get_name_layer(from_layer_no + i) + ": ";
                 layer_names[i] = new javax.swing.JLabel(label_string);
                 java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(resources.getLocale());
                 number_format.setMaximumFractionDigits(7);

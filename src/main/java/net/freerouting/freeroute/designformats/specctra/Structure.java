@@ -127,7 +127,7 @@ class Structure extends ScopeKeyword {
                 continue;
             }
             net.freerouting.freeroute.board.ConductionArea curr_area = (net.freerouting.freeroute.board.ConductionArea) curr_ob;
-            if (p_par.board.layer_structure.arr[curr_area.get_layer()].is_signal) {
+            if (p_par.board.layer_structure.get_is_signal_layer(curr_area.get_layer_no())) {
                 // These conduction areas are written in the wiring scope.
                 continue;
             }
@@ -137,11 +137,11 @@ class Structure extends ScopeKeyword {
     }
 
     static void write_default_rules(WriteScopeParameter p_par) throws java.io.IOException {
-        // write the default rule using 0 as default layer.
+        // write the default rule using 0 as default layer_no.
         Rule.write_default_rule(p_par, 0);
 
-        // write the layer structure
-        for (int i = 0; i < p_par.board.layer_structure.arr.length; ++i) {
+        // write the layer_no structure
+        for (int i = 0; i < p_par.board.layer_structure.get_layer_count(); ++i) {
             boolean write_layer_rule
                     = p_par.board.rules.get_default_net_class().get_trace_half_width(i) != p_par.board.rules.get_default_net_class().get_trace_half_width(0) || !clearance_equals(p_par.board.rules.clearance_matrix, i, 0);
             Layer.write_scope(p_par, i, write_layer_rule);
@@ -185,9 +185,9 @@ class Structure extends ScopeKeyword {
 
     private static void write_keepout_scope(WriteScopeParameter p_par, net.freerouting.freeroute.board.ObstacleArea p_keepout) throws java.io.IOException {
         net.freerouting.freeroute.geometry.planar.Area keepout_area = p_keepout.get_area();
-        int layer_no = p_keepout.get_layer();
-        net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.arr[layer_no];
-        Layer keepout_layer = new Layer(board_layer.name, layer_no, board_layer.is_signal);
+        int layer_no = p_keepout.get_layer_no();
+        net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(layer_no);
+        Layer keepout_layer = new Layer(board_layer.get_name(), layer_no, board_layer.is_signal());
         net.freerouting.freeroute.geometry.planar.Shape boundary_shape;
         net.freerouting.freeroute.geometry.planar.Shape[] holes;
         if (keepout_area instanceof net.freerouting.freeroute.geometry.planar.Shape) {
@@ -422,7 +422,7 @@ class Structure extends ScopeKeyword {
             }
             boolean conduction_area_found = false;
             for (net.freerouting.freeroute.board.ConductionArea curr_conduction_area : conduction_areas) {
-                if (curr_conduction_area.get_layer() == curr_layer.no) {
+                if (curr_conduction_area.get_layer_no() == curr_layer.no) {
                     conduction_area_found = true;
                     break;
                 }
@@ -790,7 +790,7 @@ class Structure extends ScopeKeyword {
                         return false;
                     }
                     if (p_par.layer_structure != null) {
-                        // correct the layer_structure because another layer isr read
+                        // correct the layer_structure because another layer_no isr read
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
                 } else if (next_token == Keyword.VIA) {
@@ -967,7 +967,7 @@ class Structure extends ScopeKeyword {
             return false;
         }
         if (p_board_construction_info.bounding_shape == null) {
-            // happens if the boundary shape with layer pcb is missing
+            // happens if the boundary shape with layer_no pcb is missing
             if (p_board_construction_info.outline_shapes.isEmpty()) {
                 System.out.println("Structure.create_board: outline missing");
                 return false;
@@ -1060,7 +1060,7 @@ class Structure extends ScopeKeyword {
 
         // Insert the holes in the board outline as keepouts.
         for (PolylineShape curr_outline_hole : hole_shapes) {
-            for (int i = 0; i < board_layer_structure.arr.length; ++i) {
+            for (int i = 0; i < board_layer_structure.get_layer_count(); ++i) {
                 board.insert_obstacle(curr_outline_hole, i, 0, FixedState.SYSTEM_FIXED);
             }
         }

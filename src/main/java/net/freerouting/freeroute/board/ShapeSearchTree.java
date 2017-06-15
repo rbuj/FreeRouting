@@ -853,7 +853,7 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
         for (int i = 0; i < convex_shapes.length; ++i) {
             TileShape curr_convex_shape = convex_shapes[i];
 
-            int offset_width = this.clearance_compensation_value(p_obstacle_area.clearance_class_no(), p_obstacle_area.get_layer());
+            int offset_width = this.clearance_compensation_value(p_obstacle_area.clearance_class_no(), p_obstacle_area.get_layer_no());
             curr_convex_shape = (TileShape) curr_convex_shape.enlarge(offset_width);
             TileShape[] curr_tree_shapes = curr_convex_shape.divide_into_sections(max_tree_shape_width);
             for (int j = 0; j < curr_tree_shapes.length; ++j) {
@@ -874,7 +874,7 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
                 return new TileShape[0];
             }
             Collection<TileShape> tree_shape_list = new LinkedList<>();
-            for (int layer_no = 0; layer_no < this.board.layer_structure.arr.length; ++layer_no) {
+            for (int layer_no = 0; layer_no < this.board.layer_structure.get_layer_count(); ++layer_no) {
                 for (int i = 0; i < convex_shapes.length; ++i) {
                     TileShape curr_convex_shape = convex_shapes[i];
                     int offset_width = this.clearance_compensation_value(p_board_outline.clearance_class_no(), 0);
@@ -885,11 +885,11 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
             result = tree_shape_list.stream().toArray(TileShape[]::new);
         } else {
             // Only the line shapes of the outline are inserted as obstales into the tree.
-            result = new TileShape[p_board_outline.line_count() * this.board.layer_structure.arr.length];
+            result = new TileShape[p_board_outline.line_count() * this.board.layer_structure.get_layer_count()];
             int half_width = p_board_outline.get_half_width();
             Line[] curr_line_arr = new Line[3];
             int curr_no = 0;
-            for (int layer_no = 0; layer_no < this.board.layer_structure.arr.length; ++layer_no) {
+            for (int layer_no = 0; layer_no < this.board.layer_structure.get_layer_count(); ++layer_no) {
                 for (int shape_no = 0; shape_no < p_board_outline.shape_count(); ++shape_no) {
                     PolylineShape curr_outline_shape = p_board_outline.get_shape(shape_no);
                     int border_line_count = curr_outline_shape.border_line_count();

@@ -133,27 +133,28 @@ public class MenuState extends InteractiveState {
                 curr_return_state = swap_pin(hdlg.get_current_mouse_position());
                 break;
             case '+': {
-                // increase the current layer to the next signal layer
+                // increase the current layer_no to the next signal layer_no
                 net.freerouting.freeroute.board.LayerStructure layer_structure = hdlg.get_routing_board().layer_structure;
-                int current_layer_no = hdlg.settings.layer;
+                int layer_count = layer_structure.get_layer_count();
+                int current_layer_no = hdlg.settings.layer_no;
                 for (;;) {
                     ++current_layer_no;
-                    if (current_layer_no >= layer_structure.arr.length || layer_structure.arr[current_layer_no].is_signal) {
+                    if (current_layer_no >= layer_count || layer_structure.get_is_signal_layer(current_layer_no)) {
                         break;
                     }
                 }
-                if (current_layer_no < layer_structure.arr.length) {
+                if (current_layer_no < layer_count) {
                     hdlg.set_current_layer(current_layer_no);
                 }
                 break;
             }
             case '-': {
-                // decrease the current layer to the previous signal layer
+                // decrease the current layer_no to the previous signal layer_no
                 net.freerouting.freeroute.board.LayerStructure layer_structure = hdlg.get_routing_board().layer_structure;
-                int current_layer_no = hdlg.settings.layer;
+                int current_layer_no = hdlg.settings.layer_no;
                 for (;;) {
                     --current_layer_no;
-                    if (current_layer_no < 0 || layer_structure.arr[current_layer_no].is_signal) {
+                    if (current_layer_no < 0 || layer_structure.get_is_signal_layer(current_layer_no)) {
                         break;
                     }
                 }

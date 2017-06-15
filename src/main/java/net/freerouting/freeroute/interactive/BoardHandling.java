@@ -227,8 +227,8 @@ public final class BoardHandling {
     public void set_layer_visibility(int p_layer, double p_value) {
         if (p_layer >= 0 && p_layer < graphics_context.layer_count()) {
             graphics_context.set_layer_visibility(p_layer, p_value);
-            if (p_value == 0 && settings.layer == p_layer) {
-                // change the current layer to the best visible layer, if it becomes invisible;
+            if (p_value == 0 && settings.layer_no == p_layer) {
+                // change the current layer_no to the best visible layer_no, if it becomes invisible;
                 double best_visibility = 0;
                 int best_visible_layer = 0;
                 for (int i = 0; i < graphics_context.layer_count(); ++i) {
@@ -237,14 +237,14 @@ public final class BoardHandling {
                         best_visible_layer = i;
                     }
                 }
-                settings.layer = best_visible_layer;
+                settings.layer_no = best_visible_layer;
             }
         }
     }
 
     /**
      * Gets the trace half width used in interactive routing for the input net
-     * on the input layer.
+ on the input layer_no.
      */
     public int get_trace_halfwidth(int p_net_no, int p_layer) {
         int result;
@@ -324,7 +324,7 @@ public final class BoardHandling {
     }
 
     /**
-     * Changes the current layer in the interactive board handling.
+     * Changes the current layer_no in the interactive board handling.
      */
     public void set_current_layer(int p_layer) {
         if (board_is_read_only) {
@@ -341,17 +341,17 @@ public final class BoardHandling {
      * internal use inside this package.
      */
     void set_layer(int p_layer_no) {
-        net.freerouting.freeroute.board.Layer curr_layer = board.layer_structure.arr[p_layer_no];
-        screen_messages.set_layer(curr_layer.name);
-        settings.layer = p_layer_no;
+        net.freerouting.freeroute.board.Layer curr_layer = board.layer_structure.get_layer(p_layer_no);
+        screen_messages.set_layer(curr_layer.get_name());
+        settings.layer_no = p_layer_no;
 
-        // Change the selected layer in the select parameter window.
+        // Change the selected layer_no in the select parameter window.
         int signal_layer_no = board.layer_structure.get_signal_layer_no(curr_layer);
         if (!this.board_is_read_only) {
             this.panel.set_selected_signal_layer(signal_layer_no);
         }
 
-        // make the layer visible, if it is invisible
+        // make the layer_no visible, if it is invisible
         if (graphics_context.get_layer_visibility(p_layer_no) == 0) {
             graphics_context.set_layer_visibility(p_layer_no, 1);
             panel.board_frame.refresh_windows();
@@ -361,13 +361,12 @@ public final class BoardHandling {
     }
 
     /**
-     * Displays the current layer in the layer message field, and clears the
-     * field for the additional message.
+     * Displays the current layer_no in the layer_no message field, and clears the
+ field for the additional message.
      */
     public void display_layer_messsage() {
         screen_messages.clear_add_field();
-        net.freerouting.freeroute.board.Layer curr_layer = board.layer_structure.arr[this.settings.layer];
-        screen_messages.set_layer(curr_layer.name);
+        screen_messages.set_layer(board.layer_structure.get_name_layer(this.settings.layer_no));
     }
 
     /**
@@ -930,7 +929,7 @@ public final class BoardHandling {
         coordinate_transform = (CoordinateTransform) p_design.readObject();
         graphics_context = (GraphicsContext) p_design.readObject();
         board.set_test_level(p_test_level);
-        screen_messages.set_layer(board.layer_structure.arr[settings.layer].name);
+        screen_messages.set_layer(board.layer_structure.get_name_layer(settings.layer_no));
     }
 
     /**
@@ -1440,10 +1439,10 @@ public final class BoardHandling {
      */
     java.util.Set<Item> pick_items(FloatPoint p_location, ItemSelectionFilter p_item_filter) {
         IntPoint location = p_location.round();
-        java.util.Set<Item> result = board.pick_items(location, settings.layer, p_item_filter);
+        java.util.Set<Item> result = board.pick_items(location, settings.layer_no, p_item_filter);
         if (result.isEmpty() && settings.select_on_all_visible_layers) {
             for (int i = 0; i < graphics_context.layer_count(); ++i) {
-                if (i == settings.layer || graphics_context.get_layer_visibility(i) <= 0) {
+                if (i == settings.layer_no || graphics_context.get_layer_visibility(i) <= 0) {
                     continue;
                 }
                 result.addAll(board.pick_items(location, i, p_item_filter));

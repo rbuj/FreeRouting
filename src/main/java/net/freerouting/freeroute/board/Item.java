@@ -790,7 +790,7 @@ public abstract class Item implements Drawable, SearchTreeObject, ObjectInfoPane
         }
         // Also power planes are delete_fixed.
         if (this instanceof ConductionArea) {
-            if (!this.board.layer_structure.arr[((ObstacleArea) this).get_layer()].is_signal) {
+            if (!this.board.layer_structure.get_is_signal_layer(((ObstacleArea) this).get_layer_no())) {
                 return true;
             }
         }

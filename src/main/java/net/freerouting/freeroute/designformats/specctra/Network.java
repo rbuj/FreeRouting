@@ -149,7 +149,7 @@ public class Network extends ScopeKeyword {
         for (int i = 0; i < layer_count; ++i) {
             if (p_net_class.is_active_routing_layer(i)) {
                 p_par.file.write(" ");
-                p_par.file.write(p_par.board.layer_structure.arr[i].name);
+                p_par.file.write(p_par.board.layer_structure.get_name_layer(i));
             }
         }
         p_par.file.write(")");
@@ -971,8 +971,8 @@ public class Network extends ScopeKeyword {
                     }
                 } else {
                     // insert the obstacle on all signal layers
-                    for (int j = 0; j < routing_board.layer_structure.arr.length; ++j) {
-                        if (routing_board.layer_structure.arr[j].is_signal) {
+                    for (int j = 0; j < routing_board.layer_structure.get_layer_count(); ++j) {
+                        if (routing_board.layer_structure.get_is_signal_layer(j)) {
                             switch (k) {
                                 case 0:
                                     routing_board.insert_obstacle(curr_keepout.area, j, component_translation,

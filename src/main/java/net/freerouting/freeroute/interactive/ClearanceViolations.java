@@ -56,7 +56,7 @@ public class ClearanceViolations {
         Iterator<ClearanceViolation> it = list.iterator();
         while (it.hasNext()) {
             ClearanceViolation curr_violation = it.next();
-            double intensity = p_graphics_context.get_layer_visibility(curr_violation.layer);
+            double intensity = p_graphics_context.get_layer_visibility(curr_violation.layer_no);
             p_graphics_context.fill_area(curr_violation.shape, p_graphics, draw_color, intensity);
             // draw a circle around the violation.
             double draw_radius = curr_violation.first_item.board.rules.get_min_trace_half_width() * 5;

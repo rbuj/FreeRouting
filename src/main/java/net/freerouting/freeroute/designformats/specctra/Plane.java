@@ -37,9 +37,9 @@ public class Plane extends ScopeKeyword {
         }
         String net_name = p_par.board.rules.nets.get(p_conduction.get_net_no(0)).name;
         net.freerouting.freeroute.geometry.planar.Area curr_area = p_conduction.get_area();
-        int layer_no = p_conduction.get_layer();
-        net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.arr[layer_no];
-        Layer plane_layer = new Layer(board_layer.name, layer_no, board_layer.is_signal);
+        int layer_no = p_conduction.get_layer_no();
+        net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(layer_no);
+        Layer plane_layer = new Layer(board_layer.get_name(), layer_no, board_layer.is_signal());
         net.freerouting.freeroute.geometry.planar.Shape boundary_shape;
         net.freerouting.freeroute.geometry.planar.Shape[] holes;
         if (curr_area instanceof net.freerouting.freeroute.geometry.planar.Shape) {

@@ -111,9 +111,10 @@ public class GraphicsContext implements java.io.Serializable {
         item_color_table = new ItemColorTableModel(p_layer_structure);
         other_color_table = new OtherColorTableModel();
         color_intensity_table = new ColorIntensityTable();
-        layer_visibility_arr = new double[p_layer_structure.arr.length];
-        for (int i = 0; i < layer_visibility_arr.length; ++i) {
-            if (p_layer_structure.arr[i].is_signal) {
+        int layer_ount = p_layer_structure.get_layer_count();
+        layer_visibility_arr = new double[layer_ount];
+        for (int i = 0; i < layer_ount; ++i) {
+            if (p_layer_structure.get_is_signal_layer(i)) {
                 layer_visibility_arr[i] = 1;
             } else {
                 layer_visibility_arr[i] = 0;

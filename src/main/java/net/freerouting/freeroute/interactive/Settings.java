@@ -32,9 +32,9 @@ import net.freerouting.freeroute.board.RoutingBoard;
 public class Settings implements java.io.Serializable {
 
     /**
-     * the current layer
+     * the current layer_no
      */
-    int layer;
+    int layer_no;
     /**
      * allows pushing obstacles aside
      */
@@ -45,7 +45,7 @@ public class Settings implements java.io.Serializable {
     boolean drag_components_enabled;
     /**
      * indicates if interactive selections are made on all visible layers or
-     * only on the current layer.
+ only on the current layer_no.
      */
     boolean select_on_all_visible_layers;
     /**
@@ -131,10 +131,10 @@ public class Settings implements java.io.Serializable {
     Settings(RoutingBoard p_board, Logfile p_logfile) {
         this.logfile = p_logfile;
         // Initialise with default values.
-        layer = 0;
+        layer_no = 0;
         push_enabled = true;
         drag_components_enabled = true;
-        select_on_all_visible_layers = true; // else selection is only on the current layer
+        select_on_all_visible_layers = true; // else selection is only on the current layer_no
         is_stitch_route = false; // else interactive routing is dynamic
         trace_pull_tight_region_width = Integer.MAX_VALUE;
         trace_pull_tight_accuracy = 500;
@@ -162,7 +162,7 @@ public class Settings implements java.io.Serializable {
     Settings(Settings p_settings) {
         this.logfile = p_settings.logfile;
         this.read_only = p_settings.read_only;
-        this.layer = p_settings.layer;
+        this.layer_no = p_settings.layer_no;
         this.push_enabled = p_settings.push_enabled;
         this.drag_components_enabled = p_settings.drag_components_enabled;
         this.select_on_all_visible_layers = p_settings.select_on_all_visible_layers;
@@ -185,8 +185,8 @@ public class Settings implements java.io.Serializable {
         this.snapshot_attributes = new SnapshotAttributes(p_settings.snapshot_attributes);
     }
 
-    public int get_layer() {
-        return this.layer;
+    public int get_layer_no() {
+        return this.layer_no;
     }
 
     /**
@@ -212,7 +212,7 @@ public class Settings implements java.io.Serializable {
 
     /**
      * indicates if interactive selections are made on all visible layers or
-     * only on the current layer.
+ only on the current layer_no.
      */
     public boolean get_select_on_all_visible_layers() {
         return this.select_on_all_visible_layers;
@@ -314,7 +314,7 @@ public class Settings implements java.io.Serializable {
     }
 
     /**
-     * Get the trace half width in manual routing mode on layer p_layer_no
+     * Get the trace half width in manual routing mode on layer_no p_layer_no
      */
     public int get_manual_trace_half_width(int p_layer_no) {
         if (p_layer_no < 0 || p_layer_no >= this.manual_trace_half_width_arr.length) {
@@ -400,7 +400,7 @@ public class Settings implements java.io.Serializable {
 
     /**
      * Sets, if item selection is on all board layers or only on the current
-     * layer.
+ layer_no.
      */
     public void set_select_on_all_visible_layers(boolean p_value) {
         if (read_only) {
