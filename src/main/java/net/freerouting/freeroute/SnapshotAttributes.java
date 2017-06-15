@@ -20,7 +20,7 @@ import java.util.EnumMap;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 public final class SnapshotAttributes {
 

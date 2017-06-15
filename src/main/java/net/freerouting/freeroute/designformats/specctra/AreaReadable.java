@@ -22,7 +22,7 @@ import static net.freerouting.freeroute.designformats.specctra.ShapeReadable.rea
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 public interface AreaReadable {
 

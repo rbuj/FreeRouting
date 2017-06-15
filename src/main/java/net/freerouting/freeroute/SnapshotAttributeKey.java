@@ -18,7 +18,7 @@ package net.freerouting.freeroute;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 public enum SnapshotAttributeKey {
     OBJECT_COLORS, OBJECT_VISIBILITY, LAYER_VISIBILITY, DISPLAY_REGION,

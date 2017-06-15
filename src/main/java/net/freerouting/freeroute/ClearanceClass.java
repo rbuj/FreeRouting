@@ -18,7 +18,7 @@ package net.freerouting.freeroute;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 final class ClearanceClass {
 

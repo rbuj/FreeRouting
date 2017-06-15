@@ -21,7 +21,7 @@ import javax.swing.ComboBoxModel;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 @SuppressWarnings("serial")
 class ArrayComboBoxModel<E> extends AbstractListModel<E> implements ComboBoxModel<E> {

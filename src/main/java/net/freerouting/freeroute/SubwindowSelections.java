@@ -22,7 +22,7 @@ import java.util.Map.Entry;
 /**
  * Used for storing the subwindow filters in a snapshot.
  *
- * @author robert
+ * @author Robert Buj
  */
 @SuppressWarnings("serial")
 public final class SubwindowSelections implements java.io.Serializable {

@@ -20,7 +20,7 @@ package net.freerouting.freeroute.rules;
  * Used in the function DefaultItemClearanceClasses.get_default_clearance_class
  * to get the default claearance classes for item classes.
  *
- * @author robert
+ * @author Robert Buj
  */
 public enum ItemClass {
     NONE, TRACE, VIA, PIN, SMD, AREA;

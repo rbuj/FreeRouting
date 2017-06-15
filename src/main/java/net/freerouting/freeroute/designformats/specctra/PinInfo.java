@@ -18,7 +18,7 @@ package net.freerouting.freeroute.designformats.specctra;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 public class PinInfo {
 

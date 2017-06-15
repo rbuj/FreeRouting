@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 public class SignumTest {
     

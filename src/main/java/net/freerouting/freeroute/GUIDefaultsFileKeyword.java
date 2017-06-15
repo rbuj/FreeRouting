@@ -26,7 +26,7 @@ import net.freerouting.freeroute.interactive.BoardHandling;
 /**
  * Keywords in the gui defaults file.
  *
- * @author robert
+ * @author Robert Buj
  */
 enum GUIDefaultsFileKeyword {
     BACKGROUND {

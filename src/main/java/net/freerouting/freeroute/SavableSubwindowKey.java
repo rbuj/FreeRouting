@@ -18,7 +18,7 @@ package net.freerouting.freeroute;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 enum SavableSubwindowKey {
     ABOUT, ROUTE_PARAMETER, AUTOROUTE_PARAMETER, SELECT_PARAMETER, MOVE_PARAMETER,

@@ -18,7 +18,7 @@ package net.freerouting.freeroute.geometry.planar;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 public interface SideInterface {
 

@@ -18,7 +18,7 @@ package net.freerouting.freeroute.library;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 @SuppressWarnings("serial")
 public class PartPin implements Comparable<PartPin>, java.io.Serializable {

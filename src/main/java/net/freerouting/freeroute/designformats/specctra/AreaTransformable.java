@@ -22,7 +22,7 @@ import net.freerouting.freeroute.geometry.planar.PolylineShape;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 public interface AreaTransformable {
 

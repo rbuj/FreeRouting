@@ -20,7 +20,7 @@ import java.util.Collection;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 public class Area implements AreaReadable, AreaTransformable {
 

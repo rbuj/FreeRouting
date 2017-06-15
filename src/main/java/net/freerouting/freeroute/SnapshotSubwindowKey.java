@@ -18,7 +18,7 @@ package net.freerouting.freeroute;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 enum SnapshotSubwindowKey {
     INCOMPLETES, PACKAGES, NET_INFO, COMPONENTS, PADSTACKS

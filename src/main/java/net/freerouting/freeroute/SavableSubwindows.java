@@ -22,7 +22,7 @@ import java.util.EnumMap;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 final class SavableSubwindows {
 

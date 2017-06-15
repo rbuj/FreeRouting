@@ -24,7 +24,7 @@ import net.freerouting.freeroute.geometry.planar.Simplex;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 public class Padstack {
 

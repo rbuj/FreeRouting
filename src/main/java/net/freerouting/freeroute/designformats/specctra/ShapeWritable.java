@@ -21,7 +21,7 @@ import net.freerouting.freeroute.datastructures.IndentFileWriter;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
 public interface ShapeWritable {
 
