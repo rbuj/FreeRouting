@@ -19,6 +19,9 @@
  */
 package net.freerouting.freeroute.board;
 
+import com.google.common.collect.ImmutableList;
+import java.util.stream.Collectors;
+
 /**
  * Describes the layer structure of the board.
  *
@@ -27,13 +30,18 @@ package net.freerouting.freeroute.board;
 @SuppressWarnings("serial")
 public class LayerStructure implements java.io.Serializable {
 
-    private final Layer[] arr;
+    private final ImmutableList<Layer> layer_list;
+    private final ImmutableList<Layer> signal_layer_list;
 
     /**
      * Creates a new instance of LayerStructure
      */
     public LayerStructure(Layer[] p_layer_arr) {
-        arr = (p_layer_arr == null) ? null : p_layer_arr.clone();
+        layer_list = (p_layer_arr == null) ? null : ImmutableList.copyOf(p_layer_arr);
+        signal_layer_list = (p_layer_arr == null) ? null : ImmutableList.copyOf(
+                layer_list.stream()
+                        .filter(layer -> layer.is_signal())
+                        .collect(Collectors.toList()));
     }
 
     /**
@@ -41,10 +49,12 @@ public class LayerStructure implements java.io.Serializable {
      * if arr contains no layer with name p_name.
      */
     public int get_no(String p_name) {
-        for (int i = 0; i < arr.length; ++i) {
-            if (p_name.equals(arr[i].get_name())) {
-                return i;
+        int layer_no = 0;
+        for (Layer layer : layer_list) {
+            if (p_name.equals(layer.get_name())) {
+                return layer_no;
             }
+            ++layer_no;
         }
         return -1;
     }
@@ -54,41 +64,21 @@ public class LayerStructure implements java.io.Serializable {
      * contain p_layer.
      */
     public int get_no(Layer p_layer) {
-        for (int i = 0; i < arr.length; ++i) {
-            if (p_layer == arr[i]) {
-                return i;
-            }
-        }
-        return -1;
+        return layer_list.indexOf(p_layer);
     }
 
     /**
      * Returns the count of signal layers of this layer_structure.
      */
     public int signal_layer_count() {
-        int found_signal_layers = 0;
-        for (int i = 0; i < arr.length; ++i) {
-            if (arr[i].is_signal()) {
-                ++found_signal_layers;
-            }
-        }
-        return found_signal_layers;
+        return signal_layer_list.size();
     }
 
     /**
      * Gets the p_no-th signal layer of this layer structure.
      */
     public Layer get_signal_layer(int p_no) {
-        int found_signal_layers = 0;
-        for (int i = 0; i < arr.length; ++i) {
-            if (arr[i].is_signal()) {
-                if (p_no == found_signal_layers) {
-                    return arr[i];
-                }
-                ++found_signal_layers;
-            }
-        }
-        return arr[arr.length - 1];
+        return (p_no < signal_layer_list.size()) ? signal_layer_list.get(p_no) : layer_list.get(layer_list.size() - 1);
     }
 
     /**
@@ -96,11 +86,11 @@ public class LayerStructure implements java.io.Serializable {
      */
     public int get_signal_layer_no(Layer p_layer) {
         int found_signal_layers = 0;
-        for (int i = 0; i < arr.length; ++i) {
-            if (arr[i] == p_layer) {
+        for (Layer layer : layer_list) {
+            if (layer == p_layer) {
                 return found_signal_layers;
             }
-            if (arr[i].is_signal()) {
+            if (layer.is_signal()) {
                 ++found_signal_layers;
             }
         }
@@ -117,29 +107,26 @@ public class LayerStructure implements java.io.Serializable {
     }
 
     public boolean[] active_routing_layer_arr() {
-        if (arr == null) {
-            return null;
-        }
-        boolean[] active_routing_layer_arr = new boolean[arr.length];
-        for (int i = 0; i < arr.length; ++i) {
-            active_routing_layer_arr[i] = arr[i].is_signal();
+        boolean[] active_routing_layer_arr = new boolean[layer_list.size()];
+        for (int i = 0; i < layer_list.size(); ++i) {
+            active_routing_layer_arr[i] = layer_list.get(i).is_signal();
         }
         return active_routing_layer_arr;
     }
 
-    public int get_layer_count(){
-        return (arr == null) ? 0 : arr.length;
+    public int get_layer_count() {
+        return (layer_list == null) ? 0 : layer_list.size();
     }
 
     public boolean get_is_signal_layer(int index) {
-        return (arr == null) ? null : (arr[index] == null) ? null : arr[index].is_signal();
+        return (layer_list == null) ? null : layer_list.get(index).is_signal();
     }
 
     public String get_name_layer(int index) {
-        return (arr == null) ? null : (arr[index] == null) ? null : arr[index].get_name();
+        return (layer_list == null) ? null : layer_list.get(index).get_name();
     }
 
     public Layer get_layer(int index) {
-        return (arr == null) ? null : (arr[index] == null) ? null : arr[index];
+        return (layer_list == null) ? null : layer_list.get(index);
     }
 }
