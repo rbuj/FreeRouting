@@ -21,6 +21,8 @@ package net.freerouting.freeroute;
 
 import java.util.Locale;
 import javax.swing.JOptionPane;
+import static net.freerouting.freeroute.SignalLayerWithIndexBuilder.ALL_LAYER_INDEX;
+import static net.freerouting.freeroute.SignalLayerWithIndexBuilder.INNER_LAYER_INDEX;
 import net.freerouting.freeroute.board.ObjectInfoPanel.Printable;
 import net.freerouting.freeroute.rules.BoardRules;
 import net.freerouting.freeroute.rules.NetClass;
@@ -442,19 +444,19 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
                 this.data[i][ColumnName.MAX_TRACE_LENGTH.ordinal()] = (float) max_trace_length;
                 this.data[i][ColumnName.CLEARANCE_CLASS.ordinal()]
                         = board_rules.clearance_matrix.get_name(curr_net_class.get_trace_clearance_class());
-                Layer combo_layer = layer_combo_box.get_selected_layer();
+                SignalLayerWithIndex combo_layer = layer_combo_box.get_selected_layer();
                 set_trace_width_field(i, combo_layer);
                 this.data[i][ColumnName.ON_LAYER.ordinal()] = combo_layer.name;
             }
         }
 
-        void set_trace_width_field(int p_rule_no, Layer p_layer) {
+        void set_trace_width_field(int p_rule_no, SignalLayerWithIndex p_layer) {
             Float trace_width;
             net.freerouting.freeroute.interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;
             net.freerouting.freeroute.rules.BoardRules board_rules = board_handling.get_routing_board().rules;
             NetClass curr_net_class = board_rules.net_classes.get(p_rule_no);
             switch (p_layer.index) {
-                case ComboBoxLayer.ALL_LAYER_INDEX:
+                case ALL_LAYER_INDEX:
                     // all layers
                     if (curr_net_class.trace_width_is_layer_dependent()) {
                         trace_width = (float) -1;
@@ -463,7 +465,7 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
                         trace_width = (float) board_handling.coordinate_transform.board_to_user(2 * curr_net_class.get_trace_half_width(0));
                     }
                     break;
-                case ComboBoxLayer.INNER_LAYER_INDEX:
+                case INNER_LAYER_INDEX:
                     // all inner layers
 
                     if (curr_net_class.trace_width_is_inner_layer_dependent()) {
@@ -655,11 +657,11 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
                 NetClass curr_net_class = board_rules.net_classes.get(p_row);
 
                 switch (layer_index) {
-                    case ComboBoxLayer.ALL_LAYER_INDEX:
+                    case ALL_LAYER_INDEX:
                         curr_net_class.set_trace_half_width(curr_half_width);
                         curr_net_class.set_all_layers_active(is_active);
                         break;
-                    case ComboBoxLayer.INNER_LAYER_INDEX:
+                    case INNER_LAYER_INDEX:
                         curr_net_class.set_trace_half_width_on_inner(curr_half_width);
                         curr_net_class.set_all_inner_layers_active(is_active);
                         break;
@@ -669,10 +671,10 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
                         break;
                 }
             } else if (p_col == ColumnName.ON_LAYER.ordinal()) {
-                if (!(p_value instanceof Layer)) {
+                if (!(p_value instanceof SignalLayerWithIndex)) {
                     return;
                 }
-                set_trace_width_field(p_row, (Layer) p_value);
+                set_trace_width_field(p_row, (SignalLayerWithIndex) p_value);
             }
             this.data[p_row][p_col] = p_value;
             fireTableCellUpdated(p_row, p_col);

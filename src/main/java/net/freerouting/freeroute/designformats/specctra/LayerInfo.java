@@ -13,7 +13,7 @@
  *   GNU General Public License at <http://www.gnu.org/licenses/> 
  *   for more details.
  *
- * Layer.java
+ * LayerInfo.java
  *
  * Created on 15. Mai 2004, 08:29
  */
@@ -27,16 +27,16 @@ import java.util.LinkedList;
  *
  * @author alfons
  */
-public class Layer {
+public abstract class LayerInfo {
 
     /**
      * all layers of the board
      */
-    static final Layer PCB = new Layer("pcb", -1, false);
+    static final LayerInfo PCB = new LayerNotSignalInfo("pcb", -1);
     /**
      * the signal layers
      */
-    static final Layer SIGNAL = new Layer("signal", -1, true);
+    static final LayerInfo SIGNAL = new LayerSignalInfo("signal", -1);
 
     /**
      * Writes a layer scope in the stucture scope.
@@ -47,48 +47,40 @@ public class Layer {
         net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(p_layer_no);
         p_par.identifier_type.write(board_layer.get_name(), p_par.file);
         p_par.file.new_line();
-        p_par.file.write("(type ");
-        if (board_layer.is_signal()) {
-            p_par.file.write("signal)");
-        } else {
-            p_par.file.write("power)");
-        }
+        p_par.file.write("(type " + board_layer.get_type() + ")");
         if (p_write_rule) {
             Rule.write_default_rule(p_par, p_layer_no);
         }
         p_par.file.end_scope();
     }
 
-    public final String name;
-    public final int no;
-    public final boolean is_signal;
-    public final java.util.Collection<String> net_names;
+    final String name;
+    final int layer_no;
+    final java.util.Collection<String> net_names;
 
     /**
-     * Creates a new instance of Layer. p_no is the physical layer number
+     * Creates a new instance of Layer. p_layer_no is the physical layer number
      * starting with 0 at the component side and ending at the solder side. If
      * p_is_signal, the layer is a signal layer, otherwise it is a powerground
      * layer. For Layer objects describing more than 1 layer the number is -1.
      * p_net_names is a list of nets for this layer, if the layer is a power
      * plane.
      */
-    Layer(String p_name, int p_no, boolean p_is_signal, Collection<String> p_net_names) {
+    LayerInfo(String p_name, int p_layer_no, Collection<String> p_net_names) {
         name = p_name;
-        no = p_no;
-        is_signal = p_is_signal;
+        layer_no = p_layer_no;
         net_names = p_net_names;
     }
 
     /**
-     * Creates a new instance of Layer. p_no is the physical layer number
+     * Creates a new instance of Layer. p_layer_no is the physical layer number
      * starting with 0 at the component side and ending at the solder side. If
      * p_is_signal, the layer is a signal layer, otherwise it is a powerground
      * layer. For Layer objects describing more than 1 layer the number is -1.
      */
-    Layer(String p_name, int p_no, boolean p_is_signal) {
+    LayerInfo(String p_name, int p_layer_no) {
         name = p_name;
-        no = p_no;
-        is_signal = p_is_signal;
+        layer_no = p_layer_no;
         net_names = new LinkedList<>();
     }
 }

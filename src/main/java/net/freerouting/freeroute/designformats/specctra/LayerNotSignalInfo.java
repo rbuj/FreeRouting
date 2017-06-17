@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Robert Antoni Buj Gelonch {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
+ * Copyright (C) 2017 Your Organisation
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,29 +14,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.freerouting.freeroute;
+package net.freerouting.freeroute.designformats.specctra;
+
+import java.util.Collection;
 
 /**
  *
- * @author Robert Buj
+ * @author robert
  */
-public final class Layer {
+public class LayerNotSignalInfo extends LayerInfo {
 
-    final String name;
-
-    /**
-     * The index in the board layer_structure, -1 for the layers with name "all"
-     * or "inner"
-     */
-    final int index;
-
-    Layer(String p_name, int p_index) {
-        name = p_name;
-        index = p_index;
+    LayerNotSignalInfo(String p_name, int p_no) {
+        super(p_name, p_no);
     }
 
-    @Override
-    public String toString() {
-        return name;
+    LayerNotSignalInfo(String p_name, int p_no, Collection<String> p_net_names) {
+        super(p_name, p_no, p_net_names);
     }
 }

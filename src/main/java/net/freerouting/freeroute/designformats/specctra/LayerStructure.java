@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.designformats.specctra;
 
 import java.util.Collection;
+import net.freerouting.freeroute.board.SignalLayer;
 
 /**
  * Describes a layer structure read from a dsn file.
@@ -28,29 +29,32 @@ import java.util.Collection;
  */
 public class LayerStructure {
 
-    public final Layer[] arr;
+    public final LayerInfo[] arr;
 
     /**
      * Creates a new instance of LayerStructure from a list of layers
      */
-    LayerStructure(Collection<Layer> p_layer_list) {
-        arr = p_layer_list.stream().toArray(Layer[]::new);
+    LayerStructure(Collection<LayerInfo> p_layer_list) {
+        arr = p_layer_list.stream().toArray(LayerInfo[]::new);
     }
 
     /**
      * Creates a dsn-LayerStructure from a board LayerStructure.
      */
     LayerStructure(net.freerouting.freeroute.board.LayerStructure p_board_layer_structure) {
-        arr = new Layer[p_board_layer_structure.get_layer_count()];
-        for (int i = 0; i < arr.length; ++i) {
-            net.freerouting.freeroute.board.Layer board_layer = p_board_layer_structure.get_layer(i);
-            arr[i] = new Layer(board_layer.get_name(), i, board_layer.is_signal());
+        arr = new LayerInfo[p_board_layer_structure.get_layer_count()];
+        int i = 0;
+        for (net.freerouting.freeroute.board.Layer board_layer : p_board_layer_structure) {
+            arr[i] = (board_layer instanceof SignalLayer)
+                    ? new LayerSignalInfo(board_layer.get_name(), i)
+                    : new LayerNotSignalInfo(board_layer.get_name(), i);
+            ++i;
         }
     }
 
     /**
-     * returns the number of the layer with the name p_name, -1, if no layer
-     * with name p_name exists.
+     * returns the number of the layer with the name p_name, -1, if layer_no layer
+ with name p_name exists.
      */
     public int get_no(String p_name) {
         for (int i = 0; i < arr.length; ++i) {
@@ -72,8 +76,8 @@ public class LayerStructure {
      * Returns, if the net with name p_net_name contains a powwer plane.
      */
     public boolean contains_plane(String p_net_name) {
-        for (Layer curr_layer : arr) {
-            if (!curr_layer.is_signal && curr_layer.net_names.contains(p_net_name)) {
+        for (LayerInfo curr_layer : arr) {
+            if (curr_layer instanceof LayerNotSignalInfo && curr_layer.net_names.contains(p_net_name)) {
                 return true;
             }
         }

@@ -38,12 +38,12 @@ public class PolylinePath extends Path {
      */
     static Path read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
         try {
-            Layer layer;
+            LayerInfo layer;
             Object next_token = p_scanner.next_token();
             if (next_token == Keyword.PCB_SCOPE) {
-                layer = Layer.PCB;
+                layer = LayerInfo.PCB;
             } else if (next_token == Keyword.SIGNAL) {
-                layer = Layer.SIGNAL;
+                layer = LayerInfo.SIGNAL;
             } else {
                 if (p_layer_structure == null) {
                     throw new ReadScopeException("PolylinePath.read_scope: only layer types pcb or signal expected");
@@ -101,7 +101,7 @@ public class PolylinePath extends Path {
     /**
      * Creates a new instance of PolylinePath
      */
-    PolylinePath(Layer p_layer, double p_width, double[] p_corner_arr) {
+    PolylinePath(LayerInfo p_layer, double p_width, double[] p_corner_arr) {
         super(p_layer, p_width, p_corner_arr);
     }
 

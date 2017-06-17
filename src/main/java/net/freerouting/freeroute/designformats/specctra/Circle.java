@@ -35,15 +35,15 @@ public class Circle extends Shape {
      */
     static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
         try {
-            Layer circle_layer = null;
+            LayerInfo circle_layer = null;
             boolean layer_ok = true;
             double circle_coor[] = new double[3];
 
             Object next_token = p_scanner.next_token();
             if (next_token == Keyword.PCB_SCOPE) {
-                circle_layer = Layer.PCB;
+                circle_layer = LayerInfo.PCB;
             } else if (next_token == Keyword.SIGNAL) {
-                circle_layer = Layer.SIGNAL;
+                circle_layer = LayerInfo.SIGNAL;
             } else {
                 if (p_layer_structure == null) {
                     throw new ReadScopeException("Shape.read_circle_scope: p_layer_structure != null expected");
@@ -96,12 +96,12 @@ public class Circle extends Shape {
      * dimension 3. p_coor [0] is the radius of the circle, p_coor [1] is the x
      * coordinate of the circle, p_coor [2] is the y coordinate of the circle.
      */
-    private Circle(Layer p_layer, double[] p_coor) {
+    private Circle(LayerInfo p_layer, double[] p_coor) {
         super(p_layer);
         coor = (p_coor == null) ? null : p_coor.clone();
     }
 
-    Circle(Layer p_layer, double p_radius, double p_center_x, double p_center_y) {
+    Circle(LayerInfo p_layer, double p_radius, double p_center_x, double p_center_y) {
         super(p_layer);
         coor = new double[3];
         coor[0] = p_radius;

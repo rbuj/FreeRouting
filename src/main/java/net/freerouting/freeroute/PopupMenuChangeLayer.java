@@ -43,7 +43,7 @@ class PopupMenuChangeLayer extends javax.swing.JMenu {
         int curr_signal_layer_no = 0;
         for (int i = 0; i < layer_structure.get_layer_count(); ++i) {
             net.freerouting.freeroute.board.Layer curr_layer = layer_structure.get_layer(i);
-            if (curr_layer.is_signal()) {
+            if (curr_layer instanceof net.freerouting.freeroute.board.SignalLayer) {
                 this.item_arr[curr_signal_layer_no] = new LayermenuItem(i);
                 this.item_arr[curr_signal_layer_no].setText(curr_layer.get_name());
                 ++curr_signal_layer_no;

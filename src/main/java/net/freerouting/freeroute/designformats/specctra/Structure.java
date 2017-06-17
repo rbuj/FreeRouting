@@ -25,6 +25,7 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.freerouting.freeroute.board.FixedState;
+import net.freerouting.freeroute.board.SignalLayer;
 import net.freerouting.freeroute.board.TestLevel;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
@@ -51,7 +52,7 @@ class Structure extends ScopeKeyword {
         p_par.file.start_scope("boundary");
         IntBox bounds = p_par.board.get_bounding_box();
         double[] rect_coor = p_par.coordinate_transform.board_to_dsn(bounds);
-        Rectangle bounding_rectangle = new Rectangle(Layer.PCB, rect_coor);
+        Rectangle bounding_rectangle = new Rectangle(LayerInfo.PCB, rect_coor);
         bounding_rectangle.write_scope(p_par.file, p_par.identifier_type);
         p_par.file.end_scope();
         // lookup the outline in the board
@@ -74,7 +75,7 @@ class Structure extends ScopeKeyword {
 
         // write the outline
         for (int i = 0; i < outline.shape_count(); ++i) {
-            Shape outline_shape = p_par.coordinate_transform.board_to_dsn(outline.get_shape(i), Layer.SIGNAL);
+            Shape outline_shape = p_par.coordinate_transform.board_to_dsn(outline.get_shape(i), LayerInfo.SIGNAL);
             p_par.file.start_scope("boundary");
             outline_shape.write_scope(p_par.file, p_par.identifier_type);
             p_par.file.end_scope();
@@ -144,7 +145,7 @@ class Structure extends ScopeKeyword {
         for (int i = 0; i < p_par.board.layer_structure.get_layer_count(); ++i) {
             boolean write_layer_rule
                     = p_par.board.rules.get_default_net_class().get_trace_half_width(i) != p_par.board.rules.get_default_net_class().get_trace_half_width(0) || !clearance_equals(p_par.board.rules.clearance_matrix, i, 0);
-            Layer.write_scope(p_par, i, write_layer_rule);
+            LayerInfo.write_scope(p_par, i, write_layer_rule);
         }
     }
 
@@ -187,7 +188,9 @@ class Structure extends ScopeKeyword {
         net.freerouting.freeroute.geometry.planar.Area keepout_area = p_keepout.get_area();
         int layer_no = p_keepout.get_layer_no();
         net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(layer_no);
-        Layer keepout_layer = new Layer(board_layer.get_name(), layer_no, board_layer.is_signal());
+        LayerInfo keepout_layer = (board_layer instanceof SignalLayer)
+                ? new LayerSignalInfo(board_layer.get_name(), layer_no)
+                : new LayerNotSignalInfo(board_layer.get_name(), layer_no);
         net.freerouting.freeroute.geometry.planar.Shape boundary_shape;
         net.freerouting.freeroute.geometry.planar.Shape[] holes;
         if (keepout_area instanceof net.freerouting.freeroute.geometry.planar.Shape) {
@@ -240,13 +243,13 @@ class Structure extends ScopeKeyword {
         if (curr_shape == null) {
             throw new ReadScopeException("Structure.read_boundary_scope: shape is null");
         }
-        if (curr_shape.layer == Layer.PCB) {
+        if (curr_shape.layer == LayerInfo.PCB) {
             if (p_board_construction_info.bounding_shape == null) {
                 p_board_construction_info.bounding_shape = curr_shape;
             } else {
                 System.out.println("Structure.read_boundary_scope: exact 1 bounding_shape expected");
             }
-        } else if (curr_shape.layer == Layer.SIGNAL) {
+        } else if (curr_shape.layer == LayerInfo.SIGNAL) {
             p_board_construction_info.outline_shapes.add(curr_shape);
         } else {
             System.out.println("Structure.read_boundary_scope: unexpected layer");
@@ -308,7 +311,9 @@ class Structure extends ScopeKeyword {
                 next_token = p_scanner.next_token();
             }
             if (layer_ok) {
-                Layer curr_layer = new Layer(layer_string, p_board_construction_info.found_layer_count, is_signal, net_names);
+                LayerInfo curr_layer = (is_signal)
+                        ? new LayerSignalInfo(layer_string, p_board_construction_info.found_layer_count, net_names)
+                        : new LayerNotSignalInfo(layer_string, p_board_construction_info.found_layer_count, net_names);
                 p_board_construction_info.layer_info.add(curr_layer);
                 ++p_board_construction_info.found_layer_count;
             }
@@ -413,16 +418,16 @@ class Structure extends ScopeKeyword {
         p_file.end_scope();
     }
 
-    private static void insert_missing_power_planes(Collection<Layer> p_layer_info,
+    private static void insert_missing_power_planes(Collection<LayerInfo> p_layer_info,
             NetList p_netlist, net.freerouting.freeroute.board.BasicBoard p_board) {
         Collection<net.freerouting.freeroute.board.ConductionArea> conduction_areas = p_board.get_conduction_areas();
-        for (Layer curr_layer : p_layer_info) {
-            if (curr_layer.is_signal) {
+        for (LayerInfo curr_layer : p_layer_info) {
+            if (curr_layer instanceof LayerSignalInfo) {
                 continue;
             }
             boolean conduction_area_found = false;
             for (net.freerouting.freeroute.board.ConductionArea curr_conduction_area : conduction_areas) {
-                if (curr_conduction_area.get_layer_no() == curr_layer.no) {
+                if (curr_conduction_area.get_layer_no() == curr_layer.layer_no) {
                     conduction_area_found = true;
                     break;
                 }
@@ -445,7 +450,7 @@ class Structure extends ScopeKeyword {
                 }
                 int[] net_numbers = new int[1];
                 net_numbers[0] = curr_net.net_number;
-                p_board.insert_conduction_area(p_board.bounding_box, curr_layer.no, net_numbers, BoardRules.clearance_class_none(),
+                p_board.insert_conduction_area(p_board.bounding_box, curr_layer.layer_no, net_numbers, BoardRules.clearance_class_none(),
                         false, FixedState.SYSTEM_FIXED);
             }
         }
@@ -691,15 +696,15 @@ class Structure extends ScopeKeyword {
             System.out.println("Structure.insert_keepout: board not initialized");
             return false;
         }
-        Layer curr_layer = (p_area.shape_list.iterator().next()).layer;
-        if (curr_layer == Layer.SIGNAL) {
+        LayerInfo curr_layer = (p_area.shape_list.iterator().next()).layer;
+        if (curr_layer == LayerInfo.SIGNAL) {
             for (int i = 0; i < board.get_layer_count(); ++i) {
-                if (p_par.layer_structure.arr[i].is_signal) {
+                if (p_par.layer_structure.arr[i] instanceof LayerSignalInfo) {
                     insert_keepout(board, keepout_area, i, p_area.clearance_class_name, p_keepout_type, p_fixed_state);
                 }
             }
-        } else if (curr_layer.no >= 0) {
-            insert_keepout(board, keepout_area, curr_layer.no, p_area.clearance_class_name, p_keepout_type, p_fixed_state);
+        } else if (curr_layer.layer_no >= 0) {
+            insert_keepout(board, keepout_area, curr_layer.layer_no, p_area.clearance_class_name, p_keepout_type, p_fixed_state);
         } else {
             System.out.println("Structure.insert_keepout: unknown layer name");
             return false;
@@ -930,8 +935,8 @@ class Structure extends ScopeKeyword {
             }
             net.freerouting.freeroute.geometry.planar.Area plane_area
                     = AreaTransformable.transform_area_to_board(plane_info.area.shape_list, p_par.coordinate_transform);
-            Layer curr_layer = (plane_info.area.shape_list.iterator().next()).layer;
-            if (curr_layer.no >= 0) {
+            LayerInfo curr_layer = (plane_info.area.shape_list.iterator().next()).layer;
+            if (curr_layer.layer_no >= 0) {
                 int clearance_class_no;
                 if (plane_info.area.clearance_class_name != null) {
                     clearance_class_no = board.rules.clearance_matrix.get_no(plane_info.area.clearance_class_name);
@@ -944,7 +949,7 @@ class Structure extends ScopeKeyword {
                 }
                 int[] net_numbers = new int[1];
                 net_numbers[0] = curr_net.net_number;
-                board.insert_conduction_area(plane_area, curr_layer.no, net_numbers, clearance_class_no,
+                board.insert_conduction_area(plane_area, curr_layer.layer_no, net_numbers, clearance_class_no,
                         false, FixedState.SYSTEM_FIXED);
             } else {
                 System.out.println("Plane.read_scope: unexpected layer name");
@@ -982,14 +987,16 @@ class Structure extends ScopeKeyword {
         }
         Rectangle bounding_box = p_board_construction_info.bounding_shape.bounding_box();
         net.freerouting.freeroute.board.Layer[] board_layer_arr = new net.freerouting.freeroute.board.Layer[layer_count];
-        Iterator<Layer> it = p_board_construction_info.layer_info.iterator();
+        Iterator<LayerInfo> it = p_board_construction_info.layer_info.iterator();
         for (int i = 0; i < layer_count; ++i) {
-            Layer curr_layer = it.next();
-            if (curr_layer.no < 0 || curr_layer.no >= layer_count) {
+            LayerInfo curr_layer = it.next();
+            if (curr_layer.layer_no < 0 || curr_layer.layer_no >= layer_count) {
                 System.out.println("Structure.create_board: illegal layer number");
                 return false;
             }
-            board_layer_arr[i] = new net.freerouting.freeroute.board.Layer(curr_layer.name, curr_layer.is_signal);
+            board_layer_arr[i] = (curr_layer instanceof LayerSignalInfo)
+                    ? new net.freerouting.freeroute.board.SignalLayer(curr_layer.name)
+                    : new net.freerouting.freeroute.board.NotSignalLayer(curr_layer.name);
         }
         net.freerouting.freeroute.board.LayerStructure board_layer_structure = new net.freerouting.freeroute.board.LayerStructure(board_layer_arr);
         p_par.layer_structure = new LayerStructure(p_board_construction_info.layer_info);
@@ -1072,7 +1079,7 @@ class Structure extends ScopeKeyword {
 
     private static class BoardConstructionInfo {
 
-        Collection<Layer> layer_info = new LinkedList<>();
+        Collection<LayerInfo> layer_info = new LinkedList<>();
         Shape bounding_shape;
         java.util.List<Shape> outline_shapes = new LinkedList<>();
         String outline_clearance_class_name = null;

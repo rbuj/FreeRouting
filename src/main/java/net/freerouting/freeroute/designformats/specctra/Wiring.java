@@ -29,6 +29,7 @@ import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.ItemSelectionFilter;
 import net.freerouting.freeroute.board.PolylineTrace;
 import net.freerouting.freeroute.board.RoutingBoard;
+import net.freerouting.freeroute.board.SignalLayer;
 import net.freerouting.freeroute.board.Trace;
 import net.freerouting.freeroute.board.Via;
 import net.freerouting.freeroute.datastructures.IdentifierType;
@@ -116,7 +117,9 @@ class Wiring extends ScopeKeyword {
         PolylineTrace curr_wire = (PolylineTrace) p_wire;
         int layer_no = curr_wire.get_layer();
         net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(layer_no);
-        Layer curr_layer = new Layer(board_layer.get_name(), layer_no, board_layer.is_signal());
+        LayerInfo curr_layer = (board_layer instanceof SignalLayer)
+                    ? new LayerSignalInfo(board_layer.get_name(), layer_no)
+                    : new LayerNotSignalInfo(board_layer.get_name(), layer_no);
         double wire_width = p_par.coordinate_transform.board_to_dsn(2 * curr_wire.get_half_width());
         net.freerouting.freeroute.rules.Net wire_net = null;
         if (curr_wire.net_count() > 0) {
@@ -159,7 +162,9 @@ class Wiring extends ScopeKeyword {
         net.freerouting.freeroute.geometry.planar.Area curr_area = p_conduction_area.get_area();
         int layer_no = p_conduction_area.get_layer_no();
         net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(layer_no);
-        Layer conduction_layer = new Layer(board_layer.get_name(), layer_no, board_layer.is_signal());
+        LayerInfo conduction_layer = (board_layer instanceof SignalLayer)
+                    ? new LayerSignalInfo(board_layer.get_name(), layer_no)
+                    : new LayerNotSignalInfo(board_layer.get_name(), layer_no);
         net.freerouting.freeroute.geometry.planar.Shape boundary_shape;
         net.freerouting.freeroute.geometry.planar.Shape[] holes;
         if (curr_area instanceof net.freerouting.freeroute.geometry.planar.Shape) {
@@ -423,10 +428,10 @@ class Wiring extends ScopeKeyword {
         int layer_no;
         int half_width;
         if (path != null) {
-            layer_no = path.layer.no;
+            layer_no = path.layer.layer_no;
             half_width = (int) Math.round(p_par.coordinate_transform.dsn_to_board(path.width / 2));
         } else {
-            layer_no = border_shape.layer.no;
+            layer_no = border_shape.layer.layer_no;
             half_width = 0;
         }
         if (layer_no < 0 || layer_no >= board.get_layer_count()) {

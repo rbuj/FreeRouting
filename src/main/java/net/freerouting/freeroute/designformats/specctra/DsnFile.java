@@ -23,6 +23,7 @@ import java.io.OutputStream;
 import java.io.Reader;
 import net.freerouting.freeroute.board.BasicBoard;
 import net.freerouting.freeroute.board.BoardObservers;
+import net.freerouting.freeroute.board.NotSignalLayer;
 import net.freerouting.freeroute.board.TestLevel;
 import net.freerouting.freeroute.datastructures.IdNoGenerator;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
@@ -125,7 +126,7 @@ public class DsnFile {
                 continue;
             }
             net.freerouting.freeroute.board.Layer curr_layer = routing_board.layer_structure.get_layer(layer_no);
-            if (!curr_layer.is_signal() || layer_no == 0 || layer_no == layer_count - 1) {
+            if (curr_layer instanceof NotSignalLayer || layer_no == 0 || layer_no == layer_count - 1) {
                 continue;
             }
             net.freerouting.freeroute.geometry.planar.TileShape[] convex_pieces = curr_conduction_area.get_area().split_to_convex();

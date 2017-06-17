@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import net.freerouting.freeroute.board.Item;
+import net.freerouting.freeroute.board.SignalLayer;
 
 /**
  * Class for reading and writing package scopes from dsn-files.
@@ -123,7 +124,7 @@ public class Package {
         // write the package outline.
         for (int i = 0; i < p_package.outline.length; ++i) {
             p_par.file.start_scope("outline");
-            Shape curr_outline = p_par.coordinate_transform.board_to_dsn_rel(p_package.outline[i], Layer.SIGNAL);
+            Shape curr_outline = p_par.coordinate_transform.board_to_dsn_rel(p_package.outline[i], LayerInfo.SIGNAL);
             curr_outline.write_scope(p_par.file, p_par.identifier_type);
             p_par.file.end_scope();
         }
@@ -132,12 +133,14 @@ public class Package {
 
     private static void write_package_keepout(net.freerouting.freeroute.library.Package.Keepout p_keepout, WriteScopeParameter p_par,
             boolean p_is_via_keepout) throws java.io.IOException {
-        Layer keepout_layer;
-        if (p_keepout.layer >= 0) {
-            net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(p_keepout.layer);
-            keepout_layer = new Layer(board_layer.get_name(), p_keepout.layer, board_layer.is_signal());
+        LayerInfo keepout_layer;
+        if (p_keepout.layer_no >= 0) {
+            net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(p_keepout.layer_no);
+            keepout_layer = (board_layer instanceof SignalLayer)
+                    ? new LayerSignalInfo(board_layer.get_name(), p_keepout.layer_no)
+                    : new LayerNotSignalInfo(board_layer.get_name(), p_keepout.layer_no);
         } else {
-            keepout_layer = Layer.SIGNAL;
+            keepout_layer = LayerInfo.SIGNAL;
         }
         net.freerouting.freeroute.geometry.planar.Shape boundary_shape;
         net.freerouting.freeroute.geometry.planar.Shape[] holes;

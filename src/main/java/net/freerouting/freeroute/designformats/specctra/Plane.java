@@ -21,6 +21,7 @@ package net.freerouting.freeroute.designformats.specctra;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.freerouting.freeroute.board.SignalLayer;
 
 /**
  * Class for reading and writing plane scopes from dsn-files.
@@ -39,7 +40,9 @@ public class Plane extends ScopeKeyword {
         net.freerouting.freeroute.geometry.planar.Area curr_area = p_conduction.get_area();
         int layer_no = p_conduction.get_layer_no();
         net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(layer_no);
-        Layer plane_layer = new Layer(board_layer.get_name(), layer_no, board_layer.is_signal());
+        LayerInfo plane_layer = (board_layer instanceof SignalLayer)
+                    ? new LayerSignalInfo(board_layer.get_name(), layer_no)
+                    : new LayerNotSignalInfo(board_layer.get_name(), layer_no);
         net.freerouting.freeroute.geometry.planar.Shape boundary_shape;
         net.freerouting.freeroute.geometry.planar.Shape[] holes;
         if (curr_area instanceof net.freerouting.freeroute.geometry.planar.Shape) {

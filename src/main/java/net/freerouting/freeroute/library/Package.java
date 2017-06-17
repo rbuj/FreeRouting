@@ -193,12 +193,12 @@ public class Package implements Comparable<Package>, net.freerouting.freeroute.b
 
         public final String name;
         public final Area area;
-        public final int layer;
+        public final int layer_no;
 
-        public Keepout(String p_name, Area p_area, int p_layer) {
-            name = p_name;
-            area = p_area;
-            layer = p_layer;
+        public Keepout(String name, Area area, int layer_no) {
+            this.name = name;
+            this.area = area;
+            this.layer_no = layer_no;
         }
     }
 }

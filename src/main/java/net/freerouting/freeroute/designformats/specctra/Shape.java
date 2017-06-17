@@ -26,9 +26,9 @@ package net.freerouting.freeroute.designformats.specctra;
  */
 public abstract class Shape implements ShapeReadable, ShapeWritable, ShapeTransformable {
 
-    public final Layer layer;
+    public final LayerInfo layer;
 
-    protected Shape(Layer p_layer) {
+    protected Shape(LayerInfo p_layer) {
         layer = p_layer;
     }
 

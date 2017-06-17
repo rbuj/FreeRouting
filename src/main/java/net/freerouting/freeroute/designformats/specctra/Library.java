@@ -150,27 +150,27 @@ public class Library extends ScopeKeyword {
                 Iterator<Area> it2 = curr_package.keepouts.iterator();
                 for (int i = 0; i < keepout_arr.length; ++i) {
                     Area curr_keepout = it2.next();
-                    Layer curr_layer = curr_keepout.shape_list.iterator().next().layer;
+                    LayerInfo curr_layer = curr_keepout.shape_list.iterator().next().layer;
                     net.freerouting.freeroute.geometry.planar.Area curr_area = AreaTransformable.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
-                    keepout_arr[i] = new net.freerouting.freeroute.library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.no);
+                    keepout_arr[i] = new net.freerouting.freeroute.library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.layer_no);
                 }
 
                 net.freerouting.freeroute.library.Package.Keepout[] via_keepout_arr = new net.freerouting.freeroute.library.Package.Keepout[curr_package.via_keepouts.size()];
                 it2 = curr_package.via_keepouts.iterator();
                 for (int i = 0; i < via_keepout_arr.length; ++i) {
                     Area curr_keepout = it2.next();
-                    Layer curr_layer = (curr_keepout.shape_list.iterator().next()).layer;
+                    LayerInfo curr_layer = (curr_keepout.shape_list.iterator().next()).layer;
                     net.freerouting.freeroute.geometry.planar.Area curr_area = AreaTransformable.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
-                    via_keepout_arr[i] = new net.freerouting.freeroute.library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.no);
+                    via_keepout_arr[i] = new net.freerouting.freeroute.library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.layer_no);
                 }
 
                 net.freerouting.freeroute.library.Package.Keepout[] place_keepout_arr = new net.freerouting.freeroute.library.Package.Keepout[curr_package.place_keepouts.size()];
                 it2 = curr_package.place_keepouts.iterator();
                 for (int i = 0; i < place_keepout_arr.length; ++i) {
                     Area curr_keepout = it2.next();
-                    Layer curr_layer = (curr_keepout.shape_list.iterator().next()).layer;
+                    LayerInfo curr_layer = (curr_keepout.shape_list.iterator().next()).layer;
                     net.freerouting.freeroute.geometry.planar.Area curr_area = AreaTransformable.transform_area_to_board_rel(curr_keepout.shape_list, p_par.coordinate_transform);
-                    place_keepout_arr[i] = new net.freerouting.freeroute.library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.no);
+                    place_keepout_arr[i] = new net.freerouting.freeroute.library.Package.Keepout(curr_keepout.area_name, curr_area, curr_layer.layer_no);
                 }
 
                 board.library.packages.add(curr_package.name, pin_arr, outline_arr,

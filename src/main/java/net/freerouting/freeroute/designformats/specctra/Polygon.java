@@ -41,12 +41,12 @@ public class Polygon extends Shape {
      */
     static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
         try {
-            Layer polygon_layer = null;
+            LayerInfo polygon_layer = null;
             Object next_token = p_scanner.next_token();
             if (next_token == Keyword.PCB_SCOPE) {
-                polygon_layer = Layer.PCB;
+                polygon_layer = LayerInfo.PCB;
             } else if (next_token == Keyword.SIGNAL) {
-                polygon_layer = Layer.SIGNAL;
+                polygon_layer = LayerInfo.SIGNAL;
             } else {
                 if (p_layer_structure == null) {
                     throw new ReadScopeException("Shape.read_polygon_scope: only layer types pcb or signal expected");
@@ -109,7 +109,7 @@ public class Polygon extends Shape {
      * dimension 2 * point_count and contains x0, y0, x1, y1, ... If the polygon
      * is used as rectangle,
      */
-    Polygon(Layer p_layer, double[] p_coor) {
+    Polygon(LayerInfo p_layer, double[] p_coor) {
         super(p_layer);
         coor = (p_coor == null) ? null : p_coor.clone();
     }

@@ -32,6 +32,8 @@ import java.io.Reader;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Set;
+import static net.freerouting.freeroute.SignalLayerWithIndexBuilder.ALL_LAYER_INDEX;
+import static net.freerouting.freeroute.SignalLayerWithIndexBuilder.INNER_LAYER_INDEX;
 import net.freerouting.freeroute.board.BoardObservers;
 import net.freerouting.freeroute.board.CoordinateTransform;
 import net.freerouting.freeroute.board.FixedState;
@@ -386,12 +388,12 @@ public final class BoardHandling {
      */
     public void set_manual_trace_half_width(int p_layer_no, int p_value) {
         switch (p_layer_no) {
-            case net.freerouting.freeroute.ComboBoxLayer.ALL_LAYER_INDEX:
+            case ALL_LAYER_INDEX:
                 for (int i = 0; i < settings.manual_trace_half_width_arr.length; ++i) {
                     this.settings.set_manual_trace_half_width(i, p_value);
                 }
                 break;
-            case net.freerouting.freeroute.ComboBoxLayer.INNER_LAYER_INDEX:
+            case INNER_LAYER_INDEX:
                 for (int i = 1; i < settings.manual_trace_half_width_arr.length - 1; ++i) {
                     this.settings.set_manual_trace_half_width(i, p_value);
                 }

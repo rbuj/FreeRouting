@@ -35,9 +35,9 @@ public class LayerStructureTest {
     @Before
     public void setUp() {
         Layer[] arr = new Layer[]{
-            new Layer("Layer#0", false),
-            new Layer("Layer#1", true),
-            new Layer("Layer#2", false)
+            new NotSignalLayer("Layer#0"),
+            new SignalLayer("Layer#1"),
+            new NotSignalLayer("Layer#2")
         };
         layer_structure = new LayerStructure(arr);
     }

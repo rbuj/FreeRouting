@@ -187,7 +187,7 @@ public class CoordinateTransform implements java.io.Serializable {
     /**
      * Transforms a board shape to a dsn shape.
      */
-    public Shape board_to_dsn(net.freerouting.freeroute.geometry.planar.Shape p_board_shape, Layer p_layer) {
+    public Shape board_to_dsn(net.freerouting.freeroute.geometry.planar.Shape p_board_shape, LayerInfo p_layer) {
         Shape result;
         if (p_board_shape instanceof IntBox) {
             result = new Rectangle(p_layer, board_to_dsn((IntBox) p_board_shape));
@@ -211,7 +211,7 @@ public class CoordinateTransform implements java.io.Serializable {
      * Transforms the relative (vector) coordinates of a geometry.planar.Shape
      * to a specctra dsn shape.
      */
-    public Shape board_to_dsn_rel(net.freerouting.freeroute.geometry.planar.Shape p_board_shape, Layer p_layer) {
+    public Shape board_to_dsn_rel(net.freerouting.freeroute.geometry.planar.Shape p_board_shape, LayerInfo p_layer) {
         Shape result;
         if (p_board_shape instanceof IntBox) {
             result = new Rectangle(p_layer, board_to_dsn_rel((IntBox) p_board_shape));

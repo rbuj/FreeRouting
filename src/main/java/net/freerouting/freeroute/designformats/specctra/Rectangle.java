@@ -37,14 +37,14 @@ public class Rectangle extends Shape {
      */
     static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
         try {
-            Layer rect_layer = null;
+            LayerInfo rect_layer = null;
             double rect_coor[] = new double[4];
 
             Object next_token = p_scanner.next_token();
             if (next_token == Keyword.PCB_SCOPE) {
-                rect_layer = Layer.PCB;
+                rect_layer = LayerInfo.PCB;
             } else if (next_token == Keyword.SIGNAL) {
-                rect_layer = Layer.SIGNAL;
+                rect_layer = LayerInfo.SIGNAL;
             } else if (p_layer_structure != null) {
                 if (!(next_token instanceof String)) {
                     throw new ReadScopeException("Shape.read_rectangle_scope: layer name string expected");
@@ -58,7 +58,7 @@ public class Rectangle extends Shape {
                     rect_layer = p_layer_structure.arr[layer_no];
                 }
             } else {
-                rect_layer = Layer.SIGNAL;
+                rect_layer = LayerInfo.SIGNAL;
             }
             // fill the the rectangle
             for (int i = 0; i < 4; ++i) {
@@ -93,7 +93,7 @@ public class Rectangle extends Shape {
      * contains the rectangle coordinates in the following order: lower left x,
      * lower left y, upper right x, uppper right y.
      */
-    Rectangle(Layer p_layer, double[] p_coor) {
+    Rectangle(LayerInfo p_layer, double[] p_coor) {
         super(p_layer);
         coor = (p_coor == null) ? null : p_coor.clone();
     }

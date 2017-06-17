@@ -21,6 +21,7 @@ package net.freerouting.freeroute.boardgraphics;
 
 import java.awt.Color;
 import java.util.Locale;
+import net.freerouting.freeroute.board.SignalLayer;
 
 /**
  * Stores the layer_no dependent colors used for drawing for the items on the
@@ -42,7 +43,7 @@ public class ItemColorTableModel extends ColorTableModel {
         int signal_layer_no = 0;
         for (int layer_no = 0; layer_no < row_count; ++layer_no) {
             net.freerouting.freeroute.board.Layer curr_layer = p_layer_structure.get_layer(layer_no);
-            boolean is_signal_layer = curr_layer.is_signal();
+            boolean is_signal_layer = curr_layer instanceof SignalLayer;
             data[layer_no] = new Object[item_type_count + 1];
             Object[] curr_row = data[layer_no];
             curr_row[0] = curr_layer.get_name();

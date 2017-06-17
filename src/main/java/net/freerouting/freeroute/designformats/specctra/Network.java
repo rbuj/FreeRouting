@@ -439,7 +439,7 @@ public class Network extends ScopeKeyword {
             }
         }
 
-        // read the layer dependent rules.
+        // read the layer_no dependent rules.
         for (Rule.LayerRule curr_layer_rule : p_class.layer_rules) {
             for (String curr_layer_name : curr_layer_rule.layer_names) {
                 int layer_no = p_board.layer_structure.get_no(curr_layer_name);
@@ -934,13 +934,13 @@ public class Network extends ScopeKeyword {
             }
             for (int i = 0; i < keepout_arr.length; ++i) {
                 net.freerouting.freeroute.library.Package.Keepout curr_keepout = keepout_arr[i];
-                int layer = curr_keepout.layer;
+                int layer = curr_keepout.layer_no;
                 if (layer >= routing_board.get_layer_count()) {
                     System.out.println("Network.insert_component: keepout layer is to big");
                     continue;
                 }
                 if (layer >= 0 && !p_location.is_front) {
-                    layer = routing_board.get_layer_count() - curr_keepout.layer - 1;
+                    layer = routing_board.get_layer_count() - curr_keepout.layer_no - 1;
                 }
                 int clearance_class
                         = routing_board.rules.get_default_net_class().default_item_clearance_classes.get(ItemClass.AREA);

@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.board;
 
 import com.google.common.collect.ImmutableList;
+import java.util.Iterator;
 import java.util.stream.Collectors;
 
 /**
@@ -28,19 +29,21 @@ import java.util.stream.Collectors;
  * @author alfons
  */
 @SuppressWarnings("serial")
-public class LayerStructure implements java.io.Serializable {
+public class LayerStructure implements Iterable<Layer>, java.io.Serializable {
 
     private final ImmutableList<Layer> layer_list;
     private final ImmutableList<Layer> signal_layer_list;
 
     /**
-     * Creates a new instance of LayerStructure
+     * Creates a new instance of LayerStructure.
+     *
+     * @throws NullPointerException if any of {@code p_layer_arr} is null
      */
     public LayerStructure(Layer[] p_layer_arr) {
-        layer_list = (p_layer_arr == null) ? null : ImmutableList.copyOf(p_layer_arr);
-        signal_layer_list = (p_layer_arr == null) ? null : ImmutableList.copyOf(
+        layer_list = ImmutableList.copyOf(p_layer_arr);
+        signal_layer_list = ImmutableList.copyOf(
                 layer_list.stream()
-                        .filter(layer -> layer.is_signal())
+                        .filter(layer -> layer instanceof SignalLayer)
                         .collect(Collectors.toList()));
     }
 
@@ -78,7 +81,11 @@ public class LayerStructure implements java.io.Serializable {
      * Gets the p_no-th signal layer of this layer structure.
      */
     public Layer get_signal_layer(int p_no) {
-        return (p_no < signal_layer_list.size()) ? signal_layer_list.get(p_no) : layer_list.get(layer_list.size() - 1);
+        if (p_no < signal_layer_list.size()) {
+            return signal_layer_list.get(p_no);
+        } else {
+            return (layer_list.size() == 0) ? null : layer_list.get(layer_list.size() - 1);
+        }
     }
 
     /**
@@ -90,7 +97,7 @@ public class LayerStructure implements java.io.Serializable {
             if (layer == p_layer) {
                 return found_signal_layers;
             }
-            if (layer.is_signal()) {
+            if (layer instanceof SignalLayer) {
                 ++found_signal_layers;
             }
         }
@@ -108,25 +115,34 @@ public class LayerStructure implements java.io.Serializable {
 
     public boolean[] active_routing_layer_arr() {
         boolean[] active_routing_layer_arr = new boolean[layer_list.size()];
-        for (int i = 0; i < layer_list.size(); ++i) {
-            active_routing_layer_arr[i] = layer_list.get(i).is_signal();
+        int i = 0;
+        for (Layer layer : layer_list) {
+            active_routing_layer_arr[i] = layer instanceof SignalLayer;
+            ++i;
         }
         return active_routing_layer_arr;
     }
 
     public int get_layer_count() {
-        return (layer_list == null) ? 0 : layer_list.size();
+        return layer_list.size();
     }
 
     public boolean get_is_signal_layer(int index) {
-        return (layer_list == null) ? null : layer_list.get(index).is_signal();
+        Layer layer = layer_list.get(index);
+        return layer instanceof SignalLayer;
     }
 
     public String get_name_layer(int index) {
-        return (layer_list == null) ? null : layer_list.get(index).get_name();
+        Layer layer = layer_list.get(index);
+        return layer.get_name();
     }
 
     public Layer get_layer(int index) {
-        return (layer_list == null) ? null : layer_list.get(index);
+        return layer_list.get(index);
+    }
+
+    @Override
+    public Iterator<Layer> iterator() {
+        return layer_list.iterator();
     }
 }

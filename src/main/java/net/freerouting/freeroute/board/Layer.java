@@ -25,7 +25,7 @@ package net.freerouting.freeroute.board;
  * @author alfons
  */
 @SuppressWarnings("serial")
-public class Layer implements java.io.Serializable {
+public abstract class Layer implements java.io.Serializable {
 
     /**
      * The name of the layer.
@@ -33,29 +33,20 @@ public class Layer implements java.io.Serializable {
     private final String name;
 
     /**
-     * True, if this is a signal layer, which can be used for routing. Otherwise
-     * it may be for example a power ground layer.
-     */
-    private final boolean is_signal;
-
-    /**
      * Creates a new instance of Layer
      */
-    public Layer(String p_name, boolean p_is_signal) {
-        name = p_name;
-        is_signal = p_is_signal;
+    Layer(String name) {
+        this.name = name;
     }
 
     public String get_name(){
         return name;
     }
 
-    public boolean is_signal(){
-        return is_signal;
-    }
-
     @Override
     public String toString() {
         return name;
     }
+
+    public abstract String get_type();
 }

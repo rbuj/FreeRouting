@@ -20,6 +20,8 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import static net.freerouting.freeroute.SignalLayerWithIndexBuilder.ALL_LAYER_INDEX;
+import static net.freerouting.freeroute.SignalLayerWithIndexBuilder.INNER_LAYER_INDEX;
 import net.freerouting.freeroute.datastructures.UndoableObjects;
 import net.freerouting.freeroute.rules.ClearanceMatrix;
 
@@ -402,12 +404,12 @@ public final class WindowClearanceMatrix extends BoardSavableSubWindow {
             int board_value = (int) Math.round(board_handling.coordinate_transform.user_to_board((number_value).doubleValue()));
             int layer_no = layer_combo_box.get_selected_layer().index;
             switch (layer_no) {
-                case ComboBoxLayer.ALL_LAYER_INDEX:
+                case ALL_LAYER_INDEX:
                     // change the clearance on all layers
                     clearance_matrix.set_value(curr_row, curr_column, board_value);
                     clearance_matrix.set_value(curr_column, curr_row, board_value);
                     break;
-                case ComboBoxLayer.INNER_LAYER_INDEX:
+                case INNER_LAYER_INDEX:
                     // change the clearance on all inner layers
                     clearance_matrix.set_inner_value(curr_row, curr_column, board_value);
                     clearance_matrix.set_inner_value(curr_column, curr_row, board_value);
@@ -449,9 +451,8 @@ public final class WindowClearanceMatrix extends BoardSavableSubWindow {
             for (int i = 0; i < clearance_matrix.get_class_count(); ++i) {
                 for (int j = 0; j < clearance_matrix.get_class_count(); ++j) {
                     switch (p_layer) {
-                        case ComboBoxLayer.ALL_LAYER_INDEX:
+                        case ALL_LAYER_INDEX:
                             // all layers
-
                             if (clearance_matrix.is_layer_dependent(i, j)) {
                                 this.data[i][j + 1] = -1;
                             } else {
@@ -460,9 +461,8 @@ public final class WindowClearanceMatrix extends BoardSavableSubWindow {
                                 this.data[i][j + 1] = curr_table_value;
                             }
                             break;
-                        case ComboBoxLayer.INNER_LAYER_INDEX:
-                            // all layers
-
+                        case INNER_LAYER_INDEX:
+                            // all inner layers
                             if (clearance_matrix.is_inner_layer_dependent(i, j)) {
                                 this.data[i][j + 1] = -1;
                             } else {

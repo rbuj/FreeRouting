@@ -20,6 +20,8 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import static net.freerouting.freeroute.SignalLayerWithIndexBuilder.ALL_LAYER_INDEX;
+import static net.freerouting.freeroute.SignalLayerWithIndexBuilder.INNER_LAYER_INDEX;
 import net.freerouting.freeroute.rules.ViaRule;
 
 /**
@@ -154,10 +156,10 @@ public final class WindowManualRules extends BoardSavableSubWindow {
     /**
      * Sets the selected layer to p_layer.
      */
-    private void set_selected_layer(Layer p_layer) {
+    private void set_selected_layer(SignalLayerWithIndex p_layer) {
         int curr_half_width;
         switch (p_layer.index) {
-            case ComboBoxLayer.ALL_LAYER_INDEX: {
+            case ALL_LAYER_INDEX: {
                 // check if the half width is layer_dependent.
                 boolean trace_widths_layer_dependent = false;
                 int first_half_width = this.board_handling.settings.get_manual_trace_half_width(0);
@@ -174,7 +176,7 @@ public final class WindowManualRules extends BoardSavableSubWindow {
                 }
                 break;
             }
-            case ComboBoxLayer.INNER_LAYER_INDEX: {
+            case INNER_LAYER_INDEX: {
                 // check if the half width is layer_dependent on the inner layers.
                 boolean trace_widths_layer_dependent = false;
                 int first_half_width = this.board_handling.settings.get_manual_trace_half_width(1);
@@ -202,7 +204,7 @@ public final class WindowManualRules extends BoardSavableSubWindow {
 
         @Override
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            Layer new_selected_layer = layer_combo_box.get_selected_layer();
+            SignalLayerWithIndex new_selected_layer = layer_combo_box.get_selected_layer();
             set_selected_layer(new_selected_layer);
         }
     }

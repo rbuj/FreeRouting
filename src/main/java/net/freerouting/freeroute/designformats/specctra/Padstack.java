@@ -19,6 +19,7 @@ package net.freerouting.freeroute.designformats.specctra;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import net.freerouting.freeroute.board.SignalLayer;
 import net.freerouting.freeroute.geometry.planar.PolygonShape;
 import net.freerouting.freeroute.geometry.planar.Simplex;
 
@@ -57,7 +58,9 @@ public class Padstack {
                 continue;
             }
             net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(i);
-            Layer curr_layer = new Layer(board_layer.get_name(), i, board_layer.is_signal());
+            LayerInfo curr_layer = (board_layer instanceof SignalLayer)
+                    ? new LayerSignalInfo(board_layer.get_name(), i)
+                    : new LayerNotSignalInfo(board_layer.get_name(), i);
             Shape curr_shape = p_par.coordinate_transform.board_to_dsn_rel(curr_board_shape, curr_layer);
             p_par.file.start_scope("shape");
             curr_shape.write_scope(p_par.file, p_par.identifier_type);
@@ -161,7 +164,7 @@ public class Padstack {
                 }
             }
 
-            if (pad_shape.layer == Layer.PCB || pad_shape.layer == Layer.SIGNAL) {
+            if (pad_shape.layer == LayerInfo.PCB || pad_shape.layer == LayerInfo.SIGNAL) {
                 for (int i = 0; i < padstack_shapes.length; ++i) {
                     padstack_shapes[i] = padstack_shape;
                 }

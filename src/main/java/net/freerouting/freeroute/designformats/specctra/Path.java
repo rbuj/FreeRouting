@@ -39,7 +39,7 @@ public abstract class Path extends Shape {
     /**
      * Creates a new instance of Path
      */
-    Path(Layer p_layer, double p_width, double[] p_coordinate_arr) {
+    Path(LayerInfo p_layer, double p_width, double[] p_coordinate_arr) {
         super(p_layer);
         width = p_width;
         coordinate_arr = p_coordinate_arr;

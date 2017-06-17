@@ -27,29 +27,22 @@ import net.freerouting.freeroute.rules.ClearanceMatrix;
  * @author alfons
  */
 @SuppressWarnings("serial")
-public final class ComboBoxClearance extends javax.swing.JComboBox<ClearanceClass> {
+final class ComboBoxClearance extends javax.swing.JComboBox<ClearanceClass> {
 
     /**
      * Creates a new instance of ClearanceComboBox
      */
     ComboBoxClearance(ClearanceMatrix p_clearance_matrix) {
-        ClearanceClass[] class_arr = new ClearanceClass[p_clearance_matrix.get_class_count()];
-        for (int i = 0; i < class_arr.length; ++i) {
-            class_arr[i] = new ClearanceClass(p_clearance_matrix.get_name(i), i);
-        }
-        this.setModel(new ArrayComboBoxModel<>(class_arr));
+        this.setModel(new ArrayComboBoxModel<>(ClearanceClassBuilder.build_clearance_class_array(p_clearance_matrix)));
         this.setSelectedIndex(1);
     }
 
     /**
      * Adjusts this combo box to p_new_clearance_matrix.
      */
-    public void adjust(ClearanceMatrix p_new_clearance_matrix) {
+    void adjust(ClearanceMatrix p_new_clearance_matrix) {
         int old_index = this.get_selected_class_index();
-        ClearanceClass[] class_arr = new ClearanceClass[p_new_clearance_matrix.get_class_count()];
-        for (int i = 0; i < class_arr.length; ++i) {
-            class_arr[i] = new ClearanceClass(p_new_clearance_matrix.get_name(i), i);
-        }
+        ClearanceClass[] class_arr = ClearanceClassBuilder.build_clearance_class_array(p_new_clearance_matrix);
         this.setModel(new ArrayComboBoxModel<>(class_arr));
         this.setSelectedIndex(Math.min(old_index, class_arr.length - 1));
     }
@@ -58,14 +51,14 @@ public final class ComboBoxClearance extends javax.swing.JComboBox<ClearanceClas
      * Returns the index of the selected clearance class in the clearance
      * matrix.
      */
-    public int get_selected_class_index() {
+    int get_selected_class_index() {
         return ((ClearanceClass) this.getSelectedItem()).index;
     }
 
     /**
      * Returns the number of clearance classes in this combo box.
      */
-    public int get_class_count() {
+    int get_class_count() {
         return this.getItemCount();
     }
 }

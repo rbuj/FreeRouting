@@ -41,12 +41,12 @@ public class PolygonPath extends Path {
      */
     static Path read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
         try {
-            Layer layer = null;
+            LayerInfo layer = null;
             Object next_token = p_scanner.next_token();
             if (next_token == Keyword.PCB_SCOPE) {
-                layer = Layer.PCB;
+                layer = LayerInfo.PCB;
             } else if (next_token == Keyword.SIGNAL) {
-                layer = Layer.SIGNAL;
+                layer = LayerInfo.SIGNAL;
             } else {
                 if (p_layer_structure == null) {
                     throw new ReadScopeException("Shape.read_polygon_path_scope: only layer types pcb or signal expected");
@@ -110,7 +110,7 @@ public class PolygonPath extends Path {
     /**
      * Creates a new instance of PolygonPath
      */
-    PolygonPath(Layer p_layer, double p_width, double[] p_coordinate_arr) {
+    PolygonPath(LayerInfo p_layer, double p_width, double[] p_coordinate_arr) {
         super(p_layer, p_width, p_coordinate_arr);
     }
 

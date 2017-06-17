@@ -24,6 +24,7 @@ import java.util.Iterator;
 import net.freerouting.freeroute.board.BasicBoard;
 import net.freerouting.freeroute.board.ConductionArea;
 import net.freerouting.freeroute.board.PolylineTrace;
+import net.freerouting.freeroute.board.SignalLayer;
 import net.freerouting.freeroute.board.Via;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
@@ -242,7 +243,9 @@ public class SessionFile {
                 continue;
             }
             net.freerouting.freeroute.board.Layer board_layer = p_board.layer_structure.get_layer(i);
-            Layer curr_layer = new Layer(board_layer.get_name(), i, board_layer.is_signal());
+            LayerInfo curr_layer = (board_layer instanceof SignalLayer)
+                    ? new LayerSignalInfo(board_layer.get_name(), i)
+                    : new LayerNotSignalInfo(board_layer.get_name(), i);
             Shape curr_shape = p_coordinate_transform.board_to_dsn_rel(curr_board_shape, curr_layer);
             p_file.start_scope("shape");
             curr_shape.write_scope_int(p_file, p_identifier_type);
@@ -396,7 +399,9 @@ public class SessionFile {
         net.freerouting.freeroute.geometry.planar.Area curr_area = p_conduction_area.get_area();
         int layer_no = p_conduction_area.get_layer_no();
         net.freerouting.freeroute.board.Layer board_layer = p_board.layer_structure.get_layer(layer_no);
-        Layer conduction_layer = new Layer(board_layer.get_name(), layer_no, board_layer.is_signal());
+        LayerInfo conduction_layer = (board_layer instanceof SignalLayer)
+                    ? new LayerSignalInfo(board_layer.get_name(), layer_no)
+                    : new LayerNotSignalInfo(board_layer.get_name(), layer_no);
         net.freerouting.freeroute.geometry.planar.Shape boundary_shape;
         net.freerouting.freeroute.geometry.planar.Shape[] holes;
         if (curr_area instanceof net.freerouting.freeroute.geometry.planar.Shape) {
