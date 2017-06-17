@@ -20,6 +20,7 @@ package net.freerouting.freeroute.board;
  *
  * @author Robert Buj
  */
+@SuppressWarnings("serial")
 public final class SignalLayer extends Layer {
 
     private static final String TYPE = "signal";
