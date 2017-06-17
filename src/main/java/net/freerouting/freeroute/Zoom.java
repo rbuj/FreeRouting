@@ -42,7 +42,7 @@ enum Zoom {
         return factor;
     }
 
-    static final class Constants {
+    private final class Constants {
 
         static final double C_ZOOM_FACTOR = 2.0;
         static final String ZOOM_IN = "zoom_in";
