@@ -21,6 +21,7 @@ package net.freerouting.freeroute;
 
 import java.util.Collection;
 import java.util.Locale;
+import net.freerouting.freeroute.board.PrintableShape;
 
 /**
  * Window displaying text information for a list of objects implementing the
@@ -248,7 +249,7 @@ public final class WindowObjectInfo extends BoardTemporarySubWindow implements n
      */
     @Override
     public boolean append(net.freerouting.freeroute.geometry.planar.Shape p_shape) {
-        net.freerouting.freeroute.board.PrintableShape transformed_shape = this.coordinate_transform.board_to_user(p_shape);
+        PrintableShape transformed_shape = this.coordinate_transform.board_to_user(p_shape);
         if (transformed_shape == null) {
             return false;
         }

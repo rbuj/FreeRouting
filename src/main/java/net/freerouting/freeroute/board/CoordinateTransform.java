@@ -101,22 +101,22 @@ public class CoordinateTransform implements java.io.Serializable {
         return result;
     }
 
-    public PrintableShape.Circle board_to_user(net.freerouting.freeroute.geometry.planar.Circle p_circle) {
-        return new PrintableShape.Circle(board_to_user(p_circle.center.to_float()),
+    private PrintableCircle board_to_user(net.freerouting.freeroute.geometry.planar.Circle p_circle) {
+        return new PrintableCircle(board_to_user(p_circle.center.to_float()),
                 board_to_user(p_circle.radius));
     }
 
-    public PrintableShape.Rectangle board_to_user(net.freerouting.freeroute.geometry.planar.IntBox p_box) {
-        return new PrintableShape.Rectangle(board_to_user(p_box.ll.to_float()),
+    private PrintableRectangle board_to_user(net.freerouting.freeroute.geometry.planar.IntBox p_box) {
+        return new PrintableRectangle(board_to_user(p_box.ll.to_float()),
                 board_to_user(p_box.ur.to_float()));
     }
 
-    public PrintableShape.Polygon board_to_user(net.freerouting.freeroute.geometry.planar.PolylineShape p_shape) {
+    private PrintablePolygon board_to_user(net.freerouting.freeroute.geometry.planar.PolylineShape p_shape) {
         FloatPoint[] corners = p_shape.corner_approx_arr();
         FloatPoint[] transformed_corners = new FloatPoint[corners.length];
         for (int i = 0; i < corners.length; ++i) {
             transformed_corners[i] = board_to_user(corners[i]);
         }
-        return new PrintableShape.Polygon(transformed_corners);
+        return new PrintablePolygon(transformed_corners);
     }
 }

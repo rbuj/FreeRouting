@@ -19,9 +19,6 @@
  */
 package net.freerouting.freeroute.board;
 
-import java.util.Locale;
-import net.freerouting.freeroute.geometry.planar.FloatPoint;
-
 /**
  * Shape class used for printing a geometry.planar.Shape after transforming it
  * to user coordinates.
@@ -38,82 +35,4 @@ public abstract class PrintableShape {
      */
     @Override
     public abstract String toString();
-
-    static class Circle extends PrintableShape {
-
-        public final FloatPoint center;
-        public final double radius;
-
-        /**
-         * Creates a Circle from the input coordinates.
-         */
-        Circle(FloatPoint p_center, double p_radius) {
-            center = p_center;
-            radius = p_radius;
-        }
-
-        @Override
-        public String toString() {
-            Locale locale = Locale.getDefault();
-            java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", locale);
-            StringBuilder sb = new StringBuilder();
-            sb.append(resources.getString("circle")).append(": ");
-            if (center.x != 0 || center.y != 0) {
-                sb.append(resources.getString("center")).append(" =").append(center.to_string(locale));
-            }
-            java.text.NumberFormat nf = java.text.NumberFormat.getInstance(locale);
-            nf.setMaximumFractionDigits(4);
-            String radius_string = resources.getString("radius") + " = " + nf.format((float) radius);
-            sb.append(radius_string);
-            return sb.toString();
-        }
-    }
-
-    static class Rectangle extends PrintableShape {
-
-        public final FloatPoint lower_left;
-        public final FloatPoint upper_right;
-
-        Rectangle(FloatPoint p_lower_left, FloatPoint p_upper_right) {
-            lower_left = p_lower_left;
-            upper_right = p_upper_right;
-        }
-
-        @Override
-        public String toString() {
-            Locale locale = Locale.getDefault();
-            java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", locale);
-            StringBuilder sb = new StringBuilder();
-            sb.append(resources.getString("rectangle")).append(": ").append(resources.getString("lower_left")).append(" = ").append(lower_left.to_string(locale)).append(", ").append(resources.getString("upper_right")).append(" = ").append(upper_right.to_string(locale));
-            return sb.toString();
-        }
-    }
-
-    static class Polygon extends PrintableShape {
-
-        public final FloatPoint[] corner_arr;
-
-        Polygon(FloatPoint[] p_corners) {
-            corner_arr = p_corners;
-        }
-
-        @Override
-        public String toString() {
-            Locale locale = Locale.getDefault();
-            java.util.ResourceBundle resources
-                    = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.board.resources.ObjectInfoPanel", locale);
-            StringBuilder sb = new StringBuilder();
-            sb.append(resources.getString("polygon")).append(": ");
-            for (int i = 0; i < corner_arr.length; ++i) {
-                if (i > 0) {
-                    sb.append(", ");
-                }
-                sb.append(corner_arr[i].to_string(locale));
-            }
-            return sb.toString();
-        }
-
-    }
 }
