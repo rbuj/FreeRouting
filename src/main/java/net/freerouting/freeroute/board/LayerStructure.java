@@ -84,7 +84,7 @@ public class LayerStructure implements Iterable<Layer>, java.io.Serializable {
         if (p_no < signal_layer_list.size()) {
             return signal_layer_list.get(p_no);
         } else {
-            return (layer_list.size() == 0) ? null : layer_list.get(layer_list.size() - 1);
+            return (layer_list.isEmpty()) ? null : layer_list.get(layer_list.size() - 1);
         }
     }
 
