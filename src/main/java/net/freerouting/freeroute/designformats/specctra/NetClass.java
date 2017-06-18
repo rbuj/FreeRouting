@@ -82,7 +82,7 @@ public class NetClass {
                         if (next_token == Keyword.RULE) {
                             rules.addAll(Rule.read_scope(p_scanner));
                         } else if (next_token == Keyword.LAYER_RULE) {
-                            layer_rules.add(Rule.read_layer_rule_scope(p_scanner));
+                            layer_rules.add(Rule.LayerRule.read_layer_rule_scope(p_scanner));
                         } else if (next_token == Keyword.VIA_RULE) {
                             via_rule = DsnFile.read_string_scope(p_scanner);
                         } else if (next_token == Keyword.CIRCUIT) {
@@ -133,7 +133,7 @@ public class NetClass {
                     } else if (next_token == Keyword.RULE) {
                         rules.addAll(Rule.read_scope(p_scanner));
                     } else if (next_token == Keyword.LAYER_RULE) {
-                        layer_rules.add(Rule.read_layer_rule_scope(p_scanner));
+                        layer_rules.add(Rule.LayerRule.read_layer_rule_scope(p_scanner));
                     }
                 }
                 prev_token = next_token;

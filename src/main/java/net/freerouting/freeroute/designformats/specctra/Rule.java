@@ -27,12 +27,12 @@ import java.util.LinkedList;
  *
  * @author Alfons Wirtz
  */
-public abstract class Rule {
+abstract class Rule {
 
     /**
      * Returns a collection of objects of class Rule.
      */
-    public static Collection<Rule> read_scope(Scanner p_scanner) {
+    static Collection<Rule> read_scope(Scanner p_scanner) {
         Collection<Rule> result = new LinkedList<>();
         Object next_token = null;
         for (;;) {
@@ -55,9 +55,9 @@ public abstract class Rule {
             if (prev_token == Keyword.OPEN_BRACKET) {
                 Rule curr_rule = null;
                 if (next_token == Keyword.WIDTH) {
-                    curr_rule = read_width_rule(p_scanner);
+                    curr_rule = WidthRule.read_width_rule(p_scanner);
                 } else if (next_token == Keyword.CLEARANCE) {
-                    curr_rule = read_clearance_rule(p_scanner);
+                    curr_rule = ClearanceRule.read_clearance_rule(p_scanner);
                 } else {
                     ScopeKeyword.skip_scope(p_scanner);
                 }
@@ -70,70 +70,7 @@ public abstract class Rule {
         return result;
     }
 
-    /**
-     * Reads a LayerRule from dsn-file.
-     */
-    public static LayerRule read_layer_rule_scope(Scanner p_scanner) {
-        try {
-            Collection<String> layer_names = new LinkedList<>();
-            Collection<Rule> rule_list = new LinkedList<>();
-            for (;;) {
-                p_scanner.yybegin(SpecctraFileScanner.LAYER_NAME);
-                Object next_token = p_scanner.next_token();
-                if (next_token == Keyword.OPEN_BRACKET) {
-                    break;
-                }
-                if (!(next_token instanceof String)) {
-
-                    System.out.println("Rule.read_layer_rule_scope: string expected");
-                    return null;
-                }
-                layer_names.add((String) next_token);
-            }
-            for (;;) {
-                Object next_token = p_scanner.next_token();
-                if (next_token == Keyword.CLOSED_BRACKET) {
-                    break;
-                }
-                if (next_token != Keyword.RULE) {
-
-                    System.out.println("Rule.read_layer_rule_scope: rule expected");
-                    return null;
-                }
-                rule_list.addAll(read_scope(p_scanner));
-            }
-            return new LayerRule(layer_names, rule_list);
-        } catch (java.io.IOException e) {
-            System.out.println("Rule.read_layer_rule_scope: IO error scanning file");
-            return null;
-        }
-    }
-
-    public static WidthRule read_width_rule(Scanner p_scanner) {
-        try {
-            double value;
-            Object next_token = p_scanner.next_token();
-            if (next_token instanceof Double) {
-                value = (double) next_token;
-            } else if (next_token instanceof Integer) {
-                value = ((Number) next_token).doubleValue();
-            } else {
-                System.out.println("Rule.read_width_rule: number expected");
-                return null;
-            }
-            next_token = p_scanner.next_token();
-            if (next_token != Keyword.CLOSED_BRACKET) {
-                System.out.println("Rule.read_width_rule: closing bracket expected");
-                return null;
-            }
-            return new WidthRule(value);
-        } catch (java.io.IOException e) {
-            System.out.println("Rule.read_width_rule: IO error scanning file");
-            return null;
-        }
-    }
-
-    public static void write_scope(net.freerouting.freeroute.rules.NetClass p_net_class, WriteScopeParameter p_par) throws java.io.IOException {
+    static void write_scope(net.freerouting.freeroute.rules.NetClass p_net_class, WriteScopeParameter p_par) throws java.io.IOException {
         p_par.file.start_scope("rule");
 
         // write the trace width
@@ -173,7 +110,7 @@ public abstract class Rule {
     /**
      * Writes the default rule as a scope to an output dsn-file.
      */
-    public static void write_default_rule(WriteScopeParameter p_par, int p_layer) throws java.io.IOException {
+    static void write_default_rule(WriteScopeParameter p_par, int p_layer) throws java.io.IOException {
         p_par.file.start_scope("rule");
         // write the trace width
         double trace_width = 2 * p_par.coordinate_transform.board_to_dsn(p_par.board.rules.get_default_net_class().get_trace_half_width(0));
@@ -226,57 +163,7 @@ public abstract class Rule {
         }
     }
 
-    public static ClearanceRule read_clearance_rule(Scanner p_scanner) {
-        try {
-            double value;
-            Object next_token = p_scanner.next_token();
-            if (next_token instanceof Double) {
-                value = (double) next_token;
-            } else if (next_token instanceof Integer) {
-                value = ((Number) next_token).doubleValue();
-            } else {
-                System.out.println("Rule.read_clearance_rule: number expected");
-                return null;
-            }
-            Collection<String> class_pairs = new LinkedList<>();
-            next_token = p_scanner.next_token();
-            if (next_token != Keyword.CLOSED_BRACKET) {
-                if (next_token != Keyword.OPEN_BRACKET) {
-                    System.out.println("Rule.read_clearance_rule: ( expected");
-                    return null;
-                }
-                next_token = p_scanner.next_token();
-                if (next_token != Keyword.TYPE) {
-                    System.out.println("Rule.read_clearance_rule: type expected");
-                    return null;
-                }
-                for (;;) {
-                    p_scanner.yybegin(SpecctraFileScanner.IGNORE_QUOTE);
-                    next_token = p_scanner.next_token();
-                    if (next_token == Keyword.CLOSED_BRACKET) {
-                        break;
-                    }
-                    if (!(next_token instanceof String)) {
-                        System.out.println("Rule.read_clearance_rule: string expected");
-                        return null;
-                    }
-                    class_pairs.add((String) next_token);
-                }
-                next_token = p_scanner.next_token();
-                if (next_token != Keyword.CLOSED_BRACKET) {
-                    System.out.println("Rule.read_clearance_rule: closing bracket expected");
-                    return null;
-                }
-            }
-            return new ClearanceRule(value, class_pairs);
-        } catch (java.io.IOException e) {
-            System.out.println("Rule.read_clearance_rule: IO error scanning file");
-            return null;
-        }
-
-    }
-
-    static public void write_item_clearance_class(String p_name, net.freerouting.freeroute.datastructures.IndentFileWriter p_file,
+    static void write_item_clearance_class(String p_name, net.freerouting.freeroute.datastructures.IndentFileWriter p_file,
             net.freerouting.freeroute.datastructures.IdentifierType p_identifier_type) throws java.io.IOException {
         p_file.new_line();
         p_file.write("(clearance_class ");
@@ -288,16 +175,40 @@ public abstract class Rule {
         // not called
     }
 
-    public static class WidthRule extends Rule {
+    static final class WidthRule extends Rule {
 
         final double value;
 
         private WidthRule(double p_value) {
             value = p_value;
         }
+
+        static WidthRule read_width_rule(Scanner p_scanner) {
+            try {
+                double value;
+                Object next_token = p_scanner.next_token();
+                if (next_token instanceof Double) {
+                    value = (double) next_token;
+                } else if (next_token instanceof Integer) {
+                    value = ((Number) next_token).doubleValue();
+                } else {
+                    System.out.println("Rule.read_width_rule: number expected");
+                    return null;
+                }
+                next_token = p_scanner.next_token();
+                if (next_token != Keyword.CLOSED_BRACKET) {
+                    System.out.println("Rule.read_width_rule: closing bracket expected");
+                    return null;
+                }
+                return new WidthRule(value);
+            } catch (java.io.IOException e) {
+                System.out.println("Rule.read_width_rule: IO error scanning file");
+                return null;
+            }
+        }
     }
 
-    public static class ClearanceRule extends Rule {
+    static final class ClearanceRule extends Rule {
 
         final double value;
         final Collection<String> clearance_class_pairs;
@@ -306,9 +217,58 @@ public abstract class Rule {
             value = p_value;
             clearance_class_pairs = p_class_pairs;
         }
+
+        static ClearanceRule read_clearance_rule(Scanner p_scanner) {
+            try {
+                double value;
+                Object next_token = p_scanner.next_token();
+                if (next_token instanceof Double) {
+                    value = (double) next_token;
+                } else if (next_token instanceof Integer) {
+                    value = ((Number) next_token).doubleValue();
+                } else {
+                    System.out.println("Rule.read_clearance_rule: number expected");
+                    return null;
+                }
+                Collection<String> class_pairs = new LinkedList<>();
+                next_token = p_scanner.next_token();
+                if (next_token != Keyword.CLOSED_BRACKET) {
+                    if (next_token != Keyword.OPEN_BRACKET) {
+                        System.out.println("Rule.read_clearance_rule: ( expected");
+                        return null;
+                    }
+                    next_token = p_scanner.next_token();
+                    if (next_token != Keyword.TYPE) {
+                        System.out.println("Rule.read_clearance_rule: type expected");
+                        return null;
+                    }
+                    for (;;) {
+                        p_scanner.yybegin(SpecctraFileScanner.IGNORE_QUOTE);
+                        next_token = p_scanner.next_token();
+                        if (next_token == Keyword.CLOSED_BRACKET) {
+                            break;
+                        }
+                        if (!(next_token instanceof String)) {
+                            System.out.println("Rule.read_clearance_rule: string expected");
+                            return null;
+                        }
+                        class_pairs.add((String) next_token);
+                    }
+                    next_token = p_scanner.next_token();
+                    if (next_token != Keyword.CLOSED_BRACKET) {
+                        System.out.println("Rule.read_clearance_rule: closing bracket expected");
+                        return null;
+                    }
+                }
+                return new ClearanceRule(value, class_pairs);
+            } catch (java.io.IOException e) {
+                System.out.println("Rule.read_clearance_rule: IO error scanning file");
+                return null;
+            }
+        }
     }
 
-    public static class LayerRule {
+    static final class LayerRule {
 
         final Collection<String> layer_names;
         final Collection<Rule> rules;
@@ -316,6 +276,45 @@ public abstract class Rule {
         private LayerRule(Collection<String> p_layer_names, Collection<Rule> p_rules) {
             layer_names = p_layer_names;
             rules = p_rules;
+        }
+
+        /**
+         * Reads a LayerRule from dsn-file.
+         */
+        static LayerRule read_layer_rule_scope(Scanner p_scanner) {
+            try {
+                Collection<String> layer_names = new LinkedList<>();
+                Collection<Rule> rule_list = new LinkedList<>();
+                for (;;) {
+                    p_scanner.yybegin(SpecctraFileScanner.LAYER_NAME);
+                    Object next_token = p_scanner.next_token();
+                    if (next_token == Keyword.OPEN_BRACKET) {
+                        break;
+                    }
+                    if (!(next_token instanceof String)) {
+
+                        System.out.println("Rule.read_layer_rule_scope: string expected");
+                        return null;
+                    }
+                    layer_names.add((String) next_token);
+                }
+                for (;;) {
+                    Object next_token = p_scanner.next_token();
+                    if (next_token == Keyword.CLOSED_BRACKET) {
+                        break;
+                    }
+                    if (next_token != Keyword.RULE) {
+
+                        System.out.println("Rule.read_layer_rule_scope: rule expected");
+                        return null;
+                    }
+                    rule_list.addAll(read_scope(p_scanner));
+                }
+                return new LayerRule(layer_names, rule_list);
+            } catch (java.io.IOException e) {
+                System.out.println("Rule.read_layer_rule_scope: IO error scanning file");
+                return null;
+            }
         }
     }
 }
