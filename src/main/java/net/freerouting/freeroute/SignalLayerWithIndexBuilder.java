@@ -27,11 +27,11 @@ public final class SignalLayerWithIndexBuilder {
     /**
      * The layer index, when all layers are selected.
      */
-    public final static int ALL_LAYER_INDEX = -1;
+    public static final int ALL_LAYER_INDEX = -1;
     /**
      * The layer index, when all inner layers ar selected.
      */
-    public final static int INNER_LAYER_INDEX = -2;
+    public static final int INNER_LAYER_INDEX = -2;
 
     private SignalLayerWithIndexBuilder() {
         // no code
