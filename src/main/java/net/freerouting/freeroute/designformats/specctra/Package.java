@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.SignalLayer;
+import static net.freerouting.freeroute.designformats.specctra.Area.read_area_scope;
 
 /**
  * Class for reading and writing package scopes from dsn-files.
@@ -73,17 +74,17 @@ public class Package {
                             throw new ReadScopeException("Package.read_scope: closed bracket expected");
                         }
                     } else if (next_token == Keyword.KEEPOUT) {
-                        Area keepout_area = AreaReadable.read_area_scope(p_scanner, p_layer_structure, false);
+                        Area keepout_area = read_area_scope(p_scanner, p_layer_structure, false);
                         if (keepout_area != null) {
                             keepouts.add(keepout_area);
                         }
                     } else if (next_token == Keyword.VIA_KEEPOUT) {
-                        Area keepout_area = AreaReadable.read_area_scope(p_scanner, p_layer_structure, false);
+                        Area keepout_area = read_area_scope(p_scanner, p_layer_structure, false);
                         if (keepout_area != null) {
                             via_keepouts.add(keepout_area);
                         }
                     } else if (next_token == Keyword.PLACE_KEEPOUT) {
-                        Area keepout_area = AreaReadable.read_area_scope(p_scanner, p_layer_structure, false);
+                        Area keepout_area = read_area_scope(p_scanner, p_layer_structure, false);
                         if (keepout_area != null) {
                             place_keepouts.add(keepout_area);
                         }

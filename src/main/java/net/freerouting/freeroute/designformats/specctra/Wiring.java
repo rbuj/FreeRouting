@@ -35,6 +35,7 @@ import net.freerouting.freeroute.board.Via;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 import net.freerouting.freeroute.datastructures.UndoableObjects;
+import static net.freerouting.freeroute.designformats.specctra.Area.transform_area_to_board;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
@@ -451,7 +452,7 @@ class Wiring extends ScopeKeyword {
             area.add(border_shape);
             area.addAll(hole_list);
             net.freerouting.freeroute.geometry.planar.Area conduction_area
-                    = AreaTransformable.transform_area_to_board(area, p_par.coordinate_transform);
+                    = transform_area_to_board(area, p_par.coordinate_transform);
             result = board.insert_conduction_area(conduction_area, layer_no, net_no_arr, clearance_class_no,
                     false, fixed);
         } else if (path instanceof PolygonPath) {

@@ -31,6 +31,8 @@ import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 import net.freerouting.freeroute.datastructures.UndoableObjects;
 import net.freerouting.freeroute.datastructures.UndoableObjects.Storable;
+import static net.freerouting.freeroute.designformats.specctra.Area.read_area_scope;
+import static net.freerouting.freeroute.designformats.specctra.Area.transform_area_to_board;
 import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.PolylineShape;
@@ -684,9 +686,10 @@ class Structure extends ScopeKeyword {
         return true;
     }
 
-    private static boolean insert_keepout(Area p_area, ReadScopeParameter p_par, KeepoutType p_keepout_type, FixedState p_fixed_state) {
+    private static boolean insert_keepout(Area p_area, ReadScopeParameter p_par,
+            KeepoutType p_keepout_type, FixedState p_fixed_state) {
         net.freerouting.freeroute.geometry.planar.Area keepout_area
-                = AreaTransformable.transform_area_to_board(p_area.shape_list, p_par.coordinate_transform);
+                = transform_area_to_board(p_area.shape_list, p_par.coordinate_transform);
         if (keepout_area.dimension() < 2) {
             System.out.println("Structure.insert_keepout: keepout is not an area");
             return true;
@@ -812,7 +815,7 @@ class Structure extends ScopeKeyword {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
                     try {
-                        keepout_list.add(AreaReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                        keepout_list.add(read_area_scope(p_par.scanner, p_par.layer_structure, false));
                     } catch (DsnFileException | ReadScopeException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
@@ -822,7 +825,7 @@ class Structure extends ScopeKeyword {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
                     try {
-                        via_keepout_list.add(AreaReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                        via_keepout_list.add(read_area_scope(p_par.scanner, p_par.layer_structure, false));
                     } catch (DsnFileException | ReadScopeException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
@@ -832,7 +835,7 @@ class Structure extends ScopeKeyword {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
                     try {
-                        place_keepout_list.add(AreaReadable.read_area_scope(p_par.scanner, p_par.layer_structure, false));
+                        place_keepout_list.add(read_area_scope(p_par.scanner, p_par.layer_structure, false));
                     } catch (DsnFileException | ReadScopeException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
@@ -934,7 +937,7 @@ class Structure extends ScopeKeyword {
                 continue;
             }
             net.freerouting.freeroute.geometry.planar.Area plane_area
-                    = AreaTransformable.transform_area_to_board(plane_info.area.shape_list, p_par.coordinate_transform);
+                    = transform_area_to_board(plane_info.area.shape_list, p_par.coordinate_transform);
             LayerInfo curr_layer = (plane_info.area.shape_list.iterator().next()).layer;
             if (curr_layer.layer_no >= 0) {
                 int clearance_class_no;

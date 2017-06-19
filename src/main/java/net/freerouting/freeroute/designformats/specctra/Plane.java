@@ -22,6 +22,7 @@ package net.freerouting.freeroute.designformats.specctra;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.freerouting.freeroute.board.SignalLayer;
+import static net.freerouting.freeroute.designformats.specctra.Area.read_area_scope;
 
 /**
  * Class for reading and writing plane scopes from dsn-files.
@@ -86,7 +87,7 @@ public class Plane extends ScopeKeyword {
                 throw new ReadScopeException("Plane.read_scope: String expected");
             }
             net_name = (String) next_token;
-            conduction_area = AreaReadable.read_area_scope(p_par.scanner, p_par.layer_structure, skip_window_scopes);
+            conduction_area = read_area_scope(p_par.scanner, p_par.layer_structure, skip_window_scopes);
             ReadScopeParameter.PlaneInfo plane_info = new ReadScopeParameter.PlaneInfo(conduction_area, net_name);
             p_par.plane_list.add(plane_info);
         } catch (java.io.IOException e) {
