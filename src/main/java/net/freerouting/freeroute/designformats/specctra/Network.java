@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 import net.freerouting.freeroute.board.RoutingBoard;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
-import static net.freerouting.freeroute.designformats.specctra.NetClass.read_class_class_scope;
+import static net.freerouting.freeroute.designformats.specctra.NetClass.ClassClass.read_class_class_scope;
 import static net.freerouting.freeroute.designformats.specctra.NetClass.read_net_class_scope;
 import static net.freerouting.freeroute.designformats.specctra.Rule.read_rule_scope;
 import net.freerouting.freeroute.geometry.planar.IntPoint;

@@ -119,42 +119,6 @@ class NetClass {
         }
     }
 
-    static ClassClass read_class_class_scope(Scanner p_scanner)
-            throws DsnFileException {
-
-        try {
-            Collection<String> classes = new LinkedList<>();
-            Collection<Rule> rules = new LinkedList<>();
-            Collection<Rule.LayerRule> layer_rules = new LinkedList<>();
-            Object prev_token = null;
-            for (;;) {
-                Object next_token = p_scanner.next_token();
-                if (next_token == null) {
-                    System.out.println("ClassClass.read_scope: unexpected end of file");
-                    return null;
-                }
-                if (next_token == Keyword.CLOSED_BRACKET) {
-                    // end of scope
-                    break;
-                }
-                if (prev_token == Keyword.OPEN_BRACKET) {
-                    if (next_token == Keyword.CLASSES) {
-                        classes.addAll(read_string_list_scope(p_scanner));
-                    } else if (next_token == Keyword.RULE) {
-                        rules.addAll(read_rule_scope(p_scanner));
-                    } else if (next_token == Keyword.LAYER_RULE) {
-                        layer_rules.add(read_layer_rule_scope(p_scanner));
-                    }
-                }
-                prev_token = next_token;
-            }
-            return new ClassClass(classes, rules, layer_rules);
-        } catch (java.io.IOException e) {
-            System.out.println("NetClass.read_scope: IO error while scanning file");
-            return null;
-        }
-    }
-
     final String name;
     final String trace_clearance_class;
     final Collection<String> net_list;
@@ -192,6 +156,42 @@ class NetClass {
     }
 
     static class ClassClass {
+
+        static ClassClass read_class_class_scope(Scanner p_scanner)
+                throws DsnFileException {
+
+            try {
+                Collection<String> classes = new LinkedList<>();
+                Collection<Rule> rules = new LinkedList<>();
+                Collection<Rule.LayerRule> layer_rules = new LinkedList<>();
+                Object prev_token = null;
+                for (;;) {
+                    Object next_token = p_scanner.next_token();
+                    if (next_token == null) {
+                        System.out.println("ClassClass.read_scope: unexpected end of file");
+                        return null;
+                    }
+                    if (next_token == Keyword.CLOSED_BRACKET) {
+                        // end of scope
+                        break;
+                    }
+                    if (prev_token == Keyword.OPEN_BRACKET) {
+                        if (next_token == Keyword.CLASSES) {
+                            classes.addAll(read_string_list_scope(p_scanner));
+                        } else if (next_token == Keyword.RULE) {
+                            rules.addAll(read_rule_scope(p_scanner));
+                        } else if (next_token == Keyword.LAYER_RULE) {
+                            layer_rules.add(read_layer_rule_scope(p_scanner));
+                        }
+                    }
+                    prev_token = next_token;
+                }
+                return new ClassClass(classes, rules, layer_rules);
+            } catch (java.io.IOException e) {
+                System.out.println("NetClass.read_scope: IO error while scanning file");
+                return null;
+            }
+        }
 
         final Collection<String> class_names;
         final Collection<Rule> rules;
