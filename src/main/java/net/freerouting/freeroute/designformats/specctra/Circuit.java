@@ -58,7 +58,7 @@ class Circuit {
             }
             if (prev_token == Keyword.OPEN_BRACKET) {
                 if (next_token == Keyword.LENGTH) {
-                    LengthMatchingRule length_rule = read_length_scope(p_scanner);
+                    LengthMatchingRule length_rule = LengthMatchingRule.read_length_scope(p_scanner);
                     min_trace_length = length_rule.min_length;
                     max_trace_length = length_rule.max_length;
                 } else if (next_token == Keyword.USE_VIA) {
@@ -71,45 +71,6 @@ class Circuit {
             }
         }
         return new ReadScopeResult(max_trace_length, min_trace_length, use_via, use_layer);
-    }
-
-    static LengthMatchingRule read_length_scope(Scanner p_scanner) throws ReadScopeException {
-        double[] length_arr = new double[2];
-        Object next_token = null;
-        for (int i = 0; i < 2; ++i) {
-            try {
-                next_token = p_scanner.next_token();
-            } catch (java.io.IOException e) {
-                throw new ReadScopeException("Circuit.read_length_scope: IO error scanning file");
-            }
-            if (next_token instanceof Double) {
-                length_arr[i] = (double) next_token;
-            } else if (next_token instanceof Integer) {
-                length_arr[i] = ((Number) next_token).doubleValue();
-            } else {
-                throw new ReadScopeException("Circuit.read_length_scope: number expected");
-            }
-        }
-        LengthMatchingRule result = new LengthMatchingRule(length_arr[0], length_arr[1]);
-        for (;;) {
-            Object prev_token = next_token;
-            try {
-                next_token = p_scanner.next_token();
-            } catch (java.io.IOException e) {
-                throw new ReadScopeException("Circuit.read_length_scope: IO error scanning file", e);
-            }
-            if (next_token == null) {
-                throw new ReadScopeException("Circuit.read_length_scope: unexpected end of file");
-            }
-            if (next_token == Keyword.CLOSED_BRACKET) {
-                // end of scope
-                break;
-            }
-            if (prev_token == Keyword.OPEN_BRACKET) {
-                skip_scope(p_scanner);
-            }
-        }
-        return result;
     }
 
     private Circuit() {
@@ -138,6 +99,45 @@ class Circuit {
      * A max_length of -1 indicates, tha no maximum length is defined.
      */
     private static class LengthMatchingRule {
+
+        static LengthMatchingRule read_length_scope(Scanner p_scanner) throws ReadScopeException {
+            double[] length_arr = new double[2];
+            Object next_token = null;
+            for (int i = 0; i < 2; ++i) {
+                try {
+                    next_token = p_scanner.next_token();
+                } catch (java.io.IOException e) {
+                    throw new ReadScopeException("Circuit.read_length_scope: IO error scanning file");
+                }
+                if (next_token instanceof Double) {
+                    length_arr[i] = (double) next_token;
+                } else if (next_token instanceof Integer) {
+                    length_arr[i] = ((Number) next_token).doubleValue();
+                } else {
+                    throw new ReadScopeException("Circuit.read_length_scope: number expected");
+                }
+            }
+            LengthMatchingRule result = new LengthMatchingRule(length_arr[0], length_arr[1]);
+            for (;;) {
+                Object prev_token = next_token;
+                try {
+                    next_token = p_scanner.next_token();
+                } catch (java.io.IOException e) {
+                    throw new ReadScopeException("Circuit.read_length_scope: IO error scanning file", e);
+                }
+                if (next_token == null) {
+                    throw new ReadScopeException("Circuit.read_length_scope: unexpected end of file");
+                }
+                if (next_token == Keyword.CLOSED_BRACKET) {
+                    // end of scope
+                    break;
+                }
+                if (prev_token == Keyword.OPEN_BRACKET) {
+                    skip_scope(p_scanner);
+                }
+            }
+            return result;
+        }
 
         final double max_length;
         final double min_length;
