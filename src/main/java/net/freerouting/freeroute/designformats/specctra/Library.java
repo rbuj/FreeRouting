@@ -25,6 +25,8 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static net.freerouting.freeroute.designformats.specctra.Area.transform_area_to_board_rel;
+import static net.freerouting.freeroute.designformats.specctra.Package.read_package_scope;
+import static net.freerouting.freeroute.designformats.specctra.Padstack.read_padstack_scope;
 import net.freerouting.freeroute.geometry.planar.IntVector;
 import net.freerouting.freeroute.geometry.planar.Vector;
 
@@ -33,9 +35,9 @@ import net.freerouting.freeroute.geometry.planar.Vector;
  *
  * @author Alfons Wirtz
  */
-public class Library extends ScopeKeyword {
+class Library extends ScopeKeyword {
 
-    public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
         p_par.file.start_scope("library");
         for (net.freerouting.freeroute.library.Package curr_package : p_par.board.library.packages) {
             Package.write_scope(p_par, curr_package);
@@ -49,7 +51,7 @@ public class Library extends ScopeKeyword {
     /**
      * Creates a new instance of Library
      */
-    public Library() {
+    Library() {
         super("library");
     }
 
@@ -77,12 +79,12 @@ public class Library extends ScopeKeyword {
                 }
                 if (prev_token == OPEN_BRACKET) {
                     if (next_token == Keyword.PADSTACK) {
-                        if (!Padstack.read_padstack_scope(p_par.scanner, p_par.layer_structure,
+                        if (!read_padstack_scope(p_par.scanner, p_par.layer_structure,
                                 p_par.coordinate_transform, board.library.padstacks)) {
                             return false;
                         }
                     } else if (next_token == Keyword.IMAGE) {
-                        Package curr_package = Package.read_scope(p_par.scanner, p_par.layer_structure);
+                        Package curr_package = read_package_scope(p_par.scanner, p_par.layer_structure);
                         package_list.add(curr_package);
                     } else {
                         skip_scope(p_par.scanner);

@@ -21,6 +21,7 @@ package net.freerouting.freeroute.designformats.specctra;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static net.freerouting.freeroute.designformats.specctra.DsnFile.read_string_scope;
 
 /**
  * Handels the placement bata of a library component.
@@ -286,7 +287,7 @@ public class Component extends ScopeKeyword {
         while (next_token == Keyword.OPEN_BRACKET) {
             next_token = p_scanner.next_token();
             if (next_token == Keyword.CLEARANCE_CLASS) {
-                cl_class_name = DsnFile.read_string_scope(p_scanner);
+                cl_class_name = read_string_scope(p_scanner);
             } else {
                 skip_scope(p_scanner);
             }

@@ -28,6 +28,9 @@ import java.util.logging.Logger;
 import net.freerouting.freeroute.board.RoutingBoard;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
+import static net.freerouting.freeroute.designformats.specctra.NetClass.read_class_class_scope;
+import static net.freerouting.freeroute.designformats.specctra.NetClass.read_net_class_scope;
+import static net.freerouting.freeroute.designformats.specctra.Rule.read_rule_scope;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.PointUtils;
 import net.freerouting.freeroute.geometry.planar.Vector;
@@ -1043,10 +1046,10 @@ public class Network extends ScopeKeyword {
                         Collection<String> curr_via_rule = read_via_rule(p_par.scanner, p_par.board_handling.get_routing_board());
                         via_rules.add(curr_via_rule);
                     } else if (next_token == Keyword.CLASS) {
-                        NetClass curr_class = NetClass.read_scope(p_par.scanner);
+                        NetClass curr_class = read_net_class_scope(p_par.scanner);
                         classes.add(curr_class);
                     } else if (next_token == Keyword.CLASS_CLASS) {
-                        NetClass.ClassClass curr_class_class = NetClass.read_class_class_scope(p_par.scanner);
+                        NetClass.ClassClass curr_class_class = read_class_class_scope(p_par.scanner);
                         if (curr_class_class == null) {
                             return false;
                         }
@@ -1128,7 +1131,7 @@ public class Network extends ScopeKeyword {
                         }
                         subnet_pin_lists.add(curr_subnet_pin_list);
                     } else if (next_token == Keyword.RULE) {
-                        net_rules.addAll(Rule.read_scope(p_scanner));
+                        net_rules.addAll(read_rule_scope(p_scanner));
                     } else if (next_token == Keyword.LAYER_RULE) {
                         System.out.println("Netwark.read_net_scope: layer_rule not yet implemented");
                         skip_scope(p_scanner);

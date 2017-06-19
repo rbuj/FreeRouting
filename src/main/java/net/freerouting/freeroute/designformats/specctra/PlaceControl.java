@@ -51,7 +51,7 @@ public class PlaceControl extends ScopeKeyword {
     /**
      * Creates a new instance of PlaceControl
      */
-    public PlaceControl() {
+    PlaceControl() {
         super("place_control");
     }
 
@@ -87,5 +87,4 @@ public class PlaceControl extends ScopeKeyword {
         }
         return true;
     }
-
 }

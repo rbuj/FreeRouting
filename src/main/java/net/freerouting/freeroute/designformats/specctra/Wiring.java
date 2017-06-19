@@ -36,6 +36,12 @@ import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
 import net.freerouting.freeroute.datastructures.UndoableObjects;
 import static net.freerouting.freeroute.designformats.specctra.Area.transform_area_to_board;
+import static net.freerouting.freeroute.designformats.specctra.Circle.read_circle_scope;
+import static net.freerouting.freeroute.designformats.specctra.Polygon.read_polygon_scope;
+import static net.freerouting.freeroute.designformats.specctra.PolygonPath.read_polygon_path_scope;
+import static net.freerouting.freeroute.designformats.specctra.PolylinePath.read_polyline_path_scope;
+import static net.freerouting.freeroute.designformats.specctra.Rectangle.read_rectangle_scope;
+import static net.freerouting.freeroute.designformats.specctra.Shape.read_shape_scope;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
@@ -376,17 +382,17 @@ class Wiring extends ScopeKeyword {
             }
             if (prev_token == OPEN_BRACKET) {
                 if (next_token == Keyword.POLYGON_PATH) {
-                    path = PolygonPath.read_scope(p_par.scanner, p_par.layer_structure);
+                    path = read_polygon_path_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.POLYLINE_PATH) {
-                    path = PolylinePath.read_scope(p_par.scanner, p_par.layer_structure);
+                    path = read_polyline_path_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.RECTANGLE) {
-                    border_shape = Rectangle.read_scope(p_par.scanner, p_par.layer_structure);
+                    border_shape = read_rectangle_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.POLYGON) {
-                    border_shape = Polygon.read_scope(p_par.scanner, p_par.layer_structure);
+                    border_shape = read_polygon_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.CIRCLE) {
-                    border_shape = Circle.read_scope(p_par.scanner, p_par.layer_structure);
+                    border_shape = read_circle_scope(p_par.scanner, p_par.layer_structure);
                 } else if (next_token == Keyword.WINDOW) {
-                    Shape hole_shape = ShapeReadable.read_scope(p_par.scanner, p_par.layer_structure);
+                    Shape hole_shape = read_shape_scope(p_par.scanner, p_par.layer_structure);
                     hole_list.add(hole_shape);
                     // overread the closing bracket
                     try {

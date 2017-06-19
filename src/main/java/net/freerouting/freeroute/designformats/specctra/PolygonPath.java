@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
+import static net.freerouting.freeroute.designformats.specctra.ScopeKeyword.skip_scope;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntOctagon;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
@@ -34,33 +35,16 @@ import net.freerouting.freeroute.geometry.planar.IntPoint;
  *
  * @author Alfons Wirtz
  */
-public class PolygonPath extends Path {
+class PolygonPath extends Path {
 
     /**
      * Reads an object of type Path from the dsn-file.
      */
-    static Path read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
+    static Path read_polygon_path_scope(Scanner p_scanner,
+            LayerStructure p_layer_structure) throws ReadScopeException {
         try {
-            LayerInfo layer = null;
-            Object next_token = p_scanner.next_token();
-            if (next_token == Keyword.PCB_SCOPE) {
-                layer = LayerInfo.PCB;
-            } else if (next_token == Keyword.SIGNAL) {
-                layer = LayerInfo.SIGNAL;
-            } else {
-                if (p_layer_structure == null) {
-                    throw new ReadScopeException("Shape.read_polygon_path_scope: only layer types pcb or signal expected");
-                }
-                if (!(next_token instanceof String)) {
-                    throw new ReadScopeException("Path.read_scope: layer name string expected");
-                }
-                int layer_no = p_layer_structure.get_no((String) next_token);
-                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
-                    throw new ReadScopeException("Shape.read_polygon_path_scope: layer with name " + next_token.toString() + " not found in layer structure ");
-                } else {
-                    layer = p_layer_structure.arr[layer_no];
-                }
-            }
+            LayerInfo layer = read_layer_shape_scope(p_scanner, p_layer_structure);
+            Object next_token;
             Collection<Object> corner_list = new LinkedList<>();
 
             // read the width and the corners of the path
@@ -68,7 +52,7 @@ public class PolygonPath extends Path {
                 next_token = p_scanner.next_token();
                 if (next_token == Keyword.OPEN_BRACKET) {
                     // unknown scope
-                    ScopeKeyword.skip_scope(p_scanner);
+                    skip_scope(p_scanner);
                     next_token = p_scanner.next_token();
                 }
                 if (next_token == Keyword.CLOSED_BRACKET) {
@@ -77,7 +61,7 @@ public class PolygonPath extends Path {
                 corner_list.add(next_token);
             }
             if (corner_list.size() < 5) {
-                throw new ReadScopeException("Shape.read_polygon_path_scope: to few numbers in scope");
+                throw new ReadScopeException("PolygonPath.read_polygon_path_scope: to few numbers in scope");
             }
             Iterator<Object> it = corner_list.iterator();
             double width;
@@ -87,7 +71,7 @@ public class PolygonPath extends Path {
             } else if (next_object instanceof Integer) {
                 width = ((Number) next_object).doubleValue();
             } else {
-                throw new ReadScopeException("Shape.read_polygon_path_scope: number expected");
+                throw new ReadScopeException("PolygonPath.read_polygon_path_scope: number expected");
             }
             double[] coordinate_arr = new double[corner_list.size() - 1];
             for (int i = 0; i < coordinate_arr.length; ++i) {
@@ -97,13 +81,12 @@ public class PolygonPath extends Path {
                 } else if (next_object instanceof Integer) {
                     coordinate_arr[i] = ((Number) next_object).doubleValue();
                 } else {
-                    throw new ReadScopeException("Shape.read_polygon_path_scope: number expected");
+                    throw new ReadScopeException("PolygonPath.read_polygon_path_scope: number expected");
                 }
-
             }
             return new PolygonPath(layer, width, coordinate_arr);
         } catch (java.io.IOException e) {
-            throw new ReadScopeException("Shape.read_polygon_path_scope: IO error scanning file", e);
+            throw new ReadScopeException("PolygonPath.read_polygon_path_scope: IO error scanning file", e);
         }
     }
 
@@ -118,7 +101,7 @@ public class PolygonPath extends Path {
      * Writes this path as a scope to an output dsn-file.
      */
     @Override
-    public void write_scope(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
+    void write_scope(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
         p_file.start_scope("path ");
         p_identifier_type.write(this.layer.name, p_file);
         p_file.write(" ");
@@ -134,7 +117,7 @@ public class PolygonPath extends Path {
     }
 
     @Override
-    public void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
+    void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
         p_file.start_scope("path ");
         p_identifier_type.write(this.layer.name, p_file);
         p_file.write(" ");
@@ -152,7 +135,7 @@ public class PolygonPath extends Path {
     }
 
     @Override
-    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform) {
+    net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform) {
         FloatPoint[] corner_arr = new FloatPoint[this.coordinate_arr.length / 2];
         double[] curr_point = new double[2];
         for (int i = 0; i < corner_arr.length; ++i) {
@@ -177,7 +160,7 @@ public class PolygonPath extends Path {
     }
 
     @Override
-    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
+    net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
         FloatPoint[] corner_arr = new FloatPoint[this.coordinate_arr.length / 2];
         double[] curr_point = new double[2];
         for (int i = 0; i < corner_arr.length; ++i) {
@@ -202,7 +185,7 @@ public class PolygonPath extends Path {
     }
 
     @Override
-    public Rectangle bounding_box() {
+    Rectangle bounding_box() {
         double offset = this.width / 2;
         double[] bounds = new double[4];
         bounds[0] = Integer.MAX_VALUE;
@@ -222,5 +205,4 @@ public class PolygonPath extends Path {
         }
         return new Rectangle(layer, bounds);
     }
-
 }

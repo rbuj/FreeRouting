@@ -22,6 +22,8 @@ package net.freerouting.freeroute.designformats.specctra;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static net.freerouting.freeroute.designformats.specctra.PolygonPath.read_polygon_path_scope;
+import static net.freerouting.freeroute.designformats.specctra.ScopeKeyword.skip_scope;
 
 /**
  * Transformes a Specctra session file into an Eagle script file.
@@ -193,7 +195,7 @@ public class SessionToEagle extends javax.swing.JFrame {
                     }
                 } else {
                     // overread all scopes except the routes scope for the time being
-                    ScopeKeyword.skip_scope(this.scanner);
+                    skip_scope(this.scanner);
                 }
             }
         }
@@ -225,7 +227,7 @@ public class SessionToEagle extends javax.swing.JFrame {
                     }
                 } else {
                     // skip unknown scope
-                    ScopeKeyword.skip_scope(this.scanner);
+                    skip_scope(this.scanner);
                 }
 
             }
@@ -287,7 +289,7 @@ public class SessionToEagle extends javax.swing.JFrame {
                     result = process_network_scope();
                 } else {
                     // skip unknown scope
-                    ScopeKeyword.skip_scope(this.scanner);
+                    skip_scope(this.scanner);
                 }
 
             }
@@ -317,7 +319,7 @@ public class SessionToEagle extends javax.swing.JFrame {
                     result = process_net_scope();
                 } else {
                     // skip unknown scope
-                    ScopeKeyword.skip_scope(this.scanner);
+                    skip_scope(this.scanner);
                 }
 
             }
@@ -359,7 +361,7 @@ public class SessionToEagle extends javax.swing.JFrame {
                         return false;
                     }
                 } else {
-                    ScopeKeyword.skip_scope(this.scanner);
+                    skip_scope(this.scanner);
                 }
             }
         }
@@ -383,14 +385,14 @@ public class SessionToEagle extends javax.swing.JFrame {
             if (prev_token == Keyword.OPEN_BRACKET) {
                 if (next_token == Keyword.POLYGON_PATH) {
                     try {
-                        wire_path = PolygonPath.read_scope(this.scanner, this.specctra_layer_structure);
+                        wire_path = read_polygon_path_scope(this.scanner, this.specctra_layer_structure);
                     } catch (ReadScopeException ex) {
                         Logger.getLogger(SessionToEagle.class.getName()).log(Level.SEVERE, null, ex);
                         // conduction areas are skipped
                         return true;
                     }
                 } else {
-                    ScopeKeyword.skip_scope(this.scanner);
+                    skip_scope(this.scanner);
                 }
             }
         }
@@ -452,7 +454,7 @@ public class SessionToEagle extends javax.swing.JFrame {
         next_token = this.scanner.next_token();
         while (next_token == Keyword.OPEN_BRACKET) {
             // skip unknown scopes
-            ScopeKeyword.skip_scope(this.scanner);
+            skip_scope(this.scanner);
             next_token = this.scanner.next_token();
         }
         if (next_token != Keyword.CLOSED_BRACKET) {

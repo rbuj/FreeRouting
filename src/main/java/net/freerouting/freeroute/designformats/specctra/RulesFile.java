@@ -22,6 +22,11 @@ package net.freerouting.freeroute.designformats.specctra;
 
 import net.freerouting.freeroute.board.BasicBoard;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
+import static net.freerouting.freeroute.designformats.specctra.AutorouteSettings.read_autoroute_settings_scope;
+import static net.freerouting.freeroute.designformats.specctra.Padstack.read_padstack_scope;
+import static net.freerouting.freeroute.designformats.specctra.Rule.read_rule_scope;
+import static net.freerouting.freeroute.designformats.specctra.ScopeKeyword.skip_scope;
+import static net.freerouting.freeroute.designformats.specctra.Structure.read_snap_angle;
 
 /**
  * File for saving the board rules, so that they can be restored after the Board
@@ -101,11 +106,11 @@ public class RulesFile {
                 }
                 if (prev_token == Keyword.OPEN_BRACKET) {
                     if (next_token == Keyword.RULE) {
-                        add_rules(Rule.read_scope(scanner), routing_board, null);
+                        add_rules(read_rule_scope(scanner), routing_board, null);
                     } else if (next_token == Keyword.LAYER) {
                         add_layer_rules(scanner, routing_board);
                     } else if (next_token == Keyword.PADSTACK) {
-                        Padstack.read_padstack_scope(scanner, layer_structure, coordinate_transform, routing_board.library.padstacks);
+                        read_padstack_scope(scanner, layer_structure, coordinate_transform, routing_board.library.padstacks);
                     } else if (next_token == Keyword.VIA) {
                         read_via_info(scanner, routing_board);
                     } else if (next_token == Keyword.VIA_RULE) {
@@ -113,18 +118,18 @@ public class RulesFile {
                     } else if (next_token == Keyword.CLASS) {
                         read_net_class(scanner, layer_structure, routing_board);
                     } else if (next_token == Keyword.SNAP_ANGLE) {
-                        net.freerouting.freeroute.board.AngleRestriction snap_angle = Structure.read_snap_angle(scanner);
+                        net.freerouting.freeroute.board.AngleRestriction snap_angle = read_snap_angle(scanner);
                         if (snap_angle != null) {
                             routing_board.rules.set_trace_angle_restriction(snap_angle);
                         }
                     } else if (next_token == Keyword.AUTOROUTE_SETTINGS) {
                         net.freerouting.freeroute.interactive.AutorouteSettings autoroute_settings
-                                = AutorouteSettings.read_scope(scanner, layer_structure);
+                                = read_autoroute_settings_scope(scanner, layer_structure);
                         if (autoroute_settings != null) {
                             p_board_handling.settings.autoroute_settings = autoroute_settings;
                         }
                     } else {
-                        ScopeKeyword.skip_scope(scanner);
+                        skip_scope(scanner);
                     }
                 }
             }
@@ -193,10 +198,10 @@ public class RulesFile {
                 }
                 next_token = p_scanner.next_token();
                 if (next_token == Keyword.RULE) {
-                    java.util.Collection<Rule> curr_rules = Rule.read_scope(p_scanner);
+                    java.util.Collection<Rule> curr_rules = read_rule_scope(p_scanner);
                     add_rules(curr_rules, p_board, layer_string);
                 } else {
-                    ScopeKeyword.skip_scope(p_scanner);
+                    skip_scope(p_scanner);
                 }
                 next_token = p_scanner.next_token();
             }
@@ -221,7 +226,7 @@ public class RulesFile {
     }
 
     private static void read_net_class(Scanner p_scanner, LayerStructure p_layer_structure, BasicBoard p_board) throws DsnFileException, ReadScopeException {
-        NetClass curr_class = NetClass.read_scope(p_scanner);
+        NetClass curr_class = NetClass.read_net_class_scope(p_scanner);
         Network.insert_net_class(curr_class, p_layer_structure, p_board, p_board.communication.coordinate_transform, false);
     }
 

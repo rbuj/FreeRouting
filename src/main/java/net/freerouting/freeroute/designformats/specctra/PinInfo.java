@@ -16,16 +16,18 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import static net.freerouting.freeroute.designformats.specctra.ScopeKeyword.skip_scope;
+
 /**
  *
  * @author Robert Buj
  */
-public class PinInfo {
+class PinInfo {
 
     /**
      * Reads the information of a single pin in a package.
      */
-    public static PinInfo read_pin_info(Scanner p_scanner) throws ReadScopeException {
+    static PinInfo read_pin_info(Scanner p_scanner) throws ReadScopeException {
         try {
             // Read the padstack name.
             p_scanner.yybegin(SpecctraFileScanner.NAME);
@@ -48,7 +50,7 @@ public class PinInfo {
                 if (next_token == Keyword.ROTATE) {
                     rotation = read_rotation(p_scanner);
                 } else {
-                    ScopeKeyword.skip_scope(p_scanner);
+                    skip_scope(p_scanner);
                 }
                 p_scanner.yybegin(SpecctraFileScanner.NAME);
                 next_token = p_scanner.next_token();
@@ -90,7 +92,7 @@ public class PinInfo {
                     if (next_token == Keyword.ROTATE) {
                         rotation = read_rotation(p_scanner);
                     } else {
-                        ScopeKeyword.skip_scope(p_scanner);
+                        skip_scope(p_scanner);
                     }
                 }
             }
@@ -122,7 +124,7 @@ public class PinInfo {
         return result;
     }
 
-    public static void write_scope(WriteScopeParameter p_par, net.freerouting.freeroute.library.Package.Pin curr_pin) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par, net.freerouting.freeroute.library.Package.Pin curr_pin) throws java.io.IOException {
         p_par.file.new_line();
         p_par.file.write("(pin ");
         net.freerouting.freeroute.library.Padstack curr_padstack = p_par.board.library.padstacks.get(curr_pin.padstack_no);
@@ -166,5 +168,4 @@ public class PinInfo {
         rel_coor = p_rel_coor;
         rotation = p_rotation;
     }
-
 }

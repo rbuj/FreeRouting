@@ -19,6 +19,9 @@ package net.freerouting.freeroute.designformats.specctra;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import static net.freerouting.freeroute.designformats.specctra.DsnFile.read_string_scope;
+import static net.freerouting.freeroute.designformats.specctra.ScopeKeyword.skip_scope;
+import static net.freerouting.freeroute.designformats.specctra.Shape.read_shape_scope;
 import net.freerouting.freeroute.geometry.planar.PolylineShape;
 
 /**
@@ -61,7 +64,7 @@ class Area {
                 area_name = curr_name;
             }
         }
-        Shape curr_shape = ShapeReadable.read_scope(p_scanner, p_layer_structure);
+        Shape curr_shape = read_shape_scope(p_scanner, p_layer_structure);
         if (curr_shape == null) {
             result_ok = false;
         }
@@ -85,7 +88,7 @@ class Area {
             if (prev_token == Keyword.OPEN_BRACKET) {
                 // a new scope is expected
                 if (next_token == Keyword.WINDOW && !p_skip_window_scopes) {
-                    Shape hole_shape = ShapeReadable.read_scope(p_scanner, p_layer_structure);
+                    Shape hole_shape = read_shape_scope(p_scanner, p_layer_structure);
                     shape_list.add(hole_shape);
                     // overread closing bracket
                     try {
@@ -96,12 +99,11 @@ class Area {
                     if (next_token != Keyword.CLOSED_BRACKET) {
                         throw new ReadScopeException("Area.read_area_scope: closed bracket expected");
                     }
-
                 } else if (next_token == Keyword.CLEARANCE_CLASS) {
-                    clearance_class_name = DsnFile.read_string_scope(p_scanner);
+                    clearance_class_name = read_string_scope(p_scanner);
                 } else {
                     // skip unknown scope
-                    ScopeKeyword.skip_scope(p_scanner);
+                    skip_scope(p_scanner);
                 }
             }
         }

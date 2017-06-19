@@ -21,6 +21,9 @@ package net.freerouting.freeroute.designformats.specctra;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import static net.freerouting.freeroute.designformats.specctra.Rule.ClearanceRule.read_clearance_rule;
+import static net.freerouting.freeroute.designformats.specctra.Rule.WidthRule.read_width_rule;
+import static net.freerouting.freeroute.designformats.specctra.ScopeKeyword.skip_scope;
 
 /**
  * Class for reading and writing rule scopes from dsn-files.
@@ -32,7 +35,7 @@ abstract class Rule {
     /**
      * Returns a collection of objects of class Rule.
      */
-    static Collection<Rule> read_scope(Scanner p_scanner) {
+    static Collection<Rule> read_rule_scope(Scanner p_scanner) {
         Collection<Rule> result = new LinkedList<>();
         Object next_token = null;
         for (;;) {
@@ -55,11 +58,11 @@ abstract class Rule {
             if (prev_token == Keyword.OPEN_BRACKET) {
                 Rule curr_rule = null;
                 if (next_token == Keyword.WIDTH) {
-                    curr_rule = WidthRule.read_width_rule(p_scanner);
+                    curr_rule = read_width_rule(p_scanner);
                 } else if (next_token == Keyword.CLEARANCE) {
-                    curr_rule = ClearanceRule.read_clearance_rule(p_scanner);
+                    curr_rule = read_clearance_rule(p_scanner);
                 } else {
-                    ScopeKeyword.skip_scope(p_scanner);
+                    skip_scope(p_scanner);
                 }
                 if (curr_rule != null) {
                     result.add(curr_rule);
@@ -304,11 +307,10 @@ abstract class Rule {
                         break;
                     }
                     if (next_token != Keyword.RULE) {
-
                         System.out.println("Rule.read_layer_rule_scope: rule expected");
                         return null;
                     }
-                    rule_list.addAll(read_scope(p_scanner));
+                    rule_list.addAll(read_rule_scope(p_scanner));
                 }
                 return new LayerRule(layer_names, rule_list);
             } catch (java.io.IOException e) {

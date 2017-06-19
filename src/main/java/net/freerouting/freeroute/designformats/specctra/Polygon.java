@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
+import static net.freerouting.freeroute.designformats.specctra.ScopeKeyword.skip_scope;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
 import net.freerouting.freeroute.geometry.planar.SimplexUtils;
 
@@ -32,50 +33,29 @@ import net.freerouting.freeroute.geometry.planar.SimplexUtils;
  *
  * @author alfons
  */
-public class Polygon extends Shape {
+class Polygon extends Shape {
 
     /**
      * Reads a closed polygon scope from a Specctra dsn file. If
      * p_layer_structure == null, only Layer.PCB and Layer.Signal are expected,
      * no induvidual layers.
      */
-    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
+    static Shape read_polygon_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
         try {
-            LayerInfo polygon_layer = null;
-            Object next_token = p_scanner.next_token();
-            if (next_token == Keyword.PCB_SCOPE) {
-                polygon_layer = LayerInfo.PCB;
-            } else if (next_token == Keyword.SIGNAL) {
-                polygon_layer = LayerInfo.SIGNAL;
-            } else {
-                if (p_layer_structure == null) {
-                    throw new ReadScopeException("Shape.read_polygon_scope: only layer types pcb or signal expected");
-                }
-                if (!(next_token instanceof String)) {
-                    throw new ReadScopeException("Shape.read_polygon_scope: layer name string expected");
-                }
-                int layer_no = p_layer_structure.get_no((String) next_token);
-                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
-                    throw new ReadScopeException("Shape.read_polygon_scope: layer name " + next_token.toString() + " not found in layer structure ");
-                } else {
-                    polygon_layer = p_layer_structure.arr[layer_no];
-                }
-            }
-
+            LayerInfo polygon_layer = read_layer_shape_scope(p_scanner, p_layer_structure);
             // overread the aperture width
-            next_token = p_scanner.next_token();
-
+            Object next_token = p_scanner.next_token();
             Collection<Object> coor_list = new LinkedList<>();
 
             // read the coordinates of the polygon
             for (;;) {
                 next_token = p_scanner.next_token();
                 if (next_token == null) {
-                    throw new ReadScopeException("Shape.read_polygon_scope: unexpected end of file");
+                    throw new ReadScopeException("Polygon.read_polygon_scope: unexpected end of file");
                 }
                 if (next_token == Keyword.OPEN_BRACKET) {
                     // unknown scope
-                    ScopeKeyword.skip_scope(p_scanner);
+                    skip_scope(p_scanner);
                     next_token = p_scanner.next_token();
                 }
                 if (next_token == Keyword.CLOSED_BRACKET) {
@@ -92,17 +72,16 @@ public class Polygon extends Shape {
                 } else if (next_object instanceof Integer) {
                     coor_arr[i] = ((Number) next_object).doubleValue();
                 } else {
-                    throw new ReadScopeException("Shape.read_polygon_scope: number expected");
+                    throw new ReadScopeException("Polygon.read_polygon_scope: number expected");
                 }
-
             }
             return new Polygon(polygon_layer, coor_arr);
         } catch (java.io.IOException e) {
-            throw new ReadScopeException("Rectangle.read_scope: IO error scanning file", e);
+            throw new ReadScopeException("Polygon.read_polygon_scope: IO error scanning file", e);
         }
     }
 
-    public final double[] coor;
+    final double[] coor;
 
     /**
      * Creates a new instance of Polygon p_coor is an array of dimension of
@@ -115,7 +94,7 @@ public class Polygon extends Shape {
     }
 
     @Override
-    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform) {
+    net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform) {
         IntPoint[] corner_arr = new IntPoint[coor.length / 2];
         double[] curr_point = new double[2];
         for (int i = 0; i < corner_arr.length; ++i) {
@@ -127,7 +106,7 @@ public class Polygon extends Shape {
     }
 
     @Override
-    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
+    net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
         if (coor.length < 2) {
             return SimplexUtils.EMPTY;
         }
@@ -141,7 +120,7 @@ public class Polygon extends Shape {
     }
 
     @Override
-    public Rectangle bounding_box() {
+    Rectangle bounding_box() {
         double[] bounds = new double[4];
         bounds[0] = Integer.MAX_VALUE;
         bounds[1] = Integer.MAX_VALUE;
@@ -165,7 +144,7 @@ public class Polygon extends Shape {
      * Writes this polygon as a scope to an output dsn-file.
      */
     @Override
-    public void write_scope(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
+    void write_scope(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
         p_file.start_scope("polygon ");
         p_identifier_type.write(this.layer.name, p_file);
         p_file.write(" ");
@@ -181,7 +160,7 @@ public class Polygon extends Shape {
     }
 
     @Override
-    public void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
+    void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
         p_file.start_scope("polygon ");
         p_identifier_type.write(this.layer.name, p_file);
         p_file.write(" ");
@@ -197,5 +176,4 @@ public class Polygon extends Shape {
         }
         p_file.end_scope();
     }
-
 }

@@ -31,32 +31,15 @@ import net.freerouting.freeroute.datastructures.IndentFileWriter;
  *
  * @author alfons
  */
-public class PolylinePath extends Path {
+class PolylinePath extends Path {
 
     /**
      * Reads an object of type PolylinePath from the dsn-file.
      */
-    static Path read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
+    static Path read_polyline_path_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
         try {
-            LayerInfo layer;
-            Object next_token = p_scanner.next_token();
-            if (next_token == Keyword.PCB_SCOPE) {
-                layer = LayerInfo.PCB;
-            } else if (next_token == Keyword.SIGNAL) {
-                layer = LayerInfo.SIGNAL;
-            } else {
-                if (p_layer_structure == null) {
-                    throw new ReadScopeException("PolylinePath.read_scope: only layer types pcb or signal expected");
-                }
-                if (!(next_token instanceof String)) {
-                    throw new ReadScopeException("PolylinePath.read_scope: layer name string expected");
-                }
-                int layer_no = p_layer_structure.get_no((String) next_token);
-                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
-                    throw new ReadScopeException("Shape.read_polyline_path_scope: layer name " + next_token.toString() + " not found in layer structure ");
-                }
-                layer = p_layer_structure.arr[layer_no];
-            }
+            LayerInfo layer = read_layer_shape_scope(p_scanner, p_layer_structure);
+            Object next_token;
             Collection<Object> corner_list = new LinkedList<>();
 
             // read the width and the corners of the path
@@ -68,7 +51,7 @@ public class PolylinePath extends Path {
                 corner_list.add(next_token);
             }
             if (corner_list.size() < 5) {
-                throw new ReadScopeException("PolylinePath.read_scope: to few numbers in scope");
+                throw new ReadScopeException("PolylinePath.read_polyline_path_scope: to few numbers in scope");
             }
             Iterator<Object> it = corner_list.iterator();
             double width;
@@ -78,7 +61,7 @@ public class PolylinePath extends Path {
             } else if (next_object instanceof Integer) {
                 width = ((Number) next_object).doubleValue();
             } else {
-                throw new ReadScopeException("PolylinePath.read_scope: number expected");
+                throw new ReadScopeException("PolylinePath.read_polyline_path_scope: number expected");
             }
             double[] corner_arr = new double[corner_list.size() - 1];
             for (int i = 0; i < corner_arr.length; ++i) {
@@ -88,13 +71,12 @@ public class PolylinePath extends Path {
                 } else if (next_object instanceof Integer) {
                     corner_arr[i] = ((Number) next_object).doubleValue();
                 } else {
-                    throw new ReadScopeException("Shape.read_polygon_path_scope: number expected");
+                    throw new ReadScopeException("PolylinePath.read_polyline_path_scope: number expected");
                 }
-
             }
             return new PolylinePath(layer, width, corner_arr);
         } catch (java.io.IOException e) {
-            throw new ReadScopeException("PolylinePath.read_scope: IO error scanning file", e);
+            throw new ReadScopeException("PolylinePath.read_polyline_path_scope: IO error scanning file", e);
         }
     }
 
@@ -109,7 +91,7 @@ public class PolylinePath extends Path {
      * Writes this path as a scope to an output dsn-file.
      */
     @Override
-    public void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
+    void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
         p_file.start_scope("polyline_path ");
         p_identifier.write(this.layer.name, p_file);
         p_file.write(" ");
@@ -126,7 +108,7 @@ public class PolylinePath extends Path {
     }
 
     @Override
-    public void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
+    void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
         p_file.start_scope("polyline_path ");
         p_identifier.write(this.layer.name, p_file);
         p_file.write(" ");
@@ -144,18 +126,17 @@ public class PolylinePath extends Path {
     }
 
     @Override
-    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
+    net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
         throw new UnsupportedOperationException("PolylinePath.transform_to_board_rel not implemented");
     }
 
     @Override
-    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform) {
+    net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform) {
         throw new UnsupportedOperationException("PolylinePath.transform_to_board_rel not implemented");
     }
 
     @Override
-    public Rectangle bounding_box() {
+    Rectangle bounding_box() {
         throw new UnsupportedOperationException("PolylinePath.boundingbox not implemented");
     }
-
 }

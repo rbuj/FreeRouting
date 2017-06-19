@@ -20,6 +20,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import net.freerouting.freeroute.board.SignalLayer;
+import static net.freerouting.freeroute.designformats.specctra.DsnFile.read_on_off_scope;
+import static net.freerouting.freeroute.designformats.specctra.ScopeKeyword.skip_scope;
+import static net.freerouting.freeroute.designformats.specctra.Shape.read_shape_scope;
 import net.freerouting.freeroute.geometry.planar.PolygonShape;
 import net.freerouting.freeroute.geometry.planar.Simplex;
 
@@ -96,25 +99,25 @@ public class Padstack {
                 next_token = p_scanner.next_token();
                 if (prev_token == Keyword.OPEN_BRACKET) {
                     if (next_token == Keyword.SHAPE) {
-                        Shape curr_shape = ShapeReadable.read_scope(p_scanner, p_layer_structure);
+                        Shape curr_shape = read_shape_scope(p_scanner, p_layer_structure);
                         if (curr_shape != null) {
                             shape_list.add(curr_shape);
                         }
                         // overread the closing bracket and unknown scopes.
                         Object curr_next_token = p_scanner.next_token();
                         while (curr_next_token == Keyword.OPEN_BRACKET) {
-                            ScopeKeyword.skip_scope(p_scanner);
+                            skip_scope(p_scanner);
                             curr_next_token = p_scanner.next_token();
                         }
                         if (curr_next_token != Keyword.CLOSED_BRACKET) {
                             throw new ReadScopeException("Library.read_padstack_scope: closing bracket expected");
                         }
                     } else if (next_token == Keyword.ATTACH) {
-                        is_drilllable = DsnFile.read_on_off_scope(p_scanner);
+                        is_drilllable = read_on_off_scope(p_scanner);
                     } else if (next_token == Keyword.ABSOLUTE) {
-                        placed_absolute = DsnFile.read_on_off_scope(p_scanner);
+                        placed_absolute = read_on_off_scope(p_scanner);
                     } else {
-                        ScopeKeyword.skip_scope(p_scanner);
+                        skip_scope(p_scanner);
                     }
                 }
 

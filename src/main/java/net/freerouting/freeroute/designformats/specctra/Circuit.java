@@ -20,6 +20,10 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import static net.freerouting.freeroute.designformats.specctra.DsnFile.read_string_list_scope;
+import static net.freerouting.freeroute.designformats.specctra.ScopeKeyword.skip_scope;
+import static net.freerouting.freeroute.designformats.specctra.Structure.read_via_padstacks;
+
 /**
  *
  * @author Alfons Wirtz
@@ -30,7 +34,7 @@ public class Circuit {
      * Currently only the length matching rule is read from a circuit scope. If
      * the scope does not contain a length matching rule, nulll is returned.
      */
-    public static ReadScopeResult read_scope(Scanner p_scanner) throws DsnFileException, ReadScopeException {
+    public static ReadScopeResult read_circuit_scope(Scanner p_scanner) throws DsnFileException, ReadScopeException {
         Object next_token = null;
         double min_trace_length = 0;
         double max_trace_length = 0;
@@ -56,11 +60,11 @@ public class Circuit {
                     min_trace_length = length_rule.min_length;
                     max_trace_length = length_rule.max_length;
                 } else if (next_token == Keyword.USE_VIA) {
-                    use_via.addAll(Structure.read_via_padstacks(p_scanner));
+                    use_via.addAll(read_via_padstacks(p_scanner));
                 } else if (next_token == Keyword.USE_LAYER) {
-                    use_layer.addAll(DsnFile.read_string_list_scope(p_scanner));
+                    use_layer.addAll(read_string_list_scope(p_scanner));
                 } else {
-                    ScopeKeyword.skip_scope(p_scanner);
+                    skip_scope(p_scanner);
                 }
             }
         }
@@ -100,7 +104,7 @@ public class Circuit {
                 break;
             }
             if (prev_token == Keyword.OPEN_BRACKET) {
-                ScopeKeyword.skip_scope(p_scanner);
+                skip_scope(p_scanner);
             }
         }
         return result;

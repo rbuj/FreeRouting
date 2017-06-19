@@ -22,6 +22,10 @@ package net.freerouting.freeroute.designformats.specctra;
 
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
+import static net.freerouting.freeroute.designformats.specctra.DsnFile.read_float_scope;
+import static net.freerouting.freeroute.designformats.specctra.DsnFile.read_integer_scope;
+import static net.freerouting.freeroute.designformats.specctra.DsnFile.read_on_off_scope;
+import static net.freerouting.freeroute.designformats.specctra.ScopeKeyword.skip_scope;
 
 /**
  *
@@ -29,7 +33,7 @@ import net.freerouting.freeroute.datastructures.IndentFileWriter;
  */
 public class AutorouteSettings {
 
-    static net.freerouting.freeroute.interactive.AutorouteSettings read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws DsnFileException {
+    static net.freerouting.freeroute.interactive.AutorouteSettings read_autoroute_settings_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws DsnFileException {
         net.freerouting.freeroute.interactive.AutorouteSettings result = new net.freerouting.freeroute.interactive.AutorouteSettings(p_layer_structure.arr.length);
         boolean with_fanout = false;
         boolean with_autoroute = true;
@@ -53,28 +57,28 @@ public class AutorouteSettings {
             }
             if (prev_token == Keyword.OPEN_BRACKET) {
                 if (next_token == Keyword.FANOUT) {
-                    with_fanout = DsnFile.read_on_off_scope(p_scanner);
+                    with_fanout = read_on_off_scope(p_scanner);
                 } else if (next_token == Keyword.AUTOROUTE) {
-                    with_autoroute = DsnFile.read_on_off_scope(p_scanner);
+                    with_autoroute = read_on_off_scope(p_scanner);
                 } else if (next_token == Keyword.POSTROUTE) {
-                    with_postroute = DsnFile.read_on_off_scope(p_scanner);
+                    with_postroute = read_on_off_scope(p_scanner);
                 } else if (next_token == Keyword.VIAS) {
-                    result.set_vias_allowed(DsnFile.read_on_off_scope(p_scanner));
+                    result.set_vias_allowed(read_on_off_scope(p_scanner));
                 } else if (next_token == Keyword.VIA_COSTS) {
-                    result.set_via_costs(DsnFile.read_integer_scope(p_scanner));
+                    result.set_via_costs(read_integer_scope(p_scanner));
                 } else if (next_token == Keyword.PLANE_VIA_COSTS) {
-                    result.set_plane_via_costs(DsnFile.read_integer_scope(p_scanner));
+                    result.set_plane_via_costs(read_integer_scope(p_scanner));
                 } else if (next_token == Keyword.START_RIPUP_COSTS) {
-                    result.set_start_ripup_costs(DsnFile.read_integer_scope(p_scanner));
+                    result.set_start_ripup_costs(read_integer_scope(p_scanner));
                 } else if (next_token == Keyword.START_PASS_NO) {
-                    result.set_pass_no(DsnFile.read_integer_scope(p_scanner));
+                    result.set_pass_no(read_integer_scope(p_scanner));
                 } else if (next_token == Keyword.LAYER_RULE) {
                     result = read_layer_rule(p_scanner, p_layer_structure, result);
                     if (result == null) {
                         return null;
                     }
                 } else {
-                    ScopeKeyword.skip_scope(p_scanner);
+                    skip_scope(p_scanner);
                 }
             }
         }
@@ -121,7 +125,7 @@ public class AutorouteSettings {
             }
             if (prev_token == Keyword.OPEN_BRACKET) {
                 if (next_token == Keyword.ACTIVE) {
-                    p_settings.set_layer_active(layer_no, DsnFile.read_on_off_scope(p_scanner));
+                    p_settings.set_layer_active(layer_no, read_on_off_scope(p_scanner));
                 } else if (next_token == Keyword.PREFERRED_DIRECTION) {
                     try {
                         boolean pref_dir_is_horizontal = true;
@@ -143,11 +147,11 @@ public class AutorouteSettings {
                         return null;
                     }
                 } else if (next_token == Keyword.PREFERRED_DIRECTION_TRACE_COSTS) {
-                    p_settings.set_preferred_direction_trace_costs(layer_no, DsnFile.read_float_scope(p_scanner));
+                    p_settings.set_preferred_direction_trace_costs(layer_no, read_float_scope(p_scanner));
                 } else if (next_token == Keyword.AGAINST_PREFERRED_DIRECTION_TRACE_COSTS) {
-                    p_settings.set_against_preferred_direction_trace_costs(layer_no, DsnFile.read_float_scope(p_scanner));
+                    p_settings.set_against_preferred_direction_trace_costs(layer_no, read_float_scope(p_scanner));
                 } else {
-                    ScopeKeyword.skip_scope(p_scanner);
+                    skip_scope(p_scanner);
                 }
             }
         }

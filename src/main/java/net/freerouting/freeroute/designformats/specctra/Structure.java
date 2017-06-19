@@ -33,6 +33,12 @@ import net.freerouting.freeroute.datastructures.UndoableObjects;
 import net.freerouting.freeroute.datastructures.UndoableObjects.Storable;
 import static net.freerouting.freeroute.designformats.specctra.Area.read_area_scope;
 import static net.freerouting.freeroute.designformats.specctra.Area.transform_area_to_board;
+import static net.freerouting.freeroute.designformats.specctra.AutorouteSettings.read_autoroute_settings_scope;
+import static net.freerouting.freeroute.designformats.specctra.DsnFile.read_on_off_scope;
+import static net.freerouting.freeroute.designformats.specctra.DsnFile.read_string_scope;
+import static net.freerouting.freeroute.designformats.specctra.PlaceControl.read_flip_style_rotate_first;
+import static net.freerouting.freeroute.designformats.specctra.Rule.read_rule_scope;
+import static net.freerouting.freeroute.designformats.specctra.Shape.read_shape_scope;
 import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.Point;
 import net.freerouting.freeroute.geometry.planar.PolylineShape;
@@ -222,8 +228,10 @@ class Structure extends ScopeKeyword {
         p_par.file.end_scope();
     }
 
-    private static boolean read_boundary_scope(Scanner p_scanner, BoardConstructionInfo p_board_construction_info) throws DsnFileException, ReadScopeException {
-        Shape curr_shape = ShapeReadable.read_scope(p_scanner, null);
+    private static boolean read_boundary_scope(Scanner p_scanner,
+            BoardConstructionInfo p_board_construction_info) throws DsnFileException,
+            ReadScopeException {
+        Shape curr_shape = read_shape_scope(p_scanner, null);
         // overread the closing bracket.
         try {
             Object prev_token = null;
@@ -234,7 +242,7 @@ class Structure extends ScopeKeyword {
                 }
                 if (prev_token == Keyword.OPEN_BRACKET) {
                     if (next_token == Keyword.CLEARANCE_CLASS) {
-                        p_board_construction_info.outline_clearance_class_name = DsnFile.read_string_scope(p_scanner);
+                        p_board_construction_info.outline_clearance_class_name = read_string_scope(p_scanner);
                     }
                 }
                 prev_token = next_token;
@@ -292,7 +300,7 @@ class Structure extends ScopeKeyword {
                         throw new ReadScopeException("Structure.read_layer_scope: ) expected");
                     }
                 } else if (next_token == Keyword.RULE) {
-                    Collection<Rule> curr_rules = Rule.read_scope(p_scanner);
+                    Collection<Rule> curr_rules = read_rule_scope(p_scanner);
                     p_board_construction_info.layer_dependent_rules.add(new LayerRule(layer_string, curr_rules));
                 } else if (next_token == Keyword.USE_NET) {
                     for (;;) {
@@ -374,7 +382,7 @@ class Structure extends ScopeKeyword {
             }
             if (prev_token == OPEN_BRACKET) {
                 if (next_token == Keyword.VIA_AT_SMD) {
-                    p_par.via_at_smd_allowed = DsnFile.read_on_off_scope(p_par.scanner);
+                    p_par.via_at_smd_allowed = read_on_off_scope(p_par.scanner);
                 } else {
                     skip_scope(p_par.scanner);
                 }
@@ -809,7 +817,7 @@ class Structure extends ScopeKeyword {
                         return false;
                     }
                 } else if (next_token == Keyword.RULE) {
-                    board_construction_info.default_rules.addAll(Rule.read_scope(p_par.scanner));
+                    board_construction_info.default_rules.addAll(read_rule_scope(p_par.scanner));
                 } else if (next_token == Keyword.KEEPOUT) {
                     if (p_par.layer_structure == null) {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
@@ -849,7 +857,7 @@ class Structure extends ScopeKeyword {
                     if (p_par.layer_structure == null) {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                         try {
-                            p_par.autoroute_settings = AutorouteSettings.read_scope(p_par.scanner, p_par.layer_structure);
+                            p_par.autoroute_settings = read_autoroute_settings_scope(p_par.scanner, p_par.layer_structure);
                         } catch (DsnFileException ex) {
                             Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                             return false;
@@ -863,7 +871,7 @@ class Structure extends ScopeKeyword {
                         return false;
                     }
                 } else if (next_token == Keyword.FLIP_STYLE) {
-                    flip_style_rotate_first = PlaceControl.read_flip_style_rotate_first(p_par.scanner);
+                    flip_style_rotate_first = read_flip_style_rotate_first(p_par.scanner);
                 } else if (next_token == Keyword.SNAP_ANGLE) {
                     net.freerouting.freeroute.board.AngleRestriction snap_angle;
                     try {

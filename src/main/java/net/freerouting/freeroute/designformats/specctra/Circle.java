@@ -28,39 +28,17 @@ import net.freerouting.freeroute.geometry.planar.IntPoint;
  *
  * @author alfons
  */
-public class Circle extends Shape {
+class Circle extends Shape {
 
     /**
      * Reads a circle scope from a Specctra dsn file.
      */
-    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
+    static Shape read_circle_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
         try {
-            LayerInfo circle_layer = null;
-            boolean layer_ok = true;
+            LayerInfo circle_layer = read_layer_shape_scope(p_scanner, p_layer_structure);
             double circle_coor[] = new double[3];
+            Object next_token;
 
-            Object next_token = p_scanner.next_token();
-            if (next_token == Keyword.PCB_SCOPE) {
-                circle_layer = LayerInfo.PCB;
-            } else if (next_token == Keyword.SIGNAL) {
-                circle_layer = LayerInfo.SIGNAL;
-            } else {
-                if (p_layer_structure == null) {
-                    throw new ReadScopeException("Shape.read_circle_scope: p_layer_structure != null expected");
-                }
-                if (!(next_token instanceof String)) {
-                    throw new ReadScopeException("Shape.read_circle_scope: string for layer_name expected");
-                }
-                int layer_no = p_layer_structure.get_no((String) next_token);
-                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
-                    System.out.print("Shape.read_circle_scope: layer with name ");
-                    System.out.print((String) next_token);
-                    System.out.println(" not found in layer stracture ");
-                    layer_ok = false;
-                } else {
-                    circle_layer = p_layer_structure.arr[layer_no];
-                }
-            }
             // fill the the the coordinates
             int curr_index = 0;
             for (;;) {
@@ -69,27 +47,24 @@ public class Circle extends Shape {
                     break;
                 }
                 if (curr_index > 2) {
-                    throw new ReadScopeException("Shape.read_circle_scope: closed bracket expected");
+                    throw new ReadScopeException("Circle.read_circle_scope: closed bracket expected");
                 }
                 if (next_token instanceof Double) {
                     circle_coor[curr_index] = (double) next_token;
                 } else if (next_token instanceof Integer) {
                     circle_coor[curr_index] = ((Number) next_token).doubleValue();
                 } else {
-                    throw new ReadScopeException("Shape.read_circle_scope: number expected");
+                    throw new ReadScopeException("Circle.read_circle_scope: number expected");
                 }
                 ++curr_index;
             }
-            if (!layer_ok) {
-                return null;
-            }
             return new Circle(circle_layer, circle_coor);
         } catch (java.io.IOException e) {
-            throw new ReadScopeException("Shape.read_rectangle_scope: IO error scanning file", e);
+            throw new ReadScopeException("Circle.read_circle_scope: IO error scanning file", e);
         }
     }
 
-    public final double[] coor;
+    final double[] coor;
 
     /**
      * Creates a new circle from the input parameters. p_coor is an array of
@@ -110,7 +85,7 @@ public class Circle extends Shape {
     }
 
     @Override
-    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform) {
+    net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform) {
         double[] location = new double[2];
         location[0] = coor[1];
         location[1] = coor[2];
@@ -120,7 +95,7 @@ public class Circle extends Shape {
     }
 
     @Override
-    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
+    net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
         int[] new_coor = new int[3];
         new_coor[0] = (int) Math.round(p_coordinate_transform.dsn_to_board(coor[0]) / 2);
         for (int i = 1; i < 3; ++i) {
@@ -130,7 +105,7 @@ public class Circle extends Shape {
     }
 
     @Override
-    public Rectangle bounding_box() {
+    Rectangle bounding_box() {
         double[] bounds = new double[4];
         bounds[0] = coor[1] - coor[0];
         bounds[1] = coor[2] - coor[0];
@@ -140,7 +115,7 @@ public class Circle extends Shape {
     }
 
     @Override
-    public void write_scope(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
+    void write_scope(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
         p_file.new_line();
         p_file.write("(circle ");
         p_identifier_type.write(this.layer.name, p_file);
@@ -152,7 +127,7 @@ public class Circle extends Shape {
     }
 
     @Override
-    public void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
+    void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
         p_file.new_line();
         p_file.write("(circle ");
         p_identifier_type.write(this.layer.name, p_file);
@@ -163,5 +138,4 @@ public class Circle extends Shape {
         }
         p_file.write(")");
     }
-
 }

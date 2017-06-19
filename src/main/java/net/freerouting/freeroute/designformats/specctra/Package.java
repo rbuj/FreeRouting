@@ -25,15 +25,18 @@ import java.util.LinkedList;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.SignalLayer;
 import static net.freerouting.freeroute.designformats.specctra.Area.read_area_scope;
+import static net.freerouting.freeroute.designformats.specctra.PinInfo.read_pin_info;
+import static net.freerouting.freeroute.designformats.specctra.ScopeKeyword.skip_scope;
+import static net.freerouting.freeroute.designformats.specctra.Shape.read_shape_scope;
 
 /**
  * Class for reading and writing package scopes from dsn-files.
  *
  * @author alfons
  */
-public class Package {
+class Package {
 
-    public static Package read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws DsnFileException, ReadScopeException {
+    static Package read_package_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws DsnFileException, ReadScopeException {
         try {
             boolean is_front = true;
             Collection<Shape> outline = new LinkedList<>();
@@ -59,12 +62,12 @@ public class Package {
                 }
                 if (prev_token == Keyword.OPEN_BRACKET) {
                     if (next_token == Keyword.PIN) {
-                        PinInfo next_pin = PinInfo.read_pin_info(p_scanner);
+                        PinInfo next_pin = read_pin_info(p_scanner);
                         pin_info_list.add(next_pin);
                     } else if (next_token == Keyword.SIDE) {
                         is_front = read_placement_side(p_scanner);
                     } else if (next_token == Keyword.OUTLINE) {
-                        Shape curr_shape = ShapeReadable.read_scope(p_scanner, p_layer_structure);
+                        Shape curr_shape = read_shape_scope(p_scanner, p_layer_structure);
                         if (curr_shape != null) {
                             outline.add(curr_shape);
                         }
@@ -89,7 +92,7 @@ public class Package {
                             place_keepouts.add(keepout_area);
                         }
                     } else {
-                        ScopeKeyword.skip_scope(p_scanner);
+                        skip_scope(p_scanner);
                     }
                 }
             }

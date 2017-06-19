@@ -27,6 +27,7 @@ import net.freerouting.freeroute.board.NotSignalLayer;
 import net.freerouting.freeroute.board.TestLevel;
 import net.freerouting.freeroute.datastructures.IdNoGenerator;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
+import static net.freerouting.freeroute.designformats.specctra.ScopeKeyword.skip_scope;
 import net.freerouting.freeroute.interactive.BoardHandling;
 
 /**
@@ -215,7 +216,7 @@ public class DsnFile {
             } else if (next_token != Keyword.OFF) {
                 throw new DsnFileException("DsnFile.read_boolean: Keyword.OFF expected");
             }
-            ScopeKeyword.skip_scope(p_scanner);
+            skip_scope(p_scanner);
             return result;
         } catch (java.io.IOException exc) {
             throw new DsnFileException("DsnFile.read_boolean: IO error scanning file", exc);

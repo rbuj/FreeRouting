@@ -19,22 +19,15 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
-import net.freerouting.freeroute.datastructures.IdentifierType;
-import net.freerouting.freeroute.datastructures.IndentFileWriter;
-
 /**
  * Class for writing path scopes from dsn-files.
  *
  * @author alfons
  */
-public abstract class Path extends Shape {
+abstract class Path extends Shape {
 
-    static Path read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
-        throw new UnsupportedOperationException();
-    }
-
-    public final double width;
-    public final double[] coordinate_arr;
+    final double width;
+    final double[] coordinate_arr;
 
     /**
      * Creates a new instance of Path
@@ -44,11 +37,4 @@ public abstract class Path extends Shape {
         width = p_width;
         coordinate_arr = p_coordinate_arr;
     }
-
-    /**
-     * Writes this path as a scope to an output dsn-file.
-     */
-    @Override
-    public abstract void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException;
-
 }

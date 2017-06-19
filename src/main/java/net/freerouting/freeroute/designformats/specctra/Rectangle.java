@@ -29,37 +29,18 @@ import net.freerouting.freeroute.geometry.planar.IntBox;
  *
  * @author alfons
  */
-public class Rectangle extends Shape {
+class Rectangle extends Shape {
 
     /**
      * Reads a rectangle scope from a Specctra dsn file. If p_layer_structure ==
      * null, only Layer.PCB and Layer.Signal are expected, no induvidual layers.
      */
-    static Shape read_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
+    static Shape read_rectangle_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws ReadScopeException {
         try {
-            LayerInfo rect_layer = null;
+            LayerInfo rect_layer = read_layer_shape_scope(p_scanner, p_layer_structure);
             double rect_coor[] = new double[4];
+            Object next_token;
 
-            Object next_token = p_scanner.next_token();
-            if (next_token == Keyword.PCB_SCOPE) {
-                rect_layer = LayerInfo.PCB;
-            } else if (next_token == Keyword.SIGNAL) {
-                rect_layer = LayerInfo.SIGNAL;
-            } else if (p_layer_structure != null) {
-                if (!(next_token instanceof String)) {
-                    throw new ReadScopeException("Shape.read_rectangle_scope: layer name string expected");
-                }
-                String layer_name = (String) next_token;
-                int layer_no = p_layer_structure.get_no(layer_name);
-                if (layer_no < 0 || layer_no >= p_layer_structure.arr.length) {
-                    System.out.println("Shape.read_rectangle_scope: layer name " + layer_name
-                            + " not found in layer structure ");
-                } else {
-                    rect_layer = p_layer_structure.arr[layer_no];
-                }
-            } else {
-                rect_layer = LayerInfo.SIGNAL;
-            }
             // fill the the rectangle
             for (int i = 0; i < 4; ++i) {
                 next_token = p_scanner.next_token();
@@ -68,25 +49,25 @@ public class Rectangle extends Shape {
                 } else if (next_token instanceof Integer) {
                     rect_coor[i] = ((Number) next_token).doubleValue();
                 } else {
-                    throw new ReadScopeException("Shape.read_rectangle_scope: number expected");
+                    throw new ReadScopeException("Rectangle.read_rectangle_scope: number expected");
                 }
             }
             // overread the closing bracket
 
             next_token = p_scanner.next_token();
             if (next_token != Keyword.CLOSED_BRACKET) {
-                throw new ReadScopeException("Shape.read_rectangle_scope ) expected");
+                throw new ReadScopeException("Rectangle.read_rectangle_scope ) expected");
             }
             if (rect_layer == null) {
                 return null;
             }
             return new Rectangle(rect_layer, rect_coor);
         } catch (java.io.IOException e) {
-            throw new ReadScopeException("Shape.read_rectangle_scope: IO error scanning file", e);
+            throw new ReadScopeException("Rectangle.read_rectangle_scope: IO error scanning file", e);
         }
     }
 
-    public final double[] coor;
+    final double[] coor;
 
     /**
      * Creates a new instance of Rectangle p_coor is an array of dimension 4 and
@@ -99,14 +80,14 @@ public class Rectangle extends Shape {
     }
 
     @Override
-    public Rectangle bounding_box() {
+    Rectangle bounding_box() {
         return this;
     }
 
     /**
      * Creates the smallest rectangle containing this rectangle and p_other
      */
-    public Rectangle union(Rectangle p_other) {
+    Rectangle union(Rectangle p_other) {
         double[] result_coor = new double[4];
         result_coor[0] = Math.min(this.coor[0], p_other.coor[0]);
         result_coor[1] = Math.min(this.coor[1], p_other.coor[1]);
@@ -116,7 +97,7 @@ public class Rectangle extends Shape {
     }
 
     @Override
-    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
+    net.freerouting.freeroute.geometry.planar.Shape transform_to_board_rel(CoordinateTransform p_coordinate_transform) {
         int box_coor[] = new int[4];
         for (int i = 0; i < 4; ++i) {
             box_coor[i] = (int) Math.round(p_coordinate_transform.dsn_to_board(this.coor[i]));
@@ -134,7 +115,7 @@ public class Rectangle extends Shape {
     }
 
     @Override
-    public net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform) {
+    net.freerouting.freeroute.geometry.planar.Shape transform_to_board(CoordinateTransform p_coordinate_transform) {
         double[] curr_point = new double[2];
         curr_point[0] = Math.min(coor[0], coor[2]);
         curr_point[1] = Math.min(coor[1], coor[3]);
@@ -149,7 +130,7 @@ public class Rectangle extends Shape {
      * Writes this rectangle as a scope to an output dsn-file.
      */
     @Override
-    public void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
+    void write_scope(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
         p_file.new_line();
         p_file.write("(rect ");
         p_identifier.write(this.layer.name, p_file);
@@ -161,7 +142,7 @@ public class Rectangle extends Shape {
     }
 
     @Override
-    public void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
+    void write_scope_int(IndentFileWriter p_file, IdentifierType p_identifier) throws java.io.IOException {
         p_file.new_line();
         p_file.write("(rect ");
         p_identifier.write(this.layer.name, p_file);
@@ -172,5 +153,4 @@ public class Rectangle extends Shape {
         }
         p_file.write(")");
     }
-
 }
