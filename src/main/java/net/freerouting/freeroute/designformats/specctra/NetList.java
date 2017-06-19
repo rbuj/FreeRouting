@@ -31,7 +31,7 @@ import java.util.TreeMap;
  *
  * @author alfons
  */
-public class NetList {
+class NetList {
 
     /**
      * The entries of this map are of type Net, the keys are the net_ids.
@@ -41,7 +41,7 @@ public class NetList {
     /**
      * Returns true, if the netlist contains a net with the input name.
      */
-    public boolean contains(Net.Id p_net_id) {
+    boolean contains(Net.Id p_net_id) {
         return nets.containsKey(p_net_id);
     }
 
@@ -50,7 +50,7 @@ public class NetList {
      * with p_name already exists in the net list. In this case no new net is
      * added.
      */
-    public Net add_net(Net.Id p_net_id) {
+    Net add_net(Net.Id p_net_id) {
         Net result;
         if (nets.containsKey(p_net_id)) {
             result = null;
@@ -65,7 +65,7 @@ public class NetList {
      * Returns the net with the input name, or null, if the netlist does not
      * contain a net with the input name.
      */
-    public Net get_net(Net.Id p_net_id) {
+    Net get_net(Net.Id p_net_id) {
         Object value = nets.get(p_net_id);
         return ((Net) value);
     }
@@ -73,7 +73,7 @@ public class NetList {
     /**
      * Returns all nets in this net list containing the input pin.
      */
-    public Collection<Net> get_nets(String p_component_name, String p_pin_name) {
+    Collection<Net> get_nets(String p_component_name, String p_pin_name) {
         Collection<Net> result = new java.util.LinkedList<>();
         Net.Pin search_pin = new Net.Pin(p_component_name, p_pin_name);
         Collection<Net> net_list = nets.values();
@@ -87,5 +87,4 @@ public class NetList {
         }
         return result;
     }
-
 }

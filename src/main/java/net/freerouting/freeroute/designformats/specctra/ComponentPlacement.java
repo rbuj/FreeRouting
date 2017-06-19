@@ -28,17 +28,17 @@ import java.util.Map;
  *
  * @author alfons
  */
-public class ComponentPlacement {
+class ComponentPlacement {
 
     /**
      * The name of the corresponding library component
      */
-    public final String lib_name;
+    final String lib_name;
 
     /**
      * The list of ComponentLocations of the library component on the board.
      */
-    public final Collection<ComponentLocation> locations;
+    final Collection<ComponentLocation> locations;
 
     /**
      * Creates a new instance of ComponentPlacement
@@ -48,46 +48,49 @@ public class ComponentPlacement {
         locations = new LinkedList<>();
     }
 
-    public static class ComponentLocation {
+    static class ComponentLocation {
 
-        public final String name;
+        final String name;
 
         /**
          * the x- and the y-coordinate of the location.
          */
-        public final double[] coor;
+        final double[] coor;
 
         /**
          * True, if the component is placed at the component side. Else the
          * component is placed at the solder side.
          */
-        public final boolean is_front;
+        final boolean is_front;
 
         /**
          * The rotation of the component in degree.
          */
-        public final double rotation;
+        final double rotation;
 
         /**
          * If true, the component cannot be moved.
          */
-        public final boolean position_fixed;
+        final boolean position_fixed;
 
         /**
          * The entries of this map are of type ItemClearanceInfo, the keys are
          * the pin names.
          */
-        public final Map<String, ItemClearanceInfo> pin_infos;
+        final Map<String, ItemClearanceInfo> pin_infos;
 
-        public final Map<String, ItemClearanceInfo> keepout_infos;
+        final Map<String, ItemClearanceInfo> keepout_infos;
 
-        public final Map<String, ItemClearanceInfo> via_keepout_infos;
+        final Map<String, ItemClearanceInfo> via_keepout_infos;
 
-        public final Map<String, ItemClearanceInfo> place_keepout_infos;
+        final Map<String, ItemClearanceInfo> place_keepout_infos;
 
-        ComponentLocation(String p_name, double[] p_coor, boolean p_is_front, double p_rotation, boolean p_position_fixed,
-                Map<String, ItemClearanceInfo> p_pin_infos, Map<String, ItemClearanceInfo> p_keepout_infos,
-                Map<String, ItemClearanceInfo> p_via_keepout_infos, Map<String, ItemClearanceInfo> p_place_keepout_infos) {
+        ComponentLocation(String p_name, double[] p_coor, boolean p_is_front,
+                double p_rotation, boolean p_position_fixed,
+                Map<String, ItemClearanceInfo> p_pin_infos,
+                Map<String, ItemClearanceInfo> p_keepout_infos,
+                Map<String, ItemClearanceInfo> p_via_keepout_infos,
+                Map<String, ItemClearanceInfo> p_place_keepout_infos) {
             name = p_name;
             coor = p_coor;
             is_front = p_is_front;
@@ -101,10 +104,10 @@ public class ComponentPlacement {
         }
     }
 
-    public static class ItemClearanceInfo {
+    static class ItemClearanceInfo {
 
-        public final String name;
-        public final String clearance_class;
+        final String name;
+        final String clearance_class;
 
         ItemClearanceInfo(String p_name, String p_clearance_class) {
             name = p_name;

@@ -59,7 +59,7 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
     /**
      * used in objects of class EntrySortedByClearance
      */
-    static private int last_generated_id_no = 0;
+    private static int last_generated_id_no = 0;
     /**
      * The clearance class number for which the shapes of this tree is
      * compensated. If compensated_clearance_class_no = 0, the shapes are not
@@ -979,7 +979,7 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
         return true;
     }
 
-    static private class EntrySortedByClearance implements Comparable<EntrySortedByClearance> {
+    private static class EntrySortedByClearance implements Comparable<EntrySortedByClearance> {
 
         Leaf leaf;
         int clearance;

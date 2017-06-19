@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Your Organisation
+ * Copyright (C) 2017 Robert Antoni Buj Gelonch {@literal <}rbuj{@literal @}fedoraproject.org{@literal >}
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,9 +20,9 @@ import java.util.Collection;
 
 /**
  *
- * @author robert
+ * @author Robert Buj
  */
-public class LayerNotSignalInfo extends LayerInfo {
+class LayerNotSignalInfo extends LayerInfo {
 
     LayerNotSignalInfo(String p_name, int p_no) {
         super(p_name, p_no);

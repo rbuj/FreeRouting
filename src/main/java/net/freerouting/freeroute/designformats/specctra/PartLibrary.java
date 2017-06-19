@@ -23,9 +23,9 @@ package net.freerouting.freeroute.designformats.specctra;
  *
  * @author Alfons Wirtz
  */
-public class PartLibrary extends ScopeKeyword {
+class PartLibrary extends ScopeKeyword {
 
-    public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
         net.freerouting.freeroute.library.LogicalParts logical_parts = p_par.board.library.logical_parts;
         if (logical_parts.count() <= 0) {
             return;
@@ -78,12 +78,12 @@ public class PartLibrary extends ScopeKeyword {
     /**
      * Creates a new instance of PartLibrary
      */
-    public PartLibrary() {
+    PartLibrary() {
         super("part_library");
     }
 
     @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
+    boolean read_scope(ReadScopeParameter p_par) {
         Object next_token = null;
         for (;;) {
             Object prev_token = next_token;
@@ -273,17 +273,17 @@ public class PartLibrary extends ScopeKeyword {
         }
     }
 
-    public static class LogicalPartMapping {
+    static class LogicalPartMapping {
 
         /**
          * The name of the maopping.
          */
-        public final String name;
+        final String name;
 
         /**
          * The conponents belonging to the mapping.
          */
-        public final java.util.SortedSet<String> components;
+        final java.util.SortedSet<String> components;
 
         private LogicalPartMapping(String p_name, java.util.SortedSet<String> p_components) {
             name = p_name;
@@ -291,13 +291,13 @@ public class PartLibrary extends ScopeKeyword {
         }
     }
 
-    public static class PartPin {
+    static class PartPin {
 
-        public final String pin_name;
-        public final String gate_name;
-        public final int gate_swap_code;
-        public final String gate_pin_name;
-        public final int gate_pin_swap_code;
+        final String pin_name;
+        final String gate_name;
+        final int gate_swap_code;
+        final String gate_pin_name;
+        final int gate_pin_swap_code;
 
         private PartPin(String p_pin_name, String p_gate_name, int p_gate_swap_code,
                 String p_gate_pin_name, int p_gate_pin_swap_code) {
@@ -309,17 +309,17 @@ public class PartLibrary extends ScopeKeyword {
         }
     }
 
-    public static class LogicalPart {
+    static class LogicalPart {
 
         /**
          * The name of the maopping.
          */
-        public final String name;
+        final String name;
 
         /**
          * The pins of this logical part
          */
-        public final java.util.Collection<PartPin> part_pins;
+        final java.util.Collection<PartPin> part_pins;
 
         private LogicalPart(String p_name, java.util.Collection<PartPin> p_part_pins) {
             name = p_name;

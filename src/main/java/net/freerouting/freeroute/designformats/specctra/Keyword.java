@@ -24,7 +24,7 @@ package net.freerouting.freeroute.designformats.specctra;
  *
  * @author alfons
  */
-public class Keyword {
+class Keyword {
 
     /**
      * The only instances of the internal classes:

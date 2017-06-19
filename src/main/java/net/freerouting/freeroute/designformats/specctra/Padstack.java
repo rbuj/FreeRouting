@@ -30,9 +30,12 @@ import net.freerouting.freeroute.geometry.planar.Simplex;
  *
  * @author Robert Buj
  */
-public class Padstack {
+class Padstack {
 
-    public static void write_padstack_scope(WriteScopeParameter p_par, net.freerouting.freeroute.library.Padstack p_padstack) throws java.io.IOException {
+    static void write_padstack_scope(WriteScopeParameter p_par,
+            net.freerouting.freeroute.library.Padstack p_padstack)
+            throws java.io.IOException {
+
         // search the layer range of the padstack
         int first_layer_no = 0;
         while (first_layer_no < p_par.board.get_layer_count()) {

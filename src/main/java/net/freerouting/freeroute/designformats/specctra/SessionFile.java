@@ -358,7 +358,7 @@ public class SessionFile {
         p_file.end_scope();
     }
 
-    static private void write_fixed_state(IndentFileWriter p_file, net.freerouting.freeroute.board.FixedState p_fixed_state) throws java.io.IOException {
+    private static void write_fixed_state(IndentFileWriter p_file, net.freerouting.freeroute.board.FixedState p_fixed_state) throws java.io.IOException {
         if (p_fixed_state.ordinal() <= net.freerouting.freeroute.board.FixedState.SHOVE_FIXED.ordinal()) {
             return;
         }

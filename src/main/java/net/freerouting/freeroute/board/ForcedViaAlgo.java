@@ -177,7 +177,7 @@ public class ForcedViaAlgo {
         return true;
     }
 
-    static private CalcFromSide calculate_from_side(FloatPoint p_via_location, TileShape p_via_shape, Simplex p_room_shape, double p_dist, boolean is_90_degree) {
+    private static CalcFromSide calculate_from_side(FloatPoint p_via_location, TileShape p_via_shape, Simplex p_room_shape, double p_dist, boolean is_90_degree) {
         IntBox via_box = p_via_shape.bounding_box();
         for (int i = 0; i < 4; ++i) {
             FloatPoint check_point;

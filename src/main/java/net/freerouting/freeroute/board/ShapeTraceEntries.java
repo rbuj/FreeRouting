@@ -95,7 +95,7 @@ public class ShapeTraceEntries {
         board.communication.observers.notify_new(end_piece);
     }
 
-    static private boolean net_nos_equal(int[] p_net_nos_1, int[] p_net_nos_2) {
+    private static boolean net_nos_equal(int[] p_net_nos_1, int[] p_net_nos_2) {
         if (p_net_nos_1.length != p_net_nos_2.length) {
             return false;
         }

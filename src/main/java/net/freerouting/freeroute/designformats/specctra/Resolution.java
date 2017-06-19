@@ -19,14 +19,18 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
+import net.freerouting.freeroute.board.Communication;
+import net.freerouting.freeroute.datastructures.IndentFileWriter;
+
 /**
  * Class for reading resolution scopes from dsn-files.
  *
  * @author alfons
  */
-public class Resolution extends ScopeKeyword {
+class Resolution extends ScopeKeyword {
 
-    public static void write_scope(net.freerouting.freeroute.datastructures.IndentFileWriter p_file, net.freerouting.freeroute.board.Communication p_board_communication) throws java.io.IOException {
+    static void write_scope(IndentFileWriter p_file, Communication p_board_communication)
+            throws java.io.IOException {
         p_file.new_line();
         p_file.write("(resolution ");
         p_file.write(p_board_communication.unit.toString());
@@ -38,12 +42,12 @@ public class Resolution extends ScopeKeyword {
     /**
      * Creates a new instance of Resolution
      */
-    public Resolution() {
+    Resolution() {
         super("resolution");
     }
 
     @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
+    boolean read_scope(ReadScopeParameter p_par) {
         try {
             // read the unit
             Object next_token = p_par.scanner.next_token();
@@ -75,5 +79,4 @@ public class Resolution extends ScopeKeyword {
             return false;
         }
     }
-
 }

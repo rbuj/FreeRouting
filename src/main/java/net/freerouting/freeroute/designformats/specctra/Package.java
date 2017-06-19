@@ -36,7 +36,10 @@ import static net.freerouting.freeroute.designformats.specctra.Shape.read_shape_
  */
 class Package {
 
-    static Package read_package_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws DsnFileException, ReadScopeException {
+    static Package read_package_scope(Scanner p_scanner,
+            LayerStructure p_layer_structure) throws DsnFileException,
+            ReadScopeException {
+
         try {
             boolean is_front = true;
             Collection<Shape> outline = new LinkedList<>();
@@ -103,7 +106,10 @@ class Package {
         }
     }
 
-    public static void write_scope(WriteScopeParameter p_par, net.freerouting.freeroute.library.Package p_package) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par,
+            net.freerouting.freeroute.library.Package p_package)
+            throws java.io.IOException {
+
         p_par.file.start_scope("image ");
         p_par.identifier_type.write(p_package.name, p_par.file);
         // write the placement side of the package
@@ -135,8 +141,11 @@ class Package {
         p_par.file.end_scope();
     }
 
-    private static void write_package_keepout(net.freerouting.freeroute.library.Package.Keepout p_keepout, WriteScopeParameter p_par,
-            boolean p_is_via_keepout) throws java.io.IOException {
+    private static void write_package_keepout(
+            net.freerouting.freeroute.library.Package.Keepout p_keepout,
+            WriteScopeParameter p_par, boolean p_is_via_keepout)
+            throws java.io.IOException {
+
         LayerInfo keepout_layer;
         if (p_keepout.layer_no >= 0) {
             net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(p_keepout.layer_no);
@@ -174,7 +183,7 @@ class Package {
     /**
      * Writes the placements of p_package to a Specctra dsn-file.
      */
-    public static void write_placement_scope(WriteScopeParameter p_par, net.freerouting.freeroute.library.Package p_package)
+    static void write_placement_scope(WriteScopeParameter p_par, net.freerouting.freeroute.library.Package p_package)
             throws java.io.IOException {
         Collection<Item> board_items = p_par.board.get_items();
         boolean component_found = false;
@@ -217,31 +226,31 @@ class Package {
         return result;
     }
 
-    public final String name;
+    final String name;
     /**
      * List of objects of type PinInfo.
      */
-    public final PinInfo[] pin_info_arr;
+    final PinInfo[] pin_info_arr;
     /**
      * The outline of the package.
      */
-    public final Collection<Shape> outline;
+    final Collection<Shape> outline;
     /**
      * Collection of keepoouts belonging to this package
      */
-    public final Collection<Area> keepouts;
+    final Collection<Area> keepouts;
     /**
      * Collection of via keepoouts belonging to this package
      */
-    public final Collection<Area> via_keepouts;
+    final Collection<Area> via_keepouts;
     /**
      * Collection of place keepoouts belonging to this package
      */
-    public final Collection<Area> place_keepouts;
+    final Collection<Area> place_keepouts;
     /**
      * If false, the package is placed on the back side of the board
      */
-    public final boolean is_front;
+    final boolean is_front;
 
     /**
      * Creates a new instance of Package

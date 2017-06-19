@@ -29,9 +29,9 @@ import static net.freerouting.freeroute.designformats.specctra.Area.read_area_sc
  *
  * @author alfons
  */
-public class Plane extends ScopeKeyword {
+class Plane extends ScopeKeyword {
 
-    public static void write_scope(WriteScopeParameter p_par, net.freerouting.freeroute.board.ConductionArea p_conduction) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par, net.freerouting.freeroute.board.ConductionArea p_conduction) throws java.io.IOException {
         int net_count = p_conduction.net_count();
         if (net_count <= 0 || net_count > 1) {
             System.out.println("Plane.write_scope: unexpected net count");
@@ -69,12 +69,12 @@ public class Plane extends ScopeKeyword {
     /**
      * Creates a new instance of Plane
      */
-    public Plane() {
+    Plane() {
         super("plane");
     }
 
     @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
+    boolean read_scope(ReadScopeParameter p_par) {
         // read the net name
         String net_name;
         boolean skip_window_scopes = p_par.host_cad != null && p_par.host_cad.equalsIgnoreCase("allegro");
@@ -99,5 +99,4 @@ public class Plane extends ScopeKeyword {
         }
         return true;
     }
-
 }

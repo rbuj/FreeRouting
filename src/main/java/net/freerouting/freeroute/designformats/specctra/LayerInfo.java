@@ -27,7 +27,7 @@ import java.util.LinkedList;
  *
  * @author alfons
  */
-public abstract class LayerInfo {
+abstract class LayerInfo {
 
     /**
      * all layers of the board
@@ -41,7 +41,7 @@ public abstract class LayerInfo {
     /**
      * Writes a layer scope in the stucture scope.
      */
-    public static void write_scope(WriteScopeParameter p_par, int p_layer_no,
+    static void write_scope(WriteScopeParameter p_par, int p_layer_no,
             boolean p_write_rule) throws java.io.IOException {
         p_par.file.start_scope("layer ");
         net.freerouting.freeroute.board.Layer board_layer = p_par.board.layer_structure.get_layer(p_layer_no);

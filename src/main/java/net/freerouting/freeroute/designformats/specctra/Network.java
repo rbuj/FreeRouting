@@ -43,9 +43,9 @@ import net.freerouting.freeroute.rules.ViaInfo;
  *
  * @author Alfons Wirtz
  */
-public class Network extends ScopeKeyword {
+class Network extends ScopeKeyword {
 
-    public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
         p_par.file.start_scope("network");
         Collection<net.freerouting.freeroute.board.Pin> board_pins = p_par.board.get_pins();
         for (int i = 1; i <= p_par.board.rules.nets.max_net_no(); ++i) {
@@ -57,8 +57,10 @@ public class Network extends ScopeKeyword {
         p_par.file.end_scope();
     }
 
-    public static void write_via_infos(net.freerouting.freeroute.rules.BoardRules p_rules, IndentFileWriter p_file, IdentifierType p_identifier_type)
+    static void write_via_infos(net.freerouting.freeroute.rules.BoardRules p_rules,
+            IndentFileWriter p_file, IdentifierType p_identifier_type)
             throws java.io.IOException {
+
         for (ViaInfo curr_via : p_rules.via_infos) {
             p_file.start_scope("via ");
             p_file.new_line();
@@ -74,8 +76,10 @@ public class Network extends ScopeKeyword {
         }
     }
 
-    public static void write_via_rules(net.freerouting.freeroute.rules.BoardRules p_rules, IndentFileWriter p_file, IdentifierType p_identifier_type)
+    static void write_via_rules(net.freerouting.freeroute.rules.BoardRules p_rules,
+            IndentFileWriter p_file, IdentifierType p_identifier_type)
             throws java.io.IOException {
+
         for (net.freerouting.freeroute.rules.ViaRule curr_rule : p_rules.via_rules) {
             p_file.start_scope("via_rule");
             p_file.new_line();
@@ -88,14 +92,14 @@ public class Network extends ScopeKeyword {
         }
     }
 
-    public static void write_net_classes(WriteScopeParameter p_par)
+    static void write_net_classes(WriteScopeParameter p_par)
             throws java.io.IOException {
         for (int i = 0; i < p_par.board.rules.net_classes.count(); ++i) {
             write_net_class(p_par.board.rules.net_classes.get(i), p_par);
         }
     }
 
-    public static void write_net_class(net.freerouting.freeroute.rules.NetClass p_net_class, WriteScopeParameter p_par)
+    static void write_net_class(net.freerouting.freeroute.rules.NetClass p_net_class, WriteScopeParameter p_par)
             throws java.io.IOException {
         p_par.file.start_scope("class ");
         p_par.identifier_type.write(p_net_class.get_name(), p_par.file);
@@ -483,7 +487,7 @@ public class Network extends ScopeKeyword {
         }
     }
 
-    static private void insert_class_pairs(Collection<NetClass.ClassClass> p_class_classes, ReadScopeParameter p_par) {
+    private static void insert_class_pairs(Collection<NetClass.ClassClass> p_class_classes, ReadScopeParameter p_par) {
         for (NetClass.ClassClass curr_class_class : p_class_classes) {
             java.util.Iterator<String> it1 = curr_class_class.class_names.iterator();
             net.freerouting.freeroute.board.BasicBoard routing_board = p_par.board_handling.get_routing_board();
@@ -509,7 +513,7 @@ public class Network extends ScopeKeyword {
         }
     }
 
-    static private void insert_class_pair_info(NetClass.ClassClass p_class_class, net.freerouting.freeroute.rules.NetClass p_first_class, net.freerouting.freeroute.rules.NetClass p_second_class,
+    private static void insert_class_pair_info(NetClass.ClassClass p_class_class, net.freerouting.freeroute.rules.NetClass p_first_class, net.freerouting.freeroute.rules.NetClass p_second_class,
             net.freerouting.freeroute.board.BasicBoard p_board, CoordinateTransform p_coordinate_transform) {
         for (Rule curr_rule : p_class_class.rules) {
             if (curr_rule instanceof Rule.ClearanceRule) {
@@ -540,7 +544,7 @@ public class Network extends ScopeKeyword {
         }
     }
 
-    static private void add_mixed_clearance_rule(net.freerouting.freeroute.rules.ClearanceMatrix p_clearance_matrix, net.freerouting.freeroute.rules.NetClass p_first_class,
+    private static void add_mixed_clearance_rule(net.freerouting.freeroute.rules.ClearanceMatrix p_clearance_matrix, net.freerouting.freeroute.rules.NetClass p_first_class,
             net.freerouting.freeroute.rules.NetClass p_second_class, Rule.ClearanceRule p_clearance_rule, int p_layer_no,
             CoordinateTransform p_coordinate_transform) {
         int curr_clearance = (int) Math.round(p_coordinate_transform.dsn_to_board(p_clearance_rule.value));
@@ -595,7 +599,7 @@ public class Network extends ScopeKeyword {
         }
     }
 
-    static private void create_default_clearance_classes(net.freerouting.freeroute.rules.NetClass p_net_class,
+    private static void create_default_clearance_classes(net.freerouting.freeroute.rules.NetClass p_net_class,
             net.freerouting.freeroute.rules.ClearanceMatrix p_clearance_matrix) {
         get_clearance_class(p_clearance_matrix, p_net_class, "via");
         get_clearance_class(p_clearance_matrix, p_net_class, "smd");
@@ -693,7 +697,7 @@ public class Network extends ScopeKeyword {
      * p_net_class_name and p_item_class_name. Creates a new class, if that
      * class is not yet existing.
      */
-    static private int get_clearance_class(net.freerouting.freeroute.rules.ClearanceMatrix p_clearance_matrix,
+    private static int get_clearance_class(net.freerouting.freeroute.rules.ClearanceMatrix p_clearance_matrix,
             net.freerouting.freeroute.rules.NetClass p_net_class, String p_item_class_name) {
         String net_class_name = p_net_class.get_name();
         String new_class_name = net_class_name;
@@ -1009,12 +1013,12 @@ public class Network extends ScopeKeyword {
     /**
      * Creates a new instance of Network
      */
-    public Network() {
+    Network() {
         super("network");
     }
 
     @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
+    boolean read_scope(ReadScopeParameter p_par) {
         Collection<NetClass> classes = new LinkedList<>();
         Collection<NetClass.ClassClass> class_class_list = new LinkedList<>();
         Collection<net.freerouting.freeroute.rules.ViaInfo> via_infos = new LinkedList<>();

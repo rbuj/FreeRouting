@@ -28,13 +28,15 @@ import static net.freerouting.freeroute.designformats.specctra.Structure.read_vi
  *
  * @author Alfons Wirtz
  */
-public class Circuit {
+class Circuit {
 
     /**
      * Currently only the length matching rule is read from a circuit scope. If
      * the scope does not contain a length matching rule, nulll is returned.
      */
-    public static ReadScopeResult read_circuit_scope(Scanner p_scanner) throws DsnFileException, ReadScopeException {
+    static ReadScopeResult read_circuit_scope(Scanner p_scanner)
+            throws DsnFileException, ReadScopeException {
+
         Object next_token = null;
         double min_trace_length = 0;
         double max_trace_length = 0;
@@ -117,12 +119,12 @@ public class Circuit {
     /**
      * A max_length of -1 indicates, tha no maximum length is defined.
      */
-    public static class ReadScopeResult {
+    static class ReadScopeResult {
 
-        public final double max_length;
-        public final double min_length;
-        public final java.util.Collection<String> use_via;
-        public final java.util.Collection<String> use_layer;
+        final double max_length;
+        final double min_length;
+        final java.util.Collection<String> use_via;
+        final java.util.Collection<String> use_layer;
 
         private ReadScopeResult(double p_max_length, double p_min_length, java.util.Collection<String> p_use_via, java.util.Collection<String> p_use_layer) {
             max_length = p_max_length;
@@ -137,8 +139,8 @@ public class Circuit {
      */
     private static class LengthMatchingRule {
 
-        public final double max_length;
-        public final double min_length;
+        final double max_length;
+        final double min_length;
 
         LengthMatchingRule(double p_max_length, double p_min_length) {
             max_length = p_max_length;

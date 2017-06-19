@@ -28,13 +28,13 @@ import java.io.IOException;
 /**
  * Keywords defining a scope object
  */
-public class ScopeKeyword extends Keyword {
+class ScopeKeyword extends Keyword {
 
     /**
      * Scips the current scope while reading a dsn file. Returns false, if no
      * legal scope was found.
      */
-    public static boolean skip_scope(Scanner p_scanner) {
+    static boolean skip_scope(Scanner p_scanner) {
         int open_bracked_count = 1;
         while (open_bracked_count > 0) {
             p_scanner.yybegin(SpecctraFileScanner.NAME);
@@ -65,7 +65,7 @@ public class ScopeKeyword extends Keyword {
     /**
      * Reads the next scope of this keyword from dsn file.
      */
-    public boolean read_scope(ReadScopeParameter p_par) {
+    boolean read_scope(ReadScopeParameter p_par) {
         Object next_token = null;
         for (;;) {
             Object prev_token = next_token;

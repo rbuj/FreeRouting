@@ -57,7 +57,7 @@ import net.freerouting.freeroute.rules.ItemClass;
  */
 class Wiring extends ScopeKeyword {
 
-    public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
         p_par.file.start_scope("wiring");
         // write the wires
         Collection<Trace> board_wires = p_par.board.get_traces();
@@ -196,14 +196,14 @@ class Wiring extends ScopeKeyword {
         p_par.file.end_scope();
     }
 
-    static private void write_net(net.freerouting.freeroute.rules.Net p_net, IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
+    private static void write_net(net.freerouting.freeroute.rules.Net p_net, IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
         p_file.new_line();
         p_file.write("(");
         Net.write_net_id(p_net, p_file, p_identifier_type);
         p_file.write(")");
     }
 
-    static private void write_fixed_state(IndentFileWriter p_file, FixedState p_fixed_state) throws java.io.IOException {
+    private static void write_fixed_state(IndentFileWriter p_file, FixedState p_fixed_state) throws java.io.IOException {
         if (p_fixed_state == FixedState.UNFIXED) {
             return;
         }
@@ -317,7 +317,7 @@ class Wiring extends ScopeKeyword {
     }
 
     @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
+    boolean read_scope(ReadScopeParameter p_par) {
         try {
             Object next_token = null;
             for (;;) {

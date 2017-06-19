@@ -24,7 +24,7 @@ package net.freerouting.freeroute.designformats.specctra;
  *
  * @author Alfons Wirtz
  */
-public class PlaceControl extends ScopeKeyword {
+class PlaceControl extends ScopeKeyword {
 
     /**
      * Returns true, if rotate_first is read, else false.
@@ -59,7 +59,7 @@ public class PlaceControl extends ScopeKeyword {
      * Reads the flip_style
      */
     @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
+    boolean read_scope(ReadScopeParameter p_par) {
         boolean flip_style_rotate_first = false;
         Object next_token = null;
         for (;;) {

@@ -27,9 +27,9 @@ import net.freerouting.freeroute.board.SignalLayer;
  *
  * @author alfons
  */
-public class LayerStructure {
+class LayerStructure {
 
-    public final LayerInfo[] arr;
+    final LayerInfo[] arr;
 
     /**
      * Creates a new instance of LayerStructure from a list of layers
@@ -53,10 +53,10 @@ public class LayerStructure {
     }
 
     /**
-     * returns the number of the layer with the name p_name, -1, if layer_no layer
- with name p_name exists.
+     * returns the number of the layer with the name p_name, -1, if layer_no
+     * layer with name p_name exists.
      */
-    public int get_no(String p_name) {
+    int get_no(String p_name) {
         for (int i = 0; i < arr.length; ++i) {
             if (p_name.equals(arr[i].name)) {
                 return i;
@@ -75,7 +75,7 @@ public class LayerStructure {
     /**
      * Returns, if the net with name p_net_name contains a powwer plane.
      */
-    public boolean contains_plane(String p_net_name) {
+    boolean contains_plane(String p_net_name) {
         for (LayerInfo curr_layer : arr) {
             if (curr_layer instanceof LayerNotSignalInfo && curr_layer.net_names.contains(p_net_name)) {
                 return true;
@@ -83,5 +83,4 @@ public class LayerStructure {
         }
         return false;
     }
-
 }

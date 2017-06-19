@@ -28,7 +28,7 @@ import net.freerouting.freeroute.datastructures.IndentFileWriter;
  *
  * @author alfons
  */
-public class WriteScopeParameter {
+class WriteScopeParameter {
 
     final BasicBoard board;
     final net.freerouting.freeroute.interactive.AutorouteSettings autoroute_settings;

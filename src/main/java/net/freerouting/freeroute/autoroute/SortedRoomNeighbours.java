@@ -577,7 +577,7 @@ public class SortedRoomNeighbours {
 
     private class SortedRoomNeighbour implements Comparable<SortedRoomNeighbour> {
 
-        static private final double C_DIST_TOLERANCE = 1;
+        private static final double C_DIST_TOLERANCE = 1;
 
         /**
          * The shape of the neighbour room

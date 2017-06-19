@@ -56,7 +56,7 @@ class Library extends ScopeKeyword {
     }
 
     @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
+    boolean read_scope(ReadScopeParameter p_par) {
         net.freerouting.freeroute.board.RoutingBoard board = p_par.board_handling.get_routing_board();
         board.library.padstacks = new net.freerouting.freeroute.library.Padstacks(p_par.board_handling.get_routing_board().layer_structure);
 

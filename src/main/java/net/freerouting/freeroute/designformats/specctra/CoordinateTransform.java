@@ -59,7 +59,7 @@ public class CoordinateTransform implements java.io.Serializable {
     /**
      * Scale a value from the dsn to the board coordinate system
      */
-    public double dsn_to_board(double p_val) {
+    double dsn_to_board(double p_val) {
         return p_val * scale_factor;
     }
 
@@ -67,7 +67,7 @@ public class CoordinateTransform implements java.io.Serializable {
      * Transforms a geometry.planar.FloatPoint to a tuple of doubles in the dsn
      * coordinate system.
      */
-    public double[] board_to_dsn(FloatPoint p_point) {
+    double[] board_to_dsn(FloatPoint p_point) {
         double[] result = new double[2];
         result[0] = board_to_dsn(p_point.x) + base_x;
         result[1] = board_to_dsn(p_point.y) + base_y;
@@ -78,7 +78,7 @@ public class CoordinateTransform implements java.io.Serializable {
      * Transforms a geometry.planar.FloatPoint to a tuple of doubles in the dsn
      * coordinate system in relative (vector) coordinates.
      */
-    public double[] board_to_dsn_rel(FloatPoint p_point) {
+    double[] board_to_dsn_rel(FloatPoint p_point) {
         double[] result = new double[2];
         result[0] = board_to_dsn(p_point.x);
         result[1] = board_to_dsn(p_point.y);
@@ -89,7 +89,7 @@ public class CoordinateTransform implements java.io.Serializable {
      * Transforms an array of n geometry.planar.FloatPoints to an array of 2*n
      * doubles in the dsn coordinate system.
      */
-    public double[] board_to_dsn(FloatPoint[] p_points) {
+    double[] board_to_dsn(FloatPoint[] p_points) {
         double[] result = new double[2 * p_points.length];
         for (int i = 0; i < p_points.length; ++i) {
             result[2 * i] = board_to_dsn(p_points[i].x) + base_x;
@@ -102,7 +102,7 @@ public class CoordinateTransform implements java.io.Serializable {
      * Transforms an array of n geometry.planar.Lines to an array of 4*n doubles
      * in the dsn coordinate system.
      */
-    public double[] board_to_dsn(Line[] p_lines) {
+    double[] board_to_dsn(Line[] p_lines) {
         double[] result = new double[4 * p_lines.length];
         for (int i = 0; i < p_lines.length; ++i) {
             FloatPoint a = p_lines[i].a.to_float();
@@ -119,7 +119,7 @@ public class CoordinateTransform implements java.io.Serializable {
      * Transforms an array of n geometry.planar.FloatPoints to an array of 2*n
      * doubles in the dsn coordinate system in relative (vector) coordinates.
      */
-    public double[] board_to_dsn_rel(FloatPoint[] p_points) {
+    double[] board_to_dsn_rel(FloatPoint[] p_points) {
         double[] result = new double[2 * p_points.length];
         for (int i = 0; i < p_points.length; ++i) {
             result[2 * i] = board_to_dsn(p_points[i].x);
@@ -132,7 +132,7 @@ public class CoordinateTransform implements java.io.Serializable {
      * Transforms a geometry.planar.Vector to a tuple of doubles in the dsn
      * coordinate system.
      */
-    public double[] board_to_dsn(Vector p_vector) {
+    double[] board_to_dsn(Vector p_vector) {
         double[] result = new double[2];
         FloatPoint v = p_vector.to_float();
         result[0] = board_to_dsn(v.x);
@@ -143,7 +143,7 @@ public class CoordinateTransform implements java.io.Serializable {
     /**
      * Transforms a dsn tuple to a geometry.planar.FloatPoint
      */
-    public FloatPoint dsn_to_board(double[] p_tuple) {
+    FloatPoint dsn_to_board(double[] p_tuple) {
         double x = dsn_to_board(p_tuple[0] - base_x);
         double y = dsn_to_board(p_tuple[1] - base_y);
         return new FloatPoint(x, y);
@@ -153,7 +153,7 @@ public class CoordinateTransform implements java.io.Serializable {
      * Transforms a dsn tuple to a geometry.planar.FloatPoint in relative
      * (vector) coordinates.
      */
-    public FloatPoint dsn_to_board_rel(double[] p_tuple) {
+    FloatPoint dsn_to_board_rel(double[] p_tuple) {
         double x = dsn_to_board(p_tuple[0]);
         double y = dsn_to_board(p_tuple[1]);
         return new FloatPoint(x, y);
@@ -162,7 +162,7 @@ public class CoordinateTransform implements java.io.Serializable {
     /**
      * Transforms a geometry.planar.Intbox to the coordinates of a Rectangle.
      */
-    public double[] board_to_dsn(IntBox p_box) {
+    double[] board_to_dsn(IntBox p_box) {
         double[] result = new double[4];
         result[0] = p_box.ll.x / scale_factor + base_x;
         result[1] = p_box.ll.y / scale_factor + base_y;
@@ -175,7 +175,7 @@ public class CoordinateTransform implements java.io.Serializable {
      * Transforms a geometry.planar.Intbox to a Rectangle in relative (vector)
      * coordinates.
      */
-    public double[] board_to_dsn_rel(IntBox p_box) {
+    double[] board_to_dsn_rel(IntBox p_box) {
         double[] result = new double[4];
         result[0] = p_box.ll.x / scale_factor;
         result[1] = p_box.ll.y / scale_factor;
@@ -187,7 +187,7 @@ public class CoordinateTransform implements java.io.Serializable {
     /**
      * Transforms a board shape to a dsn shape.
      */
-    public Shape board_to_dsn(net.freerouting.freeroute.geometry.planar.Shape p_board_shape, LayerInfo p_layer) {
+    Shape board_to_dsn(net.freerouting.freeroute.geometry.planar.Shape p_board_shape, LayerInfo p_layer) {
         Shape result;
         if (p_board_shape instanceof IntBox) {
             result = new Rectangle(p_layer, board_to_dsn((IntBox) p_board_shape));
@@ -211,7 +211,7 @@ public class CoordinateTransform implements java.io.Serializable {
      * Transforms the relative (vector) coordinates of a geometry.planar.Shape
      * to a specctra dsn shape.
      */
-    public Shape board_to_dsn_rel(net.freerouting.freeroute.geometry.planar.Shape p_board_shape, LayerInfo p_layer) {
+    Shape board_to_dsn_rel(net.freerouting.freeroute.geometry.planar.Shape p_board_shape, LayerInfo p_layer) {
         Shape result;
         if (p_board_shape instanceof IntBox) {
             result = new Rectangle(p_layer, board_to_dsn_rel((IntBox) p_board_shape));
@@ -230,5 +230,4 @@ public class CoordinateTransform implements java.io.Serializable {
         }
         return result;
     }
-
 }

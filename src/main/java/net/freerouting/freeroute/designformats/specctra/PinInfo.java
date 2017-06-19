@@ -148,19 +148,19 @@ class PinInfo {
     /**
      * Phe name of the pastack of this pin.
      */
-    public final String padstack_name;
+    final String padstack_name;
     /**
      * Phe name of this pin.
      */
-    public final String pin_name;
+    final String pin_name;
     /**
      * The x- and y-coordinates relative to the package location.
      */
-    public final double[] rel_coor;
+    final double[] rel_coor;
     /**
      * The rotation of the pin relative to the package.
      */
-    public final double rotation;
+    final double rotation;
 
     private PinInfo(String p_padstack_name, String p_pin_name, double[] p_rel_coor, double p_rotation) {
         padstack_name = p_padstack_name;

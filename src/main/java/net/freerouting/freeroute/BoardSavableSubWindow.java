@@ -72,7 +72,7 @@ public abstract class BoardSavableSubWindow extends BoardSubWindow {
      * Type for attributes of this class, which are saved to an Objectstream.
      */
     @SuppressWarnings("serial")
-    static private class SavedAttributes implements java.io.Serializable {
+    private static class SavedAttributes implements java.io.Serializable {
 
         public final Rectangle2D bounds;
         public final boolean is_visible;

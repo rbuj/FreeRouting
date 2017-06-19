@@ -203,7 +203,7 @@ public class RouteState extends InteractiveState {
         return picked_item;
     }
 
-    static private Item pick_routing_item(IntPoint p_location, int p_layer_no, BoardHandling p_hdlg) {
+    private static Item pick_routing_item(IntPoint p_location, int p_layer_no, BoardHandling p_hdlg) {
 
         if (p_layer_no == p_hdlg.settings.layer_no || (p_hdlg.graphics_context.get_layer_visibility(p_layer_no) <= 0)) {
             return null;

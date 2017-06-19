@@ -54,7 +54,7 @@ import net.freerouting.freeroute.rules.ViaInfo;
  */
 class Structure extends ScopeKeyword {
 
-    public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
         p_par.file.start_scope("structure");
         // write the bounding box
         p_par.file.start_scope("boundary");
@@ -647,14 +647,14 @@ class Structure extends ScopeKeyword {
         return false;
     }
 
-    static private void create_default_clearance_classes(BoardRules p_board_rules) {
+    private static void create_default_clearance_classes(BoardRules p_board_rules) {
         append_clearance_class(p_board_rules, "via");
         append_clearance_class(p_board_rules, "smd");
         append_clearance_class(p_board_rules, "pin");
         append_clearance_class(p_board_rules, "area");
     }
 
-    static private int append_clearance_class(BoardRules p_board_rules, String p_name) {
+    private static int append_clearance_class(BoardRules p_board_rules, String p_name) {
         p_board_rules.clearance_matrix.append_class(p_name);
         int result = p_board_rules.clearance_matrix.get_no(p_name);
         net.freerouting.freeroute.rules.NetClass default_net_class = p_board_rules.get_default_net_class();
@@ -760,7 +760,7 @@ class Structure extends ScopeKeyword {
     }
 
     @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
+    boolean read_scope(ReadScopeParameter p_par) {
         BoardConstructionInfo board_construction_info = new BoardConstructionInfo();
 
         // If true, components on the back side are rotated before mirroring

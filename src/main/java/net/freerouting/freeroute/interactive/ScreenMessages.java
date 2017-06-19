@@ -29,7 +29,7 @@ import javax.swing.JLabel;
  */
 public class ScreenMessages {
 
-    static private final String EMPTY_STRING = "            ";
+    private static final String EMPTY_STRING = "            ";
     private final java.util.ResourceBundle resources;
     private final String active_layer_string;
     private final String target_layer_string;

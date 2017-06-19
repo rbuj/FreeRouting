@@ -39,7 +39,7 @@ import net.freerouting.freeroute.geometry.planar.TileShape;
  */
 class LocateFoundConnectionAlgoAnyAngle extends LocateFoundConnectionAlgo {
 
-    static private final double C_TOLERANCE = 1.0;
+    private static final double C_TOLERANCE = 1.0;
 
     /**
      * Calculates the left most corner of the shape of p_to_info.door seen from

@@ -28,12 +28,12 @@ import static net.freerouting.freeroute.designformats.specctra.DsnFile.read_stri
  *
  * @author alfons
  */
-public class Component extends ScopeKeyword {
+class Component extends ScopeKeyword {
 
     /**
      * Used also when reading a session file.
      */
-    public static ComponentPlacement read_scope(Scanner p_scanner) throws java.io.IOException, DsnFileException {
+    static ComponentPlacement read_scope(Scanner p_scanner) throws java.io.IOException, DsnFileException {
         Object next_token = p_scanner.next_token();
         if (!(next_token instanceof String)) {
             System.out.println("Component.read_scope: component name expected");
@@ -56,7 +56,7 @@ public class Component extends ScopeKeyword {
         return component_placement;
     }
 
-    public static void write_scope(WriteScopeParameter p_par, net.freerouting.freeroute.board.Component p_component)
+    static void write_scope(WriteScopeParameter p_par, net.freerouting.freeroute.board.Component p_component)
             throws java.io.IOException {
         p_par.file.start_scope("place ");
         p_par.file.new_line();
@@ -321,7 +321,7 @@ public class Component extends ScopeKeyword {
     /**
      * Creates a new instance of Component
      */
-    public Component() {
+    Component() {
         super("component");
     }
 
@@ -329,7 +329,7 @@ public class Component extends ScopeKeyword {
      * Overwrites the function read_scope in ScopeKeyword
      */
     @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
+    boolean read_scope(ReadScopeParameter p_par) {
         try {
             ComponentPlacement component_placement = read_scope(p_par.scanner);
             if (component_placement == null) {

@@ -27,7 +27,7 @@ import java.util.LinkedList;
  *
  * @author alfons
  */
-public class ReadScopeParameter {
+class ReadScopeParameter {
 
     final Scanner scanner;
     final net.freerouting.freeroute.interactive.BoardHandling board_handling;

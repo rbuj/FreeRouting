@@ -24,9 +24,9 @@ package net.freerouting.freeroute.designformats.specctra;
  *
  * @author Alfons Wirtz
  */
-public class Placement extends ScopeKeyword {
+class Placement extends ScopeKeyword {
 
-    public static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
         p_par.file.start_scope("placement");
         if (p_par.board.components.get_flip_style_rotate_first()) {
             p_par.file.new_line();
@@ -41,7 +41,7 @@ public class Placement extends ScopeKeyword {
     /**
      * Creates a new instance of Placemet
      */
-    public Placement() {
+    Placement() {
         super("placement");
     }
 }

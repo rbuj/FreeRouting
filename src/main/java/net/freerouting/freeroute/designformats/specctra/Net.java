@@ -31,9 +31,9 @@ import net.freerouting.freeroute.datastructures.IndentFileWriter;
  *
  * @author alfons
  */
-public class Net {
+class Net {
 
-    public static void write_scope(WriteScopeParameter p_par, net.freerouting.freeroute.rules.Net p_net, Collection<net.freerouting.freeroute.board.Pin> p_pin_list) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par, net.freerouting.freeroute.rules.Net p_net, Collection<net.freerouting.freeroute.board.Pin> p_pin_list) throws java.io.IOException {
         p_par.file.start_scope();
         write_net_id(p_net, p_par.file, p_par.identifier_type);
         // write the pins scope
@@ -49,7 +49,7 @@ public class Net {
         p_par.file.end_scope();
     }
 
-    public static void write_net_id(net.freerouting.freeroute.rules.Net p_net, IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
+    static void write_net_id(net.freerouting.freeroute.rules.Net p_net, IndentFileWriter p_file, IdentifierType p_identifier_type) throws java.io.IOException {
         p_file.write("net ");
         p_identifier_type.write(p_net.name, p_file);
         p_file.write(" ");
@@ -57,7 +57,7 @@ public class Net {
         p_file.write(subnet_number.toString());
     }
 
-    public static void write_pin(WriteScopeParameter p_par, net.freerouting.freeroute.board.Pin p_pin) throws java.io.IOException {
+    static void write_pin(WriteScopeParameter p_par, net.freerouting.freeroute.board.Pin p_pin) throws java.io.IOException {
         net.freerouting.freeroute.board.Component curr_component = p_par.board.components.get(p_pin.get_component_no());
         if (curr_component == null) {
             System.out.println("Net.write_scope: component not found");
@@ -75,7 +75,7 @@ public class Net {
 
     }
 
-    public final Id id;
+    final Id id;
 
     /**
      * List of elements of type Pin.
@@ -89,21 +89,21 @@ public class Net {
         id = p_net_id;
     }
 
-    public void set_pins(Collection<Pin> p_pin_list) {
+    void set_pins(Collection<Pin> p_pin_list) {
         pin_list = new TreeSet<>();
         for (Pin curr_pin : p_pin_list) {
             pin_list.add(curr_pin);
         }
     }
 
-    public Set<Pin> get_pins() {
+    Set<Pin> get_pins() {
         return pin_list;
     }
 
-    public static class Id implements Comparable<Id> {
+    static class Id implements Comparable<Id> {
 
-        public final String name;
-        public final int subnet_number;
+        final String name;
+        final int subnet_number;
 
         Id(String p_name, int p_subnet_number) {
             name = p_name;
@@ -120,10 +120,10 @@ public class Net {
         }
     }
 
-    public static class Pin implements Comparable<Pin> {
+    static class Pin implements Comparable<Pin> {
 
-        public final String component_name;
-        public final String pin_name;
+        final String component_name;
+        final String pin_name;
 
         Pin(String p_component_name, String p_pin_name) {
             component_name = p_component_name;

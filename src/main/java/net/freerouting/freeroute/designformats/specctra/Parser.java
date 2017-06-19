@@ -28,7 +28,7 @@ import net.freerouting.freeroute.board.Communication.SpecctraParserInfo;
  *
  * @author Alfons Wirtz
  */
-public class Parser extends ScopeKeyword {
+class Parser extends ScopeKeyword {
 
     private static SpecctraParserInfo.WriteResolution read_write_solution(ReadScopeParameter p_par) {
         try {
@@ -88,7 +88,7 @@ public class Parser extends ScopeKeyword {
     /**
      * p_reduced is true if the scope is written to a session file.
      */
-    public static void write_scope(net.freerouting.freeroute.datastructures.IndentFileWriter p_file, SpecctraParserInfo p_parser_info,
+    static void write_scope(net.freerouting.freeroute.datastructures.IndentFileWriter p_file, SpecctraParserInfo p_parser_info,
             net.freerouting.freeroute.datastructures.IdentifierType p_identifier_type, boolean p_reduced) throws java.io.IOException {
         p_file.start_scope("parser");
         if (!p_reduced) {
@@ -161,12 +161,12 @@ public class Parser extends ScopeKeyword {
     /**
      * Creates a new instance of Parser
      */
-    public Parser() {
+    Parser() {
         super("parser");
     }
 
     @Override
-    public boolean read_scope(ReadScopeParameter p_par) {
+    boolean read_scope(ReadScopeParameter p_par) {
         Object next_token = null;
         for (;;) {
             Object prev_token = next_token;

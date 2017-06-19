@@ -36,7 +36,8 @@ import static net.freerouting.freeroute.designformats.specctra.ScopeKeyword.skip
  */
 class NetClass {
 
-    static NetClass read_net_class_scope(Scanner p_scanner) throws DsnFileException, ReadScopeException {
+    static NetClass read_net_class_scope(Scanner p_scanner)
+            throws DsnFileException, ReadScopeException {
 
         try {
             // read the class name
@@ -118,7 +119,9 @@ class NetClass {
         }
     }
 
-    public static ClassClass read_class_class_scope(Scanner p_scanner) throws DsnFileException {
+    static ClassClass read_class_class_scope(Scanner p_scanner)
+            throws DsnFileException {
+
         try {
             Collection<String> classes = new LinkedList<>();
             Collection<Rule> rules = new LinkedList<>();
@@ -152,26 +155,28 @@ class NetClass {
         }
     }
 
-    public final String name;
-    public final String trace_clearance_class;
-    public final Collection<String> net_list;
-    public final Collection<Rule> rules;
-    public final Collection<Rule.LayerRule> layer_rules;
-    public final Collection<String> use_via;
-    public final Collection<String> use_layer;
-    public final String via_rule;
-    public final boolean shove_fixed;
-    public final boolean pull_tight;
-    public final double min_trace_length;
-    public final double max_trace_length;
+    final String name;
+    final String trace_clearance_class;
+    final Collection<String> net_list;
+    final Collection<Rule> rules;
+    final Collection<Rule.LayerRule> layer_rules;
+    final Collection<String> use_via;
+    final Collection<String> use_layer;
+    final String via_rule;
+    final boolean shove_fixed;
+    final boolean pull_tight;
+    final double min_trace_length;
+    final double max_trace_length;
 
     /**
      * Creates a new instance of NetClass
      */
-    private NetClass(String p_name, String p_trace_clearance_class, Collection<String> p_net_list,
-            Collection<Rule> p_rules, Collection<Rule.LayerRule> p_layer_rules, Collection<String> p_use_via,
-            Collection<String> p_use_layer, String p_via_rule, boolean p_shove_fixed, boolean p_pull_tight,
-            double p_min_trace_length, double p_max_trace_length) {
+    private NetClass(String p_name, String p_trace_clearance_class,
+            Collection<String> p_net_list, Collection<Rule> p_rules,
+            Collection<Rule.LayerRule> p_layer_rules, Collection<String> p_use_via,
+            Collection<String> p_use_layer, String p_via_rule, boolean p_shove_fixed,
+            boolean p_pull_tight, double p_min_trace_length, double p_max_trace_length) {
+
         name = p_name;
         trace_clearance_class = p_trace_clearance_class;
         net_list = p_net_list;
@@ -186,11 +191,11 @@ class NetClass {
         max_trace_length = p_max_trace_length;
     }
 
-    public static class ClassClass {
+    static class ClassClass {
 
-        public final Collection<String> class_names;
-        public final Collection<Rule> rules;
-        public final Collection<Rule.LayerRule> layer_rules;
+        final Collection<String> class_names;
+        final Collection<Rule> rules;
+        final Collection<Rule.LayerRule> layer_rules;
 
         private ClassClass(Collection<String> p_class_names, Collection<Rule> p_rules,
                 Collection<Rule.LayerRule> p_layer_rules) {

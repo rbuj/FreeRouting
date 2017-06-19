@@ -138,7 +138,7 @@ public class RulesFile {
         }
     }
 
-    private static void write_rules(WriteScopeParameter p_par, String p_design_name) throws java.io.IOException {
+    static void write_rules(WriteScopeParameter p_par, String p_design_name) throws java.io.IOException {
         p_par.file.start_scope("rules PCB ");
         p_par.file.write(p_design_name);
         Structure.write_snap_angle(p_par.file, p_par.board.rules.get_trace_angle_restriction());
