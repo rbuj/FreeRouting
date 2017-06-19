@@ -24,15 +24,15 @@ import net.freerouting.freeroute.rules.ClearanceMatrix;
  */
 final class ClearanceClassBuilder {
 
-    private ClearanceClassBuilder() {
-        // no code
-    }
-
     static ClearanceClass[] build_clearance_class_array(ClearanceMatrix p_clearance_matrix) {
         ClearanceClass[] class_arr = new ClearanceClass[p_clearance_matrix.get_class_count()];
         for (int i = 0; i < class_arr.length; ++i) {
             class_arr[i] = new ClearanceClass(p_clearance_matrix.get_name(i), i);
         }
         return class_arr;
+    }
+
+    private ClearanceClassBuilder() {
+        // no code
     }
 }

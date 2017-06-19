@@ -24,6 +24,7 @@ import net.freerouting.freeroute.board.LayerStructure;
  * @author Robert Buj
  */
 public final class SignalLayerWithIndexBuilder {
+
     /**
      * The layer index, when all layers are selected.
      */
@@ -32,10 +33,6 @@ public final class SignalLayerWithIndexBuilder {
      * The layer index, when all inner layers ar selected.
      */
     public static final int INNER_LAYER_INDEX = -2;
-
-    private SignalLayerWithIndexBuilder() {
-        // no code
-    }
 
     static SignalLayerWithIndex[] build_signal_layer_array(LayerStructure p_layer_structure) {
         java.util.ResourceBundle resources
@@ -59,5 +56,9 @@ public final class SignalLayerWithIndexBuilder {
             layer_arr[curr_layer_no] = new SignalLayerWithIndex(curr_signal_layer.get_name(), p_layer_structure.get_no(curr_signal_layer));
         }
         return layer_arr;
+    }
+
+    private SignalLayerWithIndexBuilder() {
+        // no code
     }
 }

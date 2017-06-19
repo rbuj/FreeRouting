@@ -180,12 +180,6 @@ abstract class Rule {
 
     static final class WidthRule extends Rule {
 
-        final double value;
-
-        private WidthRule(double p_value) {
-            value = p_value;
-        }
-
         static WidthRule read_width_rule(Scanner p_scanner) {
             try {
                 double value;
@@ -209,17 +203,15 @@ abstract class Rule {
                 return null;
             }
         }
+
+        final double value;
+
+        private WidthRule(double p_value) {
+            value = p_value;
+        }
     }
 
     static final class ClearanceRule extends Rule {
-
-        final double value;
-        final Collection<String> clearance_class_pairs;
-
-        private ClearanceRule(double p_value, Collection<String> p_class_pairs) {
-            value = p_value;
-            clearance_class_pairs = p_class_pairs;
-        }
 
         static ClearanceRule read_clearance_rule(Scanner p_scanner) {
             try {
@@ -269,17 +261,17 @@ abstract class Rule {
                 return null;
             }
         }
+
+        final double value;
+        final Collection<String> clearance_class_pairs;
+
+        private ClearanceRule(double p_value, Collection<String> p_class_pairs) {
+            value = p_value;
+            clearance_class_pairs = p_class_pairs;
+        }
     }
 
     static final class LayerRule {
-
-        final Collection<String> layer_names;
-        final Collection<Rule> rules;
-
-        private LayerRule(Collection<String> p_layer_names, Collection<Rule> p_rules) {
-            layer_names = p_layer_names;
-            rules = p_rules;
-        }
 
         /**
          * Reads a LayerRule from dsn-file.
@@ -317,6 +309,14 @@ abstract class Rule {
                 System.out.println("Rule.read_layer_rule_scope: IO error scanning file");
                 return null;
             }
+        }
+
+        final Collection<String> layer_names;
+        final Collection<Rule> rules;
+
+        private LayerRule(Collection<String> p_layer_names, Collection<Rule> p_rules) {
+            layer_names = p_layer_names;
+            rules = p_rules;
         }
     }
 }

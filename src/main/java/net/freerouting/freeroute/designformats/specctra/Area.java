@@ -30,17 +30,6 @@ import net.freerouting.freeroute.geometry.planar.PolylineShape;
  */
 class Area {
 
-    String area_name; // may be generated later on, if area_name is null.
-    final Collection<Shape> shape_list;
-    final String clearance_class_name;
-
-    private Area(String p_area_name, Collection<Shape> p_shape_list,
-            String p_clearance_class_name) {
-        area_name = p_area_name;
-        shape_list = p_shape_list;
-        clearance_class_name = p_clearance_class_name;
-    }
-
     /**
      * Reads a shape, which may contain holes from a specctra dsn-file. The
      * first shape in the shape_list of the result is the border of the area.
@@ -187,5 +176,16 @@ class Area {
             result = new net.freerouting.freeroute.geometry.planar.PolylineArea(border, holes);
         }
         return result;
+    }
+
+    String area_name; // may be generated later on, if area_name is null.
+    final Collection<Shape> shape_list;
+    final String clearance_class_name;
+
+    private Area(String p_area_name, Collection<Shape> p_shape_list,
+            String p_clearance_class_name) {
+        area_name = p_area_name;
+        shape_list = p_shape_list;
+        clearance_class_name = p_clearance_class_name;
     }
 }
