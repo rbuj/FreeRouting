@@ -20,7 +20,6 @@
 package net.freerouting.freeroute.designformats.specctra;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
@@ -50,31 +49,8 @@ class PolylinePath extends Path {
                 }
                 corner_list.add(next_token);
             }
-            if (corner_list.size() < 5) {
-                throw new ReadScopeException("PolylinePath.read_polyline_path_scope: to few numbers in scope");
-            }
-            Iterator<Object> it = corner_list.iterator();
-            double width;
-            Object next_object = it.next();
-            if (next_object instanceof Double) {
-                width = (double) next_object;
-            } else if (next_object instanceof Integer) {
-                width = ((Number) next_object).doubleValue();
-            } else {
-                throw new ReadScopeException("PolylinePath.read_polyline_path_scope: number expected");
-            }
-            double[] corner_arr = new double[corner_list.size() - 1];
-            for (int i = 0; i < corner_arr.length; ++i) {
-                next_object = it.next();
-                if (next_object instanceof Double) {
-                    corner_arr[i] = (double) next_object;
-                } else if (next_object instanceof Integer) {
-                    corner_arr[i] = ((Number) next_object).doubleValue();
-                } else {
-                    throw new ReadScopeException("PolylinePath.read_polyline_path_scope: number expected");
-                }
-            }
-            return new PolylinePath(layer, width, corner_arr);
+            PathHelper path_helper = PathHelper.extract_width_and_coordinates(corner_list);
+            return new PolylinePath(layer, path_helper.get_width(), path_helper.get_coordinates());
         } catch (java.io.IOException e) {
             throw new ReadScopeException("PolylinePath.read_polyline_path_scope: IO error scanning file", e);
         }

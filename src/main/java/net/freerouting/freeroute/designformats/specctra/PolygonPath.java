@@ -20,7 +20,6 @@
 package net.freerouting.freeroute.designformats.specctra;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 import net.freerouting.freeroute.datastructures.IdentifierType;
 import net.freerouting.freeroute.datastructures.IndentFileWriter;
@@ -60,31 +59,8 @@ class PolygonPath extends Path {
                 }
                 corner_list.add(next_token);
             }
-            if (corner_list.size() < 5) {
-                throw new ReadScopeException("PolygonPath.read_polygon_path_scope: to few numbers in scope");
-            }
-            Iterator<Object> it = corner_list.iterator();
-            double width;
-            Object next_object = it.next();
-            if (next_object instanceof Double) {
-                width = (double) next_object;
-            } else if (next_object instanceof Integer) {
-                width = ((Number) next_object).doubleValue();
-            } else {
-                throw new ReadScopeException("PolygonPath.read_polygon_path_scope: number expected");
-            }
-            double[] coordinate_arr = new double[corner_list.size() - 1];
-            for (int i = 0; i < coordinate_arr.length; ++i) {
-                next_object = it.next();
-                if (next_object instanceof Double) {
-                    coordinate_arr[i] = (double) next_object;
-                } else if (next_object instanceof Integer) {
-                    coordinate_arr[i] = ((Number) next_object).doubleValue();
-                } else {
-                    throw new ReadScopeException("PolygonPath.read_polygon_path_scope: number expected");
-                }
-            }
-            return new PolygonPath(layer, width, coordinate_arr);
+            PathHelper path_helper = PathHelper.extract_width_and_coordinates(corner_list);
+            return new PolygonPath(layer, path_helper.get_width(), path_helper.get_coordinates());
         } catch (java.io.IOException e) {
             throw new ReadScopeException("PolygonPath.read_polygon_path_scope: IO error scanning file", e);
         }

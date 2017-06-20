@@ -35,6 +35,6 @@ abstract class Path extends Shape {
     Path(LayerInfo p_layer, double p_width, double[] p_coordinate_arr) {
         super(p_layer);
         width = p_width;
-        coordinate_arr = p_coordinate_arr;
+        coordinate_arr = (p_coordinate_arr == null) ? null : p_coordinate_arr.clone();
     }
 }
