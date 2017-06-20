@@ -49,8 +49,7 @@ class PolylinePath extends Path {
                 }
                 corner_list.add(next_token);
             }
-            PathHelper path_helper = PathHelper.extract_width_and_coordinates(corner_list);
-            return new PolylinePath(layer, path_helper.get_width(), path_helper.get_coordinates());
+            return new PolylinePath(layer, corner_list);
         } catch (java.io.IOException e) {
             throw new ReadScopeException("PolylinePath.read_polyline_path_scope: IO error scanning file", e);
         }
@@ -61,6 +60,10 @@ class PolylinePath extends Path {
      */
     PolylinePath(LayerInfo p_layer, double p_width, double[] p_corner_arr) {
         super(p_layer, p_width, p_corner_arr);
+    }
+
+    private PolylinePath(LayerInfo layer, Collection<Object> corner_list) throws ReadScopeException {
+        super(layer, corner_list);
     }
 
     /**

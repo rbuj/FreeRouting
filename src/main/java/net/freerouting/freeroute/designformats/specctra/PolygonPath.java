@@ -59,8 +59,7 @@ class PolygonPath extends Path {
                 }
                 corner_list.add(next_token);
             }
-            PathHelper path_helper = PathHelper.extract_width_and_coordinates(corner_list);
-            return new PolygonPath(layer, path_helper.get_width(), path_helper.get_coordinates());
+            return new PolygonPath(layer, corner_list);
         } catch (java.io.IOException e) {
             throw new ReadScopeException("PolygonPath.read_polygon_path_scope: IO error scanning file", e);
         }
@@ -71,6 +70,10 @@ class PolygonPath extends Path {
      */
     PolygonPath(LayerInfo p_layer, double p_width, double[] p_coordinate_arr) {
         super(p_layer, p_width, p_coordinate_arr);
+    }
+
+    private PolygonPath(LayerInfo layer, Collection<Object> corner_list) throws ReadScopeException {
+        super(layer, corner_list);
     }
 
     /**
