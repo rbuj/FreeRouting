@@ -26,7 +26,7 @@ package net.freerouting.freeroute.designformats.specctra;
  */
 class Placement extends ScopeKeyword {
 
-    static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par) throws java.io.IOException, WriteScopeException {
         p_par.file.start_scope("placement");
         if (p_par.board.components.get_flip_style_rotate_first()) {
             p_par.file.new_line();

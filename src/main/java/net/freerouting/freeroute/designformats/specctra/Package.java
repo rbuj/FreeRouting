@@ -184,7 +184,7 @@ class Package {
      * Writes the placements of p_package to a Specctra dsn-file.
      */
     static void write_placement_scope(WriteScopeParameter p_par, net.freerouting.freeroute.library.Package p_package)
-            throws java.io.IOException {
+            throws java.io.IOException, WriteScopeException {
         Collection<Item> board_items = p_par.board.get_items();
         boolean component_found = false;
         for (net.freerouting.freeroute.board.Component curr_component : p_par.board.components) {

@@ -57,7 +57,7 @@ class Component extends ScopeKeyword {
     }
 
     static void write_scope(WriteScopeParameter p_par, net.freerouting.freeroute.board.Component p_component)
-            throws java.io.IOException {
+            throws java.io.IOException, WriteScopeException {
         p_par.file.start_scope("place ");
         p_par.file.new_line();
         p_par.identifier_type.write(p_component.name, p_par.file);
@@ -88,24 +88,21 @@ class Component extends ScopeKeyword {
     }
 
     private static void write_pin_info(WriteScopeParameter p_par, net.freerouting.freeroute.board.Component p_component, int p_pin_no)
-            throws java.io.IOException {
+            throws java.io.IOException, WriteScopeException {
         if (!p_component.is_placed()) {
             return;
         }
         net.freerouting.freeroute.library.Package.Pin package_pin = p_component.get_package().get_pin(p_pin_no);
         if (package_pin == null) {
-            System.out.println("Component.write_pin_info: package pin not found");
-            return;
+            throw new WriteScopeException("Component.write_pin_info: package pin not found");
         }
         net.freerouting.freeroute.board.Pin component_pin = p_par.board.get_pin(p_component.no, p_pin_no);
         if (component_pin == null) {
-            System.out.println("Component.write_pin_info: component pin not found");
-            return;
+            throw new WriteScopeException("Component.write_pin_info: component pin not found");
         }
         String cl_class_name = p_par.board.rules.clearance_matrix.get_name(component_pin.clearance_class_no());
         if (cl_class_name == null) {
-            System.out.println("Component.write_pin_info: clearance class  name not found");
-            return;
+            throw new WriteScopeException("Component.write_pin_info: clearance class name not found");
         }
         p_par.file.new_line();
         p_par.file.write("(pin ");
@@ -116,7 +113,7 @@ class Component extends ScopeKeyword {
     }
 
     private static void write_keepout_infos(WriteScopeParameter p_par, net.freerouting.freeroute.board.Component p_component)
-            throws java.io.IOException {
+            throws java.io.IOException, WriteScopeException {
         if (!p_component.is_placed()) {
             return;
         }
@@ -145,8 +142,7 @@ class Component extends ScopeKeyword {
                 }
                 String cl_class_name = p_par.board.rules.clearance_matrix.get_name(curr_obstacle_area.clearance_class_no());
                 if (cl_class_name == null) {
-                    System.out.println("Component.write_keepout_infos: clearance class name not found");
-                    return;
+                    throw new WriteScopeException("Component.write_keepout_infos: clearance class name not found");
                 }
                 p_par.file.new_line();
                 p_par.file.write(keepout_type);

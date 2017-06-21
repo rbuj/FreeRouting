@@ -180,13 +180,13 @@ public class DsnFile {
             String p_design_name, boolean p_compat_mode) throws DsnFileException {
         try (IndentFileWriter output_file = new IndentFileWriter(p_file)) {
             write_pcb_scope(p_board_handling, output_file, p_design_name, p_compat_mode);
-        } catch (java.io.IOException exc) {
-            throw new DsnFileException("unable to write dsn file", exc);
+        } catch (java.io.IOException | WriteScopeException exc) {
+            throw new DsnFileException("Error detected while writing dsn file", exc);
         }
     }
 
     private static void write_pcb_scope(net.freerouting.freeroute.interactive.BoardHandling p_board_handling, IndentFileWriter p_file, String p_design_name, boolean p_compat_mode)
-            throws java.io.IOException {
+            throws java.io.IOException, WriteScopeException {
         BasicBoard routing_board = p_board_handling.get_routing_board();
         WriteScopeParameter write_scope_parameter
                 = new WriteScopeParameter(routing_board, p_board_handling.settings.autoroute_settings, p_file,
