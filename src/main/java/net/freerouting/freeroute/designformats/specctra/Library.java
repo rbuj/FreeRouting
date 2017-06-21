@@ -78,12 +78,12 @@ class Library extends ScopeKeyword {
                     break;
                 }
                 if (prev_token == OPEN_BRACKET) {
-                    if (next_token == Keyword.PADSTACK) {
+                    if (next_token == PADSTACK) {
                         if (!read_padstack_scope(p_par.scanner, p_par.layer_structure,
                                 p_par.coordinate_transform, board.library.padstacks)) {
                             return false;
                         }
-                    } else if (next_token == Keyword.IMAGE) {
+                    } else if (next_token == IMAGE) {
                         Package curr_package = read_package_scope(p_par.scanner, p_par.layer_structure);
                         package_list.add(curr_package);
                     } else {

@@ -215,7 +215,7 @@ class Network extends ScopeKeyword {
                 System.out.println("Network.read_net_pins: IO error while scanning file");
                 return false;
             }
-            if (next_token == Keyword.CLOSED_BRACKET) {
+            if (next_token == CLOSED_BRACKET) {
                 break;
             }
             if (!(next_token instanceof String)) {
@@ -278,13 +278,13 @@ class Network extends ScopeKeyword {
             }
             boolean attach_allowed = false;
             next_token = p_scanner.next_token();
-            if (next_token != Keyword.CLOSED_BRACKET) {
-                if (next_token != Keyword.ATTACH) {
+            if (next_token != CLOSED_BRACKET) {
+                if (next_token != ATTACH) {
                     throw new ReadScopeException("Network.read_via_info: Keyword.ATTACH expected");
                 }
                 attach_allowed = true;
                 next_token = p_scanner.next_token();
-                if (next_token != Keyword.CLOSED_BRACKET) {
+                if (next_token != CLOSED_BRACKET) {
                     throw new ReadScopeException("Network.read_via_info: closing bracket expected");
                 }
             }
@@ -300,7 +300,7 @@ class Network extends ScopeKeyword {
             for (;;) {
                 p_scanner.yybegin(SpecctraFileScanner.NAME);
                 Object next_token = p_scanner.next_token();
-                if (next_token == Keyword.CLOSED_BRACKET) {
+                if (next_token == CLOSED_BRACKET) {
                     break;
                 }
                 if (!(next_token instanceof String)) {
@@ -1040,19 +1040,19 @@ class Network extends ScopeKeyword {
                     break;
                 }
                 if (prev_token == OPEN_BRACKET) {
-                    if (next_token == Keyword.NET) {
+                    if (next_token == NET) {
                         read_net_scope(p_par.scanner, p_par.netlist, p_par.board_handling.get_routing_board(),
                                 p_par.coordinate_transform, p_par.layer_structure);
-                    } else if (next_token == Keyword.VIA) {
+                    } else if (next_token == VIA) {
                         net.freerouting.freeroute.rules.ViaInfo curr_via_info = read_via_info(p_par.scanner, p_par.board_handling.get_routing_board());
                         via_infos.add(curr_via_info);
-                    } else if (next_token == Keyword.VIA_RULE) {
+                    } else if (next_token == VIA_RULE) {
                         Collection<String> curr_via_rule = read_via_rule(p_par.scanner, p_par.board_handling.get_routing_board());
                         via_rules.add(curr_via_rule);
-                    } else if (next_token == Keyword.CLASS) {
+                    } else if (next_token == CLASS) {
                         NetClass curr_class = read_net_class_scope(p_par.scanner);
                         classes.add(curr_class);
-                    } else if (next_token == Keyword.CLASS_CLASS) {
+                    } else if (next_token == CLASS_CLASS) {
                         NetClass.ClassClass curr_class_class = read_class_class_scope(p_par.scanner);
                         if (curr_class_class == null) {
                             return false;
@@ -1119,24 +1119,24 @@ class Network extends ScopeKeyword {
                     break;
                 }
                 if (prev_token == OPEN_BRACKET) {
-                    if (next_token == Keyword.PINS) {
+                    if (next_token == PINS) {
                         if (!read_net_pins(p_scanner, pin_list)) {
                             return false;
                         }
-                    } else if (next_token == Keyword.ORDER) {
+                    } else if (next_token == ORDER) {
                         pin_order_found = true;
                         if (!read_net_pins(p_scanner, pin_list)) {
                             return false;
                         }
-                    } else if (next_token == Keyword.FROMTO) {
+                    } else if (next_token == FROMTO) {
                         Set<Net.Pin> curr_subnet_pin_list = new java.util.TreeSet<>();
                         if (!read_net_pins(p_scanner, curr_subnet_pin_list)) {
                             return false;
                         }
                         subnet_pin_lists.add(curr_subnet_pin_list);
-                    } else if (next_token == Keyword.RULE) {
+                    } else if (next_token == RULE) {
                         net_rules.addAll(read_rule_scope(p_scanner));
-                    } else if (next_token == Keyword.LAYER_RULE) {
+                    } else if (next_token == LAYER_RULE) {
                         System.out.println("Netwark.read_net_scope: layer_rule not yet implemented");
                         skip_scope(p_scanner);
                     } else {

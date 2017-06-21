@@ -45,7 +45,7 @@ class Parser extends ScopeKeyword {
             }
             int resolution_value = (Integer) next_token;
             next_token = p_par.scanner.next_token();
-            if (next_token != Keyword.CLOSED_BRACKET) {
+            if (next_token != CLOSED_BRACKET) {
                 System.out.println("Parser.read_write_solution: closing_bracket expected");
                 return null;
             }
@@ -74,7 +74,7 @@ class Parser extends ScopeKeyword {
             }
             result[1] = (String) next_token;
             next_token = p_par.scanner.next_token();
-            if (next_token != Keyword.CLOSED_BRACKET) {
+            if (next_token != CLOSED_BRACKET) {
                 System.out.println("Parser.read_constant: closing_bracket expected");
                 return null;
             }
@@ -147,7 +147,7 @@ class Parser extends ScopeKeyword {
             }
             String result = (String) next_token;
             next_token = p_scanner.next_token();
-            if (next_token != Keyword.CLOSED_BRACKET) {
+            if (next_token != CLOSED_BRACKET) {
                 System.out.println("Parser.read_quote_char: closing bracket expected");
                 return null;
             }
@@ -186,34 +186,34 @@ class Parser extends ScopeKeyword {
             }
             boolean read_ok = true;
             if (prev_token == OPEN_BRACKET) {
-                if (next_token == Keyword.STRING_QUOTE) {
+                if (next_token == STRING_QUOTE) {
                     String quote_char = read_quote_char(p_par.scanner);
                     if (quote_char == null) {
                         return false;
                     }
                     p_par.string_quote = quote_char;
-                } else if (next_token == Keyword.HOST_CAD) {
+                } else if (next_token == HOST_CAD) {
                     try {
                         p_par.host_cad = DsnFile.read_string_scope(p_par.scanner);
                     } catch (DsnFileException ex) {
                         Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
-                } else if (next_token == Keyword.HOST_VERSION) {
+                } else if (next_token == HOST_VERSION) {
                     try {
                         p_par.host_version = DsnFile.read_string_scope(p_par.scanner);
                     } catch (DsnFileException ex) {
                         Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
-                } else if (next_token == Keyword.CONSTANT) {
+                } else if (next_token == CONSTANT) {
                     String[] curr_constant = read_constant(p_par);
                     if (curr_constant != null) {
                         p_par.constants.add(curr_constant);
                     }
-                } else if (next_token == Keyword.WRITE_RESOLUTION) {
+                } else if (next_token == WRITE_RESOLUTION) {
                     p_par.write_resolution = read_write_solution(p_par);
-                } else if (next_token == Keyword.GENERATED_BY_FREEROUTE) {
+                } else if (next_token == GENERATED_BY_FREEROUTE) {
                     p_par.dsn_file_generated_by_host = false;
                     // skip the closing bracket
                     skip_scope(p_par.scanner);

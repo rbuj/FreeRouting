@@ -19,8 +19,6 @@
  */
 package net.freerouting.freeroute.designformats.specctra;
 
-import static net.freerouting.freeroute.designformats.specctra.ScopeKeyword.skip_scope;
-
 /**
  *
  * @author Alfons Wirtz
@@ -100,18 +98,18 @@ class PartLibrary extends ScopeKeyword {
                 System.out.println("PartLibrary.read_scope: unexpected end of file");
                 return false;
             }
-            if (next_token == Keyword.CLOSED_BRACKET) {
+            if (next_token == CLOSED_BRACKET) {
                 // end of scope
                 break;
             }
-            if (prev_token == Keyword.OPEN_BRACKET) {
-                if (next_token == Keyword.LOGICAL_PART_MAPPING) {
+            if (prev_token == OPEN_BRACKET) {
+                if (next_token == LOGICAL_PART_MAPPING) {
                     LogicalPartMapping next_mapping = LogicalPartMapping.read_logical_part_mapping(p_par.scanner);
                     if (next_mapping == null) {
                         return false;
                     }
                     p_par.logical_part_mappings.add(next_mapping);
-                } else if (next_token == Keyword.LOGICAL_PART) {
+                } else if (next_token == LOGICAL_PART) {
                     LogicalPart next_part = LogicalPart.read_logical_part(p_par.scanner);
                     if (next_part == null) {
                         return false;
@@ -140,12 +138,12 @@ class PartLibrary extends ScopeKeyword {
                 }
                 String name = (String) next_token;
                 next_token = p_scanner.next_token();
-                if (next_token != Keyword.OPEN_BRACKET) {
+                if (next_token != OPEN_BRACKET) {
                     System.out.println("PartLibrary.read_logical_part_mapping: open bracket expected");
                     return null;
                 }
                 next_token = p_scanner.next_token();
-                if (next_token != Keyword.COMPONENT_SCOPE) {
+                if (next_token != COMPONENT_SCOPE) {
                     System.out.println("PartLibrary.read_logical_part_mapping: Keyword.COMPONENT_SCOPE expected");
                     return null;
                 }
@@ -153,7 +151,7 @@ class PartLibrary extends ScopeKeyword {
                 for (;;) {
                     p_scanner.yybegin(SpecctraFileScanner.NAME);
                     next_token = p_scanner.next_token();
-                    if (next_token == Keyword.CLOSED_BRACKET) {
+                    if (next_token == CLOSED_BRACKET) {
                         break;
                     }
                     if (!(next_token instanceof String)) {
@@ -163,7 +161,7 @@ class PartLibrary extends ScopeKeyword {
                     result.add((String) next_token);
                 }
                 next_token = p_scanner.next_token();
-                if (next_token != Keyword.CLOSED_BRACKET) {
+                if (next_token != CLOSED_BRACKET) {
                     System.out.println("PartLibrary.read_logical_part_mapping: closing bracket expected");
                     return null;
                 }
@@ -235,7 +233,7 @@ class PartLibrary extends ScopeKeyword {
                 // overread subgates
                 for (;;) {
                     next_token = p_scanner.next_token();
-                    if (next_token == Keyword.CLOSED_BRACKET) {
+                    if (next_token == CLOSED_BRACKET) {
                         break;
                     }
                 }
@@ -296,7 +294,7 @@ class PartLibrary extends ScopeKeyword {
                 }
                 boolean read_ok = true;
                 if (prev_token == OPEN_BRACKET) {
-                    if (next_token == Keyword.PIN) {
+                    if (next_token == PIN) {
                         PartPin curr_part_pin = PartPin.read_part_pin(p_scanner);
                         if (curr_part_pin == null) {
                             return null;

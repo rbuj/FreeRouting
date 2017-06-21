@@ -49,9 +49,9 @@ class ScopeKeyword extends Keyword {
             if (curr_token == null) {
                 return false; // end of file
             }
-            if (curr_token == Keyword.OPEN_BRACKET) {
+            if (curr_token == OPEN_BRACKET) {
                 ++open_bracked_count;
-            } else if (curr_token == Keyword.CLOSED_BRACKET) {
+            } else if (curr_token == CLOSED_BRACKET) {
                 --open_bracked_count;
             }
         }
@@ -84,7 +84,6 @@ class ScopeKeyword extends Keyword {
                 // end of scope
                 break;
             }
-
             if (prev_token == OPEN_BRACKET) {
                 ScopeKeyword next_scope;
                 // a new scope is expected
@@ -93,12 +92,10 @@ class ScopeKeyword extends Keyword {
                     if (!next_scope.read_scope(p_par)) {
                         return false;
                     }
-
                 } else {
                     // skip unknown scope
                     skip_scope(p_par.scanner);
                 }
-
             }
         }
         return true;
