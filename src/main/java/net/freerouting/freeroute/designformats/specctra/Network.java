@@ -45,7 +45,8 @@ import net.freerouting.freeroute.rules.ViaInfo;
  */
 class Network extends ScopeKeyword {
 
-    static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par)
+            throws java.io.IOException, WriteScopeException {
         p_par.file.start_scope("network");
         Collection<net.freerouting.freeroute.board.Pin> board_pins = p_par.board.get_pins();
         for (int i = 1; i <= p_par.board.rules.nets.max_net_no(); ++i) {

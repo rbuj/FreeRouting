@@ -33,7 +33,10 @@ import net.freerouting.freeroute.datastructures.IndentFileWriter;
  */
 class Net {
 
-    static void write_scope(WriteScopeParameter p_par, net.freerouting.freeroute.rules.Net p_net, Collection<net.freerouting.freeroute.board.Pin> p_pin_list) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par,
+            net.freerouting.freeroute.rules.Net p_net,
+            Collection<net.freerouting.freeroute.board.Pin> p_pin_list)
+            throws java.io.IOException, WriteScopeException {
         p_par.file.start_scope();
         write_net_id(p_net, p_par.file, p_par.identifier_type);
         // write the pins scope
@@ -57,22 +60,23 @@ class Net {
         p_file.write(subnet_number.toString());
     }
 
-    static void write_pin(WriteScopeParameter p_par, net.freerouting.freeroute.board.Pin p_pin) throws java.io.IOException {
-        net.freerouting.freeroute.board.Component curr_component = p_par.board.components.get(p_pin.get_component_no());
+    static void write_pin(WriteScopeParameter p_par,
+            net.freerouting.freeroute.board.Pin p_pin)
+            throws java.io.IOException, WriteScopeException {
+        net.freerouting.freeroute.board.Component curr_component
+                = p_par.board.components.get(p_pin.get_component_no());
         if (curr_component == null) {
-            System.out.println("Net.write_scope: component not found");
-            return;
+            throw new WriteScopeException("Net.write_scope: component not found");
         }
-        net.freerouting.freeroute.library.Package.Pin lib_pin = curr_component.get_package().get_pin(p_pin.get_index_in_package());
+        net.freerouting.freeroute.library.Package.Pin lib_pin
+                = curr_component.get_package().get_pin(p_pin.get_index_in_package());
         if (lib_pin == null) {
-            System.out.println("Net.write_scope:  pin number out of range");
-            return;
+            throw new WriteScopeException("Net.write_scope: pin number out of range");
         }
         p_par.file.new_line();
         p_par.identifier_type.write(curr_component.name, p_par.file);
         p_par.file.write("-");
         p_par.identifier_type.write(lib_pin.name, p_par.file);
-
     }
 
     final Id id;
