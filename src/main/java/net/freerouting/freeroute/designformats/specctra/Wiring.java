@@ -57,7 +57,7 @@ import net.freerouting.freeroute.rules.ItemClass;
  */
 class Wiring extends ScopeKeyword {
 
-    static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par) throws java.io.IOException, WriteScopeException {
         p_par.file.start_scope("wiring");
         // write the wires
         Collection<Trace> board_wires = p_par.board.get_traces();
@@ -116,10 +116,9 @@ class Wiring extends ScopeKeyword {
         p_par.file.end_scope();
     }
 
-    private static void write_wire_scope(WriteScopeParameter p_par, Trace p_wire) throws java.io.IOException {
+    private static void write_wire_scope(WriteScopeParameter p_par, Trace p_wire) throws java.io.IOException, WriteScopeException {
         if (!(p_wire instanceof PolylineTrace)) {
-            System.out.println("Wiring.write_wire_scope: trace type not yet implemented");
-            return;
+            throw new WriteScopeException("Wiring.write_wire_scope: trace type not yet implemented");
         }
         PolylineTrace curr_wire = (PolylineTrace) p_wire;
         int layer_no = curr_wire.get_layer();
@@ -133,8 +132,7 @@ class Wiring extends ScopeKeyword {
             wire_net = p_par.board.rules.nets.get(curr_wire.get_net_no(0));
         }
         if (wire_net == null) {
-            System.out.println("Wiring.write_wire_scope: net not found");
-            return;
+            throw new WriteScopeException("Wiring.write_wire_scope: net not found");
         }
         p_par.file.start_scope("wire");
 
@@ -159,11 +157,10 @@ class Wiring extends ScopeKeyword {
         p_par.file.end_scope();
     }
 
-    private static void write_conduction_area_scope(WriteScopeParameter p_par, net.freerouting.freeroute.board.ConductionArea p_conduction_area) throws java.io.IOException {
+    private static void write_conduction_area_scope(WriteScopeParameter p_par, net.freerouting.freeroute.board.ConductionArea p_conduction_area) throws java.io.IOException, WriteScopeException {
         int net_count = p_conduction_area.net_count();
         if (net_count <= 0 || net_count > 1) {
-            System.out.println("Plane.write_scope: unexpected net count");
-            return;
+            throw new WriteScopeException("Plane.write_scope: unexpected net count");
         }
         net.freerouting.freeroute.rules.Net curr_net = p_par.board.rules.nets.get(p_conduction_area.get_net_no(0));
         net.freerouting.freeroute.geometry.planar.Area curr_area = p_conduction_area.get_area();

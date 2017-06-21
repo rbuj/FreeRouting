@@ -54,7 +54,7 @@ import net.freerouting.freeroute.rules.ViaInfo;
  */
 class Structure extends ScopeKeyword {
 
-    static void write_scope(WriteScopeParameter p_par) throws java.io.IOException {
+    static void write_scope(WriteScopeParameter p_par) throws java.io.IOException, WriteScopeException {
         p_par.file.start_scope("structure");
         // write the bounding box
         p_par.file.start_scope("boundary");
@@ -76,8 +76,7 @@ class Structure extends ScopeKeyword {
             }
         }
         if (curr_ob == null) {
-            System.out.println("Structure.write_scope; outline not found");
-            return;
+            throw new WriteScopeException("Structure.write_scope; outline not found");
         }
         net.freerouting.freeroute.board.BoardOutline outline = (net.freerouting.freeroute.board.BoardOutline) curr_ob;
 
@@ -158,7 +157,7 @@ class Structure extends ScopeKeyword {
     }
 
     private static void write_via_padstacks(net.freerouting.freeroute.library.BoardLibrary p_library, IndentFileWriter p_file,
-            IdentifierType p_identifier_type) throws java.io.IOException {
+            IdentifierType p_identifier_type) throws java.io.IOException, WriteScopeException {
         p_file.new_line();
         p_file.write("(via");
         for (int i = 0; i < p_library.via_padstack_count(); ++i) {
@@ -167,7 +166,7 @@ class Structure extends ScopeKeyword {
                 p_file.write(" ");
                 p_identifier_type.write(curr_padstack.name, p_file);
             } else {
-                System.out.println("Structure.write_via_padstacks: padstack is null");
+                throw new WriteScopeException("Structure.write_via_padstacks: padstack is null");
             }
         }
         p_file.write(")");
