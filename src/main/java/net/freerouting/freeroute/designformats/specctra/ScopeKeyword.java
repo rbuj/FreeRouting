@@ -28,7 +28,20 @@ import java.io.IOException;
 /**
  * Keywords defining a scope object
  */
-class ScopeKeyword extends Keyword {
+class ScopeKeyword {
+
+    static final ScopeKeyword COMPONENT_SCOPE = new Component();
+    static final ScopeKeyword LIBRARY_SCOPE = new Library();
+    static final ScopeKeyword NETWORK_SCOPE = new Network();
+    static final ScopeKeyword PART_LIBRARY_SCOPE = new PartLibrary();
+    static final ScopeKeyword PARSER_SCOPE = new Parser();
+    static final ScopeKeyword PCB_SCOPE = new ScopeKeyword("pcb");
+    static final ScopeKeyword PLACE_CONTROL = new PlaceControl();
+    static final ScopeKeyword PLACEMENT_SCOPE = new Placement();
+    static final ScopeKeyword PLANE_SCOPE = new Plane();
+    static final ScopeKeyword RESOLUTION_SCOPE = new Resolution();
+    static final ScopeKeyword STRUCTURE_SCOPE = new Structure();
+    static final ScopeKeyword WIRING_SCOPE = new Wiring();
 
     /**
      * Scips the current scope while reading a dsn file. Returns false, if no
@@ -49,17 +62,22 @@ class ScopeKeyword extends Keyword {
             if (curr_token == null) {
                 return false; // end of file
             }
-            if (curr_token == OPEN_BRACKET) {
+            if (curr_token == Keyword.OPEN_BRACKET) {
                 ++open_bracked_count;
-            } else if (curr_token == CLOSED_BRACKET) {
+            } else if (curr_token == Keyword.CLOSED_BRACKET) {
                 --open_bracked_count;
             }
         }
         return true;
     }
 
+    private final String name;
+
+    /**
+     * prevents creating more instances
+     */
     ScopeKeyword(String p_name) {
-        super(p_name);
+        name = p_name;
     }
 
     /**
@@ -80,11 +98,11 @@ class ScopeKeyword extends Keyword {
                 // end of file
                 return true;
             }
-            if (next_token == CLOSED_BRACKET) {
+            if (next_token == Keyword.CLOSED_BRACKET) {
                 // end of scope
                 break;
             }
-            if (prev_token == OPEN_BRACKET) {
+            if (prev_token == Keyword.OPEN_BRACKET) {
                 ScopeKeyword next_scope;
                 // a new scope is expected
                 if (next_token instanceof ScopeKeyword) {

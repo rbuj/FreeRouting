@@ -236,11 +236,11 @@ class Structure extends ScopeKeyword {
             Object prev_token = null;
             for (;;) {
                 Object next_token = p_scanner.next_token();
-                if (next_token == CLOSED_BRACKET) {
+                if (next_token == Keyword.CLOSED_BRACKET) {
                     break;
                 }
-                if (prev_token == OPEN_BRACKET) {
-                    if (next_token == CLEARANCE_CLASS) {
+                if (prev_token == Keyword.OPEN_BRACKET) {
+                    if (next_token == Keyword.CLEARANCE_CLASS) {
                         p_board_construction_info.outline_clearance_class_name = read_string_scope(p_scanner);
                     }
                 }
@@ -277,16 +277,16 @@ class Structure extends ScopeKeyword {
             Collection<String> net_names = new LinkedList<>();
             String layer_string = (String) next_token;
             next_token = p_scanner.next_token();
-            while (next_token != CLOSED_BRACKET) {
-                if (next_token != OPEN_BRACKET) {
+            while (next_token != Keyword.CLOSED_BRACKET) {
+                if (next_token != Keyword.OPEN_BRACKET) {
                     throw new ReadScopeException("Structure.read_layer_scope: ( expected");
                 }
                 next_token = p_scanner.next_token();
-                if (next_token == TYPE) {
+                if (next_token == Keyword.TYPE) {
                     next_token = p_scanner.next_token();
-                    if (next_token == POWER) {
+                    if (next_token == Keyword.POWER) {
                         is_signal = false;
-                    } else if (next_token != SIGNAL) {
+                    } else if (next_token != Keyword.SIGNAL) {
                         System.out.print("Structure.read_layer_scope: unknown layer type ");
                         if (next_token instanceof String) {
                             System.out.print((String) next_token);
@@ -295,17 +295,17 @@ class Structure extends ScopeKeyword {
                         layer_ok = false;
                     }
                     next_token = p_scanner.next_token();
-                    if (next_token != CLOSED_BRACKET) {
+                    if (next_token != Keyword.CLOSED_BRACKET) {
                         throw new ReadScopeException("Structure.read_layer_scope: ) expected");
                     }
-                } else if (next_token == RULE) {
+                } else if (next_token == Keyword.RULE) {
                     Collection<Rule> curr_rules = read_rule_scope(p_scanner);
                     p_board_construction_info.layer_dependent_rules.add(new LayerRule(layer_string, curr_rules));
-                } else if (next_token == USE_NET) {
+                } else if (next_token == Keyword.USE_NET) {
                     for (;;) {
                         p_scanner.yybegin(SpecctraFileScanner.NAME);
                         next_token = p_scanner.next_token();
-                        if (next_token == CLOSED_BRACKET) {
+                        if (next_token == Keyword.CLOSED_BRACKET) {
                             break;
                         }
                         if (next_token instanceof String) {
@@ -339,12 +339,12 @@ class Structure extends ScopeKeyword {
             Collection<String> spare_vias = new LinkedList<>();
             for (;;) {
                 Object next_token = p_scanner.next_token();
-                if (next_token == CLOSED_BRACKET) {
+                if (next_token == Keyword.CLOSED_BRACKET) {
                     break;
                 }
-                if (next_token == OPEN_BRACKET) {
+                if (next_token == Keyword.OPEN_BRACKET) {
                     next_token = p_scanner.next_token();
-                    if (next_token == SPARE) {
+                    if (next_token == Keyword.SPARE) {
                         spare_vias = read_via_padstacks(p_scanner);
                     } else {
                         skip_scope(p_scanner);
@@ -375,12 +375,12 @@ class Structure extends ScopeKeyword {
             if (next_token == null) {
                 throw new ReadScopeException("Structure.read_control_scope: unexpected end of file");
             }
-            if (next_token == CLOSED_BRACKET) {
+            if (next_token == Keyword.CLOSED_BRACKET) {
                 // end of scope
                 break;
             }
-            if (prev_token == OPEN_BRACKET) {
-                if (next_token == VIA_AT_SMD) {
+            if (prev_token == Keyword.OPEN_BRACKET) {
+                if (next_token == Keyword.VIA_AT_SMD) {
                     p_par.via_at_smd_allowed = read_on_off_scope(p_par.scanner);
                 } else {
                     skip_scope(p_par.scanner);
@@ -394,17 +394,17 @@ class Structure extends ScopeKeyword {
         try {
             Object next_token = p_scanner.next_token();
             net.freerouting.freeroute.board.AngleRestriction snap_angle;
-            if (next_token == NINETY_DEGREE) {
+            if (next_token == Keyword.NINETY_DEGREE) {
                 snap_angle = net.freerouting.freeroute.board.AngleRestriction.NINETY_DEGREE;
-            } else if (next_token == FORTYFIVE_DEGREE) {
+            } else if (next_token == Keyword.FORTYFIVE_DEGREE) {
                 snap_angle = net.freerouting.freeroute.board.AngleRestriction.FORTYFIVE_DEGREE;
-            } else if (next_token == NONE) {
+            } else if (next_token == Keyword.NONE) {
                 snap_angle = net.freerouting.freeroute.board.AngleRestriction.NONE;
             } else {
                 throw new ReadScopeException("Structure.read_snap_angle_scope: unexpected token");
             }
             next_token = p_scanner.next_token();
-            if (next_token != CLOSED_BRACKET) {
+            if (next_token != Keyword.CLOSED_BRACKET) {
                 throw new ReadScopeException("Structure.read_selection_layer_scop: closing bracket expected");
             }
             return snap_angle;
@@ -784,20 +784,20 @@ class Structure extends ScopeKeyword {
                 System.out.println("Structure.read_scope: unexpected end of file");
                 return false;
             }
-            if (next_token == CLOSED_BRACKET) {
+            if (next_token == Keyword.CLOSED_BRACKET) {
                 // end of scope
                 break;
             }
             boolean read_ok = true;
-            if (prev_token == OPEN_BRACKET) {
-                if (next_token == BOUNDARY) {
+            if (prev_token == Keyword.OPEN_BRACKET) {
+                if (next_token == Keyword.BOUNDARY) {
                     try {
                         read_boundary_scope(p_par.scanner, board_construction_info);
                     } catch (DsnFileException | ReadScopeException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
-                } else if (next_token == LAYER) {
+                } else if (next_token == Keyword.LAYER) {
                     try {
                         read_ok = read_layer_scope(p_par.scanner, board_construction_info, p_par.string_quote);
                     } catch (ReadScopeException ex) {
@@ -808,16 +808,16 @@ class Structure extends ScopeKeyword {
                         // correct the layer_structure because another layer_no isr read
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
-                } else if (next_token == VIA) {
+                } else if (next_token == Keyword.VIA) {
                     try {
                         p_par.via_padstack_names = read_via_padstacks(p_par.scanner);
                     } catch (ReadScopeException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
-                } else if (next_token == RULE) {
+                } else if (next_token == Keyword.RULE) {
                     board_construction_info.default_rules.addAll(read_rule_scope(p_par.scanner));
-                } else if (next_token == KEEPOUT) {
+                } else if (next_token == Keyword.KEEPOUT) {
                     if (p_par.layer_structure == null) {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
@@ -827,7 +827,7 @@ class Structure extends ScopeKeyword {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
-                } else if (next_token == VIA_KEEPOUT) {
+                } else if (next_token == Keyword.VIA_KEEPOUT) {
                     if (p_par.layer_structure == null) {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
@@ -837,7 +837,7 @@ class Structure extends ScopeKeyword {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
-                } else if (next_token == PLACE_KEEPOUT) {
+                } else if (next_token == Keyword.PLACE_KEEPOUT) {
                     if (p_par.layer_structure == null) {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
@@ -852,7 +852,7 @@ class Structure extends ScopeKeyword {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                     }
                     PLANE_SCOPE.read_scope(p_par);
-                } else if (next_token == AUTOROUTE_SETTINGS) {
+                } else if (next_token == Keyword.AUTOROUTE_SETTINGS) {
                     if (p_par.layer_structure == null) {
                         p_par.layer_structure = new LayerStructure(board_construction_info.layer_info);
                         try {
@@ -862,16 +862,16 @@ class Structure extends ScopeKeyword {
                             return false;
                         }
                     }
-                } else if (next_token == CONTROL) {
+                } else if (next_token == Keyword.CONTROL) {
                     try {
                         read_ok = read_control_scope(p_par);
                     } catch (DsnFileException | ReadScopeException ex) {
                         Logger.getLogger(Structure.class.getName()).log(Level.SEVERE, null, ex);
                         return false;
                     }
-                } else if (next_token == FLIP_STYLE) {
+                } else if (next_token == Keyword.FLIP_STYLE) {
                     flip_style_rotate_first = read_flip_style_rotate_first(p_par.scanner);
-                } else if (next_token == SNAP_ANGLE) {
+                } else if (next_token == Keyword.SNAP_ANGLE) {
                     net.freerouting.freeroute.board.AngleRestriction snap_angle;
                     try {
                         snap_angle = read_snap_angle(p_par.scanner);

@@ -69,7 +69,7 @@ class Resolution extends ScopeKeyword {
             p_par.resolution = (int) next_token;
             // overread the closing bracket
             next_token = p_par.scanner.next_token();
-            if (next_token != CLOSED_BRACKET) {
+            if (next_token != Keyword.CLOSED_BRACKET) {
                 System.out.println("Resolution.read_scope: closing bracket expected");
                 return false;
             }

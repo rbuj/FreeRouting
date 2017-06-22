@@ -68,7 +68,7 @@ abstract class Shape {
     static LayerInfo read_layer_shape_scope(Scanner p_scanner, LayerStructure p_layer_structure) throws IOException, ReadScopeException {
         LayerInfo layer_info;
         Object next_token = p_scanner.next_token();
-        if (next_token == Keyword.PCB_SCOPE) {
+        if (next_token == ScopeKeyword.PCB_SCOPE) {
             layer_info = LayerInfo.PCB;
         } else if (next_token == Keyword.SIGNAL) {
             layer_info = LayerInfo.SIGNAL;

@@ -43,8 +43,8 @@ class Component extends ScopeKeyword {
         ComponentPlacement component_placement = new ComponentPlacement(name);
         Object prev_token = next_token;
         next_token = p_scanner.next_token();
-        while (next_token != CLOSED_BRACKET) {
-            if (prev_token == OPEN_BRACKET && next_token == PLACE) {
+        while (next_token != Keyword.CLOSED_BRACKET) {
+            if (prev_token == Keyword.OPEN_BRACKET && next_token == Keyword.PLACE) {
                 ComponentPlacement.ComponentLocation next_location = read_place_scope(p_scanner);
                 if (next_location != null) {
                     component_placement.locations.add(next_location);
@@ -194,7 +194,7 @@ class Component extends ScopeKeyword {
                     location[i] = (double) next_token;
                 } else if (next_token instanceof Integer) {
                     location[i] = ((Number) next_token).doubleValue();
-                } else if (next_token == CLOSED_BRACKET) {
+                } else if (next_token == Keyword.CLOSED_BRACKET) {
                     // component is not yet placed
                     return new ComponentPlacement.ComponentLocation(name, null, true, 0, false, pin_infos,
                             keepout_infos, via_keepout_infos, place_keepout_infos);
@@ -205,9 +205,9 @@ class Component extends ScopeKeyword {
             }
             next_token = p_scanner.next_token();
             boolean is_front = true;
-            if (next_token == BACK) {
+            if (next_token == Keyword.BACK) {
                 is_front = false;
-            } else if (next_token != FRONT) {
+            } else if (next_token != Keyword.FRONT) {
                 System.out.println("Component.read_place_scope: Keyword.FRONT expected");
             }
             double rotation;
@@ -222,29 +222,29 @@ class Component extends ScopeKeyword {
             }
             boolean position_fixed = false;
             next_token = p_scanner.next_token();
-            while (next_token == OPEN_BRACKET) {
+            while (next_token == Keyword.OPEN_BRACKET) {
                 next_token = p_scanner.next_token();
-                if (next_token == LOCK_TYPE) {
+                if (next_token == Keyword.LOCK_TYPE) {
                     position_fixed = read_lock_type(p_scanner);
-                } else if (next_token == PIN) {
+                } else if (next_token == Keyword.PIN) {
                     ComponentPlacement.ItemClearanceInfo curr_pin_info = read_item_clearance_info(p_scanner);
                     if (curr_pin_info == null) {
                         return null;
                     }
                     pin_infos.put(curr_pin_info.name, curr_pin_info);
-                } else if (next_token == KEEPOUT) {
+                } else if (next_token == Keyword.KEEPOUT) {
                     ComponentPlacement.ItemClearanceInfo curr_keepout_info = read_item_clearance_info(p_scanner);
                     if (curr_keepout_info == null) {
                         return null;
                     }
                     keepout_infos.put(curr_keepout_info.name, curr_keepout_info);
-                } else if (next_token == VIA_KEEPOUT) {
+                } else if (next_token == Keyword.VIA_KEEPOUT) {
                     ComponentPlacement.ItemClearanceInfo curr_keepout_info = read_item_clearance_info(p_scanner);
                     if (curr_keepout_info == null) {
                         return null;
                     }
                     via_keepout_infos.put(curr_keepout_info.name, curr_keepout_info);
-                } else if (next_token == PLACE_KEEPOUT) {
+                } else if (next_token == Keyword.PLACE_KEEPOUT) {
                     ComponentPlacement.ItemClearanceInfo curr_keepout_info = read_item_clearance_info(p_scanner);
                     if (curr_keepout_info == null) {
                         return null;
@@ -255,7 +255,7 @@ class Component extends ScopeKeyword {
                 }
                 next_token = p_scanner.next_token();
             }
-            if (next_token != CLOSED_BRACKET) {
+            if (next_token != Keyword.CLOSED_BRACKET) {
                 System.out.println("Component.read_place_scope: ) expected");
                 return null;
             }
@@ -280,16 +280,16 @@ class Component extends ScopeKeyword {
         String name = (String) next_token;
         String cl_class_name = null;
         next_token = p_scanner.next_token();
-        while (next_token == OPEN_BRACKET) {
+        while (next_token == Keyword.OPEN_BRACKET) {
             next_token = p_scanner.next_token();
-            if (next_token == CLEARANCE_CLASS) {
+            if (next_token == Keyword.CLEARANCE_CLASS) {
                 cl_class_name = read_string_scope(p_scanner);
             } else {
                 skip_scope(p_scanner);
             }
             next_token = p_scanner.next_token();
         }
-        if (next_token != CLOSED_BRACKET) {
+        if (next_token != Keyword.CLOSED_BRACKET) {
             System.out.println("Component.read_item_clearance_info: ) expected");
             return null;
         }
@@ -304,10 +304,10 @@ class Component extends ScopeKeyword {
         boolean result = false;
         for (;;) {
             Object next_token = p_scanner.next_token();
-            if (next_token == CLOSED_BRACKET) {
+            if (next_token == Keyword.CLOSED_BRACKET) {
                 break;
             }
-            if (next_token == POSITION) {
+            if (next_token == Keyword.POSITION) {
                 result = true;
             }
         }

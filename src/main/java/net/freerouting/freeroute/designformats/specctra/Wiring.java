@@ -256,17 +256,17 @@ class Wiring extends ScopeKeyword {
         net.freerouting.freeroute.board.FixedState result;
         try {
             Object next_token = p_scanner.next_token();
-            if (next_token == SHOVE_FIXED) {
+            if (next_token == Keyword.SHOVE_FIXED) {
                 result = net.freerouting.freeroute.board.FixedState.SHOVE_FIXED;
-            } else if (next_token == FIX) {
+            } else if (next_token == Keyword.FIX) {
                 result = net.freerouting.freeroute.board.FixedState.SYSTEM_FIXED;
-            } else if (next_token != NORMAL) {
+            } else if (next_token != Keyword.NORMAL) {
                 result = net.freerouting.freeroute.board.FixedState.USER_FIXED;
             } else {
                 result = net.freerouting.freeroute.board.FixedState.UNFIXED;
             }
             next_token = p_scanner.next_token();
-            if (next_token != CLOSED_BRACKET) {
+            if (next_token != Keyword.CLOSED_BRACKET) {
                 System.out.println("Wiring.is_fixed: ) expected");
                 return net.freerouting.freeroute.board.FixedState.UNFIXED;
             }
@@ -296,7 +296,7 @@ class Wiring extends ScopeKeyword {
                 subnet_number = (Integer) next_token;
                 next_token = p_scanner.next_token();
             }
-            if (next_token != CLOSED_BRACKET) {
+            if (next_token != Keyword.CLOSED_BRACKET) {
                 System.out.println("Wiring.read_net_id: closing bracket expected");
             }
             return new Net.Id(net_name, subnet_number);
@@ -323,15 +323,15 @@ class Wiring extends ScopeKeyword {
                 if (next_token == null) {
                     throw new ReadScopeException("Wiring.read_scope: unexpected end of file");
                 }
-                if (next_token == CLOSED_BRACKET) {
+                if (next_token == Keyword.CLOSED_BRACKET) {
                     // end of scope
                     break;
                 }
                 boolean read_ok = true;
-                if (prev_token == OPEN_BRACKET) {
-                    if (next_token == WIRE) {
+                if (prev_token == Keyword.OPEN_BRACKET) {
+                    if (next_token == Keyword.WIRE) {
                         read_wire_scope(p_par);
-                    } else if (next_token == VIA) {
+                    } else if (next_token == Keyword.VIA) {
                         read_ok = read_via_scope(p_par);
                     } else {
                         skip_scope(p_par.scanner);
@@ -373,22 +373,22 @@ class Wiring extends ScopeKeyword {
             if (next_token == null) {
                 throw new ReadScopeException("Wiring.read_wire_scope: unexpected end of file");
             }
-            if (next_token == CLOSED_BRACKET) {
+            if (next_token == Keyword.CLOSED_BRACKET) {
                 // end of scope
                 break;
             }
-            if (prev_token == OPEN_BRACKET) {
-                if (next_token == POLYGON_PATH) {
+            if (prev_token == Keyword.OPEN_BRACKET) {
+                if (next_token == Keyword.POLYGON_PATH) {
                     path = read_polygon_path_scope(p_par.scanner, p_par.layer_structure);
-                } else if (next_token == POLYLINE_PATH) {
+                } else if (next_token == Keyword.POLYLINE_PATH) {
                     path = read_polyline_path_scope(p_par.scanner, p_par.layer_structure);
-                } else if (next_token == RECTANGLE) {
+                } else if (next_token == Keyword.RECTANGLE) {
                     border_shape = read_rectangle_scope(p_par.scanner, p_par.layer_structure);
-                } else if (next_token == POLYGON) {
+                } else if (next_token == Keyword.POLYGON) {
                     border_shape = read_polygon_scope(p_par.scanner, p_par.layer_structure);
-                } else if (next_token == CIRCLE) {
+                } else if (next_token == Keyword.CIRCLE) {
                     border_shape = read_circle_scope(p_par.scanner, p_par.layer_structure);
-                } else if (next_token == WINDOW) {
+                } else if (next_token == Keyword.WINDOW) {
                     Shape hole_shape = read_shape_scope(p_par.scanner, p_par.layer_structure);
                     hole_list.add(hole_shape);
                     // overread the closing bracket
@@ -397,14 +397,14 @@ class Wiring extends ScopeKeyword {
                     } catch (java.io.IOException e) {
                         throw new ReadScopeException("Wiring.read_wire_scope: IO error scanning file", e);
                     }
-                    if (next_token != CLOSED_BRACKET) {
+                    if (next_token != Keyword.CLOSED_BRACKET) {
                         throw new ReadScopeException("Wiring.read_wire_scope: closing bracket expected");
                     }
-                } else if (next_token == NET) {
+                } else if (next_token == Keyword.NET) {
                     net_id = read_net_id(p_par.scanner);
-                } else if (next_token == CLEARANCE_CLASS) {
+                } else if (next_token == Keyword.CLEARANCE_CLASS) {
                     clearance_class_name = DsnFile.read_string_scope(p_par.scanner);
-                } else if (next_token == TYPE) {
+                } else if (next_token == Keyword.TYPE) {
                     fixed = calc_fixed(p_par.scanner);
                 } else {
                     skip_scope(p_par.scanner);
@@ -556,16 +556,16 @@ class Wiring extends ScopeKeyword {
                 if (next_token == null) {
                     throw new ReadScopeException("Wiring.read_via_scope: unexpected end of file");
                 }
-                if (next_token == CLOSED_BRACKET) {
+                if (next_token == Keyword.CLOSED_BRACKET) {
                     // end of scope
                     break;
                 }
-                if (prev_token == OPEN_BRACKET) {
-                    if (next_token == NET) {
+                if (prev_token == Keyword.OPEN_BRACKET) {
+                    if (next_token == Keyword.NET) {
                         net_id = read_net_id(p_par.scanner);
-                    } else if (next_token == CLEARANCE_CLASS) {
+                    } else if (next_token == Keyword.CLEARANCE_CLASS) {
                         clearance_class_name = DsnFile.read_string_scope(p_par.scanner);
-                    } else if (next_token == TYPE) {
+                    } else if (next_token == Keyword.TYPE) {
                         fixed = calc_fixed(p_par.scanner);
                     } else {
                         skip_scope(p_par.scanner);

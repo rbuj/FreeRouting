@@ -189,7 +189,7 @@ public class SessionToEagle extends javax.swing.JFrame {
                     if (!process_routes_scope()) {
                         return false;
                     }
-                } else if (next_token == Keyword.PLACEMENT_SCOPE) {
+                } else if (next_token == ScopeKeyword.PLACEMENT_SCOPE) {
                     if (!process_placement_scope()) {
                         return false;
                     }
@@ -221,7 +221,7 @@ public class SessionToEagle extends javax.swing.JFrame {
 
             if (prev_token == Keyword.OPEN_BRACKET) {
 
-                if (next_token == Keyword.COMPONENT_SCOPE) {
+                if (next_token == ScopeKeyword.COMPONENT_SCOPE) {
                     if (!process_component_placement()) {
                         return false;
                     }

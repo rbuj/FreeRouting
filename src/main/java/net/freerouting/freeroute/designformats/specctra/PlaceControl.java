@@ -33,11 +33,11 @@ class PlaceControl extends ScopeKeyword {
         try {
             boolean result = false;
             Object next_token = p_scanner.next_token();
-            if (next_token == ROTATE_FIRST) {
+            if (next_token == Keyword.ROTATE_FIRST) {
                 result = true;
             }
             next_token = p_scanner.next_token();
-            if (next_token != CLOSED_BRACKET) {
+            if (next_token != Keyword.CLOSED_BRACKET) {
                 System.out.println("Structure.read_flip_style: closing bracket expected");
                 return false;
             }
@@ -73,11 +73,11 @@ class PlaceControl extends ScopeKeyword {
             if (next_token == null) {
                 System.out.println("PlaceControl.read_scope: unexpected end of file");
                 return false;
-            } else if (next_token == CLOSED_BRACKET) {
+            } else if (next_token == Keyword.CLOSED_BRACKET) {
                 // end of scope
                 break;
-            } else if (next_token == FLIP_STYLE) {
-                if (prev_token == OPEN_BRACKET) {
+            } else if (next_token == Keyword.FLIP_STYLE) {
+                if (prev_token == Keyword.OPEN_BRACKET) {
                     flip_style_rotate_first = read_flip_style_rotate_first(p_par.scanner);
                 }
             }

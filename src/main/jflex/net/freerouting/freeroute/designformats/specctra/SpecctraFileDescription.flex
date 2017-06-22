@@ -108,8 +108,8 @@ ComponentIdentifier = ({Letter}|{Digit}|{SpecChar4})({Letter}|{Digit}|{SpecChar5
    "clear"         { return Keyword.CLEARANCE; }
    "clearance"     { return Keyword.CLEARANCE; }
    "clearance_class" { yybegin(NAME); return Keyword.CLEARANCE_CLASS; }
-   "comp"          { yybegin(NAME); return Keyword.COMPONENT_SCOPE; }
-   "component"     { yybegin(NAME); return Keyword.COMPONENT_SCOPE; }
+   "comp"          { yybegin(NAME); return ScopeKeyword.COMPONENT_SCOPE; }
+   "component"     { yybegin(NAME); return ScopeKeyword.COMPONENT_SCOPE; }
    "constant"      { return Keyword.CONSTANT; }
    "control"       { return Keyword.CONTROL; }
    "fanout"        { return Keyword.FANOUT; }
@@ -127,12 +127,12 @@ ComponentIdentifier = ({Letter}|{Digit}|{SpecChar4})({Letter}|{Digit}|{SpecChar5
    "layer"         { yybegin(NAME); return Keyword.LAYER; }
    "layer_rule"    { yybegin(NAME); return Keyword.LAYER_RULE; }
    "length"        { return Keyword.LENGTH; }
-   "library"       { return Keyword.LIBRARY_SCOPE; }
+   "library"       { return ScopeKeyword.LIBRARY_SCOPE; }
    "lock_type"     { return Keyword.LOCK_TYPE; }
    "logical_part"  { yybegin(NAME); return Keyword.LOGICAL_PART; }
    "logical_part_mapping"  { yybegin(NAME); return Keyword.LOGICAL_PART_MAPPING; }
    "net"           { yybegin(NAME); return Keyword.NET; }
-   "network"       { return Keyword.NETWORK_SCOPE; }
+   "network"       { return ScopeKeyword.NETWORK_SCOPE; }
    "network_out"   { return Keyword.NETWORK_OUT; }
    "ninety_degree" { return Keyword.NINETY_DEGREE; }
    "none"          { return Keyword.NONE; }
@@ -142,17 +142,17 @@ ComponentIdentifier = ({Letter}|{Digit}|{SpecChar4})({Letter}|{Digit}|{SpecChar5
    "order"         { return Keyword.ORDER; }
    "outline"       { return Keyword.OUTLINE; }
    "padstack"      { yybegin(NAME); return Keyword.PADSTACK; }
-   "parser"        { return Keyword.PARSER_SCOPE; }
-   "part_library"  { return Keyword.PART_LIBRARY_SCOPE; }
+   "parser"        { return ScopeKeyword.PARSER_SCOPE; }
+   "part_library"  { return ScopeKeyword.PART_LIBRARY_SCOPE; }
    "path"          { yybegin(LAYER_NAME); return Keyword.POLYGON_PATH; }
-   "pcb"           { return Keyword.PCB_SCOPE; }
+   "pcb"           { return ScopeKeyword.PCB_SCOPE; }
    "pin"           { return Keyword.PIN; }
    "pins"          { return Keyword.PINS; }
    "place"         { yybegin(NAME); return Keyword.PLACE; }
-   "place_control" { return Keyword.PLACE_CONTROL; } 
+   "place_control" { return ScopeKeyword.PLACE_CONTROL; } 
    "place_keepout" { yybegin(NAME); return Keyword.PLACE_KEEPOUT; }
-   "placement"     { return Keyword.PLACEMENT_SCOPE; }
-   "plane"         { yybegin(NAME); return Keyword.PLANE_SCOPE; }
+   "placement"     { return ScopeKeyword.PLACEMENT_SCOPE; }
+   "plane"         { yybegin(NAME); return ScopeKeyword.PLANE_SCOPE; }
    "plane_via_costs" { return Keyword.PLANE_VIA_COSTS; }
    "poly"          { yybegin(LAYER_NAME); return Keyword.POLYGON; }
    "polygon"       { yybegin(LAYER_NAME); return Keyword.POLYGON; }
@@ -167,7 +167,7 @@ ComponentIdentifier = ({Letter}|{Digit}|{SpecChar4})({Letter}|{Digit}|{SpecChar5
    "pull_tight"    { return Keyword.PULL_TIGHT; }
    "rect"          { yybegin(LAYER_NAME); return Keyword.RECTANGLE; }
    "rectangle"     { yybegin(LAYER_NAME); return Keyword.RECTANGLE; }
-   "resolution"    { return Keyword.RESOLUTION_SCOPE; }
+   "resolution"    { return ScopeKeyword.RESOLUTION_SCOPE; }
    "rotate"        { return Keyword.ROTATE; }
    "rotate_first"  { return Keyword.ROTATE_FIRST; }
    "routes"        { return Keyword.ROUTES; }
@@ -183,7 +183,7 @@ ComponentIdentifier = ({Letter}|{Digit}|{SpecChar4})({Letter}|{Digit}|{SpecChar5
    "start_pass_no" { return Keyword.START_PASS_NO; }
    "start_ripup_costs" { return Keyword.START_RIPUP_COSTS; }
    "string_quote"  { yybegin(IGNORE_QUOTE); return Keyword.STRING_QUOTE; }
-   "structure"     { return Keyword.STRUCTURE_SCOPE; }
+   "structure"     { return ScopeKeyword.STRUCTURE_SCOPE; }
    "type"          { return Keyword.TYPE; }
    "use_layer"     { yybegin(NAME); return Keyword.USE_LAYER; }
    "use_net"       { yybegin(NAME); return Keyword.USE_NET; }
@@ -199,7 +199,7 @@ ComponentIdentifier = ({Letter}|{Digit}|{SpecChar4})({Letter}|{Digit}|{SpecChar5
    "window"        { return Keyword.WINDOW; }
    "wire"          { yybegin(NAME); return Keyword.WIRE; }
    "wire_keepout"  { return Keyword.KEEPOUT; }
-   "wiring"        { return Keyword.WIRING_SCOPE; }
+   "wiring"        { return ScopeKeyword.WIRING_SCOPE; }
    "write_resolution" { return Keyword.WRITE_RESOLUTION; }
    "("             { return Keyword.OPEN_BRACKET; }
    ")"             { return Keyword.CLOSED_BRACKET; }
@@ -268,7 +268,7 @@ ComponentIdentifier = ({Letter}|{Digit}|{SpecChar4})({Letter}|{Digit}|{SpecChar5
 
 <LAYER_NAME> {
    /* keywords */
-   "pcb"           { yybegin(YYINITIAL); return Keyword.PCB_SCOPE; }
+   "pcb"           { yybegin(YYINITIAL); return ScopeKeyword.PCB_SCOPE; }
    "signal"        { yybegin(YYINITIAL); return Keyword.SIGNAL; }
    "("             { yybegin(YYINITIAL); return Keyword.OPEN_BRACKET;}
    ")"             { yybegin(YYINITIAL); return Keyword.CLOSED_BRACKET;}

@@ -59,7 +59,7 @@ public class DsnFile {
             if (i == 0) {
                 keyword_ok = (curr_token == Keyword.OPEN_BRACKET);
             } else if (i == 1) {
-                keyword_ok = (curr_token == Keyword.PCB_SCOPE);
+                keyword_ok = (curr_token == ScopeKeyword.PCB_SCOPE);
                 scanner.yybegin(SpecctraFileScanner.NAME); // to overread the name of the pcb for i = 2
             }
             if (!keyword_ok) {
@@ -68,7 +68,7 @@ public class DsnFile {
         }
         ReadScopeParameter read_scope_par
                 = new ReadScopeParameter(scanner, p_board_handling, p_observers, p_item_id_no_generator, p_test_level);
-        boolean read_ok = Keyword.PCB_SCOPE.read_scope(read_scope_par);
+        boolean read_ok = ScopeKeyword.PCB_SCOPE.read_scope(read_scope_par);
         if (read_ok && read_scope_par.autoroute_settings == null) {
             // look for power planes with incorrect layer_no type and adjust autoroute parameters
             adjust_plane_autoroute_settings(p_board_handling);

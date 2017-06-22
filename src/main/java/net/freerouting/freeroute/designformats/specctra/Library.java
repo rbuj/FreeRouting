@@ -73,17 +73,17 @@ class Library extends ScopeKeyword {
                 if (next_token == null) {
                     throw new ReadScopeException("Library.read_scope: unexpected end of file");
                 }
-                if (next_token == CLOSED_BRACKET) {
+                if (next_token == Keyword.CLOSED_BRACKET) {
                     // end of scope
                     break;
                 }
-                if (prev_token == OPEN_BRACKET) {
-                    if (next_token == PADSTACK) {
+                if (prev_token == Keyword.OPEN_BRACKET) {
+                    if (next_token == Keyword.PADSTACK) {
                         if (!read_padstack_scope(p_par.scanner, p_par.layer_structure,
                                 p_par.coordinate_transform, board.library.padstacks)) {
                             return false;
                         }
-                    } else if (next_token == IMAGE) {
+                    } else if (next_token == Keyword.IMAGE) {
                         Package curr_package = read_package_scope(p_par.scanner, p_par.layer_structure);
                         package_list.add(curr_package);
                     } else {

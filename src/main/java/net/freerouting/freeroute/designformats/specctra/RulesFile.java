@@ -71,7 +71,7 @@ public class RulesFile {
             }
 
             curr_token = scanner.next_token();
-            if (curr_token != Keyword.PCB_SCOPE) {
+            if (curr_token != ScopeKeyword.PCB_SCOPE) {
                 throw new ReadScopeException("RulesFile.read: keyword pcb expected");
             }
 
