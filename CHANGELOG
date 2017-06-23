@@ -3,6 +3,30 @@ ToDo
 	* Migrate all GUI from swing to JavaFX
 	* Write all documentation in docbook format
 
+xxxx-xx-xx
+        * Use ImmutableList<Layer> in board/LayerStructure.java
+                * layer_list contains all layers (signal & not signal)
+                * signal_layer_list contains only the signal layers
+        * Custom ComboBox:
+                * ClearanceClassBuilder.java
+                * SignalLayerWithIndexBuilder.java
+                * ArrayComboBoxModel.java
+        * Refactor class to enum:
+                * designformats/specctra/Keyword.java
+        * Refactor interfaces to class static/abstract methods:
+                * designformats/specctra/AreaReadable.java
+                * designformats/specctra/AreaTransformable.java
+                * designformats/specctra/ShapeReadable.java
+                * designformats/specctra/ShapeTransformable.java
+                * designformats/specctra/ShapeWritable.java
+        * Move static methods to inner classes
+        * Class structure (organize members)
+        * New custom exception:
+                * designformats/specctra/WriteScopeException.java
+        * Change some access level modifiers to package-private/private
+        * -h option shows avaliable options
+        * Use the precalculated width for the components in the right toolbar
+
 2017-06-10 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
 
         * Bump version to 1.4.3
