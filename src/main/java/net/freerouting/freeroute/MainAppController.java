@@ -43,7 +43,7 @@ public class MainAppController implements Initializable {
 
     private Stage mainStage;
 
-    protected SimpleStringProperty sp_message_field;
+    SimpleStringProperty sp_message_field;
     private ResourceBundle resourceBundle;
     private TestLevel test_level = null;
     private LaunchMode launch_mode;
@@ -84,7 +84,7 @@ public class MainAppController implements Initializable {
         create_board_frame();
     }
 
-    protected void create_board_frame() {
+    void create_board_frame() {
         SwingUtilities.invokeLater(() -> {
             if (inputFile != null) {
                 design_dir_name = inputFile.getParent();

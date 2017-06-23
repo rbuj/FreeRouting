@@ -33,14 +33,14 @@ public class CornerItemConstructionState extends InteractiveState {
     /**
      * stored corners of the shape of the item under construction
      */
-    protected java.util.LinkedList<IntPoint> corner_list = new java.util.LinkedList<>();
-    protected FloatPoint snapped_mouse_position;
-    protected boolean observers_activated = false;
+    java.util.LinkedList<IntPoint> corner_list = new java.util.LinkedList<>();
+    FloatPoint snapped_mouse_position;
+    boolean observers_activated = false;
 
     /**
      * Creates a new instance of CornerItemConstructionState
      */
-    protected CornerItemConstructionState(InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
+    CornerItemConstructionState(InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
         super(p_parent_state, p_board_handling, p_logfile);
         p_board_handling.remove_ratsnest(); // Constructing an item may change the connectivity.
     }
@@ -115,7 +115,7 @@ public class CornerItemConstructionState extends InteractiveState {
     /**
      * add a corner to make the last lines fulfil the snap angle restrictions
      */
-    protected void add_corner_for_snap_angle() {
+    void add_corner_for_snap_angle() {
         if (hdlg.get_routing_board().rules.get_trace_angle_restriction() == AngleRestriction.NONE) {
             return;
         }

@@ -47,7 +47,7 @@ public final class WindowPackages extends WindowObjectListWithFilter {
      * Fills the list with the library packages.
      */
     @Override
-    protected void fill_list() {
+    void fill_list() {
         Packages packages = this.board_frame.board_panel.board_handling.get_routing_board().library.packages;
         Package[] sorted_arr = new Package[packages.count()];
         for (int i = 0; i < sorted_arr.length; ++i) {
@@ -61,7 +61,7 @@ public final class WindowPackages extends WindowObjectListWithFilter {
     }
 
     @Override
-    protected void select_instances() {
+    void select_instances() {
         List<?> selected_packages = list.getSelectedValuesList();
         if (selected_packages.isEmpty()) {
             return;

@@ -32,7 +32,7 @@ import java.util.Locale;
 @SuppressWarnings("serial")
 public class PopupMenuDisplay extends javax.swing.JPopupMenu {
 
-    protected final BoardPanel board_panel;
+    final BoardPanel board_panel;
 
     /**
      * Creates a new instance of PopupMenuDisplay

@@ -33,24 +33,24 @@ import net.freerouting.freeroute.board.ObjectInfoPanel;
 @SuppressWarnings("serial")
 public abstract class WindowObjectList extends BoardSavableSubWindow {
 
-    protected static final int DEFAULT_TABLE_SIZE = 20;
+    static final int DEFAULT_TABLE_SIZE = 20;
 
-    protected final BoardFrame board_frame;
+    final BoardFrame board_frame;
 
     private final javax.swing.JPanel main_panel;
 
     private javax.swing.JScrollPane list_scroll_pane = null;
-    protected javax.swing.JLabel list_empty_message;
+    javax.swing.JLabel list_empty_message;
 
     private javax.swing.DefaultListModel<Object> list_model = null;
-    protected javax.swing.JList<Object> list;
+    javax.swing.JList<Object> list;
 
-    protected final javax.swing.JPanel south_panel;
+    final javax.swing.JPanel south_panel;
 
     /**
      * The subwindows with information about selected object
      */
-    protected final java.util.Collection<WindowObjectInfo> subwindows = new java.util.LinkedList<>();
+    final java.util.Collection<WindowObjectInfo> subwindows = new java.util.LinkedList<>();
 
     private final java.util.ResourceBundle resources;
 
@@ -126,7 +126,7 @@ public abstract class WindowObjectList extends BoardSavableSubWindow {
         super.setVisible(p_value);
     }
 
-    protected void recalculate() {
+    void recalculate() {
         if (this.list_scroll_pane != null) {
             main_panel.remove(this.list_scroll_pane);
         }
@@ -164,16 +164,16 @@ public abstract class WindowObjectList extends BoardSavableSubWindow {
         super.dispose();
     }
 
-    protected void add_to_list(Object p_object) {
+    void add_to_list(Object p_object) {
         this.list_model.addElement(p_object);
     }
 
     /**
      * Fills the list with the objects to display.
      */
-    abstract protected void fill_list();
+    abstract void fill_list();
 
-    abstract protected void select_instances();
+    abstract void select_instances();
 
     /**
      * Saves also the filter string to disk.

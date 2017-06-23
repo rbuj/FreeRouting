@@ -89,14 +89,14 @@ public abstract class DragState extends InteractiveState {
         }
         return result;
     }
-    protected FloatPoint previous_location;
-    protected boolean something_dragged = false;
-    protected boolean observers_activated = false;
+    FloatPoint previous_location;
+    boolean something_dragged = false;
+    boolean observers_activated = false;
 
     /**
      * Creates a new instance of DragState
      */
-    protected DragState(FloatPoint p_location, InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
+    DragState(FloatPoint p_location, InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
         super(p_parent_state, p_board_handling, p_logfile);
         previous_location = p_location;
     }

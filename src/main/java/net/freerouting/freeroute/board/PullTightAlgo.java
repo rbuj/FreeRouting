@@ -72,19 +72,20 @@ public abstract class PullTightAlgo {
         result.min_translate_dist = Math.max(p_min_translate_dist, 100);
         return result;
     }
-    protected final RoutingBoard board;
+
+    final RoutingBoard board;
     /**
      * If only_net_no {@literal >} 0, only nets with this net numbers are
      * optimized.
      */
-    protected final int[] only_net_no_arr;
-    protected int curr_layer;
-    protected int curr_half_width;
-    protected int[] curr_net_no_arr;
-    protected int curr_cl_type;
-    protected IntOctagon curr_clip_shape;
-    protected Set<Pin> contact_pins;
-    protected int min_translate_dist;
+    final int[] only_net_no_arr;
+    int curr_layer;
+    int curr_half_width;
+    int[] curr_net_no_arr;
+    int curr_cl_type;
+    IntOctagon curr_clip_shape;
+    Set<Pin> contact_pins;
+    int min_translate_dist;
     /**
      * If stoppable_thread != null, the agorithm can be requested to be stopped.
      */

@@ -62,12 +62,12 @@ public final class WindowLayerVisibility extends WindowVisibility {
     }
 
     @Override
-    protected void set_changed_value(int p_index, double p_value) {
+    void set_changed_value(int p_index, double p_value) {
         get_board_handling().set_layer_visibility(p_index, p_value);
     }
 
     @Override
-    protected void set_all_minimum() {
+    void set_all_minimum() {
         int layer_count = this.get_board_handling().graphics_context.layer_count();
         for (int i = 0; i < layer_count; ++i) {
             if (i != this.get_board_handling().settings.get_layer_no()) {
@@ -78,7 +78,7 @@ public final class WindowLayerVisibility extends WindowVisibility {
     }
 
     @Override
-    protected void set_all_maximum() {
+    void set_all_maximum() {
         int layer_count = this.get_board_handling().graphics_context.layer_count();
         for (int i = 0; i < layer_count; ++i) {
             if (i != this.get_board_handling().settings.get_layer_no()) {

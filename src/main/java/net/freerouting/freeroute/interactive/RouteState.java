@@ -162,7 +162,7 @@ public class RouteState extends InteractiveState {
      * start item of the routing at p_location, or null, if no such item was
      * found.
      */
-    static protected Item start_ok(IntPoint p_location, BoardHandling p_hdlg) {
+    static Item start_ok(IntPoint p_location, BoardHandling p_hdlg) {
         net.freerouting.freeroute.board.RoutingBoard routing_board = p_hdlg.get_routing_board();
 
         /**
@@ -240,15 +240,15 @@ public class RouteState extends InteractiveState {
         }
         return result;
     }
-    protected Route route = null;
-    private Set<Item> routing_target_set = null;
-    protected boolean observers_activated = false;
+    Route route = null;
+    Set<Item> routing_target_set = null;
+    boolean observers_activated = false;
 
     /**
      * Creates a new instance of RouteState If p_logfile != null, the creation
      * of the route is stored in the logfile.
      */
-    protected RouteState(InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
+    RouteState(InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
         super(p_parent_state, p_board_handling, p_logfile);
     }
 

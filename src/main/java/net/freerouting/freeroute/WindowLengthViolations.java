@@ -49,7 +49,7 @@ public final class WindowLengthViolations extends WindowObjectListWithFilter {
     }
 
     @Override
-    protected void fill_list() {
+    void fill_list() {
         RatsNest ratsnest = this.board_frame.board_panel.board_handling.get_ratsnest();
         Nets net_list = this.board_frame.board_panel.board_handling.get_routing_board().rules.nets;
         java.util.SortedSet<LengthViolation> length_violations = new java.util.TreeSet<>();
@@ -68,7 +68,7 @@ public final class WindowLengthViolations extends WindowObjectListWithFilter {
     }
 
     @Override
-    protected void select_instances() {
+    void select_instances() {
         List<?> selected_violations = list.getSelectedValuesList();
         if (selected_violations.isEmpty()) {
             return;

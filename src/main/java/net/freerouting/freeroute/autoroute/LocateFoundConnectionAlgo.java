@@ -220,23 +220,23 @@ public abstract class LocateFoundConnectionAlgo {
      * The array of backtrack doors from the destination to the start of a found
      * connection of the maze search algorithm.
      */
-    protected final BacktrackElement[] backtrack_array;
-    protected final AutorouteControl ctrl;
-    protected final AngleRestriction angle_restriction;
-    protected final TestLevel test_level;
-    protected final TargetItemExpansionDoor start_door;
-    protected FloatPoint current_from_point;
-    protected FloatPoint previous_from_point;
-    protected int current_trace_layer;
-    protected int current_from_door_index;
-    protected int current_to_door_index;
-    protected int current_target_door_index;
-    protected TileShape current_target_shape;
+    final BacktrackElement[] backtrack_array;
+    final AutorouteControl ctrl;
+    final AngleRestriction angle_restriction;
+    final TestLevel test_level;
+    final TargetItemExpansionDoor start_door;
+    FloatPoint current_from_point;
+    FloatPoint previous_from_point;
+    int current_trace_layer;
+    int current_from_door_index;
+    int current_to_door_index;
+    int current_target_door_index;
+    TileShape current_target_shape;
 
     /**
      * Creates a new instance of LocateFoundConnectionAlgo
      */
-    protected LocateFoundConnectionAlgo(MazeSearchAlgo.Result p_maze_search_result, AutorouteControl p_ctrl,
+    LocateFoundConnectionAlgo(MazeSearchAlgo.Result p_maze_search_result, AutorouteControl p_ctrl,
             ShapeSearchTree p_search_tree, AngleRestriction p_angle_restriction, SortedSet<Item> p_ripped_item_list, TestLevel p_test_level) {
         this.ctrl = p_ctrl;
         this.angle_restriction = p_angle_restriction;
@@ -397,7 +397,7 @@ public abstract class LocateFoundConnectionAlgo {
      * calculate_next_trace. If the result is emppty, the trace is already
      * completed.
      */
-    protected abstract Collection<FloatPoint> calculate_next_trace_corners();
+    abstract Collection<FloatPoint> calculate_next_trace_corners();
 
     /**
      * Test display of the baktrack rooms.

@@ -28,13 +28,13 @@ import net.freerouting.freeroute.geometry.planar.FloatPoint;
  */
 public class SelectRegionState extends InteractiveState {
 
-    protected FloatPoint corner1 = null;
-    protected FloatPoint corner2 = null;
+    FloatPoint corner1 = null;
+    FloatPoint corner2 = null;
 
     /**
      * Creates a new instance of SelectRegionState
      */
-    protected SelectRegionState(InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
+    SelectRegionState(InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
         super(p_parent_state, p_board_handling, p_logfile);
     }
 

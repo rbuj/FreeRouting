@@ -47,7 +47,7 @@ public final class WindowClearanceViolations extends WindowObjectListWithFilter 
     }
 
     @Override
-    protected void fill_list() {
+    void fill_list() {
         net.freerouting.freeroute.interactive.BoardHandling board_handling = this.board_frame.board_panel.board_handling;
 
         ClearanceViolations clearance_violations
@@ -63,7 +63,7 @@ public final class WindowClearanceViolations extends WindowObjectListWithFilter 
     }
 
     @Override
-    protected void select_instances() {
+    void select_instances() {
         List<?> selected_violations = list.getSelectedValuesList();
         if (selected_violations.isEmpty()) {
             return;

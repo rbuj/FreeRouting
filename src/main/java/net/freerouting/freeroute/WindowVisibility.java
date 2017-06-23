@@ -109,18 +109,18 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
         slider_arr[p_no].setValue(visibility);
     }
 
-    protected BoardHandling get_board_handling() {
+    BoardHandling get_board_handling() {
         return board_panel.board_handling;
     }
 
-    protected void set_all_minimum() {
+    void set_all_minimum() {
         for (int i = 0; i < slider_arr.length; ++i) {
             set_slider_value(i, MIN_SLIDER_VALUE);
             set_changed_value(i, MIN_VISIBILITY_VALUE);
         }
     }
 
-    protected void set_all_maximum() {
+    void set_all_maximum() {
         for (int i = 0; i < slider_arr.length; ++i) {
             set_slider_value(i, MAX_SLIDER_VALUE);
             set_changed_value(i, MAX_VISIBILITY_VALUE);
@@ -131,7 +131,7 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
      * Stores the new value in the board database, when a slider value was
      * changed.
      */
-    protected abstract void set_changed_value(int p_index, double p_value);
+    abstract void set_changed_value(int p_index, double p_value);
 
     // private classes
     private class MinAllButtonListener implements java.awt.event.ActionListener {

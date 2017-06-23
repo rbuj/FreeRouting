@@ -51,7 +51,7 @@ public final class WindowRouteStubs extends WindowObjectListWithFilter {
     }
 
     @Override
-    protected void fill_list() {
+    void fill_list() {
         net.freerouting.freeroute.board.BasicBoard routing_board = this.board_frame.board_panel.board_handling.get_routing_board();
 
         SortedSet<RouteStubInfo> route_stub_info_set = new java.util.TreeSet<>();
@@ -118,7 +118,7 @@ public final class WindowRouteStubs extends WindowObjectListWithFilter {
     }
 
     @Override
-    protected void select_instances() {
+    void select_instances() {
         List<?> selected_list_values = list.getSelectedValuesList();
         if (selected_list_values.isEmpty()) {
             return;

@@ -34,24 +34,24 @@ public class InteractiveState {
     /**
      * board setting access handler for the derived classes
      */
-    protected final BoardHandling hdlg;
+    final BoardHandling hdlg;
     /**
      * The intended state after this state is finished
      */
-    protected InteractiveState return_state;
+    InteractiveState return_state;
     /**
      * if logfile != null, the interactive actions are stored in a logfile
      */
-    protected final Logfile logfile;
+    final Logfile logfile;
     /**
      * Contains the files with the language dependent messages
      */
-    protected final java.util.ResourceBundle resources;
+    final java.util.ResourceBundle resources;
 
     /**
      * Creates a new instance of InteractiveState
      */
-    protected InteractiveState(InteractiveState p_return_state, BoardHandling p_board_handling, Logfile p_logfile) {
+    InteractiveState(InteractiveState p_return_state, BoardHandling p_board_handling, Logfile p_logfile) {
         this.return_state = p_return_state;
         this.hdlg = p_board_handling;
         this.logfile = p_logfile;

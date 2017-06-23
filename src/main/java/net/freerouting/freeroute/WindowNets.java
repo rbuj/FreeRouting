@@ -61,7 +61,7 @@ public final class WindowNets extends WindowObjectListWithFilter {
      * Fills the list with the nets in the net list.
      */
     @Override
-    protected void fill_list() {
+    void fill_list() {
         Nets nets = this.board_frame.board_panel.board_handling.get_routing_board().rules.nets;
         Net[] sorted_arr = new Net[nets.max_net_no()];
         for (int i = 0; i < sorted_arr.length; ++i) {
@@ -75,7 +75,7 @@ public final class WindowNets extends WindowObjectListWithFilter {
     }
 
     @Override
-    protected void select_instances() {
+    void select_instances() {
         List<?> selected_nets = list.getSelectedValuesList();
         if (selected_nets.isEmpty()) {
             return;

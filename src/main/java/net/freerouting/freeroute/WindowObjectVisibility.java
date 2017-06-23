@@ -71,7 +71,7 @@ public final class WindowObjectVisibility extends WindowVisibility {
     }
 
     @Override
-    protected void set_changed_value(int p_index, double p_value) {
+    void set_changed_value(int p_index, double p_value) {
         get_board_handling().graphics_context.color_intensity_table
                 .set_value(ObjectNames.values()[p_index], p_value);
     }
