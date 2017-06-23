@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.interactive;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -77,7 +78,7 @@ public class SelectedItemState extends InteractiveState {
      * Gets the list of the currently selected items.
      */
     public Collection<Item> get_item_list() {
-        return item_list;
+        return item_list == null ? null : Collections.unmodifiableCollection(item_list);
     }
 
     @Override

@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.autoroute;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import net.freerouting.freeroute.board.Connectable;
 import net.freerouting.freeroute.board.Item;
@@ -125,7 +126,7 @@ public class CompleteFreeSpaceExpansionRoom extends FreeSpaceExpansionRoom imple
      */
     @Override
     public Collection<TargetItemExpansionDoor> get_target_doors() {
-        return this.target_doors;
+        return this.target_doors == null ? null : Collections.unmodifiableCollection(this.target_doors);
     }
 
     /**

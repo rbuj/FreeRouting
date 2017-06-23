@@ -21,6 +21,7 @@
 package net.freerouting.freeroute.autoroute;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.PolylineTrace;
@@ -127,7 +128,7 @@ public class ObstacleExpansionRoom implements CompleteExpansionRoom {
      */
     @Override
     public List<ExpansionDoor> get_doors() {
-        return this.doors;
+        return this.doors == null ? null : Collections.unmodifiableList(this.doors);
     }
 
     /**

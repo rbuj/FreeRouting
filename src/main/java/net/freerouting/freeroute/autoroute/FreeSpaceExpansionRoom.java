@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.autoroute;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -70,7 +71,7 @@ public abstract class FreeSpaceExpansionRoom implements ExpansionRoom {
      */
     @Override
     public List<ExpansionDoor> get_doors() {
-        return this.doors;
+        return this.doors == null ? null : Collections.unmodifiableList(this.doors);
     }
 
     /**

@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.designformats.specctra;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -101,7 +102,7 @@ class Net {
     }
 
     Set<Pin> get_pins() {
-        return pin_list;
+        return pin_list == null ? null : Collections.unmodifiableSet(pin_list);
     }
 
     static class Id implements Comparable<Id> {

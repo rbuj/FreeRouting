@@ -21,6 +21,7 @@
 package net.freerouting.freeroute.autoroute;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.RoutingBoard;
@@ -147,7 +148,7 @@ class DrillPage implements ExpandableObject {
                 }
             }
         }
-        return this.drills;
+        return this.drills == null ? null : Collections.unmodifiableCollection(this.drills);
     }
 
     @Override
