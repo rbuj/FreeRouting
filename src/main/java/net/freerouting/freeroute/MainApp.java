@@ -138,7 +138,7 @@ public final class MainApp extends Application {
                 test_level = TestLevel.RELEASE_VERSION;
             }
         } catch (IllegalArgumentException exc) {
-            LOGGER.log(Level.SEVERE, exc.toString());
+            LOGGER.log(Level.SEVERE, "{0}{1}Try -h, for available options.", new Object[]{exc.toString(), System.getProperty("line.separator")});
             System.exit(1);
         }
     }
