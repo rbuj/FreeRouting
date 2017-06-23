@@ -22,8 +22,6 @@ After pushing the Drag button you get into the state for changing the location o
 
 For more information please use the online help in the board editor. From here you can download also a printable version of the online help.
 
-If you have further questions or want some feedback, please sent an Email to support@ FreeRouting.net or visit our forum.
-
 ## Additional steps for users of CadSoft-Eagle
 
 1. Download the latest Eagle2freerouter ulp file
