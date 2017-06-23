@@ -20,7 +20,7 @@ By pushing the Route button you get into the state for interactive routing. In t
 
 After pushing the Drag button you get into the state for changing the location of vias, components or traces. In this state you can select vias or components and drag them with the left mouse button to a different location. The connected route is updated automatically. You can also move traces by pushing them from behind out of the empty space with the left mouse button pressed. That works on the current layer, which can be changed in the select parameter sheet. In this way you can make space for example to insert a new component.
 
-For more information please use the online help in the board editor. From here you can download also a printable version of the online help.
+For more information please use the bundled help from the board editor.
 
 ## Additional steps for users of CadSoft-Eagle
 
@@ -38,7 +38,7 @@ For more information please use the online help in the board editor. From here y
 2. Start the NetBeans IDE and select File | Open Project in the pull down menu and select freeroute project.
 3. Build the project. The router should run now.
 
-For optional parameters of the Freerouting outfile check the usage of the variable p_args in the source file gui/MainApplication.java.
+For optional parameters use -h argument.
 
 ## Here are some instructions how to build the Freerouting project from a Terminal
 

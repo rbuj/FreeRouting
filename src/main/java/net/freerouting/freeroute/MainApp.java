@@ -58,6 +58,12 @@ public final class MainApp extends Application {
      * Main function of the Application
      */
     public static void main(String[] args) {
+        // -h: shows usage
+        if (Arrays.stream(args).anyMatch("-h"::equals)) {
+            show_usage();
+            System.exit(0);
+        }
+
         // Enable OpenGL pipeline
         System.setProperty("sun.java2d.opengl", "true");
 
@@ -206,4 +212,14 @@ public final class MainApp extends Application {
         });
     }
 
+    private static void show_usage() {
+        System.out.println("Available options:");
+        System.out.println("\t-de DSN_FILE   opens the specified design file");
+        System.out.println("\t-di DSN_DIR    specifies the design directory");
+        System.out.println("\t-l LOCALE      specifies the LOCALE");
+        System.out.println("\t-s             enable session mode");
+        System.out.println("\t-test          enable test mode");
+        System.out.println("\t-h             shows this help");
+        System.out.println("Support: https://github.com/rbuj/FreeRouting/issues");
+    }
 }
