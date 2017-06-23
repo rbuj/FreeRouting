@@ -22,6 +22,7 @@ package net.freerouting.freeroute.board;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
 import net.freerouting.freeroute.autoroute.AutorouteControl.ExpansionCostFactor;
 import net.freerouting.freeroute.datastructures.Signum;
 import net.freerouting.freeroute.datastructures.Stoppable;
@@ -183,7 +184,7 @@ public abstract class PullTightAlgo {
         curr_half_width = p_half_width + search_tree.clearance_compensation_value(p_cl_type, p_layer);
         curr_net_no_arr = (p_net_no_arr == null) ? null : p_net_no_arr.clone();
         curr_cl_type = p_cl_type;
-        contact_pins = p_contact_pins;
+        contact_pins = p_contact_pins == null ? null : new TreeSet<Pin>(p_contact_pins);
         return pull_tight(p_polyline);
     }
 
