@@ -4,6 +4,10 @@ ToDo
 	* Write all documentation in docbook format
 
 xxxx-xx-xx
+        * Multiple dispatch emulation by using visitor pattern & default
+          method in the interface:
+                * geometry/planar/Direction.java
+                * geometry/planar/Vector.java
         * Use ImmutableList<Layer> in board/LayerStructure.java
                 * layer_list contains all layers (signal & not signal)
                 * signal_layer_list contains only the signal layers
