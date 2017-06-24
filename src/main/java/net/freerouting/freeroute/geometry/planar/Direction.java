@@ -161,24 +161,12 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
      */
     default int compareTo(Direction p_other_direction) {
         int result;
-        if (this instanceof IntDirection) {
-            if (p_other_direction instanceof IntDirection) {
-                result = ((IntDirection) this).compareTo((IntDirection) p_other_direction);
-            } else if (p_other_direction instanceof BigIntDirection) {
-                result = ((IntDirection) this).compareTo((BigIntDirection) p_other_direction);
-            } else {
-                throw new AssertionError(p_other_direction.getClass());
-            }
-        } else if (this instanceof BigIntDirection) {
-            if (p_other_direction instanceof IntDirection) {
-                result = ((BigIntDirection) this).compareTo((IntDirection) p_other_direction);
-            } else if (p_other_direction instanceof BigIntDirection) {
-                result = ((BigIntDirection) this).compareTo((BigIntDirection) p_other_direction);
-            } else {
-                throw new AssertionError(p_other_direction.getClass());
-            }
+        if (p_other_direction instanceof IntDirection) {
+            result = compareTo((IntDirection) p_other_direction);
+        } else if (p_other_direction instanceof BigIntDirection) {
+            result = compareTo((BigIntDirection) p_other_direction);
         } else {
-            throw new AssertionError(this.getClass());
+            throw new AssertionError(p_other_direction.getClass());
         }
         return result;
     }

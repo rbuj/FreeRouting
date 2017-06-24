@@ -154,14 +154,6 @@ public final class IntVector implements Vector {
         return new IntVector(this.x, -this.y);
     }
 
-    /**
-     * adds p_other to this vector
-     */
-    @Override
-    public Vector add(Vector p_other) {
-        return p_other.add(this);
-    }
-
     @Override
     public Vector add(IntVector p_other) {
         return new IntVector(x + p_other.x, y + p_other.y);
@@ -192,12 +184,6 @@ public final class IntVector implements Vector {
      * collinear with L.
      */
     @Override
-    public Side side_of(Vector p_other) {
-        Side tmp = p_other.side_of(this);
-        return tmp.negate();
-    }
-
-    @Override
     public Side side_of(IntVector p_other) {
         double determinant = (double) p_other.x * y - (double) p_other.y * x;
         return Side.of(determinant);
@@ -207,22 +193,6 @@ public final class IntVector implements Vector {
     public Side side_of(RationalVector p_other) {
         Side tmp = p_other.side_of(this);
         return tmp.negate();
-    }
-
-    /**
-     * The function returns Signum.POSITIVE, if the scalar product of this
-     * vector and p_other {@literal >} 0, Signum.NEGATIVE, if the scalar product
-     * Vector is {@literal <} 0, and Signum.ZERO, if the scalar product is equal
-     * 0.
-     */
-    @Override
-    public Signum projection(Vector p_other) {
-        return p_other.projection(this);
-    }
-
-    @Override
-    public double scalar_product(Vector p_other) {
-        return p_other.scalar_product(this);
     }
 
     /**
@@ -264,6 +234,11 @@ public final class IntVector implements Vector {
     }
 
     @Override
+    public Signum projection(RationalVector p_other) {
+        return p_other.projection(this);
+    }
+
+    @Override
     public double scalar_product(IntVector p_other) {
         return (double) x * p_other.x + (double) y * p_other.y;
     }
@@ -272,10 +247,4 @@ public final class IntVector implements Vector {
     public double scalar_product(RationalVector p_other) {
         return p_other.scalar_product(this);
     }
-
-    @Override
-    public Signum projection(RationalVector p_other) {
-        return p_other.projection(this);
-    }
-
 }

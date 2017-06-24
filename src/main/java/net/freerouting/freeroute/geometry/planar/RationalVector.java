@@ -114,26 +114,6 @@ public final class RationalVector implements Vector {
         return new RationalVector(x.negate(), y.negate(), z);
     }
 
-    /**
-     * adds p_other to this vector
-     */
-    @Override
-    public Vector add(Vector p_other) {
-        return p_other.add(this);
-    }
-
-    /**
-     * Let L be the line from the Zero Vector to p_other. The function returns
-     * Side.ON_THE_LEFT, if this Vector is on the left of L Side.ON_THE_RIGHT,
-     * if this Vector is on the right of L and Side.COLLINEAR, if this Vector is
-     * collinear with L.
-     */
-    @Override
-    public Side side_of(Vector p_other) {
-        Side tmp = p_other.side_of(this);
-        return tmp.negate();
-    }
-
     @Override
     public boolean is_orthogonal() {
         return (x.signum() == 0 || y.signum() == 0);
@@ -142,24 +122,6 @@ public final class RationalVector implements Vector {
     @Override
     public boolean is_diagonal() {
         return x.abs().equals(y.abs());
-    }
-
-    /**
-     * The function returns Signum.POSITIVE, if the scalar product of this
-     * vector and p_other {@literal >} 0, Signum.NEGATIVE, if the scalar product
-     * is {@literal <} 0, and Signum.ZERO, if the scalar product is equal 0.
-     */
-    @Override
-    public Signum projection(Vector p_other) {
-        return p_other.projection(this);
-    }
-
-    /**
-     * calculates the scalar product of this vector and p_other
-     */
-    @Override
-    public double scalar_product(Vector p_other) {
-        return p_other.scalar_product(this);
     }
 
     /**
@@ -250,12 +212,22 @@ public final class RationalVector implements Vector {
         return v1.x * v2.x + v1.y * v2.y;
     }
 
+    /**
+     * The function returns Signum.POSITIVE, if the scalar product of this
+     * vector and p_other {@literal >} 0, Signum.NEGATIVE, if the scalar product
+     * is {@literal <} 0, and Signum.ZERO, if the scalar product is equal 0.
+     */
     @Override
     public Signum projection(IntVector p_other) {
         Vector other = new RationalVector(p_other);
         return other.projection(this);
     }
 
+    /**
+     * The function returns Signum.POSITIVE, if the scalar product of this
+     * vector and p_other {@literal >} 0, Signum.NEGATIVE, if the scalar product
+     * is {@literal <} 0, and Signum.ZERO, if the scalar product is equal 0.
+     */
     @Override
     public Signum projection(RationalVector p_other) {
         BigInteger tmp1 = x.multiply(p_other.x);
@@ -265,12 +237,18 @@ public final class RationalVector implements Vector {
         return Signum.of(result);
     }
 
+    /**
+     * adds p_other to this vector
+     */
     @Override
     public Vector add(IntVector p_other) {
         RationalVector other = new RationalVector(p_other);
         return add(other);
     }
 
+    /**
+     * adds p_other to this vector
+     */
     @Override
     public Vector add(RationalVector p_other) {
         BigInteger v1[] = new BigInteger[3];
@@ -311,12 +289,24 @@ public final class RationalVector implements Vector {
         return new RationalPoint(result[0], result[1], result[2]);
     }
 
+    /**
+     * Let L be the line from the Zero Vector to p_other. The function returns
+     * Side.ON_THE_LEFT, if this Vector is on the left of L Side.ON_THE_RIGHT,
+     * if this Vector is on the right of L and Side.COLLINEAR, if this Vector is
+     * collinear with L.
+     */
     @Override
     public Side side_of(IntVector p_other) {
         RationalVector other = new RationalVector(p_other);
         return side_of(other);
     }
 
+    /**
+     * Let L be the line from the Zero Vector to p_other. The function returns
+     * Side.ON_THE_LEFT, if this Vector is on the left of L Side.ON_THE_RIGHT,
+     * if this Vector is on the right of L and Side.COLLINEAR, if this Vector is
+     * collinear with L.
+     */
     @Override
     public Side side_of(RationalVector p_other) {
         BigInteger tmp_1 = y.multiply(p_other.x);
@@ -325,5 +315,4 @@ public final class RationalVector implements Vector {
         int signum = determinant.signum();
         return Side.of(signum);
     }
-
 }
