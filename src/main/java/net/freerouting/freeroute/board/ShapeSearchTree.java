@@ -815,12 +815,19 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
                 result[i] = null;
             } else {
                 TileShape curr_tile_shape;
-                if (this.board.rules.get_trace_angle_restriction() == AngleRestriction.NINETY_DEGREE) {
-                    curr_tile_shape = curr_shape.bounding_box();
-                } else if (this.board.rules.get_trace_angle_restriction() == AngleRestriction.FORTYFIVE_DEGREE) {
-                    curr_tile_shape = curr_shape.bounding_octagon();
-                } else {
-                    curr_tile_shape = curr_shape.bounding_tile();
+                AngleRestriction angle_restriction = this.board.rules.get_trace_angle_restriction();
+                if (null == angle_restriction) {
+                    curr_tile_shape = null;
+                } else switch (angle_restriction) {
+                    case NINETY_DEGREE:
+                        curr_tile_shape = curr_shape.bounding_box();
+                        break;
+                    case FORTYFIVE_DEGREE:
+                        curr_tile_shape = curr_shape.bounding_octagon();
+                        break;
+                    default:
+                        curr_tile_shape = curr_shape.bounding_tile();
+                        break;
                 }
                 int offset_width = this.clearance_compensation_value(p_drill_item.clearance_class_no(), p_drill_item.shape_layer(i));
                 if (curr_tile_shape == null) {
