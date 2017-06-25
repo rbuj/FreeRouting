@@ -1082,7 +1082,7 @@ public final class BoardHandling {
         if (interactive_state instanceof MenuState) {
             set_interactive_state(SelectedItemState.get_instance(p_items, interactive_state, this, logfile));
         } else if (interactive_state instanceof SelectedItemState) {
-            ((SelectedItemState) interactive_state).get_item_list().addAll(p_items);
+            ((SelectedItemState) interactive_state).update_item_list(p_items);
             repaint();
         }
     }

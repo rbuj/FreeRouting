@@ -783,4 +783,13 @@ public class SelectedItemState extends InteractiveState {
     public void display_default_message() {
         hdlg.screen_messages.set_status_message(resources.getString("in_select_item_mode"));
     }
+
+    void update_item_list(Set<Item> p_items) {
+        if (item_list == null) {
+            item_list = new TreeSet<>(p_items);
+        } else {
+            item_list.clear();
+            item_list.addAll(p_items);
+        }
+    }
 }
