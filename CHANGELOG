@@ -6,7 +6,7 @@ ToDo
 xxxx-xx-xx
         * Clear previously selected items before adding new ones
         * Multiple dispatch emulation by using visitor pattern & default
-          method in the interface:
+          method in the implemented interfaces of the abstract classes:
                 * geometry/planar/Direction.java
                 * geometry/planar/Vector.java
         * Use ImmutableList<Layer> in board/LayerStructure.java
