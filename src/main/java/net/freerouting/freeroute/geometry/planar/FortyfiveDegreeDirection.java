@@ -20,8 +20,6 @@
  */
 package net.freerouting.freeroute.geometry.planar;
 
-@SuppressWarnings("all") // Eclipse regards get_direction() as unused
-
 /**
  * Enum for the eight 45-degree direction starting from right in
  * counterclocksense to down45.
@@ -40,7 +38,7 @@ public enum FortyfiveDegreeDirection {
 
     IntDirection direction;
 
-    FortyfiveDegreeDirection(IntDirection intDirection) {
+    private FortyfiveDegreeDirection(IntDirection intDirection) {
         direction = intDirection;
     }
 

@@ -20,7 +20,8 @@ package net.freerouting.freeroute.geometry.planar;
  *
  * @author Robert Buj
  */
-public final class VectorUtils {
+@SuppressWarnings("serial")
+public final class VectorUtils implements java.io.Serializable {
 
     /**
      * Standard implementation of the zero vector .

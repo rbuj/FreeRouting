@@ -24,7 +24,8 @@ import java.math.BigInteger;
  *
  * @author Alfons Wirtz
  */
-public class Limits {
+@SuppressWarnings("serial")
+public class Limits implements java.io.Serializable {
 
     /**
      * An upper bound (2^25) so that the product of two integers with absolut

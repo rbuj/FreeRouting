@@ -23,7 +23,8 @@ package net.freerouting.freeroute.geometry.planar;
  *
  * @author Alfons Wirtz
  */
-public class FortyfiveDegreeBoundingDirections implements ShapeBoundingDirections {
+@SuppressWarnings("serial")
+public class FortyfiveDegreeBoundingDirections implements ShapeBoundingDirections, java.io.Serializable {
 
     /**
      * the one and only instantiation

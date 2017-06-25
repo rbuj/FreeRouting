@@ -20,7 +20,8 @@ package net.freerouting.freeroute.geometry.planar;
  *
  * @author Robert Buj
  */
-public final class PointUtils {
+@SuppressWarnings("serial")
+public final class PointUtils implements java.io.Serializable {
 
     /**
      * Standard implementation of the zero point .

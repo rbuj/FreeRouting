@@ -20,7 +20,8 @@ package net.freerouting.freeroute.geometry.planar;
  *
  * @author Robert Buj
  */
-public final class DirectionUtils {
+@SuppressWarnings("serial")
+public final class DirectionUtils implements java.io.Serializable {
 
     static final IntDirection NULL = new IntDirection(0, 0);
 

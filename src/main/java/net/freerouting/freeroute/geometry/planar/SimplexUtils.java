@@ -20,7 +20,8 @@ package net.freerouting.freeroute.geometry.planar;
  *
  * @author Robert Buj
  */
-public final class SimplexUtils {
+@SuppressWarnings("serial")
+public final class SimplexUtils implements java.io.Serializable {
 
     /**
      * Standard implementation for an empty Simplex.

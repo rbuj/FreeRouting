@@ -20,7 +20,8 @@ package net.freerouting.freeroute.geometry.planar;
  *
  * @author Robert Buj
  */
-public final class TileShapeUtils {
+@SuppressWarnings("serial")
+public final class TileShapeUtils implements java.io.Serializable {
 
     /**
      * creates a Simplex as intersection of the halfplanes defined by an array
