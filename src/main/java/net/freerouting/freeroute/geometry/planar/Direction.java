@@ -32,45 +32,45 @@ import net.freerouting.freeroute.datastructures.Signum;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public interface Direction extends Comparable<Direction>, java.io.Serializable {
+public abstract class Direction implements ComparableDirection, java.io.Serializable {
 
     /**
      * return any Vector pointing into this direction
      */
-    Vector get_vector();
+    public abstract Vector get_vector();
 
     /**
      * returns true, if the direction is horizontal or vertical
      */
-    boolean is_orthogonal();
+    public abstract boolean is_orthogonal();
 
     /**
      * returns true, if the direction is diagonal
      */
-    boolean is_diagonal();
+    public abstract boolean is_diagonal();
 
     /**
      * returns true, if the direction is orthogonal or diagonal
      */
-    default boolean is_multiple_of_45_degree() {
+    public boolean is_multiple_of_45_degree() {
         return (is_orthogonal() || is_diagonal());
     }
 
     /**
      * turns the direction by p_factor times 45 degree
      */
-    Direction turn_45_degree(int p_factor);
+    public abstract Direction turn_45_degree(int p_factor);
 
     /**
      * returns the opposite direction of this direction
      */
-    Direction opposite();
+    public abstract Direction opposite();
 
     /**
      * Returns true, if p_ob is a Direction and this Direction and p_ob point
      * into the same direction
      */
-    default boolean equals(Direction p_other) {
+    boolean equals(Direction p_other) {
         if (this == p_other) {
             return true;
         }
@@ -93,7 +93,7 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
      * L Side.ON_THE_RIGHT, if this.get_vector() is on the right of L and
      * Side.COLLINEAR, if this.get_vector() is collinear with L.
      */
-    default Side side_of(Direction p_other) {
+    public Side side_of(Direction p_other) {
         return this.get_vector().side_of(p_other.get_vector());
     }
 
@@ -103,7 +103,7 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
      * {@literal >} 0, Signum.NEGATIVE, if the scalar product is {@literal <} 0,
      * and Signum.ZERO, if the scalar product is equal 0.
      */
-    default Signum projection(Direction p_other) {
+    public Signum projection(Direction p_other) {
         return this.get_vector().projection(p_other.get_vector());
     }
 
@@ -111,7 +111,7 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
      * calculates an approximation of the direction in the middle of this
      * direction and p_other
      */
-    default Direction middle_approx(Direction p_other) {
+    public Direction middle_approx(Direction p_other) {
         FloatPoint v1 = get_vector().to_float();
         FloatPoint v2 = p_other.get_vector().to_float();
         double length1 = v1.size();
@@ -129,7 +129,7 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
      * angle between p_2 and this direction, 0, if p_1 is equal to p_2, * and -1
      * otherwise.
      */
-    default int compare_from(Direction p_1, Direction p_2) {
+    public int compare_from(Direction p_1, Direction p_2) {
         int result;
         if (p_1.compareTo(this) >= 0) {
             if (p_2.compareTo(this) >= 0) {
@@ -149,29 +149,7 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
      * Returns an approximation of the signed angle corresponding to this
      * dierection.
      */
-    default double angle_approx() {
+    public double angle_approx() {
         return this.get_vector().angle_approx();
     }
-
-    /**
-     * Implements the Comparable interface. Returns 1, if this direction has a
-     * strict bigger angle with the positive x-axis than p_other_direction, 0,
-     * if this direction is equal to p_other_direction, and -1 otherwise. Throws
-     * an exception, if p_other_direction is not a Direction.
-     */
-    default int compareTo(Direction p_other_direction) {
-        int result;
-        if (p_other_direction instanceof IntDirection) {
-            result = compareTo((IntDirection) p_other_direction);
-        } else if (p_other_direction instanceof BigIntDirection) {
-            result = compareTo((BigIntDirection) p_other_direction);
-        } else {
-            throw new AssertionError(p_other_direction.getClass());
-        }
-        return result;
-    }
-
-    int compareTo(IntDirection p_other);
-
-    int compareTo(BigIntDirection p_other);
 }

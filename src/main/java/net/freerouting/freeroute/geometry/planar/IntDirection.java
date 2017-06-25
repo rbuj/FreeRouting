@@ -30,7 +30,7 @@ import net.freerouting.freeroute.datastructures.Signum;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class IntDirection implements Direction {
+public class IntDirection extends Direction {
 
     public final int x;
     public final int y;

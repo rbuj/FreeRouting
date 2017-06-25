@@ -30,7 +30,7 @@ import java.math.BigInteger;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public class BigIntDirection implements Direction {
+public class BigIntDirection extends Direction {
 
     final BigInteger x;
     final BigInteger y;
