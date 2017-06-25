@@ -32,7 +32,7 @@ import net.freerouting.freeroute.datastructures.Signum;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public final class RationalVector extends Vector {
+public final class RationalVector implements Vector {
 
     public final BigInteger x;
     public final BigInteger y;

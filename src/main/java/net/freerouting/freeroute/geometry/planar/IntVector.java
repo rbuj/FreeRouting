@@ -29,7 +29,7 @@ import net.freerouting.freeroute.datastructures.Signum;
  * @author Alfons Wirtz
  */
 @SuppressWarnings("serial")
-public final class IntVector extends Vector {
+public final class IntVector implements Vector {
 
     /**
      * the x coordinate of this vector
