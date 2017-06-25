@@ -59,15 +59,19 @@ public abstract class PullTightAlgo {
             Stoppable p_stoppable_thread, int p_time_limit, Point p_keep_point, int p_keep_point_layer) {
         PullTightAlgo result;
         AngleRestriction angle_restriction = p_board.rules.get_trace_angle_restriction();
-        if (angle_restriction == AngleRestriction.NINETY_DEGREE) {
-            result = new PullTightAlgo90(p_board, p_only_net_no_arr, p_stoppable_thread, p_time_limit,
-                    p_keep_point, p_keep_point_layer);
-        } else if (angle_restriction == AngleRestriction.FORTYFIVE_DEGREE) {
-            result = new PullTightAlgo45(p_board, p_only_net_no_arr, p_stoppable_thread, p_time_limit,
-                    p_keep_point, p_keep_point_layer);
-        } else {
-            result = new PullTightAlgoAnyAngle(p_board, p_only_net_no_arr, p_stoppable_thread, p_time_limit,
-                    p_keep_point, p_keep_point_layer);
+        switch (angle_restriction) {
+            case NINETY_DEGREE:
+                result = new PullTightAlgo90(p_board, p_only_net_no_arr, p_stoppable_thread, p_time_limit,
+                        p_keep_point, p_keep_point_layer);
+                break;
+            case FORTYFIVE_DEGREE:
+                result = new PullTightAlgo45(p_board, p_only_net_no_arr, p_stoppable_thread, p_time_limit,
+                        p_keep_point, p_keep_point_layer);
+                break;
+            default:
+                result = new PullTightAlgoAnyAngle(p_board, p_only_net_no_arr, p_stoppable_thread, p_time_limit,
+                        p_keep_point, p_keep_point_layer);
+                break;
         }
         result.curr_clip_shape = p_clip_shape;
         result.min_translate_dist = Math.max(p_min_translate_dist, 100);
@@ -303,7 +307,6 @@ public abstract class PullTightAlgo {
                         = tmp.offset_shape(curr_half_width, 0);
                 check_ok = board.check_trace_shape(shape_to_check,
                         curr_layer, curr_net_no_arr, curr_cl_type, this.contact_pins);
-
             }
             delta_dist /= 2;
             if (check_ok) {
@@ -324,7 +327,6 @@ public abstract class PullTightAlgo {
             board.changed_area.join(check_lines[2].intersection_approx(new_line), curr_layer);
             board.changed_area.join(p_line_arr[p_no - 1].intersection_approx(p_line_arr[p_no]), curr_layer);
             board.changed_area.join(p_line_arr[p_no].intersection_approx(p_line_arr[p_no + 1]), curr_layer);
-
         }
         return new_line;
     }
