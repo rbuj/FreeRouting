@@ -115,7 +115,7 @@ public class SelectItemsInRegionState extends SelectRegionState {
         boolean something_found = (found_items.size() > 0);
         if (something_found) {
             if (this.return_state instanceof SelectedItemState) {
-                ((SelectedItemState) this.return_state).get_item_list().addAll(found_items);
+                ((SelectedItemState) this.return_state).clearAndAddAllItems(found_items);
             } else {
                 this.return_state = SelectedItemState.get_instance(found_items, this.return_state, hdlg, logfile);
             }

@@ -129,10 +129,10 @@ public class MoveItemState extends InteractiveState {
         if (!move_ok) {
             if (p_parent_state instanceof SelectedItemState) {
                 if (fixed_items.size() > 0) {
-                    ((SelectedItemState) p_parent_state).get_item_list().addAll(fixed_items);
+                    ((SelectedItemState) p_parent_state).clearAndAddAllItems(fixed_items);
                     p_board_handling.screen_messages.set_status_message(resources.getString("please_unfix_selected_items_before_moving"));
                 } else {
-                    ((SelectedItemState) p_parent_state).get_item_list().addAll(obstacle_items);
+                    ((SelectedItemState) p_parent_state).clearAndAddAllItems(obstacle_items);
                     p_board_handling.screen_messages.set_status_message(resources.getString("please_unroute_or_extend_selection_before_moving"));
                 }
             }

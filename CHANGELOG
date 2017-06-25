@@ -4,6 +4,7 @@ ToDo
 	* Write all documentation in docbook format
 
 xxxx-xx-xx
+        * Clear previously selected items before adding new ones
         * Multiple dispatch emulation by using visitor pattern & default
           method in the interface:
                 * geometry/planar/Direction.java
