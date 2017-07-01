@@ -4,7 +4,7 @@
 
     <groupId>net.freerouting</groupId>
     <artifactId>freeroute</artifactId>
-    <version>1.4.4</version>
+    <version>1.4.5-alpha</version>
     <packaging>jar</packaging>
 
     <name>freeroute</name>
