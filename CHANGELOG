@@ -3,7 +3,7 @@ ToDo
 	* Migrate all GUI from swing to JavaFX
 	* Write all documentation in docbook format
 
-xxxx-xx-xx
+2017-07-01
         * Clear previously selected items before adding new ones
         * Multiple dispatch emulation by using visitor pattern & default
           method in the interfaces:
@@ -31,6 +31,7 @@ xxxx-xx-xx
         * Change some access level modifiers to package-private/private
         * -h option shows avaliable options
         * Use the precalculated width for the components in the right toolbar
+        * Other improvements
 
 2017-06-10 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
 
