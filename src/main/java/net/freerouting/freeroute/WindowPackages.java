@@ -78,6 +78,7 @@ public final class WindowPackages extends WindowObjectListWithFilter {
             }
         }
         board_frame.board_panel.board_handling.select_items(board_instances);
+        board_frame.zoom_all();
         board_frame.board_panel.board_handling.zoom_selection();
     }
 }

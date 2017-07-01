@@ -71,6 +71,7 @@ public final class WindowIncompletes extends WindowObjectListWithFilter {
             selected_items.add(curr_airline.to_item);
         }
         board_frame.board_panel.board_handling.select_items(selected_items);
+        board_frame.zoom_all();
         board_frame.board_panel.board_handling.zoom_selection();
     }
 }

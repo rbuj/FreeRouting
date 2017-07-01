@@ -105,9 +105,9 @@ public final class WindowUnconnectedRoute extends WindowObjectListWithFilter {
             UnconnectedRouteInfo current_value = (UnconnectedRouteInfo) it.next();
             selected_items.addAll(current_value.item_list);
         }
-        net.freerouting.freeroute.interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;
-        board_handling.select_items(selected_items);
-        board_handling.zoom_selection();
+        board_frame.board_panel.board_handling.select_items(selected_items);
+        board_frame.zoom_all();
+        board_frame.board_panel.board_handling.zoom_selection();
     }
 
     private class UnconnectedRouteInfo implements Comparable<UnconnectedRouteInfo> {

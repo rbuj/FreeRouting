@@ -100,6 +100,7 @@ public final class WindowNets extends WindowObjectListWithFilter {
             }
         }
         board_frame.board_panel.board_handling.select_items(selected_items);
+        board_frame.zoom_all();
         board_frame.board_panel.board_handling.zoom_selection();
     }
 

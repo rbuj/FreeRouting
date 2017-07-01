@@ -75,10 +75,10 @@ public final class WindowClearanceViolations extends WindowObjectListWithFilter 
             selected_items.add(curr_violation.first_item);
             selected_items.add(curr_violation.second_item);
         }
-        net.freerouting.freeroute.interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;
-        board_handling.select_items(selected_items);
-        board_handling.toggle_selected_item_violations();
-        board_handling.zoom_selection();
+        board_frame.board_panel.board_handling.select_items(selected_items);
+        board_frame.board_panel.board_handling.toggle_selected_item_violations();
+        board_frame.zoom_all();
+        board_frame.board_panel.board_handling.zoom_selection();
     }
 
     private String item_info(net.freerouting.freeroute.board.Item p_item) {

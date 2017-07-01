@@ -78,9 +78,9 @@ public final class WindowLengthViolations extends WindowObjectListWithFilter {
             LengthViolation curr_violation = (LengthViolation) it.next();
             selected_items.addAll(curr_violation.net.get_items());
         }
-        net.freerouting.freeroute.interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;
-        board_handling.select_items(selected_items);
-        board_handling.zoom_selection();
+        board_frame.board_panel.board_handling.select_items(selected_items);
+        board_frame.zoom_all();
+        board_frame.board_panel.board_handling.zoom_selection();
     }
 
     private class LengthViolation implements Comparable<LengthViolation> {

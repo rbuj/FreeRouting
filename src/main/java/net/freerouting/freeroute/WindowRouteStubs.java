@@ -128,9 +128,9 @@ public final class WindowRouteStubs extends WindowObjectListWithFilter {
             RouteStubInfo current_value = (RouteStubInfo) it.next();
             selected_items.add(current_value.stub_item);
         }
-        net.freerouting.freeroute.interactive.BoardHandling board_handling = board_frame.board_panel.board_handling;
-        board_handling.select_items(selected_items);
-        board_handling.zoom_selection();
+        board_frame.board_panel.board_handling.select_items(selected_items);
+        board_frame.zoom_all();
+        board_frame.board_panel.board_handling.zoom_selection();
     }
 
     private class RouteStubInfo implements Comparable<RouteStubInfo> {
