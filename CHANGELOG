@@ -3,7 +3,11 @@ ToDo
 	* Migrate all GUI from swing to JavaFX
 	* Write all documentation in docbook format
 
-2017-07-01
+xxxx-xx-xx
+        * Add icons in toolbar. Icon theme:
+                * Elementary GTK Light Crystal
+
+2017-07-01 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
         * Clear previously selected items before adding new ones
         * Multiple dispatch emulation by using visitor pattern & default
           method in the interfaces:

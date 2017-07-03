@@ -191,7 +191,7 @@ final class BoardToolbar extends javax.swing.JPanel {
 
         final javax.swing.JButton display_region_button = new javax.swing.JButton(
                 resources.getString("display_region_button"),
-                new ImageIcon(BoardToolbar.class.getResource("/icons/32/actions/view-restore.png")));
+                new ImageIcon(BoardToolbar.class.getResource("/icons/32/status/image-loading.png")));
         display_region_button.setToolTipText(resources.getString("display_region_button_tooltip"));
         display_region_button.setVerticalTextPosition(AbstractButton.BOTTOM);
         display_region_button.setHorizontalTextPosition(AbstractButton.CENTER);

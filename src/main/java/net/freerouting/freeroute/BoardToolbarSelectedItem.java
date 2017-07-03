@@ -270,7 +270,7 @@ final class BoardToolbarSelectedItem extends javax.swing.JToolBar {
 
         javax.swing.JButton display_region_button = new javax.swing.JButton(
                 resources.getString("zoom_region"),
-                new ImageIcon(BoardToolbarSelectedItem.class.getResource("/icons/32/actions/view-restore.png")));
+                new ImageIcon(BoardToolbarSelectedItem.class.getResource("/icons/32/status/image-loading.png")));
         display_region_button.setToolTipText(resources.getString("zoom_region_tooltip"));
         display_region_button.setVerticalTextPosition(AbstractButton.BOTTOM);
         display_region_button.setHorizontalTextPosition(AbstractButton.CENTER);
