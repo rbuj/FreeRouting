@@ -20,10 +20,12 @@
 package net.freerouting.freeroute.interactive;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Optional;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import net.freerouting.freeroute.board.BasicBoard;
@@ -121,9 +123,7 @@ public final class NetIncompletes {
         // Create the Airlines. Skip edges, whose from_item and to_item are already in the same connected set
         // or whose connected sets have already an airline.
         Net curr_net = p_board.rules.nets.get(p_net_no);
-        Iterator<Edge> it = sorted_edges.iterator();
-        while (it.hasNext()) {
-            Edge curr_edge = it.next();
+        for (Edge curr_edge : sorted_edges) {
             if (curr_edge.from_item.connected_set == curr_edge.to_item.connected_set) {
                 continue; // airline exists already
             }
@@ -185,9 +185,7 @@ public final class NetIncompletes {
             }
             FloatPoint[] draw_points = new FloatPoint[2];
             int draw_width = 1;
-            Iterator<RatsNest.AirLine> it = incompletes.iterator();
-            while (it.hasNext()) {
-                RatsNest.AirLine curr_incomplete = it.next();
+            for (RatsNest.AirLine curr_incomplete : incompletes) {
                 draw_points[0] = curr_incomplete.from_corner;
                 draw_points[1] = curr_incomplete.to_corner;
                 p_graphics_context.draw(draw_points, draw_width, draw_color, p_graphics, draw_intensity);
@@ -213,27 +211,27 @@ public final class NetIncompletes {
      * other.
      */
     private NetItem[] calculate_net_items(Collection<Item> p_item_list) {
-        NetItem[] result = new NetItem[p_item_list.size()];
+        int max_element_count = p_item_list.size();
+        ArrayList<NetItem> result = new ArrayList<>(max_element_count);
         int curr_index = 0;
         while (!p_item_list.isEmpty()) {
-            Item start_item = p_item_list.iterator().next();
-            Collection<Item> curr_connected_set = start_item.get_connected_set(this.net.net_number);
-            p_item_list.removeAll(curr_connected_set);
-            Iterator<Item> it = curr_connected_set.iterator();
-            while (it.hasNext()) {
-                Item curr_item = it.next();
-                if (curr_index >= result.length) {
-                    System.out.println("NetIncompletes.calculate_net_items: to many items");
-                    return result;
+            Optional<Item> optional_start_item = p_item_list.stream().findFirst();
+            if (!optional_start_item.isPresent()) {
+                break;
+            } else {
+                Collection<Item> curr_connected_set = optional_start_item.get().get_connected_set(this.net.net_number);
+                p_item_list.removeAll(curr_connected_set);
+                for (Item curr_item : curr_connected_set) {
+                    if (curr_index > max_element_count) {
+                        System.out.println("NetIncompletes.calculate_net_items: to many items");
+                        return result.stream().toArray(NetItem[]::new);
+                    }
+                    result.add(curr_index, new NetItem(curr_item, curr_connected_set));
+                    ++curr_index;
                 }
-                result[curr_index] = new NetItem(curr_item, curr_connected_set);
-                ++curr_index;
             }
         }
-        if (curr_index < result.length) {
-            System.out.println("NetIncompletes.calculate_net_items: to few items");
-        }
-        return result;
+        return result.stream().toArray(NetItem[]::new);
     }
 
     /**
