@@ -159,6 +159,7 @@ public interface Direction extends Comparable<Direction>, java.io.Serializable {
      * if this direction is equal to p_other_direction, and -1 otherwise. Throws
      * an exception, if p_other_direction is not a Direction.
      */
+    @Override
     default int compareTo(Direction p_other_direction) {
         int result;
         if (p_other_direction instanceof IntDirection) {
