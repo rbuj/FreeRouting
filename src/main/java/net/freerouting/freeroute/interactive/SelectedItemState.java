@@ -310,9 +310,7 @@ public class SelectedItemState extends InteractiveState {
             logfile.start_scope(LogfileScope.DELETE_SELECTED);
         }
 
-        for (Integer curr_net_no : changed_nets) {
-            hdlg.update_ratsnest(curr_net_no);
-        }
+        hdlg.update_ratsnest(changed_nets.stream().mapToInt(i->i).toArray());
         hdlg.repaint();
         return this.return_state;
     }

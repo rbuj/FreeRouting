@@ -329,9 +329,7 @@ public class RouteState extends InteractiveState {
         if (route_completed) {
             result = this.return_state;
             hdlg.screen_messages.clear();
-            for (int curr_net_no : this.route.net_no_arr) {
-                hdlg.update_ratsnest(curr_net_no);
-            }
+            hdlg.update_ratsnest(this.route.net_no_arr);
         } else {
             result = this;
         }

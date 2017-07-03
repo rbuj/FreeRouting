@@ -246,7 +246,7 @@ public final class BoardHandling {
 
     /**
      * Gets the trace half width used in interactive routing for the input net
- on the input layer_no.
+     * on the input layer_no.
      */
     public int get_trace_halfwidth(int p_net_no, int p_layer) {
         int result;
@@ -363,8 +363,8 @@ public final class BoardHandling {
     }
 
     /**
-     * Displays the current layer_no in the layer_no message field, and clears the
- field for the additional message.
+     * Displays the current layer_no in the layer_no message field, and clears
+     * the field for the additional message.
      */
     public void display_layer_messsage() {
         screen_messages.clear_add_field();
@@ -462,6 +462,17 @@ public final class BoardHandling {
     void update_ratsnest(int p_net_no) {
         if (ratsnest != null && p_net_no > 0) {
             ratsnest.recalculate(p_net_no, this.board);
+            ratsnest.show();
+        }
+    }
+
+    void update_ratsnest(int[] p_net_no_arr) {
+        if (ratsnest != null) {
+            for (int net_no : p_net_no_arr) {
+                if (net_no > 0) {
+                    ratsnest.recalculate(net_no, this.board);
+                }
+            }
             ratsnest.show();
         }
     }
@@ -690,9 +701,7 @@ public final class BoardHandling {
         }
         java.util.Set<Integer> changed_nets = new java.util.TreeSet<>();
         if (board.undo(changed_nets)) {
-            for (Integer changed_net : changed_nets) {
-                this.update_ratsnest(changed_net);
-            }
+            this.update_ratsnest(changed_nets.stream().mapToInt(i -> i).toArray());
             if (changed_nets.size() > 0) {
                 // reset the start pass number in the autorouter in case
                 // a batch autorouter is undone.
@@ -715,9 +724,7 @@ public final class BoardHandling {
         }
         java.util.Set<Integer> changed_nets = new java.util.TreeSet<>();
         if (board.redo(changed_nets)) {
-            for (Integer changed_net : changed_nets) {
-                this.update_ratsnest(changed_net);
-            }
+            this.update_ratsnest(changed_nets.stream().mapToInt(i -> i).toArray());
             screen_messages.set_status_message(resources.getString("redo"));
         } else {
             screen_messages.set_status_message(resources.getString("no_more_redo_possible"));

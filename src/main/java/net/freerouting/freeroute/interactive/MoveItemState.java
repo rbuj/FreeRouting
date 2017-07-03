@@ -235,18 +235,14 @@ public class MoveItemState extends InteractiveState {
             }
         }
         net.freerouting.freeroute.board.BasicBoard routing_board = hdlg.get_routing_board();
-        for (Item curr_item : this.item_list) {
-            routing_board.insert_item(curr_item);
-        }
+        this.item_list.forEach((curr_item) -> routing_board.insert_item(curr_item));
 
         // let the observers syncronize the moving
-        for (Component curr_component : this.component_list) {
+        this.component_list.forEach((curr_component) -> {
             routing_board.communication.observers.notify_moved(curr_component);
-        }
+        });
 
-        for (NetItems curr_net_items : this.net_items_list) {
-            this.hdlg.update_ratsnest(curr_net_items.net_no);
-        }
+        this.hdlg.update_ratsnest(this.net_items_list.stream().mapToInt(curr_net_items -> curr_net_items.net_no).toArray());
 
         if (logfile != null) {
             logfile.start_scope(LogfileScope.COMPLETE_SCOPE);
@@ -259,9 +255,7 @@ public class MoveItemState extends InteractiveState {
     @Override
     public InteractiveState cancel() {
         hdlg.get_routing_board().undo(null);
-        for (NetItems curr_net_items : this.net_items_list) {
-            this.hdlg.update_ratsnest(curr_net_items.net_no);
-        }
+        this.hdlg.update_ratsnest(this.net_items_list.stream().mapToInt(curr_net_items -> curr_net_items.net_no).toArray());
         if (logfile != null) {
             logfile.start_scope(LogfileScope.CANCEL_SCOPE);
         }

@@ -54,9 +54,7 @@ public class DynamicRouteState extends RouteState {
         if (logfile != null) {
             logfile.start_scope(LogfileScope.COMPLETE_SCOPE);
         }
-        for (int curr_net_no : this.route.net_no_arr) {
-            hdlg.update_ratsnest(curr_net_no);
-        }
+        hdlg.update_ratsnest(this.route.net_no_arr);
         return this.return_state;
     }
 

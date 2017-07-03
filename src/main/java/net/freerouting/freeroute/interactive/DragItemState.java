@@ -145,9 +145,7 @@ public class DragItemState extends DragState {
                         changed_nets.add(curr_moved_item.get_net_no(i));
                     }
                 }
-                for (Integer curr_net_no : changed_nets) {
-                    hdlg.update_ratsnest(curr_net_no);
-                }
+                hdlg.update_ratsnest(changed_nets.stream().mapToInt(i -> i).toArray());
             }
         } else {
             hdlg.show_ratsnest();

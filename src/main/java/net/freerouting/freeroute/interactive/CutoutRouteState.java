@@ -20,6 +20,7 @@
  */
 package net.freerouting.freeroute.interactive;
 
+import com.google.common.collect.ImmutableList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Set;
@@ -67,7 +68,8 @@ public class CutoutRouteState extends SelectRegionState {
         new_instance.hdlg.screen_messages.set_status_message(new_instance.resources.getString("drag_left_mouse_button_to_select_cutout_rectangle"));
         return new_instance;
     }
-    private final Collection<PolylineTrace> trace_list;
+
+    private final ImmutableList<PolylineTrace> trace_list;
 
     /**
      * Creates a new instance of CutoutRouteState
@@ -77,7 +79,7 @@ public class CutoutRouteState extends SelectRegionState {
         if (logfile != null) {
             logfile.start_scope(LogfileScope.CUTOUT_ROUTE);
         }
-        this.trace_list = p_item_list;
+        this.trace_list = ImmutableList.copyOf(p_item_list);
     }
 
     @Override
@@ -115,9 +117,7 @@ public class CutoutRouteState extends SelectRegionState {
             }
         }
 
-        for (Integer changed_net : changed_nets) {
-            hdlg.update_ratsnest(changed_net);
-        }
+        hdlg.update_ratsnest(changed_nets.stream().mapToInt(i->i).toArray());
     }
 
     @Override
@@ -125,9 +125,7 @@ public class CutoutRouteState extends SelectRegionState {
         if (trace_list == null) {
             return;
         }
-
         for (PolylineTrace curr_trace : this.trace_list) {
-
             curr_trace.draw(p_graphics, hdlg.graphics_context, hdlg.graphics_context.get_hilight_color(),
                     hdlg.graphics_context.get_hilight_color_intensity());
         }
