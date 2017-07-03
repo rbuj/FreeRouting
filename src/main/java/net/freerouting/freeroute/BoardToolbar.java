@@ -20,6 +20,8 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
 /**
@@ -96,9 +98,12 @@ final class BoardToolbar extends javax.swing.JPanel {
         // create the middle toolbar
         final javax.swing.JToolBar middle_toolbar = new javax.swing.JToolBar();
 
-        final javax.swing.JButton autoroute_button = new javax.swing.JButton();
-        autoroute_button.setText(resources.getString("autoroute_button"));
+        final javax.swing.JButton autoroute_button = new javax.swing.JButton(
+                resources.getString("autoroute_button"),
+                new ImageIcon(BoardToolbar.class.getResource("/icons/32/actions/system-run.png")));
         autoroute_button.setToolTipText(resources.getString("autoroute_button_tooltip"));
+        autoroute_button.setVerticalTextPosition(AbstractButton.BOTTOM);
+        autoroute_button.setHorizontalTextPosition(AbstractButton.CENTER);
         autoroute_button.addActionListener((java.awt.event.ActionEvent evt) -> {
             board_frame.board_panel.board_handling.start_batch_autorouter();
         });
@@ -111,9 +116,12 @@ final class BoardToolbar extends javax.swing.JPanel {
         separator_2.setRequestFocusEnabled(false);
         middle_toolbar.add(separator_2);
 
-        final javax.swing.JButton undo_button = new javax.swing.JButton();
-        undo_button.setText(resources.getString("undo_button"));
+        final javax.swing.JButton undo_button = new javax.swing.JButton(
+                resources.getString("undo_button"),
+                new ImageIcon(BoardToolbar.class.getResource("/icons/32/actions/edit-undo.png")));
         undo_button.setToolTipText(resources.getString("undo_button_tooltip"));
+        undo_button.setVerticalTextPosition(AbstractButton.BOTTOM);
+        undo_button.setHorizontalTextPosition(AbstractButton.CENTER);
         undo_button.addActionListener((java.awt.event.ActionEvent evt) -> {
             board_frame.board_panel.board_handling.cancel_state();
             board_frame.board_panel.board_handling.undo();
@@ -122,9 +130,12 @@ final class BoardToolbar extends javax.swing.JPanel {
 
         middle_toolbar.add(undo_button);
 
-        final javax.swing.JButton redo_button = new javax.swing.JButton();
-        redo_button.setText(resources.getString("redo_button"));
+        final javax.swing.JButton redo_button = new javax.swing.JButton(
+                resources.getString("redo_button"),
+                new ImageIcon(BoardToolbar.class.getResource("/icons/32/actions/edit-redo.png")));
         redo_button.setToolTipText(resources.getString("redo_button_tooltip"));
+        redo_button.setVerticalTextPosition(AbstractButton.BOTTOM);
+        redo_button.setHorizontalTextPosition(AbstractButton.CENTER);
         redo_button.addActionListener((java.awt.event.ActionEvent evt) -> {
             board_frame.board_panel.board_handling.redo();
         });
@@ -136,18 +147,24 @@ final class BoardToolbar extends javax.swing.JPanel {
         separator_1.setPreferredSize(new java.awt.Dimension(10, 10));
         middle_toolbar.add(separator_1);
 
-        final javax.swing.JButton incompletes_button = new javax.swing.JButton();
-        incompletes_button.setText(resources.getString("incompletes_button"));
+        final javax.swing.JButton incompletes_button = new javax.swing.JButton(
+                resources.getString("incompletes_button"),
+                new ImageIcon(BoardToolbar.class.getResource("/icons/32/status/dialog-warning.png")));
         incompletes_button.setToolTipText(resources.getString("incompletes_button_tooltip"));
+        incompletes_button.setVerticalTextPosition(AbstractButton.BOTTOM);
+        incompletes_button.setHorizontalTextPosition(AbstractButton.CENTER);
         incompletes_button.addActionListener((java.awt.event.ActionEvent evt) -> {
             board_frame.board_panel.board_handling.toggle_ratsnest();
         });
 
         middle_toolbar.add(incompletes_button);
 
-        final javax.swing.JButton violation_button = new javax.swing.JButton();
-        violation_button.setText(resources.getString("violations_button"));
+        final javax.swing.JButton violation_button = new javax.swing.JButton(
+                resources.getString("violations_button"),
+                new ImageIcon(BoardToolbar.class.getResource("/icons/32/status/dialog-error.png")));
         violation_button.setToolTipText(resources.getString("violations_button_tooltip"));
+        violation_button.setVerticalTextPosition(AbstractButton.BOTTOM);
+        violation_button.setHorizontalTextPosition(AbstractButton.CENTER);
         violation_button.addActionListener((java.awt.event.ActionEvent evt) -> {
             board_frame.board_panel.board_handling.toggle_clearance_violations();
         });
@@ -160,18 +177,24 @@ final class BoardToolbar extends javax.swing.JPanel {
         separator_3.setRequestFocusEnabled(false);
         middle_toolbar.add(separator_3);
 
-        final javax.swing.JButton display_all_button = new javax.swing.JButton();
-        display_all_button.setText(resources.getString("display_all_button"));
+        final javax.swing.JButton display_all_button = new javax.swing.JButton(
+                resources.getString("display_all_button"),
+                new ImageIcon(BoardToolbar.class.getResource("/icons/32/actions/view-fullscreen.png")));
         display_all_button.setToolTipText(resources.getString("display_all_button_tooltip"));
+        display_all_button.setVerticalTextPosition(AbstractButton.BOTTOM);
+        display_all_button.setHorizontalTextPosition(AbstractButton.CENTER);
         display_all_button.addActionListener((java.awt.event.ActionEvent evt) -> {
             board_frame.zoom_all();
         });
 
         middle_toolbar.add(display_all_button);
 
-        final javax.swing.JButton display_region_button = new javax.swing.JButton();
-        display_region_button.setText(resources.getString("display_region_button"));
+        final javax.swing.JButton display_region_button = new javax.swing.JButton(
+                resources.getString("display_region_button"),
+                new ImageIcon(BoardToolbar.class.getResource("/icons/32/actions/view-restore.png")));
         display_region_button.setToolTipText(resources.getString("display_region_button_tooltip"));
+        display_region_button.setVerticalTextPosition(AbstractButton.BOTTOM);
+        display_region_button.setHorizontalTextPosition(AbstractButton.CENTER);
         display_region_button.addActionListener((java.awt.event.ActionEvent evt) -> {
             board_frame.board_panel.board_handling.zoom_region();
         });
