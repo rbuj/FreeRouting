@@ -25,7 +25,6 @@ import java.util.Locale;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
 import net.freerouting.freeroute.board.LayerStructure;
 
 /**
@@ -41,9 +40,9 @@ public final class WindowAutorouteParameter extends BoardSavableSubWindow {
     private final ArrayList<JCheckBox> signal_layer_active_arr;
     private final ArrayList<JComboBox<String>> combo_box_arr;
     private final JCheckBox vias_allowed;
-    private final JRadioButton fanout_pass_button;
-    private final JRadioButton autoroute_pass_button;
-    private final JRadioButton postroute_pass_button;
+    private final JCheckBox fanout_pass_button;
+    private final JCheckBox autoroute_pass_button;
+    private final JCheckBox postroute_pass_button;
     private final WindowAutorouteDetailParameter detail_window;
     private final DetailListener detail_listener;
     private final String horizontal;
@@ -141,7 +140,7 @@ public final class WindowAutorouteParameter extends BoardSavableSubWindow {
         gridbag.setConstraints(passes_label, gridbag_constraints);
         main_panel.add(passes_label);
 
-        fanout_pass_button = new JRadioButton(resources.getString("fanout"));
+        fanout_pass_button = new JCheckBox(resources.getString("fanout"));
         fanout_pass_button.addActionListener(new FanoutListener());
         fanout_pass_button.setSelected(false);
         gridbag_constraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
@@ -149,13 +148,13 @@ public final class WindowAutorouteParameter extends BoardSavableSubWindow {
         gridbag.setConstraints(fanout_pass_button, gridbag_constraints);
         main_panel.add(fanout_pass_button, gridbag_constraints);
 
-        autoroute_pass_button = new JRadioButton(resources.getString("autoroute"));
+        autoroute_pass_button = new JCheckBox(resources.getString("autoroute"));
         autoroute_pass_button.addActionListener(new AutorouteListener());
         autoroute_pass_button.setSelected(true);
         gridbag.setConstraints(autoroute_pass_button, gridbag_constraints);
         main_panel.add(autoroute_pass_button, gridbag_constraints);
 
-        postroute_pass_button = new JRadioButton(resources.getString("postroute"));
+        postroute_pass_button = new JCheckBox(resources.getString("postroute"));
         postroute_pass_button.addActionListener(new PostrouteListener());
         autoroute_pass_button.setSelected(true);
         gridbag.setConstraints(postroute_pass_button, gridbag_constraints);
