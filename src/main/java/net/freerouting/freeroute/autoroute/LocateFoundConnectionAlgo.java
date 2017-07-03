@@ -187,12 +187,22 @@ public abstract class LocateFoundConnectionAlgo {
     static FloatPoint calculate_additional_corner(FloatPoint p_from_point, FloatPoint p_to_point,
             boolean p_horizontal_first, AngleRestriction p_angle_restriction) {
         FloatPoint result;
-        if (p_angle_restriction == AngleRestriction.NINETY_DEGREE) {
-            result = ninety_degree_corner(p_from_point, p_to_point, p_horizontal_first);
-        } else if (p_angle_restriction == AngleRestriction.FORTYFIVE_DEGREE) {
-            result = fortyfive_degree_corner(p_from_point, p_to_point, p_horizontal_first);
+        if (null == p_angle_restriction) {
+            throw new UnsupportedOperationException();
         } else {
-            result = p_to_point;
+            switch (p_angle_restriction) {
+                case NINETY_DEGREE:
+                    result = ninety_degree_corner(p_from_point, p_to_point, p_horizontal_first);
+                    break;
+                case FORTYFIVE_DEGREE:
+                    result = fortyfive_degree_corner(p_from_point, p_to_point, p_horizontal_first);
+                    break;
+                case NONE:
+                    result = p_to_point;
+                    break;
+                default:
+                    throw new UnsupportedOperationException();
+            }
         }
         return result;
     }

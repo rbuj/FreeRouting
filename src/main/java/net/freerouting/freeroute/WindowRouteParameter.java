@@ -342,12 +342,22 @@ public final class WindowRouteParameter extends BoardSavableSubWindow {
     public void refresh() {
         net.freerouting.freeroute.board.AngleRestriction snap_angle = this.board_handling.get_routing_board().rules.get_trace_angle_restriction();
 
-        if (snap_angle == net.freerouting.freeroute.board.AngleRestriction.NINETY_DEGREE) {
-            snap_angle_90_button.setSelected(true);
-        } else if (snap_angle == net.freerouting.freeroute.board.AngleRestriction.FORTYFIVE_DEGREE) {
-            snap_angle_45_button.setSelected(true);
+        if (null == snap_angle) {
+            throw new UnsupportedOperationException();
         } else {
-            snap_angle_none_button.setSelected(true);
+            switch (snap_angle) {
+                case NINETY_DEGREE:
+                    snap_angle_90_button.setSelected(true);
+                    break;
+                case FORTYFIVE_DEGREE:
+                    snap_angle_45_button.setSelected(true);
+                    break;
+                case NONE:
+                    snap_angle_none_button.setSelected(true);
+                    break;
+                default:
+                    throw new UnsupportedOperationException();
+            }
         }
 
         if (this.board_handling.settings.get_is_stitch_route()) {

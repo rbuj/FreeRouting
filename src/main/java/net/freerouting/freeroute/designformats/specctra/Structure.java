@@ -417,12 +417,22 @@ class Structure extends ScopeKeyword {
         p_file.start_scope("snap_angle ");
         p_file.new_line();
 
-        if (p_angle_restriction == net.freerouting.freeroute.board.AngleRestriction.NINETY_DEGREE) {
-            p_file.write("ninety_degree");
-        } else if (p_angle_restriction == net.freerouting.freeroute.board.AngleRestriction.FORTYFIVE_DEGREE) {
-            p_file.write("fortyfive_degree");
+        if (null == p_angle_restriction) {
+            throw new UnsupportedOperationException();
         } else {
-            p_file.write("none");
+            switch (p_angle_restriction) {
+                case NINETY_DEGREE:
+                    p_file.write("ninety_degree");
+                    break;
+                case FORTYFIVE_DEGREE:
+                    p_file.write("fortyfive_degree");
+                    break;
+                case NONE:
+                    p_file.write("none");
+                    break;
+                default:
+                    throw new UnsupportedOperationException();
+            }
         }
         p_file.end_scope();
     }

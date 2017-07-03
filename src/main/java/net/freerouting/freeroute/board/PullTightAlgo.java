@@ -59,19 +59,25 @@ public abstract class PullTightAlgo {
             Stoppable p_stoppable_thread, int p_time_limit, Point p_keep_point, int p_keep_point_layer) {
         PullTightAlgo result;
         AngleRestriction angle_restriction = p_board.rules.get_trace_angle_restriction();
-        switch (angle_restriction) {
-            case NINETY_DEGREE:
-                result = new PullTightAlgo90(p_board, p_only_net_no_arr, p_stoppable_thread, p_time_limit,
-                        p_keep_point, p_keep_point_layer);
-                break;
-            case FORTYFIVE_DEGREE:
-                result = new PullTightAlgo45(p_board, p_only_net_no_arr, p_stoppable_thread, p_time_limit,
-                        p_keep_point, p_keep_point_layer);
-                break;
-            default:
-                result = new PullTightAlgoAnyAngle(p_board, p_only_net_no_arr, p_stoppable_thread, p_time_limit,
-                        p_keep_point, p_keep_point_layer);
-                break;
+        if (null == angle_restriction) {
+            throw new UnsupportedOperationException();
+        } else {
+            switch (angle_restriction) {
+                case NINETY_DEGREE:
+                    result = new PullTightAlgo90(p_board, p_only_net_no_arr, p_stoppable_thread, p_time_limit,
+                            p_keep_point, p_keep_point_layer);
+                    break;
+                case FORTYFIVE_DEGREE:
+                    result = new PullTightAlgo45(p_board, p_only_net_no_arr, p_stoppable_thread, p_time_limit,
+                            p_keep_point, p_keep_point_layer);
+                    break;
+                case NONE:
+                    result = new PullTightAlgoAnyAngle(p_board, p_only_net_no_arr, p_stoppable_thread, p_time_limit,
+                            p_keep_point, p_keep_point_layer);
+                    break;
+                default:
+                    throw new UnsupportedOperationException();
+            }
         }
         result.curr_clip_shape = p_clip_shape;
         result.min_translate_dist = Math.max(p_min_translate_dist, 100);

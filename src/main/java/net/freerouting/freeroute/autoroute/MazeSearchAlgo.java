@@ -580,15 +580,25 @@ public class MazeSearchAlgo {
 
             double door_length;
             AngleRestriction angle_restriction = autoroute_engine.board.rules.get_trace_angle_restriction();
-            if (angle_restriction == AngleRestriction.NINETY_DEGREE) {
-                IntBox door_box = door_shape.bounding_box();
-                door_length = door_box.max_width();
-            } else if (angle_restriction == AngleRestriction.FORTYFIVE_DEGREE) {
-                IntOctagon door_oct = door_shape.bounding_octagon();
-                door_length = door_oct.max_width();
+            if (null == angle_restriction) {
+                throw new UnsupportedOperationException();
             } else {
-                FloatLine door_line_segment = door_shape.diagonal_corner_segment();
-                door_length = door_line_segment.b.distance(door_line_segment.a);
+                switch (angle_restriction) {
+                    case NINETY_DEGREE:
+                        IntBox door_box = door_shape.bounding_box();
+                        door_length = door_box.max_width();
+                        break;
+                    case FORTYFIVE_DEGREE:
+                        IntOctagon door_oct = door_shape.bounding_octagon();
+                        door_length = door_oct.max_width();
+                        break;
+                    case NONE:
+                        FloatLine door_line_segment = door_shape.diagonal_corner_segment();
+                        door_length = door_line_segment.b.distance(door_line_segment.a);
+                        break;
+                    default:
+                        throw new UnsupportedOperationException();
+                }
             }
             if (door_length < p_trace_width) {
                 return true;
