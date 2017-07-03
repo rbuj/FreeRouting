@@ -847,7 +847,7 @@ public class Simplex extends TileShape {
             }
             Simplex curr_piece = new Simplex(piece_lines);
             result_list.add(curr_piece.intersection(p_outer_simplex));
-            next_division_line = prev_division_line;
+            prev_division_line = next_division_line;
         }
         return result_list.stream().toArray(Simplex[]::new);
     }
