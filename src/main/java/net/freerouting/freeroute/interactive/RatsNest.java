@@ -21,6 +21,7 @@ package net.freerouting.freeroute.interactive;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -67,17 +68,17 @@ public class RatsNest {
             }
         }
         this.net_incompletes = new NetIncompletes[max_net_no];
-        this.is_filtered = new boolean[max_net_no];
-        for (int i = 0; i < net_incompletes.length; ++i) {
+        for (int i = 0; i < max_net_no; ++i) {
             net_incompletes[i] = new NetIncompletes(i + 1, net_item_lists.get(i), p_board);
-            is_filtered[i] = false;
         }
+        this.is_filtered = new boolean[max_net_no];
+        Arrays.fill(is_filtered, false);
     }
 
     /**
      * Recalculates the incomplete connections for the input net
      */
-    public void recalculate(int p_net_no, BasicBoard p_board) {
+    public void recalculate(final int p_net_no, BasicBoard p_board) {
         if (p_net_no >= 1 && p_net_no <= net_incompletes.length) {
             Collection<Item> item_list = p_board.get_connectable_items(p_net_no);
             net_incompletes[p_net_no - 1] = new NetIncompletes(p_net_no, item_list, p_board);
@@ -88,11 +89,9 @@ public class RatsNest {
      * Recalculates the incomplete connections for the input net with the input
      * item list.
      */
-    public void recalculate(int p_net_no, Collection<Item> p_item_list, BasicBoard p_board) {
+    public void recalculate(final int p_net_no, final Collection<Item> p_item_list, BasicBoard p_board) {
         if (p_net_no >= 1 && p_net_no <= net_incompletes.length) {
-            // copy p_item_list, because it will be changed inside the constructor of NetIncompletes
-            Collection<Item> item_list = new LinkedList<>(p_item_list);
-            net_incompletes[p_net_no - 1] = new NetIncompletes(p_net_no, item_list, p_board);
+            net_incompletes[p_net_no - 1] = new NetIncompletes(p_net_no, p_item_list, p_board);
         }
     }
 
@@ -120,7 +119,7 @@ public class RatsNest {
      * to big, {@literal <} 0, if the trace length is to smalll, 0, if the thace
      * length is ok or the net has no length restrictions
      */
-    public double get_length_violation(int p_net_no) {
+    public double get_length_violation(final int p_net_no) {
         if (p_net_no <= 0 || p_net_no > net_incompletes.length) {
             return 0;
         }
@@ -175,7 +174,7 @@ public class RatsNest {
     /**
      * Sets the visibility filter for the incompletes of the input net.
      */
-    public void set_filter(int p_net_no, boolean p_value) {
+    public void set_filter(final int p_net_no, final boolean p_value) {
         if (p_net_no < 1 || p_net_no > is_filtered.length) {
             return;
         }

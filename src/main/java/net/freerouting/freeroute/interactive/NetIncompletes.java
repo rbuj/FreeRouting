@@ -209,17 +209,18 @@ public final class NetIncompletes {
      * net. Pairs belonging to the same connected set are located next to each
      * other.
      */
-    private List<NetItem> calculate_net_items(Collection<Item> p_item_list) {
-        int max_element_count = p_item_list.size();
+    private List<NetItem> calculate_net_items(final Collection<Item> p_item_list) {
+        ArrayList<Item> item_list = new ArrayList<>(p_item_list);
+        int max_element_count = item_list.size();
         ArrayList<NetItem> result = new ArrayList<>(max_element_count);
         int curr_index = 0;
-        while (!p_item_list.isEmpty()) {
-            Optional<Item> optional_start_item = p_item_list.stream().findFirst();
+        while (!item_list.isEmpty()) {
+            Optional<Item> optional_start_item = item_list.stream().findFirst();
             if (!optional_start_item.isPresent()) {
                 break;
             } else {
                 Collection<Item> curr_connected_set = optional_start_item.get().get_connected_set(this.net.net_number);
-                p_item_list.removeAll(curr_connected_set);
+                item_list.removeAll(curr_connected_set);
                 for (Item curr_item : curr_connected_set) {
                     if (curr_index > max_element_count) {
                         System.out.println("NetIncompletes.calculate_net_items: to many items");
@@ -237,7 +238,9 @@ public final class NetIncompletes {
      * Joins p_from_connected_set to p_to_connected_set and updates the
      * connected sets of the items in p_net_items.
      */
-    private void join_connected_sets(List<NetItem> p_net_items, Collection<Item> p_from_connected_set, Collection<Item> p_to_connected_set) {
+    private void join_connected_sets(List<NetItem> p_net_items,
+            final Collection<Item> p_from_connected_set,
+            Collection<Item> p_to_connected_set) {
         for (NetItem curr_item : p_net_items) {
             if (curr_item.connected_set == p_from_connected_set) {
                 p_to_connected_set.add(curr_item.item);
