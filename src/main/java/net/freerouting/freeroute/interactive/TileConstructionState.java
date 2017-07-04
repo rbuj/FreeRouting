@@ -19,7 +19,10 @@
  */
 package net.freerouting.freeroute.interactive;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.stream.Collectors;
 import net.freerouting.freeroute.board.AngleRestriction;
 import net.freerouting.freeroute.board.FixedState;
 import net.freerouting.freeroute.board.RoutingBoard;
@@ -165,10 +168,7 @@ public class TileConstructionState extends CornerItemConstructionState {
         }
         if (new_length < corner_arr.length) {
             // somthing skipped, update corner_list
-            corner_list = new java.util.LinkedList<>();
-            for (int i = 0; i < new_length; ++i) {
-                corner_list.add(corner_arr[i]);
-            }
+            corner_list = Arrays.stream(corner_arr).collect(Collectors.toCollection(LinkedList::new));
         }
     }
 
@@ -196,10 +196,7 @@ public class TileConstructionState extends CornerItemConstructionState {
 
         if (new_length != corner_arr.length) {
             // recalculate the corner_list
-            corner_list = new java.util.LinkedList<>();
-            for (int i = 0; i < new_length; ++i) {
-                corner_list.add(corner_arr[i]);
-            }
+            corner_list = Arrays.stream(corner_arr).collect(Collectors.toCollection(LinkedList::new));
             add_corner_for_snap_angle();
         }
     }

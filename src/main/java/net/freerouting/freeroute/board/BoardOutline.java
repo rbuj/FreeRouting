@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ListIterator;
 import java.util.Locale;
+import java.util.stream.Collectors;
 import net.freerouting.freeroute.boardgraphics.GraphicsContext;
 import net.freerouting.freeroute.geometry.planar.Area;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
@@ -63,7 +64,7 @@ public class BoardOutline extends Item {
      */
     BoardOutline(PolylineShape[] p_shapes, int p_clearance_class_no, int p_id_no, BasicBoard p_board) {
         super(new int[0], p_clearance_class_no, p_id_no, 0, FixedState.SYSTEM_FIXED, p_board);
-        shapes = new ArrayList<>(Arrays.asList(p_shapes));
+        shapes = Arrays.stream(p_shapes).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**

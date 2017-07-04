@@ -19,9 +19,11 @@
  */
 package net.freerouting.freeroute.geometry.planar;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 /**
  * A PolylineArea is an Area, where the outside border curve and the hole
@@ -192,10 +194,7 @@ public class PolylineArea implements Area, java.io.Serializable {
                 // split failed
                 return null;
             }
-            Collection<TileShape> curr_piece_list = new LinkedList<>();
-            for (int i = 0; i < convex_border_pieces.length; ++i) {
-                curr_piece_list.add(convex_border_pieces[i]);
-            }
+            Collection<TileShape> curr_piece_list = Arrays.stream(convex_border_pieces).collect(Collectors.toCollection(LinkedList::new));
             for (int i = 0; i < hole_arr.length; ++i) {
                 if (hole_arr[i].dimension() < 2) {
                     System.out.println("PolylineArea. split_to_convex: dimennsion 2 for hole expected");
@@ -252,7 +251,6 @@ public class PolylineArea implements Area, java.io.Serializable {
             new_hole_arr[i] = hole_arr[i].mirror_vertical(p_pole);
         }
         return new PolylineArea(new_border, new_hole_arr);
-
     }
 
     @Override
@@ -263,7 +261,6 @@ public class PolylineArea implements Area, java.io.Serializable {
             new_hole_arr[i] = hole_arr[i].mirror_horizontal(p_pole);
         }
         return new PolylineArea(new_border, new_hole_arr);
-
     }
 
 }

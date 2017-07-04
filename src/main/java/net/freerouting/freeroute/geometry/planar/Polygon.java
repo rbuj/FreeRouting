@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -42,8 +43,7 @@ public class Polygon implements java.io.Serializable {
             corners = new ArrayList<>();
             return;
         }
-        corners = new ArrayList<>(Arrays.asList(p_point_arr));
-
+        corners = Arrays.stream(p_point_arr).collect(Collectors.toCollection(ArrayList::new));
         check();
     }
 

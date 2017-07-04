@@ -19,6 +19,7 @@
  */
 package net.freerouting.freeroute.interactive;
 
+import java.util.LinkedList;
 import net.freerouting.freeroute.board.AngleRestriction;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
@@ -33,7 +34,7 @@ public class CornerItemConstructionState extends InteractiveState {
     /**
      * stored corners of the shape of the item under construction
      */
-    java.util.LinkedList<IntPoint> corner_list = new java.util.LinkedList<>();
+    LinkedList<IntPoint> corner_list = new LinkedList<>();
     FloatPoint snapped_mouse_position;
     boolean observers_activated = false;
 

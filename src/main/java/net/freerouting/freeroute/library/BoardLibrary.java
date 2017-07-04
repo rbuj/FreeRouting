@@ -22,6 +22,7 @@ package net.freerouting.freeroute.library;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Describes a board library of packages and padstacks.
@@ -56,7 +57,7 @@ public class BoardLibrary implements java.io.Serializable {
      * routing for inserting vias.
      */
     public void set_via_padstacks(Padstack[] p_padstacks) {
-        this.via_padstacks = new ArrayList<>(Arrays.asList(p_padstacks));
+        this.via_padstacks = Arrays.stream(p_padstacks).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
