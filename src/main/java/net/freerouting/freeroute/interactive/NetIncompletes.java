@@ -21,9 +21,9 @@ package net.freerouting.freeroute.interactive;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -98,15 +98,15 @@ public final class NetIncompletes {
         this.net = p_board.rules.nets.get(p_net_no);
 
         // Create an array of Item-connected_set pairs.
-        NetItem[] net_items = calculate_net_items(p_net_items);
-        if (net_items.length <= 1) {
+        List<NetItem> net_items = calculate_net_items(p_net_items);
+        if (net_items.size() <= 1) {
             return;
         }
 
         // create a Delauny Triangulation for the net_items
         Collection<PlanarDelaunayTriangulation.Storable> triangulation_objects
                 = new LinkedList<>();
-        triangulation_objects.addAll(Arrays.asList(net_items));
+        triangulation_objects.addAll(net_items);
         PlanarDelaunayTriangulation triangulation = new PlanarDelaunayTriangulation(triangulation_objects);
 
         // sort the result edges of the triangulation by length in ascending order.
@@ -209,7 +209,7 @@ public final class NetIncompletes {
      * net. Pairs belonging to the same connected set are located next to each
      * other.
      */
-    private NetItem[] calculate_net_items(Collection<Item> p_item_list) {
+    private List<NetItem> calculate_net_items(Collection<Item> p_item_list) {
         int max_element_count = p_item_list.size();
         ArrayList<NetItem> result = new ArrayList<>(max_element_count);
         int curr_index = 0;
@@ -223,23 +223,22 @@ public final class NetIncompletes {
                 for (Item curr_item : curr_connected_set) {
                     if (curr_index > max_element_count) {
                         System.out.println("NetIncompletes.calculate_net_items: to many items");
-                        return result.stream().toArray(NetItem[]::new);
+                        return result;
                     }
                     result.add(curr_index, new NetItem(curr_item, curr_connected_set));
                     ++curr_index;
                 }
             }
         }
-        return result.stream().toArray(NetItem[]::new);
+        return result;
     }
 
     /**
      * Joins p_from_connected_set to p_to_connected_set and updates the
      * connected sets of the items in p_net_items.
      */
-    private void join_connected_sets(NetItem[] p_net_items, Collection<Item> p_from_connected_set, Collection<Item> p_to_connected_set) {
-        for (int i = 0; i < p_net_items.length; ++i) {
-            NetItem curr_item = p_net_items[i];
+    private void join_connected_sets(List<NetItem> p_net_items, Collection<Item> p_from_connected_set, Collection<Item> p_to_connected_set) {
+        for (NetItem curr_item : p_net_items) {
             if (curr_item.connected_set == p_from_connected_set) {
                 p_to_connected_set.add(curr_item.item);
                 curr_item.connected_set = p_to_connected_set;
