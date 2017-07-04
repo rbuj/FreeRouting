@@ -38,8 +38,8 @@ public class FloatLine {
         if (p_a == null || p_b == null) {
             System.out.println("FloatLine: Parameter is null");
         }
-        a = p_a;
-        b = p_b;
+        a = new FloatPoint(p_a);
+        b = new FloatPoint(p_b);
     }
 
     /**

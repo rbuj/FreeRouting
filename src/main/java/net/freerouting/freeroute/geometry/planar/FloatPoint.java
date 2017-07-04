@@ -82,6 +82,14 @@ public class FloatPoint implements java.io.Serializable {
     }
 
     /**
+     * Copy constructor.
+     */
+    FloatPoint(FloatPoint float_point) {
+        x = float_point.x;
+        y = float_point.y;
+    }
+
+    /**
      * returns the square of the distance from this point to the zero point
      */
     public final double size_square() {
