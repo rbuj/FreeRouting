@@ -37,7 +37,6 @@ public class DestinationDistance {
     private final int active_layer_count;
 
     private double min_normal_via_cost;
-    private double min_cheap_via_cost;
     double min_component_side_trace_cost;
     double max_component_side_trace_cost;
     double min_solder_side_trace_cost;
@@ -71,7 +70,6 @@ public class DestinationDistance {
         layer_active = (p_layer_active == null) ? null : p_layer_active.clone();
         layer_count = p_layer_active.length;
         min_normal_via_cost = p_min_normal_via_cost;
-        min_cheap_via_cost = p_min_cheap_via_cost;
         int curr_active_layer_count = 0;
         for (int ind = 0; ind < layer_count; ++ind) {
             if (layer_active[ind]) {

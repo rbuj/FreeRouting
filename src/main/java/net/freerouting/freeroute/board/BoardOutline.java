@@ -52,11 +52,6 @@ public class BoardOutline extends Item {
      * generated The outline curves are holes of the keepout_area.
      */
     private Area keepout_area = null;
-    /**
-     * Used instead of keepout_area if only the line shapes of the outlines are
-     * inserted as keepout.
-     */
-    private TileShape[] keepout_lines = null;
     private boolean keepout_outside_outline = false;
 
     /**
@@ -147,7 +142,6 @@ public class BoardOutline extends Item {
         if (keepout_area != null) {
             keepout_area = keepout_area.translate_by(p_vector);
         }
-        keepout_lines = null;
     }
 
     @Override
@@ -159,7 +153,6 @@ public class BoardOutline extends Item {
         if (keepout_area != null) {
             keepout_area = keepout_area.turn_90_degree(p_factor, p_pole);
         }
-        keepout_lines = null;
     }
 
     @Override
@@ -172,7 +165,6 @@ public class BoardOutline extends Item {
         if (keepout_area != null) {
             keepout_area = keepout_area.rotate_approx(angle, p_pole);
         }
-        keepout_lines = null;
     }
 
     @Override
@@ -184,7 +176,6 @@ public class BoardOutline extends Item {
         if (keepout_area != null) {
             keepout_area = keepout_area.mirror_vertical(p_pole);
         }
-        keepout_lines = null;
     }
 
     @Override
