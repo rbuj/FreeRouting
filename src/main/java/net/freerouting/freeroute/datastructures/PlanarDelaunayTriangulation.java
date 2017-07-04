@@ -61,7 +61,7 @@ public class PlanarDelaunayTriangulation {
     /**
      * Creates a new instance of PlanarDelaunayTriangulation from p_object_list.
      */
-    public PlanarDelaunayTriangulation(Collection<PlanarDelaunayTriangulation.Storable> p_object_list) {
+    public PlanarDelaunayTriangulation(final Collection<PlanarDelaunayTriangulation.Storable> p_object_list) {
         List<Corner> corner_list = new LinkedList<>();
         for (PlanarDelaunayTriangulation.Storable curr_object : p_object_list) {
             Point[] curr_corners = curr_object.get_triangulation_corners();
@@ -81,9 +81,8 @@ public class PlanarDelaunayTriangulation {
         bounding_corners[2] = new Corner(null, new IntPoint(-bounding_coor, -bounding_coor));
 
         Edge[] edge_lines = new Edge[3];
-        for (int i = 0; i < 2; ++i) {
-            edge_lines[i] = new Edge(bounding_corners[i], bounding_corners[i + 1]);
-        }
+        edge_lines[0] = new Edge(bounding_corners[0], bounding_corners[1]);
+        edge_lines[1] = new Edge(bounding_corners[1], bounding_corners[2]);
         edge_lines[2] = new Edge(bounding_corners[2], bounding_corners[0]);
 
         Triangle start_triangle = new Triangle(edge_lines, null);

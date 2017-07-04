@@ -104,10 +104,7 @@ public final class NetIncompletes {
         }
 
         // create a Delauny Triangulation for the net_items
-        Collection<PlanarDelaunayTriangulation.Storable> triangulation_objects
-                = new LinkedList<>();
-        triangulation_objects.addAll(net_items);
-        PlanarDelaunayTriangulation triangulation = new PlanarDelaunayTriangulation(triangulation_objects);
+        PlanarDelaunayTriangulation triangulation = new PlanarDelaunayTriangulation(new ArrayList<>(net_items));
 
         // sort the result edges of the triangulation by length in ascending order.
         Collection<PlanarDelaunayTriangulation.ResultEdge> triangulation_lines = triangulation.get_edge_lines();
