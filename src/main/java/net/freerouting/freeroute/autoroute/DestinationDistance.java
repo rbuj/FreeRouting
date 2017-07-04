@@ -65,7 +65,7 @@ public class DestinationDistance {
      * p_layer_active are arrays of dimension layer_count.
      */
     DestinationDistance(ExpansionCostFactor[] p_trace_costs,
-            boolean[] p_layer_active, double p_min_normal_via_cost, double p_min_cheap_via_cost) {
+            boolean[] p_layer_active, double p_min_normal_via_cost) {
         trace_costs = (p_trace_costs == null) ? null : p_trace_costs.clone();
         layer_active = (p_layer_active == null) ? null : p_layer_active.clone();
         layer_count = p_layer_active.length;

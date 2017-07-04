@@ -199,7 +199,7 @@ public class MazeSearchAlgo {
         maze_expansion_list = new TreeSet<>();
         destination_distance
                 = new DestinationDistance(ctrl.trace_costs, ctrl.layer_active,
-                        ctrl.min_normal_via_cost, ctrl.min_cheap_via_cost);
+                        ctrl.min_normal_via_cost);
     }
 
     /**
