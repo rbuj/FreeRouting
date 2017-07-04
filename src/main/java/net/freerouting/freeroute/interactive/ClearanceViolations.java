@@ -19,10 +19,13 @@
  */
 package net.freerouting.freeroute.interactive;
 
+import com.google.common.collect.ImmutableList;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 import net.freerouting.freeroute.board.ClearanceViolation;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.boardgraphics.GraphicsContext;
@@ -32,30 +35,27 @@ import net.freerouting.freeroute.boardgraphics.GraphicsContext;
  *
  * @author alfons
  */
-public class ClearanceViolations {
+public class ClearanceViolations implements Iterable<ClearanceViolation>{
 
     /**
      * The list of clearance violations.
      */
-    public final Collection<ClearanceViolation> list;
+    private final ImmutableList<ClearanceViolation> immutable_list;
 
     /**
      * Creates a new instance of ClearanceViolations
      */
     public ClearanceViolations(Collection<Item> p_item_list) {
-        this.list = new LinkedList<>();
-        Iterator<Item> it = p_item_list.iterator();
-        while (it.hasNext()) {
-            Item curr_item = it.next();
-            this.list.addAll(curr_item.clearance_violations());
-        }
+        List<ClearanceViolation> list = p_item_list.stream()
+                .map(item -> item.clearance_violations())
+                .flatMap(cv -> cv.stream())
+                .collect(Collectors.toCollection(ArrayList<ClearanceViolation>::new));
+        immutable_list = ImmutableList.copyOf(list);
     }
 
     public void draw(Graphics p_graphics, GraphicsContext p_graphics_context) {
         java.awt.Color draw_color = p_graphics_context.get_violations_color();
-        Iterator<ClearanceViolation> it = list.iterator();
-        while (it.hasNext()) {
-            ClearanceViolation curr_violation = it.next();
+        for (ClearanceViolation curr_violation : immutable_list) {
             double intensity = p_graphics_context.get_layer_visibility(curr_violation.layer_no);
             p_graphics_context.fill_area(curr_violation.shape, p_graphics, draw_color, intensity);
             // draw a circle around the violation.
@@ -65,4 +65,12 @@ public class ClearanceViolations {
         }
     }
 
+    @Override
+    public Iterator<ClearanceViolation> iterator() {
+        return immutable_list.iterator();
+    }
+
+    int size() {
+        return immutable_list.size();
+    }
 }

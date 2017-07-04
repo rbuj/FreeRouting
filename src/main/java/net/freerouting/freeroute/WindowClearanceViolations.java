@@ -53,7 +53,7 @@ public final class WindowClearanceViolations extends WindowObjectListWithFilter 
         ClearanceViolations clearance_violations
                 = new ClearanceViolations(board_handling.get_routing_board().get_items());
         java.util.SortedSet<ViolationInfo> sorted_set = new java.util.TreeSet<>();
-        for (ClearanceViolation curr_violation : clearance_violations.list) {
+        for (ClearanceViolation curr_violation : clearance_violations) {
             sorted_set.add(new ViolationInfo(curr_violation));
         }
         for (ViolationInfo curr_violation : sorted_set) {

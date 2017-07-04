@@ -430,7 +430,7 @@ public final class BoardHandling {
     public void toggle_clearance_violations() {
         if (clearance_violations == null) {
             clearance_violations = new ClearanceViolations(this.board.get_items());
-            Integer violation_count = (clearance_violations.list.size() + 1) / 2;
+            Integer violation_count = (clearance_violations.size() + 1) / 2;
             String curr_message = violation_count.toString() + " " + resources.getString("clearance_violations_found");
             screen_messages.set_status_message(curr_message);
         } else {

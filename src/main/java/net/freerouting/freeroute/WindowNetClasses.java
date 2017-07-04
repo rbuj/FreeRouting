@@ -133,7 +133,6 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
         while (it.hasNext()) {
             javax.swing.JFrame curr_subwindow = it.next();
             if (curr_subwindow != null) {
-
                 curr_subwindow.dispose();
             }
             it.remove();

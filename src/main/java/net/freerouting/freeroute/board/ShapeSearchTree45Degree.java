@@ -208,13 +208,7 @@ public class ShapeSearchTree45Degree extends ShapeSearchTree {
         }
         result = divide_large_room(result, board.get_bounding_box());
         // remove rooms with shapes equal to the contained shape to prevent endless loop.
-        java.util.Iterator<IncompleteFreeSpaceExpansionRoom> it = result.iterator();
-        while (it.hasNext()) {
-            IncompleteFreeSpaceExpansionRoom curr_room = it.next();
-            if (curr_room.get_contained_shape().contains(curr_room.get_shape())) {
-                it.remove();
-            }
-        }
+        result.removeIf(curr_room -> curr_room.get_contained_shape().contains(curr_room.get_shape()));
         return result;
     }
 

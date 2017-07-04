@@ -715,7 +715,7 @@ public class SelectedItemState extends InteractiveState {
     public void toggle_clearance_violations() {
         if (clearance_violations == null) {
             clearance_violations = new ClearanceViolations(this.item_list);
-            Integer violation_count = clearance_violations.list.size();
+            Integer violation_count = clearance_violations.size();
             String curr_message = violation_count.toString() + " " + resources.getString("clearance_violations_found");
             hdlg.screen_messages.set_status_message(curr_message);
         } else {

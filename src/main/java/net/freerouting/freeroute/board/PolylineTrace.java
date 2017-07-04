@@ -214,12 +214,7 @@ public class PolylineTrace extends Trace {
         Collection<Item> contacts = get_normal_contacts(start_corner, false);
         if (p_ignore_areas) {
             // remove conduction areas from the list
-            Iterator<Item> it = contacts.iterator();
-            while (it.hasNext()) {
-                if (it.next() instanceof ConductionArea) {
-                    it.remove();
-                }
-            }
+            contacts.removeIf(ConductionArea.class::isInstance);
         }
         if (contacts.size() != 1) {
             return false;
@@ -314,12 +309,7 @@ public class PolylineTrace extends Trace {
         Collection<Item> contacts = get_normal_contacts(end_corner, false);
         if (p_ignore_areas) {
             // remove conduction areas from the list
-            Iterator<Item> it = contacts.iterator();
-            while (it.hasNext()) {
-                if (it.next() instanceof ConductionArea) {
-                    it.remove();
-                }
-            }
+            contacts.removeIf(ConductionArea.class::isInstance);
         }
         if (contacts.size() != 1) {
             return false;
@@ -479,12 +469,10 @@ public class PolylineTrace extends Trace {
                             int line_no = found_entry.shape_index_in_object + 1;
                             PolylineTrace[] curr_split_pieces = found_trace.split(line_no, intersecting_lines[j]);
                             if (curr_split_pieces != null) {
-
                                 for (int k = 0; k < 2; ++k) {
                                     if (curr_split_pieces[k] != null) {
                                         found_trace_split = true;
                                         split_pieces.add(curr_split_pieces[k]);
-
                                     }
                                 }
                                 if (found_trace_split) {

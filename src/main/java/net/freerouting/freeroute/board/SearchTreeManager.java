@@ -135,13 +135,7 @@ public class SearchTreeManager {
      */
     public void clearance_value_changed() {
         // delete all trees except the default tree
-        Iterator<ShapeSearchTree> it = this.compensated_search_trees.iterator();
-        while (it.hasNext()) {
-            ShapeSearchTree curr_tree = it.next();
-            if (curr_tree.compensated_clearance_class_no != default_tree.compensated_clearance_class_no) {
-                it.remove();
-            }
-        }
+        this.compensated_search_trees.removeIf(curr_tree -> curr_tree.compensated_clearance_class_no != default_tree.compensated_clearance_class_no);
         if (this.clearance_compensation_used) {
             remove_all_board_items();
             insert_all_board_items();
@@ -152,17 +146,11 @@ public class SearchTreeManager {
      * Actions to be done, when a new clearance class is removed interactively.
      */
     public void clearance_class_removed(int p_no) {
-        Iterator<ShapeSearchTree> it = this.compensated_search_trees.iterator();
         if (p_no == default_tree.compensated_clearance_class_no) {
             System.out.println("SearchtreeManager.clearance_class_removed: unable to remove default tree");
             return;
         }
-        while (it.hasNext()) {
-            ShapeSearchTree curr_tree = it.next();
-            if (curr_tree.compensated_clearance_class_no == p_no) {
-                it.remove();
-            }
-        }
+        this.compensated_search_trees.removeIf(curr_tree -> curr_tree.compensated_clearance_class_no == p_no);
     }
 
     /**
@@ -202,13 +190,7 @@ public class SearchTreeManager {
      * the default tree.
      */
     public void reset_compensated_trees() {
-        Iterator<ShapeSearchTree> it = this.compensated_search_trees.iterator();
-        while (it.hasNext()) {
-            ShapeSearchTree curr_tree = it.next();
-            if (curr_tree != default_tree) {
-                it.remove();
-            }
-        }
+        this.compensated_search_trees.removeIf(curr_tree -> curr_tree != default_tree);
     }
 
     /**
