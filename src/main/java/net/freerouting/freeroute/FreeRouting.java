@@ -16,6 +16,7 @@
  */
 package net.freerouting.freeroute;
 
+import java.awt.Desktop;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,9 +44,9 @@ public class FreeRouting {
                 System.setProperty("apple.awt.application.name", "FreeRouting");
                 System.setProperty("apple.laf.useScreenMenuBar", "true");
                 System.setProperty("apple.awt.fileDialogForDirectories", "true");
-                com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
-                macApp.setAboutHandler(null);
-                macApp.setQuitHandler(null);
+                Desktop desktop = java.awt.Desktop.getDesktop();
+                desktop.setAboutHandler(null);
+                desktop.setQuitHandler(null);
             }
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {

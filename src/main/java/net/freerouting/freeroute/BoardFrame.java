@@ -15,6 +15,7 @@
  */
 package net.freerouting.freeroute;
 
+import java.awt.Desktop;
 import java.awt.desktop.AboutEvent;
 import java.awt.desktop.QuitEvent;
 import java.awt.desktop.QuitResponse;
@@ -204,11 +205,11 @@ public final class BoardFrame extends javax.swing.JFrame {
         addWindowListener(new WindowStateListener());
 
         if (System.getProperty("os.name").equals("Mac OS X")) {
-            com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
-            macApp.setAboutHandler((AboutEvent e) -> {
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            desktop.setAboutHandler((AboutEvent e) -> {
                 savable_subwindows.get(SavableSubwindowKey.ABOUT).setVisible(true);
             });
-            macApp.setQuitHandler((QuitEvent e, QuitResponse response) -> {
+            desktop.setQuitHandler((QuitEvent e, QuitResponse response) -> {
                 dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
             });
         }
@@ -406,9 +407,9 @@ public final class BoardFrame extends javax.swing.JFrame {
         setVisible(false);
         if (System.getProperty("os.name").equals("Mac OS X")) {
             getJMenuBar().removeAll();
-            com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
-            macApp.setAboutHandler(null);
-            macApp.setQuitHandler(null);
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            desktop.setAboutHandler(null);
+            desktop.setQuitHandler(null);
         }
         if (savable_subwindows != null) {
             savable_subwindows.dispose_all();
