@@ -53,6 +53,8 @@ final class BoardToolbar extends javax.swing.JPanel {
 
         // create the left toolbar
         final javax.swing.JToolBar left_toolbar = new javax.swing.JToolBar();
+        left_toolbar.setFloatable(false);
+
         final javax.swing.ButtonGroup toolbar_button_group = new javax.swing.ButtonGroup();
         this.select_button = new javax.swing.JToggleButton();
         this.route_button = new javax.swing.JToggleButton();
@@ -97,6 +99,7 @@ final class BoardToolbar extends javax.swing.JPanel {
 
         // create the middle toolbar
         final javax.swing.JToolBar middle_toolbar = new javax.swing.JToolBar();
+        middle_toolbar.setFloatable(false);
 
         final javax.swing.JButton autoroute_button = new javax.swing.JButton(
                 resources.getString("autoroute_button"),
@@ -205,6 +208,8 @@ final class BoardToolbar extends javax.swing.JPanel {
 
         // create the right toolbar
         final javax.swing.JToolBar right_toolbar = new javax.swing.JToolBar();
+        right_toolbar.setFloatable(false);
+
         final javax.swing.JLabel unit_label = new javax.swing.JLabel();
         java.text.NumberFormat number_format = java.text.NumberFormat.getInstance(locale);
         number_format.setMaximumFractionDigits(7);

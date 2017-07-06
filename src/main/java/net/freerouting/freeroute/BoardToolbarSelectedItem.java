@@ -45,6 +45,8 @@ final class BoardToolbarSelectedItem extends javax.swing.JToolBar {
         this.resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardToolbarSelectedItem", Locale.getDefault());
 
+        this.setFloatable(false);
+
         javax.swing.JButton cancel_button = new javax.swing.JButton(
                 resources.getString("cancel"),
                 new ImageIcon(BoardToolbarSelectedItem.class.getResource("/icons/32/actions/process-stop.png")));
