@@ -46,11 +46,13 @@ class BoardMenuHelpReduced extends BoardMenu {
 
     private void initializeComponents() {
         this.setText(this.resources.getString("help"));
-        javax.swing.JMenuItem about_window = new javax.swing.JMenuItem();
-        about_window.setText(this.resources.getString("about"));
-        about_window.addActionListener((java.awt.event.ActionEvent evt) -> {
-            board_frame.savable_subwindows.get(SavableSubwindowKey.ABOUT).setVisible(true);
-        });
-        this.add(about_window);
+        if (!System.getProperty("os.name").equals("Mac OS X")) {
+            javax.swing.JMenuItem about_window = new javax.swing.JMenuItem();
+            about_window.setText(this.resources.getString("about"));
+            about_window.addActionListener((java.awt.event.ActionEvent evt) -> {
+                board_frame.savable_subwindows.get(SavableSubwindowKey.ABOUT).setVisible(true);
+            });
+            this.add(about_window);
+        }
     }
 }
