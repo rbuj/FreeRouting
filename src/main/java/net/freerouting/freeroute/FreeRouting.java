@@ -39,6 +39,14 @@ public class FreeRouting {
         System.setProperty("sun.java2d.opengl", "true");
         // System look & feel
         try {
+            if (System.getProperty("os.name").equals("Mac OS X")) {
+                System.setProperty("apple.awt.application.name", "FreeRouting");
+                System.setProperty("apple.laf.useScreenMenuBar", "true");
+                System.setProperty("apple.awt.fileDialogForDirectories", "true");
+                com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
+                macApp.setAboutHandler(null);
+                macApp.setQuitHandler(null);
+            }
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.INFO, null, ex);

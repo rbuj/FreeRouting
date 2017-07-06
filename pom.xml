@@ -105,7 +105,7 @@
                                 <argument>-Dglass.disableGrab=true</argument>
                                 <argument>-cp</argument>
                                 <classpath/>
-                                <argument>net.freerouting.freeroute.MainApp</argument>
+                                <argument>${mainClass}</argument>
                             </arguments>
                         </configuration>
                     </execution>
