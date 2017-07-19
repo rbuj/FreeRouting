@@ -331,9 +331,7 @@ public class SessionFile {
         }
         if (corner_index < coors.length) {
             int[] adjusted_coors = new int[corner_index];
-            for (int i = 0; i < adjusted_coors.length; ++i) {
-                adjusted_coors[i] = coors[i];
-            }
+            System.arraycopy(coors, 0, adjusted_coors, 0, adjusted_coors.length);
             coors = adjusted_coors;
         }
         write_path(board_layer.get_name(), wire_width, coors, p_identifier_type, p_file);

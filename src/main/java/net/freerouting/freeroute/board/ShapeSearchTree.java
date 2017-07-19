@@ -136,9 +136,7 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
         }
 
         // correct the precalculated tree shapes first, because it is used in this.insert
-        for (int i = p_keep_at_start_count; i < new_shape_count - p_keep_at_end_count; ++i) {
-            new_precalculated_tree_shapes[i] = changed_shapes[i - p_keep_at_start_count];
-        }
+        System.arraycopy(changed_shapes, 0, new_precalculated_tree_shapes, p_keep_at_start_count, new_shape_count - p_keep_at_end_count - p_keep_at_start_count);
         p_obj.set_precalculated_tree_shapes(new_precalculated_tree_shapes, this);
 
         for (int i = p_keep_at_start_count; i < new_shape_count - p_keep_at_end_count; ++i) {
@@ -868,9 +866,7 @@ public class ShapeSearchTree extends net.freerouting.freeroute.datastructures.Mi
             int offset_width = this.clearance_compensation_value(p_obstacle_area.clearance_class_no(), p_obstacle_area.get_layer_no());
             curr_convex_shape = (TileShape) curr_convex_shape.enlarge(offset_width);
             TileShape[] curr_tree_shapes = curr_convex_shape.divide_into_sections(max_tree_shape_width);
-            for (int j = 0; j < curr_tree_shapes.length; ++j) {
-                tree_shape_list.add(curr_tree_shapes[j]);
-            }
+            Collections.addAll(tree_shape_list, curr_tree_shapes);
         }
         return tree_shape_list.stream().toArray(TileShape[]::new);
     }

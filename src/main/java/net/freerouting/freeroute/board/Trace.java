@@ -321,12 +321,10 @@ public abstract class Trace extends Item implements Connectable {
         Collection<Item> start_contacts = this.get_start_contacts();
         // a cycle exists if through expanding the start contact we reach
         // this trace again via an end contact
-        for (Item curr_contact : start_contacts) {
-            // make shure, that all direct neighbours are
-            // expanded from here, to block coming back to
-            // this trace via a start contact.
-            visited_items.add(curr_contact);
-        }
+        // make shure, that all direct neighbours are
+        // expanded from here, to block coming back to
+        // this trace via a start contact.
+        visited_items.addAll(start_contacts);
         boolean ignore_areas = false;
         if (this.net_no_arr.length > 0) {
             net.freerouting.freeroute.rules.Net curr_net = this.board.rules.nets.get(this.net_no_arr[0]);

@@ -1267,9 +1267,7 @@ public class IntOctagon extends RegularTileShape {
         }
 
         // add the 4 octagons to the result
-        for (int i = 0; i < 4; ++i) {
-            result[4 + i] = octagons[i];
-        }
+        System.arraycopy(octagons, 0, result, 4, 4);
         return result;
     }
 

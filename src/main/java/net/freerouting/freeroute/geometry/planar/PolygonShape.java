@@ -345,12 +345,8 @@ public class PolygonShape extends PolylineShape {
             if (next_point.side_of(prev_point, curr_point) != Side.ON_THE_LEFT) {
                 //skip curr_point;
                 Point[] new_corners = new Point[corners.length - 1];
-                for (int i = 0; i < ind; ++i) {
-                    new_corners[i] = corners[i];
-                }
-                for (int i = ind; i < new_corners.length; ++i) {
-                    new_corners[i] = corners[i + 1];
-                }
+                System.arraycopy(corners, 0, new_corners, 0, ind);
+                System.arraycopy(corners, ind + 1, new_corners, ind, new_corners.length - ind);
                 PolygonShape result = new PolygonShape(new_corners);
                 return result.convex_hull();
             }

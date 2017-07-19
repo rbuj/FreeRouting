@@ -96,9 +96,7 @@ class Net {
 
     void set_pins(Collection<Pin> p_pin_list) {
         pin_list = new TreeSet<>();
-        for (Pin curr_pin : p_pin_list) {
-            pin_list.add(curr_pin);
-        }
+        pin_list.addAll(p_pin_list);
     }
 
     Set<Pin> get_pins() {
