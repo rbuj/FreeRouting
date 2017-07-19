@@ -713,9 +713,7 @@ public abstract class TileShape extends PolylineShape implements ConvexShape {
         }
         int[][] normalized_result = new int[intersection_count][2];
         for (int j = 0; j < intersection_count; ++j) {
-            for (int i = 0; i < 2; ++i) {
-                normalized_result[j][i] = result[j][i];
-            }
+            System.arraycopy(result[j], 0, normalized_result[j], 0, 2);
         }
         return normalized_result;
     }

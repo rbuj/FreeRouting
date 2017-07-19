@@ -435,9 +435,7 @@ public final class WindowVia extends BoardSavableSubWindow {
                 return;
             }
             List<WindowObjectInfo.Printable> object_list = new LinkedList<>();
-            for (ViaRule selected_object : selected_objects) {
-                object_list.add(selected_object);
-            }
+            object_list.addAll(selected_objects);
             net.freerouting.freeroute.board.CoordinateTransform coordinate_transform = board_frame.board_panel.board_handling.coordinate_transform;
             WindowObjectInfo new_window
                     = WindowObjectInfo.display(resources.getString("selected_rule"), object_list, board_frame, coordinate_transform);

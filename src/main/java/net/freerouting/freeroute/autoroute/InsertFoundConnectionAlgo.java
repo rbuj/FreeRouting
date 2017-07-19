@@ -138,9 +138,7 @@ public class InsertFoundConnectionAlgo {
         int from_corner_no = 0;
         for (int i = 1; i < p_trace.corners.length; ++i) {
             Point[] curr_corner_arr = new Point[i - from_corner_no + 1];
-            for (int j = from_corner_no; j <= i; ++j) {
-                curr_corner_arr[j - from_corner_no] = p_trace.corners[j];
-            }
+            System.arraycopy(p_trace.corners, from_corner_no, curr_corner_arr, 0, i + 1 - from_corner_no);
             Polyline insert_polyline = new Polyline(curr_corner_arr);
             Point ok_point = board.insert_forced_trace_polyline(insert_polyline,
                     ctrl.trace_half_width[p_trace.layer], p_trace.layer, net_no_arr, ctrl.trace_clearance_class_no,
