@@ -20,6 +20,7 @@
 package net.freerouting.freeroute.board;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
