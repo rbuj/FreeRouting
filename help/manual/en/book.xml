@@ -765,21 +765,6 @@
                         <para>
                             If you want to transfer the changes of the design created by this software back to the host system, you can write here a session file in the Specctra .ses format. You can then import this file into the host system, as you would do it when using the Specctra or Electra autorouter. After the session file is written, you will be asked if you also want to save the rules created inside this program for later reuse. Answer with yes, if for example you have created Via Rules, which you want to reuse after switching forth and back to the host system. However a new created rule in the host system might be overwritten by a saved rule in this case.
                         </para>
-                        <para>
-                            If the original design file was created by Cadsoft-Eagle, you will see the following entry instead:
-                        </para>
-                    </listitem>
-                </varlistentry>
-                <varlistentry>
-                    <term>
-                        <filename>
-                            Export Eagle Session Script 
-                        </filename>
-                    </term>
-                    <listitem>
-                        <para>
-                            A text file with the same name as the design file and the extension .scr will be written. You can import the changes of the design to Cadsoft Eagle by selecting in the Files pull down menu of Eagle script... and choosing this text file. After the text file is written, you will be asked if you also want to save the rules created inside this program for later reuse. Answer with yes, if for example you have created Via Rules, which you want to reuse after switching forth and back to Eagle. However a new created rule in the Eagle might be overwritten by a saved rule in this case
-                        </para>
                     </listitem>
                 </varlistentry>
             </variablelist>

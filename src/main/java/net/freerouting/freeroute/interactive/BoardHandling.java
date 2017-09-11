@@ -49,7 +49,6 @@ import net.freerouting.freeroute.datastructures.IdNoGenerator;
 import net.freerouting.freeroute.designformats.specctra.DsnFile;
 import net.freerouting.freeroute.designformats.specctra.DsnFileException;
 import net.freerouting.freeroute.designformats.specctra.SessionFile;
-import net.freerouting.freeroute.designformats.specctra.SessionToEagle;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 import net.freerouting.freeroute.geometry.planar.IntBox;
 import net.freerouting.freeroute.geometry.planar.IntPoint;
@@ -988,16 +987,6 @@ public final class BoardHandling {
         } catch (DsnFileException exc) {
             throw new BoardHandlingException("the dsn-file is currupted", exc);
         }
-    }
-
-    /**
-     * Writes a session file ins the Eaglea scr format.
-     */
-    public boolean export_eagle_session_file(java.io.Reader p_reader, OutputStream p_output_stream) {
-        if (board_is_read_only) {
-            return false;
-        }
-        return SessionToEagle.get_instance(p_reader, p_output_stream, this.board);
     }
 
     /**

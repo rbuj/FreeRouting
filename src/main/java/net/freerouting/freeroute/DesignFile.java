@@ -20,8 +20,6 @@
  */
 package net.freerouting.freeroute;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -212,33 +210,6 @@ final class DesignFile {
             return false;
         }
         return true;
-    }
-
-    void update_eagle(BoardFrame p_board_frame) {
-        final java.util.ResourceBundle resources
-                = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.BoardMenuFile", Locale.getDefault());
-        String design_file_name = get_name();
-        String[] file_name_parts = design_file_name.split("\\.", 2);
-        String design_name = file_name_parts[0];
-        String output_file_name = design_name + ".scr";
-        File curr_output_file = new File(get_parent(), output_file_name);
-        try (ByteArrayOutputStream session_output_stream = new ByteArrayOutputStream();
-                Reader reader = new InputStreamReader(new ByteArrayInputStream(session_output_stream.toByteArray()), StandardCharsets.UTF_8);
-                OutputStream output_stream = new FileOutputStream(curr_output_file);) {
-            if (!p_board_frame.board_panel.board_handling.export_specctra_session_file(design_file_name, session_output_stream)) {
-                return;
-            }
-            if (p_board_frame.board_panel.board_handling.export_eagle_session_file(reader, output_stream)) {
-                p_board_frame.screen_messages.set_status_message(resources.getString("message_14") + " " + output_file_name + " " + resources.getString("message_15"));
-            } else {
-                p_board_frame.screen_messages.set_status_message(resources.getString("message_16") + " " + output_file_name + " " + resources.getString("message_7"));
-            }
-            if (WindowMessage.confirm(resources.getString("confirm"))) {
-                write_rules_file(design_name, p_board_frame.board_panel.board_handling);
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(DesignFile.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**

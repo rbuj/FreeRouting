@@ -74,11 +74,6 @@ public class Communication implements java.io.Serializable {
                 new CoordinateTransform(1, 0, 0), new net.freerouting.freeroute.board.ItemIdNoGenerator(), new BoardObserverAdaptor());
     }
 
-    public boolean host_cad_is_eagle() {
-        return specctra_parser_info != null && specctra_parser_info.host_cad != null
-                && specctra_parser_info.host_cad.equalsIgnoreCase("CadSoft");
-    }
-
     public boolean host_cad_exists() {
         return specctra_parser_info != null && specctra_parser_info.host_cad != null;
     }

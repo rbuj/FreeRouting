@@ -80,16 +80,6 @@ msgstr "Specctra-Session-Datei exportieren"
 msgid "writes a session file in the Specctra .ses format"
 msgstr "Schreibt eine Session-Datei im .ses-Format von Specctra"
 
-#: eagle_script
-msgid "Export Eagle Session Script"
-msgstr "Eagle-Session-Script exportieren"
-
-#: eagle_script_tooltip
-msgid "creates an eagle script to export the changes in routing"
-msgstr ""
-"Schreibt die �nderungen im Routing in ein Eagle-Script zum Update der "
-"entsprechenden .brd-Datei in Eagle"
-
 #: settings
 msgid "Save GUI Settings as Default"
 msgstr "GUI-Einstellungen als Default speichern "
@@ -158,17 +148,9 @@ msgstr "im Specctra-Format geschrieben"
 msgid "writing session file"
 msgstr "schreibe Session-Datei"
 
-#: message_14
-msgid "Eagle script file"
-msgstr "Eagle-Script-Datei"
-
 #: message_15
 msgid "written"
 msgstr "geschrieben"
-
-#: message_16
-msgid "creating Eagle script file"
-msgstr "erzeuge Eagle-Script-Datei"
 
 #: message_17
 msgid "GUI default settings saved"
@@ -189,7 +171,3 @@ msgstr "Das Host-Cad-System erwartet evtl. den Session-Dateinamen"
 #: message_21
 msgid "Please rename the file if necessary"
 msgstr "Bitte Datei gegebenenfalls umbenennen"
-
-#: message_22
-msgid "Eagle might expect the script file extension .scr "
-msgstr "Eagle erwartet evtl. die Dateierweiterung .scr f�r das Script-File."

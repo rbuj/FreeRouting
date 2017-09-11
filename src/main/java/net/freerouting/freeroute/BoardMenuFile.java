@@ -142,29 +142,13 @@ final class BoardMenuFile extends BoardMenu {
             return;
         }
         net.freerouting.freeroute.board.BasicBoard routing_board = this.board_frame.board_panel.board_handling.get_routing_board();
-        boolean host_cad_is_eagle = routing_board.communication.host_cad_is_eagle();
-
         javax.swing.JMenuItem write_session_file_item = new javax.swing.JMenuItem();
         write_session_file_item.setText(resources.getString("session_file"));
         write_session_file_item.setToolTipText(resources.getString("session_file_tooltip"));
         write_session_file_item.addActionListener((java.awt.event.ActionEvent evt) -> {
             board_frame.design_file.write_specctra_session_file(board_frame);
         });
-
-        if ((routing_board.get_test_level() != net.freerouting.freeroute.board.TestLevel.RELEASE_VERSION || !host_cad_is_eagle)) {
-            this.add(write_session_file_item);
-        }
-
-        javax.swing.JMenuItem write_eagle_session_script_item = new javax.swing.JMenuItem();
-        write_eagle_session_script_item.setText(resources.getString("eagle_script"));
-        write_eagle_session_script_item.setToolTipText(resources.getString("eagle_script_tooltip"));
-        write_eagle_session_script_item.addActionListener((java.awt.event.ActionEvent evt) -> {
-            board_frame.design_file.update_eagle(board_frame);
-        });
-
-        if (routing_board.get_test_level() != net.freerouting.freeroute.board.TestLevel.RELEASE_VERSION || host_cad_is_eagle) {
-            this.add(write_eagle_session_script_item);
-        }
+        this.add(write_session_file_item);
     }
 
     /**

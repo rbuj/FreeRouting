@@ -882,28 +882,6 @@ msgid ""
 "be overwritten by a saved rule in this case."
 msgstr ""
 
-#: ../manual/en/book.xml:768(para)
-msgid ""
-"If the original design file was created by Cadsoft-Eagle, you will see the "
-"following entry instead:"
-msgstr ""
-
-#: ../manual/en/book.xml:775(filename)
-msgid "Export Eagle Session Script"
-msgstr ""
-
-#: ../manual/en/book.xml:780(para)
-msgid ""
-"A text file with the same name as the design file and the extension .scr "
-"will be written. You can import the changes of the design to Cadsoft Eagle "
-"by selecting in the Files pull down menu of Eagle script... and choosing "
-"this text file. After the text file is written, you will be asked if you "
-"also want to save the rules created inside this program for later reuse. "
-"Answer with yes, if for example you have created Via Rules, which you want "
-"to reuse after switching forth and back to Eagle. However a new created rule "
-"in the Eagle might be overwritten by a saved rule in this case"
-msgstr ""
-
 #: ../manual/en/book.xml:789(title) ../manual/en/book.xml:1803(title)
 msgid "Display Settings"
 msgstr ""

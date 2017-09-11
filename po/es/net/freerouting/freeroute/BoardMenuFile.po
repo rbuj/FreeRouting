@@ -78,14 +78,6 @@ msgstr "Exportar fichero de sesión Specctra"
 msgid "writes a session file in the Specctra .ses format"
 msgstr "writes a session file in the Specctra .ses format"
 
-#: eagle_script
-msgid "Export Eagle Session Script"
-msgstr "Export Eagle Session Script"
-
-#: eagle_script_tooltip
-msgid "creates an eagle script to export the changes in routing"
-msgstr "creates an eagle script to export the changes in routing"
-
 #: settings
 msgid "Save GUI Settings as Default"
 msgstr "Guardar ajustes IGU como valores predeterminados"
@@ -150,17 +142,9 @@ msgstr "in Specctra format written"
 msgid "writing session file"
 msgstr "writing session file"
 
-#: message_14
-msgid "Eagle script file"
-msgstr "Eagle script file"
-
 #: message_15
 msgid "written"
 msgstr "written"
-
-#: message_16
-msgid "creating Eagle script file"
-msgstr "creating Eagle script file"
 
 #: message_17
 msgid "GUI default settings saved"
@@ -181,7 +165,3 @@ msgstr "Host cad system might expect the session file name"
 #: message_21
 msgid "Please rename the file if necessary"
 msgstr "Please rename the file if necessary"
-
-#: message_22
-msgid "Eagle might expect the script file extension .scr "
-msgstr "Eagle might expect the script file extension .scr "
