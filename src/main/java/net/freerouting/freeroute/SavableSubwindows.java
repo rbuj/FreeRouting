@@ -31,8 +31,11 @@ final class SavableSubwindows {
     /**
      * The constructor method.
      */
-    SavableSubwindows() {
+    SavableSubwindows(BoardFrame board_frame) {
         savable_subwindows_map = new EnumMap<>(SavableSubwindowKey.class);
+        for (SavableSubwindowKey window : SavableSubwindowKey.values()) {
+            savable_subwindows_map.put(window, window.create(board_frame));
+        }
     }
 
     /**

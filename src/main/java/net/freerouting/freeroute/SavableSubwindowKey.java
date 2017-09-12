@@ -21,9 +21,131 @@ package net.freerouting.freeroute;
  * @author Robert Buj
  */
 enum SavableSubwindowKey {
-    ABOUT, ROUTE_PARAMETER, AUTOROUTE_PARAMETER, SELECT_PARAMETER, MOVE_PARAMETER,
-    CLEARANCE_MATRIX, VIA, EDIT_VIAS, EDIT_NET_RULES, ASSIGN_NET_CLASSES,
-    PADSTACKS, PACKAGES, INCOMPLETES, NET_INFO, CLEARANCE_VIOLATIONS,
-    LENGHT_VIOLATIONS, UNCONNECTED_ROUTE, ROUTE_STUBS, COMPONENTS, LAYER_VISIBILITY,
-    OBJECT_VISIBILITY, DISPLAY_MISC, SNAPSHOT, COLOR_MANAGER
+    ABOUT {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowAbout();
+        }
+    }, ROUTE_PARAMETER {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowRouteParameter(board_frame);
+        }
+    }, AUTOROUTE_PARAMETER {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowAutorouteParameter(board_frame);
+        }
+    }, SELECT_PARAMETER {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowSelectParameter(board_frame);
+        }
+    }, MOVE_PARAMETER {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowMoveParameter(board_frame);
+        }
+    },
+    CLEARANCE_MATRIX {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowClearanceMatrix(board_frame);
+        }
+    }, VIA {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowVia(board_frame);
+        }
+    }, EDIT_VIAS {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowEditVias(board_frame);
+        }
+    }, EDIT_NET_RULES {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowNetClasses(board_frame);
+        }
+    }, ASSIGN_NET_CLASSES {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowAssignNetClass(board_frame);
+        }
+    },
+    PADSTACKS {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowPadstacks(board_frame);
+        }
+    }, PACKAGES {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowPackages(board_frame);
+        }
+    }, INCOMPLETES {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowIncompletes(board_frame);
+        }
+    }, NET_INFO {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowNets(board_frame);
+        }
+    }, CLEARANCE_VIOLATIONS {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowClearanceViolations(board_frame);
+        }
+    },
+    LENGHT_VIOLATIONS {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowLengthViolations(board_frame);
+        }
+    }, UNCONNECTED_ROUTE {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowUnconnectedRoute(board_frame);
+        }
+    }, ROUTE_STUBS {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowRouteStubs(board_frame);
+        }
+    }, COMPONENTS {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowComponents(board_frame);
+        }
+    }, LAYER_VISIBILITY {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return WindowLayerVisibility.get_instance(board_frame);
+        }
+    },
+    OBJECT_VISIBILITY {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return WindowObjectVisibility.get_instance(board_frame);
+        }
+    }, DISPLAY_MISC {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowDisplayMisc(board_frame);
+        }
+    }, SNAPSHOT {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new WindowSnapshot(board_frame);
+        }
+    }, COLOR_MANAGER {
+        @Override
+        BoardSavableSubWindow create(BoardFrame board_frame) {
+            return new ColorManager(board_frame);
+        }
+    };
+
+    abstract BoardSavableSubWindow create(BoardFrame board_frame);
 }
