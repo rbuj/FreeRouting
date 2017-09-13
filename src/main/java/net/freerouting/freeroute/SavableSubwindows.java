@@ -16,9 +16,13 @@
  */
 package net.freerouting.freeroute;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.EnumMap;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -138,6 +142,20 @@ final class SavableSubwindows {
     void repaint_all() {
         for (BoardSavableSubWindow window : savable_subwindows_map.values()) {
             window.repaint();
+        }
+    }
+
+    void init_localions() {
+        Properties properties = new Properties();
+        try {
+            properties.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
+            savable_subwindows_map.forEach((SavableSubwindowKey k, BoardSavableSubWindow v) -> {
+                String[] args = properties.getProperty(k.name() + "_WINDOW").split(",");
+                v.setLocation(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+                v.setVisible(Boolean.parseBoolean(args[2]));
+            });
+        } catch (IOException ex) {
+            Logger.getLogger(SavableSubwindows.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

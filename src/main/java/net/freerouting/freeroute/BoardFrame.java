@@ -440,35 +440,8 @@ public final class BoardFrame extends javax.swing.JFrame {
      */
     private void initialize_windows() {
         allocate_permanent_subwindows();
-
         setLocation(120, 0);
-
-        savable_subwindows.get(SavableSubwindowKey.SELECT_PARAMETER).setLocation(0, 0);
-        savable_subwindows.get(SavableSubwindowKey.SELECT_PARAMETER).setVisible(true);
-
-        savable_subwindows.get(SavableSubwindowKey.ROUTE_PARAMETER).setLocation(0, 100);
-        savable_subwindows.get(SavableSubwindowKey.AUTOROUTE_PARAMETER).setLocation(0, 200);
-        savable_subwindows.get(SavableSubwindowKey.MOVE_PARAMETER).setLocation(0, 50);
-        savable_subwindows.get(SavableSubwindowKey.CLEARANCE_MATRIX).setLocation(0, 150);
-        savable_subwindows.get(SavableSubwindowKey.VIA).setLocation(50, 150);
-        savable_subwindows.get(SavableSubwindowKey.EDIT_VIAS).setLocation(100, 150);
-        savable_subwindows.get(SavableSubwindowKey.EDIT_NET_RULES).setLocation(100, 200);
-        savable_subwindows.get(SavableSubwindowKey.ASSIGN_NET_CLASSES).setLocation(100, 250);
-        savable_subwindows.get(SavableSubwindowKey.PADSTACKS).setLocation(100, 30);
-        savable_subwindows.get(SavableSubwindowKey.PACKAGES).setLocation(200, 30);
-        savable_subwindows.get(SavableSubwindowKey.COMPONENTS).setLocation(300, 30);
-        savable_subwindows.get(SavableSubwindowKey.INCOMPLETES).setLocation(400, 30);
-        savable_subwindows.get(SavableSubwindowKey.CLEARANCE_VIOLATIONS).setLocation(500, 30);
-        savable_subwindows.get(SavableSubwindowKey.LENGHT_VIOLATIONS).setLocation(550, 30);
-        savable_subwindows.get(SavableSubwindowKey.NET_INFO).setLocation(350, 30);
-        savable_subwindows.get(SavableSubwindowKey.UNCONNECTED_ROUTE).setLocation(650, 30);
-        savable_subwindows.get(SavableSubwindowKey.ROUTE_STUBS).setLocation(600, 30);
-        savable_subwindows.get(SavableSubwindowKey.SNAPSHOT).setLocation(0, 250);
-        savable_subwindows.get(SavableSubwindowKey.LAYER_VISIBILITY).setLocation(0, 450);
-        savable_subwindows.get(SavableSubwindowKey.OBJECT_VISIBILITY).setLocation(0, 550);
-        savable_subwindows.get(SavableSubwindowKey.DISPLAY_MISC).setLocation(0, 350);
-        savable_subwindows.get(SavableSubwindowKey.COLOR_MANAGER).setLocation(0, 600);
-        savable_subwindows.get(SavableSubwindowKey.ABOUT).setLocation(200, 200);
+        savable_subwindows.init_localions();
     }
 
     /**
