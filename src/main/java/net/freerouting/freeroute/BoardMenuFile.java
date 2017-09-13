@@ -47,7 +47,6 @@ final class BoardMenuFile extends BoardMenu {
      */
     static BoardMenuFile get_instance(BoardFrame p_board_frame, boolean p_session_file_option) {
         BoardMenuFile file_menu = new BoardMenuFile(p_board_frame, p_session_file_option);
-
         file_menu.setText(file_menu.resources.getString("file"));
 
         // Create the menu items.
@@ -62,7 +61,6 @@ final class BoardMenuFile extends BoardMenu {
                     file_menu.board_frame.screen_messages.set_status_message(file_menu.resources.getString("save_message"));
                 }
             });
-
             file_menu.add(save_item);
         }
 
@@ -96,7 +94,6 @@ final class BoardMenuFile extends BoardMenu {
             save_as_item.addActionListener((java.awt.event.ActionEvent evt) -> {
                 file_menu.save_as_action();
             });
-
             file_menu.add(save_as_item);
 
             javax.swing.JMenuItem write_logfile_item = new javax.swing.JMenuItem();
@@ -105,7 +102,6 @@ final class BoardMenuFile extends BoardMenu {
             write_logfile_item.addActionListener((java.awt.event.ActionEvent evt) -> {
                 file_menu.write_logfile_action();
             });
-
             file_menu.add(write_logfile_item);
 
             javax.swing.JMenuItem replay_logfile_item = new javax.swing.JMenuItem();
@@ -114,7 +110,6 @@ final class BoardMenuFile extends BoardMenu {
             replay_logfile_item.addActionListener((java.awt.event.ActionEvent evt) -> {
                 file_menu.read_logfile_action();
             });
-
             file_menu.add(replay_logfile_item);
         }
 
@@ -141,7 +136,6 @@ final class BoardMenuFile extends BoardMenu {
         if (this.session_file_option) {
             return;
         }
-        net.freerouting.freeroute.board.BasicBoard routing_board = this.board_frame.board_panel.board_handling.get_routing_board();
         javax.swing.JMenuItem write_session_file_item = new javax.swing.JMenuItem();
         write_session_file_item.setText(resources.getString("session_file"));
         write_session_file_item.setToolTipText(resources.getString("session_file_tooltip"));
