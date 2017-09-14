@@ -496,8 +496,7 @@ public final class BoardFrame extends javax.swing.JFrame {
      * Used for storing the subwindowfilters in a snapshot.
      */
     public SubwindowSelections get_snapshot_subwindow_selections() {
-        SubwindowSelections result = new SubwindowSelections(snapshot_subwindows);
-        return result;
+        return new SubwindowSelections(snapshot_subwindows);
     }
 
     /**
