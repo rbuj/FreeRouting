@@ -19,6 +19,7 @@ import java.awt.Desktop;
 import java.awt.desktop.AboutEvent;
 import java.awt.desktop.QuitEvent;
 import java.awt.desktop.QuitResponse;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
@@ -202,7 +203,29 @@ public final class BoardFrame extends javax.swing.JFrame {
         scroll_pane.setViewportView(board_panel);
 
         setTitle(resources.getString("title"));
-        addWindowListener(new WindowStateListener());
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                int option = javax.swing.JOptionPane.showConfirmDialog(null, resources.getString("confirm_cancel"),
+                        null, javax.swing.JOptionPane.YES_NO_OPTION);
+                if (option == javax.swing.JOptionPane.NO_OPTION) {
+                    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                }
+            }
+
+            @Override
+            public void windowIconified(java.awt.event.WindowEvent evt) {
+                savable_subwindows.iconifed_all();
+                temporary_subwindows.iconifed_all();
+            }
+
+            @Override
+            public void windowDeiconified(java.awt.event.WindowEvent evt) {
+                savable_subwindows.deiconifed_all();
+                temporary_subwindows.deiconifed_all();
+            }
+        });
 
         if (System.getProperty("os.name").equals("Mac OS X")) {
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -512,30 +535,5 @@ public final class BoardFrame extends javax.swing.JFrame {
     public void repaint_all() {
         repaint();
         savable_subwindows.repaint_all();
-    }
-
-    private class WindowStateListener extends java.awt.event.WindowAdapter {
-
-        @Override
-        public void windowClosing(java.awt.event.WindowEvent evt) {
-            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            int option = javax.swing.JOptionPane.showConfirmDialog(null, resources.getString("confirm_cancel"),
-                    null, javax.swing.JOptionPane.YES_NO_OPTION);
-            if (option == javax.swing.JOptionPane.NO_OPTION) {
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-            }
-        }
-
-        @Override
-        public void windowIconified(java.awt.event.WindowEvent evt) {
-            savable_subwindows.iconifed_all();
-            temporary_subwindows.iconifed_all();
-        }
-
-        @Override
-        public void windowDeiconified(java.awt.event.WindowEvent evt) {
-            savable_subwindows.deiconifed_all();
-            temporary_subwindows.deiconifed_all();
-        }
     }
 }

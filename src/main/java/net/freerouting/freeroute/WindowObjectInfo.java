@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Collection;
 import java.util.Locale;
 import net.freerouting.freeroute.board.PrintableShape;
@@ -171,9 +173,9 @@ public final class WindowObjectInfo extends BoardTemporarySubWindow implements n
         /**
          * Dispose this window and all subwindows when closing the window.
          */
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(java.awt.event.WindowEvent evt) {
+            public void windowClosing(WindowEvent evt) {
                 dispose();
             }
         });
