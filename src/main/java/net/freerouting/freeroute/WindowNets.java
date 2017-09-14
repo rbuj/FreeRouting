@@ -37,7 +37,7 @@ public final class WindowNets extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of NetsWindow
      */
-    WindowNets(BoardFrame p_board_frame) {
+    private WindowNets(BoardFrame p_board_frame) {
         super(p_board_frame);
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowNets", Locale.getDefault());
         this.setTitle(resources.getString("title"));
@@ -54,7 +54,12 @@ public final class WindowNets extends WindowObjectListWithFilter {
         curr_button_panel.add(filter_incompletes_button);
         filter_incompletes_button.setToolTipText(resources.getString("filter_incompletes_tooltip"));
         filter_incompletes_button.addActionListener(new FilterIncompletesListener());
-        p_board_frame.set_context_sensitive_help(this, "WindowObjectList_Nets");
+    }
+
+    static WindowNets getInstance(BoardFrame p_board_frame) {
+        WindowNets window = new WindowNets(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowObjectList_Nets");
+        return window;
     }
 
     /**

@@ -51,7 +51,7 @@ public final class WindowAutorouteParameter extends BoardSavableSubWindow {
     /**
      * Creates a new instance of WindowAutorouteParameter
      */
-    WindowAutorouteParameter(BoardFrame p_board_frame) {
+    private WindowAutorouteParameter(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowAutorouteParameter", Locale.getDefault());
@@ -164,7 +164,7 @@ public final class WindowAutorouteParameter extends BoardSavableSubWindow {
         gridbag.setConstraints(separator, gridbag_constraints);
         main_panel.add(separator, gridbag_constraints);
 
-        detail_window = new WindowAutorouteDetailParameter(p_board_frame);
+        detail_window = WindowAutorouteDetailParameter.getInstance(p_board_frame);
         javax.swing.JButton detail_button = new javax.swing.JButton(resources.getString("detail_parameter"));
         this.detail_listener = new DetailListener();
         detail_button.addActionListener(detail_listener);
@@ -172,11 +172,15 @@ public final class WindowAutorouteParameter extends BoardSavableSubWindow {
 
         main_panel.add(detail_button);
 
-        p_board_frame.set_context_sensitive_help(this, "WindowAutorouteParameter");
-
         this.refresh();
         this.pack();
         this.setResizable(false);
+    }
+
+    static WindowAutorouteParameter getInstance(BoardFrame p_board_frame) {
+        WindowAutorouteParameter window = new WindowAutorouteParameter(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowAutorouteParameter");
+        return window;
     }
 
     /**

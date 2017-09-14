@@ -29,95 +29,95 @@ enum SavableSubwindowKey {
     }, ROUTE_PARAMETER {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowRouteParameter(board_frame);
+            return WindowRouteParameter.getInstance(board_frame);
         }
     }, AUTOROUTE_PARAMETER {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowAutorouteParameter(board_frame);
+            return WindowAutorouteParameter.getInstance(board_frame);
         }
     }, SELECT_PARAMETER {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowSelectParameter(board_frame);
+            return WindowSelectParameter.getInstance(board_frame);
         }
     }, MOVE_PARAMETER {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowMoveParameter(board_frame);
+            return WindowMoveParameter.getInstance(board_frame);
         }
     },
     CLEARANCE_MATRIX {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowClearanceMatrix(board_frame);
+            return WindowClearanceMatrix.getInstance(board_frame);
         }
     }, VIA {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowVia(board_frame);
+            return WindowVia.getInstance(board_frame);
         }
     }, EDIT_VIAS {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowEditVias(board_frame);
+            return WindowEditVias.getInstance(board_frame);
         }
     }, EDIT_NET_RULES {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowNetClasses(board_frame);
+            return WindowNetClasses.getInstance(board_frame);
         }
     }, ASSIGN_NET_CLASSES {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowAssignNetClass(board_frame);
+            return WindowAssignNetClass.getInstance(board_frame);
         }
     },
     PADSTACKS {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowPadstacks(board_frame);
+            return WindowPadstacks.getInstance(board_frame);
         }
     }, PACKAGES {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowPackages(board_frame);
+            return WindowPackages.getInstance(board_frame);
         }
     }, INCOMPLETES {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowIncompletes(board_frame);
+            return WindowIncompletes.getInstance(board_frame);
         }
     }, NET_INFO {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowNets(board_frame);
+            return WindowNets.getInstance(board_frame);
         }
     }, CLEARANCE_VIOLATIONS {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowClearanceViolations(board_frame);
+            return WindowClearanceViolations.getInstance(board_frame);
         }
     },
     LENGHT_VIOLATIONS {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowLengthViolations(board_frame);
+            return WindowLengthViolations.getInstance(board_frame);
         }
     }, UNCONNECTED_ROUTE {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowUnconnectedRoute(board_frame);
+            return WindowUnconnectedRoute.getInstance(board_frame);
         }
     }, ROUTE_STUBS {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowRouteStubs(board_frame);
+            return WindowRouteStubs.getInstance(board_frame);
         }
     }, COMPONENTS {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowComponents(board_frame);
+            return WindowComponents.getInstance(board_frame);
         }
     }, LAYER_VISIBILITY {
         @Override
@@ -133,17 +133,17 @@ enum SavableSubwindowKey {
     }, DISPLAY_MISC {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowDisplayMisc(board_frame);
+            return WindowDisplayMisc.getInstance(board_frame);
         }
     }, SNAPSHOT {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new WindowSnapshot(board_frame);
+            return WindowSnapshot.getInstance(board_frame);
         }
     }, COLOR_MANAGER {
         @Override
         BoardSavableSubWindow create(BoardFrame board_frame) {
-            return new ColorManager(board_frame);
+            return ColorManager.getInstance(board_frame);
         }
     };
 

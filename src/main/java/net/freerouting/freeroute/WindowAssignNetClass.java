@@ -49,7 +49,7 @@ public final class WindowAssignNetClass extends BoardSavableSubWindow {
     /**
      * Creates a new instance of AssignNetRulesWindow
      */
-    WindowAssignNetClass(BoardFrame p_board_frame) {
+    private WindowAssignNetClass(BoardFrame p_board_frame) {
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowAssignNetClass", Locale.getDefault());
         this.setTitle(resources.getString("title"));
 
@@ -68,10 +68,14 @@ public final class WindowAssignNetClass extends BoardSavableSubWindow {
         this.main_panel.add(scroll_pane, java.awt.BorderLayout.CENTER);
         add_net_class_combo_box();
 
-        p_board_frame.set_context_sensitive_help(this, "WindowNetClasses_AssignNetClass");
-
         this.add(main_panel);
         this.pack();
+    }
+
+    static WindowAssignNetClass getInstance(BoardFrame p_board_frame) {
+        WindowAssignNetClass window = new WindowAssignNetClass(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowNetClasses_AssignNetClass");
+        return window;
     }
 
     private void add_net_class_combo_box() {

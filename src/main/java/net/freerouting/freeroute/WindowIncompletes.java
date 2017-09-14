@@ -34,13 +34,18 @@ public final class WindowIncompletes extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of IncompletesWindow
      */
-    WindowIncompletes(BoardFrame p_board_frame) {
+    private WindowIncompletes(BoardFrame p_board_frame) {
         super(p_board_frame);
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         this.setTitle(resources.getString("incompletes"));
         this.list_empty_message.setText(resources.getString("route_completed"));
-        p_board_frame.set_context_sensitive_help(this, "WindowObjectList_Incompletes");
+    }
+
+    static WindowIncompletes getInstance(BoardFrame p_board_frame) {
+        WindowIncompletes window = new WindowIncompletes(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowObjectList_Incompletes");
+        return window;
     }
 
     /**

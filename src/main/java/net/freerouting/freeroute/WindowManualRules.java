@@ -42,7 +42,7 @@ public final class WindowManualRules extends BoardSavableSubWindow {
     /**
      * Creates a new instance of TraceWidthWindow
      */
-    WindowManualRules(BoardFrame p_board_frame) {
+    private WindowManualRules(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
         Locale locale = Locale.getDefault();
         java.util.ResourceBundle resources
@@ -118,10 +118,14 @@ public final class WindowManualRules extends BoardSavableSubWindow {
         gridbag.setConstraints(empty_label, gridbag_constraints);
         main_panel.add(empty_label);
 
-        p_board_frame.set_context_sensitive_help(this, "WindowManualRules");
-
         this.pack();
         this.setResizable(false);
+    }
+
+    static WindowManualRules getInstance(BoardFrame p_board_frame) {
+        WindowManualRules window = new WindowManualRules(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowManualRules");
+        return window;
     }
 
     /**

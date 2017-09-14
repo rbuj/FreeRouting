@@ -62,10 +62,10 @@ public final class WindowRouteParameter extends BoardSavableSubWindow {
     /**
      * Creates a new instance of RouteParameterWindow
      */
-    WindowRouteParameter(BoardFrame p_board_frame) {
+    private WindowRouteParameter(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
         this.detail_window = new WindowRouteDetail(p_board_frame);
-        this.manual_rule_window = new WindowManualRules(p_board_frame);
+        this.manual_rule_window = WindowManualRules.getInstance(p_board_frame);
         Locale locale = Locale.getDefault();
 
         java.util.ResourceBundle resources
@@ -285,11 +285,15 @@ public final class WindowRouteParameter extends BoardSavableSubWindow {
             main_panel.add(detail_button);
         }
 
-        p_board_frame.set_context_sensitive_help(this, "WindowRouteParameter");
-
         this.refresh();
         this.pack();
         this.setResizable(false);
+    }
+
+    static WindowRouteParameter getInstance(BoardFrame p_board_frame) {
+        WindowRouteParameter window = new WindowRouteParameter(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowRouteParameter");
+        return window;
     }
 
     @Override

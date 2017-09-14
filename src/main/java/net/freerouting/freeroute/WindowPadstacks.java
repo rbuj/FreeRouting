@@ -37,12 +37,17 @@ public final class WindowPadstacks extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of PadstacksWindow
      */
-    WindowPadstacks(BoardFrame p_board_frame) {
+    private WindowPadstacks(BoardFrame p_board_frame) {
         super(p_board_frame);
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         this.setTitle(resources.getString("padstacks"));
-        p_board_frame.set_context_sensitive_help(this, "WindowObjectList_LibraryPadstacks");
+    }
+
+    static WindowPadstacks getInstance(BoardFrame p_board_frame) {
+        WindowPadstacks window = new WindowPadstacks(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowObjectList_LibraryPadstacks");
+        return window;
     }
 
     /**

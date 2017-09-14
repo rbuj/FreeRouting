@@ -109,7 +109,7 @@ public final class ColorManager extends BoardSavableSubWindow {
     /**
      * Creates a new instance of ColorManager
      */
-    ColorManager(BoardFrame p_board_frame) {
+    private ColorManager(BoardFrame p_board_frame) {
         GraphicsContext graphics_context = p_board_frame.board_panel.board_handling.graphics_context;
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
@@ -130,9 +130,15 @@ public final class ColorManager extends BoardSavableSubWindow {
         JScrollPane other_scroll_pane = init_color_table(other_color_table);
         panel.add(other_scroll_pane, BorderLayout.SOUTH);
         getContentPane().add(panel, BorderLayout.CENTER);
-        p_board_frame.set_context_sensitive_help(this, "WindowDisplay_Colors");
+
         this.pack();
         this.setResizable(false);
+    }
+
+    static ColorManager getInstance(BoardFrame p_board_frame) {
+        ColorManager window = new ColorManager(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowDisplay_Colors");
+        return window;
     }
 
     /**

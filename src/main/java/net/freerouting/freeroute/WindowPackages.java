@@ -35,12 +35,17 @@ public final class WindowPackages extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of PackagesWindow
      */
-    WindowPackages(BoardFrame p_board_frame) {
+    private WindowPackages(BoardFrame p_board_frame) {
         super(p_board_frame);
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         this.setTitle(resources.getString("packages"));
-        p_board_frame.set_context_sensitive_help(this, "WindowObjectList_LibraryPackages");
+    }
+
+    static WindowPackages getInstance(BoardFrame p_board_frame) {
+        WindowPackages window = new WindowPackages(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowObjectList_LibraryPackages");
+        return window;
     }
 
     /**

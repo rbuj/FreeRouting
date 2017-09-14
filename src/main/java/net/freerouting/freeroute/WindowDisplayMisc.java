@@ -50,7 +50,7 @@ public final class WindowDisplayMisc extends BoardSavableSubWindow {
     /**
      * Creates a new instance of DisplayMiscWindow
      */
-    WindowDisplayMisc(BoardFrame p_board_frame) {
+    private WindowDisplayMisc(BoardFrame p_board_frame) {
         this.panel = p_board_frame.board_panel;
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.DisplayMisc", Locale.getDefault());
@@ -183,11 +183,15 @@ public final class WindowDisplayMisc extends BoardSavableSubWindow {
         main_panel.add(auto_layer_dim_slider);
         this.auto_layer_dim_slider.addChangeListener(new SliderChangeListener());
 
-        p_board_frame.set_context_sensitive_help(this, "WindowDisplay_Miscellanious");
-
         this.refresh();
         this.pack();
         this.setResizable(false);
+    }
+
+    static WindowDisplayMisc getInstance(BoardFrame p_board_frame) {
+        WindowDisplayMisc window = new WindowDisplayMisc(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowDisplay_Miscellanious");
+        return window;
     }
 
     /**

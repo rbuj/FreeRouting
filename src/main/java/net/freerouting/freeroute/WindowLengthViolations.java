@@ -40,12 +40,17 @@ public final class WindowLengthViolations extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of WindowLengthViolations
      */
-    WindowLengthViolations(BoardFrame p_board_frame) {
+    private WindowLengthViolations(BoardFrame p_board_frame) {
         super(p_board_frame);
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowLengthViolations", Locale.getDefault());
         this.setTitle(resources.getString("title"));
         this.list_empty_message.setText(resources.getString("list_empty"));
-        p_board_frame.set_context_sensitive_help(this, "WindowObjectList_LengthViolations");
+    }
+
+    static WindowLengthViolations getInstance(BoardFrame p_board_frame) {
+        WindowLengthViolations window = new WindowLengthViolations(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowObjectList_LengthViolations");
+        return window;
     }
 
     @Override

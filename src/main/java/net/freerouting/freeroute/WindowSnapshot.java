@@ -42,9 +42,9 @@ public final class WindowSnapshot extends BoardSavableSubWindow {
     /**
      * Creates a new instance of SnapshotFrame
      */
-    WindowSnapshot(BoardFrame p_board_frame) {
+    private WindowSnapshot(BoardFrame p_board_frame) {
         this.board_frame = p_board_frame;
-        this.settings_window = new WindowSnapshotSettings(p_board_frame);
+        this.settings_window = WindowSnapshotSettings.getInstance(p_board_frame);
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowSnapshot", Locale.getDefault());
         this.setTitle(resources.getString("title"));
 
@@ -124,9 +124,13 @@ public final class WindowSnapshot extends BoardSavableSubWindow {
         gridbag.setConstraints(delete_all_button, gridbag_constraints);
         south_panel.add(settings_button);
 
-        p_board_frame.set_context_sensitive_help(this, "WindowSnapshots");
-
         this.pack();
+    }
+
+    static WindowSnapshot getInstance(BoardFrame p_board_frame) {
+        WindowSnapshot window = new WindowSnapshot(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowSnapshots");
+        return window;
     }
 
     @Override

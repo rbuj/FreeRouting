@@ -57,7 +57,7 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
     /**
      * Creates a new instance of NetClassesWindow
      */
-    WindowNetClasses(BoardFrame p_board_frame) {
+    private WindowNetClasses(BoardFrame p_board_frame) {
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowNetClasses", Locale.getDefault());
         this.setTitle(resources.getString("title"));
 
@@ -107,11 +107,15 @@ public final class WindowNetClasses extends BoardSavableSubWindow {
         filter_incompletes_button.setToolTipText(resources.getString("filter_incompletes_tooltip"));
         filter_incompletes_button.addActionListener(new FilterIncompletesListener());
 
-        p_board_frame.set_context_sensitive_help(this, "WindowNetClasses");
-
         this.add(main_panel);
         this.pack();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    static WindowNetClasses getInstance(BoardFrame p_board_frame) {
+        WindowNetClasses window = new WindowNetClasses(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowNetClasses");
+        return window;
     }
 
     @Override

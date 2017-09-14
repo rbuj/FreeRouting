@@ -40,7 +40,7 @@ public final class WindowMoveParameter extends BoardSavableSubWindow {
     /**
      * Creates a new instance of WindowMoveParameter
      */
-    WindowMoveParameter(BoardFrame p_board_frame) {
+    private WindowMoveParameter(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
         Locale locale = Locale.getDefault();
         java.util.ResourceBundle resources
@@ -121,11 +121,15 @@ public final class WindowMoveParameter extends BoardSavableSubWindow {
         gridbag.setConstraints(rotate_button, gridbag_constraints);
         main_panel.add(rotate_button, gridbag_constraints);
 
-        p_board_frame.set_context_sensitive_help(this, "WindowMoveParameter");
-
         this.refresh();
         this.pack();
         this.setResizable(false);
+    }
+
+    static WindowMoveParameter getInstance(BoardFrame p_board_frame) {
+        WindowMoveParameter window = new WindowMoveParameter(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowMoveParameter");
+        return window;
     }
 
     private void set_horizontal_grid_field(double p_value) {

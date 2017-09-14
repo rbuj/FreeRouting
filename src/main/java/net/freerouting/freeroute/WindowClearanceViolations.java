@@ -38,12 +38,17 @@ public final class WindowClearanceViolations extends WindowObjectListWithFilter 
     /**
      * Creates a new instance of IncompletesWindow
      */
-    WindowClearanceViolations(BoardFrame p_board_frame) {
+    private WindowClearanceViolations(BoardFrame p_board_frame) {
         super(p_board_frame);
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowClearanceViolations", Locale.getDefault());
         this.setTitle(resources.getString("title"));
         this.list_empty_message.setText(resources.getString("list_empty_message"));
-        p_board_frame.set_context_sensitive_help(this, "WindowObjectList_ClearanceViolations");
+    }
+
+    static WindowClearanceViolations getInstance(BoardFrame p_board_frame) {
+        WindowClearanceViolations window = new WindowClearanceViolations(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowObjectList_ClearanceViolations");
+        return window;
     }
 
     @Override

@@ -35,12 +35,17 @@ public final class WindowComponents extends WindowObjectListWithFilter {
     /**
      * Creates a new instance of ComponentsWindow
      */
-    WindowComponents(BoardFrame p_board_frame) {
+    private WindowComponents(BoardFrame p_board_frame) {
         super(p_board_frame);
         java.util.ResourceBundle resources
                 = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.Default", Locale.getDefault());
         this.setTitle(resources.getString("components"));
-        p_board_frame.set_context_sensitive_help(this, "WindowObjectList_BoardComponents");
+    }
+
+    static WindowComponents getInstance(BoardFrame p_board_frame) {
+        WindowComponents window = new WindowComponents(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowObjectList_BoardComponents");
+        return window;
     }
 
     /**

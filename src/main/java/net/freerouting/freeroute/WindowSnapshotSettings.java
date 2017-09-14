@@ -39,7 +39,7 @@ public final class WindowSnapshotSettings extends BoardSavableSubWindow {
     /**
      * Creates a new instance of WindowSnapshotSettings
      */
-    WindowSnapshotSettings(BoardFrame p_board_frame) {
+    private WindowSnapshotSettings(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
 
         java.util.ResourceBundle resources
@@ -105,8 +105,6 @@ public final class WindowSnapshotSettings extends BoardSavableSubWindow {
 
         main_panel.add(snapshot_attributes_map.get(SnapshotAttributeKey.INFO_LIST_SELECTIONS), gridbag_constraints);
 
-        p_board_frame.set_context_sensitive_help(this, "WindowSnapshots_SnapshotSettings");
-
         CheckBoxListener checkBoxListener = new CheckBoxListener();
         for (SnapshotAttributeKey key : SnapshotAttributeKey.values()) {
             snapshot_attributes_map.get(key).addActionListener(checkBoxListener);
@@ -115,6 +113,12 @@ public final class WindowSnapshotSettings extends BoardSavableSubWindow {
         this.refresh();
         this.pack();
         this.setResizable(false);
+    }
+
+    static WindowSnapshotSettings getInstance(BoardFrame p_board_frame) {
+        WindowSnapshotSettings window = new WindowSnapshotSettings(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowSnapshots_SnapshotSettings");
+        return window;
     }
 
     /**

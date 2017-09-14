@@ -52,7 +52,7 @@ public final class WindowEditVias extends BoardSavableSubWindow {
     /**
      * Creates a new instance of ViaTablePanel
      */
-    WindowEditVias(BoardFrame p_board_frame) {
+    private WindowEditVias(BoardFrame p_board_frame) {
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowEditVias", Locale.getDefault());
         this.setTitle(resources.getString("title"));
 
@@ -79,10 +79,14 @@ public final class WindowEditVias extends BoardSavableSubWindow {
         remove_via_button.addActionListener(new RemoveViaListener());
         via_info_button_panel.add(remove_via_button);
 
-        p_board_frame.set_context_sensitive_help(this, "WindowVia_EditVia");
-
         this.add(main_panel);
         this.pack();
+    }
+
+    static WindowEditVias getInstance(BoardFrame p_board_frame) {
+        WindowEditVias window = new WindowEditVias(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowVia_EditVia");
+        return window;
     }
 
     /**

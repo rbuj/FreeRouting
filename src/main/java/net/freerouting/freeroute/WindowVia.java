@@ -52,7 +52,7 @@ public final class WindowVia extends BoardSavableSubWindow {
     /**
      * Creates a new instance of ViaWindow
      */
-    WindowVia(BoardFrame p_board_frame) {
+    private WindowVia(BoardFrame p_board_frame) {
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowVia", Locale.getDefault());
         this.setTitle(resources.getString("title"));
 
@@ -171,11 +171,15 @@ public final class WindowVia extends BoardSavableSubWindow {
         remove_rule_button.addActionListener(new RemoveViaRuleListener());
         via_rule_button_panel.add(remove_rule_button);
 
-        p_board_frame.set_context_sensitive_help(this, "WindowVia");
-
         this.add(main_panel);
         this.pack();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    static WindowVia getInstance(BoardFrame p_board_frame) {
+        WindowVia window_via = new WindowVia(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window_via, "WindowVia");
+        return window_via;
     }
 
     @Override
@@ -456,7 +460,7 @@ public final class WindowVia extends BoardSavableSubWindow {
                 return;
             }
             net.freerouting.freeroute.rules.BoardRules board_rules = board_frame.board_panel.board_handling.get_routing_board().rules;
-            WindowViaRule new_window = new WindowViaRule((ViaRule) selected_object, board_rules.via_infos, board_frame);
+            WindowViaRule new_window = WindowViaRule.getInstance((ViaRule) selected_object, board_rules.via_infos, board_frame);
             java.awt.Point loc = getLocation();
             java.awt.Point new_window_location
                     = new java.awt.Point((int) (loc.getX() + WINDOW_OFFSET), (int) (loc.getY() + WINDOW_OFFSET));

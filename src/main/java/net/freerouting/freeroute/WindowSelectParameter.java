@@ -43,7 +43,7 @@ public final class WindowSelectParameter extends BoardSavableSubWindow {
     /**
      * Creates a new instance of SelectWindow
      */
-    WindowSelectParameter(BoardFrame p_board_frame) {
+    private WindowSelectParameter(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
 
         java.util.ResourceBundle resources
@@ -131,11 +131,15 @@ public final class WindowSelectParameter extends BoardSavableSubWindow {
         gridbag.setConstraints(empty_label, gridbag_constraints);
         main_panel.add(empty_label);
 
-        p_board_frame.set_context_sensitive_help(this, "WindowSelectParameter");
-
         this.refresh();
         this.pack();
         this.setResizable(false);
+    }
+
+    static WindowSelectParameter getInstance(BoardFrame p_board_frame) {
+        WindowSelectParameter window = new WindowSelectParameter(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowSelectParameter");
+        return window;
     }
 
     /**

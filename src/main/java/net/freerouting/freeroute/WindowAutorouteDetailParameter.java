@@ -49,7 +49,7 @@ public final class WindowAutorouteDetailParameter extends BoardSavableSubWindow 
     /**
      * Creates a new instance of WindowAutorouteDetailParameter
      */
-    WindowAutorouteDetailParameter(BoardFrame p_board_frame) {
+    private WindowAutorouteDetailParameter(BoardFrame p_board_frame) {
         this.board_handling = p_board_frame.board_panel.board_handling;
         Locale locale = Locale.getDefault();
         java.util.ResourceBundle resources
@@ -196,11 +196,15 @@ public final class WindowAutorouteDetailParameter extends BoardSavableSubWindow 
             against_preferred_direction_trace_costs_input_completed[i] = true;
         }
 
-        p_board_frame.set_context_sensitive_help(this, "WindowAutorouteDetailParameter");
-
         this.refresh();
         this.pack();
         this.setResizable(false);
+    }
+
+    static WindowAutorouteDetailParameter getInstance(BoardFrame p_board_frame) {
+        WindowAutorouteDetailParameter window = new WindowAutorouteDetailParameter(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowAutorouteDetailParameter");
+        return window;
     }
 
     /**

@@ -48,7 +48,7 @@ public final class WindowClearanceMatrix extends BoardSavableSubWindow {
     /**
      * Creates a new instance of ClearanceMatrixWindow
      */
-    WindowClearanceMatrix(BoardFrame p_board_frame) {
+    private WindowClearanceMatrix(BoardFrame p_board_frame) {
         this.board_frame = p_board_frame;
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.resources.WindowClearanceMatrix", Locale.getDefault());
 
@@ -95,10 +95,14 @@ public final class WindowClearanceMatrix extends BoardSavableSubWindow {
 
         main_panel.add(south_panel, java.awt.BorderLayout.SOUTH);
 
-        p_board_frame.set_context_sensitive_help(this, "WindowClearanceMatrix");
-
         this.add(main_panel);
         this.pack();
+    }
+
+    static WindowClearanceMatrix getInstance(BoardFrame p_board_frame) {
+        WindowClearanceMatrix window = new WindowClearanceMatrix(p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowClearanceMatrix");
+        return window;
     }
 
     /**

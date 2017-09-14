@@ -49,7 +49,7 @@ public final class WindowViaRule extends javax.swing.JFrame {
     /**
      * Creates a new instance of ViaRuleWindow
      */
-    WindowViaRule(ViaRule p_via_rule, ViaInfos p_via_list, BoardFrame p_board_frame) {
+    private WindowViaRule(ViaRule p_via_rule, ViaInfos p_via_list, BoardFrame p_board_frame) {
         this.via_rule = p_via_rule;
         this.via_list = p_via_list;
 
@@ -109,12 +109,16 @@ public final class WindowViaRule extends javax.swing.JFrame {
         move_down_button.addActionListener(new MoveDownListener());
         button_panel.add(move_down_button);
 
-        p_board_frame.set_context_sensitive_help(this, "WindowVia_EditViaRule");
-
         this.add(main_panel);
         this.pack();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setVisible(true);
+    }
+
+    static WindowViaRule getInstance(ViaRule p_via_rule, ViaInfos p_via_list, BoardFrame p_board_frame) {
+        WindowViaRule window = new WindowViaRule(p_via_rule, p_via_list, p_board_frame);
+        p_board_frame.set_context_sensitive_help(window, "WindowVia_EditViaRule");
+        return window;
     }
 
     /**
