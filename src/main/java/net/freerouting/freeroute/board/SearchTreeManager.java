@@ -47,7 +47,7 @@ public class SearchTreeManager {
         compensated_search_trees = new LinkedList<>();
         default_tree = new ShapeSearchTree(FortyfiveDegreeBoundingDirections.INSTANCE, p_board, 0);
         compensated_search_trees.add(default_tree);
-        this.clearance_compensation_used = false;
+        clearance_compensation_used = false;
     }
 
     /**
@@ -68,7 +68,6 @@ public class SearchTreeManager {
             return;
         }
         for (ShapeSearchTree curr_tree : compensated_search_trees) {
-
             ShapeTree.Leaf[] curr_tree_entries = p_item.get_search_tree_entries(curr_tree);
             {
                 if (curr_tree_entries != null) {
@@ -90,7 +89,6 @@ public class SearchTreeManager {
     boolean validate_entries(Item p_item) {
         boolean result = true;
         for (ShapeSearchTree curr_tree : compensated_search_trees) {
-
             if (!curr_tree.validate_entries(p_item)) {
                 result = false;
             }
@@ -276,9 +274,7 @@ public class SearchTreeManager {
      */
     void reuse_entries_after_cutout(PolylineTrace p_from_trace, PolylineTrace p_start_piece, PolylineTrace p_end_piece) {
         for (ShapeSearchTree curr_tree : compensated_search_trees) {
-
             curr_tree.reuse_entries_after_cutout(p_from_trace, p_start_piece, p_end_piece);
         }
     }
-
 }
