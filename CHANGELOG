@@ -3,12 +3,18 @@ ToDo
 	* Migrate all GUI from swing to JavaFX
 	* Write all documentation in docbook format
 
-xxxx-xx-xx
+2017-09-14 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
+
+        * Bump version to 1.4.5
+        * Global menu bar on OS X
         * Remove "Export Eagle Session Script"
         * Add icons in toolbar. Icon theme:
                 * Elementary GTK Light Crystal
+        * Other improvements
 
 2017-07-01 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
+
+        * Bump version to 1.4.4
         * Clear previously selected items before adding new ones
         * Multiple dispatch emulation by using visitor pattern & default
           method in the interfaces:

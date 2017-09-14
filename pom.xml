@@ -4,7 +4,7 @@
 
     <groupId>net.freerouting</groupId>
     <artifactId>freeroute</artifactId>
-    <version>1.4.5-alpha</version>
+    <version>1.4.5</version>
     <packaging>jar</packaging>
 
     <name>freeroute</name>
@@ -16,11 +16,6 @@
         <maven.compiler.source>9</maven.compiler.source>
         <maven.compiler.target>9</maven.compiler.target>
     </properties>
-
-    <organization>
-        <!-- Used as the 'Vendor' for JNLP generation -->
-        <name>Your Organisation</name>
-    </organization>
 
     <build>
         <plugins>
