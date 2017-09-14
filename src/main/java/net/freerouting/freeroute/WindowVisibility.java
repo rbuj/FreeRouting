@@ -88,13 +88,19 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
         javax.swing.JButton min_all_button
                 = new javax.swing.JButton(resources.getString("minimum_all"));
         min_all_button.setToolTipText(resources.getString("minimum_all_tooltip"));
-        min_all_button.addActionListener(new MinAllButtonListener());
+        min_all_button.addActionListener((java.awt.event.ActionEvent p_evt) -> {
+            set_all_minimum();
+            board_panel.repaint();
+        });
         gridbag.setConstraints(min_all_button, gridbag_constraints);
         main_panel.add(min_all_button);
         javax.swing.JButton max_all_button
                 = new javax.swing.JButton(resources.getString("maximum_all"));
         max_all_button.setToolTipText(resources.getString("maximum_all_tooltip"));
-        max_all_button.addActionListener(new MaxAllButtonListener());
+        max_all_button.addActionListener((java.awt.event.ActionEvent e) -> {
+            set_all_maximum();
+            board_panel.repaint();
+        });
         gridbag.setConstraints(max_all_button, gridbag_constraints);
         main_panel.add(max_all_button);
         this.pack();
@@ -133,25 +139,6 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
      */
     abstract void set_changed_value(int p_index, double p_value);
 
-    // private classes
-    private class MinAllButtonListener implements java.awt.event.ActionListener {
-
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
-            set_all_minimum();
-            board_panel.repaint();
-        }
-    }
-
-    private class MaxAllButtonListener implements java.awt.event.ActionListener {
-
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent p_evt) {
-            set_all_maximum();
-            board_panel.repaint();
-        }
-    }
-
     private class SliderChangeListener implements javax.swing.event.ChangeListener {
 
         public int slider_no;
@@ -166,6 +153,5 @@ public abstract class WindowVisibility extends BoardSavableSubWindow {
             set_changed_value(slider_no, new_visibility / ((double) MAX_SLIDER_VALUE));
             board_panel.repaint();
         }
-
     }
 }
