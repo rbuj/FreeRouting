@@ -122,7 +122,7 @@ public final class BoardPanel extends javax.swing.JPanel {
         addMouseWheelListener((java.awt.event.MouseWheelEvent evt) -> {
             board_handling.mouse_wheel_moved(evt.getWheelRotation());
         });
-        board_handling = new BoardHandling(this);
+        board_handling = BoardHandling.getInstance(this);
         setAutoscrolls(true);
         this.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
     }

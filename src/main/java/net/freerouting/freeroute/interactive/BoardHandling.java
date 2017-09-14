@@ -129,12 +129,20 @@ public final class BoardHandling {
     /**
      * Creates a new BoardHandling
      */
-    public BoardHandling(net.freerouting.freeroute.BoardPanel p_panel) {
+    private BoardHandling(net.freerouting.freeroute.BoardPanel p_panel) {
         this.panel = p_panel;
         this.screen_messages = p_panel.screen_messages;
         this.logfile = new Logfile();
-        this.set_interactive_state(SelectMenuState.get_instance(this, logfile));
         this.resources = java.util.ResourceBundle.getBundle("net.freerouting.freeroute.interactive.resources.BoardHandling", Locale.getDefault());
+    }
+
+    /**
+     * Creates a new BoardHandling instance
+     */
+    public static BoardHandling getInstance(net.freerouting.freeroute.BoardPanel p_panel) {
+        BoardHandling board_handling = new BoardHandling(p_panel);
+        board_handling.set_interactive_state(SelectMenuState.get_instance(board_handling, board_handling.logfile));
+        return board_handling;
     }
 
     /**
