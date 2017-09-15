@@ -22,6 +22,8 @@ package net.freerouting.freeroute;
 
 import java.net.URL;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.help.CSH;
 import javax.help.HelpSet;
 import javax.help.HelpSetException;
@@ -67,13 +69,12 @@ final class BoardMenuHelp extends BoardMenuHelpReduced {
             try {
                 URL hsURL = HelpSet.findHelpSet(this.getClass().getClassLoader(), helpset_name);
                 if (hsURL == null) {
-                    System.out.println("HelpSet " + helpset_name + " not found.");
+                    Logger.getLogger(BoardMenuHelp.class.getName()).log(Level.INFO, "HelpSet [{0}] not found.", helpset_name);
                 } else {
                     BoardFrame.help_set = new HelpSet(null, hsURL);
                 }
             } catch (HelpSetException ee) {
-                System.out.println("HelpSet " + helpset_name + " could not be opened.");
-                System.out.println(ee.getMessage());
+                Logger.getLogger(BoardMenuHelp.class.getName()).log(Level.INFO, "HelpSet [{0}] could not be opened.", helpset_name);
             }
             if (BoardFrame.help_set != null) {
                 BoardFrame.help_broker = BoardFrame.help_set.createHelpBroker();

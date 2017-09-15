@@ -21,6 +21,8 @@ package net.freerouting.freeroute.interactive;
 
 import java.util.Collection;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.ConductionArea;
 import net.freerouting.freeroute.board.DrillItem;
 import net.freerouting.freeroute.board.Item;
@@ -47,7 +49,7 @@ public class RouteState extends InteractiveState {
      */
     public static RouteState get_instance(FloatPoint p_location, InteractiveState p_parent_state, BoardHandling p_board_handling, Logfile p_logfile) {
         if (!(p_parent_state instanceof MenuState)) {
-            System.out.println("RouteState.get_instance: unexpected parent state");
+            Logger.getLogger(RouteState.class.getName()).log(Level.INFO, "RouteState.get_instance: unexpected parent state");
         }
         p_board_handling.display_layer_messsage();
         IntPoint location = p_location.round();
@@ -430,7 +432,7 @@ public class RouteState extends InteractiveState {
                     String layer_name = hdlg.get_routing_board().layer_structure.get_name_layer(hdlg.get_routing_board().get_shove_failing_layer());
                     hdlg.screen_messages.set_status_message(resources.getString("layer_not_changed_because_of_obstacle_on_layer") + " " + layer_name);
                 } else {
-                    System.out.println("RouteState.change_layer_action: shove_failing_layer not set");
+                    Logger.getLogger(RouteState.class.getName()).log(Level.INFO, "RouteState.change_layer_action: shove_failing_layer not set");
                 }
                 result = false;
             }

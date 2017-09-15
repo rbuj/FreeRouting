@@ -23,6 +23,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Collection;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.PrintableShape;
 
 /**
@@ -191,7 +193,7 @@ public final class WindowObjectInfo extends BoardTemporarySubWindow implements n
         try {
             document.insertString(document.getLength(), p_string, document.getStyle(p_style));
         } catch (javax.swing.text.BadLocationException e) {
-            System.out.println("ObjectInfoWindow.append: unable to insert text into text pane.");
+            Logger.getLogger(WindowObjectInfo.class.getName()).log(Level.SEVERE, "ObjectInfoWindow.append: unable to insert text into text pane", e);
             return false;
         }
         return true;
@@ -327,7 +329,7 @@ public final class WindowObjectInfo extends BoardTemporarySubWindow implements n
         try {
             document.insertString(document.getLength(), p_button_name, button_style);
         } catch (javax.swing.text.BadLocationException e) {
-            System.err.println("ObjectInfoWindow.append: unable to insert text into text pane.");
+            Logger.getLogger(WindowObjectInfo.class.getName()).log(Level.SEVERE, "ObjectInfoWindow.append: unable to insert text into text pane.", e);
             return false;
         }
         return true;

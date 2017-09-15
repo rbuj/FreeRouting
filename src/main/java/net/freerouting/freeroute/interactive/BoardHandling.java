@@ -32,6 +32,8 @@ import java.io.Reader;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static net.freerouting.freeroute.SignalLayerWithIndexBuilder.ALL_LAYER_INDEX;
 import static net.freerouting.freeroute.SignalLayerWithIndexBuilder.INNER_LAYER_INDEX;
 import net.freerouting.freeroute.board.BoardObservers;
@@ -566,7 +568,7 @@ public final class BoardHandling {
             PolylineShape[] p_outline_shapes, String p_outline_clearance_class_name,
             BoardRules p_rules, net.freerouting.freeroute.board.Communication p_board_communication, TestLevel p_test_level) {
         if (this.board != null) {
-            System.out.println(" BoardHandling.create_board: board already created");
+            Logger.getLogger(BoardHandling.class.getName()).log(Level.INFO, "BoardHandling.create_board: board already created");
         }
         int outline_cl_class_no = 0;
 

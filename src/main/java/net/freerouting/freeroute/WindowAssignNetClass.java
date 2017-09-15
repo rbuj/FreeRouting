@@ -21,6 +21,8 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.rules.Net;
 import net.freerouting.freeroute.rules.NetClass;
 
@@ -188,7 +190,7 @@ public final class WindowAssignNetClass extends BoardSavableSubWindow {
             }
             Object first_row_object = getValueAt(p_row, 0);
             if (!(first_row_object instanceof Net)) {
-                System.out.println("AssignNetRuLesVindow.setValueAt: Net expected");
+                Logger.getLogger(WindowAssignNetClass.class.getName()).log(Level.SEVERE, "AssignNetRuLesVindow.setValueAt: Net expected");
                 return;
             }
             Net curr_net = (Net) first_row_object;

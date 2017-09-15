@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.BasicBoard;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.boardgraphics.GraphicsContext;
@@ -220,7 +222,7 @@ public final class NetIncompletes {
                 item_list.removeAll(curr_connected_set);
                 for (Item curr_item : curr_connected_set) {
                     if (curr_index > max_element_count) {
-                        System.out.println("NetIncompletes.calculate_net_items: to many items");
+                        Logger.getLogger(NetIncompletes.class.getName()).log(Level.INFO, "NetIncompletes.calculate_net_items: to many items");
                         return result;
                     }
                     result.add(curr_index, new NetItem(curr_item, curr_connected_set));

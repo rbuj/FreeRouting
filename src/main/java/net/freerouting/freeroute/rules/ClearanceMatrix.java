@@ -16,6 +16,8 @@
 package net.freerouting.freeroute.rules;
 
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -81,7 +83,7 @@ public class ClearanceMatrix implements java.io.Serializable {
      */
     public String get_name(int p_cl_class) {
         if (p_cl_class < 0 || p_cl_class >= row.length) {
-            System.out.println("CleatranceMatrix.get_name: p_cl_class out of range");
+            Logger.getLogger(ClearanceMatrix.class.getName()).log(Level.INFO, "CleatranceMatrix.get_name: p_cl_class out of range");
             return null;
         }
         return row[p_cl_class].name;
@@ -210,7 +212,7 @@ public class ClearanceMatrix implements java.io.Serializable {
      */
     public Row get_row(int p_no) {
         if (p_no < 0 || p_no >= this.row.length) {
-            System.out.println("ClearanceMatrix.get_row: p_no out of range");
+            Logger.getLogger(ClearanceMatrix.class.getName()).log(Level.INFO, "ClearanceMatrix.get_row: p_no out of range");
             return null;
         }
         return this.row[p_no];

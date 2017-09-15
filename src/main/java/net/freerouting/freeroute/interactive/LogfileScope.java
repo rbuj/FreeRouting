@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute.interactive;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 
 /**
@@ -319,7 +321,7 @@ public abstract class LogfileScope {
                 java.util.Collection<net.freerouting.freeroute.board.Item> item_list = ((SelectedItemState) p_return_state).get_item_list();
                 result = CopyItemState.get_instance(p_location, item_list, p_return_state.return_state, p_board_handling, null);
             } else {
-                System.out.println("CopyItemScope.start_scope: unexpected p_return_state");
+                Logger.getLogger(CopyItemScope.class.getName()).log(Level.INFO, "CopyItemScope.start_scope: unexpected p_return_state");
                 result = null;
 
             }
@@ -341,7 +343,7 @@ public abstract class LogfileScope {
                 java.util.Collection<net.freerouting.freeroute.board.Item> item_list = ((SelectedItemState) p_return_state).get_item_list();
                 result = MoveItemState.get_instance(p_location, item_list, p_return_state.return_state, p_board_handling, null);
             } else {
-                System.out.println("MoveComponent.start_scope: unexpected p_return_state");
+                Logger.getLogger(MoveItemScope.class.getName()).log(Level.INFO, "MoveComponent.start_scope: unexpected p_return_state");
                 result = null;
 
             }
@@ -373,8 +375,7 @@ public abstract class LogfileScope {
                 ((MoveItemState) p_return_state).turn_90_degree(factor);
                 return p_return_state;
             }
-
-            System.out.println("Turn90DegreeScope.read_scope: unexpected p_return_state");
+            Logger.getLogger(Turn90DegreeScope.class.getName()).log(Level.INFO, "Turn90DegreeScope.read_scope: unexpected p_return_state");
             return null;
         }
     }
@@ -393,8 +394,7 @@ public abstract class LogfileScope {
                 ((MoveItemState) p_return_state).rotate(angle);
                 return p_return_state;
             }
-
-            System.out.println("RotateScope.read_scope: unexpected p_return_state");
+            Logger.getLogger(RotateScope.class.getName()).log(Level.INFO, "RotateScope.read_scope: unexpected p_return_state");
             return null;
         }
     }
@@ -412,8 +412,7 @@ public abstract class LogfileScope {
                 ((MoveItemState) p_return_state).change_placement_side();
                 return p_return_state;
             }
-
-            System.out.println("ChangePlacementSideScope.read_scope: unexpected p_return_state");
+            Logger.getLogger(ChangePlacementSideScope.class.getName()).log(Level.INFO, "ChangePlacementSideScope.read_scope: unexpected p_return_state");
             return null;
         }
     }
@@ -436,8 +435,7 @@ public abstract class LogfileScope {
                 }
                 return p_return_state;
             }
-
-            System.out.println("SetRotateWithWheelScope.read_scope: unexpected p_return_state");
+            Logger.getLogger(SetZoomWithWheelScope.class.getName()).log(Level.INFO, "SetZoomWithWheelScope.read_scope: unexpected p_return_state");
             return null;
         }
     }
@@ -472,7 +470,7 @@ public abstract class LogfileScope {
             }
             FloatPoint location = p_logfile.read_corner();
             if (location == null) {
-                System.out.println("StartSelectScope.read_scope: unable to read corner");
+                Logger.getLogger(StartSelectScope.class.getName()).log(Level.INFO, "StartSelectScope.read_scope: unable to read corner");
                 return null;
             }
             return ((MenuState) p_return_state).select_items(location);
@@ -489,12 +487,12 @@ public abstract class LogfileScope {
         public InteractiveState read_scope(Logfile p_logfile,
                 InteractiveState p_return_state, BoardHandling p_board_handling) {
             if (!(p_return_state instanceof SelectedItemState)) {
-                System.out.println("ToggleSelectScope.read_scope: SelectedItemState expected");
+                Logger.getLogger(ToggleSelectScope.class.getName()).log(Level.INFO, "ToggleSelectScope.read_scope: SelectedItemState expected");
                 return null;
             }
             FloatPoint location = p_logfile.read_corner();
             if (location == null) {
-                System.out.println("ToggleSelectScope.read_scope: unable to read corner");
+                Logger.getLogger(ToggleSelectScope.class.getName()).log(Level.INFO, "ToggleSelectScope.read_scope: unable to read corner");
                 return null;
             }
             return ((SelectedItemState) p_return_state).toggle_select(location);
@@ -511,11 +509,11 @@ public abstract class LogfileScope {
         public InteractiveState read_scope(Logfile p_logfile,
                 InteractiveState p_return_state, BoardHandling p_board_handling) {
             if (!(p_return_state instanceof MenuState)) {
-                System.out.println("SelectRegionScope.read_scope: menu state expected");
+                Logger.getLogger(SelectRegionScope.class.getName()).log(Level.INFO, "SelectRegionScope.read_scope: menu state expected");
             }
             FloatPoint lower_left = p_logfile.read_corner();
             if (lower_left == null) {
-                System.out.println("SelectRegionScope.read_scope: unable to read corner");
+                Logger.getLogger(SelectRegionScope.class.getName()).log(Level.INFO, "SelectRegionScope.read_scope: unable to read corner");
                 return null;
             }
             InteractiveState curr_state
@@ -540,12 +538,12 @@ public abstract class LogfileScope {
         public InteractiveState read_scope(Logfile p_logfile,
                 InteractiveState p_return_state, BoardHandling p_board_handling) {
             if (!(p_return_state instanceof SelectedItemState)) {
-                System.out.println("CutoutRouteScope.read_scope: electedItemState expected");
+                Logger.getLogger(CutoutRouteScope.class.getName()).log(Level.INFO, "CutoutRouteScope.read_scope: electedItemState expected");
             }
             java.util.Collection<net.freerouting.freeroute.board.Item> item_list = ((SelectedItemState) p_return_state).get_item_list();
             FloatPoint lower_left = p_logfile.read_corner();
             if (lower_left == null) {
-                System.out.println("CutoutRouteScope.read_scope: unable to read corner");
+                Logger.getLogger(CutoutRouteScope.class.getName()).log(Level.INFO, "CutoutRouteScope.read_scope: unable to read corner");
                 return null;
             }
             InteractiveState curr_state
@@ -573,7 +571,7 @@ public abstract class LogfileScope {
             if (p_return_state instanceof SelectedItemState) {
                 result = ((SelectedItemState) p_return_state).delete_items();
             } else {
-                System.out.println("DeleteSelectedScope.read_scope: SelectedItemState expected");
+                Logger.getLogger(DeleteSelectedScope.class.getName()).log(Level.INFO, "DeleteSelectedScope.read_scope: SelectedItemState expected");
                 result = null;
             }
             return result;
@@ -593,7 +591,7 @@ public abstract class LogfileScope {
             if (p_return_state instanceof SelectedItemState) {
                 result = ((SelectedItemState) p_return_state).pull_tight(null);
             } else {
-                System.out.println("DeleteSelectedScope.read_scope: SelectedItemState expected");
+                Logger.getLogger(OptimizeSelectedScope.class.getName()).log(Level.INFO, "OptimizeSelectedScope.read_scope: SelectedItemState expected");
                 result = null;
             }
             return result;
@@ -613,7 +611,7 @@ public abstract class LogfileScope {
             if (p_return_state instanceof SelectedItemState) {
                 result = ((SelectedItemState) p_return_state).autoroute(null);
             } else {
-                System.out.println("AutorouteSelectedScope.read_scope: SelectedItemState expected");
+                Logger.getLogger(AutorouteSelectedScope.class.getName()).log(Level.INFO, "AutorouteSelectedScope.read_scope: SelectedItemState expected");
                 result = null;
             }
             return result;
@@ -633,7 +631,7 @@ public abstract class LogfileScope {
             if (p_return_state instanceof SelectedItemState) {
                 result = ((SelectedItemState) p_return_state).fanout(null);
             } else {
-                System.out.println("FanoutSelectedScope.read_scope: SelectedItemState expected");
+                Logger.getLogger(FanoutSelectedScope.class.getName()).log(Level.INFO, "FanoutSelectedScope.read_scope: SelectedItemState expected");
                 result = null;
             }
             return result;
@@ -657,7 +655,7 @@ public abstract class LogfileScope {
                 int int_value = p_logfile.read_int();
                 result = ((SelectedItemState) p_return_state).assign_clearance_class(int_value);
             } else {
-                System.out.println("AssignSelectedToNewNetScope.read_scope: SelectedItemState expected");
+                Logger.getLogger(AssignClearanceClassScope.class.getName()).log(Level.INFO, "AssignClearanceClassScope.read_scope: SelectedItemState expected");
                 result = null;
             }
             return result;
@@ -680,7 +678,7 @@ public abstract class LogfileScope {
             if (p_return_state instanceof SelectedItemState) {
                 result = ((SelectedItemState) p_return_state).assign_items_to_new_net();
             } else {
-                System.out.println("AssignSelectedToNewNetScope.read_scope: SelectedItemState expected");
+                Logger.getLogger(AssignSelectedToNewNetScope.class.getName()).log(Level.INFO, "AssignSelectedToNewNetScope.read_scope: SelectedItemState expected");
                 result = null;
             }
             return result;
@@ -704,7 +702,7 @@ public abstract class LogfileScope {
             if (p_return_state instanceof SelectedItemState) {
                 result = ((SelectedItemState) p_return_state).assign_items_to_new_group();
             } else {
-                System.out.println("AssignSelectedToNewGroupScope.read_scope: SelectedItemState expected");
+                Logger.getLogger(AssignSelectedToNewGroupScope.class.getName()).log(Level.INFO, "AssignSelectedToNewGroupScope.read_scope: SelectedItemState expected");
                 result = null;
             }
             return result;
@@ -723,7 +721,7 @@ public abstract class LogfileScope {
             if (p_return_state instanceof SelectedItemState) {
                 return_state = ((SelectedItemState) p_return_state).extent_to_whole_connected_sets();
             } else {
-                System.out.println("ExtendToWholeConnectedSetsScope.read_scope: SelectedItemState expected");
+                Logger.getLogger(ExtendToWholeConnectedSetsScope.class.getName()).log(Level.INFO, "ExtendToWholeConnectedSetsScope.read_scope: SelectedItemState expected");
             }
             return return_state;
         }
@@ -741,7 +739,7 @@ public abstract class LogfileScope {
             if (p_return_state instanceof SelectedItemState) {
                 return_state = ((SelectedItemState) p_return_state).extent_to_whole_components();
             } else {
-                System.out.println("ExtendToWholeGroupsScope.read_scope: SelectedItemState expected");
+                Logger.getLogger(ExtendToWholeComponentsScope.class.getName()).log(Level.INFO, "ExtendToWholeComponentsScope.read_scope: SelectedItemState expected");
             }
             return return_state;
         }
@@ -759,7 +757,7 @@ public abstract class LogfileScope {
             if (p_return_state instanceof SelectedItemState) {
                 return_state = ((SelectedItemState) p_return_state).extent_to_whole_nets();
             } else {
-                System.out.println("ExtendToWholeNetsScope.read_scope: SelectedItemState expected");
+                Logger.getLogger(ExtendToWholeNetsScope.class.getName()).log(Level.INFO, "ExtendToWholeNetsScope.read_scope: SelectedItemState expected");
             }
             return return_state;
         }
@@ -777,7 +775,7 @@ public abstract class LogfileScope {
             if (p_return_state instanceof SelectedItemState) {
                 return_state = ((SelectedItemState) p_return_state).extent_to_whole_connections();
             } else {
-                System.out.println("ExtendToWholeConnectionsScope.read_scope: SelectedItemState expected");
+                Logger.getLogger(ExtendToWholeConnectionsScope.class.getName()).log(Level.INFO, "ExtendToWholeConnectionsScope.read_scope: SelectedItemState expected");
             }
             return return_state;
         }
@@ -794,7 +792,7 @@ public abstract class LogfileScope {
             if (p_return_state instanceof SelectedItemState) {
                 ((SelectedItemState) p_return_state).fix_items();
             } else {
-                System.out.println("FixSelectedScope.read_scope: SelectedItemState expected");
+                Logger.getLogger(FixSelectedScope.class.getName()).log(Level.INFO, "FixSelectedScope.read_scope: SelectedItemState expected");
             }
             return p_return_state;
         }
@@ -811,7 +809,7 @@ public abstract class LogfileScope {
             if (p_return_state instanceof SelectedItemState) {
                 ((SelectedItemState) p_return_state).unfix_items();
             } else {
-                System.out.println("UnfixSelectedScope.read_scope: SelectedItemState expected");
+                Logger.getLogger(UnfixSelectedScope.class.getName()).log(Level.INFO, "UnfixSelectedScope.read_scope: SelectedItemState expected");
             }
             return p_return_state;
         }

@@ -24,6 +24,8 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.ClearanceViolation;
 import net.freerouting.freeroute.board.Component;
 import net.freerouting.freeroute.board.DrillItem;
@@ -62,7 +64,7 @@ public class MoveItemState extends InteractiveState {
             if (curr_item.get_component_no() > 0) {
                 Component curr_component = routing_board.components.get(curr_item.get_component_no());
                 if (curr_component == null) {
-                    System.out.println("MoveComponentState.get_instance inconsistant component number");
+                    Logger.getLogger(MoveItemState.class.getName()).log(Level.INFO, "MoveComponentState.get_instance inconsistant component number");
                     return null;
                 }
                 if (grid_snap_component == null

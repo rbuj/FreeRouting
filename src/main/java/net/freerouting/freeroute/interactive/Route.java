@@ -20,6 +20,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.AngleRestriction;
 import net.freerouting.freeroute.board.ConductionArea;
 import net.freerouting.freeroute.board.DrillItem;
@@ -249,7 +251,7 @@ public class Route {
             return true;
         }
         if (p_to_layer < 0 || p_to_layer >= this.layer_active.length) {
-            System.out.println("Route.change_layer: p_to_layer out of range");
+            Logger.getLogger(Route.class.getName()).log(Level.INFO, "Route.change_layer: p_to_layer out of range");
             return false;
         }
         if (!this.layer_active[p_to_layer]) {

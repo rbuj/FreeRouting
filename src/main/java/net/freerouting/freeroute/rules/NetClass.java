@@ -20,6 +20,8 @@
 package net.freerouting.freeroute.rules;
 
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Describes routing rules for individual nets.
@@ -112,7 +114,7 @@ public class NetClass implements java.io.Serializable, net.freerouting.freeroute
      */
     public int get_trace_half_width(int p_layer) {
         if (p_layer < 0 || p_layer >= trace_half_width_arr.length) {
-            System.out.println(" NetClass.get_trace_half_width: p_layer out of range");
+            Logger.getLogger(NetClass.class.getName()).log(Level.INFO, "NetClass.get_trace_half_width: p_layer out of range");
             return 0;
         }
         return trace_half_width_arr[p_layer];

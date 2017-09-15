@@ -20,6 +20,8 @@
 package net.freerouting.freeroute.library;
 
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.geometry.planar.Area;
 import net.freerouting.freeroute.geometry.planar.Shape;
 import net.freerouting.freeroute.geometry.planar.Vector;
@@ -99,7 +101,7 @@ public class Package implements Comparable<Package>, net.freerouting.freeroute.b
      */
     public Pin get_pin(int p_no) {
         if (p_no < 0 || p_no >= pin_arr.length) {
-            System.out.println("Package.get_pin: p_no out of range");
+            Logger.getLogger(Package.class.getName()).log(Level.INFO, "Package.get_pin: p_no out of range");
             return null;
         }
         return pin_arr[p_no];

@@ -20,6 +20,8 @@
 package net.freerouting.freeroute.rules;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.geometry.planar.ConvexShape;
 
 /**
@@ -136,7 +138,7 @@ public class BoardRules implements java.io.Serializable {
      */
     public void set_default_trace_half_widths(int p_value) {
         if (p_value <= 0) {
-            System.out.println("BoardRules.set_trace_half_widths: p_value out of range");
+            Logger.getLogger(BoardRules.class.getName()).log(Level.INFO, "BoardRules.set_trace_half_widths: p_value out of range");
             return;
         }
         this.get_default_net_class().set_trace_half_width(p_value);

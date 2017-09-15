@@ -20,6 +20,8 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.ItemSelectionFilter;
 
 /**
@@ -154,7 +156,7 @@ public final class WindowSelectParameter extends BoardSavableSubWindow {
         }
         ItemSelectionFilter item_selection_filter = this.board_handling.settings.get_item_selection_filter();
         if (item_selection_filter == null) {
-            System.out.println("SelectParameterWindow.refresh: item_selection_filter is null");
+            Logger.getLogger(WindowSelectParameter.class.getName()).log(Level.SEVERE, "SelectParameterWindow.refresh: item_selection_filter is null");
         } else {
             final ItemSelectionFilter.SELECTABLE_CHOICES[] filter_values = ItemSelectionFilter.SELECTABLE_CHOICES.values();
             for (int i = 0; i < filter_values.length; ++i) {

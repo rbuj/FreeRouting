@@ -20,6 +20,8 @@
 package net.freerouting.freeroute.library;
 
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.geometry.planar.ConvexShape;
 import net.freerouting.freeroute.geometry.planar.Direction;
 import net.freerouting.freeroute.geometry.planar.FortyfiveDegreeDirection;
@@ -82,7 +84,7 @@ public class Padstack implements Comparable<Padstack>, net.freerouting.freeroute
      */
     public ConvexShape get_shape(int p_layer) {
         if (p_layer < 0 || p_layer >= shapes.length) {
-            System.out.println("Padstack.get_layer p_layer out of range");
+            Logger.getLogger(Padstack.class.getName()).log(Level.INFO, "Padstack.get_layer p_layer out of range");
             return null;
         }
         return shapes[p_layer];

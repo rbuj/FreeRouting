@@ -20,6 +20,8 @@
 package net.freerouting.freeroute.interactive;
 
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.ItemSelectionFilter;
 import net.freerouting.freeroute.board.TestLevel;
@@ -74,7 +76,7 @@ public class MenuState extends InteractiveState {
         if (picked_items.size() > 0) {
             Item first_item = picked_items.iterator().next();
             if (!(first_item instanceof net.freerouting.freeroute.board.Pin)) {
-                System.out.println("MenuState.swap_pin: Pin expected");
+                Logger.getLogger(MenuState.class.getName()).log(Level.INFO, "MenuState.swap_pin: Pin expected");
                 return this;
             }
             net.freerouting.freeroute.board.Pin selected_pin = (net.freerouting.freeroute.board.Pin) first_item;

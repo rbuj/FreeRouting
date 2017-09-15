@@ -20,6 +20,8 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.rules.ViaInfo;
 import net.freerouting.freeroute.rules.ViaInfos;
 import net.freerouting.freeroute.rules.ViaRule;
@@ -148,7 +150,7 @@ public final class WindowViaRule extends javax.swing.JFrame {
                 ViaInfo curr_via = via_list.get(i);
                 if (!via_rule.contains(curr_via)) {
                     if (curr_index >= possible_values.length) {
-                        System.out.println("ViaRuleWindow.AppendListener.actionPerformed: index inconsistent");
+                        Logger.getLogger(WindowViaRule.class.getName()).log(Level.INFO, "ViaRuleWindow.AppendListener.actionPerformed: index inconsistent");
                         break;
                     }
                     possible_values[curr_index] = curr_via;

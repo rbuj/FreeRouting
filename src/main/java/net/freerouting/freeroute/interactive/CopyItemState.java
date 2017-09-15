@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.Component;
 import net.freerouting.freeroute.board.DrillItem;
 import net.freerouting.freeroute.board.Item;
@@ -201,7 +203,7 @@ public class CopyItemState extends InteractiveState {
                 } else {
                     Component old_component = board.components.get(curr_cmp_no);
                     if (old_component == null) {
-                        System.out.println("CopyItemState: component not found");
+                        Logger.getLogger(CopyItemState.class.getName()).log(Level.INFO, "CopyItemState: component not found");
                         continue;
                     }
                     Point new_location = old_component.get_location().translate_by(translate_vector);

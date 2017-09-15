@@ -21,6 +21,8 @@
 package net.freerouting.freeroute.interactive;
 
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Used for running an interactive action in a seperate Thread, that can be
@@ -167,7 +169,7 @@ public abstract class InteractiveActionThread extends Thread implements net.free
                     InteractiveState new_state
                             = logfile_scope.read_scope(hdlg.logfile, hdlg.interactive_state, hdlg);
                     if (new_state == null) {
-                        System.out.println("BoardHandling:read_logfile: inconsistent logfile scope");
+                        Logger.getLogger(ReadLogfileThread.class.getName()).log(Level.INFO, "BoardHandling:read_logfile: inconsistent logfile scope");
                         new_state = previous_state;
                     }
                     hdlg.repaint();
@@ -177,8 +179,8 @@ public abstract class InteractiveActionThread extends Thread implements net.free
             hdlg.paint_immediately = false;
             try {
                 this.reader.close();
-            } catch (java.io.IOException e) {
-                System.out.println("ReadLogfileThread: unable to close input stream");
+            } catch (java.io.IOException ex) {
+                Logger.getLogger(ReadLogfileThread.class.getName()).log(Level.SEVERE, "ReadLogfileThread: unable to close input stream", ex);
             }
             hdlg.get_panel().board_frame.refresh_windows();
             hdlg.screen_messages.set_write_protected(false);

@@ -23,6 +23,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Describes the electrical Nets on a board.
@@ -103,7 +105,7 @@ public class Nets implements java.io.Serializable {
         }
         Net result = list.get(p_net_no - 1);
         if (result != null && result.net_number != p_net_no) {
-            System.out.println("Nets.get: inconsistent net_no");
+            Logger.getLogger(Nets.class.getName()).log(Level.INFO, "Nets.get: inconsistent net_no");
         }
         return result;
     }
@@ -125,7 +127,7 @@ public class Nets implements java.io.Serializable {
     public Net add(String p_name, int p_subnet_number, boolean p_contains_plane) {
         int new_net_no = list.size() + 1;
         if (new_net_no >= MAX_LEGAL_NET_NO) {
-            System.out.println("Nets.add_net: max_net_no out of range");
+            Logger.getLogger(Nets.class.getName()).log(Level.INFO, "Nets.add_net: max_net_no out of range");
         }
         Net new_net = new Net(p_name, p_subnet_number, new_net_no, this, p_contains_plane);
         list.add(new_net);

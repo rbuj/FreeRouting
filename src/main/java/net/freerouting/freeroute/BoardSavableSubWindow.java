@@ -21,6 +21,8 @@ package net.freerouting.freeroute;
 
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Subwindow of the board frame, whose location and visibility can be saved and
@@ -42,7 +44,7 @@ public abstract class BoardSavableSubWindow extends BoardSubWindow {
             this.setVisible(saved_attributes.is_visible);
             return true;
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("SelectParameterWindow.read: read failed");
+            Logger.getLogger(BoardSavableSubWindow.class.getName()).log(Level.SEVERE, "SelectParameterWindow.read: read failed", e);
             return false;
         }
     }
@@ -56,7 +58,7 @@ public abstract class BoardSavableSubWindow extends BoardSubWindow {
         try {
             p_object_stream.writeObject(saved_attributes);
         } catch (java.io.IOException e) {
-            System.out.println("BoardSubWindow.save: save failed");
+            Logger.getLogger(BoardSavableSubWindow.class.getName()).log(Level.SEVERE, "BoardSubWindow.save: save failed", e);
         }
     }
 

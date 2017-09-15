@@ -19,6 +19,8 @@
  */
 package net.freerouting.freeroute.interactive;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.Item;
 import net.freerouting.freeroute.board.ItemSelectionFilter;
 import net.freerouting.freeroute.board.Pin;
@@ -80,7 +82,7 @@ public class PinSwapState extends InteractiveState {
             return this.cancel();
         }
         if (this.from_pin.net_count() > 1 || this.to_pin.net_count() > 1) {
-            System.out.println("PinSwapState.complete: pin swap not yet implemented for pins belonging to more than 1 net ");
+            Logger.getLogger(PinSwapState.class.getName()).log(Level.INFO, "PinSwapState.complete: pin swap not yet implemented for pins belonging to more than 1 net");
             return this.cancel();
         }
         int from_net_no;

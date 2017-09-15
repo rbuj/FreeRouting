@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.geometry.planar.Shape;
 
 /**
@@ -72,7 +74,7 @@ public class Packages implements java.io.Serializable, Iterable<Package> {
     public Package get(int p_package_no) {
         Package result = package_arr.get(p_package_no - 1);
         if (result != null && result.no != p_package_no) {
-            System.out.println("Padstacks.get: inconsistent padstack number");
+            Logger.getLogger(Packages.class.getName()).log(Level.INFO, "Packages.get: inconsistent package number");
         }
         return result;
     }

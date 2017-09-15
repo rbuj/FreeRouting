@@ -20,6 +20,8 @@
 package net.freerouting.freeroute;
 
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static net.freerouting.freeroute.SignalLayerWithIndexBuilder.ALL_LAYER_INDEX;
 import static net.freerouting.freeroute.SignalLayerWithIndexBuilder.INNER_LAYER_INDEX;
 import net.freerouting.freeroute.datastructures.UndoableObjects;
@@ -225,7 +227,7 @@ public final class WindowClearanceMatrix extends BoardSavableSubWindow {
                         java.util.Collection<net.freerouting.freeroute.board.Item> board_items = routing_board.get_items();
                         routing_board.rules.change_clearance_class_no(i, j, board_items);
                         if (!routing_board.rules.remove_clearance_class(i, board_items)) {
-                            System.out.println("WindowClearanceMatrix.prune_clearance_matrix error removing clearance class");
+                            Logger.getLogger(WindowClearanceMatrix.class.getName()).log(Level.SEVERE, "WindowClearanceMatrix.prune_clearance_matrix error removing clearance class");
                             return;
                         }
                         routing_board.search_tree_manager.clearance_class_removed(i);

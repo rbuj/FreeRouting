@@ -23,6 +23,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -71,7 +73,7 @@ public final class BoardPanel extends javax.swing.JPanel {
             // used to be able to change the location of the mouse pointer
             robot = new java.awt.Robot();
         } catch (java.awt.AWTException e) {
-            System.out.println("unable to create robot");
+            Logger.getLogger(BoardPanel.class.getName()).log(Level.INFO, "unable to create robot");
         }
         board_frame = p_board_frame;
         this.scroll_pane = board_frame.scroll_pane;

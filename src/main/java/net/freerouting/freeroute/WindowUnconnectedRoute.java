@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.Item;
 
 /**
@@ -88,7 +90,7 @@ public final class WindowUnconnectedRoute extends WindowObjectListWithFilter {
                         unconnected_route_info_set.add(curr_unconnected_route_info);
                     }
                 } else {
-                    System.out.println("WindowUnconnectedRoute.fill_list: net_count 1 expected");
+                    Logger.getLogger(WindowUnconnectedRoute.class.getName()).log(Level.INFO, "WindowUnconnectedRoute.fill_list: net_count 1 expected");
                 }
             }
         }

@@ -20,6 +20,8 @@
 package net.freerouting.freeroute.library;
 
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Contains contain information for gate swap and pin swap for a single
@@ -54,7 +56,7 @@ public class LogicalPart implements net.freerouting.freeroute.board.ObjectInfoPa
      */
     public PartPin get_pin(int p_no) {
         if (p_no < 0 || p_no >= part_pin_arr.length) {
-            System.out.println("LogicalPart.get_pin: p_no out of range");
+            Logger.getLogger(LogicalPart.class.getName()).log(Level.INFO, "LogicalPart.get_pin: p_no out of range");
             return null;
         }
         return part_pin_arr[p_no];

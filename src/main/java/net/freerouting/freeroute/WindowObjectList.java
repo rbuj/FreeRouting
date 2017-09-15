@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.board.ObjectInfoPanel;
 
 /**
@@ -191,7 +193,7 @@ public abstract class WindowObjectList extends BoardSavableSubWindow {
         try {
             p_object_stream.writeObject(selected_indices);
         } catch (java.io.IOException e) {
-            System.out.println("WindowObjectList.save: save failed");
+            Logger.getLogger(WindowObjectList.class.getName()).log(Level.SEVERE, "WindowObjectList.save: save failed", e);
         }
         super.save(p_object_stream);
     }
@@ -202,7 +204,7 @@ public abstract class WindowObjectList extends BoardSavableSubWindow {
         try {
             saved_selected_indices = (int[]) p_object_stream.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("WindowObjectListWithFilter.read: read failed");
+            Logger.getLogger(WindowObjectList.class.getName()).log(Level.SEVERE, "WindowObjectListWithFilter.read: read failed", e);
             return false;
         }
         boolean result = super.read(p_object_stream);

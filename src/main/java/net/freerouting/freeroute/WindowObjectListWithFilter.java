@@ -21,6 +21,8 @@ package net.freerouting.freeroute;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Abstract class for windows displaying a list of objects The object name can
@@ -97,7 +99,7 @@ public abstract class WindowObjectListWithFilter extends WindowObjectList {
         try {
             p_object_stream.writeObject(filter_string.getText());
         } catch (java.io.IOException e) {
-            System.out.println("WindowObjectListWithFilter.save: save failed");
+            Logger.getLogger(WindowObjectListWithFilter.class.getName()).log(Level.SEVERE, "WindowObjectListWithFilter.save: save failed", e);
         }
         super.save(p_object_stream);
     }
@@ -108,7 +110,7 @@ public abstract class WindowObjectListWithFilter extends WindowObjectList {
             String curr_string = (String) p_object_stream.readObject();
             this.filter_string.setText(curr_string);
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("WindowObjectListWithFilter.read: read failed");
+            Logger.getLogger(WindowObjectListWithFilter.class.getName()).log(Level.SEVERE, "WindowObjectListWithFilter.read: read failed", e);
         }
         return super.read(p_object_stream);
     }

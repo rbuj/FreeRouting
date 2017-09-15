@@ -21,6 +21,8 @@ package net.freerouting.freeroute;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.interactive.SnapShot;
 
 /**
@@ -169,7 +171,7 @@ public final class WindowSnapshot extends BoardSavableSubWindow {
             this.settings_window.read(p_object_stream);
             return true;
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("VisibilityFrame.read_attriutes: read failed");
+            Logger.getLogger(WindowSnapshot.class.getName()).log(Level.SEVERE, "VisibilityFrame.read_attriutes: read failed", e);
             return false;
         }
     }
@@ -183,7 +185,7 @@ public final class WindowSnapshot extends BoardSavableSubWindow {
         try {
             p_object_stream.writeObject(saved_attributes);
         } catch (java.io.IOException e) {
-            System.out.println("VisibilityFrame.save_attriutes: save failed");
+            Logger.getLogger(WindowSnapshot.class.getName()).log(Level.SEVERE, "VisibilityFrame.save_attriutes: save failed", e);
         }
         this.settings_window.save(p_object_stream);
     }

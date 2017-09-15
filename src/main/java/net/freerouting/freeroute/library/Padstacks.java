@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.geometry.planar.ConvexShape;
 
 /**
@@ -77,12 +79,12 @@ public class Padstacks implements java.io.Serializable, Iterable<Padstack> {
     public Padstack get(int p_padstack_no) {
         if (p_padstack_no <= 0 || p_padstack_no > padstack_arr.size()) {
             Integer padstack_count = padstack_arr.size();
-            System.out.println("Padstacks.get: 1 <= p_padstack_no <= " + padstack_count.toString() + " expected");
+            Logger.getLogger(Padstacks.class.getName()).log(Level.INFO, "Padstacks.get: 1 <= p_padstack_no <= {0} expected", padstack_count.toString());
             return null;
         }
         Padstack result = padstack_arr.get(p_padstack_no - 1);
         if (result != null && result.no != p_padstack_no) {
-            System.out.println("Padstacks.get: inconsistent padstack number");
+            Logger.getLogger(Padstacks.class.getName()).log(Level.INFO, "Padstacks.get: inconsistent padstack number");
         }
         return result;
     }

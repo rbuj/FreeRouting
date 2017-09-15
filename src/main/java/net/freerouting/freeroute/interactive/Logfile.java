@@ -23,6 +23,8 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.freerouting.freeroute.geometry.planar.FloatPoint;
 
 /**
@@ -78,7 +80,7 @@ public class Logfile {
             try {
                 this.file_writer.close();
             } catch (IOException e) {
-                System.out.println("unable to close logfile");
+                Logger.getLogger(Logfile.class.getName()).log(Level.SEVERE, "unable to close logfile", e);
             }
         }
         this.write_enabled = false;
@@ -91,7 +93,7 @@ public class Logfile {
         try {
             this.file_writer = new OutputStreamWriter(new FileOutputStream(p_file), StandardCharsets.UTF_8);
         } catch (FileNotFoundException ex) {
-            System.out.println("unable to create logfile");
+            Logger.getLogger(Logfile.class.getName()).log(Level.SEVERE, "unable to create logfile", ex);
             return false;
         }
         write_enabled = true;
@@ -106,8 +108,8 @@ public class Logfile {
             try {
                 this.file_writer.write(p_logfile_scope.name);
                 this.file_writer.write("\n");
-            } catch (IOException e2) {
-                System.out.println("Logfile.start_scope: write failed");
+            } catch (IOException ex) {
+                Logger.getLogger(Logfile.class.getName()).log(Level.SEVERE, "Logfile.start_scope: write failed", ex);
             }
         }
     }
@@ -155,7 +157,7 @@ public class Logfile {
             return null;
         }
         if (!(curr_ob instanceof String)) {
-            System.out.println("Logfile.start_read_scope: String expected");
+            Logger.getLogger(Logfile.class.getName()).log(Level.INFO, "Logfile.start_read_scope: String expected");
             this.pending_token = curr_ob;
             return null;
         }
@@ -172,8 +174,8 @@ public class Logfile {
             try {
                 this.file_writer.write(Integer.toString(p_int));
                 this.file_writer.write("\n");
-            } catch (IOException e2) {
-                System.out.println("unable to write integer to logfile");
+            } catch (IOException e) {
+                Logger.getLogger(Logfile.class.getName()).log(Level.SEVERE, "unable to write integer to logfile", e);
             }
         }
     }
@@ -185,7 +187,7 @@ public class Logfile {
     public int read_int() {
         Object curr_ob = this.next_token();
         if (!(curr_ob instanceof Integer)) {
-            System.out.println("Logfile.read_int: Integer expected");
+            Logger.getLogger(Logfile.class.getName()).log(Level.INFO, "Logfile.read_int: Integer expected");
             this.pending_token = curr_ob;
             return -1;
         }
@@ -198,7 +200,7 @@ public class Logfile {
     public void add_corner(FloatPoint p_corner) {
         if (write_enabled) {
             if (p_corner == null) {
-                System.out.println("logfile.add_corner: p_corner is null");
+                Logger.getLogger(Logfile.class.getName()).log(Level.INFO, "logfile.add_corner: p_corner is null");
                 return;
             }
             try {
@@ -206,8 +208,8 @@ public class Logfile {
                 this.file_writer.write(" ");
                 this.file_writer.write(Double.toString(p_corner.y));
                 this.file_writer.write("\n");
-            } catch (IOException e2) {
-                System.out.println("unable to write to logfile while adding corner");
+            } catch (IOException e) {
+                Logger.getLogger(Logfile.class.getName()).log(Level.SEVERE, "unable to write to logfile while adding corner", e);
             }
         }
     }
@@ -222,7 +224,7 @@ public class Logfile {
             Object result = this.scanner.next_token();
             return result;
         } catch (IOException e) {
-            System.out.println("Logfile.next_token: IO error scanning file");
+            Logger.getLogger(Logfile.class.getName()).log(Level.SEVERE, "Logfile.next_token: IO error scanning file", e);
             return null;
         }
     }
