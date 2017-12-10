@@ -25,7 +25,7 @@ For more information please use the bundled help from the board editor.
 
 ## Here are some instructions how to run the Freerouting project in the NetBeans IDE
 
-1. Go to the Java EA download web page and download and install JDK 9 EA http://jdk.java.net/9/, and download Development version of NetBeans IDE http://bits.netbeans.org/download/trunk/nightly/latest/
+1. Go to the Oracle Java download web page and download and install [JDK 9](http://www.oracle.com/technetwork/java/javase/downloads/index.html), and download [Development version of NetBeans IDE](http://bits.netbeans.org/download/trunk/nightly/latest/)
 2. Start the NetBeans IDE and select File | Open Project in the pull down menu and select freeroute project.
 3. Build the project. The router should run now.
 
@@ -40,9 +40,9 @@ Install maven
 sudo dnf install maven
 ```
 
-Install Oracle JDK & JRE 9 EA http://jdk.java.net/9/
+Install Oracle [JDK & JRE 9](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 ```bash
-tar xzvf jdk-9-ea+170_linux-x64_bin.tar.gz -C /usr/java
+tar xzvf jdk-9.0.1_linux-x64_bin.tar.gz -C /usr/java
 su -c chown -R root:root /usr/java
 su -c chown -R +x /usr/java/bin
 su -c pdate-alternatives --install /usr/bin/java java /usr/java/jdk1.9*/bin/java 1065
@@ -75,7 +75,7 @@ java -jar freeroute-[version]-jar-with-dependencies.jar
 ```
 
 ### OS X
-Download and install Oracle's JDK & JRE 9. http://jdk.java.net/9/
+Download and install Oracle [JDK & JRE 9](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 
 Install Apache Maven. https://maven.apache.org/
 
