@@ -105,9 +105,6 @@ public class BasicBoard implements java.io.Serializable {
     private int min_trace_half_width = 10_000;
 
     /**
-     * Limits the maximum width of a shape in the search tree.
-     */
-    /**
      * Creates a new instance of a routing Board with surrrounding box
      * p_bounding_box Rules contains the restrictions to obey when inserting
      * items. Among other things it may contain a clearance matrix. p_observers

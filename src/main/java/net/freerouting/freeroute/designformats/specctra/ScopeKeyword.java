@@ -21,10 +21,11 @@ package net.freerouting.freeroute.designformats.specctra;
 
 import java.io.IOException;
 
-/**
+/*
  *
  * @author alfons
  */
+
 /**
  * Keywords defining a scope object
  */

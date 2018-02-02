@@ -62,7 +62,7 @@ final class SavableSubwindows {
      * savable_subwindow_key is mapped, or null if the savable_subwindows_map
      * contains no mapping for the savable_subwindow_key.
      *
-     * @param savable_subwindow_key
+     * @param savable_subwindow_key the key indicating the subwindow to get.
      * @return the BoardSavableSubWindow to which the specified key is mapped,
      * or null if savable_subwindows_map contains no mapping for the key
      */

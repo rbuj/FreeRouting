@@ -72,7 +72,7 @@ public class CoordinateTransform implements java.io.Serializable {
     /**
      * Copy constructor
      *
-     * @param p_coordinate_transform
+     * @param p_coordinate_transform the transformation to apply to coordinates.
      */
     public CoordinateTransform(CoordinateTransform p_coordinate_transform) {
         this.screen_bounds = new Dimension(p_coordinate_transform.screen_bounds);
