@@ -393,29 +393,13 @@ public class IntPoint extends Point {
     }
 
     @Override
-    int compare_x(IntPoint p_other) {
-        int result;
-        if (this.x > p_other.x) {
-            result = 1;
-        } else if (this.x == p_other.x) {
-            result = 0;
-        } else {
-            result = -1;
-        }
-        return result;
+    int compare_x(IntPoint other) {
+        return Integer.compare(this.x, other.x);
     }
 
     @Override
-    int compare_y(IntPoint p_other) {
-        int result;
-        if (this.y > p_other.y) {
-            result = 1;
-        } else if (this.y == p_other.y) {
-            result = 0;
-        } else {
-            result = -1;
-        }
-        return result;
+    int compare_y(IntPoint other) {
+        return Integer.compare(this.y, other.y);
     }
 
     @Override
