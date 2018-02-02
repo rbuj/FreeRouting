@@ -180,11 +180,8 @@ public class CopyItemState extends InteractiveState {
                 }
             }
         }
-        // Copy the components of the old items and assign the new items to the copied components.
 
-        /**
-         * Contailns the old and new id no of a copied component.
-         */
+        // Copy the components of the old items and assign the new items to the copied components.
         Map<Integer, Integer> cmp_no_pairs = new TreeMap<>();
 
         Vector translate_vector = current_position.difference_by(start_position);

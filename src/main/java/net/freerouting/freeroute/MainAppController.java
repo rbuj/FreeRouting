@@ -88,9 +88,7 @@ public class MainAppController implements Initializable {
         SwingUtilities.invokeLater(() -> {
             if (inputFile != null) {
                 design_dir_name = inputFile.getParent();
-                /**
-                 * create board
-                 */
+                // Create board.
                 BoardFrame new_frame = new BoardFrame(
                         new DesignFile(inputFile, design_dir_name),
                         launch_mode,

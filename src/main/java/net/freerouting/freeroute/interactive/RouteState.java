@@ -167,10 +167,7 @@ public class RouteState extends InteractiveState {
     static Item start_ok(IntPoint p_location, BoardHandling p_hdlg) {
         net.freerouting.freeroute.board.RoutingBoard routing_board = p_hdlg.get_routing_board();
 
-        /**
-         * look if an already exististing trace ends at p_start_corner and pick
-         * it up in this case.
-         */
+        // Check if an already existing trace ends at p_start_corner and pick it up in this case.
         Item picked_item = routing_board.pick_nearest_routing_item(p_location, p_hdlg.settings.layer_no, null);
         int layer_count = routing_board.get_layer_count();
         if (picked_item == null && p_hdlg.settings.select_on_all_visible_layers) {

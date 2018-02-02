@@ -65,9 +65,7 @@ public final class MainApp extends Application {
     @Override
     public void init() throws Exception {
         List<String> locale_list = Arrays.asList("ca", "de", "es", "en");
-        /**
-         * Parse commandline arguments
-         */
+        // Parse commandline arguments.
         try {
             boolean test_version_option = false;
             Locale locale = null;
@@ -129,9 +127,7 @@ public final class MainApp extends Application {
             }
             Locale.setDefault(locale);
 
-            /**
-             * Set data fields
-             */
+            // Set data fields.
             if (test_version_option) {
                 test_level = DEBUG_LEVEL;
             } else {

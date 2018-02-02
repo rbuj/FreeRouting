@@ -172,9 +172,7 @@ public final class WindowObjectInfo extends BoardTemporarySubWindow implements n
         javax.swing.JScrollPane scroll_pane = new javax.swing.JScrollPane(this.text_pane);
         this.add(scroll_pane);
 
-        /**
-         * Dispose this window and all subwindows when closing the window.
-         */
+        // Dispose this window and all subwindows when closing the window.
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent evt) {
