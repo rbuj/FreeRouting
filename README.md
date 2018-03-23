@@ -67,7 +67,7 @@ Run freeroute
 ```bash
 cd target
 export J2D_TRACE_LEVEL=4
-java -cp freeroute-[version].jar:libext/javahelp-2.0.05.jar:libext/guava-24.0-jre.jar net.freerouting.freeroute.FreeRouting
+java -cp freeroute-[version].jar:libext/javahelp-2.0.05.jar:libext/guava-24.1-jre.jar net.freerouting.freeroute.FreeRouting
 (or)
 java -jar freeroute-[version].jar
 (or)
@@ -94,7 +94,7 @@ Run freeroute
 ```bash
 cd target
 export J2D_TRACE_LEVEL=4
-java -cp freeroute-[version].jar:libext/javahelp-2.0.05.jar:libext/guava-24.0-jre.jar net.freerouting.freeroute.FreeRouting
+java -cp freeroute-[version].jar:libext/javahelp-2.0.05.jar:libext/guava-24.1-jre.jar net.freerouting.freeroute.FreeRouting
 (or)
 java -jar freeroute-[version].jar
 (or)
