@@ -24,7 +24,7 @@
                      org.apache.maven.plugins ...which is assumed by default.
                 -->
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.0.2</version>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <id>copy-dependencies</id>
@@ -45,7 +45,7 @@
                      org.apache.maven.plugins ...which is assumed by default.
                 -->
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
+                <version>3.1.0</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -111,7 +111,7 @@
                      org.apache.maven.plugins ...which is assumed by default.
                 -->
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.8.0</version>
                 <configuration>
                     <release>9</release>
                     <compilerArgs>
@@ -126,7 +126,7 @@
                      org.apache.maven.plugins ...which is assumed by default.
                 -->
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.21.0</version>
+                <version>2.22.0</version>
                 <configuration>
                     <additionalClasspathElements>
                         <additionalClasspathElement>${java.home}/lib/jfxrt.jar</additionalClasspathElement>
@@ -312,7 +312,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>25.0-jre</version>
+            <version>26.0-jre</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
