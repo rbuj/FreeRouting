@@ -1,7 +1,15 @@
 ToDo
-        * Bump version to 1.4.6
+        * Bump version to 1.4.7
 	* Migrate all GUI from swing to JavaFX
 	* Write all documentation in docbook format
+
+2019-04-02 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
+
+        * Bump version to 1.4.6
+        * Fix Save/Open bin file issue with SnapshotAttributes
+        * Fix some invalid javadocs
+	* Use Integer.compare whenever possible
+	* Other improvements
 
 2017-09-14 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
 

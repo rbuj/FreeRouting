@@ -39,17 +39,29 @@ Install maven
 ```bash
 sudo dnf install maven
 ```
-
 Install [Oracle JDK & JRE 11](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 ```bash
-tar xzvf jdk-11_linux-x64_bin.tar.gz -C /usr/java
-su -c chown -R root:root /usr/java
-su -c chown -R +x /usr/java/bin
-su -c pdate-alternatives --install /usr/bin/java java /usr/java/jdk-11*/bin/java 1065
-su -c update-alternatives --install /usr/bin/javac javac /usr/java/jdk-11*/bin/javac 1065
-su -c update-alternatives --install /usr/bin/jar jar /usr/java/jdk-11*/bin/jar 1065
-su -c update-alternatives --install /usr/bin/javaws javaws /usr/java/jdk-11*/bin/javaws 1065
-su -c update-alternatives --config java
+mkdir -p /usr/java
+tar xzvf jdk-11.0.2_linux-x64_bin.tar.gz -C /usr/java
+chown -R root:root /usr/java
+chown -R +x /usr/java/bin
+update-alternatives --install /usr/bin/java java /usr/java/jdk-11*/bin/java 1065
+update-alternatives --install /usr/bin/javac javac /usr/java/jdk-11*/bin/javac 1065
+update-alternatives --install /usr/bin/jar jar /usr/java/jdk-11*/bin/jar 1065
+update-alternatives --install /usr/bin/javaws javaws /usr/java/jdk-11*/bin/javaws 1065
+update-alternatives --config java
+```
+
+Update /etc/profile:
+````shell
+JAVA_HOME=/usr/java/jdk-11.0.2
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+export JAVA_HOME
+```
+
+Load /etc/profile:
+```shell
+source /etc/profile
 ```
 
 Download freeroute source

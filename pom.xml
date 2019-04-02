@@ -4,7 +4,7 @@
 
     <groupId>net.freerouting</groupId>
     <artifactId>freeroute</artifactId>
-    <version>1.4.6-alpha</version>
+    <version>1.4.6</version>
     <packaging>jar</packaging>
 
     <name>freeroute</name>
@@ -327,7 +327,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>27.0-jre</version>
+            <version>27.1-jre</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
