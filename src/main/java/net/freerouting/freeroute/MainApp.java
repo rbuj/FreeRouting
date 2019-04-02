@@ -47,7 +47,7 @@ public final class MainApp extends Application {
     /**
      * Change this string when creating a new version
      */
-    private static final String VERSION_NUMBER_STRING = "1.4.6";
+    private static final String VERSION_NUMBER_STRING = "1.4.7-alpha";
     private static final Logger LOGGER = Logger.getLogger(MainAppController.class.getName());
     private static final TestLevel DEBUG_LEVEL = TestLevel.CRITICAL_DEBUGGING_OUTPUT;
 
