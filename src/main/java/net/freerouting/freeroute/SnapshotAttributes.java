@@ -16,13 +16,14 @@
  */
 package net.freerouting.freeroute;
 
+import java.io.Serializable;
 import java.util.EnumMap;
 
 /**
  *
  * @author Robert Buj
  */
-public final class SnapshotAttributes {
+public final class SnapshotAttributes implements Serializable {
 
     EnumMap<SnapshotAttributeKey, Boolean> snapshot_attributes_map;
 
