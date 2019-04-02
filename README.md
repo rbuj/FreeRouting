@@ -53,7 +53,7 @@ update-alternatives --config java
 ```
 
 Update /etc/profile:
-````shell
+```bash
 JAVA_HOME=/usr/java/jdk-11.0.2
 PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
 export JAVA_HOME
