@@ -9,6 +9,7 @@ ToDo
         * Fix Save/Open bin file issue with SnapshotAttributes
         * Fix some invalid javadocs
 	* Use Integer.compare whenever possible
+	* Requires Java 11 or later
 	* Other improvements
 
 2017-09-14 Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>
